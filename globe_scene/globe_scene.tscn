@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=26 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Texture2D" uid="uid://bedemtmo7mjjh" path="res://assets/largeres_w_grid.png" id="1_gksnk"]
 [ext_resource type="Script" path="res://globe_scene/planet.gd" id="2_0c888"]
@@ -68,6 +68,16 @@ radius = 2.0
 radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kdm7k"]
+_surfaces = [{
+"aabb": AABB(86.326, 34.7524, 33.6016, 3.69, 4.95101, 6.59929),
+"format": 34359738375,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("5KasQlfQHkK0oRxCEWuxQh0qHkIWaAZCxbOvQg8rDELDzSBCxbOvQg8rDELDzSBCEWuxQh0qHkIWaAZCLAi0QoECC0JUfg1C48LDnv1XpMcmxkSf6ltwyfHEf5tOWBjG8cR/m05YGMYmxkSf6ltwyfLHxpv3W7LH")
+}]
 
 [node name="GameMain" type="Node3D"]
 
@@ -166,3 +176,6 @@ shape = SubResource("SphereShape3D_5v0fy")
 [node name="GeometryDrawer" type="Node3D" parent="." node_paths=PackedStringArray("draw_on")]
 script = ExtResource("11_6u1es")
 draw_on = NodePath("../GamePlanet/ClickableSphere")
+
+[node name="@MeshInstance3D@25428" type="MeshInstance3D" parent="GeometryDrawer"]
+mesh = SubResource("ArrayMesh_kdm7k")

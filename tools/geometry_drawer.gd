@@ -95,15 +95,11 @@ func input_clicks():
             sphere.queue_free()
         debug_spheres = []
 
+#REWIND POINT
 func handle_add_vertex_at(position: Vector3) -> void:
     print("Hello from handle_add_vertex_at")
     vertices.append(position)
     normals.append(normal_from_vertex(position, draw_on))
-    if vertices.size() % 3 == 0:
-        var i = vertices.size() - 3
-        indices.append(i)
-        indices.append(i + 1)
-        indices.append(i + 2)
     
     #DEBUG SPHERES
     var mesh := SphereMesh.new()
@@ -113,26 +109,44 @@ func handle_add_vertex_at(position: Vector3) -> void:
     mesh.radius = radius
     mesh.height = height
     sphere.mesh = mesh
-    sphere.position = position #Equivalent to transform.origin
+    sphere.position = position # Equivalent to transform.origin
     add_child(sphere)
     debug_spheres.append(sphere)
     
+    if vertices.size() >= 4:
+        generate_mesh_from_vertices(vertices, indices, normals)
+    
 
 
-func generate_mesh_from_vertices(_vertices: PackedVector3Array, _indices:PackedInt32Array, _normals:PackedVector3Array):
+func generate_mesh_from_vertices(_vertices: PackedVector3Array, _indices: PackedInt32Array, _normals: PackedVector3Array):
     arrays.resize(Mesh.ARRAY_MAX)
     arrays[Mesh.ARRAY_VERTEX] = _vertices
     arrays[Mesh.ARRAY_INDEX] = _indices
     arrays[Mesh.ARRAY_NORMAL] = _normals
     var surface_tool := SurfaceTool.new()
     surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
-    var v_index:int = 0
-    for vertex in _vertices:
-        surface_tool.set_uv(Vector2(v_index/_vertices.size(),v_index/_vertices.size())) #If I have 10 vertices, I want 0 to be UV of 0, 10 to be UV of 1. Ergo: 
-        surface_tool.set_color(Color("Red"))
-        surface_tool.add_vertex(vertex)
     
-    surface_tool.generate_normals()
+    #This function is called only when there are 4 vertices available, so:
+    var v0 = _vertices[0]
+    var v1 = _vertices[1]
+    var v2 = _vertices[2]
+    var v3 = _vertices[3]
+    
+    surface_tool.set_normal(normal_from_vertex(v0, draw_on))
+    surface_tool.add_vertex(v0) # Top left
+    surface_tool.set_normal(normal_from_vertex(v1, draw_on))
+    surface_tool.add_vertex(v1) # Top right
+    surface_tool.set_normal(normal_from_vertex(v2, draw_on))
+    surface_tool.add_vertex(v2) # Bottom left
+
+    surface_tool.set_normal(normal_from_vertex(v2, draw_on))
+    surface_tool.add_vertex(v2) # Bottom left
+    surface_tool.set_normal(normal_from_vertex(v1, draw_on))
+    surface_tool.add_vertex(v1) # Top right
+    surface_tool.set_normal(normal_from_vertex(v3, draw_on))
+    surface_tool.add_vertex(v3) # Bottom right
+    
+   # surface_tool.generate_normals()
     var mesh = surface_tool.commit()
     var mesh_instance = MeshInstance3D.new()
     mesh_instance.mesh = mesh
