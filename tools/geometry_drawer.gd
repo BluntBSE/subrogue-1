@@ -13,6 +13,8 @@ var debug_spheres = []
 var indices := PackedInt32Array()
 var vertices := PackedVector3Array()
 var normals := PackedVector3Array()
+@export var bake_mesh:bool = false
+
 
 signal add_vertex_at
 
@@ -33,6 +35,10 @@ func _process(delta: float) -> void:
     if hovering_over != {}:
         var dstr = str(hovering_over)
         dh.dprint(debug, dstr)
+        
+    if bake_mesh == true:
+        generate_mesh_from_vertices(vertices, indices, normals)
+        bake_mesh = false
         
     input_clicks()
     pass
@@ -78,6 +84,7 @@ func input_clicks():
     if Input.is_action_just_pressed("editor_log"):
         print("Vertices are ", vertices)
         print("Indices are ", indices)
+        print("Normals are", normals)
         print("Spheres are", debug_spheres)
         pass
     if Input.is_action_just_pressed("editor_clear"):
@@ -91,12 +98,12 @@ func input_clicks():
 func handle_add_vertex_at(position: Vector3) -> void:
     print("Hello from handle_add_vertex_at")
     vertices.append(position)
+    normals.append(normal_from_vertex(position, draw_on))
     if vertices.size() % 3 == 0:
         var i = vertices.size() - 3
         indices.append(i)
         indices.append(i + 1)
         indices.append(i + 2)
-        generate_mesh_from_vertices(vertices)
     
     #DEBUG SPHERES
     var mesh := SphereMesh.new()
@@ -111,43 +118,39 @@ func handle_add_vertex_at(position: Vector3) -> void:
     debug_spheres.append(sphere)
     
 
-func generate_mesh_from_vertices(vertices:PackedVector3Array):
-    pass
 
-"""
-func export_shape_to_mesh_instance() -> void:
-    
-    var shape:ConcavePolygonShape3D = load(shape_path)
-    if shape == null or not shape is ConcavePolygonShape3D:
-        print("Failed to load shape or shape is not a ConcavePolygonShape3D.")
-        return
-
-    var faces = shape.get_faces()
-    var vertices = PackedVector3Array()
-    var indices = PackedInt32Array()
-
-    for i in range(0, faces.size(), 3):
-        vertices.append(faces[i])
-        vertices.append(faces[i + 1])
-        vertices.append(faces[i + 2])
-        indices.append(i)
-        indices.append(i + 1)
-        indices.append(i + 2)
-
-    var arrays = []
+func generate_mesh_from_vertices(_vertices: PackedVector3Array, _indices:PackedInt32Array, _normals:PackedVector3Array):
     arrays.resize(Mesh.ARRAY_MAX)
-    arrays[Mesh.ARRAY_VERTEX] = vertices
-    arrays[Mesh.ARRAY_INDEX] = indices
-
-    var mesh = ArrayMesh.new()
-    mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-    # Create a new MeshInstance3D
+    arrays[Mesh.ARRAY_VERTEX] = _vertices
+    arrays[Mesh.ARRAY_INDEX] = _indices
+    arrays[Mesh.ARRAY_NORMAL] = _normals
+    var surface_tool := SurfaceTool.new()
+    surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+    var v_index:int = 0
+    for vertex in _vertices:
+        surface_tool.set_uv(Vector2(v_index/_vertices.size(),v_index/_vertices.size())) #If I have 10 vertices, I want 0 to be UV of 0, 10 to be UV of 1. Ergo: 
+        surface_tool.set_color(Color("Red"))
+        surface_tool.add_vertex(vertex)
+    
+    surface_tool.generate_normals()
+    var mesh = surface_tool.commit()
     var mesh_instance = MeshInstance3D.new()
     mesh_instance.mesh = mesh
-
-    # Add the MeshInstance3D to the scene tree
     add_child(mesh_instance)
     mesh_instance.owner = get_tree().edited_scene_root
+    
+    
     print("MeshInstance3D created and added to the scene.")
     
-"""
+
+func relative_normal_from_triangle(a:Vector3, b:Vector3, c:Vector3, anchor:Node3D)->Vector3:
+    var triangle_centroid  = ( a + b + c)/3.0
+    var dir_from_anchor = triangle_centroid - anchor.position #Anchor is always 0.0 but still
+    dir_from_anchor = dir_from_anchor.normalized()
+    
+    return Vector3()
+
+func normal_from_vertex(vertex:Vector3, anchor)->Vector3:
+    var dir_from_anchor:Vector3 = vertex - anchor.position
+    dir_from_anchor = dir_from_anchor.normalized()
+    return dir_from_anchor
