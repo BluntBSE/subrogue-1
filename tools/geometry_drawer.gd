@@ -9,13 +9,15 @@ var hovering_over:Dictionary = {}
 
 #Mesh in progress
 var arrays = []
+var sprites = []
 var debug_spheres = []
 var indices := PackedInt32Array()
 var vertices := PackedVector3Array()
 var normals := PackedVector3Array()
 @export var bake_mesh:bool = false
-var extrude_up = 3.0
-var extrude_down = 7.0
+var extrude_up = 15.0
+var extrude_down = 23.0
+@export var flipped_normal:bool = true
 
 signal add_vertex_at
 
@@ -32,6 +34,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+    #print(hovering_over)
+    if not Engine.is_editor_hint():
+        return
+    
     hovering_over = cast_from_camera()
     if hovering_over != {}:
         var dstr = str(hovering_over)
@@ -39,6 +45,7 @@ func _process(delta: float) -> void:
         
     if bake_mesh == true:
         generate_mesh_from_vertices(vertices)
+    # clear_data()
         bake_mesh = false
         
     input_clicks()
@@ -88,39 +95,35 @@ func input_clicks():
         print("Spheres are", debug_spheres)
         pass
     if Input.is_action_just_pressed("editor_clear"):
+        clear_data()
+        
+func clear_data()->void:
         print("Clearing all data from mesh in progress")
         vertices = PackedVector3Array()
         indices = PackedInt32Array()
-        for sphere in debug_spheres:
-            sphere.queue_free()
-        debug_spheres = []
 
+        for sprite in sprites:
+            sprite.queue_free()
+        sprites = []
 #REWIND POINT
-func handle_add_vertex_at(position: Vector3) -> void:
+func handle_add_vertex_at(_position: Vector3) -> void:
     print("Hello from handle_add_vertex_at")
-    var direction_from_anchor = normal_from_vertex(position, draw_on)
-    var new_position = position + (direction_from_anchor * extrude_up)
+    var direction_from_anchor = normal_from_vertex(_position, draw_on)
+    var new_position = _position + (direction_from_anchor * extrude_up)
     
     
     vertices.append(new_position)
     
-    #DEBUG SPHERES
-    var mesh := SphereMesh.new()
-    var sphere := MeshInstance3D.new()
-    var radius = 0.5
-    var height = 1.0
-    mesh.radius = radius
-    mesh.height = height
-    sphere.mesh = mesh
-    var sphere_2 = sphere.duplicate()
-   # var sphere_3 = sphere.duplicate()
-    sphere.position = new_position # Equivalent to transform.origin
-    sphere_2.position = position
-    #sphere_3.position = 
-    add_child(sphere)
-    add_child(sphere_2)
-    debug_spheres.append(sphere)
-    debug_spheres.append(sphere_2)
+    
+    #SPRITES
+    var sprite := Sprite3D.new()
+    sprite.texture = load("res://assets/marker.png")
+    sprite.position = _position
+    sprite.billboard = 1
+    sprite.scale = Vector3(4.0,4.0,4.0)
+    add_child(sprite)
+    sprites.append(sprite)
+    
     
     
 
@@ -150,14 +153,18 @@ func generate_mesh_from_vertices(_vertices: PackedVector3Array):
         surface_tool.add_vertex(vertices_lower[i])
         surface_tool.add_vertex(vertices_upper[i + 1])
         
+ 
         surface_tool.add_vertex(vertices_lower[i])
         surface_tool.add_vertex(vertices_lower[i + 1])
         surface_tool.add_vertex(vertices_upper[i + 1])
     
-    # surface_tool.generate_normals()
+    surface_tool.generate_normals(true) #Setting this to flipped = true does nothing!
     var mesh = surface_tool.commit()
+    if flipped_normal:
+        mesh = flip_mesh_faces(mesh)
     var mesh_instance = MeshInstance3D.new()
     mesh_instance.mesh = mesh
+    #mesh_instance.material_override = load("res://tools/visible_collider_mesh.material")
     add_child(mesh_instance)
     mesh_instance.owner = get_tree().edited_scene_root
     
@@ -175,3 +182,25 @@ func normal_from_vertex(vertex:Vector3, anchor)->Vector3:
     var dir_from_anchor:Vector3 = vertex - anchor.position
     dir_from_anchor = dir_from_anchor.normalized()
     return dir_from_anchor
+    
+func flip_mesh_faces(mesh: ArrayMesh) -> ArrayMesh:
+    var flipped_mesh = ArrayMesh.new()
+    
+    for surface in range(mesh.get_surface_count()):
+        var arrays = mesh.surface_get_arrays(surface)
+        
+        var vertices = arrays[Mesh.ARRAY_VERTEX]
+        var indices = arrays[Mesh.ARRAY_INDEX]
+        
+        var flipped_indices = PackedInt32Array()
+        
+        for i in range(0, indices.size(), 3):
+            flipped_indices.append(indices[i])
+            flipped_indices.append(indices[i + 2])
+            flipped_indices.append(indices[i + 1])
+        
+        arrays[Mesh.ARRAY_INDEX] = flipped_indices
+        
+        flipped_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+    
+    return flipped_mesh

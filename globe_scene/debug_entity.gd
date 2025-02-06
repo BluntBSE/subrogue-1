@@ -3,7 +3,7 @@ class_name Entity
 @export var anchor: Node3D
 @export var azimuth:float
 @export var polar:float
-@export var height:float = 105.0; #Given that the planet has a known radius of 100. Height of 5.
+@export var height:float = 101.0; #Given that the planet has a known radius of 100. Height of 5.
 @export var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
 @export var speed = 20.0
@@ -17,6 +17,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+
     handle_input(delta)
     fix_height()
     update_coords()
