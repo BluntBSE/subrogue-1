@@ -1,0 +1,168 @@
+[gd_scene load_steps=25 format=3 uid="uid://bnygsufjcl2ql"]
+
+[ext_resource type="Texture2D" uid="uid://bedemtmo7mjjh" path="res://assets/largeres_w_grid.png" id="1_gksnk"]
+[ext_resource type="Script" path="res://globe_scene/planet.gd" id="2_0c888"]
+[ext_resource type="Script" path="res://globe_scene/orbital_camera.gd" id="2_xt6wy"]
+[ext_resource type="Script" path="res://debug_node.gd" id="4_lsblq"]
+[ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
+[ext_resource type="Script" path="res://globe_scene/debug_entity.gd" id="5_oduww"]
+[ext_resource type="Shader" path="res://just_the_mesh/shadercollider.gdshader" id="7_ypo7k"]
+[ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/collision_mask.png" id="8_6dvw2"]
+[ext_resource type="Script" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
+[ext_resource type="Script" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
+[ext_resource type="Script" path="res://classes/entity_move_bus.gd" id="11_dg66u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ehk3"]
+albedo_texture = ExtResource("1_gksnk")
+
+[sub_resource type="SphereMesh" id="SphereMesh_wog1n"]
+radius = 100.0
+height = 200.0
+radial_segments = 40
+rings = 40
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wv2ic"]
+radius = 102.771
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n6esi"]
+render_priority = 0
+shader = ExtResource("7_ypo7k")
+shader_parameter/height_ratio = 3.0
+shader_parameter/heightmap = ExtResource("8_6dvw2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5glwl"]
+transparency = 4
+blend_mode = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_75hqn"]
+radius = 101.701
+height = 205.855
+
+[sub_resource type="GDScript" id="GDScript_qu1hb"]
+script/source = "extends CollisionShape3D
+class_name PlanetPhysicalBody
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+    pass
+"
+
+[sub_resource type="Environment" id="Environment_13rd1"]
+background_mode = 2
+sky = ExtResource("5_braji")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h62qs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sbk4o"]
+radius = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_e0wf7"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
+
+[node name="GameMain" type="Node3D"]
+
+[node name="GamePlanet" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_1ehk3")
+mesh = SubResource("SphereMesh_wog1n")
+script = ExtResource("2_0c888")
+
+[node name="ClickableSphere" type="Area3D" parent="GamePlanet"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GamePlanet/ClickableSphere"]
+shape = SubResource("SphereShape3D_wv2ic")
+
+[node name="LandCollider" type="MeshInstance3D" parent="GamePlanet"]
+material_override = SubResource("ShaderMaterial_n6esi")
+material_overlay = SubResource("StandardMaterial3D_5glwl")
+transparency = 0.97
+cast_shadow = 0
+gi_mode = 0
+
+[node name="PlanetFloorCollider" type="StaticBody3D" parent="GamePlanet"]
+
+[node name="CollisionPolygon3D" type="CollisionShape3D" parent="GamePlanet/PlanetFloorCollider"]
+shape = SubResource("CapsuleShape3D_75hqn")
+script = SubResource("GDScript_qu1hb")
+
+[node name="DebugNode" type="Node" parent="."]
+script = ExtResource("4_lsblq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_13rd1")
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="Player1" type="Node3D" parent="Players"]
+
+[node name="PlayerCommandBus" type="Node3D" parent="Players/Player1"]
+
+[node name="PlayerCameras" type="Node3D" parent="Players/Player1"]
+
+[node name="OrbitalCamera" type="Camera3D" parent="Players/Player1/PlayerCameras" node_paths=PackedStringArray("anchor")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 150, 0, 0)
+current = true
+fov = 15.5
+near = 0.21
+far = 10000.0
+script = ExtResource("2_xt6wy")
+anchor = NodePath("../../../../GamePlanet")
+distance = 155.0
+azimuth = 1.5708
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Players/Player1/PlayerCameras/OrbitalCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4831, 0, 0)
+light_energy = 300.0
+light_indirect_energy = 10.667
+light_volumetric_fog_energy = 1.88
+light_size = 0.859
+light_specular = 0.0
+omni_range = 600.0
+
+[node name="PlayerEntities" type="Node3D" parent="Players/Player1"]
+unique_name_in_owner = true
+script = ExtResource("9_ak5in")
+
+[node name="PlayerEntity" type="RigidBody3D" parent="Players/Player1/PlayerEntities" node_paths=PackedStringArray("anchor")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_8wa36")
+contact_monitor = true
+script = ExtResource("5_oduww")
+anchor = NodePath("../../../../GamePlanet")
+
+[node name="EntityMesh" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+mesh = SubResource("CapsuleMesh_h62qs")
+skeleton = NodePath("")
+
+[node name="EntityShape" type="CollisionShape3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+shape = SubResource("SphereShape3D_sbk4o")
+
+[node name="NavArea" type="Area3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="EntityNavShape" type="CollisionShape3D" parent="Players/Player1/PlayerEntities/PlayerEntity/NavArea"]
+shape = SubResource("SphereShape3D_e0wf7")
+
+[node name="EntityMoveBus" type="Node3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+script = ExtResource("11_dg66u")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_5v0fy")
+
+[node name="GeometryDrawer" type="Node3D" parent="." node_paths=PackedStringArray("draw_on")]
+script = ExtResource("11_6u1es")
+draw_on = NodePath("../GamePlanet/ClickableSphere")

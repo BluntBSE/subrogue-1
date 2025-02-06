@@ -1,0 +1,35 @@
+
+
+The circle math on the camera might still be at odds with the circle math used elsewhere. vOv?
+
+next: Create a tool to paint collision shapes.
+
+
+Avoid colliding with land:
+    
+    invisible colliders that protrude from the land that I draw in 3D?
+    mapping clicks and movement on the outside to a subviewport scene2D?
+    
+    
+
+NOTES:
+    Remember that you're using collision masks on the camera, the waypoints, and the clickable sphere.
+
+IDEAS:
+    
+    Sounds (and other emissions) are achieved by creating a large 3d shape around the emitter,
+    where the edge of the shape represents the smallest unit detectable (such as 1DB)
+    This large 3D shape clips with the terrain.
+    If an entity with a LISTENING flag is within the shape, it measures its distance from the emitter across the curve of the sphere.
+    With that distance. Given the POWER of the signal and the SENSITIVITY of the listener, do the following:
+    
+    If Signal POWER is within the SENSITIVITY limit of the listener, create a SignalDetectedNode.
+    
+    Signal detected nodes do not positively identify the object, but provide a node to pathfind to. Perhaps some variance is introduced to the position of the node based on sensitivity.
+    A SignalDetectedNode knows what it's parented to, so updates to a SignalDetectedNode are tracked to the object they belong to.
+    
+    
+    For the player, the player must choose to save these nodes to the screen, else they disappear after a certain amount of time.
+    
+    
+    

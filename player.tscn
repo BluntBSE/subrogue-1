@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://06e1q3fjqnua"]
+
+[ext_resource type="Texture2D" uid="uid://w452s6v8ljb1" path="res://icon.svg" id="1_ntu8m"]
+[ext_resource type="Script" path="res://globe_scene/player/globe_player.gd" id="2_er01d"]
+
+[node name="Player" type="Sprite3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 101, 0, 0)
+texture_filter = 0
+texture = ExtResource("1_ntu8m")
+script = ExtResource("2_er01d")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, -2)

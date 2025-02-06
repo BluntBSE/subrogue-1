@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3 uid="uid://dukbtye8qp0kh"]
+
+[ext_resource type="Texture2D" uid="uid://bedemtmo7mjjh" path="res://largeres_w_grid.png" id="1_ip4ri"]
+[ext_resource type="Texture2D" uid="uid://ft4oj81we26f" path="res://equirect.jpg" id="1_osnux"]
+[ext_resource type="Script" path="res://orbital_camera.gd" id="2_e3lkr"]
+[ext_resource type="Script" path="res://orbit_tester.gd" id="3_c470t"]
+[ext_resource type="Script" path="res://debug_node.gd" id="4_3nlpi"]
+[ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://sky.tres" id="6_5fdbr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vb3ey"]
+albedo_texture = ExtResource("1_ip4ri")
+
+[sub_resource type="SphereMesh" id="SphereMesh_qde3s"]
+radius = 100.0
+height = 200.0
+radial_segments = 256
+rings = 128
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhrom"]
+albedo_texture = ExtResource("1_osnux")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l24rb"]
+albedo_texture = ExtResource("1_osnux")
+
+[sub_resource type="SphereMesh" id="SphereMesh_57j0c"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="Environment" id="Environment_13rd1"]
+background_mode = 2
+sky = ExtResource("6_5fdbr")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="JPGTextureSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.387665, 0.389282, 0.411926)
+material_override = SubResource("StandardMaterial3D_vb3ey")
+mesh = SubResource("SphereMesh_qde3s")
+
+[node name="JPGTextureSphere2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.387665, 0.389282, 0.411926)
+visible = false
+material_override = SubResource("StandardMaterial3D_vhrom")
+mesh = SubResource("SphereMesh_qde3s")
+
+[node name="OrbitalCamera" type="Camera3D" parent="." node_paths=PackedStringArray("anchor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0, 0)
+current = true
+fov = 100.0
+near = 0.21
+script = ExtResource("2_e3lkr")
+anchor = NodePath("../JPGTextureSphere")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="OrbitalCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4831, 0, 0)
+light_energy = 300.0
+light_indirect_energy = 10.667
+light_volumetric_fog_energy = 1.88
+light_size = 0.859
+light_specular = 0.0
+omni_range = 600.0
+
+[node name="OrbitTester" type="MeshInstance3D" parent="." node_paths=PackedStringArray("anchor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_l24rb")
+mesh = SubResource("SphereMesh_57j0c")
+script = ExtResource("3_c470t")
+anchor = NodePath("../JPGTextureSphere")
+
+[node name="DebugNode" type="Node" parent="."]
+script = ExtResource("4_3nlpi")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_13rd1")
