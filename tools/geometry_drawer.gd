@@ -9,10 +9,15 @@ var hovering_over:Dictionary = {}
 
 #Mesh in progress
 var arrays = []
+var sprites = []
 var debug_spheres = []
 var indices := PackedInt32Array()
 var vertices := PackedVector3Array()
 var normals := PackedVector3Array()
+@export var bake_mesh:bool = false
+var extrude_up = 15.0
+var extrude_down = 23.0
+@export var flipped_normal:bool = true
 
 signal add_vertex_at
 
@@ -29,10 +34,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+    #print(hovering_over)
+    if not Engine.is_editor_hint():
+        return
+    
     hovering_over = cast_from_camera()
     if hovering_over != {}:
         var dstr = str(hovering_over)
         dh.dprint(debug, dstr)
+        
+    if bake_mesh == true:
+        generate_mesh_from_vertices(vertices)
+    # clear_data()
+        bake_mesh = false
         
     input_clicks()
     pass
@@ -66,7 +80,6 @@ func cast_from_camera()->Dictionary:
 func input_clicks():
     #BECAUSE we're not shift clicking or doing waypoint logic right now, this always overwrites the most recent item in the queue.
     if Input.is_action_just_pressed("editor_apply_to"):
-        print("Foo!")
         if hovering_over != {}:
             if hovering_over.collider.name == draw_on.name:
                 print("Clicked on collider", hovering_over)
@@ -78,76 +91,116 @@ func input_clicks():
     if Input.is_action_just_pressed("editor_log"):
         print("Vertices are ", vertices)
         print("Indices are ", indices)
+        print("Normals are", normals)
         print("Spheres are", debug_spheres)
         pass
     if Input.is_action_just_pressed("editor_clear"):
+        clear_data()
+        
+func clear_data()->void:
         print("Clearing all data from mesh in progress")
         vertices = PackedVector3Array()
         indices = PackedInt32Array()
-        for sphere in debug_spheres:
-            sphere.queue_free()
-        debug_spheres = []
 
-func handle_add_vertex_at(position: Vector3) -> void:
+        for sprite in sprites:
+            sprite.queue_free()
+        sprites = []
+#REWIND POINT
+func handle_add_vertex_at(_position: Vector3) -> void:
     print("Hello from handle_add_vertex_at")
-    vertices.append(position)
-    if vertices.size() % 3 == 0:
-        var i = vertices.size() - 3
-        indices.append(i)
-        indices.append(i + 1)
-        indices.append(i + 2)
-        generate_mesh_from_vertices(vertices)
+    var direction_from_anchor = normal_from_vertex(_position, draw_on)
+    var new_position = _position + (direction_from_anchor * extrude_up)
     
-    #DEBUG SPHERES
-    var mesh := SphereMesh.new()
-    var sphere := MeshInstance3D.new()
-    var radius = 0.5
-    var height = 1.0
-    mesh.radius = radius
-    mesh.height = height
-    sphere.mesh = mesh
-    sphere.position = position #Equivalent to transform.origin
-    add_child(sphere)
-    debug_spheres.append(sphere)
+    
+    vertices.append(new_position)
+    
+    
+    #SPRITES
+    var sprite := Sprite3D.new()
+    sprite.texture = load("res://assets/marker.png")
+    sprite.position = _position
+    sprite.billboard = 1
+    sprite.scale = Vector3(4.0,4.0,4.0)
+    add_child(sprite)
+    sprites.append(sprite)
+    
+    
     
 
-func generate_mesh_from_vertices(vertices:PackedVector3Array):
-    pass
 
-"""
-func export_shape_to_mesh_instance() -> void:
+func generate_mesh_from_vertices(_vertices: PackedVector3Array):
+    var surface_tool := SurfaceTool.new()
+    surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
     
-    var shape:ConcavePolygonShape3D = load(shape_path)
-    if shape == null or not shape is ConcavePolygonShape3D:
-        print("Failed to load shape or shape is not a ConcavePolygonShape3D.")
-        return
-
-    var faces = shape.get_faces()
-    var vertices = PackedVector3Array()
-    var indices = PackedInt32Array()
-
-    for i in range(0, faces.size(), 3):
-        vertices.append(faces[i])
-        vertices.append(faces[i + 1])
-        vertices.append(faces[i + 2])
-        indices.append(i)
-        indices.append(i + 1)
-        indices.append(i + 2)
-
-    var arrays = []
-    arrays.resize(Mesh.ARRAY_MAX)
-    arrays[Mesh.ARRAY_VERTEX] = vertices
-    arrays[Mesh.ARRAY_INDEX] = indices
-
-    var mesh = ArrayMesh.new()
-    mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-    # Create a new MeshInstance3D
+    # Every vertex in _vertices represents the high point of the plane we want to generate
+    var vertices_upper = _vertices.duplicate()
+    vertices_upper.reverse() # Start at the last point drawn, not the first.
+    var vertices_lower = PackedVector3Array()
+    
+    # Create a mirror vertex beneath the anchor's surface
+    for vertex in vertices_upper:
+        var l_dir = (vertex - draw_on.position).normalized() * -1.0
+        var l_dist = l_dir * extrude_down
+        var lower_vertex: Vector3 = vertex + l_dist
+        vertices_lower.append(lower_vertex)
+    
+    # 0,1,2 | 2, 1, 3 Counter-clockwise winding order.
+    
+    for i in range(vertices_upper.size() - 1):
+        # 0, 1, 2
+        print(i)
+        surface_tool.add_vertex(vertices_upper[i])
+        surface_tool.add_vertex(vertices_lower[i])
+        surface_tool.add_vertex(vertices_upper[i + 1])
+        
+ 
+        surface_tool.add_vertex(vertices_lower[i])
+        surface_tool.add_vertex(vertices_lower[i + 1])
+        surface_tool.add_vertex(vertices_upper[i + 1])
+    
+    surface_tool.generate_normals(true) #Setting this to flipped = true does nothing!
+    var mesh = surface_tool.commit()
+    if flipped_normal:
+        mesh = flip_mesh_faces(mesh)
     var mesh_instance = MeshInstance3D.new()
     mesh_instance.mesh = mesh
-
-    # Add the MeshInstance3D to the scene tree
+    #mesh_instance.material_override = load("res://tools/visible_collider_mesh.material")
     add_child(mesh_instance)
     mesh_instance.owner = get_tree().edited_scene_root
+    
     print("MeshInstance3D created and added to the scene.")
     
-"""
+
+func relative_normal_from_triangle(a:Vector3, b:Vector3, c:Vector3, anchor:Node3D)->Vector3:
+    var triangle_centroid  = ( a + b + c)/3.0
+    var dir_from_anchor = triangle_centroid - anchor.position #Anchor is always 0.0 but still
+    dir_from_anchor = dir_from_anchor.normalized()
+    
+    return Vector3()
+
+func normal_from_vertex(vertex:Vector3, anchor)->Vector3:
+    var dir_from_anchor:Vector3 = vertex - anchor.position
+    dir_from_anchor = dir_from_anchor.normalized()
+    return dir_from_anchor
+    
+func flip_mesh_faces(mesh: ArrayMesh) -> ArrayMesh:
+    var flipped_mesh = ArrayMesh.new()
+    
+    for surface in range(mesh.get_surface_count()):
+        var arrays = mesh.surface_get_arrays(surface)
+        
+        var vertices = arrays[Mesh.ARRAY_VERTEX]
+        var indices = arrays[Mesh.ARRAY_INDEX]
+        
+        var flipped_indices = PackedInt32Array()
+        
+        for i in range(0, indices.size(), 3):
+            flipped_indices.append(indices[i])
+            flipped_indices.append(indices[i + 2])
+            flipped_indices.append(indices[i + 1])
+        
+        arrays[Mesh.ARRAY_INDEX] = flipped_indices
+        
+        flipped_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+    
+    return flipped_mesh
