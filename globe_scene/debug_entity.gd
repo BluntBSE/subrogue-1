@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 
     handle_input(delta)
     fix_height()
+    fix_rotation()
     update_coords()
     move_to_next()
     check_reached_waypoint()
@@ -61,6 +62,11 @@ func fix_height()->void:
     var desired_position:Vector3 = anchor.position + (direction * height)
     position = desired_position
     pass
+
+func fix_rotation() -> void:
+    look_at(anchor.position)
+
+    
 
 func move_to_next()->void:
     if move_bus.queue.size() < 1:

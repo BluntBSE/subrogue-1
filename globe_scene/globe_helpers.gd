@@ -12,7 +12,7 @@ static func rads_from_position(vec:Vector3)->Dictionary:
         "polar":polar
     }
     var dstr = "rads from position returned" + str(dict)
-    dh.dprint(false, dstr)
+    dh.dprint(true, dstr)
     return dict
     
 static func fix_height(entity:Node3D, anchor:Node3D)->Vector3:

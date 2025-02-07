@@ -217,7 +217,7 @@ script = ExtResource("11_dg66u")
 shape = SubResource("SphereShape3D_sbk4o")
 
 [node name="Sprite3D" type="Sprite3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
-transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 texture = ExtResource("11_mhsw6")
 
 [node name="Area3D" type="Area3D" parent="."]
