@@ -1,7 +1,7 @@
-[gd_scene load_steps=47 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=58 format=4 uid="uid://bnygsufjcl2ql"]
 
-[ext_resource type="Texture2D" uid="uid://bedemtmo7mjjh" path="res://assets/largeres_w_grid.png" id="1_gksnk"]
 [ext_resource type="Script" path="res://globe_scene/planet.gd" id="2_0c888"]
+[ext_resource type="Shader" path="res://globe_scene/ripple.gdshader" id="2_6afaf"]
 [ext_resource type="Script" path="res://globe_scene/orbital_camera.gd" id="2_xt6wy"]
 [ext_resource type="Script" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
@@ -11,12 +11,56 @@
 [ext_resource type="Script" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
 [ext_resource type="Script" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="Script" path="res://classes/entity_move_bus.gd" id="11_dg66u"]
-[ext_resource type="Texture2D" uid="uid://db4euec4ebjls" path="res://assets/marker.png" id="11_mhsw6"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="11_hhgbi"]
+[ext_resource type="Shader" path="res://globe_scene/player_entity.gdshader" id="12_0gt0h"]
+[ext_resource type="Shader" path="res://globe_scene/test_shader_2.gdshader" id="12_y3al2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ehk3"]
-albedo_texture = ExtResource("1_gksnk")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vngxy"]
+transparency = 1
+albedo_texture = ExtResource("8_6dvw2")
+emission_enabled = true
+emission = Color(0.142281, 0, 0.905092, 1)
+emission_energy_multiplier = 10.28
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m0j1h"]
+noise_type = 0
+seed = 1
+fractal_type = 3
+fractal_lacunarity = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wb0ps"]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 9.9
+noise = SubResource("FastNoiseLite_m0j1h")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y00ai"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uams7"]
+width = 4000
+height = 4000
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 32.0
+noise = SubResource("FastNoiseLite_y00ai")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yy0wv"]
+render_priority = 0
+next_pass = SubResource("StandardMaterial3D_vngxy")
+shader = ExtResource("2_6afaf")
+shader_parameter/uAlbedo = Color(0.00890561, 0.00177568, 0.143907, 1)
+shader_parameter/uNormalMix = 0.2
+shader_parameter/uWaveDirection = Vector2(1, 0)
+shader_parameter/uWaveDirection2 = Vector2(0, 1)
+shader_parameter/uTimeScale = 0.0015
+shader_parameter/uWaveScale = 1.6
+shader_parameter/uTexureNormal = SubResource("NoiseTexture2D_wb0ps")
+shader_parameter/uTexureNormal2 = SubResource("NoiseTexture2D_uams7")
 
 [sub_resource type="SphereMesh" id="SphereMesh_wog1n"]
+material = SubResource("ShaderMaterial_yy0wv")
 radius = 100.0
 height = 200.0
 radial_segments = 40
@@ -38,6 +82,7 @@ blend_mode = 2
 [sub_resource type="Environment" id="Environment_13rd1"]
 background_mode = 2
 sky = ExtResource("5_braji")
+glow_enabled = true
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -49,6 +94,29 @@ radius = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_sbk4o"]
 custom_solver_bias = 1.0
 radius = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qmg5"]
+render_priority = 0
+shader = ExtResource("12_y3al2")
+shader_parameter/color = Color(0.898039, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sigbo"]
+lightmap_size_hint = Vector2i(17, 9)
+material = SubResource("ShaderMaterial_8qmg5")
+add_uv2 = true
+radial_segments = 10
+rings = 10
+
+[sub_resource type="SphereMesh" id="SphereMesh_smcyj"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3tdv0"]
+render_priority = 0
+shader = ExtResource("12_0gt0h")
+shader_parameter/Frequency = 1.0
+shader_parameter/MaxOpacity = 1.0
+shader_parameter/MinimumOpacity = 0.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
 
@@ -131,7 +199,6 @@ points = PackedVector3Array(112.613, -8.63816, -10.8341, 112.205, -7.82297, -12.
 [node name="GameMain" type="Node3D"]
 
 [node name="GamePlanet" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_1ehk3")
 mesh = SubResource("SphereMesh_wog1n")
 script = ExtResource("2_0c888")
 
@@ -190,7 +257,7 @@ script = ExtResource("9_ak5in")
 
 [node name="PlayerEntity" type="RigidBody3D" parent="Players/Player1/PlayerEntities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 101, 0, 0)
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
@@ -218,7 +285,22 @@ shape = SubResource("SphereShape3D_sbk4o")
 
 [node name="Sprite3D" type="Sprite3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-texture = ExtResource("11_mhsw6")
+texture = ExtResource("11_hhgbi")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Players/Player1/PlayerEntities/PlayerEntity/Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.38242e-08, 0, 1.46014)
+spot_range = 10.0
+spot_attenuation = -1.35
+spot_angle = 40.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity/Sprite3D"]
+visible = false
+mesh = SubResource("SphereMesh_sigbo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+visible = false
+mesh = SubResource("SphereMesh_smcyj")
+surface_material_override/0 = SubResource("ShaderMaterial_3tdv0")
 
 [node name="Area3D" type="Area3D" parent="."]
 
