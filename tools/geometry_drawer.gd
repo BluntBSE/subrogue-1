@@ -146,6 +146,7 @@ func generate_mesh_from_vertices(_vertices: PackedVector3Array):
     
     # 0,1,2 | 2, 1, 3 Counter-clockwise winding order.
     
+
     for i in range(vertices_upper.size() - 1):
         # 0, 1, 2
         print(i)

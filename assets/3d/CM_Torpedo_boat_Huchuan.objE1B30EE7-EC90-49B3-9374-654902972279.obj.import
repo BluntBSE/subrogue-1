@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dfdt4o0h2cw6g"
+path="res://.godot/imported/CM_Torpedo_boat_Huchuan.objE1B30EE7-EC90-49B3-9374-654902972279.obj-b0b00b368d4e4064d73f250568ed7f1d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/CM_Torpedo_boat_Huchuan.objE1B30EE7-EC90-49B3-9374-654902972279.obj-b0b00b368d4e4064d73f250568ed7f1d.mesh"]
+
+source_file="res://assets/3d/CM_Torpedo_boat_Huchuan.objE1B30EE7-EC90-49B3-9374-654902972279.obj"
+dest_files=["res://.godot/imported/CM_Torpedo_boat_Huchuan.objE1B30EE7-EC90-49B3-9374-654902972279.obj-b0b00b368d4e4064d73f250568ed7f1d.mesh", "res://.godot/imported/CM_Torpedo_boat_Huchuan.objE1B30EE7-EC90-49B3-9374-654902972279.obj-b0b00b368d4e4064d73f250568ed7f1d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

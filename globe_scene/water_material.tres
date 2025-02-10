@@ -1,0 +1,41 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://c0oh0tqawpdmg"]
+
+[ext_resource type="Material" uid="uid://1dxldgjx8y3r" path="res://globe_scene/land_backup.tres" id="1_by6de"]
+[ext_resource type="Shader" path="res://globe_scene/world_ripple.gdshader" id="2_6c4yd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jph6l"]
+noise_type = 0
+seed = 1
+fractal_type = 3
+fractal_lacunarity = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_noict"]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 9.9
+noise = SubResource("FastNoiseLite_jph6l")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fhr5f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vpipa"]
+width = 4000
+height = 4000
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 32.0
+noise = SubResource("FastNoiseLite_fhr5f")
+
+[resource]
+render_priority = 0
+next_pass = ExtResource("1_by6de")
+shader = ExtResource("2_6c4yd")
+shader_parameter/uAlbedo = Color(0.00890561, 0.00177568, 0.143907, 1)
+shader_parameter/uNormalMix = 0.2
+shader_parameter/uWaveDirection = Vector2(1, 0)
+shader_parameter/uWaveDirection2 = Vector2(0, 1)
+shader_parameter/uTimeScale = 0.0015
+shader_parameter/uWaveScale = 1.6
+shader_parameter/uTexureNormal = SubResource("NoiseTexture2D_noict")
+shader_parameter/uTexureNormal2 = SubResource("NoiseTexture2D_vpipa")

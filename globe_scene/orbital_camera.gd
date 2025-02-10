@@ -56,6 +56,10 @@ func _process(delta: float) -> void:
     look_at(anchor.position)
     hovering_over = cast_from_camera()
     #print(hovering_over.collider.name)
+    var dist = anchor.position - position
+    dist = dist.length()
+    %WorldEnvironment.environment.set_volumetric_fog_length(dist)
+    
     
     
 func cast_from_camera()->Dictionary:
@@ -100,7 +104,6 @@ func input_clicks():
                 var click_normal = hovering_over.normal
                 var click_azimuth = GlobeHelpers.rads_from_position(click_position).azimuth
                 var click_polar = GlobeHelpers.rads_from_position(click_position).polar
-                print("Click data: ", click_position)
                 #Create a 3D area to check for collision with to determine if a movement is finished.
                 var waypoint:Area3D = Area3D.new()
                 var wp_collider := CollisionShape3D.new()

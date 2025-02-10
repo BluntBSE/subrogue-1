@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://78fpva77dmbk"
+path="res://.godot/imported/astute_submarine.obj-c80e8bf31ac750ea783aa633c2b625bd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/astute_submarine.obj-c80e8bf31ac750ea783aa633c2b625bd.mesh"]
+
+source_file="res://assets/3d/astute_submarine.obj"
+dest_files=["res://.godot/imported/astute_submarine.obj-c80e8bf31ac750ea783aa633c2b625bd.mesh", "res://.godot/imported/astute_submarine.obj-c80e8bf31ac750ea783aa633c2b625bd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

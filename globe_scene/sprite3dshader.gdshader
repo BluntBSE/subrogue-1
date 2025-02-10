@@ -13,11 +13,11 @@ uniform float alphaThreshold: hint_range(0.0, 1.0) =  0.2; // Alpha level a pixe
 //Goes through every single pixle and does thing
 void fragment() {
 	vec4 col = texture(sprite_texture, UV); // Gets color at uv position of pixel
-	
+
 	// Sets source image as default pixel
 	ALBEDO = col.rgb;
 	ALPHA = col.a;
-	
+
 	vec2 pixel_size = 1.0 / vec2(textureSize(sprite_texture, 0)); // Set pixel size
 	float alph = 0.0; // Start with a 0 alpha to add to with each check
 	for (int i = 0; i < glowRadialCoverage; i++) { // Goes around in a circle
@@ -31,7 +31,7 @@ void fragment() {
 			vec2 pixel_coor = vec2( sin(angle) , cos(angle) );
 			// Gets the pixel based on the previous information
     		vec4 tex = texture(sprite_texture, UV + pixel_coor * pixel_size * dist);
-			
+
 			// Sharpness. If you don't care about this, enable the next line and delete the next 3
 			//alph += tex.a * line_color.a;
 			float distFrom = float(glowDensity-j) / float(glowDensity); // Distance iteration number (how far out)
@@ -39,14 +39,14 @@ void fragment() {
 			alph += (tex.a * line_color.a) * sharpness; // Apply sharpness
 		}
 	}
-	
+
 	// Adds outline if this part of the image is transparent
 	if (ALPHA < alphaThreshold){
 		ALBEDO = line_color.rgb;
 		ALPHA = alph;
 	}
-	
+
 	// Enabling this line will cut out the image and leave the outline
-	//ALPHA -= col.a * 10.0; 
+	//ALPHA -= col.a * 10.0;
 	// if you set blend to add, and set this as a second pass, you'll get a better glow effect
 }

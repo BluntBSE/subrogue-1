@@ -1,0 +1,34 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://bh8eee8r2l3qq"
+path="res://.godot/imported/NK57 Monospace Sc Sb.otf-1a1e03730b1e3cb14574df0c3cb766fd.fontdata"
+
+[deps]
+
+source_file="res://assets/UI/fonts/NK57/NK57 Monospace Sc Sb.otf"
+dest_files=["res://.godot/imported/NK57 Monospace Sc Sb.otf-1a1e03730b1e3cb14574df0c3cb766fd.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

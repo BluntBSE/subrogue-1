@@ -1,7 +1,8 @@
-[gd_scene load_steps=58 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=59 format=4 uid="uid://bnygsufjcl2ql"]
 
+[ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
+[ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
 [ext_resource type="Script" path="res://globe_scene/planet.gd" id="2_0c888"]
-[ext_resource type="Shader" path="res://globe_scene/ripple.gdshader" id="2_6afaf"]
 [ext_resource type="Script" path="res://globe_scene/orbital_camera.gd" id="2_xt6wy"]
 [ext_resource type="Script" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
@@ -11,56 +12,14 @@
 [ext_resource type="Script" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
 [ext_resource type="Script" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="Script" path="res://classes/entity_move_bus.gd" id="11_dg66u"]
+[ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="11_dslo6"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="11_hhgbi"]
-[ext_resource type="Shader" path="res://globe_scene/player_entity.gdshader" id="12_0gt0h"]
 [ext_resource type="Shader" path="res://globe_scene/test_shader_2.gdshader" id="12_y3al2"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vngxy"]
-transparency = 1
-albedo_texture = ExtResource("8_6dvw2")
-emission_enabled = true
-emission = Color(0.142281, 0, 0.905092, 1)
-emission_energy_multiplier = 10.28
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_m0j1h"]
-noise_type = 0
-seed = 1
-fractal_type = 3
-fractal_lacunarity = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wb0ps"]
-in_3d_space = true
-seamless = true
-as_normal_map = true
-bump_strength = 9.9
-noise = SubResource("FastNoiseLite_m0j1h")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_y00ai"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uams7"]
-width = 4000
-height = 4000
-in_3d_space = true
-seamless = true
-as_normal_map = true
-bump_strength = 32.0
-noise = SubResource("FastNoiseLite_y00ai")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yy0wv"]
-render_priority = 0
-next_pass = SubResource("StandardMaterial3D_vngxy")
-shader = ExtResource("2_6afaf")
-shader_parameter/uAlbedo = Color(0.00890561, 0.00177568, 0.143907, 1)
-shader_parameter/uNormalMix = 0.2
-shader_parameter/uWaveDirection = Vector2(1, 0)
-shader_parameter/uWaveDirection2 = Vector2(0, 1)
-shader_parameter/uTimeScale = 0.0015
-shader_parameter/uWaveScale = 1.6
-shader_parameter/uTexureNormal = SubResource("NoiseTexture2D_wb0ps")
-shader_parameter/uTexureNormal2 = SubResource("NoiseTexture2D_uams7")
+[ext_resource type="AudioStream" uid="uid://c4pqqqemfw30i" path="res://assets/royalty_free_music/dark-ambient-126122.mp3" id="16_o22p0"]
+[ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="17_eum53"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_wog1n"]
-material = SubResource("ShaderMaterial_yy0wv")
+material = ExtResource("1_jtrqq")
 radius = 100.0
 height = 200.0
 radial_segments = 40
@@ -82,7 +41,15 @@ blend_mode = 2
 [sub_resource type="Environment" id="Environment_13rd1"]
 background_mode = 2
 sky = ExtResource("5_braji")
+sdfgi_use_occlusion = true
 glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.25
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_length = 10.0
+volumetric_fog_detail_spread = 1.0
+volumetric_fog_ambient_inject = 1.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -94,6 +61,13 @@ radius = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_sbk4o"]
 custom_solver_bias = 1.0
 radius = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1baen"]
+render_priority = 0
+shader = ExtResource("11_dslo6")
+shader_parameter/glow_color = Color(0, 0.815686, 0.792157, 1)
+shader_parameter/glow_intensity = 5.0
+shader_parameter/texture_albedo = ExtResource("11_hhgbi")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8qmg5"]
 render_priority = 0
@@ -108,15 +82,22 @@ radial_segments = 10
 rings = 10
 
 [sub_resource type="SphereMesh" id="SphereMesh_smcyj"]
-radius = 1.0
-height = 2.0
+radius = 12.0
+height = 24.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3tdv0"]
-render_priority = 0
-shader = ExtResource("12_0gt0h")
-shader_parameter/Frequency = 1.0
-shader_parameter/MaxOpacity = 1.0
-shader_parameter/MinimumOpacity = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_pcy2y"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_54rvg"]
+radius = 3.0
+height = 6.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_2rtqc"]
+density = 8.134
+albedo = Color(0, 0.818736, 0.815349, 1)
+height_falloff = 2.0
+edge_fade = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
 
@@ -197,6 +178,7 @@ points = PackedVector3Array(106.902, -8.63812, -10.019, 108.532, -7.41545, -12.4
 points = PackedVector3Array(112.613, -8.63816, -10.8341, 112.205, -7.82297, -12.8731, 111.797, -8.23056, -12.4651, 114.243, -9.04592, -12.0572, 114.243, -7.41505, -12.0572, 111.389, -7.41505, -11.65, 111.389, -9.04592, -10.8341, 114.243, -7.41505, -12.8731, 114.243, -9.04592, -11.2421, 111.389, -9.04592, -11.65, 111.389, -7.41505, -12.4651, 113.835, -8.23056, -12.8731, 114.243, -8.23056, -11.2421, 112.613, -7.82297, -11.2421, 111.389, -8.63816, -10.8341)
 
 [node name="GameMain" type="Node3D"]
+script = ExtResource("1_msvd6")
 
 [node name="GamePlanet" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_wog1n")
@@ -220,6 +202,7 @@ gi_mode = 0
 script = ExtResource("4_lsblq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
 environment = SubResource("Environment_13rd1")
 
 [node name="Players" type="Node3D" parent="."]
@@ -232,14 +215,14 @@ environment = SubResource("Environment_13rd1")
 
 [node name="OrbitalCamera" type="Camera3D" parent="Players/Player1/PlayerCameras" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 150, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 218.407, 0, 0)
 current = true
 fov = 15.5
 near = 0.21
 far = 10000.0
 script = ExtResource("2_xt6wy")
 anchor = NodePath("../../../../GamePlanet")
-distance = 155.0
+distance = 218.0
 azimuth = 1.5708
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Players/Player1/PlayerCameras/OrbitalCamera"]
@@ -257,7 +240,7 @@ script = ExtResource("9_ak5in")
 
 [node name="PlayerEntity" type="RigidBody3D" parent="Players/Player1/PlayerEntities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 101, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100.25, 0, 0)
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
@@ -267,6 +250,7 @@ anchor = NodePath("../../../../GamePlanet")
 
 [node name="EntityMesh" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
 visible = false
+gi_mode = 2
 mesh = SubResource("SphereMesh_0u415")
 skeleton = NodePath("")
 
@@ -283,17 +267,21 @@ script = ExtResource("11_dg66u")
 [node name="EntityShape" type="CollisionShape3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
 shape = SubResource("SphereShape3D_sbk4o")
 
-[node name="Sprite3D" type="Sprite3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+[node name="HardSprite" type="Sprite3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+material_overlay = SubResource("ShaderMaterial_1baen")
+modulate = Color(0, 0.815686, 0.792157, 0)
+shaded = true
+alpha_antialiasing_mode = 1
 texture = ExtResource("11_hhgbi")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Players/Player1/PlayerEntities/PlayerEntity/Sprite3D"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Players/Player1/PlayerEntities/PlayerEntity/HardSprite"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.38242e-08, 0, 1.46014)
+visible = false
 spot_range = 10.0
 spot_attenuation = -1.35
 spot_angle = 40.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity/Sprite3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity/HardSprite"]
 visible = false
 mesh = SubResource("SphereMesh_sigbo")
 
@@ -301,6 +289,72 @@ mesh = SubResource("SphereMesh_sigbo")
 visible = false
 mesh = SubResource("SphereMesh_smcyj")
 surface_material_override/0 = SubResource("ShaderMaterial_3tdv0")
+
+[node name="EntitySpot1" type="SpotLight3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.758e-07, 0, 4.02185)
+light_color = Color(0, 0.816604, 0.791994, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.265
+spot_range = 20.808
+spot_attenuation = -4.0
+spot_angle = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity/EntitySpot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_pcy2y")
+skeleton = NodePath("../../460mi")
+
+[node name="460mi" type="SpotLight3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.12062e-07, 0, 7.13916)
+layers = 7
+light_color = Color(0.774024, 0.045353, 0.588677, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.265
+spot_range = 20.808
+spot_attenuation = -4.0
+spot_angle = 55.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity/460mi"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
+layers = 4
+cast_shadow = 3
+mesh = SubResource("SphereMesh_54rvg")
+skeleton = NodePath("../../EntitySpot1")
+
+[node name="1100mi" type="SpotLight3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18129e-07, 0, 16.4289)
+visible = false
+layers = 7
+light_color = Color(0.774024, 0.045353, 0.588677, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.265
+spot_range = 50.0
+spot_attenuation = -4.0
+spot_angle = 55.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity/1100mi"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
+layers = 4
+cast_shadow = 3
+mesh = SubResource("SphereMesh_54rvg")
+skeleton = NodePath("../../EntitySpot1")
+
+[node name="FogVolume" type="FogVolume" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+size = Vector3(1, 1, 1)
+shape = 0
+material = SubResource("FogMaterial_2rtqc")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Players/Player1/PlayerEntities/PlayerEntity/FogVolume"]
+visible = false
+light_color = Color(0.928687, 0.35569, 0.750399, 1)
+omni_range = 4.65
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -316,72 +370,91 @@ flipped_normal = false
 visible = false
 mesh = SubResource("ArrayMesh_8w7ix")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="GeometryDrawer"]
+[node name="NorthPanama" type="StaticBody3D" parent="GeometryDrawer"]
 collision_layer = 2
 collision_mask = 7
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_tid5b")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_i8avd")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_p1pif")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_ufbo8")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_01q4x")
 
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_vh146")
 
-[node name="CollisionShape3D7" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_sh1cg")
 
-[node name="CollisionShape3D8" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_o08pe")
 
-[node name="CollisionShape3D9" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_fqrlm")
 
-[node name="CollisionShape3D10" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_qkwtn")
 
-[node name="CollisionShape3D11" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_mj8id")
 
-[node name="CollisionShape3D12" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_ge81c")
 
-[node name="CollisionShape3D13" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_j6i75")
 
-[node name="CollisionShape3D14" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D14" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_al2gg")
 
-[node name="CollisionShape3D15" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D15" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_dmo1b")
 
-[node name="CollisionShape3D16" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D16" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_ofddj")
 
-[node name="CollisionShape3D17" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D17" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_x7yc7")
 
-[node name="CollisionShape3D18" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D18" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_l2phg")
 
-[node name="CollisionShape3D19" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D19" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_i2kn0")
 
-[node name="CollisionShape3D20" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D20" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_iro33")
 
-[node name="CollisionShape3D21" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D21" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_v61fo")
 
-[node name="CollisionShape3D22" type="CollisionShape3D" parent="GeometryDrawer/StaticBody3D"]
+[node name="CollisionShape3D22" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
 shape = SubResource("ConvexPolygonShape3D_ym8sc")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_o22p0")
+volume_db = -12.0
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_eum53")
+volume_db = -3.0
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="OnLoadFilter" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_right = 1922.0
+offset_bottom = 1070.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

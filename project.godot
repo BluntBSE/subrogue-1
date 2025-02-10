@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SubRogue-1"
-run/main_scene="res://globe_scene/globe_scene.tscn"
+run/main_scene="res://title_screen/title_screen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -19,9 +19,13 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalConst="*res://globalconst.gd"
+SceneChangeLoader="*res://scene_change_loader.gd"
+SoundManager="*res://engine/sound/sound_manager.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/vsync/vsync_mode=0
 
 [input]
@@ -78,4 +82,5 @@ editor_clear={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+environment/volumetric_fog/volume_size=256
+environment/volumetric_fog/volume_depth=256

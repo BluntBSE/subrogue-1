@@ -1,0 +1,258 @@
+[gd_scene load_steps=14 format=3 uid="uid://cdrj27u3ygxc0"]
+
+[ext_resource type="Script" path="res://title_screen/main_menu.gd" id="1_cr28v"]
+[ext_resource type="PackedScene" uid="uid://c4rbxieydn2a4" path="res://title_screen/wireframe_sub_space.tscn" id="2_rdkjt"]
+[ext_resource type="Shader" path="res://title_screen/vcr.gdshader" id="3_qq1wq"]
+[ext_resource type="FontFile" uid="uid://ckkgmxhxnuee3" path="res://assets/UI/fonts/Ethnocentric Rg.otf" id="4_eea5d"]
+[ext_resource type="FontFile" uid="uid://5muhrw1dex5u" path="res://assets/UI/fonts/Ethnocentric Rg It.otf" id="5_1ihsi"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dbuyn"]
+viewport_path = NodePath("TextureRect/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ny2f1"]
+shader = ExtResource("3_qq1wq")
+shader_parameter/curvature = 0.0
+shader_parameter/skip = 0.0
+shader_parameter/image_flicker = 0.0
+shader_parameter/use_noise = false
+shader_parameter/vignette_flicker_speed = 0.25
+shader_parameter/vignette_strength = 0.54
+shader_parameter/small_scanlines_speed = 1.0
+shader_parameter/small_scanlines_proximity = 1.0
+shader_parameter/small_scanlines_opacity = 1.0
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_speed = 0.1
+shader_parameter/scanline_thickness = 0.2
+shader_parameter/scanlines_spacing = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orbx5"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wmaxc"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63mdo"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxsfg"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1qc2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_cdp6a"]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 36
+Button/fonts/font = ExtResource("4_eea5d")
+Button/styles/disabled = SubResource("StyleBoxFlat_orbx5")
+Button/styles/focus = SubResource("StyleBoxFlat_wmaxc")
+Button/styles/hover = SubResource("StyleBoxFlat_63mdo")
+Button/styles/normal = SubResource("StyleBoxFlat_rxsfg")
+Button/styles/pressed = SubResource("StyleBoxFlat_e1qc2")
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_cr28v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1919.0
+offset_bottom = 1086.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1930.0
+offset_bottom = 1090.0
+scale = Vector2(1.0073, 1.0073)
+texture = SubResource("ViewportTexture_dbuyn")
+
+[node name="SubViewport" type="SubViewport" parent="TextureRect"]
+use_debanding = true
+size = Vector2i(1920, 1080)
+
+[node name="WireframeSubSpace" parent="TextureRect/SubViewport" instance=ExtResource("2_rdkjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14476, 0, 9.24166)
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect"]
+visible = false
+material = SubResource("ShaderMaterial_ny2f1")
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1074.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+offset_left = 281.0
+offset_top = 364.0
+offset_right = 731.0
+offset_bottom = 814.0
+color = Color(0.00784314, 0.00784314, 0.00784314, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 180.0
+offset_top = 8.0
+offset_right = -159.0
+offset_bottom = 455.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[center]SUB ROGUE[/center]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -262.0
+offset_top = -36.0
+offset_right = 288.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Start Game"
+
+[node name="Button2" type="Button" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Start Game"
+
+[node name="Button3" type="Button" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Start Game"
+
+[node name="TextureButton" type="TextureButton" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 83.0
+offset_top = 167.0
+offset_right = 722.0
+offset_bottom = 971.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 218.0
+offset_right = -25.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="BtnNewGame" type="Button" parent="ColorRect3/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_cdp6a")
+text = "NEW GAME"
+
+[node name="Button2" type="Button" parent="ColorRect3/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_cdp6a")
+text = "LOAD GAME"
+
+[node name="Button5" type="Button" parent="ColorRect3/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_cdp6a")
+text = "MULTIPLAYER"
+
+[node name="Button4" type="Button" parent="ColorRect3/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_cdp6a")
+text = "SETTINGS"
+
+[node name="Button3" type="Button" parent="ColorRect3/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_cdp6a")
+text = "QUIT"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect3"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 633.0
+offset_bottom = 196.0
+theme_override_fonts/normal_font = ExtResource("5_1ihsi")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[center]SUB ROGUE[/center]"
+
+[connection signal="button_up" from="ColorRect3/VBoxContainer/BtnNewGame" to="." method="_on_btn_new_game_button_up"]

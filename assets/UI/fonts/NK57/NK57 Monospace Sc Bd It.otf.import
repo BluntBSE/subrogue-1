@@ -1,0 +1,34 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://do752tpigrefk"
+path="res://.godot/imported/NK57 Monospace Sc Bd It.otf-1f25eddad38f6be85172ea47e3fcc3ec.fontdata"
+
+[deps]
+
+source_file="res://assets/UI/fonts/NK57/NK57 Monospace Sc Bd It.otf"
+dest_files=["res://.godot/imported/NK57 Monospace Sc Bd It.otf-1f25eddad38f6be85172ea47e3fcc3ec.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

@@ -1,0 +1,142 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpk54blusv338"]
+
+[ext_resource type="Script" path="res://loading_screen/loadingbar.gd" id="1_ae46u"]
+[ext_resource type="Texture2D" uid="uid://b38f01iyq0i43" path="res://loading_screen/grid_purple.jpg" id="2_b4m6o"]
+[ext_resource type="Texture2D" uid="uid://bhbk1mvl4jcr7" path="res://loading_screen/LoadingBarEmptyT09White.png" id="2_yqgq8"]
+[ext_resource type="FontFile" uid="uid://ckkgmxhxnuee3" path="res://assets/UI/fonts/Ethnocentric Rg.otf" id="3_gdwg3"]
+[ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="3_kma5t"]
+[ext_resource type="Texture2D" uid="uid://dxtmwfg0q5pcs" path="res://loading_screen/LoadingBarFullT09White.png" id="4_ftt7a"]
+
+[sub_resource type="Animation" id="Animation_887lg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_lr6to"]
+resource_name = "texture_pan_up"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(1, 30)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -794, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(1, 30)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2youl"]
+_data = {
+"RESET": SubResource("Animation_887lg"),
+"texture_pan_up": SubResource("Animation_lr6to")
+}
+
+[node name="LoadingScreen" type="Control" node_paths=PackedStringArray("progressbar", "debugbar", "percent_label", "tooltip_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ae46u")
+progressbar = NodePath("TextureProgressBar")
+debugbar = NodePath("")
+percent_label = NodePath("TextureProgressBar/PercentLabel")
+tooltip_label = NodePath("ColorBG/RichTextLabel")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -39.0
+offset_right = 4461.0
+offset_bottom = 4500.0
+scale = Vector2(0.43944, 0.43944)
+texture = ExtResource("2_b4m6o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
+libraries = {
+"": SubResource("AnimationLibrary_2youl")
+}
+autoplay = "texture_pan_up"
+
+[node name="ColorBG" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1077.0
+color = Color(0, 0, 0, 0.670588)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorBG"]
+self_modulate = Color(0.937255, 0.603922, 0.956863, 1)
+layout_mode = 0
+offset_left = 675.0
+offset_top = 792.0
+offset_right = 1319.0
+offset_bottom = 852.0
+theme_override_fonts/normal_font = ExtResource("3_kma5t")
+bbcode_enabled = true
+text = "[center]Mercenary satellites can reveal the position and specification of surface vessels without compromising your position.[/center]"
+fit_content = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+modulate = Color(0.937255, 0.603922, 0.956863, 1)
+layout_mode = 0
+offset_left = 522.0
+offset_top = 873.0
+offset_right = 1539.0
+offset_bottom = 972.0
+step = 0.0
+texture_under = ExtResource("2_yqgq8")
+texture_progress = ExtResource("4_ftt7a")
+
+[node name="Label" type="Label" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = -205.0
+offset_top = 28.0
+offset_right = 12.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("3_gdwg3")
+theme_override_font_sizes/font_size = 36
+text = "LOADING"
+
+[node name="PercentLabel" type="Label" parent="TextureProgressBar"]
+layout_mode = 0
+offset_left = 1021.0
+offset_top = 28.0
+offset_right = 1238.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("3_gdwg3")
+theme_override_font_sizes/font_size = 36
+text = "30%"

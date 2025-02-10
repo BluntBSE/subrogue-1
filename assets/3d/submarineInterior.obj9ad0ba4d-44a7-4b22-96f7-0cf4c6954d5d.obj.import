@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bj4lhqnq7gcu"
+path="res://.godot/imported/submarineInterior.obj9ad0ba4d-44a7-4b22-96f7-0cf4c6954d5d.obj-522ec3cd4e83cbc325ab1e0127ac3567.mesh"
+
+[deps]
+
+files=["res://.godot/imported/submarineInterior.obj9ad0ba4d-44a7-4b22-96f7-0cf4c6954d5d.obj-522ec3cd4e83cbc325ab1e0127ac3567.mesh"]
+
+source_file="res://assets/3d/submarineInterior.obj9ad0ba4d-44a7-4b22-96f7-0cf4c6954d5d.obj"
+dest_files=["res://.godot/imported/submarineInterior.obj9ad0ba4d-44a7-4b22-96f7-0cf4c6954d5d.obj-522ec3cd4e83cbc325ab1e0127ac3567.mesh", "res://.godot/imported/submarineInterior.obj9ad0ba4d-44a7-4b22-96f7-0cf4c6954d5d.obj-522ec3cd4e83cbc325ab1e0127ac3567.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
