@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cx72xcf27h8qj"]
+
+[ext_resource type="Shader" path="res://globe_scene/pulsing_wireframe.gdshader" id="1_i4ac8"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_i4ac8")
+shader_parameter/albedo = Color(0.0317893, 0.438316, 0.529365, 1)
+shader_parameter/outline_width = 3.0
+shader_parameter/tolerance = 1.0
+shader_parameter/speed = 1.0
+shader_parameter/dash_length = 0.1

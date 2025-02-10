@@ -21,7 +21,7 @@ void vertex() {
 
 void fragment() {
     float time_offset = TIME * speed;
-    float dash_position = mod(UV.x + time_offset, dash_length * 2.0);
+    float dash_position = mod(UV.x - time_offset, dash_length * 2.0);
 
     if (dash_position < dash_length) {
         ALPHA = 1.0;

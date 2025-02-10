@@ -98,17 +98,31 @@ func drop_context_marker(point: Vector3) -> Node3D:
     var mid_tangent: Vector3 = (end_point - start_point) * 0.25
     var end_tangent: Vector3 = (end_point - mid_point) * 0.5
     
-    # Add points to the curve with tangents
-    curve.add_point(start_point, Vector3(), start_tangent) # idx 0
-    curve.add_point(mid_point, -mid_tangent, mid_tangent)
-    curve.add_point(end_point, -end_tangent, Vector3())
+    # Add points to the curve with tangents - In the abstract, if you want the path to sit on the ground, do this.
+    #curve.add_point(start_point, Vector3(), start_tangent) # idx 0
+    #curve.add_point(mid_point, -mid_tangent, mid_tangent)
+    #curve.add_point(end_point, -end_tangent, Vector3())
     
+    #If using a CSG, we must offset.
+    curve.add_point(start_point-%PlayerEntity.position, Vector3(), start_tangent) # idx 0
+    curve.add_point(mid_point-%PlayerEntity.position, -mid_tangent, mid_tangent)
+    curve.add_point(end_point-%PlayerEntity.position, -end_tangent, Vector3())
     path.curve = curve
-    marker.add_child(path)
+    var csg:CSGPolygon3D = CSGPolygon3D.new()
+    csg.polygon = [Vector2(0.0,0.0),Vector2(0.0,0.25),Vector2(0.125,0.125)]
+    csg.mode = CSGPolygon3D.MODE_PATH
+    csg.add_child(path)
+    csg.path_interval = 0.1
+    csg.material = load("res://globe_scene/csgmat.tres")
+    #marker.add_child(path)
+    marker.add_child(csg)
+
     sprite.position = end_point
     marker.position = %PlayerEntity.position
     %PlayerMarkers.add_child(marker)
-    
+    csg.set_path_node(csg.get_child(0).get_path())
+    csg.position - %PlayerEntity.position
+  
     return marker
     
  

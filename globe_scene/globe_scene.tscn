@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=61 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Script" path="res://globe_scene/debug_entity.gd" id="5_oduww"]
-[ext_resource type="Shader" path="res://globe_scene/pulsing_wireframe.gdshader" id="6_xri4n"]
+[ext_resource type="Material" uid="uid://cx72xcf27h8qj" path="res://globe_scene/csgmat.tres" id="6_1twjn"]
 [ext_resource type="Shader" path="res://just_the_mesh/shadercollider.gdshader" id="7_ypo7k"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/collision_mask.png" id="8_6dvw2"]
 [ext_resource type="Script" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
@@ -38,15 +38,6 @@ shader_parameter/heightmap = ExtResource("8_6dvw2")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5glwl"]
 transparency = 4
 blend_mode = 2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_klgae"]
-render_priority = 0
-shader = ExtResource("6_xri4n")
-shader_parameter/albedo = Color(0.0317893, 0.438316, 0.529365, 1)
-shader_parameter/outline_width = 3.0
-shader_parameter/tolerance = 1.0
-shader_parameter/speed = 1.0
-shader_parameter/dash_length = 0.1
 
 [sub_resource type="Environment" id="Environment_13rd1"]
 background_mode = 2
@@ -228,7 +219,7 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
-material = SubResource("ShaderMaterial_klgae")
+material = ExtResource("6_1twjn")
 
 [node name="DebugNode" type="Node" parent="."]
 script = ExtResource("4_lsblq")
