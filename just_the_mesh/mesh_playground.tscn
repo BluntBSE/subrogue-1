@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bedemtmo7mjjh" path="res://assets/largeres_w_grid.png" id="1_gksnk"]
 [ext_resource type="Texture2D" uid="uid://ft4oj81we26f" path="res://assets/equirect.jpg" id="1_koind"]
 [ext_resource type="Script" path="res://globe_scene/planet.gd" id="2_0c888"]
-[ext_resource type="Script" path="res://globe_scene/orbital_camera.gd" id="2_xt6wy"]
+[ext_resource type="Script" path="res://engine/player_camera/orbital_camera.gd" id="2_xt6wy"]
 [ext_resource type="Script" path="res://globe_scene/orbit_tester.gd" id="3_3ypgv"]
 [ext_resource type="Script" path="res://globe_scene/gravity_collider.gd" id="3_js1ha"]
 [ext_resource type="PackedScene" uid="uid://06e1q3fjqnua" path="res://player.tscn" id="3_pqhdm"]

@@ -1,14 +1,19 @@
 
 
-The circle math on the camera might still be at odds with the circle math used elsewhere. vOv?
-
-next: Create a tool to paint collision shapes.
 
 
-Avoid colliding with land:
-    
-    invisible colliders that protrude from the land that I draw in 3D?
-    mapping clicks and movement on the outside to a subviewport scene2D?
+
+
+'M" to toggle between following the playerentity and free-look
+
+UPON Right click:
+    Pop up a menu.
+    Play a sound
+    Draw a dotted path from the player entity to the clicked point
+    Draw a marker
+    Display, near the end of the dotted line, the curved distance (in m is fine for now)
+
+
     
     
 

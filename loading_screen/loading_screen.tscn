@@ -65,7 +65,7 @@ _data = {
 "texture_pan_up": SubResource("Animation_lr6to")
 }
 
-[node name="LoadingScreen" type="Control" node_paths=PackedStringArray("progressbar", "debugbar", "percent_label", "tooltip_label")]
+[node name="LoadingScreen" type="Control" node_paths=PackedStringArray("progressbar", "percent_label", "tooltip_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,7 +74,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ae46u")
 progressbar = NodePath("TextureProgressBar")
-debugbar = NodePath("")
 percent_label = NodePath("TextureProgressBar/PercentLabel")
 tooltip_label = NodePath("ColorBG/RichTextLabel")
 

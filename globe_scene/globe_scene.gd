@@ -9,8 +9,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    load_filter.modulate.a = lerp(load_filter.modulate.a, 0.0, delta * 0.5)
-    if is_equal_approx(load_filter.modulate.a, 0.0):
-        load_filter.visible = false
-        load_filter.queue_free()
+    if load_filter != null:
+        if is_equal_approx(load_filter.modulate.a, 0.0):
+            load_filter.visible = false
+            load_filter.queue_free()
+            return
+        load_filter.modulate.a = lerp(load_filter.modulate.a, 0.0, delta * 0.5)
+
     pass
