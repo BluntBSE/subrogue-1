@@ -82,32 +82,34 @@ func drop_context_marker(point: Vector3) -> Node3D:
     var dir = diff.normalized()
     var length = diff.length()
     
-    var start_point: Vector3 = %PlayerEntity.position
-    var end_point: Vector3 = hovering_over.position
-    var mid_point: Vector3 = (start_point + end_point) / 2.0
+    var start_point: Vector3 = Vector3(0.0, 0.0, 0.0) # Path starts at the origin
+    var end_point: Vector3 = dir * length
+    var mid_point: Vector3 = dir * (length / 2.0)
     
     # Calculate the direction away from the anchor
-    var up_dir: Vector3 = (mid_point - anchor.position).normalized()
+    var up_dir: Vector3 = (mid_point + %PlayerEntity.position - anchor.position).normalized()
     
     # Lift the midpoint
-    var lift: float = 10.0
+    var lift: float = 0.15 * length #TODO: Recalculate based on distance.
     mid_point += up_dir * lift
     
-
+    # Calculate tangents for smooth curve
+    var start_tangent: Vector3 = (mid_point - start_point) * 0.5
+    var mid_tangent: Vector3 = (end_point - start_point) * 0.25
+    var end_tangent: Vector3 = (end_point - mid_point) * 0.5
     
-    # Add points to the curve
-    curve.add_point(start_point - %PlayerEntity.position) # idx 0
-    curve.add_point(mid_point - %PlayerEntity.position)
-    curve.add_point(end_point - %PlayerEntity.position)
+    # Add points to the curve with tangents
+    curve.add_point(start_point, Vector3(), start_tangent) # idx 0
+    curve.add_point(mid_point, -mid_tangent, mid_tangent)
+    curve.add_point(end_point, -end_tangent, Vector3())
     
     path.curve = curve
     marker.add_child(path)
-    marker.position = start_point
-    sprite.global_position = end_point
+    sprite.position = end_point
+    marker.position = %PlayerEntity.position
     %PlayerMarkers.add_child(marker)
     
     return marker
-        
     
  
 func cast_from_camera()->Dictionary:
