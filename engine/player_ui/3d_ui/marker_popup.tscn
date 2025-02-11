@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://d4m5f8ce6m1yg"]
+
+[ext_resource type="Texture2D" uid="uid://djyhnpve3kxcy" path="res://assets/UI/blue_panels/SmallMenuBGT01.5BlueDark.png" id="1_2xycp"]
+[ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="3_hj20s"]
+[ext_resource type="Texture2D" uid="uid://b1jxlcc8aq8gj" path="res://assets/UI/white_buttons/PCMainButtonHighlightedWhiteT02.png" id="3_xirwi"]
+[ext_resource type="FontFile" uid="uid://b3pxbbyvttwq8" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Rg.otf" id="4_q1pug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vixht"]
+
+[sub_resource type="Theme" id="Theme_ipfg0"]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 46
+Label/fonts/font = ExtResource("4_q1pug")
+Label/styles/normal = SubResource("StyleBoxEmpty_vixht")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BoundingBox" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="BoundingBox"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_2xycp")
+expand_mode = 1
+flip_h = true
+flip_v = true
+
+[node name="Button" type="TextureButton" parent="BoundingBox/TextureRect"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 51.0
+offset_right = 319.0
+offset_bottom = 183.0
+texture_normal = ExtResource("3_hj20s")
+texture_pressed = ExtResource("3_hj20s")
+texture_hover = ExtResource("3_xirwi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BoundingBox/TextureRect/Button"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 33.0
+offset_right = 292.0
+offset_bottom = 127.0
+theme = SubResource("Theme_ipfg0")
+text = "Ping"
+horizontal_alignment = 1
+
+[node name="Button2" type="TextureButton" parent="BoundingBox/TextureRect"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 186.0
+offset_right = 319.0
+offset_bottom = 318.0
+texture_normal = ExtResource("3_hj20s")
+texture_pressed = ExtResource("3_hj20s")
+texture_hover = ExtResource("3_xirwi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BoundingBox/TextureRect/Button2"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 33.0
+offset_right = 292.0
+offset_bottom = 127.0
+theme = SubResource("Theme_ipfg0")
+text = "Hail"
+horizontal_alignment = 1
+
+[node name="Button3" type="TextureButton" parent="BoundingBox/TextureRect"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 322.0
+offset_right = 319.0
+offset_bottom = 454.0
+texture_normal = ExtResource("3_hj20s")
+texture_pressed = ExtResource("3_hj20s")
+texture_hover = ExtResource("3_xirwi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BoundingBox/TextureRect/Button3"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 34.0
+offset_right = 303.0
+offset_bottom = 128.0
+theme = SubResource("Theme_ipfg0")
+text = "Launch"
+horizontal_alignment = 1

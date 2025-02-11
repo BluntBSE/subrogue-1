@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c34iosrdf37rx"]
+
+[ext_resource type="Script" path="res://engine/player_ui/3d_ui/self_updating_CSG.gd" id="1_qs5mp"]
+
+[node name="Sucsg" type="Node3D" node_paths=PackedStringArray("csg")]
+script = ExtResource("1_qs5mp")
+csg = NodePath("CSGPolygon3D")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]

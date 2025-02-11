@@ -201,58 +201,58 @@ text = "Start Game"
 layout_mode = 2
 
 [node name="ColorRect3" type="ColorRect" parent="."]
+visible = false
 offset_left = 83.0
 offset_top = 167.0
 offset_right = 722.0
 offset_bottom = 971.0
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect3"]
-layout_mode = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 21.0
-offset_top = 218.0
-offset_right = -25.0
-offset_bottom = 72.0
+offset_left = 151.0
+offset_top = 417.0
+offset_right = 507.0
+offset_bottom = 762.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="BtnNewGame" type="Button" parent="ColorRect3/VBoxContainer"]
+[node name="BtnNewGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_cdp6a")
 text = "NEW GAME"
 
-[node name="Button2" type="Button" parent="ColorRect3/VBoxContainer"]
+[node name="Button2" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_cdp6a")
 text = "LOAD GAME"
 
-[node name="Button5" type="Button" parent="ColorRect3/VBoxContainer"]
+[node name="Button5" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_cdp6a")
 text = "MULTIPLAYER"
 
-[node name="Button4" type="Button" parent="ColorRect3/VBoxContainer"]
+[node name="Button4" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_cdp6a")
 text = "SETTINGS"
 
-[node name="Button3" type="Button" parent="ColorRect3/VBoxContainer"]
+[node name="Button3" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_cdp6a")
 text = "QUIT"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect3"]
-layout_mode = 0
-offset_top = 80.0
-offset_right = 633.0
-offset_bottom = 196.0
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 9.0
+offset_top = 247.0
+offset_right = 642.0
+offset_bottom = 363.0
 theme_override_fonts/normal_font = ExtResource("5_1ihsi")
 theme_override_font_sizes/normal_font_size = 60
 bbcode_enabled = true
 text = "[center]SUB ROGUE[/center]"
 
-[connection signal="button_up" from="ColorRect3/VBoxContainer/BtnNewGame" to="." method="_on_btn_new_game_button_up"]
+[connection signal="button_up" from="VBoxContainer/BtnNewGame" to="." method="_on_btn_new_game_button_up"]

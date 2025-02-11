@@ -74,11 +74,11 @@ func _unhandled_input(event: InputEvent) -> void:
     pass
     
 func drop_context_marker(point: Vector3) -> Node3D:
-    var marker := Node3D.new()
-    var sprite: Sprite3D = Sprite3D.new()
-    sprite.texture = load("res://assets/entity_dot.png")
-    sprite.billboard = 1
-    marker.add_child(sprite)
+    var marker:ContextMarker = load("res://engine/player_ui/3d_ui/marker_popup_3d.tscn").instantiate()
+    #Register marker with player
+    #marker.unpack(args)
+
+
     
     var path: Path3D = Path3D.new()
     var curve: Curve3D = Curve3D.new()
@@ -121,11 +121,10 @@ func drop_context_marker(point: Vector3) -> Node3D:
     #marker.add_child(path)
     marker.add_child(csg)
 
-    sprite.position = end_point
-    marker.position = %PlayerEntity.position
+    marker.position = hovering_over.position
     %PlayerMarkers.add_child(marker)
     csg.set_path_node(csg.get_child(0).get_path())
-    csg.position - %PlayerEntity.position
+    csg.global_position = %PlayerEntity.global_position
   
     return marker
     

@@ -6,6 +6,8 @@
 
 'M" to toggle between following the playerentity and free-look
 
+Popups need to have a size set to be proportional with camera distance (with caps, ofc)
+
 UPON Right click:
     Pop up a menu.
     Play a sound

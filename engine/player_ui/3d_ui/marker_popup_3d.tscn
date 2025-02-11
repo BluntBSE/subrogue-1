@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://risi5i7imk04"]
+
+[ext_resource type="Script" path="res://engine/player_ui/3d_ui/ui_quad.gd" id="1_2pv6f"]
+[ext_resource type="PackedScene" uid="uid://d4m5f8ce6m1yg" path="res://engine/player_ui/3d_ui/marker_popup.tscn" id="2_2gvl6"]
+[ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="3_jiq8v"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_qvsad"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_8dkyw"]
+size = Vector2(4, 5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2il6d"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_clhrm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8alx"]
+resource_local_to_scene = true
+blend_mode = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_2il6d")
+detail_mask = SubResource("ViewportTexture_clhrm")
+billboard_mode = 1
+billboard_keep_scale = true
+grow_amount = 1.438
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_d61o8"]
+data = PackedVector3Array(2, -2.5, 0, -2, -2.5, 0, 2, 2.5, 0, -2, -2.5, 0, -2, 2.5, 0, 2, 2.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0x80"]
+render_priority = 0
+shader = ExtResource("3_jiq8v")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_intensity = 5.0
+shader_parameter/texture_albedo = ExtResource("4_qvsad")
+
+[node name="ContextMarker" type="Node3D" node_paths=PackedStringArray("node_viewport", "node_quad", "node_area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101, 0, -6.35267)
+script = ExtResource("1_2pv6f")
+node_viewport = NodePath("SubViewport")
+node_quad = NodePath("MeshInstance3D")
+node_area = NodePath("MeshInstance3D/Area3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-0.0540291, 0.173395, 0.983369, 0, 0.984808, -0.173648, -0.998539, -0.00938205, -0.0532082, 0, 2.24564, -1.8993)
+mesh = SubResource("QuadMesh_8dkyw")
+surface_material_override/0 = SubResource("StandardMaterial3D_p8alx")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.86265e-09, 0, -7.567e-10, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_d61o8")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(400, 500)
+
+[node name="Control" parent="SubViewport" instance=ExtResource("2_2gvl6")]
+
+[node name="HardSprite2" type="Sprite3D" parent="."]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)
+material_overlay = SubResource("ShaderMaterial_i0x80")
+modulate = Color(0, 0.815686, 0.792157, 0)
+shaded = true
+alpha_antialiasing_mode = 1
+texture = ExtResource("4_qvsad")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="HardSprite2"]
+light_color = Color(0.928687, 0.35569, 0.750399, 1)
+omni_range = 4.65
