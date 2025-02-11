@@ -64,10 +64,14 @@ func _process(delta: float) -> void:
     var dist = anchor.position - position
     dist = dist.length()
     %WorldEnvironment.environment.set_volumetric_fog_length(dist)
-    state_machine.handleInput({}) #Listening done in child state. I don't plan on using _input right now.
+    input_movement() #At least until I want a state machine to change its behavior.
     
 func _input(event:InputEvent):
     pass  
+    
+func _unhandled_input(event: InputEvent) -> void:
+    state_machine.handleInput({"event":event})
+    pass
     
 func drop_context_marker(point: Vector3) -> Node3D:
     var marker := Node3D.new()

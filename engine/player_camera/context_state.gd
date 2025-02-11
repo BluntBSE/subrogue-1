@@ -10,6 +10,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+    ref.input_movement()
     pass
     
 func stateEnter(_args:Dictionary)->void:
@@ -18,19 +19,18 @@ func stateEnter(_args:Dictionary)->void:
 
 
 func stateHandleInput(_args:Dictionary)->void:
-    ref = _reference
-    input_clicks()
-    ref.input_movement()
+    var event:InputEvent = _args["event"]
+    input_clicks(event)
     
     pass
 
-func input_clicks():
+func input_clicks(event:InputEvent):
     var ref:OrbitalCamera = _reference
     #BECAUSE we're not shift clicking or doing waypoint logic right now, this always overwrites the most recent item in the queue.
-    if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+    if event.is_action_released("primary_action"):
         print("Left mouse clicked while in the context menu")
         pass
                 
-    if Input.is_action_just_released("open_context"):
+    if event.is_action_released("secondary_action"): #Or open_context?
         ref.state_machine.Change("navigating", {})
         pass

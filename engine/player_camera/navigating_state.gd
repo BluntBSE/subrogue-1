@@ -13,19 +13,18 @@ func _process(delta: float) -> void:
     pass
     
 func stateHandleInput(_args:Dictionary)->void:
+    #Takes in _unhandled_input from ref.
+    var event:InputEvent = _args["event"]
+    input_clicks(event)
 
-    _reference.input_movement()
-    input_clicks()
-
-    pass
             
 
 
 
-func input_clicks():
+func input_clicks(event:InputEvent):
     var ref:OrbitalCamera = _reference
     #BECAUSE we're not shift clicking or doing waypoint logic right now, this always overwrites the most recent item in the queue.
-    if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+    if Input.is_action_pressed("primary_action"):
         if ref.hovering_over != {}:
             if ref.hovering_over.collider.name == "ClickableSphere":
                 var click_position = ref.hovering_over.position
@@ -55,5 +54,5 @@ func input_clicks():
                 move_command.waypoint = waypoint
                 ref.order_move.emit(move_command)
                 
-    if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+    if Input.is_action_just_released("open_context"): #Could be secondary action...
         ref.state_machine.Change("context", {})
