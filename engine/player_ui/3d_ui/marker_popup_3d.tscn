@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://risi5i7imk04"]
+[gd_scene load_steps=12 format=3 uid="uid://risi5i7imk04"]
 
 [ext_resource type="Script" path="res://engine/player_ui/3d_ui/ui_quad.gd" id="1_2pv6f"]
 [ext_resource type="PackedScene" uid="uid://d4m5f8ce6m1yg" path="res://engine/player_ui/3d_ui/marker_popup.tscn" id="2_2gvl6"]
 [ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="3_jiq8v"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_qvsad"]
+[ext_resource type="Script" path="res://engine/player_ui/3d_ui/self_updating_CSG.gd" id="5_w0apk"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_8dkyw"]
 size = Vector2(4, 5)
@@ -71,3 +72,10 @@ texture = ExtResource("4_qvsad")
 [node name="OmniLight3D" type="OmniLight3D" parent="HardSprite2"]
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
+
+[node name="SUCSG" type="Node3D" parent="." node_paths=PackedStringArray("csg")]
+unique_name_in_owner = true
+script = ExtResource("5_w0apk")
+csg = NodePath("CSGPolygon3D")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="SUCSG"]

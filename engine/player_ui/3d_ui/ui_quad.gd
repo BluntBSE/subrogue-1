@@ -17,8 +17,10 @@ var player
 var over_entity #If the player dropped this over an entity, it must track the entity and also allow hailing
 #var line_to #Possibly give this node ownerhsip over the line
 
-func _ready():
+func unpack(node_a, node_b, anchor):
+    %SUCSG.unpack(node_a,node_b,anchor)
 
+func _ready():
     node_area.mouse_entered.connect(_mouse_entered_area)
     node_area.mouse_exited.connect(_mouse_exited_area)
     node_area.input_event.connect(_mouse_input_event)
