@@ -9,7 +9,7 @@ var node_b
 var last_recorded_a:Vector3
 var last_recorded_b:Vector3
 var needs_updating := true
-var threshold:float = 0.1 #If updating fluidly is too expensive, do by threshold
+var threshold:float = 0.3 #If updating fluidly is too expensive, do by threshold
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,8 +27,8 @@ func _process(delta: float) -> void:
             #return
     var diff_a = (last_recorded_a - node_a.position).length()
     var diff_b = (last_recorded_b - node_b.position).length()
-    if node_a.position  last_recorded_a:
-        if node_b.position == last_recorded_b:
+    if (node_a.position - last_recorded_a).length() < threshold:
+        if (node_b.position == last_recorded_b) < threshold:
             needs_updating = false
             return
     needs_updating = true
