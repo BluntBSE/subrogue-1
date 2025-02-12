@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
     var diff_a = (last_recorded_a - node_a.position).length()
     var diff_b = (last_recorded_b - node_b.position).length()
     if (node_a.position - last_recorded_a).length() < threshold:
-        if (node_b.position - last_recorded_b) < threshold:
+        if (node_b.position - last_recorded_b).length() < threshold:
             needs_updating = false
             return
     needs_updating = true
