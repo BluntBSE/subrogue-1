@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=68 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -26,6 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://dfjd0lk4gcs7c" path="res://assets/UI/white_buttons/LoadingBarFullT03White.png" id="25_btgnx"]
 [ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="26_pvo63"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="27_ei3qn"]
+[ext_resource type="Script" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="28_oousn"]
+[ext_resource type="Shader" path="res://engine/player_ui/custom_line_shader.gdshader" id="29_lhhd0"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_wog1n"]
 material = ExtResource("1_jtrqq")
@@ -168,6 +170,30 @@ points = PackedVector3Array(106.902, -8.63812, -10.019, 108.532, -7.41545, -12.4
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ym8sc"]
 points = PackedVector3Array(112.613, -8.63816, -10.8341, 112.205, -7.82297, -12.8731, 111.797, -8.23056, -12.4651, 114.243, -9.04592, -12.0572, 114.243, -7.41505, -12.0572, 111.389, -7.41505, -11.65, 111.389, -9.04592, -10.8341, 114.243, -7.41505, -12.8731, 114.243, -9.04592, -11.2421, 111.389, -9.04592, -11.65, 111.389, -7.41505, -12.4651, 113.835, -8.23056, -12.8731, 114.243, -8.23056, -11.2421, 112.613, -7.82297, -11.2421, 111.389, -8.63816, -10.8341)
+
+[sub_resource type="Curve3D" id="Curve3D_ur1mf"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 5),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_15n6c"]
+render_priority = 0
+shader = ExtResource("29_lhhd0")
+shader_parameter/line_width = 0.1
+shader_parameter/tangent_facing = false
+shader_parameter/rounded = false
+shader_parameter/tube_normal = true
+shader_parameter/alpha_override = 0.01
+shader_parameter/uv_matches_width = true
+shader_parameter/tex_scale = Vector2(1, 1)
+shader_parameter/tex_stretch = true
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/roughness = 0.5
 
 [node name="GameMain" type="Node3D"]
 script = ExtResource("1_msvd6")
@@ -1041,3 +1067,10 @@ texture = ExtResource("26_pvo63")
 position = Vector2(1876, 36)
 scale = Vector2(0.21625, 0.21625)
 texture = ExtResource("27_ei3qn")
+
+[node name="Line3D" type="Path3D" parent="."]
+visible = false
+curve = SubResource("Curve3D_ur1mf")
+script = ExtResource("28_oousn")
+curve_mode = 1
+material = SubResource("ShaderMaterial_15n6c")

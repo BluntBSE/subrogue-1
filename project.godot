@@ -29,6 +29,10 @@ window/size/viewport_height=1080
 window/size/mode=3
 window/vsync/vsync_mode=0
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-polyliner/plugin.cfg")
+
 [input]
 
 ui_left={

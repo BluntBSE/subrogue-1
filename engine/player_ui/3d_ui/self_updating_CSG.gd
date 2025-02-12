@@ -13,6 +13,8 @@ var threshold:float = 0.3 #If updating fluidly is too expensive, do by threshold
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    #RESTORE SUCSG - remove set_process, make CSGPolygon3D visible
+    set_process(false)
     pass # Replace with function body.
 
 

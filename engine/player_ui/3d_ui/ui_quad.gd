@@ -19,6 +19,7 @@ var over_entity #If the player dropped this over an entity, it must track the en
 
 func unpack(node_a, node_b, anchor):
     %SUCSG.unpack(node_a,node_b,anchor)
+    %ContextLine.unpack(node_a,node_b,anchor)
 
 func _ready():
     node_area.mouse_entered.connect(_mouse_entered_area)

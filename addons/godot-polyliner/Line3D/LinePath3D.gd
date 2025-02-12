@@ -32,6 +32,8 @@ var _internal_render_mode = Mesh.PRIMITIVE_TRIANGLES
 
 var _linegen = LineGen3D.new()
 
+var unpacked := false
+
 func _show_imm_geo():
     push_warning("Immediate renderer is not implemented.")
     _mesh_instance.visible = false
@@ -72,20 +74,24 @@ func _update_material():
     _mesh_instance.material_override = material
     
 func _enter_tree():
-    for child in get_children():
-        child.queue_free()
+    unpack()
     
-    _mesh_instance = MeshInstance3D.new()
-    add_child(_mesh_instance)
-    
-#	_imm_geo = _imm_sf.get_immediate_geometry()
-#	add_child(_imm_geo)
-    
-    set_uv_mode(uv_mode)
-    set_uv_size(uv_size)
-    set_material(material)
-    
-    _rd()
+func unpack():
+    if not unpacked:
+        for child in get_children():
+            child.queue_free()
+        
+        _mesh_instance = MeshInstance3D.new()
+        add_child(_mesh_instance)
+        
+    #	_imm_geo = _imm_sf.get_immediate_geometry()
+    #	add_child(_imm_geo)
+        
+        set_uv_mode(uv_mode)
+        set_uv_size(uv_size)
+        set_material(material)
+        
+        _rd()
 
 func _get_iterative_points():
     var points = []
@@ -147,7 +153,9 @@ func _draw():
         points = _get_iterative_points()
     
     var length = uv_size * curve.get_baked_length()
-    
+    if _mesh_instance == null:
+        unpack()
+        
 #	var start = Time.get_ticks_usec()
     _mesh_instance.mesh = _linegen.draw_from_points_strip(points,length)
 #	var end = Time.get_ticks_usec()
