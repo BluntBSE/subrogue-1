@@ -12,14 +12,21 @@ var last_event_time: float = -1.0
 @export var node_area:Area3D #Should have a collisionshape under it that matches the meshInstance3D
 
 
+
 #CONTEXT ARGS
-var player
-var over_entity #If the player dropped this over an entity, it must track the entity and also allow hailing
+var originating_entities:Array #For now this is exclusively the one entity under the player's control.
+var player:Node3D
+var over_entity:Node3D #If the player dropped this over an entity, it must track the entity and also allow hailing
 #var line_to #Possibly give this node ownerhsip over the line
 
-func unpack(node_a, node_b, anchor):
-    %SUCSG.unpack(node_a,node_b,anchor)
+func unpack(_player:Player, node_a, node_b, anchor):
+    print("Context marker unpack called")
     %ContextLine.unpack(node_a,node_b,anchor)
+    %MarkerPopup.unpack(_player, self)
+    #Register self with player and its marker observer
+    player = _player
+    originating_entities = player.selected #For now, the player only has the one entity the whole game.
+    
 
 func _ready():
     node_area.mouse_entered.connect(_mouse_entered_area)

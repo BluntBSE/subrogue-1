@@ -1,6 +1,6 @@
 extends Node3D
 class_name PlayerEntities
-
+var player:Node3D
 signal order_move
 signal enqueue_move
 var camera:OrbitalCamera

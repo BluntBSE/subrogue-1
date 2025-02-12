@@ -32,6 +32,7 @@ var hovering_over
 var hovering_point
 signal order_move
 signal enqueue_move
+signal close_context
 
 var state_machine:StateMachine
 
@@ -63,7 +64,7 @@ func _process(delta: float) -> void:
     #print(hovering_over.collider.name)
     var dist = anchor.position - position
     dist = dist.length()
-    %WorldEnvironment.environment.set_volumetric_fog_length(dist)
+    %WorldEnvironment.environment.set_volumetric_fog_length(dist) #If we do multiplayer this can't be the way this works. Can each player have their own world environment node? Probably, honestly.
     input_movement() #At least until I want a state machine to change its behavior.
     
 func _input(event:InputEvent):
@@ -75,59 +76,13 @@ func _unhandled_input(event: InputEvent) -> void:
     
 func drop_context_marker(point: Vector3) -> Node3D:
     var marker:ContextMarker = load("res://engine/player_ui/3d_ui/marker_popup_3d.tscn").instantiate()
-    #Register marker with player
-    #marker.unpack(args)
-
-
-    
-    #var path: Path3D = Path3D.new()
-    #var curve: Curve3D = Curve3D.new()
-    #var diff: Vector3 = hovering_over.position - %PlayerEntity.position
-    #var dir = diff.normalized()
-    #var length = diff.length()
-    #
-    #var start_point: Vector3 = Vector3(0.0, 0.0, 0.0) # Path starts at the origin
-    #var end_point: Vector3 = dir * length
-    #var mid_point: Vector3 = dir * (length / 2.0)
-    #
-    ## Calculate the direction away from the anchor
-    #var up_dir: Vector3 = (mid_point + %PlayerEntity.position - anchor.position).normalized()
-    #
-    ## Lift the midpoint
-    #var lift: float = 0.15 * length #TODO: Recalculate based on distance.
-    #mid_point += up_dir * lift
-    #
-    ## Calculate tangents for smooth curve
-    #var start_tangent: Vector3 = (mid_point - start_point) * 0.5
-    #var mid_tangent: Vector3 = (end_point - start_point) * 0.25
-    #var end_tangent: Vector3 = (end_point - mid_point) * 0.5
-    #
-    ## Add points to the curve with tangents - In the abstract, if you want the path to sit on the ground, do this.
-    ##curve.add_point(start_point, Vector3(), start_tangent) # idx 0
-    ##curve.add_point(mid_point, -mid_tangent, mid_tangent)
-    ##curve.add_point(end_point, -end_tangent, Vector3())
-    #
-    ##If using a CSG, we must offset.
-    #curve.add_point(start_point-%PlayerEntity.position, Vector3(), start_tangent) # idx 0
-    #curve.add_point(mid_point-%PlayerEntity.position, -mid_tangent, mid_tangent)
-    #curve.add_point(end_point-%PlayerEntity.position, -end_tangent, Vector3())
-    #path.curve = curve
-    #var csg:CSGPolygon3D = CSGPolygon3D.new()
-    #csg.polygon = [Vector2(0.0,0.0),Vector2(0.0,0.25),Vector2(0.125,0.125)]
-    #csg.mode = CSGPolygon3D.MODE_PATH
-    #csg.add_child(path)
-    #csg.path_interval = 0.1
-    #csg.material = load("res://globe_scene/csgmat.tres")
-    ##marker.add_child(path)
-    #marker.add_child(csg)
-
+ 
     marker.position = hovering_over.position
-    %PlayerMarkers.add_child(marker)
-    #    csg.set_path_node(csg.get_child(0).get_path())
+    %PlayerMarkers.add_marker(marker)
 
     #If hovering over an entity, unpack such that node b is the entity not the marker. For now:
-    marker.unpack(%PlayerEntity, marker, anchor)
-
+    marker.unpack(%Player1, %PlayerEntity, marker, anchor)
+    
   
     return marker
     

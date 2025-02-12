@@ -7,6 +7,7 @@ class_name Entity
 @export var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
 @export var speed = 20.0
+var player:Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

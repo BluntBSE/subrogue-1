@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=70 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -11,10 +11,12 @@
 [ext_resource type="Shader" path="res://just_the_mesh/shadercollider.gdshader" id="7_ypo7k"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/collision_mask.png" id="8_6dvw2"]
 [ext_resource type="Script" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
+[ext_resource type="Script" path="res://globe_scene/player/player.gd" id="9_xkk1b"]
 [ext_resource type="Script" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="Script" path="res://classes/entity_move_bus.gd" id="11_dg66u"]
 [ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="11_dslo6"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="11_hhgbi"]
+[ext_resource type="Script" path="res://globe_scene/player/player_markers.gd" id="15_wdr3j"]
 [ext_resource type="AudioStream" uid="uid://c4pqqqemfw30i" path="res://assets/royalty_free_music/dark-ambient-126122.mp3" id="16_o22p0"]
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="17_eum53"]
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="19_8gfvb"]
@@ -241,6 +243,8 @@ environment = SubResource("Environment_13rd1")
 [node name="Players" type="Node3D" parent="."]
 
 [node name="Player1" type="Node3D" parent="Players"]
+unique_name_in_owner = true
+script = ExtResource("9_xkk1b")
 
 [node name="PlayerCommandBus" type="Node3D" parent="Players/Player1"]
 
@@ -375,6 +379,7 @@ omni_range = 4.65
 
 [node name="PlayerMarkers" type="Node3D" parent="Players/Player1"]
 unique_name_in_owner = true
+script = ExtResource("15_wdr3j")
 
 [node name="Area3D" type="Area3D" parent="."]
 

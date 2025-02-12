@@ -64,7 +64,8 @@ unique_name_in_owner = true
 transparent_bg = true
 size = Vector2i(400, 500)
 
-[node name="Control" parent="SubViewport" instance=ExtResource("2_2gvl6")]
+[node name="MarkerPopup" parent="SubViewport" instance=ExtResource("2_2gvl6")]
+unique_name_in_owner = true
 
 [node name="HardSprite2" type="Sprite3D" parent="."]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)
