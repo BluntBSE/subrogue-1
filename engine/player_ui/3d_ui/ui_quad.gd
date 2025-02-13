@@ -151,16 +151,29 @@ func rotate_area_to_billboard_backup():
     
 func rotate_area_to_billboard():
     var camera = get_viewport().get_camera_3d()
-    var custom_up: Vector3 = Vector3(0.0, 1.0, 0.0)
     
     # Calculate the direction from the node to the camera
     var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized()
     
+    # Get the camera's up vector
+    var camera_up: Vector3 = camera.global_transform.basis.y
     
+    # Rotate the node to look at the camera with the camera's up vector
+    node_quad.look_at(camera.global_transform.origin, camera_up, true)
+    """
+    Explanation
+    Get the Camera:
 
+    var camera = get_viewport().get_camera_3d(): Get the current 3D camera from the viewport.
+    Calculate the Direction to the Camera:
 
-    node_quad.look_at(camera.global_transform.origin, custom_up, true)
-    #Offset rotation by a factor related to the distance in negative Y we are, given that the globe is at 0,0,0
-    #if node_quad.global_position.y < 1.0:
-      #  node_quad.rotation.x += deg_to_rad((node_quad.global_position.y) * -0.5)
+    var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized(): Calculate the normalized direction vector from the node to the camera.
+    Get the Camera's Up Vector:
+
+    var camera_up: Vector3 = camera.global_transform.basis.y: Extract the 'up' vector from the camera's transform. This vector represents the camera's 'up' direction.
+    Rotate the Node to Look at the Camera:
+
+    node_quad.look_at(camera.global_transform.origin, camera_up): Rotate the node to look at the camera using the camera's 'up' vector. This ensures that the node's 'up' direction is aligned with the camera's 'up' direction.
+    """
+
     
