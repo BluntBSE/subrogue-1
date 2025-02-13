@@ -23,7 +23,6 @@ blend_mode = 1
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_2il6d")
 detail_mask = SubResource("ViewportTexture_clhrm")
-billboard_mode = 1
 billboard_keep_scale = true
 grow_amount = 1.438
 
@@ -40,7 +39,6 @@ shader_parameter/texture_albedo = ExtResource("4_qvsad")
 [sub_resource type="Curve3D" id="Curve3D_k0k1k"]
 
 [node name="ContextMarker" type="Node3D" node_paths=PackedStringArray("node_viewport", "node_quad", "node_area")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101, 0, -6.35267)
 script = ExtResource("1_2pv6f")
 node_viewport = NodePath("SubViewport")
 node_quad = NodePath("MeshInstance3D")
@@ -48,7 +46,7 @@ node_area = NodePath("MeshInstance3D/Area3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-0.0540291, 0.173395, 0.983369, 0, 0.984808, -0.173648, -0.998539, -0.00938205, -0.0532082, 0, 2.24564, -1.8993)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24564, -1.8993)
 mesh = SubResource("QuadMesh_8dkyw")
 surface_material_override/0 = SubResource("StandardMaterial3D_p8alx")
 

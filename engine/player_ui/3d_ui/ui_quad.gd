@@ -128,7 +128,6 @@ func rotate_area_to_billboard():
     
     var camera = get_viewport().get_camera_3d()
     #var mouse = get_viewport().get_mouse_position()
-    node_quad.look_at(camera.position)
-    node_quad.rotation.y = -node_quad.rotation.y
-    node_quad.rotation.x = deg_to_rad(10)
+    node_quad.look_at(camera.position, Vector3(0.0,1.0,0.0), true)
+    #We can't rotate the whole object because that'd rotate the line...
     pass
