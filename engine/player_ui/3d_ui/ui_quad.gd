@@ -11,6 +11,7 @@ var last_event_time: float = -1.0
 @export var node_quad:MeshInstance3D
 @export var node_area:Area3D #Should have a collisionshape under it that matches the meshInstance3D
 
+var anchor:Node3D
 var initial_position:Vector3
 var target_position:Vector3
 var hover_height := 1.0 #If we are south of the equator, ke
@@ -22,14 +23,15 @@ var player:Node3D
 var over_entity:Node3D #If the player dropped this over an entity, it must track the entity and also allow hailing
 #var line_to #Possibly give this node ownerhsip over the line
 
-func unpack(_player:Player, node_a, node_b, anchor):
+func unpack(_player:Player, node_a, node_b, _anchor):
+    anchor = _anchor
     print("Context marker unpack called")
     %ContextLine.unpack(node_a,node_b,anchor)
     %MarkerPopup.unpack(_player, self)
     #Register self with player and its marker observer
     player = _player
     originating_entities = player.selected #For now, the player only has the one entity the whole game.
-    
+    %DistDisplay.text = str(get_distance_in_km()) + " km"   
 
 func _ready():
     initial_position = position
@@ -37,16 +39,21 @@ func _ready():
     node_area.mouse_entered.connect(_mouse_entered_area)
     node_area.mouse_exited.connect(_mouse_exited_area)
     node_area.input_event.connect(_mouse_input_event)
-    
+
  
         
 
 
 
-
+var update_timer:float = 0.0 #How often does the dist display update?
 func _process(_delta):
     rotate_area_to_billboard()
     adjust_height()
+    update_timer += _delta
+    print("Update timer is:", update_timer)
+    if update_timer > 0.5:
+        %DistDisplay.text = str(get_distance_in_km()) + " km"
+        update_timer = 0.0
 
 
 
@@ -137,7 +144,6 @@ func adjust_height()->void:
     var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized()
     if target_position.y < 1.0: #If towards the south pole...
         var factor:float = abs((target_position.y / 10.0))
-        print("Factor is", factor)
         position = lerp(target_position, target_position + (direction_to_camera * hover_height), factor)
 
 func rotate_area_to_billboard_backup():
@@ -160,6 +166,7 @@ func rotate_area_to_billboard():
     
     # Rotate the node to look at the camera with the camera's up vector
     node_quad.look_at(camera.global_transform.origin, camera_up, true)
+    camera.global_transform.basis
     """
     Explanation
     Get the Camera:
@@ -169,7 +176,7 @@ func rotate_area_to_billboard():
 
     var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized(): Calculate the normalized direction vector from the node to the camera.
     Get the Camera's Up Vector:
-
+    ##It's this basis part that confuses me a bit. 
     var camera_up: Vector3 = camera.global_transform.basis.y: Extract the 'up' vector from the camera's transform. This vector represents the camera's 'up' direction.
     Rotate the Node to Look at the Camera:
 
@@ -177,3 +184,9 @@ func rotate_area_to_billboard():
     """
 
     
+func get_distance_in_km():
+    var point_a:Vector3 = originating_entities[0].position#For now, players only have one entity under their control. When there are more, this function should probably determine average distance
+    var point_b:Vector3 = target_position
+    var dist := GlobeHelpers.arc_to_km(point_a, point_b, anchor)
+    dist = snapped(dist, 0.1)
+    return dist

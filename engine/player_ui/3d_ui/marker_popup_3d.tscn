@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://risi5i7imk04"]
+[gd_scene load_steps=17 format=3 uid="uid://risi5i7imk04"]
 
 [ext_resource type="Script" path="res://engine/player_ui/3d_ui/ui_quad.gd" id="1_2pv6f"]
 [ext_resource type="PackedScene" uid="uid://d4m5f8ce6m1yg" path="res://engine/player_ui/3d_ui/marker_popup.tscn" id="2_2gvl6"]
+[ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="2_tkj7p"]
 [ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="3_jiq8v"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_qvsad"]
 [ext_resource type="Script" path="res://engine/player_ui/3d_ui/self_updating_CSG.gd" id="5_w0apk"]
@@ -56,6 +57,15 @@ unique_name_in_owner = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.86265e-09, 0, -7.567e-10, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_d61o8")
+
+[node name="DistDisplay" type="Label3D" parent="MeshInstance3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.310557, -2.60074, 0)
+modulate = Color(0.360784, 0.901961, 0.960784, 1)
+outline_modulate = Color(0.3648, 0.90048, 0.96, 0)
+text = "3000.00km"
+font = ExtResource("2_tkj7p")
+font_size = 64
 
 [node name="SubViewport" type="SubViewport" parent="."]
 unique_name_in_owner = true

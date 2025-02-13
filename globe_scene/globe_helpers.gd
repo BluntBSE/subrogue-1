@@ -22,3 +22,27 @@ static func fix_height(entity:Node3D, anchor:Node3D)->Vector3:
     var direction:Vector3 = (entity.position - anchor.position).normalized()
     var desired_position:Vector3 = anchor.position + (direction * GlobalConst.height)
     return desired_position
+    
+    
+    
+static func arc_to_km(point_a:Vector3, point_b:Vector3, anchor:Planet) -> float:
+    var anchor_mesh:SphereMesh = anchor.mesh
+    var sphere_radius = anchor_mesh.radius # This is 100 right now
+    var earth_radius_km = 6378
+    var earth_height_km = 6378 # This technically isn't true but whatever
+
+    # Calculate the normalized positions of point_a and point_b on the sphere
+    var normalized_a = (point_a - anchor.global_transform.origin).normalized()
+    var normalized_b = (point_b - anchor.global_transform.origin).normalized()
+
+    # Calculate the angle between the two points in radians
+    var dot_product = normalized_a.dot(normalized_b)
+    var angle_radians = acos(dot_product)
+
+    # Calculate the arc distance in game units
+    var arc_distance_game_units = angle_radians * sphere_radius
+
+    # Convert the arc distance from game units to kilometers
+    var arc_distance_km = (arc_distance_game_units / sphere_radius) * earth_radius_km
+
+    return arc_distance_km
