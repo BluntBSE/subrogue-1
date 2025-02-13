@@ -11,6 +11,9 @@ var last_event_time: float = -1.0
 @export var node_quad:MeshInstance3D
 @export var node_area:Area3D #Should have a collisionshape under it that matches the meshInstance3D
 
+var initial_position:Vector3
+var target_position:Vector3
+var hover_height := 1.0 #If we are south of the equator, ke
 
 
 #CONTEXT ARGS
@@ -29,15 +32,21 @@ func unpack(_player:Player, node_a, node_b, anchor):
     
 
 func _ready():
+    initial_position = position
+    target_position = position
     node_area.mouse_entered.connect(_mouse_entered_area)
     node_area.mouse_exited.connect(_mouse_exited_area)
     node_area.input_event.connect(_mouse_input_event)
+    
+ 
+        
 
 
 
 
 func _process(_delta):
     rotate_area_to_billboard()
+    adjust_height()
 
 
 
@@ -123,11 +132,35 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
     # Finally, send the processed input event to the viewport.
     node_viewport.push_input(event)
 
+func adjust_height()->void:
+    var camera = get_viewport().get_camera_3d()
+    var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized()
+    if target_position.y < 1.0: #If towards the south pole...
+        var factor:float = abs((target_position.y / 10.0))
+        print("Factor is", factor)
+        position = lerp(target_position, target_position + (direction_to_camera * hover_height), factor)
 
-func rotate_area_to_billboard():
+func rotate_area_to_billboard_backup():
     
     var camera = get_viewport().get_camera_3d()
     #var mouse = get_viewport().get_mouse_position()
-    node_quad.look_at(camera.position, Vector3(0.0,1.0,0.0), true)
-    #We can't rotate the whole object because that'd rotate the line...
+    var custom_up:Vector3 = Vector3(0.0, 1.0,0.0)
+    #custom up should be 20% towards the camera relative to the up vector. If up is 90 degrees, I want it 70.
+    node_quad.look_at(camera.position, custom_up, true)
     pass
+    
+func rotate_area_to_billboard():
+    var camera = get_viewport().get_camera_3d()
+    var custom_up: Vector3 = Vector3(0.0, 1.0, 0.0)
+    
+    # Calculate the direction from the node to the camera
+    var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized()
+    
+    
+
+
+    node_quad.look_at(camera.global_transform.origin, custom_up, true)
+    #Offset rotation by a factor related to the distance in negative Y we are, given that the globe is at 0,0,0
+    #if node_quad.global_position.y < 1.0:
+      #  node_quad.rotation.x += deg_to_rad((node_quad.global_position.y) * -0.5)
+    
