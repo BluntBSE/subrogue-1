@@ -16,7 +16,8 @@ UPON Right click:
     Display, near the end of the dotted line, the curved distance (in m is fine for now)
 
 
-    
+    QUEUE:
+    Remember to add active sonar target profile and passive hz to  UI instead
     
 
 NOTES:

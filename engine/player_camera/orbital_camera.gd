@@ -27,6 +27,10 @@ var destination:Vector3:
 var db:bool = false
 @onready var active_entity:Entity = %PlayerEntity #May be pluralized into an array later.
 
+#Self
+signal camera_moved
+var last_pos:Vector3
+
 #World interaction
 var hovering_over
 var hovering_point
@@ -50,6 +54,7 @@ func _ready() -> void:
     InputMap.load_from_project_settings()
     InputMap.get_actions()
     state_machine.Change("navigating", {})
+    last_pos = position
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,6 +71,7 @@ func _process(delta: float) -> void:
     dist = dist.length()
     %WorldEnvironment.environment.set_volumetric_fog_length(dist) #If we do multiplayer this can't be the way this works. Can each player have their own world environment node? Probably, honestly.
     input_movement() #At least until I want a state machine to change its behavior.
+    emit_position()
     
 func _input(event:InputEvent):
     pass  
@@ -107,10 +113,6 @@ func cast_from_camera()->Dictionary:
         hovering_over = {}
     
     return hovering_over
-
-
-    
-    
 
 
 func move_in_orbit()->Vector3:
@@ -163,3 +165,12 @@ func initialize_angles() -> void:
     polar = asin(position.y/distance)
     azimuth = asin(position.x/cos(polar)) #Why does this do what I want when rads from position is different?
     #z = cos(yaw) * cos(pitch)
+
+func emit_position()->void:
+    #print("Emitting")
+    var threshold = 0.5
+    print((position-last_pos).length())
+    if (position-last_pos).length() > threshold:
+            last_pos = position
+            print("Camera moved emitted")
+            camera_moved.emit(position, anchor.position)

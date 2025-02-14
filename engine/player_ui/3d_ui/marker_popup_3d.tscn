@@ -60,7 +60,7 @@ shape = SubResource("ConcavePolygonShape3D_d61o8")
 
 [node name="DistDisplay" type="Label3D" parent="MeshInstance3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.310557, -2.60074, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.162077, -2.29378, 0)
 modulate = Color(0.360784, 0.901961, 0.960784, 1)
 outline_modulate = Color(0.3648, 0.90048, 0.96, 0)
 text = "3000.00km"
@@ -75,15 +75,16 @@ size = Vector2i(400, 500)
 [node name="MarkerPopup" parent="SubViewport" instance=ExtResource("2_2gvl6")]
 unique_name_in_owner = true
 
-[node name="HardSprite2" type="Sprite3D" parent="."]
-transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)
+[node name="MarkSprite" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 material_overlay = SubResource("ShaderMaterial_i0x80")
 modulate = Color(0, 0.815686, 0.792157, 0)
 shaded = true
 alpha_antialiasing_mode = 1
 texture = ExtResource("4_qvsad")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="HardSprite2"]
+[node name="OmniLight3D" type="OmniLight3D" parent="MarkSprite"]
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
 

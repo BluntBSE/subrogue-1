@@ -14,7 +14,7 @@ var last_event_time: float = -1.0
 var anchor:Node3D
 var initial_position:Vector3
 var target_position:Vector3
-var hover_height := 1.0 #If we are south of the equator, ke
+var hover_height := 2.0 #If we are south of the equator, ke
 
 
 #CONTEXT ARGS
@@ -50,7 +50,6 @@ func _process(_delta):
     rotate_area_to_billboard()
     adjust_height()
     update_timer += _delta
-    print("Update timer is:", update_timer)
     if update_timer > 0.5:
         %DistDisplay.text = str(get_distance_in_km()) + " km"
         update_timer = 0.0
@@ -166,7 +165,6 @@ func rotate_area_to_billboard():
     
     # Rotate the node to look at the camera with the camera's up vector
     node_quad.look_at(camera.global_transform.origin, camera_up, true)
-    camera.global_transform.basis
     """
     Explanation
     Get the Camera:
@@ -182,6 +180,7 @@ func rotate_area_to_billboard():
 
     node_quad.look_at(camera.global_transform.origin, camera_up): Rotate the node to look at the camera using the camera's 'up' vector. This ensures that the node's 'up' direction is aligned with the camera's 'up' direction.
     """
+    %MarkSprite.look_at(camera.global_transform.origin, camera_up, true)
 
     
 func get_distance_in_km():
