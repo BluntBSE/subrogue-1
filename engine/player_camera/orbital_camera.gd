@@ -167,9 +167,7 @@ func initialize_angles() -> void:
     #z = cos(yaw) * cos(pitch)
 
 func emit_position()->void:
-    #print("Emitting")
     var threshold = 0.5
-    print((position-last_pos).length())
     if (position-last_pos).length() > threshold:
             last_pos = position
             print("Camera moved emitted")

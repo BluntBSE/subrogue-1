@@ -8,16 +8,53 @@
 
 Popups need to have a size set to be proportional with camera distance (with caps, ofc)
 
-UPON Right click:
-    Pop up a menu.
-    Play a sound
-    Draw a dotted path from the player entity to the clicked point
-    Draw a marker
-    Display, near the end of the dotted line, the curved distance (in m is fine for now)
 
 
-    QUEUE:
-    Remember to add active sonar target profile and passive hz to  UI instead
+QUEUE:
+
+Create a Muniition object.
+properties:
+    fired from
+    heading to
+    type ENUM { torpedo, missile}
+    guidance_type ENUM { active, wireguide, passive, dumb}
+    radius
+    range
+    speed
+    fuel
+    fuel_burn
+    depth - array of ENUM {surface, swim, crawl}
+
+    targeting parameters - based on ENUM
+    passive:
+    turn on after X distance
+    max_angle
+    target_hz
+    <SPECIAL> self pitch hz
+    <SPECIAL> variable speed(?)
+    sensitivity - how small can you make the hz band   
+    active:
+    turn on after X distance
+    max_angle
+    max_range
+    ping_frequency
+    
+    IF BOTH: State at which to switch from active to passive
+    
+    IF DUMB:
+        dumbfire weapons roll up to a point and deploy something like a minefield, a mobile mine, or a chatterer
+        
+        
+    
+    IF WIREGUIDE....
+    implement later.
+    
+    
+    
+    
+    
+    
+Remember to add active sonar target profile and passive hz to  UI instead
     
 
 NOTES:

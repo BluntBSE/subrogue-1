@@ -141,10 +141,9 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 func adjust_height()->void:
     var camera = get_viewport().get_camera_3d()
     var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized()
-    if target_position.y < 1.0: #If towards the south pole...
-        var factor:float = abs((target_position.y / 10.0))
-        position = lerp(target_position, target_position + (direction_to_camera * hover_height), factor)
-
+    var factor:float = abs((target_position.y / 10.0)) + 1.0
+    position = lerp(target_position, target_position + (direction_to_camera * hover_height), factor)
+    
 func rotate_area_to_billboard_backup():
     
     var camera = get_viewport().get_camera_3d()

@@ -19,4 +19,4 @@ func log_fps(delta:float)->void:
     fps_timer += delta
     if fps_timer > fps_poll_timer:
         fps_timer = 0.0
-        print("fps: " + str(Engine.get_frames_per_second()))	
+        #print("fps: " + str(Engine.get_frames_per_second()))	

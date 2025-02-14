@@ -21,20 +21,6 @@ func adjust_ruler(camera_pos:Vector3, anchor:Vector3) -> void:
 @onready var anchor = %GamePlanet
 
 func _process(delta: float) -> void:
-    """
-    emulate me:
-    #Raycast from the orbital camera and
-    var space_state := get_world_3d().direct_space_state
-    var mouse_position = get_viewport().get_mouse_position()
-    var raycast_origin = project_ray_origin(mouse_position)
-    var raycast_end = raycast_origin + project_ray_normal(mouse_position) * 8000 #normalized vectors need to be lengthened. 
-    var ray_params := PhysicsRayQueryParameters3D.new()
-    ray_params.collide_with_areas = true
-    ray_params.from = raycast_origin
-    ray_params.to = raycast_end
-    ray_params.collision_mask  = 1
-    """
-    print("Viewport is", viewport)
     # Get the mouse position relative to the Control node
     var ray_length = 8000.0 # Adjust the ray length as needed
     var mouse_pos = get_global_mouse_position()

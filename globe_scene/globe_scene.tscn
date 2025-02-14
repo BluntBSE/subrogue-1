@@ -974,7 +974,7 @@ horizontal_alignment = 1
 
 [node name="RangeFinder1" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
 unique_name_in_owner = true
-visible = false
+layout_mode = 0
 offset_left = 850.0
 offset_top = 520.0
 offset_right = 890.0
@@ -982,7 +982,7 @@ offset_bottom = 560.0
 
 [node name="RangeFinder2" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
 unique_name_in_owner = true
-visible = false
+layout_mode = 0
 offset_left = 1158.0
 offset_top = 520.0
 offset_right = 1198.0
@@ -1005,7 +1005,6 @@ text = "750 km"
 metadata/_edit_use_anchors_ = true
 
 [node name="RangeFinderLine" type="Line2D" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
-visible = false
 position = Vector2(856.69, 526)
 scale = Vector2(0.769048, 1)
 points = PackedVector2Array(0, 0, 400, 0)
