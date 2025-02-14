@@ -37,7 +37,6 @@ func handle_input(delta: float) -> void:
 
 
     if Input.is_key_label_pressed(KEY_I): # I key
-        print("KEY I")
         force += Vector3(1.0,0.0,0.0)
     if Input.is_key_label_pressed(KEY_K): # K key
         force -= Vector3(1.0,0.0,0.0)
@@ -47,7 +46,6 @@ func handle_input(delta: float) -> void:
         force += Vector3(0.0,1.0,0.0)
 
     if force != Vector3.ZERO:
-        print("Applying impulse at ", force)
         apply_impulse(force) # Adjust the force multiplier as needed
 
 func update_coords()->void:

@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://engine/player_camera/orbital_camera.gd" id="2_xt6wy"]
 [ext_resource type="Script" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
-[ext_resource type="Script" path="res://globe_scene/debug_entity.gd" id="5_oduww"]
+[ext_resource type="Script" path="res://engine/entities/entity.gd" id="5_oduww"]
 [ext_resource type="Material" uid="uid://cx72xcf27h8qj" path="res://globe_scene/csgmat.tres" id="6_1twjn"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/collision_mask.png" id="8_6dvw2"]
 [ext_resource type="Script" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]

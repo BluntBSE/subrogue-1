@@ -1,4 +1,5 @@
 extends Control
+#Loading Screen
 
 @export var progressbar:TextureProgressBar
 @export var label:Label
