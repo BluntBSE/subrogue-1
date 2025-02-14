@@ -8,12 +8,11 @@
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Script" path="res://globe_scene/debug_entity.gd" id="5_oduww"]
 [ext_resource type="Material" uid="uid://cx72xcf27h8qj" path="res://globe_scene/csgmat.tres" id="6_1twjn"]
-[ext_resource type="Shader" path="res://just_the_mesh/shadercollider.gdshader" id="7_ypo7k"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/collision_mask.png" id="8_6dvw2"]
 [ext_resource type="Script" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
 [ext_resource type="Script" path="res://globe_scene/player/player.gd" id="9_xkk1b"]
 [ext_resource type="Script" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
-[ext_resource type="Script" path="res://classes/entity_move_bus.gd" id="11_dg66u"]
+[ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="11_dg66u"]
 [ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="11_dslo6"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="11_hhgbi"]
 [ext_resource type="Script" path="res://globe_scene/player/player_markers.gd" id="15_wdr3j"]
@@ -42,9 +41,33 @@ rings = 40
 [sub_resource type="SphereShape3D" id="SphereShape3D_wv2ic"]
 radius = 100.1
 
+[sub_resource type="Shader" id="Shader_g4r0d"]
+code = "shader_type spatial;
+uniform sampler2D heightmap;
+uniform float height_ratio = 30.0;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+    float height = texture(heightmap, UV).a * height_ratio;
+    VERTEX += NORMAL * height;
+    //float a = texture(heightmap,UV).a;
+    //COLOR.a = 0.0;
+}
+
+void fragment() {
+
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the material.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n6esi"]
 render_priority = 0
-shader = ExtResource("7_ypo7k")
+shader = SubResource("Shader_g4r0d")
 shader_parameter/height_ratio = 3.0
 shader_parameter/heightmap = ExtResource("8_6dvw2")
 

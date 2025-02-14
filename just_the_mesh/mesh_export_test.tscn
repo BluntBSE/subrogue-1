@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://2m1uy55po0e5"]
-
-[ext_resource type="ArrayMesh" uid="uid://7kxixvfsmr2k" path="res://test_mesh_1.tres" id="1_f4opl"]
-
-[node name="MeshExportTest" type="Node3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = ExtResource("1_f4opl")

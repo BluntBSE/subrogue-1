@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalConst="*res://globalconst.gd"
-SceneChangeLoader="*res://scene_change_loader.gd"
+SceneChangeLoader="*res://engine/autoload/scene_change_loader.gd"
 SoundManager="*res://engine/sound/sound_manager.gd"
 
 [display]
