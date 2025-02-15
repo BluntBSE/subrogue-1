@@ -8,6 +8,8 @@ signal pressed_ping
 
 func unpack(_player:Player, _context:ContextMarker)->void:
     pressed_launch.connect(_player.markers.handle_launch)
+    pressed_launch.connect(_player.camera.add_trauma.bind(1.0))
+    pressed_launch.connect(_player.UI.handle_launch)
     pass
 
 # Called when the node enters the scene tree for the first time.

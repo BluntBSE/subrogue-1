@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://crpudkg33nnc2"]
+
+[ext_resource type="Shader" path="res://shaders/glitch_practice/glitch_1.gdshader" id="1_7leo8"]
+[ext_resource type="PackedScene" uid="uid://bnygsufjcl2ql" path="res://globe_scene/globe_scene.tscn" id="2_2y1du"]
+[ext_resource type="Texture2D" uid="uid://d1lub7ik0y0h8" path="res://assets/montage_photos/nasa-1lfI7wkGWZ4-unsplash.jpg" id="3_b3mrx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3mxe"]
+shader = ExtResource("1_7leo8")
+shader_parameter/octave_count = 10
+shader_parameter/amp_start = 0.5
+shader_parameter/amp_coeff = 0.5
+shader_parameter/freq_coeff = 2.0
+shader_parameter/shift_coeff = 1.0
+shader_parameter/speed = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gc5v1"]
+shader = ExtResource("1_7leo8")
+shader_parameter/octave_count = 10
+shader_parameter/amp_start = 1.0
+shader_parameter/amp_coeff = 10.0
+shader_parameter/freq_coeff = 1.0
+shader_parameter/shift_coeff = 1.0
+shader_parameter/speed = 2.58
+
+[node name="Glitch" type="Node2D"]
+visible = false
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+material = SubResource("ShaderMaterial_c3mxe")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="GameMain" parent="Control/SubViewportContainer/SubViewport" instance=ExtResource("2_2y1du")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_gc5v1")
+texture = ExtResource("3_b3mrx")
