@@ -79,13 +79,13 @@ func _process(delta: float) -> void:
     if Engine.is_editor_hint():
         if enable_debug_movement == false:
             return
-   
-    if return_to_pre_trauma:
-        print("Returnt oo pre")
-        position = pre_trauma_position
-        destination = pre_trauma_position
-        return_to_pre_trauma = false
-        
+            
+    if not trauma:
+        if return_to_pre_trauma:
+            print("Returnt oo pre")
+            #destination = pre_trauma_position
+            return_to_pre_trauma = false
+            
     position = lerp(position, destination, 0.1)
     look_at(anchor.position)
     hovering_over = cast_from_camera()
@@ -202,6 +202,7 @@ func emit_position()->void:
 func add_trauma(amount):
     pre_trauma_position = position
     trauma = min(trauma + amount, 1.0);
+    print("SET RETURN TO PRE TRAUMA TO TRUE")
     return_to_pre_trauma = true
     
 func shake():

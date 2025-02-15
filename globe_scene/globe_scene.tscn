@@ -86,14 +86,14 @@ volumetric_fog_length = 10.0
 volumetric_fog_detail_spread = 1.0
 volumetric_fog_ambient_inject = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vra4r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
 shader = ExtResource("21_bmluj")
 shader_parameter/octave_count = 10
 shader_parameter/amp_start = 0.5
 shader_parameter/amp_coeff = 0.5
 shader_parameter/freq_coeff = 2.0
-shader_parameter/shift_coeff = 1.0
-shader_parameter/speed = 0.5
+shader_parameter/shift_coeff = 0.5
+shader_parameter/speed = 1.0
 shader_parameter/active = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
@@ -263,7 +263,7 @@ script = ExtResource("2_xt6wy")
 anchor = NodePath("../../../../GamePlanet")
 distance = 218.0
 azimuth = 1.5708
-max_offset = Vector2(5, 5)
+max_offset = Vector2(1, 1)
 max_roll = 0.025
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Players/Player1/PlayerCameras/OrbitalCamera"]
@@ -918,7 +918,8 @@ scale = Vector2(0.769048, 1)
 points = PackedVector2Array(0, 0, 400, 0)
 
 [node name="FilterMaskGlitch" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
-material = SubResource("ShaderMaterial_vra4r")
+material = SubResource("ShaderMaterial_jitlb")
+layout_mode = 0
 offset_right = 1922.0
 offset_bottom = 1076.0
 mouse_filter = 2
