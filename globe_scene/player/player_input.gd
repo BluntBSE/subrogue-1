@@ -1,5 +1,8 @@
 extends Node3D
+class_name PlayerInput
 
+@export var player:Player
+@export var camera:OrbitalCamera
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

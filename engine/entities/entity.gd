@@ -1,52 +1,46 @@
 extends RigidBody3D
 class_name Entity
-@export var anchor: Node3D
+@onready var player:Player = get_parent().get_parent()
+@onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
 @export var height:float = 100.25; #Given that the planet has a known radius of 100. Height of 5.
 @export var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
 @export var speed = 20.0
-var player:Node3D
+@export var max_speed = 20.0
+@export var base_color:Color
+@export var spot_color:Color
+@export var range_color:Color
+@onready var spotlight:SpotLight3D = get_node("MarkerSprite/Spotlight")
+@onready var range_spot:SpotLight3D = get_node("MarkerSprite/Spotlight")
+@export var scale_factor:float = 1.0
+
+@export var faction:String = "none"
+@export var can_move := true
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     var pos_dict := GlobeHelpers.rads_from_position(position)
     azimuth = pos_dict["azimuth"]
     polar = pos_dict["polar"]
+    var sprite:Sprite3D = get_node("MarkerSprite")
+    sprite.material_overlay.set("shader_parameter/glow_color", base_color)
+   # ("shader_parameter/glow_color") = base_color
     pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 
-    handle_input(delta)
     fix_height()
     fix_rotation()
     update_coords()
     move_to_next()
     check_reached_waypoint()
-    %EntitySpot1.look_at(self.position)
-
-func handle_input(delta: float) -> void:
-    if anchor == null:
-        return
-
-    #var direction = (global_transform.origin - anchor.global_transform.origin).normalized()
-    var force = Vector3.ZERO
+    spotlight.look_at(self.position)
 
 
-
-    if Input.is_key_label_pressed(KEY_I): # I key
-        force += Vector3(1.0,0.0,0.0)
-    if Input.is_key_label_pressed(KEY_K): # K key
-        force -= Vector3(1.0,0.0,0.0)
-    if Input.is_key_label_pressed(KEY_J): # J key
-        force -= Vector3(0.0,1.0,0.0)
-    if Input.is_key_label_pressed(KEY_L): # L key
-        force += Vector3(0.0,1.0,0.0)
-
-    if force != Vector3.ZERO:
-        apply_impulse(force) # Adjust the force multiplier as needed
 
 func update_coords()->void:
     var pos_dict := GlobeHelpers.rads_from_position(position)
@@ -56,7 +50,7 @@ func update_coords()->void:
 
 func fix_height()->void:
     #The  entity should always be 5 above the tangential surface of the anchor.
-    #If tne anchor has a radius of 100m, the entity shall sit at 105, but not otherwise modify its position.
+    #If tne anchor has a radius of 100m, the entity shall sit at 100.25, but not otherwise modify its position.
     #A higher height will be more permissive when colliding with the map
     var direction:Vector3 = (position - anchor.position).normalized()
     var desired_position:Vector3 = anchor.position + (direction * height)

@@ -133,7 +133,6 @@ func move_in_orbit()->Vector3:
 func input_movement():
     var moved:bool = false
     var zoomed:bool = false
-    #TODO, and SOON - switch with is_action_pressed for remapping
     if Input.is_action_pressed("ui_up"):
         polar += move_speed
         moved = true

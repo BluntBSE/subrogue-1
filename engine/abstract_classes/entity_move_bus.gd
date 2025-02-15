@@ -1,13 +1,15 @@
 extends EventBus
 class_name EntityMoveBus
-
+#Yuck
+@onready var entity:Entity = get_parent()
+@onready var player:Player = entity.get_parent().get_parent()
+@onready var entity_controller:PlayerEntities = get_parent().get_parent()
 var max_size = 5 #Number of waypoints that can be queued up.
 var waypoints := []
 
 func _ready()->void:
-    var entities:PlayerEntities = %PlayerEntities
-    entities.order_move.connect(handle_order_move)
-    entities.enqueue_move.connect(handle_enqueue_move)
+    entity_controller.order_move.connect(handle_order_move)
+    entity_controller.enqueue_move.connect(handle_enqueue_move)
     
 
 
