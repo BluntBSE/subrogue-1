@@ -11,6 +11,7 @@ Popups need to have a size set to be proportional with camera distance (with cap
 
 
 QUEUE:
+    FIX ENTITY INHERITING SPOTLIGHT ETC.
 
 Create a Muniition object.
 properties:

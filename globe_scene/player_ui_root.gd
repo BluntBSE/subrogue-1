@@ -58,3 +58,12 @@ func _process(delta: float) -> void:
         var km = GlobeHelpers.arc_to_km(result_a.position, result_b.position, anchor)
         km = snapped(km, 1.0)
         %RulerLabel.text = str(km) + " km"
+
+
+func handle_launch()->void:
+    var glitch_mask:ColorRect = get_node("FilterMaskGlitch")
+    glitch_mask.material.set("shader_parameter/active", true)
+    await get_tree().create_timer(0.8).timeout
+    glitch_mask.material.set("shader_parameter/active", false)
+    pass
+    

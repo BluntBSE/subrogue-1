@@ -10,3 +10,4 @@ class_name SoundLib
 @export var game_theme:AudioStream
 @export var game_ambience:AudioStream
 @export var sonar_1:AudioStream
+@export var launch_thump_1:AudioStream

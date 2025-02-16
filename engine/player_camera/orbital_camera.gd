@@ -40,6 +40,18 @@ signal close_context
 
 var state_machine:StateMachine
 
+#Screen shake params
+@export var trauma_decay = 0.8;
+@export var max_offset = Vector2(100,75);
+@export var max_roll = 0.1
+var pre_trauma_position:Vector3
+var return_to_pre_trauma:bool
+#following the anchor, else: export var target
+var trauma = 0.0
+var trauma_power = 2 #2, 3. Exponent
+var noise_map := FastNoiseLite.new()
+
+var noise_y = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     state_machine = StateMachine.new()
@@ -55,14 +67,25 @@ func _ready() -> void:
     InputMap.get_actions()
     state_machine.Change("navigating", {})
     last_pos = position
-
+    #TODO: Figure out how to randomize these later.
+    noise_map.noise_type = FastNoiseLite.TYPE_SIMPLEX
+    noise_map.seed = randi()
+    noise_map.frequency = 4
+    noise_map.fractal_octaves = 2
+    randomize()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     if Engine.is_editor_hint():
         if enable_debug_movement == false:
             return
-   # handle_input()
+            
+    if not trauma:
+        if return_to_pre_trauma:
+            print("Returnt oo pre")
+            #destination = pre_trauma_position
+            return_to_pre_trauma = false
+            
     position = lerp(position, destination, 0.1)
     look_at(anchor.position)
     hovering_over = cast_from_camera()
@@ -72,7 +95,9 @@ func _process(delta: float) -> void:
     %WorldEnvironment.environment.set_volumetric_fog_length(dist) #If we do multiplayer this can't be the way this works. Can each player have their own world environment node? Probably, honestly.
     input_movement() #At least until I want a state machine to change its behavior.
     emit_position()
-    
+    if trauma:
+        trauma = max(trauma - trauma_decay * delta, 0)
+        shake()
 func _input(event:InputEvent):
     pass  
     
@@ -169,5 +194,24 @@ func emit_position()->void:
     var threshold = 0.5
     if (position-last_pos).length() > threshold:
             last_pos = position
-            print("Camera moved emitted")
             camera_moved.emit(position, anchor.position)
+
+
+
+
+func add_trauma(amount):
+    pre_trauma_position = position
+    trauma = min(trauma + amount, 1.0);
+    print("SET RETURN TO PRE TRAUMA TO TRUE")
+    return_to_pre_trauma = true
+    
+func shake():
+    var amount = pow(trauma, trauma_power)
+    noise_y += 1
+    rotation.z = max_roll * amount * randf_range(-1, 1)
+    var offset:Vector2
+    offset.x = max_offset.x * amount * randf_range(-1, 1)
+    offset.y = max_offset.y * amount * randf_range(-1, 1)
+    destination.z += offset.x
+    destination.y += offset.y
+    

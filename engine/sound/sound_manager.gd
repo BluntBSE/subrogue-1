@@ -36,13 +36,13 @@ func _on_stream_finished(player:AudioStreamPlayer)->void:
 
 
 
-func play(sound_id:String, modulation:String = "randpitch_small", category:String="game")->void:
+func play(sound_id:String, modulation:String = "randpitch_small", category:String="game", vol:float = 0.0)->void:
     #modulations: none, randpitch_small, randpitch_med, randpitch_lg
     #TODO: Will probably need to put things into a channel here later.
-    queue.append(  {"sound_id":sound_id, "modulation":modulation, "category":category}  )
+    queue.append(  {"sound_id":sound_id, "modulation":modulation, "category":category, "vol": vol}  )
 
-func play_straight(sound_id:String, category:String="game")->void:
-    queue.append({"sound_id":sound_id, "modulation":"none", "category":category})
+func play_straight(sound_id:String, category:String="game", vol:float = 0.0)->void:
+    queue.append({"sound_id":sound_id, "modulation":"none", "category":category, "vol": vol})
     
 func stop_sound_by_id(sound_id:String)->void:
     print("Stop sound by ID was called with", sound_id)
@@ -62,6 +62,7 @@ func _process(delta:float)->void:
         var sound_id:String = sound_command.sound_id
         var modulation:String = sound_command.modulation
         var category:String = sound_command.category
+        var vol:float = sound_command.vol
         var vol_to_use:float
         if category == "music":
             vol_to_use = music_volume
@@ -74,6 +75,7 @@ func _process(delta:float)->void:
             var player:AudioStreamPlayer = available[0]
             player.stream = stream
             player.volume_db = vol_to_use
+            player.volume_db += vol
             player.play()
             in_use.append({"player":available[0], "sound_id":sound_id, "category":category})
             available.pop_front()
@@ -83,6 +85,7 @@ func _process(delta:float)->void:
             player.stream = stream
             player.pitch_scale = randf_range(0.9, 1.1)
             player.volume_db = vol_to_use
+            player.volume_db += vol
             player.play()
             in_use.append({"player":available[0], "sound_id":sound_id, "category":category})
             available.pop_front()
