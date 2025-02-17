@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
     hovering_over = cast_from_camera()
     if hovering_over != {}:
         var dstr = str(hovering_over)
-        dh.dprint(debug, dstr)
+        dh.dprint(debug, self, dstr)
         
     if bake_mesh == true:
         generate_mesh_from_vertices(vertices)

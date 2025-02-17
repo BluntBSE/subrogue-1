@@ -70,16 +70,11 @@ func move_to_next()->void:
     if move_bus.queue.size() > 0:
         #print("Queue size has elements on", name)
         var dest:Area3D = move_bus.queue[0].waypoint
-        print("The start was", position)
-        print("Should be moving towards, ", dest.position)
+
         move_towards(dest.position)
 
 func move_towards(pos: Vector3) -> void:
-    print("move towards starting for", name)
     var direction = (pos - position).normalized()
-    print("anchor is", anchor)
-    
-    print("Speed", speed)
     # Calculate the vector from the center of the sphere to the current position
     var center_to_position = (position - anchor.position).normalized()
     
@@ -88,10 +83,8 @@ func move_towards(pos: Vector3) -> void:
     tangential_direction = tangential_direction.normalized()
     
     # Calculate the tangential movement vector with the desired speed
-    var vector = tangential_direction * speed
-    
-    print("Vector is ", vector)
-    
+    var vector = tangential_direction * speed * GlobalConst.time_scale
+        
     # Apply the tangential force
     apply_central_force(vector)
     

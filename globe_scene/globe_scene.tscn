@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=67 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -20,11 +20,16 @@
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="20_oyi6m"]
 [ext_resource type="Texture2D" uid="uid://c3j3ua0ninil2" path="res://assets/UI/white_buttons/PCMainButtonNormalWhiteT02_filled.png" id="21_5ntyb"]
 [ext_resource type="Shader" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="21_bmluj"]
+[ext_resource type="Script" path="res://engine/player_ui/time_manager.gd" id="22_ky6go"]
 [ext_resource type="Texture2D" uid="uid://co3mmtrqg447m" path="res://assets/UI/blue_buttons/LoadingBarEmptyT03Blue.png" id="22_l3nat"]
+[ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="23_mfwgd"]
 [ext_resource type="Texture2D" uid="uid://cgujj1t61jgne" path="res://assets/UI/blue_buttons/LoadingBarFullT03Blue.png" id="23_xmpwj"]
+[ext_resource type="Texture2D" uid="uid://edgpj510s3iu" path="res://assets/UI/blue_icons/ArrowLeftIconBlue.png" id="24_c3qma"]
 [ext_resource type="Texture2D" uid="uid://bgjry422vvmdw" path="res://assets/UI/white_buttons/VolumeSliderKnobT05White.png" id="24_ebcmx"]
 [ext_resource type="Texture2D" uid="uid://dfjd0lk4gcs7c" path="res://assets/UI/white_buttons/LoadingBarFullT03White.png" id="25_btgnx"]
+[ext_resource type="Texture2D" uid="uid://b35duoo481ffc" path="res://assets/UI/blue_icons/PauseIconBlue.png" id="25_gln1r"]
 [ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="26_pvo63"]
+[ext_resource type="Texture2D" uid="uid://drx46y536lmy6" path="res://assets/UI/blue_icons/ArrowRightIconBlue.png" id="26_v6n2o"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="27_ei3qn"]
 [ext_resource type="Script" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="28_oousn"]
 [ext_resource type="Shader" path="res://engine/player_ui/custom_line_shader.gdshader" id="29_lhhd0"]
@@ -925,6 +930,58 @@ offset_bottom = 1076.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
+[node name="TimeManager" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+unique_name_in_owner = true
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+offset_left = 1627.0
+offset_top = 24.0
+offset_right = 1711.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 20
+text = "2010-00-00"
+script = ExtResource("22_ky6go")
+metadata/_edit_use_anchors_ = true
+
+[node name="VerySlow" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager"]
+layout_mode = 0
+offset_left = -94.0
+offset_top = 3.0
+offset_right = -70.0
+offset_bottom = 27.0
+texture_normal = ExtResource("23_mfwgd")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Slow" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager"]
+layout_mode = 0
+offset_left = -75.0
+offset_top = 3.0
+offset_right = -51.0
+offset_bottom = 27.0
+texture_normal = ExtResource("24_c3qma")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Pause" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager"]
+layout_mode = 0
+offset_left = -118.0
+offset_top = 4.0
+offset_right = -94.0
+offset_bottom = 28.0
+texture_normal = ExtResource("25_gln1r")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Normal" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager"]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 4.0
+offset_right = 175.0
+offset_bottom = 28.0
+texture_normal = ExtResource("26_v6n2o")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
@@ -1037,3 +1094,7 @@ curve_mode = 1
 material = SubResource("ShaderMaterial_15n6c")
 
 [node name="Nations" type="Node3D" parent="."]
+
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/VerySlow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Slow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Normal" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [0]]

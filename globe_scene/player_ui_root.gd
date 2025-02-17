@@ -67,3 +67,7 @@ func handle_launch(_args:Dictionary)->void:
     glitch_mask.material.set("shader_parameter/active", false)
     pass
     
+    
+func engine_time_to_date():
+    GlobalConst
+    pass

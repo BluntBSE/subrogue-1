@@ -12,17 +12,17 @@ class_name OrbitalCamera
 @export var azimuth := 0.0: #Radians
     set(value):
         var dstr:String =  "azimuth is now " + str(value)
-        dh.dprint(db, dstr)
+        dh.dprint(db, self, dstr)
         azimuth = value
 @export var polar := 0.0: #Radians
     set(value):
         var dstr:String =  "polar is now " + str(value)
-        dh.dprint(db, dstr)
+        dh.dprint(db, self, dstr)
         polar = value
 var destination:Vector3:
     set(value):
         var dstr:String =  "destination is now" + str(value)
-        dh.dprint(db, dstr)
+        dh.dprint(db,self, dstr)
         destination = value
 var db:bool = false
 @onready var active_entity:Entity = %PlayerEntity #May be pluralized into an array later.
