@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
         %RulerLabel.text = str(km) + " km"
 
 
-func handle_launch()->void:
+func handle_launch(_args:Dictionary)->void:
     var glitch_mask:ColorRect = get_node("FilterMaskGlitch")
     glitch_mask.material.set("shader_parameter/active", true)
     await get_tree().create_timer(0.8).timeout

@@ -1,6 +1,6 @@
 extends RigidBody3D
 class_name Entity
-@onready var player:Player = get_parent().get_parent()
+@onready var played_by:Player = get_parent().get_parent()
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
@@ -22,6 +22,8 @@ class_name Entity
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    #temp spotlight adjustments
+    spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)
     azimuth = pos_dict["azimuth"]
     polar = pos_dict["polar"]
@@ -66,12 +68,18 @@ func move_to_next()->void:
     if move_bus.queue.size() < 1:
         return
     if move_bus.queue.size() > 0:
+        #print("Queue size has elements on", name)
         var dest:Area3D = move_bus.queue[0].waypoint
+        print("The start was", position)
+        print("Should be moving towards, ", dest.position)
         move_towards(dest.position)
 
 func move_towards(pos: Vector3) -> void:
+    print("move towards starting for", name)
     var direction = (pos - position).normalized()
+    print("anchor is", anchor)
     
+    print("Speed", speed)
     # Calculate the vector from the center of the sphere to the current position
     var center_to_position = (position - anchor.position).normalized()
     
@@ -81,6 +89,8 @@ func move_towards(pos: Vector3) -> void:
     
     # Calculate the tangential movement vector with the desired speed
     var vector = tangential_direction * speed
+    
+    print("Vector is ", vector)
     
     # Apply the tangential force
     apply_central_force(vector)

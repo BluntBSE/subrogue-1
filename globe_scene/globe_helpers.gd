@@ -46,3 +46,43 @@ static func arc_to_km(point_a:Vector3, point_b:Vector3, anchor:Planet) -> float:
     var arc_distance_km = (arc_distance_game_units / sphere_radius) * earth_radius_km
 
     return arc_distance_km
+
+
+static func generate_move_command(entity:Entity, target_position:Vector3, layer:int = 2, mask:int = 2) ->MoveCommand:
+    print("MOVE COMMAND GENERATED FOR ENTITY: ", entity.name)
+    var waypoint:Area3D = Area3D.new()
+    var wp_collider := CollisionShape3D.new()
+    var wp_shape := SphereShape3D.new() #default radius of 0.5. If we use tolerance, this might be what we assign it to.
+    #Consider making these waypoints a child of the player's abstract node.
+    wp_collider.shape = wp_shape
+    waypoint.collision_layer = 2
+    waypoint.collision_mask = 2
+    waypoint.name = "NAV_WAYPOINT_FOR_" + str(entity.name)
+    waypoint.add_child(wp_collider)
+    entity.anchor.add_child(waypoint)
+
+    waypoint.position = target_position
+    waypoint.position = GlobeHelpers.fix_height(waypoint, entity.anchor)
+    
+    var move_command := MoveCommand.new()
+    move_command.entity = entity
+    var bus:EntityMoveBus = entity.move_bus
+    var target_azimuth = GlobeHelpers.rads_from_position(target_position).azimuth
+    var target_polar = GlobeHelpers.rads_from_position(target_position).polar
+    
+    if entity.azimuth == null:
+        entity.azimuth = GlobeHelpers.rads_from_position(entity.position).azimuth
+    if entity.polar == null:
+        entity.polar = GlobeHelpers.rads_from_position(entity.position).polar
+    #TODO: When to set speed?
+    if entity.speed == null:
+        entity.speed = entity.max_speed
+        
+    move_command.start_azimuth = entity.azimuth
+    move_command.start_polar = entity.polar
+    move_command.end_azimuth = target_azimuth
+    move_command.end_polar = target_polar
+    move_command.tolerance = entity.move_tolerance #Usually 0.0, intolerant.
+    move_command.waypoint = waypoint
+    
+    return move_command

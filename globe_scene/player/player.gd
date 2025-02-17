@@ -1,12 +1,12 @@
 extends Node3D
 class_name Player
 
-var entities:Node3D
 @onready var markers:PlayerMarkers = get_node("PlayerMarkers")
 
 @onready var selected = [%PlayerEntity] #Selection is not a feature of the game for now.
 @onready var camera:OrbitalCamera = get_node("PlayerCameras/OrbitalCamera")
 @onready var UI:PlayerUIRoot = get_node("CanvasLayer/PlayerUIRoot")
+@onready var entities:PlayerEntities = get_node("PlayerEntities")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     print("Connected ruler adjustment")
