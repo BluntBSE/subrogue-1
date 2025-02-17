@@ -13,6 +13,9 @@ enum DEPTH {swim, crawl, surface}
 @export var fuel_burn:float
 @export var current_depth:int #accepts DEPTH enums
 @export var target_depths:Array #accepts DEPTH enums
+@export var target_pos:Vector3
+@export var target_node:Node3D
+@export var sprite_override:Texture2D
 #PASSIVE SONAR PARAMETERS
 
 """

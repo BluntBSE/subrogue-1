@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MunitionDef" load_steps=2 format=3 uid="uid://c2tt1184lqmkn"]
+
+[ext_resource type="Script" path="res://engine/entities/munitions/munition_def.gd" id="1_fgqn7"]
+
+[resource]
+script = ExtResource("1_fgqn7")
+id = "manta_torpedo"
+display_name = "Manta Torpedo"
+guidance_type = 1
+impact_radius = 1.0
+fuel_remaining = 100.0
+fuel_max = 0.0
+fuel_burn = 10.0
+current_depth = 0
+target_depths = Array[int]([])
+target_pos = Vector3(0, 0, 0)
+max_speed = 20.0
+trauma = 2.0

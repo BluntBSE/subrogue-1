@@ -1035,3 +1035,5 @@ curve = SubResource("Curve3D_ur1mf")
 script = ExtResource("28_oousn")
 curve_mode = 1
 material = SubResource("ShaderMaterial_15n6c")
+
+[node name="Nations" type="Node3D" parent="."]

@@ -57,11 +57,8 @@ func update_line3d(_node_a:Node3D, _node_b:Node3D, anchor):
     
     last_recorded_a = _node_a.global_position
     last_recorded_b = _node_b.global_position
-    print("LAST A: ", last_recorded_a)
-    print ("LAST B", last_recorded_b)
     #global_position = node_a.global_position    
     %Line3D.global_position = node_a.global_position #I don't understand why this is set separately
-    print("LINE POS", %Line3D.global_position)
     pass
     
 # Called when the node enters the scene tree for the first time.

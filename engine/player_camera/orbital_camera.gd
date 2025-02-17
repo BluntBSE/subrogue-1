@@ -199,7 +199,9 @@ func emit_position()->void:
 
 
 
-func add_trauma(amount):
+func add_trauma(args:Dictionary):
+    print("ADD TRAUMA RECEIVED", args.trauma)
+    var amount = args.trauma
     pre_trauma_position = position
     trauma = min(trauma + amount, 1.0);
     print("SET RETURN TO PRE TRAUMA TO TRUE")

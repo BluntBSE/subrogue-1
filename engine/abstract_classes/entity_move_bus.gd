@@ -14,9 +14,13 @@ func _ready()->void:
 
 
 func handle_order_move(command:MoveCommand)->void:
-    add(command)
-    command.finished.connect(handle_finished)
-    purge_old_waypoints()
+    print("ENTITY TO MATCH ON WAS: ", entity)
+    print("ENTITY RECEIVED WAS command", command.entity)
+    if command.entity == entity:
+        print("Behaving with match")
+        add(command)
+        command.finished.connect(handle_finished)
+        purge_old_waypoints()
 
 
     
