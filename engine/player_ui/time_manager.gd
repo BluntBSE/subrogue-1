@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
     var time_dict= Time.get_datetime_dict_from_unix_time(GlobalConst.game_date)
      #Split THE t and everything after it
 
-    text = str(time_dict.year) +"-" +str(time_dict.month) + "-" + str(time_dict.day) + "T" + str(time_dict.hour) + ":" + str(time_dict.minute)
+    text = str(time_dict.year) +"-" +str(time_dict.month) + "-" + str(time_dict.day) + " | " + str(time_dict.hour) + "H " + str(time_dict.minute) + " Min"
     pass
 
 func handle_set_time_scale(time_enum:int):

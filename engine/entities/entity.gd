@@ -7,8 +7,8 @@ class_name Entity
 @export var height:float = 100.25; #Given that the planet has a known radius of 100. Height of 5.
 @export var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
-@export var speed = 20.0
-@export var max_speed = 20.0
+@export var speed = 0.013
+@export var max_speed = 0.013 #0.013 is approximately 60Km/h at time scale 1.0
 @export var base_color:Color
 @export var spot_color:Color
 @export var range_color:Color
@@ -85,8 +85,9 @@ func move_towards(pos: Vector3) -> void:
     # Calculate the tangential movement vector with the desired speed
     var vector = tangential_direction * speed * GlobalConst.time_scale
         
-    # Apply the tangential force
-    apply_central_force(vector)
+    # Set linear velocity - we're not dealing with acceleration right now.
+    linear_velocity = vector
+    #apply_central_force(vector)
     
 func check_reached_waypoint()->void:
     if move_bus.queue.size() < 1:
@@ -96,6 +97,10 @@ func check_reached_waypoint()->void:
     var nav:Area3D = get_node("NavArea")
     var overlaps = nav.get_overlapping_areas()
     if cmd.waypoint in overlaps:
+        linear_velocity = Vector3(0.0,0.0,0.0)
+        angular_velocity = Vector3(0.0,0.0,0.0)
         cmd.is_finished()
+        print("Setting axis velocity")
+        
     
     

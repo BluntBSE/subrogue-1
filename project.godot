@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GlobalConst="*res://engine/autoload/globalconst.gd"
+GlobalConst="*res://engine/autoload/global_const.gd"
 SceneChangeLoader="*res://engine/autoload/scene_change_loader.gd"
 SoundManager="*res://engine/sound/sound_manager.gd"
 
@@ -100,7 +100,7 @@ secondary_action={
 [physics]
 
 3d/default_gravity=0.0
-3d/default_linear_damp=7.0
+3d/default_linear_damp=0.0
 3d/default_angular_damp=100.0
 
 [rendering]
