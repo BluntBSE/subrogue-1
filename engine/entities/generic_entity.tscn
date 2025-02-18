@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=13 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
-[ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="3_mm3os"]
+[ext_resource type="Material" uid="uid://cqohlfxpaw7m3" path="res://engine/entities/generic_entity.tres" id="3_7ta7w"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_rnyj7"]
 [ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="5_pq53b"]
 
@@ -16,13 +16,6 @@ radius = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_sbk4o"]
 custom_solver_bias = 1.0
 radius = 0.1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1baen"]
-render_priority = 0
-shader = ExtResource("3_mm3os")
-shader_parameter/glow_color = Color(0, 0.847809, 0.911061, 1)
-shader_parameter/glow_intensity = 5.0
-shader_parameter/texture_albedo = ExtResource("4_rnyj7")
 
 [sub_resource type="FogMaterial" id="FogMaterial_2rtqc"]
 resource_local_to_scene = true
@@ -66,7 +59,7 @@ script = ExtResource("2_7fq8g")
 shape = SubResource("SphereShape3D_sbk4o")
 
 [node name="MarkerSprite" type="Sprite3D" parent="."]
-material_overlay = SubResource("ShaderMaterial_1baen")
+material_overlay = ExtResource("3_7ta7w")
 modulate = Color(0, 0.815686, 0.792157, 1)
 shaded = true
 alpha_antialiasing_mode = 1
@@ -85,12 +78,14 @@ omni_range = 4.65
 [node name="HeadingSprite" type="Sprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
+layers = 3
 texture = ExtResource("5_pq53b")
 
 [node name="RangeSpot" type="SpotLight3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.13916)
-layers = 7
+visible = false
+layers = 3
 light_color = Color(0.774024, 0.045353, 0.588677, 1)
 light_energy = 2.0
 shadow_enabled = true
@@ -101,7 +96,7 @@ spot_angle = 55.0
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="RangeSpot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
-layers = 4
+layers = 2
 cast_shadow = 3
 mesh = SubResource("SphereMesh_54rvg")
 skeleton = NodePath("../../Spotlight")
@@ -109,8 +104,10 @@ skeleton = NodePath("../../Spotlight")
 [node name="Spotlight" type="SpotLight3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
+layers = 3
 light_color = Color(0, 0.816604, 0.791994, 1)
 light_energy = 2.0
+light_cull_mask = 4294966275
 shadow_enabled = true
 shadow_bias = 0.265
 spot_range = 20.808
@@ -119,6 +116,7 @@ spot_angle = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spotlight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
+layers = 2
 cast_shadow = 3
 mesh = SubResource("SphereMesh_pcy2y")
 skeleton = NodePath("../../RangeSpot")

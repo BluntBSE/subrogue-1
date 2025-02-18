@@ -1,0 +1,34 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cqohlfxpaw7m3"]
+
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="1_3kcei"]
+
+[sub_resource type="Shader" id="Shader_v5pr0"]
+code = "shader_type spatial;
+
+render_mode unshaded, blend_add, depth_draw_opaque;
+
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform vec4 glow_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float glow_intensity : hint_range(0.0, 100.0) = 1.0;
+
+void fragment() {
+    vec4 tex_color = texture(texture_albedo, UV);
+
+
+    // Apply the falloff to the alpha channel
+    float alpha = tex_color.a;
+
+    // Preserve the alpha channel for transparency
+    ALBEDO = tex_color.rgb * glow_color.rgb * glow_intensity;
+    ALPHA = alpha;
+
+    // Additive blending for the glow effect
+    EMISSION = tex_color.rgb * glow_color.rgb * glow_intensity * (1.0);
+}"
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_v5pr0")
+shader_parameter/glow_color = Color(0.873188, 0.413564, 0.27754, 1)
+shader_parameter/glow_intensity = 3.371
+shader_parameter/texture_albedo = ExtResource("1_3kcei")
