@@ -12,8 +12,8 @@ class_name Entity
 @export var base_color:Color
 @export var spot_color:Color
 @export var range_color:Color
-@onready var spotlight:SpotLight3D = get_node("MarkerSprite/Spotlight")
-@onready var range_spot:SpotLight3D = get_node("MarkerSprite/Spotlight")
+@onready var spotlight:SpotLight3D = %Spotlight
+@onready var range_spot:SpotLight3D = %RangeSpot
 @export var scale_factor:float = 1.0
 
 @export var faction:String = "none"

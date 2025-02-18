@@ -48,10 +48,6 @@ shader_parameter/glow_color = Color(0.665179, 0, 0.019218, 1)
 shader_parameter/glow_intensity = 2.272
 shader_parameter/texture_albedo = ExtResource("4_040x6")
 
-[sub_resource type="SphereMesh" id="SphereMesh_c6ilx"]
-radius = 3.0
-height = 6.0
-
 [sub_resource type="FogMaterial" id="FogMaterial_jo44f"]
 resource_local_to_scene = true
 density = 8.134
@@ -59,7 +55,11 @@ albedo = Color(0, 0.818736, 0.815349, 1)
 height_falloff = 2.0
 edge_fade = 2.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_p7smf"]
+[sub_resource type="SphereMesh" id="SphereMesh_ojsed"]
+radius = 3.0
+height = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_rkfvs"]
 
 [node name="MunitionEntity" type="RigidBody3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100.25, 0, 0)
@@ -97,24 +97,6 @@ shaded = true
 alpha_antialiasing_mode = 1
 texture = ExtResource("4_84c7r")
 
-[node name="RangeSpot" type="SpotLight3D" parent="MarkerSprite"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.12062e-07, 0, 7.13916)
-layers = 7
-light_color = Color(0.774024, 0.045353, 0.588677, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.265
-spot_range = 20.808
-spot_attenuation = -4.0
-spot_angle = 55.0
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MarkerSprite/RangeSpot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
-layers = 4
-cast_shadow = 3
-mesh = SubResource("SphereMesh_c6ilx")
-skeleton = NodePath("")
-
 [node name="FogVolume" type="FogVolume" parent="MarkerSprite"]
 size = Vector3(1, 1, 1)
 shape = 0
@@ -125,24 +107,45 @@ visible = false
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
 
-[node name="Spotlight" type="SpotLight3D" parent="MarkerSprite"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -1.758e-07, 4.00538e-07, 13.1851)
-light_color = Color(0, 0.816604, 0.791994, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.265
-spot_range = 20.808
-spot_attenuation = -4.0
-spot_angle = 20.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MarkerSprite/Spotlight"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 9.1431e-08, -0.97773)
-cast_shadow = 3
-mesh = SubResource("SphereMesh_p7smf")
-skeleton = NodePath("../../RangeSpot")
-
 [node name="HeadingSprite" type="Sprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
 modulate = Color(0.909804, 0.054902, 0, 1)
 texture = ExtResource("5_du4eo")
+
+[node name="RangeSpot" type="SpotLight3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.13916)
+visible = false
+layers = 7
+light_color = Color(0.774024, 0.045353, 0.588677, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.265
+spot_range = 20.808
+spot_attenuation = -4.0
+spot_angle = 55.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RangeSpot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
+layers = 4
+cast_shadow = 3
+mesh = SubResource("SphereMesh_ojsed")
+skeleton = NodePath("../../Spotlight")
+
+[node name="Spotlight" type="SpotLight3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
+light_color = Color(0.909804, 0.054902, 0, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.265
+spot_range = 20.808
+spot_attenuation = -4.0
+spot_angle = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spotlight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_rkfvs")
+skeleton = NodePath("../../RangeSpot")
