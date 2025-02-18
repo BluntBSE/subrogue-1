@@ -1,0 +1,9 @@
+PLANET - Layer 1
+
+ALL ENTITIES (Ships) - Layer 2
+ALL ENTITIES (Munitions) - Layer 3
+CITIES - Layer 20
+
+
+
+Individual players shoudl probably get their own vision layers

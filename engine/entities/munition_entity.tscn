@@ -117,7 +117,7 @@ texture = ExtResource("5_du4eo")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.13916)
 visible = false
-layers = 7
+layers = 5
 light_color = Color(0.774024, 0.045353, 0.588677, 1)
 light_energy = 2.0
 shadow_enabled = true
@@ -138,6 +138,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
 light_color = Color(0.909804, 0.054902, 0, 1)
 light_energy = 2.0
+light_cull_mask = 4294966277
 shadow_enabled = true
 shadow_bias = 0.265
 spot_range = 20.808
@@ -146,6 +147,7 @@ spot_angle = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spotlight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
+layers = 4
 cast_shadow = 3
 mesh = SubResource("SphereMesh_rkfvs")
 skeleton = NodePath("../../RangeSpot")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=69 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -32,8 +32,8 @@
 [ext_resource type="Texture2D" uid="uid://drx46y536lmy6" path="res://assets/UI/blue_icons/ArrowRightIconBlue.png" id="26_v6n2o"]
 [ext_resource type="Texture2D" uid="uid://b1xemghegym28" path="res://assets/UI/blue_icons/FrontIconBlue.png" id="27_3xujn"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="27_ei3qn"]
-[ext_resource type="Script" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="28_oousn"]
-[ext_resource type="Shader" path="res://engine/player_ui/custom_line_shader.gdshader" id="29_lhhd0"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="34_f1l1f"]
+[ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="35_m4noy"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_wog1n"]
 material = ExtResource("1_jtrqq")
@@ -180,29 +180,16 @@ points = PackedVector3Array(106.902, -8.63812, -10.019, 108.532, -7.41545, -12.4
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ym8sc"]
 points = PackedVector3Array(112.613, -8.63816, -10.8341, 112.205, -7.82297, -12.8731, 111.797, -8.23056, -12.4651, 114.243, -9.04592, -12.0572, 114.243, -7.41505, -12.0572, 111.389, -7.41505, -11.65, 111.389, -9.04592, -10.8341, 114.243, -7.41505, -12.8731, 114.243, -9.04592, -11.2421, 111.389, -9.04592, -11.65, 111.389, -7.41505, -12.4651, 113.835, -8.23056, -12.8731, 114.243, -8.23056, -11.2421, 112.613, -7.82297, -11.2421, 111.389, -8.63816, -10.8341)
 
-[sub_resource type="Curve3D" id="Curve3D_ur1mf"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 5),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
+[sub_resource type="SphereMesh" id="SphereMesh_6oioa"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_15n6c"]
-render_priority = 0
-shader = ExtResource("29_lhhd0")
-shader_parameter/line_width = 0.1
-shader_parameter/tangent_facing = false
-shader_parameter/rounded = false
-shader_parameter/tube_normal = true
-shader_parameter/alpha_override = 0.01
-shader_parameter/uv_matches_width = true
-shader_parameter/tex_scale = Vector2(1, 1)
-shader_parameter/tex_stretch = true
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/metallic = 0.0
-shader_parameter/specular = 0.5
-shader_parameter/roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ho0hv"]
+transparency = 4
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 1, 1)
+albedo_texture = ExtResource("34_f1l1f")
+
+[sub_resource type="SphereMesh" id="SphereMesh_rcc5k"]
 
 [node name="GameMain" type="Node3D"]
 script = ExtResource("1_msvd6")
@@ -1000,6 +987,16 @@ texture_normal = ExtResource("27_3xujn")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
+modulate = Color(1, 1, 1, 0.4)
+position = Vector2(1927, 492)
+texture = ExtResource("26_pvo63")
+
+[node name="SettingsIconFilledBlue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
+position = Vector2(1876, 36)
+scale = Vector2(0.21625, 0.21625)
+texture = ExtResource("27_ei3qn")
+
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
@@ -1094,24 +1091,48 @@ stream = ExtResource("17_eum53")
 volume_db = -3.0
 autoplay = true
 
-[node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.4)
-position = Vector2(1927, 492)
-texture = ExtResource("26_pvo63")
+[node name="Factions" type="Node3D" parent="."]
 
-[node name="SettingsIconFilledBlue" type="Sprite2D" parent="."]
-position = Vector2(1876, 36)
-scale = Vector2(0.21625, 0.21625)
-texture = ExtResource("27_ei3qn")
+[node name="Cities" type="Node3D" parent="Factions"]
 
-[node name="Line3D" type="Path3D" parent="."]
+[node name="Miami" type="Node3D" parent="Factions/Cities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.421, 22.4796, -1.75084)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Factions/Cities/Miami"]
 visible = false
-curve = SubResource("Curve3D_ur1mf")
-script = ExtResource("28_oousn")
-curve_mode = 1
-material = SubResource("ShaderMaterial_15n6c")
 
-[node name="Nations" type="Node3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Factions/Cities/Miami/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+mesh = SubResource("SphereMesh_6oioa")
+
+[node name="Sprite3D" type="Sprite3D" parent="Factions/Cities/Miami"]
+transform = Transform3D(0.970131, -0.242582, 0, 0.242582, 0.970131, 0, 0, 0, 1, -0.0727158, 0, 0)
+material_override = SubResource("StandardMaterial3D_ho0hv")
+axis = 0
+texture = ExtResource("34_f1l1f")
+
+[node name="DockingSpot" type="SpotLight3D" parent="Factions/Cities/Miami"]
+transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
+light_cull_mask = 4294443009
+shadow_enabled = true
+spot_range = 16.407
+spot_attenuation = -5.66
+spot_angle = 43.28
+
+[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Factions/Cities/Miami/DockingSpot"]
+transform = Transform3D(1, 2.35071e-10, -4.65661e-09, -2.91034e-10, 1, -3.72522e-08, -4.65661e-09, 1.49032e-08, 1, -0.00889826, 0.0111237, -0.764389)
+layers = 524288
+transparency = 1.0
+mesh = SubResource("SphereMesh_rcc5k")
+
+[node name="Label3D" type="Label3D" parent="Factions/Cities/Miami"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.246742, 0.995092, 0)
+billboard = 1
+alpha_cut = 1
+modulate = Color(1, 0, 1, 1)
+text = "Miami"
+font = ExtResource("35_m4noy")
+font_size = 98
 
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/VerySlow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Slow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
