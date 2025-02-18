@@ -12,6 +12,7 @@ func unpack(_player:Player, _context:ContextMarker)->void:
     pressed_launch.connect(_player.camera.add_trauma)
     pressed_launch.connect(_player.UI.handle_launch)
     pressed_launch.connect(_player.entities.launch_munition)
+    pressed_launch.connect(_player.camera.handle_launch)
     context = _context
     pass
 

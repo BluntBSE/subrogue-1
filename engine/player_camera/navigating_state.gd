@@ -47,7 +47,6 @@ func input_clicks(event:InputEvent):
                 
                 var move_command := MoveCommand.new()
                 move_command.entity = ref.active_entity
-                print("BUT I SET IT AS ", move_command.entity)
                 move_command.start_azimuth = ref.active_entity.azimuth
                 move_command.start_polar = ref.active_entity.polar
                 move_command.end_azimuth = click_azimuth

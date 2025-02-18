@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=14 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
 [ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="3_mm3os"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_rnyj7"]
+[ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="5_pq53b"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -37,7 +38,7 @@ height_falloff = 2.0
 edge_fade = 2.0
 
 [node name="PlayerEntity" type="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100.25, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
@@ -66,7 +67,7 @@ shape = SubResource("SphereShape3D_sbk4o")
 
 [node name="MarkerSprite" type="Sprite3D" parent="."]
 material_overlay = SubResource("ShaderMaterial_1baen")
-modulate = Color(0, 0.815686, 0.792157, 0)
+modulate = Color(0, 0.815686, 0.792157, 1)
 shaded = true
 alpha_antialiasing_mode = 1
 texture = ExtResource("4_rnyj7")
@@ -114,3 +115,8 @@ material = SubResource("FogMaterial_2rtqc")
 visible = false
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
+
+[node name="HeadingSprite" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
+texture = ExtResource("5_pq53b")

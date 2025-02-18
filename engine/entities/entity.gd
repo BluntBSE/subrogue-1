@@ -89,6 +89,19 @@ func move_towards(pos: Vector3) -> void:
     linear_velocity = vector
     #apply_central_force(vector)
     
+    # Update the heading sprite to face the right direction
+    var heading_sprite: Sprite3D = %HeadingSprite
+    heading_sprite.visible = true
+    
+    # Rotate the whole sprite and heading sprite towards the target
+    look_at(direction, center_to_position, false)
+
+    #adjust heading sprite rotation to match, assuming Vector3(0,1,0) is the angle to compare to.
+
+    
+    
+    #heading_sprite.rotation.z = angle
+    
 func check_reached_waypoint()->void:
     if move_bus.queue.size() < 1:
         return
@@ -100,7 +113,6 @@ func check_reached_waypoint()->void:
         linear_velocity = Vector3(0.0,0.0,0.0)
         angular_velocity = Vector3(0.0,0.0,0.0)
         cmd.is_finished()
-        print("Setting axis velocity")
-        
+        %HeadingSprite.visible = false
     
     

@@ -217,3 +217,6 @@ func shake():
     destination.z += offset.x
     destination.y += offset.y
     
+func handle_launch(_args:Dictionary)->void:
+    state_machine.Change("navigating", {})
+    pass

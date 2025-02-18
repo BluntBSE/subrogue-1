@@ -1,42 +1,67 @@
-[gd_scene load_steps=13 format=3 uid="uid://db4foh8qap52"]
+[gd_scene load_steps=15 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" path="res://engine/entities/munition.gd" id="1_rstgs"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_geuhc"]
-[ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="3_ei24i"]
-[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_m7iyo"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_040x6"]
+[ext_resource type="Texture2D" uid="uid://67mmmqln0imo" path="res://assets/UI/blue_icons/ForwardIconBlue.png" id="4_84c7r"]
+[ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="5_du4eo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_0u415"]
+[sub_resource type="SphereMesh" id="SphereMesh_68j6v"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_e0wf7"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_1utme"]
 radius = 1.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_sbk4o"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_m615s"]
 custom_solver_bias = 1.0
 radius = 0.1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1baen"]
+[sub_resource type="Shader" id="Shader_2djlq"]
+code = "shader_type spatial;
+
+render_mode unshaded, blend_add, depth_draw_opaque;
+
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform vec4 glow_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float glow_intensity : hint_range(0.0, 100.0) = 1.0;
+
+void fragment() {
+    vec4 tex_color = texture(texture_albedo, UV);
+
+
+    // Apply the falloff to the alpha channel
+    float alpha = tex_color.a;
+
+    // Preserve the alpha channel for transparency
+    ALBEDO = tex_color.rgb * glow_color.rgb * glow_intensity;
+    ALPHA = alpha;
+
+    // Additive blending for the glow effect
+    EMISSION = tex_color.rgb * glow_color.rgb * glow_intensity * (1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nc0bu"]
 render_priority = 0
-shader = ExtResource("3_ei24i")
-shader_parameter/glow_color = Color(0, 0.847809, 0.911061, 1)
-shader_parameter/glow_intensity = 5.0
-shader_parameter/texture_albedo = ExtResource("4_m7iyo")
+shader = SubResource("Shader_2djlq")
+shader_parameter/glow_color = Color(0.665179, 0, 0.019218, 1)
+shader_parameter/glow_intensity = 2.272
+shader_parameter/texture_albedo = ExtResource("4_040x6")
 
-[sub_resource type="SphereMesh" id="SphereMesh_pcy2y"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_54rvg"]
+[sub_resource type="SphereMesh" id="SphereMesh_c6ilx"]
 radius = 3.0
 height = 6.0
 
-[sub_resource type="FogMaterial" id="FogMaterial_2rtqc"]
+[sub_resource type="FogMaterial" id="FogMaterial_jo44f"]
 resource_local_to_scene = true
 density = 8.134
 albedo = Color(0, 0.818736, 0.815349, 1)
 height_falloff = 2.0
 edge_fade = 2.0
 
-[node name="PlayerEntity" type="RigidBody3D"]
+[sub_resource type="SphereMesh" id="SphereMesh_p7smf"]
+
+[node name="MunitionEntity" type="RigidBody3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100.25, 0, 0)
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
@@ -48,7 +73,7 @@ base_color = Color(0.913867, 0.546384, 0.919942, 1)
 [node name="EntityMesh" type="MeshInstance3D" parent="."]
 visible = false
 gi_mode = 2
-mesh = SubResource("SphereMesh_0u415")
+mesh = SubResource("SphereMesh_68j6v")
 skeleton = NodePath("")
 
 [node name="NavArea" type="Area3D" parent="."]
@@ -56,40 +81,24 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="EntityNavShape" type="CollisionShape3D" parent="NavArea"]
-shape = SubResource("SphereShape3D_e0wf7")
+shape = SubResource("SphereShape3D_1utme")
 
 [node name="EntityMoveBus" type="Node3D" parent="."]
 script = ExtResource("2_geuhc")
 
 [node name="EntityShape" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_sbk4o")
+shape = SubResource("SphereShape3D_m615s")
 
 [node name="MarkerSprite" type="Sprite3D" parent="."]
-material_overlay = SubResource("ShaderMaterial_1baen")
-modulate = Color(0, 0.815686, 0.792157, 0)
+transform = Transform3D(-1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, 0, 0.25, 0, 0, 0)
+material_overlay = SubResource("ShaderMaterial_nc0bu")
+modulate = Color(0, 0.815686, 0.792157, 1)
 shaded = true
 alpha_antialiasing_mode = 1
-texture = ExtResource("4_m7iyo")
-
-[node name="Spotlight" type="SpotLight3D" parent="MarkerSprite"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.758e-07, 0, 4.02185)
-light_color = Color(0, 0.816604, 0.791994, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.265
-spot_range = 20.808
-spot_attenuation = -4.0
-spot_angle = 10.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MarkerSprite/Spotlight"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
-cast_shadow = 3
-mesh = SubResource("SphereMesh_pcy2y")
-skeleton = NodePath("../../RangeSpot")
+texture = ExtResource("4_84c7r")
 
 [node name="RangeSpot" type="SpotLight3D" parent="MarkerSprite"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.12062e-07, 0, 7.13916)
-visible = false
 layers = 7
 light_color = Color(0.774024, 0.045353, 0.588677, 1)
 light_energy = 2.0
@@ -103,15 +112,37 @@ spot_angle = 55.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
 layers = 4
 cast_shadow = 3
-mesh = SubResource("SphereMesh_54rvg")
-skeleton = NodePath("../../Spotlight")
+mesh = SubResource("SphereMesh_c6ilx")
+skeleton = NodePath("")
 
 [node name="FogVolume" type="FogVolume" parent="MarkerSprite"]
 size = Vector3(1, 1, 1)
 shape = 0
-material = SubResource("FogMaterial_2rtqc")
+material = SubResource("FogMaterial_jo44f")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="MarkerSprite/FogVolume"]
 visible = false
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
+
+[node name="Spotlight" type="SpotLight3D" parent="MarkerSprite"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -1.758e-07, 4.00538e-07, 13.1851)
+light_color = Color(0, 0.816604, 0.791994, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.265
+spot_range = 20.808
+spot_attenuation = -4.0
+spot_angle = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MarkerSprite/Spotlight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 9.1431e-08, -0.97773)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_p7smf")
+skeleton = NodePath("../../RangeSpot")
+
+[node name="HeadingSprite" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
+modulate = Color(0.909804, 0.054902, 0, 1)
+texture = ExtResource("5_du4eo")
