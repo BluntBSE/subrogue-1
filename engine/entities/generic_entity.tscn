@@ -32,7 +32,8 @@ height = 6.0
 
 [node name="PlayerEntity" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
-collision_mask = 3
+collision_layer = 6
+collision_mask = 6
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true

@@ -12,7 +12,7 @@ Popups need to have a size set to be proportional with camera distance (with cap
 
 QUEUE:
     FIX ENTITY INHERITING SPOTLIGHT ETC.
-    
+    Maybe we shouldn't add_child at runtime, but reveal them?
     MUNITIONS - DO THEY OVERRIDE THEIR CHECK WAYPOINT REACHED AND JUST KEEP GOING?
 
 Create a Muniition object.
