@@ -14,5 +14,5 @@ fuel_burn = 10.0
 current_depth = 0
 target_depths = Array[int]([])
 target_pos = Vector3(0, 0, 0)
-max_speed = 20.0
+max_speed = 60.0
 trauma = 2.0

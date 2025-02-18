@@ -27,7 +27,7 @@ static func fix_height(entity:Node3D, anchor:Node3D)->Vector3:
     
 static func arc_to_km(point_a:Vector3, point_b:Vector3, anchor:Planet) -> float:
     var anchor_mesh:SphereMesh = anchor.mesh
-    var sphere_radius = anchor_mesh.radius # This is 100 right now
+    var sphere_radius = anchor_mesh.radius # This is 100 right now in game units
     var earth_radius_km = 6378
     var earth_height_km = 6378 # This technically isn't true but whatever
 
@@ -47,6 +47,21 @@ static func arc_to_km(point_a:Vector3, point_b:Vector3, anchor:Planet) -> float:
 
     return arc_distance_km
 
+static func kph_to_game_s(kph: float) -> float:
+    var sphere_radius = 100.0 # in game units
+    var earth_radius_km = 6378.0 # in kilometers
+    
+    # Calculate the conversion factor from kilometers to game units
+    var conversion_factor = sphere_radius / earth_radius_km
+    
+    # Convert kph to kilometers per MINUTE.
+    # We conver to kilometers per MINUTE because the root timescale of the game is 1 game second = 1 real world minute.
+    var kpmin = kph / 60
+    
+    # Convert kilometers per second to game units per second
+    var game_units_per_second = kpmin * conversion_factor
+    
+    return game_units_per_second
 
 static func generate_move_command(entity:Entity, target_position:Vector3, layer:int = 2, mask:int = 2) ->MoveCommand:
     print("MOVE COMMAND GENERATED FOR ENTITY: ", entity.name)

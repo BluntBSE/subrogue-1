@@ -9,14 +9,14 @@ uniform float glow_intensity : hint_range(0.0, 100.0) = 1.0;
 void fragment() {
     vec4 tex_color = texture(texture_albedo, UV);
 
-    
+
     // Apply the falloff to the alpha channel
     float alpha = tex_color.a;
-    
+
     // Preserve the alpha channel for transparency
     ALBEDO = tex_color.rgb * glow_color.rgb * glow_intensity;
     ALPHA = alpha;
-    
+
     // Additive blending for the glow effect
     EMISSION = tex_color.rgb * glow_color.rgb * glow_intensity * (1.0);
 }

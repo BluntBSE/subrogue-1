@@ -17,7 +17,7 @@ static func munition_by_id(id: String) -> Munition:
     new_munition.target_depths = munition_data.target_depths
     new_munition.target_pos = munition_data.target_pos
     new_munition.sprite_override = munition_data.sprite_override
-    new_munition.max_speed = munition_data.max_speed
+    new_munition.max_speed = GlobeHelpers.kph_to_game_s(munition_data.max_speed)
     
     #NOT FROM DATA / Should come from launch configuration
     new_munition.speed = new_munition.max_speed

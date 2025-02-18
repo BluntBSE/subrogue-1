@@ -52,9 +52,9 @@ func use_time_enum() -> void:
         TIME_SCALES.normal:
             time_scale = 60.0
         TIME_SCALES.slow:
-            time_scale = 1.0
+            time_scale = 10.0
         TIME_SCALES.very_slow:
-            time_scale = 0.016
+            time_scale = 1.0
 
 func handle_set_time_scale(scale_enum: int) -> void:
     current_scale_enum = scale_enum

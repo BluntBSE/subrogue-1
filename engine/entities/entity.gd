@@ -7,8 +7,8 @@ class_name Entity
 @export var height:float = 100.25; #Given that the planet has a known radius of 100. Height of 5.
 @export var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
-@export var speed = 0.013
-@export var max_speed = 0.013 #0.013 is approximately 60Km/h at time scale 1.0
+@export var speed = GlobeHelpers.kph_to_game_s(60.0)
+@export var max_speed = GlobeHelpers.kph_to_game_s(60.0) #0.013 is approximately 60Km/h, checked at at time scale 1.0
 @export var base_color:Color
 @export var spot_color:Color
 @export var range_color:Color
