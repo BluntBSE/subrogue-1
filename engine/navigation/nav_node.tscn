@@ -21,5 +21,6 @@ shape = SubResource("SphereShape3D_lgkp4")
 [node name="DebugMesh" type="MeshInstance3D" parent="Shape"]
 unique_name_in_owner = true
 material_override = SubResource("StandardMaterial3D_p6evq")
+transparency = 0.5
 mesh = SubResource("SphereMesh_paxg6")
 skeleton = NodePath("../..")
