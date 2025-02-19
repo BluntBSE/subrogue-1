@@ -21,6 +21,10 @@ func adjust_ruler(camera_pos:Vector3, anchor:Vector3) -> void:
 @onready var anchor = %GamePlanet
 
 func _process(delta: float) -> void:
+    #FPS
+    %FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
+    
+    #RANGEFINDING
     # Get the mouse position relative to the Control node
     var ray_length = 8000.0 # Adjust the ray length as needed
     var mouse_pos = get_global_mouse_position()
