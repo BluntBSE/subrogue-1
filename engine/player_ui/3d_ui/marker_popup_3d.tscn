@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d4m5f8ce6m1yg" path="res://engine/player_ui/3d_ui/marker_popup.tscn" id="2_2gvl6"]
 [ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="2_tkj7p"]
 [ext_resource type="Shader" path="res://globe_scene/test_3d_1.gdshader" id="3_jiq8v"]
-[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_qvsad"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="4_qvsad"]
 [ext_resource type="Script" path="res://engine/player_ui/3d_ui/self_updating_CSG.gd" id="5_w0apk"]
 [ext_resource type="Script" path="res://engine/player_ui/3d_ui/context_line.gd" id="6_gfy2j"]
 [ext_resource type="Script" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="7_msqlf"]

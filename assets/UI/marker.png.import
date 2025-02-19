@@ -2,21 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dumryou711ko6"
-path="res://.godot/imported/collision_mask.png-a6501c810242f34796a8a4e2dcb64b8d.ctex"
+uid="uid://db4euec4ebjls"
+path.s3tc="res://.godot/imported/marker.png-d85a4c33510da826b3960cd8a541a6de.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://assets/collision_mask.png"
-dest_files=["res://.godot/imported/collision_mask.png-a6501c810242f34796a8a4e2dcb64b8d.ctex"]
+source_file="res://assets/UI/marker.png"
+dest_files=["res://.godot/imported/marker.png-d85a4c33510da826b3960cd8a541a6de.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=true
+compress/mode=2
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ft4oj81we26f"
-path.s3tc="res://.godot/imported/equirect.jpg-0a1031b1aa818ece02896f0aa47a3fb6.s3tc.ctex"
+uid="uid://bxolsd7u0byg"
+path="res://.godot/imported/largeres_undecorated.png-ca6acf60e66be6231fce5bbd92bfdf26.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/equirect.jpg"
-dest_files=["res://.godot/imported/equirect.jpg-0a1031b1aa818ece02896f0aa47a3fb6.s3tc.ctex"]
+source_file="res://assets/UI/largeres_undecorated.png"
+dest_files=["res://.godot/imported/largeres_undecorated.png-ca6acf60e66be6231fce5bbd92bfdf26.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

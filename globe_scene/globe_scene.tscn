@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=75 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Material" uid="uid://cx72xcf27h8qj" path="res://globe_scene/csgmat.tres" id="6_1twjn"]
-[ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/collision_mask.png" id="8_6dvw2"]
+[ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
 [ext_resource type="Script" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
 [ext_resource type="Script" path="res://globe_scene/player/player.gd" id="9_xkk1b"]
 [ext_resource type="Script" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
@@ -32,9 +32,12 @@
 [ext_resource type="Texture2D" uid="uid://drx46y536lmy6" path="res://assets/UI/blue_icons/ArrowRightIconBlue.png" id="26_v6n2o"]
 [ext_resource type="Texture2D" uid="uid://b1xemghegym28" path="res://assets/UI/blue_icons/FrontIconBlue.png" id="27_3xujn"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="27_ei3qn"]
-[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="34_f1l1f"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="34_f1l1f"]
 [ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="35_m4noy"]
 [ext_resource type="Texture2D" uid="uid://o4wfqpapu8p2" path="res://assets/UI/red_test.png" id="35_woink"]
+[ext_resource type="Script" path="res://engine/navigation/nav_node_drawer.gd" id="36_4wwom"]
+[ext_resource type="PackedScene" uid="uid://m4t2hh3hak6e" path="res://engine/navigation/nav_node.tscn" id="36_nkwg1"]
+[ext_resource type="Script" path="res://engine/navigation/nav_node.gd" id="38_nsrfx"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_wog1n"]
 material = ExtResource("1_jtrqq")
@@ -79,41 +82,6 @@ shader_parameter/heightmap = ExtResource("8_6dvw2")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5glwl"]
 transparency = 4
 blend_mode = 2
-
-[sub_resource type="Environment" id="Environment_13rd1"]
-background_mode = 2
-sky = ExtResource("5_braji")
-sdfgi_use_occlusion = true
-glow_enabled = true
-glow_normalized = true
-glow_bloom = 0.25
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_length = 10.0
-volumetric_fog_detail_spread = 1.0
-volumetric_fog_ambient_inject = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
-shader = ExtResource("21_bmluj")
-shader_parameter/octave_count = 10
-shader_parameter/amp_start = 0.5
-shader_parameter/amp_coeff = 0.5
-shader_parameter/freq_coeff = 2.0
-shader_parameter/shift_coeff = 0.5
-shader_parameter/speed = 1.0
-shader_parameter/active = false
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_8w7ix"]
-_surfaces = [{
-"aabb": AABB(91.2029, -13.7359, -12.6692, 23.8225, 17.3545, 25.6912),
-"format": 34359738375,
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 144,
-"vertex_data": PackedByteArray("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")
-}]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tid5b"]
 points = PackedVector3Array(115.057, 3.59546, 7.10863, 91.8188, 1.96428, 3.84689, 91.4091, 2.77987, 6.29311, 115.057, 1.96428, 5.07016, 115.057, 3.59546, 5.4776, 93.4484, 3.18767, 5.4776, 91.4091, 2.77987, 7.10863, 115.057, 2.37207, 4.25465, 91.8188, 2.77987, 4.25465, 107.717, 2.77987, 7.10863, 104.455, 3.59546, 7.10863, 91.8188, 2.37207, 6.29311, 91.4091, 3.18767, 7.10863, 100.381, 2.37207, 3.84689, 115.057, 1.96428, 4.25465, 91.8188, 1.96428, 4.6624, 99.1566, 3.18767, 4.6624, 115.057, 3.18767, 7.10863, 104.455, 3.59546, 6.70055, 102.011, 1.96428, 5.07016, 91.4091, 3.18767, 6.29311, 91.8188, 2.37207, 3.84689, 100.381, 1.96428, 3.84689, 113.425, 3.59546, 5.4776)
@@ -181,6 +149,41 @@ points = PackedVector3Array(106.902, -8.63812, -10.019, 108.532, -7.41545, -12.4
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ym8sc"]
 points = PackedVector3Array(112.613, -8.63816, -10.8341, 112.205, -7.82297, -12.8731, 111.797, -8.23056, -12.4651, 114.243, -9.04592, -12.0572, 114.243, -7.41505, -12.0572, 111.389, -7.41505, -11.65, 111.389, -9.04592, -10.8341, 114.243, -7.41505, -12.8731, 114.243, -9.04592, -11.2421, 111.389, -9.04592, -11.65, 111.389, -7.41505, -12.4651, 113.835, -8.23056, -12.8731, 114.243, -8.23056, -11.2421, 112.613, -7.82297, -11.2421, 111.389, -8.63816, -10.8341)
 
+[sub_resource type="Environment" id="Environment_13rd1"]
+background_mode = 2
+sky = ExtResource("5_braji")
+sdfgi_use_occlusion = true
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.25
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_length = 10.0
+volumetric_fog_detail_spread = 1.0
+volumetric_fog_ambient_inject = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
+shader = ExtResource("21_bmluj")
+shader_parameter/octave_count = 10
+shader_parameter/amp_start = 0.5
+shader_parameter/amp_coeff = 0.5
+shader_parameter/freq_coeff = 2.0
+shader_parameter/shift_coeff = 0.5
+shader_parameter/speed = 1.0
+shader_parameter/active = false
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8w7ix"]
+_surfaces = [{
+"aabb": AABB(91.2029, -13.7359, -12.6692, 23.8225, 17.3545, 25.6912),
+"format": 34359738375,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 144,
+"vertex_data": PackedByteArray("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")
+}]
+
 [sub_resource type="SphereMesh" id="SphereMesh_6oioa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ho0hv"]
@@ -193,22 +196,28 @@ albedo_texture = ExtResource("34_f1l1f")
 [sub_resource type="SphereMesh" id="SphereMesh_rcc5k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slecc"]
-transparency = 2
-alpha_scissor_threshold = 0.354
-alpha_antialiasing_mode = 0
+transparency = 1
 blend_mode = 1
 albedo_texture = ExtResource("35_woink")
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 7.73
+emission_energy_multiplier = 0.0
 anisotropy = 0.56
 disable_receive_shadows = true
+
+[sub_resource type="Curve3D" id="Curve3D_lbs5i"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.858841, 0.0264258, -6.6302),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [node name="GameMain" type="Node3D"]
 script = ExtResource("1_msvd6")
 
 [node name="GamePlanet" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
+visible = false
 mesh = SubResource("SphereMesh_wog1n")
 script = ExtResource("2_0c888")
 
@@ -224,7 +233,75 @@ transparency = 0.97
 cast_shadow = 0
 gi_mode = 0
 
-[node name="StaticBody3D" type="StaticBody3D" parent="GamePlanet/LandCollider"]
+[node name="NorthPanama" type="StaticBody3D" parent="GamePlanet/LandCollider"]
+collision_layer = 2
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_tid5b")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_i8avd")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_p1pif")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_ufbo8")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_01q4x")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_vh146")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_sh1cg")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_o08pe")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_fqrlm")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_qkwtn")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_mj8id")
+
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_ge81c")
+
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_j6i75")
+
+[node name="CollisionShape3D14" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_al2gg")
+
+[node name="CollisionShape3D15" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_dmo1b")
+
+[node name="CollisionShape3D16" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_ofddj")
+
+[node name="CollisionShape3D17" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_x7yc7")
+
+[node name="CollisionShape3D18" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_l2phg")
+
+[node name="CollisionShape3D19" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_i2kn0")
+
+[node name="CollisionShape3D20" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_iro33")
+
+[node name="CollisionShape3D21" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_v61fo")
+
+[node name="CollisionShape3D22" type="CollisionShape3D" parent="GamePlanet/LandCollider/NorthPanama"]
+shape = SubResource("ConvexPolygonShape3D_ym8sc")
 
 [node name="CSGCylinder3D" type="CSGPolygon3D" parent="GamePlanet"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.586, 0, 0)
@@ -296,6 +373,7 @@ unique_name_in_owner = true
 script = ExtResource("15_wdr3j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Players/Player1"]
+visible = false
 
 [node name="OnLoadFilter" type="ColorRect" parent="Players/Player1/CanvasLayer"]
 unique_name_in_owner = true
@@ -1028,81 +1106,12 @@ shape = SubResource("SphereShape3D_5v0fy")
 [node name="GeometryDrawer" type="Node3D" parent="." node_paths=PackedStringArray("draw_on")]
 script = ExtResource("11_6u1es")
 draw_on = NodePath("../GamePlanet/ClickableSphere")
+raycasting = false
 flipped_normal = false
 
 [node name="@MeshInstance3D@93055" type="MeshInstance3D" parent="GeometryDrawer"]
 visible = false
 mesh = SubResource("ArrayMesh_8w7ix")
-
-[node name="NorthPanama" type="StaticBody3D" parent="GeometryDrawer"]
-collision_layer = 2
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_tid5b")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_i8avd")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_p1pif")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_ufbo8")
-
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_01q4x")
-
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_vh146")
-
-[node name="CollisionShape3D7" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_sh1cg")
-
-[node name="CollisionShape3D8" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_o08pe")
-
-[node name="CollisionShape3D9" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_fqrlm")
-
-[node name="CollisionShape3D10" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_qkwtn")
-
-[node name="CollisionShape3D11" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_mj8id")
-
-[node name="CollisionShape3D12" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_ge81c")
-
-[node name="CollisionShape3D13" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_j6i75")
-
-[node name="CollisionShape3D14" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_al2gg")
-
-[node name="CollisionShape3D15" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_dmo1b")
-
-[node name="CollisionShape3D16" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_ofddj")
-
-[node name="CollisionShape3D17" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_x7yc7")
-
-[node name="CollisionShape3D18" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_l2phg")
-
-[node name="CollisionShape3D19" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_i2kn0")
-
-[node name="CollisionShape3D20" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_iro33")
-
-[node name="CollisionShape3D21" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_v61fo")
-
-[node name="CollisionShape3D22" type="CollisionShape3D" parent="GeometryDrawer/NorthPanama"]
-shape = SubResource("ConvexPolygonShape3D_ym8sc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_o22p0")
@@ -1150,19 +1159,52 @@ transparency = 1.0
 mesh = SubResource("SphereMesh_rcc5k")
 
 [node name="Label3D" type="Label3D" parent="Factions/Cities/Miami"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.246742, 0.995092, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.246742, 1.61078, -8.88178e-16)
 billboard = 1
 alpha_cut = 1
 modulate = Color(1, 0, 1, 1)
 text = "Miami"
 font = ExtResource("35_m4noy")
-font_size = 98
+font_size = 160
 
 [node name="Sprite3D2" type="Sprite3D" parent="Factions/Cities/Miami"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13311, 0, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.13311, 0, 0)
 material_override = SubResource("StandardMaterial3D_slecc")
+transparency = 0.99
 axis = 0
 texture = ExtResource("35_woink")
+
+[node name="NavNodeDrawer" type="Node3D" parent="." node_paths=PackedStringArray("draw_on", "nav_parent")]
+script = ExtResource("36_4wwom")
+draw_on = NodePath("../GamePlanet/ClickableSphere")
+active = true
+nav_parent = NodePath("../NavNodes")
+
+[node name="NavNodes" type="Node3D" parent="."]
+
+[node name="NavNode--12_23lon-2_65lat" type="Area3D" parent="NavNodes" groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.7255, 4.62578, -21.1738)
+collision_layer = 262144
+script = ExtResource("38_nsrfx")
+
+[node name="NavNode--5_44lon-4_52lat" type="Area3D" parent="NavNodes" groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.3393, 7.88144, -9.46567)
+collision_layer = 262144
+script = ExtResource("38_nsrfx")
+neighbors = [{
+"node": Object(Area3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.4805, 7.90786, -16.0959),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"disable_mode":0,"collision_layer":262144,"collision_mask":1,"collision_priority":1.0,"input_ray_pickable":true,"input_capture_on_drag":false,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector3(0, -1, 0),"gravity_direction":Vector3(0, -1, 0),"gravity":9.8,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":0.1,"wind_force_magnitude":0.0,"wind_attenuation_factor":0.0,"wind_source_path":NodePath(""),"audio_bus_override":false,"audio_bus_name":&"Master","reverb_bus_enabled":false,"reverb_bus_name":&"Master","reverb_bus_amount":0.0,"reverb_bus_uniformity":0.0,"script":ExtResource("38_nsrfx"),"neighbors":[])
+,
+"path": Object(Path3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"curve":SubResource("Curve3D_lbs5i"),"script":null)
+
+}]
+
+[node name="@Path3D@78236" type="Path3D" parent="NavNodes/NavNode--5_44lon-4_52lat"]
+curve = SubResource("Curve3D_lbs5i")
+
+[node name="NavNode--9_28lon-4_53lat" type="Area3D" parent="NavNodes" groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.4805, 7.90786, -16.0959)
+collision_layer = 262144
+script = ExtResource("38_nsrfx")
 
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/VerySlow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Slow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]

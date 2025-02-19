@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6ncl0upg0ika"
-path.s3tc="res://.godot/imported/entity_dot.png-d21db19292b05bb1b0bb11d0a8cd44e9.s3tc.ctex"
+uid="uid://ft4oj81we26f"
+path.s3tc="res://.godot/imported/equirect.jpg-fd6ae07359f508e9b10ca04a9938c23d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/entity_dot.png"
-dest_files=["res://.godot/imported/entity_dot.png-d21db19292b05bb1b0bb11d0a8cd44e9.s3tc.ctex"]
+source_file="res://assets/UI/equirect.jpg"
+dest_files=["res://.godot/imported/equirect.jpg-fd6ae07359f508e9b10ca04a9938c23d.s3tc.ctex"]
 
 [params]
 

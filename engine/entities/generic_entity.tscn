@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
 [ext_resource type="Material" uid="uid://cqohlfxpaw7m3" path="res://engine/entities/generic_entity.tres" id="3_7ta7w"]
-[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_rnyj7"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="4_rnyj7"]
 [ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="5_pq53b"]
 [ext_resource type="Texture2D" uid="uid://dp8he1xlfl6bv" path="res://assets/UI/white_circle_2.png" id="6_1fpi7"]
 

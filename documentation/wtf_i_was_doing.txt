@@ -4,10 +4,6 @@
 
 
 
-'M" to toggle between following the playerentity and free-look
-
-Popups need to have a size set to be proportional with camera distance (with caps, ofc)
-
 
 
 QUEUE:
@@ -15,53 +11,12 @@ QUEUE:
     Maybe we shouldn't add_child at runtime, but reveal them?
     MUNITIONS - DO THEY OVERRIDE THEIR CHECK WAYPOINT REACHED AND JUST KEEP GOING?
 
-Create a Muniition object.
-properties:
-    fired from
-    heading to
-    type ENUM { torpedo, missile}
-    guidance_type ENUM { active, wireguide, passive, dumb}
-    radius
-    range
-    speed
-    fuel
-    fuel_burn
-    depth - array of ENUM {surface, swim, crawl}
-
-    targeting parameters - based on ENUM
-    passive:
-    turn on after X distance
-    max_angle
-    target_hz
-    <SPECIAL> self pitch hz
-    <SPECIAL> variable speed(?)
-    sensitivity - how small can you make the hz band   
-    active:
-    turn on after X distance
-    max_angle
-    max_range
-    ping_frequency
-    
-    IF BOTH: State at which to switch from active to passive
-    
-    IF DUMB:
-        dumbfire weapons roll up to a point and deploy something like a minefield, a mobile mine, or a chatterer
-        
-        
-    
-    IF WIREGUIDE....
-    implement later.
-    
-    
-    
     
     
     
 Remember to add active sonar target profile and passive hz to  UI instead
     
 
-NOTES:
-    Remember that you're using collision masks on the camera, the waypoints, and the clickable sphere.
 
 IDEAS:
     

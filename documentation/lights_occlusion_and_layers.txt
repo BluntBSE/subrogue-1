@@ -2,6 +2,7 @@ PLANET - Layer 1
 
 ALL ENTITIES (Ships) - Layer 2
 ALL ENTITIES (Munitions) - Layer 3
+NAV NODES - Layer 19
 CITIES - Layer 20
 
 

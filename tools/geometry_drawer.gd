@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Node
 @export var draw_on:Area3D
 @export var drawing:bool = false

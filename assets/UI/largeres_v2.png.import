@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmmc22ipo4ae3"
-path.s3tc="res://.godot/imported/Equirectangular_projection_with_grid_only.svg.png-993912d409070f5f4f9ba3b8f0f2946c.s3tc.ctex"
+uid="uid://bd28o6hqlpgo"
+path.s3tc="res://.godot/imported/largeres_v2.png-b284b95bbf5452818e62b40ec634f33a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/Equirectangular_projection_with_grid_only.svg.png"
-dest_files=["res://.godot/imported/Equirectangular_projection_with_grid_only.svg.png-993912d409070f5f4f9ba3b8f0f2946c.s3tc.ctex"]
+source_file="res://assets/UI/largeres_v2.png"
+dest_files=["res://.godot/imported/largeres_v2.png-b284b95bbf5452818e62b40ec634f33a.s3tc.ctex"]
 
 [params]
 

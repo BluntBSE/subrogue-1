@@ -15,7 +15,6 @@ class_name Entity
 @onready var spotlight:SpotLight3D = %Spotlight
 @onready var range_spot:SpotLight3D = %RangeSpot
 @export var scale_factor:float = 1.0
-
 @export var faction:String = "none"
 @export var can_move := true
 

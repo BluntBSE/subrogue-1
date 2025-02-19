@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bedemtmo7mjjh"
-path.s3tc="res://.godot/imported/largeres_w_grid.png-2fbe29b46923084af4eba99ca3171a08.s3tc.ctex"
+uid="uid://ba30mlx6bfjlw"
+path.s3tc="res://.godot/imported/superhighres_undecorated.png-c515a4fcf0525e84917adb8d29e29aae.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/largeres_w_grid.png"
-dest_files=["res://.godot/imported/largeres_w_grid.png-2fbe29b46923084af4eba99ca3171a08.s3tc.ctex"]
+source_file="res://assets/UI/superhighres_undecorated.png"
+dest_files=["res://.godot/imported/superhighres_undecorated.png-c515a4fcf0525e84917adb8d29e29aae.s3tc.ctex"]
 
 [params]
 

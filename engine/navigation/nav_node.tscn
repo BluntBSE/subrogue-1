@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://m4t2hh3hak6e"]
+
+[ext_resource type="Script" path="res://engine/navigation/nav_node.gd" id="1_35cki"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lgkp4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6evq"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.933333, 0.933333, 0.0666667, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_paxg6"]
+
+[node name="NavNode" type="Area3D" groups=["nav_nodes"]]
+collision_layer = 262144
+script = ExtResource("1_35cki")
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_lgkp4")
+
+[node name="DebugMesh" type="MeshInstance3D" parent="Shape"]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_p6evq")
+mesh = SubResource("SphereMesh_paxg6")
+skeleton = NodePath("../..")

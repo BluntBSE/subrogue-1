@@ -36,6 +36,10 @@ window/vsync/vsync_mode=0
 
 enabled=PackedStringArray("res://addons/godot-polyliner/plugin.cfg")
 
+[global_group]
+
+nav_nodes="navigation nodes for the planet"
+
 [input]
 
 ui_left={

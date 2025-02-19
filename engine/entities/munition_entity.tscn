@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://engine/entities/munition.gd" id="1_rstgs"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_geuhc"]
-[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_040x6"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="4_040x6"]
 [ext_resource type="Texture2D" uid="uid://67mmmqln0imo" path="res://assets/UI/blue_icons/ForwardIconBlue.png" id="4_84c7r"]
 [ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="5_du4eo"]
 

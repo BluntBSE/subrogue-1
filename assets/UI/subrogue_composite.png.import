@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxolsd7u0byg"
-path="res://.godot/imported/largeres_undecorated.png-366e41a1785cc9130cec1723554583a1.ctex"
+uid="uid://cjvtx8qastmkv"
+path="res://.godot/imported/subrogue_composite.png-debbf1892646932a47be916abc82fd7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/largeres_undecorated.png"
-dest_files=["res://.godot/imported/largeres_undecorated.png-366e41a1785cc9130cec1723554583a1.ctex"]
+source_file="res://assets/UI/subrogue_composite.png"
+dest_files=["res://.godot/imported/subrogue_composite.png-debbf1892646932a47be916abc82fd7a.ctex"]
 
 [params]
 
