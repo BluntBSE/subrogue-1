@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=89 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -206,9 +206,100 @@ emission_energy_multiplier = 0.0
 anisotropy = 0.56
 disable_receive_shadows = true
 
-[sub_resource type="Curve3D" id="Curve3D_gx4rl"]
+[sub_resource type="Curve3D" id="Curve3D_qkkrv"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.73307, -0.285143, -4.42603),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.62069, -0.379726, -5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_spv4e"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.06722, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_7870y"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.616615, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_afjv6"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.503159, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_adq2u"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.342865, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_iovvv"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.039711, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_fut5y"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.225082, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_kxspq"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.39595, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_ivuhj"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1.03533, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_83vdl"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1.36318, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_kvskd"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1.49294, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_0qw7r"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1.62069, 0.379726, 5.49283),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_k4x6f"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -4.72511, -0.506367, -6.19094),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_6cov8"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.72511, 0.506367, 6.19094),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -1183,20 +1274,68 @@ nav_parent = NodePath("../NavNodes")
 [node name="NavNodes" type="Node3D" parent="."]
 script = ExtResource("37_ue64j")
 
-[node name="NavNode--8_84lon-11_73lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.8432, 20.3558, -15.0683)
+[node name="NavNode--12_95lon-24_1lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 89.051, 40.875, -20.4732)
 collision_layer = 262144
 script = ExtResource("38_nsrfx")
-neighbors = [NodePath("../NavNode--11_47lon-11_57lat")]
-neighbor_paths = [NodePath("@Path3D@43007")]
+neighbors = [NodePath("../NavNode--16_48lon-23_86lat")]
+neighbor_paths = [NodePath("@Path3D@52945")]
 
-[node name="@Path3D@43007" type="Path3D" parent="NavNodes/NavNode--8_84lon-11_73lat"]
-curve = SubResource("Curve3D_gx4rl")
+[node name="@Path3D@52945" type="Path3D" parent="NavNodes/NavNode--12_95lon-24_1lat"]
+curve = SubResource("Curve3D_qkkrv")
 
-[node name="NavNode--11_47lon-11_57lat" type="Area3D" parent="NavNodes" groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.1101, 20.0706, -19.4944)
+[node name="NavNode--16_48lon-23_86lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.6717, 40.4953, -25.9661)
 collision_layer = 262144
 script = ExtResource("38_nsrfx")
+neighbors = [NodePath("../NavNode--12_95lon-24_1lat"), NodePath("../NavNode--20_51lon-23_55lat")]
+neighbor_paths = [NodePath("@Path3D@52946")]
+
+[node name="@Path3D@52904" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_spv4e")
+
+[node name="@Path3D@52908" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_7870y")
+
+[node name="@Path3D@52912" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_afjv6")
+
+[node name="@Path3D@52916" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_adq2u")
+
+[node name="@Path3D@52920" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_iovvv")
+
+[node name="@Path3D@52924" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_fut5y")
+
+[node name="@Path3D@52928" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_kxspq")
+
+[node name="@Path3D@52932" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_ivuhj")
+
+[node name="@Path3D@52936" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_83vdl")
+
+[node name="@Path3D@52940" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_kvskd")
+
+[node name="@Path3D@52944" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_0qw7r")
+
+[node name="@Path3D@52946" type="Path3D" parent="NavNodes/NavNode--16_48lon-23_86lat"]
+curve = SubResource("Curve3D_k4x6f")
+
+[node name="NavNode--20_51lon-23_55lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.9466, 39.989, -32.157)
+collision_layer = 262144
+script = ExtResource("38_nsrfx")
+neighbors = [NodePath("../NavNode--16_48lon-23_86lat")]
+neighbor_paths = [NodePath("@Path3D@52947")]
+
+[node name="@Path3D@52947" type="Path3D" parent="NavNodes/NavNode--20_51lon-23_55lat"]
+curve = SubResource("Curve3D_6cov8")
 
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/VerySlow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Slow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]

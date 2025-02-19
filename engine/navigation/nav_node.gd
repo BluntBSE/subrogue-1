@@ -74,7 +74,11 @@ func _on_mouse_entered() -> void:
 func regenerate_paths(adjacent=false)->void:
     print("Node ", name, " is regenerating its paths")
     for path in neighbor_paths:
+        print("Path to regenerate found")
         path.queue_free()
+        
+    var new_neighbor_paths:Array[Path3D] = []
+    
     for neighbor in neighbors:
         var new_path = Path3D.new()
         var curve = Curve3D.new()
@@ -84,12 +88,13 @@ func regenerate_paths(adjacent=false)->void:
         add_child(new_path)      
         if Engine.is_editor_hint():
             new_path.owner = get_tree().edited_scene_root
-        var new_neighbor_paths:Array[Path3D] = []
         new_neighbor_paths.append(new_path)
-        neighbor_paths = new_neighbor_paths 
         if adjacent == true:
             print("Should affect adjacents")
             neighbor.regenerate_paths(false) 
+            
+    neighbor_paths = new_neighbor_paths 
+
 
 
 func _on_mouse_exited() -> void:
