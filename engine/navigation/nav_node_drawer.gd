@@ -60,14 +60,16 @@ func handle_add_node_at(_position: Vector3) -> void:
     navnode.name =  "NavNode-" + str(snapped(rad_to_deg(rads.azimuth), 0.01)) +"lon-"+str (snapped(rad_to_deg(rads.polar),0.01))+"lat"
     navnode.position = _position
     last_node = navnode
-    navnode.editor_mouse_entered.connect(handle_hovered_node)
-    navnode.editor_mouse_exited.connect(handle_exited_node)
     pass
 
 func handle_add_and_link(_position:Vector3)->void:
-    var navnode:NavNode = load("res://engine/navigation/nav_node.gd").instantiate()
+    var navnode:NavNode = load("res://engine/navigation/nav_node.tscn").instantiate()
     nav_parent.add_child(navnode)
+    var rads = GlobeHelpers.rads_from_position(_position)
+    navnode.owner = get_tree().edited_scene_root
+    navnode.name =  "NavNode-" + str(snapped(rad_to_deg(rads.azimuth), 0.01)) +"lon-"+str (snapped(rad_to_deg(rads.polar),0.01))+"lat"
     navnode.position = _position
+    print("Last node was", last_node.name)
     navnode.add_link(last_node)
     last_node = navnode
     pass
@@ -138,10 +140,18 @@ func input_clicks():
             hovered_node = null
             print("SELECTED", selected_node)
             print("HOVERED", hovered_node)
+            if Input.is_key_label_pressed(KEY_SPACE): #Auto link mode
+                print("MERP")
+                if hovering_over.collider.name == draw_on.name:
+                    var click_position = hovering_over.position
+                #var click_normal = hovering_over.normal
+                    handle_add_and_link(click_position)    
+                    return                
             if hovering_over.collider.name == draw_on.name:
                 var click_position = hovering_over.position
                 #var click_normal = hovering_over.normal
                 handle_add_node_at(click_position)
+                
     if Input.is_action_just_pressed("editor_log"):
 
         pass

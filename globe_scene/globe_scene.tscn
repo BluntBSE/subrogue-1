@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=76 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://o4wfqpapu8p2" path="res://assets/UI/red_test.png" id="35_woink"]
 [ext_resource type="Script" path="res://engine/navigation/nav_node_drawer.gd" id="36_4wwom"]
 [ext_resource type="PackedScene" uid="uid://m4t2hh3hak6e" path="res://engine/navigation/nav_node.tscn" id="36_nkwg1"]
+[ext_resource type="Script" path="res://globe_scene/nav_nodes.gd" id="37_ue64j"]
 [ext_resource type="Script" path="res://engine/navigation/nav_node.gd" id="38_nsrfx"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_wog1n"]
@@ -205,9 +206,9 @@ emission_energy_multiplier = 0.0
 anisotropy = 0.56
 disable_receive_shadows = true
 
-[sub_resource type="Curve3D" id="Curve3D_lbs5i"]
+[sub_resource type="Curve3D" id="Curve3D_gx4rl"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.858841, 0.0264258, -6.6302),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.73307, -0.285143, -4.42603),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -217,7 +218,6 @@ script = ExtResource("1_msvd6")
 
 [node name="GamePlanet" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-visible = false
 mesh = SubResource("SphereMesh_wog1n")
 script = ExtResource("2_0c888")
 
@@ -1181,28 +1181,20 @@ active = true
 nav_parent = NodePath("../NavNodes")
 
 [node name="NavNodes" type="Node3D" parent="."]
+script = ExtResource("37_ue64j")
 
-[node name="NavNode--12_23lon-2_65lat" type="Area3D" parent="NavNodes" groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.7255, 4.62578, -21.1738)
+[node name="NavNode--8_84lon-11_73lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.8432, 20.3558, -15.0683)
 collision_layer = 262144
 script = ExtResource("38_nsrfx")
+neighbors = [NodePath("../NavNode--11_47lon-11_57lat")]
+neighbor_paths = [NodePath("@Path3D@43007")]
 
-[node name="NavNode--5_44lon-4_52lat" type="Area3D" parent="NavNodes" groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.3393, 7.88144, -9.46567)
-collision_layer = 262144
-script = ExtResource("38_nsrfx")
-neighbors = [{
-"node": Object(Area3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.4805, 7.90786, -16.0959),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"disable_mode":0,"collision_layer":262144,"collision_mask":1,"collision_priority":1.0,"input_ray_pickable":true,"input_capture_on_drag":false,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector3(0, -1, 0),"gravity_direction":Vector3(0, -1, 0),"gravity":9.8,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":0.1,"wind_force_magnitude":0.0,"wind_attenuation_factor":0.0,"wind_source_path":NodePath(""),"audio_bus_override":false,"audio_bus_name":&"Master","reverb_bus_enabled":false,"reverb_bus_name":&"Master","reverb_bus_amount":0.0,"reverb_bus_uniformity":0.0,"script":ExtResource("38_nsrfx"),"neighbors":[])
-,
-"path": Object(Path3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"curve":SubResource("Curve3D_lbs5i"),"script":null)
+[node name="@Path3D@43007" type="Path3D" parent="NavNodes/NavNode--8_84lon-11_73lat"]
+curve = SubResource("Curve3D_gx4rl")
 
-}]
-
-[node name="@Path3D@78236" type="Path3D" parent="NavNodes/NavNode--5_44lon-4_52lat"]
-curve = SubResource("Curve3D_lbs5i")
-
-[node name="NavNode--9_28lon-4_53lat" type="Area3D" parent="NavNodes" groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.4805, 7.90786, -16.0959)
+[node name="NavNode--11_47lon-11_57lat" type="Area3D" parent="NavNodes" groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.1101, 20.0706, -19.4944)
 collision_layer = 262144
 script = ExtResource("38_nsrfx")
 
