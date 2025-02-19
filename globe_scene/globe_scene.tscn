@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=71 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="27_ei3qn"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="34_f1l1f"]
 [ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="35_m4noy"]
+[ext_resource type="Texture2D" uid="uid://o4wfqpapu8p2" path="res://assets/UI/red_test.png" id="35_woink"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_wog1n"]
 material = ExtResource("1_jtrqq")
@@ -190,6 +191,18 @@ albedo_color = Color(1, 0, 1, 1)
 albedo_texture = ExtResource("34_f1l1f")
 
 [sub_resource type="SphereMesh" id="SphereMesh_rcc5k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slecc"]
+transparency = 2
+alpha_scissor_threshold = 0.354
+alpha_antialiasing_mode = 0
+blend_mode = 1
+albedo_texture = ExtResource("35_woink")
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 7.73
+anisotropy = 0.56
+disable_receive_shadows = true
 
 [node name="GameMain" type="Node3D"]
 script = ExtResource("1_msvd6")
@@ -987,6 +1000,16 @@ texture_normal = ExtResource("27_3xujn")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="FPSCounter" type="RichTextLabel" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1848.0
+offset_top = 69.0
+offset_right = 1913.0
+offset_bottom = 115.0
+text = "FPS: 60"
+fit_content = true
+
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.4)
 position = Vector2(1927, 492)
@@ -1096,7 +1119,7 @@ autoplay = true
 [node name="Cities" type="Node3D" parent="Factions"]
 
 [node name="Miami" type="Node3D" parent="Factions/Cities"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 97.421, 22.4796, -1.75084)
+transform = Transform3D(0.977072, -0.212911, 0, 0.212911, 0.977072, 0, 0, 0, 1, 97.535, 22.506, -1.75084)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Factions/Cities/Miami"]
 visible = false
@@ -1106,13 +1129,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 mesh = SubResource("SphereMesh_6oioa")
 
 [node name="Sprite3D" type="Sprite3D" parent="Factions/Cities/Miami"]
-transform = Transform3D(0.970131, -0.242582, 0, 0.242582, 0.970131, 0, 0, 0, 1, -0.0727158, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0727158, 0, 0)
 material_override = SubResource("StandardMaterial3D_ho0hv")
 axis = 0
 texture = ExtResource("34_f1l1f")
 
 [node name="DockingSpot" type="SpotLight3D" parent="Factions/Cities/Miami"]
 transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
+visible = false
 light_cull_mask = 4294443009
 shadow_enabled = true
 spot_range = 16.407
@@ -1133,6 +1157,12 @@ modulate = Color(1, 0, 1, 1)
 text = "Miami"
 font = ExtResource("35_m4noy")
 font_size = 98
+
+[node name="Sprite3D2" type="Sprite3D" parent="Factions/Cities/Miami"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13311, 0, 0)
+material_override = SubResource("StandardMaterial3D_slecc")
+axis = 0
+texture = ExtResource("35_woink")
 
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/VerySlow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Slow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]

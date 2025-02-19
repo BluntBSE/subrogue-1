@@ -1,0 +1,1 @@
+a 2x2 square is approximately 100km by 100km projected on the sphere. Centered, it's appropriate to call it 50km.

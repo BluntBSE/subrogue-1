@@ -99,11 +99,17 @@ secondary_action={
 
 [physics]
 
+common/physics_ticks_per_second=30
+common/max_physics_steps_per_frame=16
 3d/default_gravity=0.0
 3d/default_linear_damp=0.0
 3d/default_angular_damp=100.0
 
 [rendering]
 
+camera/depth_of_field/depth_of_field_bokeh_shape=0
+environment/ssao/quality=1
+environment/glow/upscale_mode=0
 environment/volumetric_fog/volume_size=256
 environment/volumetric_fog/volume_depth=256
+limits/opengl/max_renderable_lights=64

@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=16 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
 [ext_resource type="Material" uid="uid://cqohlfxpaw7m3" path="res://engine/entities/generic_entity.tres" id="3_7ta7w"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/entity_dot.png" id="4_rnyj7"]
 [ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="5_pq53b"]
+[ext_resource type="Texture2D" uid="uid://dp8he1xlfl6bv" path="res://assets/UI/white_circle_2.png" id="6_1fpi7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -29,6 +30,17 @@ radius = 3.0
 height = 6.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_pcy2y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ls7x1"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 0.815686, 0.792157, 1)
+albedo_texture = ExtResource("6_1fpi7")
+emission = Color(0, 0.815686, 0.792157, 1)
+emission_energy_multiplier = 6.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_v1582"]
+size = Vector2(2, 2)
 
 [node name="PlayerEntity" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
@@ -111,13 +123,22 @@ light_energy = 2.0
 light_cull_mask = 4294966275
 shadow_enabled = true
 shadow_bias = 0.265
-spot_range = 20.808
-spot_attenuation = -4.0
+spot_attenuation = -1.78
 spot_angle = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spotlight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
+visible = false
 layers = 2
 cast_shadow = 3
 mesh = SubResource("SphereMesh_pcy2y")
 skeleton = NodePath("../../RangeSpot")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+visible = false
+modulate = Color(0, 1, 1, 1)
+texture = ExtResource("6_1fpi7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ls7x1")
+mesh = SubResource("QuadMesh_v1582")
