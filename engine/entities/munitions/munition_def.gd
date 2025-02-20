@@ -16,7 +16,7 @@ class_name MunitionDef
 @export var sprite_override:Texture2D
 """
 enum GUIDANCE {active, passive, wire, dumb, radar, actipass }
-enum DEPTH {swim, crawl, surface}
+
 
 @export var id: String
 @export var display_name: String

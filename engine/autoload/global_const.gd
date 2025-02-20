@@ -14,6 +14,8 @@ var game_adjusted_msec_elapsed:float = 0.0
 var game_date = base_date
 var is_paused := false
 
+enum DEPTH {swim, crawl, surface}
+
 """
 SCALE FACTORS:
     FAST:

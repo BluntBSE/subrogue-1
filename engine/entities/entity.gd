@@ -1,6 +1,8 @@
 extends RigidBody3D
 class_name Entity
-@onready var played_by:Player = get_parent().get_parent()
+@onready var is_player = true
+var played_by:Player
+var controlled_by #NPC Factions?
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
@@ -17,10 +19,15 @@ class_name Entity
 @export var scale_factor:float = 1.0
 @export var faction:String = "none"
 @export var can_move := true
+@export var type:EntityType
+var behavior_type #TODO
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    if is_player:
+        played_by = get_parent().get_parent()
     #temp spotlight adjustments
     spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)

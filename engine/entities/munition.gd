@@ -6,6 +6,7 @@ enum DEPTH {swim, crawl, surface}
 @export var id:String
 @export var display_name:String
 @export var fired_from:Entity
+@export var munition_type:String
 @export var guidance_type: int #accepts GUIDANCE enums
 @export var impact_radius:float
 @export var fuel_remaining:float

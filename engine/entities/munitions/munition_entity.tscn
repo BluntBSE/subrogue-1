@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://qfiyabbs8j2l"]
 
-[ext_resource type="Script" path="res://engine/entities/munition.gd" id="1_rstgs"]
-[ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_geuhc"]
-[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="4_040x6"]
-[ext_resource type="Texture2D" uid="uid://67mmmqln0imo" path="res://assets/UI/blue_icons/ForwardIconBlue.png" id="4_84c7r"]
-[ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="5_du4eo"]
+[ext_resource type="Script" path="res://engine/entities/munition.gd" id="1_8j1xm"]
+[ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="3_frfhe"]
+[ext_resource type="Texture2D" uid="uid://67mmmqln0imo" path="res://assets/UI/blue_icons/ForwardIconBlue.png" id="4_4vp62"]
+[ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="5_e5swc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -46,7 +46,7 @@ render_priority = 0
 shader = SubResource("Shader_2djlq")
 shader_parameter/glow_color = Color(0.665179, 0, 0.019218, 1)
 shader_parameter/glow_intensity = 2.272
-shader_parameter/texture_albedo = ExtResource("4_040x6")
+shader_parameter/texture_albedo = ExtResource("3_frfhe")
 
 [sub_resource type="FogMaterial" id="FogMaterial_jo44f"]
 resource_local_to_scene = true
@@ -67,7 +67,7 @@ collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true
-script = ExtResource("1_rstgs")
+script = ExtResource("1_8j1xm")
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
 
 [node name="EntityMesh" type="MeshInstance3D" parent="."]
@@ -84,7 +84,7 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_1utme")
 
 [node name="EntityMoveBus" type="Node3D" parent="."]
-script = ExtResource("2_geuhc")
+script = ExtResource("2_i7nli")
 
 [node name="EntityShape" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_m615s")
@@ -95,7 +95,7 @@ material_overlay = SubResource("ShaderMaterial_nc0bu")
 modulate = Color(0, 0.815686, 0.792157, 1)
 shaded = true
 alpha_antialiasing_mode = 1
-texture = ExtResource("4_84c7r")
+texture = ExtResource("4_4vp62")
 
 [node name="FogVolume" type="FogVolume" parent="MarkerSprite"]
 size = Vector3(1, 1, 1)
@@ -111,7 +111,7 @@ omni_range = 4.65
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
 modulate = Color(0.909804, 0.054902, 0, 1)
-texture = ExtResource("5_du4eo")
+texture = ExtResource("5_e5swc")
 
 [node name="RangeSpot" type="SpotLight3D" parent="."]
 unique_name_in_owner = true
@@ -151,3 +151,9 @@ layers = 4
 cast_shadow = 3
 mesh = SubResource("SphereMesh_rkfvs")
 skeleton = NodePath("../../RangeSpot")
+
+[node name="EntityBehavior" type="Node3D" parent="."]
+
+[node name="EntityCargo" type="Node3D" parent="."]
+
+[node name="MunitionConfig" type="Node3D" parent="."]

@@ -42,7 +42,7 @@ emission_energy_multiplier = 6.0
 [sub_resource type="QuadMesh" id="QuadMesh_v1582"]
 size = Vector2(2, 2)
 
-[node name="PlayerEntity" type="RigidBody3D"]
+[node name="Entity" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
 collision_layer = 6
 collision_mask = 6
@@ -142,3 +142,9 @@ texture = ExtResource("6_1fpi7")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_ls7x1")
 mesh = SubResource("QuadMesh_v1582")
+
+[node name="EntityBehavior" type="Node3D" parent="."]
+
+[node name="EntityCargo" type="Node3D" parent="."]
+
+[node name="EntityAttributes" type="Node3D" parent="."]
