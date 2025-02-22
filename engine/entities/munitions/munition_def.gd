@@ -15,7 +15,6 @@ class_name MunitionDef
 @export var target_node:Node3D
 @export var sprite_override:Texture2D
 """
-enum GUIDANCE {active, passive, wire, dumb, radar, actipass }
 
 
 @export var id: String

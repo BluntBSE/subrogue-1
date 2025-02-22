@@ -2,8 +2,8 @@ extends EventBus
 class_name EntityMoveBus
 #Yuck
 @onready var entity:Entity = get_parent()
-@onready var player:Player = entity.get_parent().get_parent()
-@onready var entity_controller:PlayerEntities = get_parent().get_parent()
+#@onready var player:Player = entity.get_parent().get_parent()
+@onready var entity_controller:EntityController = get_parent().get_parent()
 var max_size = 5 #Number of waypoints that can be queued up.
 var waypoints := []
 

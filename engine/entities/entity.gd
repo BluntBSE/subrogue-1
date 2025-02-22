@@ -1,6 +1,6 @@
 extends RigidBody3D
 class_name Entity
-@onready var is_player = true
+@export var is_player:bool
 var played_by:Player
 var controlled_by #NPC Factions?
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
@@ -19,22 +19,21 @@ var controlled_by #NPC Factions?
 @export var scale_factor:float = 1.0
 @export var faction:String = "none"
 @export var can_move := true
-@export var type:EntityType
+@onready var atts:EntityAtts = %EntityAttributes
 var behavior_type #TODO
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    if is_player:
+    if is_player == true:
         played_by = get_parent().get_parent()
     #temp spotlight adjustments
     spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)
     azimuth = pos_dict["azimuth"]
     polar = pos_dict["polar"]
-    var sprite:Sprite3D = get_node("MarkerSprite")
-    sprite.material_overlay.set("shader_parameter/glow_color", base_color)
+
    # ("shader_parameter/glow_color") = base_color
     pass # Replace with function body.
 
@@ -120,5 +119,72 @@ func check_reached_waypoint()->void:
         angular_velocity = Vector3(0.0,0.0,0.0)
         cmd.is_finished()
         %HeadingSprite.visible = false
-    
+        
+        
+func apply_entity_type(type:EntityType):
+    """
+    enum munitition_types {torpedoes, missiles, all}
+    @export var id:String
+    @export var display_name:String
+    @export var display_class:String #Submarine, Commercial Vessel, etc
+    @export var category:String
+    #STRUCTURE
+    @export var base_hull:int
+    @export var base_cargo:int
+    #WEAPONS AND UPGRADES
+    @export var munition_types:int #Of an ENUM of 
+    @export var munition_slots:int #Number of distinct munitions
+    @export var munition_size:int
+    @export var utility_slots:int
+    @export var utility_size:int
+    @export var upgrade_slots:int
+    #VISUALS
+    @export var sprite:Texture2D
+    #@export var model
+    #NAVIGATION
+    @export var base_max_speed:int
+    @export var base_profile:float #From 0 to 1.0, how much like a military target does this thing look like?
+    @export var base_pitch:float 
+    @export var base_volume:float
+
+    @export var vol_speed_factor:float
+    #{swim, crawl, surface}
+    @export var depths:Array #accepts enums
+    @export var current_depth:int
+    #DETECTION
+    @export var base_passive_sensitivity:float #Range at which a 90DB,60hz sound will be identified with 100% certainty. 
+    @export var base_active_max_volume:int #Db
+    #META
+    @export var base_cost:int"""
+    # Update the entity's properties based on the EntityType instance
+    """extends Node3D
+    class_name EntityAtts
+
+    var type:EntityType
+    var current_hull
+    var current_pitch
+    var current_volume
+    var current_depth
+    var cargo:Array
+    var upgrades:Array
+    var utilities:Array
+    var depths:Array
+    """
+    if not atts:
+        atts = %EntityAttributes
+        atts = get_node("EntityAttributes")
+        print("ATTS SHOULD BE", atts)
+    print("We skipped the check, and atts is ", atts)
+    atts.type = type
+    atts.current_hull = type.base_hull
+    atts.current_pitch = type.base_pitch
+    atts.current_volume = type.base_active_max_volume
+    atts.current_depth = type.depths[0]
+    atts.cargo = []
+    atts.upgrades = []
+    atts.utilities = []
+    atts.munitions = []
+    atts.depths = type.depths
+    atts.debuffs = []
+
     

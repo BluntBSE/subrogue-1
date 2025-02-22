@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EntityLib" load_steps=3 format=3 uid="uid://drkl0u67f7dfr"]
+
+[ext_resource type="Script" path="res://engine/entities/entity_lib.gd" id="1_22d0a"]
+[ext_resource type="Resource" uid="uid://c8vdewfemsmme" path="res://engine/entities/types/debug_commercial.tres" id="1_w1gcw"]
+
+[resource]
+script = ExtResource("1_22d0a")
+debug_commercial = ExtResource("1_w1gcw")

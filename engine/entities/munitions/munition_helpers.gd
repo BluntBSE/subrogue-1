@@ -1,7 +1,7 @@
 class_name MunitionHelpers
 
 static func munition_by_id(id: String) -> Munition:
-    var new_munition: Munition = load("res://engine/entities/munition_entity.tscn").instantiate()
+    var new_munition: Munition = load("res://engine/entities/munitions/munition_entity.tscn").instantiate()
     var munitions_data = GlobalConst.munitions_lib
     print("Loading by string, id", id)
     var munition_data = munitions_data.get(id)

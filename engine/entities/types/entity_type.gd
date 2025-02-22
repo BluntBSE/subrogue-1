@@ -24,8 +24,11 @@ enum munitition_types {torpedoes, missiles, all}
 @export var base_profile:float #From 0 to 1.0, how much like a military target does this thing look like?
 @export var base_pitch:float 
 @export var base_volume:float
+
 @export var vol_speed_factor:float
+#{swim, crawl, surface}
 @export var depths:Array #accepts enums
+@export var current_depth:int
 #DETECTION
 @export var base_passive_sensitivity:float #Range at which a 90DB,60hz sound will be identified with 100% certainty. 
 @export var base_active_max_volume:int #Db

@@ -4,6 +4,7 @@ extends Node
 var planetary_radius := 100.00
 var height:float = planetary_radius + 0.25
 var munitions_lib:MunitionsLib = load("res://engine/entities/munitions/munitions_lib.tres")
+var entity_lib:EntityLib = load("res://engine/entities/entity_lib.tres")
 var time_scale:float = 1.0
 enum TIME_SCALES {normal, slow, very_slow, fast, very_fast}
 var current_scale_enum = TIME_SCALES.normal
@@ -15,6 +16,7 @@ var game_date = base_date
 var is_paused := false
 
 enum DEPTH {swim, crawl, surface}
+enum GUIDANCE {active, passive, wire, dumb, radar, actipass }
 
 """
 SCALE FACTORS:

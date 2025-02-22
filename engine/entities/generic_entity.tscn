@@ -1,15 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=17 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
-[ext_resource type="Material" uid="uid://cqohlfxpaw7m3" path="res://engine/entities/generic_entity.tres" id="3_7ta7w"]
-[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="4_rnyj7"]
+[ext_resource type="Script" path="res://engine/entities/entity_attributes.gd" id="3_3n25e"]
+[ext_resource type="Script" path="res://engine/entities/entity_render.gd" id="4_xb8gp"]
 [ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="5_pq53b"]
 [ext_resource type="Texture2D" uid="uid://dp8he1xlfl6bv" path="res://assets/UI/white_circle_2.png" id="6_1fpi7"]
+[ext_resource type="Texture2D" uid="uid://bsoi58tm3jjyk" path="res://assets/UI/white_icons/white_triangle_filled_2.png" id="9_oaqcn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_0u415"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e0wf7"]
 radius = 1.0
@@ -17,13 +16,6 @@ radius = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_sbk4o"]
 custom_solver_bias = 1.0
 radius = 0.1
-
-[sub_resource type="FogMaterial" id="FogMaterial_2rtqc"]
-resource_local_to_scene = true
-density = 8.134
-albedo = Color(0, 0.818736, 0.815349, 1)
-height_falloff = 2.0
-edge_fade = 2.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_54rvg"]
 radius = 3.0
@@ -42,6 +34,23 @@ emission_energy_multiplier = 6.0
 [sub_resource type="QuadMesh" id="QuadMesh_v1582"]
 size = Vector2(2, 2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ju4"]
+transparency = 1
+albedo_color = Color(0, 0.681901, 0.656941, 1)
+albedo_texture = ExtResource("9_oaqcn")
+emission = Color(0.0999336, 0.760538, 0.826485, 1)
+emission_energy_multiplier = 0.4
+subsurf_scatter_strength = 0.6
+subsurf_scatter_skin_mode = true
+refraction_scale = -0.11
+
+[sub_resource type="FogMaterial" id="FogMaterial_2rtqc"]
+resource_local_to_scene = true
+density = 8.134
+albedo = Color(0, 0.818736, 0.815349, 1)
+height_falloff = 2.0
+edge_fade = 2.0
+
 [node name="Entity" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
 collision_layer = 6
@@ -51,12 +60,6 @@ continuous_cd = true
 contact_monitor = true
 script = ExtResource("1_du6w5")
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
-
-[node name="EntityMesh" type="MeshInstance3D" parent="."]
-visible = false
-gi_mode = 2
-mesh = SubResource("SphereMesh_0u415")
-skeleton = NodePath("")
 
 [node name="NavArea" type="Area3D" parent="."]
 collision_layer = 2
@@ -68,33 +71,31 @@ shape = SubResource("SphereShape3D_e0wf7")
 [node name="EntityMoveBus" type="Node3D" parent="."]
 script = ExtResource("2_7fq8g")
 
-[node name="EntityShape" type="CollisionShape3D" parent="."]
+[node name="EntityBehavior" type="Node3D" parent="."]
+
+[node name="EntityCargo" type="Node3D" parent="."]
+
+[node name="EntityAttributes" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_3n25e")
+
+[node name="EntityDetection" type="Node3D" parent="."]
+
+[node name="EntityRender" type="Node3D" parent="."]
+script = ExtResource("4_xb8gp")
+
+[node name="EntityShape" type="CollisionShape3D" parent="EntityRender"]
+visible = false
 shape = SubResource("SphereShape3D_sbk4o")
 
-[node name="MarkerSprite" type="Sprite3D" parent="."]
-material_overlay = ExtResource("3_7ta7w")
-modulate = Color(0, 0.815686, 0.792157, 1)
-shaded = true
-alpha_antialiasing_mode = 1
-texture = ExtResource("4_rnyj7")
-
-[node name="FogVolume" type="FogVolume" parent="MarkerSprite"]
-size = Vector3(1, 1, 1)
-shape = 0
-material = SubResource("FogMaterial_2rtqc")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="MarkerSprite/FogVolume"]
-visible = false
-light_color = Color(0.928687, 0.35569, 0.750399, 1)
-omni_range = 4.65
-
-[node name="HeadingSprite" type="Sprite3D" parent="."]
+[node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
+visible = false
 layers = 3
 texture = ExtResource("5_pq53b")
 
-[node name="RangeSpot" type="SpotLight3D" parent="."]
+[node name="RangeSpot" type="SpotLight3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.13916)
 visible = false
@@ -107,14 +108,14 @@ spot_range = 20.808
 spot_attenuation = -4.0
 spot_angle = 55.0
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="RangeSpot"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="EntityRender/RangeSpot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
 layers = 2
 cast_shadow = 3
 mesh = SubResource("SphereMesh_54rvg")
 skeleton = NodePath("../../Spotlight")
 
-[node name="Spotlight" type="SpotLight3D" parent="."]
+[node name="Spotlight" type="SpotLight3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
 layers = 3
@@ -126,7 +127,7 @@ shadow_bias = 0.265
 spot_attenuation = -1.78
 spot_angle = 10.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Spotlight"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntityRender/Spotlight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
 visible = false
 layers = 2
@@ -134,17 +135,28 @@ cast_shadow = 3
 mesh = SubResource("SphereMesh_pcy2y")
 skeleton = NodePath("../../RangeSpot")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-visible = false
-modulate = Color(0, 1, 1, 1)
-texture = ExtResource("6_1fpi7")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="HighlightMesh" type="MeshInstance3D" parent="EntityRender"]
+unique_name_in_owner = true
 material_override = SubResource("StandardMaterial3D_ls7x1")
+transparency = 0.99
 mesh = SubResource("QuadMesh_v1582")
+skeleton = NodePath("../..")
 
-[node name="EntityBehavior" type="Node3D" parent="."]
+[node name="DepthMesh" type="MeshInstance3D" parent="EntityRender"]
+unique_name_in_owner = true
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_x4ju4")
+mesh = SubResource("QuadMesh_v1582")
+skeleton = NodePath("../..")
 
-[node name="EntityCargo" type="Node3D" parent="."]
+[node name="FogVolume" type="FogVolume" parent="EntityRender/DepthMesh"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
+size = Vector3(1, 1, 1)
+shape = 0
+material = SubResource("FogMaterial_2rtqc")
 
-[node name="EntityAttributes" type="Node3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="EntityRender/DepthMesh/FogVolume"]
+visible = false
+light_color = Color(0.928687, 0.35569, 0.750399, 1)
+omni_range = 4.65
