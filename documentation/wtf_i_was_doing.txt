@@ -1,6 +1,8 @@
 
 
+DONT FORGET:
 
+You currently set speed pretty directly in apply_entity_type. You'll have to change this once different speeds are at hing.
 
 
 

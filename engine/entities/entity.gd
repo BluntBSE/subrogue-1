@@ -180,6 +180,9 @@ func apply_entity_type(type:EntityType):
     atts.current_pitch = type.base_pitch
     atts.current_volume = type.base_active_max_volume
     atts.current_depth = type.depths[0]
+    #max_speed = type.base_max_speed
+    #TODO: This should probably move once we have different speeds. If we do.
+    speed = GlobeHelpers.kph_to_game_s(type.base_max_speed)
     atts.cargo = []
     atts.upgrades = []
     atts.utilities = []
