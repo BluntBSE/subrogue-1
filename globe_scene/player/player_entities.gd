@@ -1,5 +1,6 @@
 extends EntityController
 class_name PlayerEntities
+#Like entity controller, but it's hooked up to the camera!
 
 var camera:OrbitalCamera
 

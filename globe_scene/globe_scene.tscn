@@ -2236,7 +2236,7 @@ curve = SubResource("Curve3D_k8itj")
 
 [node name="NavNode--70_3lon-23_85lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.866, 40.4705, -86.1942)
-neighbors = [NodePath("../NavNode--67lon-24_09lat"), NodePath("../NavNode--72_9lon-24_26lat")]
+neighbors = [NodePath("../NavNode--67lon-24_09lat"), NodePath("../NavNode_Gibraltar")]
 neighbor_paths = [NodePath("@Path3D@57826"), NodePath("@Path3D@57829")]
 
 [node name="@Path3D@57826" type="Path3D" parent="NavNodes/NavNode--70_3lon-23_85lat"]
@@ -2245,15 +2245,15 @@ curve = SubResource("Curve3D_udc1e")
 [node name="@Path3D@57829" type="Path3D" parent="NavNodes/NavNode--70_3lon-23_85lat"]
 curve = SubResource("Curve3D_r4dcy")
 
-[node name="NavNode--72_9lon-24_26lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
+[node name="NavNode_Gibraltar" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8378, 41.1339, -87.2224)
 neighbors = [NodePath("../NavNode--70_3lon-23_85lat"), NodePath("../NavNode--69_65lon-21_84lat")]
 neighbor_paths = [NodePath("@Path3D@57830"), NodePath("@Path3D@58193")]
 
-[node name="@Path3D@57830" type="Path3D" parent="NavNodes/NavNode--72_9lon-24_26lat"]
+[node name="@Path3D@57830" type="Path3D" parent="NavNodes/NavNode_Gibraltar"]
 curve = SubResource("Curve3D_8fyi0")
 
-[node name="@Path3D@58193" type="Path3D" parent="NavNodes/NavNode--72_9lon-24_26lat"]
+[node name="@Path3D@58193" type="Path3D" parent="NavNodes/NavNode_Gibraltar"]
 curve = SubResource("Curve3D_t4qi1")
 
 [node name="NavNode--3_8lon-12_56lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
@@ -2464,7 +2464,7 @@ curve = SubResource("Curve3D_qcs4j")
 
 [node name="NavNode--69_65lon-21_84lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3098, 37.2453, -87.1142)
-neighbors = [NodePath("../NavNode--66_07lon-20_08lat"), NodePath("../NavNode--72_9lon-24_26lat")]
+neighbors = [NodePath("../NavNode--66_07lon-20_08lat"), NodePath("../NavNode_Gibraltar")]
 neighbor_paths = [NodePath("@Path3D@58190"), NodePath("@Path3D@58192")]
 
 [node name="@Path3D@58190" type="Path3D" parent="NavNodes/NavNode--69_65lon-21_84lat"]

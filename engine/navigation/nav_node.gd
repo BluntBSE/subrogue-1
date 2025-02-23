@@ -6,13 +6,14 @@ class_name NavNode
 @export var neighbor_paths:Array[Path3D] = []
 var editor_position
 var tolerance = 0.1
+@onready var debugmesh = %DebugMesh
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     if Engine.is_editor_hint():
         %DebugMesh.transparency = 0.5
     else:
-        %DebugMesh.transparency = 1.0
+        pass
     pass # Replace with function body.
 
 
@@ -107,3 +108,8 @@ func _on_mouse_exited() -> void:
 func _on_neighbors_set():
     print("Set a neighbor!")
     pass
+    
+func unpack():
+    print("Navnode unpacked")
+    print("Debug Mesh is", %DebugMesh)
+    %DebugMesh.transparency = 0.5
