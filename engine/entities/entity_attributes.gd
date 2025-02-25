@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 class_name EntityAtts
 
 var type:EntityType

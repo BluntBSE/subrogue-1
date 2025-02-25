@@ -32,6 +32,8 @@ func spawn_entity_at_node(node:NavNode, type_id:String, is_player = false):
         navnode.unpack()
     
     waypoints_from_nodes(entity, path)
+    print("Activating entity AI")
+    entity.get_node("EntityBehavior/BehaviorTreeRoot").enabled = true
     
 func waypoints_from_nodes(entity:Entity, nodes:Array):
     for node:NavNode in nodes:

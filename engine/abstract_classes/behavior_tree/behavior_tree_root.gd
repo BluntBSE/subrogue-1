@@ -1,3 +1,4 @@
+@icon("res://engine/abstract_classes/behavior_tree/icons/tree.svg")
 extends BehaviorTree
 
 class_name BehaviorTreeRoot
@@ -5,7 +6,8 @@ class_name BehaviorTreeRoot
 #Why?
 #const Blackboard = preload("res://engine/abstract_classes/behavior_tree/blackboard.gd")
 
-@export var enabled:bool = true
+#Enable only on AI controlled entities
+@export var enabled:bool = false
 
 @onready var blackboard = BlackBoard.new()
 
@@ -20,11 +22,13 @@ func _process(delta:float):
     #Possibly we can throttle how often this runs to improve performance if needed
     if not enabled:
         return
-        
     blackboard.bbset("delta", delta)
-    self.get_child(0).tick(get_parent(), blackboard)    #???
-    
-
+    var entity = get_parent().get_parent()
+    self.get_child(0).tick(entity, blackboard)    #??? I think this means "Make the immediately following composite accept the parent of this node as the thing to which tick is applied
+    #Translates to:
+    #selectorcomposite.tick(agent, blackboard)
+    #In other words, the node to which this tree is appended is the "actor" for all children.
+    #This node always expects to be part of a tree that looks like Entity->EntityBehavior->BehaviorTreeRoot(this node)
 func enable():
     self.enabled = true
 
