@@ -5,7 +5,6 @@ class_name Sequencer
 #Therefore, the order of the child nodes matters.
 
 func tick(actor, blackboard):
-    print("Running ", name, "for ", actor.name)
     for c in get_children():
         var response = c.tick(actor, blackboard)
 

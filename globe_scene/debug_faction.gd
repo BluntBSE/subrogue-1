@@ -38,14 +38,3 @@ func spawn_entity_at_node(node:NavNode, type_id:String, is_player = false):
     print("Activating entity AI")
 
     
-func waypoints_from_nodes(entity:Entity, nodes:Array):
-    for node:NavNode in nodes:
-        var command:MoveCommand = GlobeHelpers.generate_move_command(entity, node.position)
-        var entity_controller:EntityController = get_node("FactionEntities")
-        entity_controller.relay_enqueue_move(command)
-      
-
-
-    
-
-    pass

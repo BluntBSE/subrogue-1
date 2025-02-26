@@ -95,3 +95,24 @@ func reconstruct_path(came_from: Dictionary, start: NavNode, goal: NavNode) -> A
     
 
     return path
+
+
+func waypoints_from_nodes(nodes:Array):
+    for node:NavNode in nodes:
+        var command:MoveCommand = GlobeHelpers.generate_move_command(entity, node.position)
+        #entity_controller.relay_enqueue_move(command)#Weird, but...Whatever
+        handle_enqueue_move(command)
+    pass
+
+func find_closest_node()->NavNode:
+    #Might be better to implement a sphere-marching approach
+    #TODO: Fix this if it performs badly
+    var closest_node:NavNode
+    for node in get_tree().get_nodes_in_group("nav_nodes"):
+        if closest_node == null:
+            closest_node = node
+        if (entity.position-node.position).length() < (entity.position - closest_node.position).length():
+            closest_node = node
+            
+    return closest_node
+    

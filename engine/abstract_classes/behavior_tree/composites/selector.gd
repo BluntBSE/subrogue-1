@@ -8,7 +8,6 @@ class_name SelectorComposite
 
 
 func tick(actor, blackboard):
-    print("AI running for ", actor.name)
     for c in get_children():
         var response = c.tick(actor,blackboard)
          
