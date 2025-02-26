@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=30 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -17,11 +17,16 @@
 [ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/decorators/succeeder.gd" id="9_3cqk4"]
 [ext_resource type="Texture2D" uid="uid://bsoi58tm3jjyk" path="res://assets/UI/white_icons/white_triangle_filled_2.png" id="9_oaqcn"]
 [ext_resource type="Script" path="res://engine/entities/behavior/actions/keep_moving.gd" id="9_sd8qi"]
+[ext_resource type="Script" path="res://engine/entities/behavior/actions/flee_away.gd" id="12_akn2h"]
+[ext_resource type="Script" path="res://engine/entities/detection/entity_detector.gd" id="15_gt6ce"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e0wf7"]
 radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8l2mg"]
+radius = 20.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sbk4o"]
 custom_solver_bias = 1.0
@@ -118,6 +123,9 @@ script = ExtResource("8_hntc2")
 [node name="FleeThreat" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
 script = ExtResource("5_ab4l8")
 
+[node name="FleeAway" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
+script = ExtResource("12_akn2h")
+
 [node name="FleeToFriends" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
 script = ExtResource("5_ab4l8")
 
@@ -132,9 +140,6 @@ script = ExtResource("8_hntc2")
 
 [node name="FleeToDock" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
 script = ExtResource("5_ab4l8")
-
-[node name="FleeAway" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
-script = ExtResource("8_hntc2")
 
 [node name="Patrol" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
 script = ExtResource("5_ab4l8")
@@ -181,7 +186,17 @@ script = ExtResource("8_hntc2")
 unique_name_in_owner = true
 script = ExtResource("3_3n25e")
 
-[node name="EntityDetection" type="Node" parent="."]
+[node name="EntityDetector" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_gt6ce")
+
+[node name="DetectionArea" type="Area3D" parent="EntityDetector"]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntityDetector/DetectionArea"]
+shape = SubResource("SphereShape3D_8l2mg")
 
 [node name="EntityRender" type="Node3D" parent="."]
 script = ExtResource("4_xb8gp")
@@ -264,3 +279,6 @@ light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
 
 [node name="EntityActionBus" type="Node" parent="."]
+
+[node name="EntityEmission" type="Node3D" parent="."]
+unique_name_in_owner = true

@@ -1,4 +1,4 @@
-#@tool
+@tool
 extends Node
 @export var draw_on:Area3D
 @export var drawing:bool = false
@@ -80,6 +80,7 @@ func cast_from_camera()->Dictionary:
 func input_clicks():
     #BECAUSE we're not shift clicking or doing waypoint logic right now, this always overwrites the most recent item in the queue.
     if Input.is_action_just_pressed("editor_apply_to"):
+        print("Aplly to called within geometry drawer")
         if hovering_over != {}:
             if hovering_over.collider.name == draw_on.name:
                 print("Clicked on collider", hovering_over)
@@ -117,10 +118,10 @@ func handle_add_vertex_at(_position: Vector3) -> void:
     
     #SPRITES
     var sprite := Sprite3D.new()
-    sprite.texture = load("res://assets/marker.png")
+    sprite.texture = load("res://assets/UI/entity_dot.png")
     sprite.position = _position
     sprite.billboard = 1
-    sprite.scale = Vector3(4.0,4.0,4.0)
+    #sprite.scale = Vector3(4.0,4.0,4.0)
     add_child(sprite)
     sprites.append(sprite)
     
