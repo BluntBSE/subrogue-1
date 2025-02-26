@@ -6,11 +6,11 @@ var controlled_by #NPC Factions?
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
-@export var height:float = 100.25; #Given that the planet has a known radius of 100. Height of 5.
+@export var height:float = 100.25; #Given that the planet has a known radius of 100. Height of 0.25
 @export var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
 @export var speed = GlobeHelpers.kph_to_game_s(60.0)
-@export var max_speed = GlobeHelpers.kph_to_game_s(60.0) #0.013 is approximately 60Km/h, checked at at time scale 1.0
+@export var max_speed = GlobeHelpers.kph_to_game_s(60.0)
 @export var base_color:Color
 @export var spot_color:Color
 @export var range_color:Color
@@ -20,14 +20,19 @@ var controlled_by #NPC Factions?
 @export var faction:String = "none"
 @export var can_move := true
 @onready var atts:EntityAtts = %EntityAttributes
-var behavior_type #TODO
+@onready var behavior:EntityBehavior = %EntityBehavior
+@export var npc:bool = false
+
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    if is_player == true:
+    if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
         played_by = get_parent().get_parent()
+    if npc == true:
+        print(name, "instantiated as NPC")
+        behavior.enabled = true
     #temp spotlight adjustments
     spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)

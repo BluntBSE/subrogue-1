@@ -4,9 +4,15 @@ DONT FORGET:
 
 You currently set speed pretty directly in apply_entity_type. You'll have to change this once different speeds are at hing.
 
+We're making the find/attack target stuff generic to promote npc interactions,
+but I think something like a "player bias" would be helpful, that is
+skewing interactions towards interacting with the player vs npcs,
+but not so much the player can't bamboozle the AI.
 
 
 
+BUG: 
+    Left click not moving the entity as expected.
 
 QUEUE:
     FIX ENTITY INHERITING SPOTLIGHT ETC.

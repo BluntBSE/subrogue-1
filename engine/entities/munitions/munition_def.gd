@@ -1,20 +1,5 @@
 extends Resource
 class_name MunitionDef
-"""
-@export var id:String
-@export var display_name:String
-@export var fired_from:Entity
-@export var guidance_type: int #accepts GUIDANCE enums
-@export var impact_radius:float
-@export var fuel_remaining:float
-@export var fuel_max:float
-@export var fuel_burn:float
-@export var current_depth:int #accepts DEPTH enums
-@export var target_depths:Array #accepts DEPTH enums
-@export var target_pos:Vector3
-@export var target_node:Node3D
-@export var sprite_override:Texture2D
-"""
 
 
 @export var id: String

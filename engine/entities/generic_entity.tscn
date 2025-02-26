@@ -1,12 +1,22 @@
-[gd_scene load_steps=17 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=27 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
 [ext_resource type="Script" path="res://engine/entities/entity_attributes.gd" id="3_3n25e"]
+[ext_resource type="Script" path="res://engine/entities/entity_behavior.gd" id="3_37f8c"]
+[ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/behavior_tree_root.gd" id="3_m7cwq"]
+[ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/composites/selector.gd" id="4_s3opb"]
 [ext_resource type="Script" path="res://engine/entities/entity_render.gd" id="4_xb8gp"]
+[ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/composites/sequencer.gd" id="5_ab4l8"]
 [ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="5_pq53b"]
 [ext_resource type="Texture2D" uid="uid://dp8he1xlfl6bv" path="res://assets/UI/white_circle_2.png" id="6_1fpi7"]
+[ext_resource type="Script" path="res://engine/entities/behavior/conditions/has_destination.gd" id="7_mgjn4"]
+[ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/leaves/condition_leaf.gd" id="7_xiixy"]
+[ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/leaves/action_leaf.gd" id="8_hntc2"]
+[ext_resource type="Script" path="res://engine/entities/behavior/conditions/not_threatened.gd" id="8_r35ok"]
+[ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/decorators/succeeder.gd" id="9_3cqk4"]
 [ext_resource type="Texture2D" uid="uid://bsoi58tm3jjyk" path="res://assets/UI/white_icons/white_triangle_filled_2.png" id="9_oaqcn"]
+[ext_resource type="Script" path="res://engine/entities/behavior/actions/keep_moving.gd" id="9_sd8qi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -68,18 +78,110 @@ collision_mask = 2
 [node name="EntityNavShape" type="CollisionShape3D" parent="NavArea"]
 shape = SubResource("SphereShape3D_e0wf7")
 
-[node name="EntityMoveBus" type="Node3D" parent="."]
+[node name="EntityMoveBus" type="Node" parent="."]
 script = ExtResource("2_7fq8g")
 
-[node name="EntityBehavior" type="Node3D" parent="."]
+[node name="EntityBehavior" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_37f8c")
 
-[node name="EntityCargo" type="Node3D" parent="."]
+[node name="BehaviorTreeRoot" type="Node" parent="EntityBehavior"]
+script = ExtResource("3_m7cwq")
 
-[node name="EntityAttributes" type="Node3D" parent="."]
+[node name="SelectorComposite" type="Node" parent="EntityBehavior/BehaviorTreeRoot"]
+script = ExtResource("4_s3opb")
+
+[node name="MoveToDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="MoveSequencer" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination"]
+script = ExtResource("5_ab4l8")
+
+[node name="HasDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/MoveSequencer"]
+script = ExtResource("7_mgjn4")
+
+[node name="NotThreatened" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/MoveSequencer"]
+script = ExtResource("8_r35ok")
+
+[node name="KeepMoving" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/MoveSequencer"]
+script = ExtResource("9_sd8qi")
+
+[node name="AssignDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination"]
+script = ExtResource("8_hntc2")
+
+[node name="DoesNotHaveDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/AssignDestination"]
+script = ExtResource("7_xiixy")
+
+[node name="AssignDestinationAction" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/AssignDestination"]
+script = ExtResource("8_hntc2")
+
+[node name="FleeThreat" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="FleeToFriends" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
+script = ExtResource("5_ab4l8")
+
+[node name="FriendsNearby" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat/FleeToFriends"]
+script = ExtResource("7_xiixy")
+
+[node name="NotNearFriend" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat/FleeToFriends"]
+script = ExtResource("7_xiixy")
+
+[node name="FleeToFriend" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat/FleeToFriends"]
+script = ExtResource("8_hntc2")
+
+[node name="FleeToDock" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
+script = ExtResource("5_ab4l8")
+
+[node name="FleeAway" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
+script = ExtResource("8_hntc2")
+
+[node name="Patrol" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="EscortTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="FindTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="HailTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="AttackTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="SeekDestroy" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="SeekHail" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="FleeSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="FindWrecks" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="SalvageWreck" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="SalvageSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("5_ab4l8")
+
+[node name="STOP-AlwaysSucceed" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("9_3cqk4")
+
+[node name="ActionLeaf" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/STOP-AlwaysSucceed"]
+script = ExtResource("8_hntc2")
+
+[node name="EntityCargo" type="Node" parent="."]
+
+[node name="EntityAttributes" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_3n25e")
 
-[node name="EntityDetection" type="Node3D" parent="."]
+[node name="EntityDetection" type="Node" parent="."]
 
 [node name="EntityRender" type="Node3D" parent="."]
 script = ExtResource("4_xb8gp")
@@ -160,3 +262,5 @@ material = SubResource("FogMaterial_2rtqc")
 visible = false
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
+
+[node name="EntityActionBus" type="Node" parent="."]
