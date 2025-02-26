@@ -7,4 +7,4 @@ CITIES - Layer 20
 
 
 
-Individual players shoudl probably get their own vision layers
+Individual players should probably get their own vision layers

@@ -46,6 +46,16 @@ static func arc_to_km(point_a:Vector3, point_b:Vector3, anchor:Planet) -> float:
     var arc_distance_km = (arc_distance_game_units / sphere_radius) * earth_radius_km
 
     return arc_distance_km
+    
+static func km_to_arc_distance(km: float, anchor: Planet) -> float:
+    var anchor_mesh: SphereMesh = anchor.mesh
+    var sphere_radius = anchor_mesh.radius # This is 100 right now in game units
+    var earth_radius_km = 6378
+
+    # Convert the distance from kilometers to game units
+    var arc_distance_game_units = (km / earth_radius_km) * sphere_radius
+
+    return arc_distance_game_units
 
 static func kph_to_game_s(kph: float) -> float:
     var sphere_radius = 100.0 # in game units
