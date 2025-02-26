@@ -11,6 +11,9 @@ but not so much the player can't bamboozle the AI.
 
 
 
+BUG: 
+    Left click not moving the entity as expected.
+
 QUEUE:
     FIX ENTITY INHERITING SPOTLIGHT ETC.
     Maybe we shouldn't add_child at runtime, but reveal them?

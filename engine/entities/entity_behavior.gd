@@ -7,14 +7,17 @@ All entities have the same behavior tree when instantiated, but
 this node is responsible for promoting, demoting, and locking branches to match
 a given behavior profile.
 """
-enum core_behaviors {MoveToDestination, Patrol, EscortTarget, FleeTarget, FindTarget, HailTarget, SeekDestroy, SeekHail, FleeSpecific, FindWrecks, SalvageWreck, SalvageSpecific}
+
+        
+enum core_behaviors {MoveToDestination, Patrol, EscortTarget, FleeThreat, FindTarget, HailTarget, SeekDestroy, SeekHail, FleeSpecific, FindWrecks, SalvageWreck, SalvageSpecific, STOP}
 #NAVIGATING
 #The range at which a move order will be considered complete
 var move_tolerance:float = 1.0
 #Use position when entities are moving towards specific entities (e.g: towards the player)
-var move_position:Vector3
+var destination_position:Vector3
 #Use node when entities are moving to a known place in the world
-var move_node:NavNode
+var destination_node:NavNode
+
 
 
 #TARGETING
@@ -28,7 +31,12 @@ var seeking:Node3D = null
 # How confident this entity is in its strength. Compared to the player's reputation, or player's capabilities
 # This determines
 var chutzpah:float = 100.0
-
+@onready var behavior_tree = get_child(0)
+var enabled:bool = false:
+    set(value):
+        print("Attempting to set the child behavior tree to  ", value)
+        enabled = value
+        behavior_tree.enabled = value
 
 var profile = null #BehaviorProfile controls the order of the nodes.
 
