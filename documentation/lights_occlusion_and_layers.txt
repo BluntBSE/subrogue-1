@@ -2,15 +2,15 @@ PLANET - Layer 1
 
 ALL ENTITIES (Ships) - Layer 2
 ALL ENTITIES (Munitions) - Layer 3 #Maybe not necessary>
-Player 1 entities - 4
-Player 2 entities - 5
-Player 3 entities - 6
-Player 4 entities - 7
+Player 1 entities - 6
+Player 2 entities - 7
+Player 3 entities - 8
+Player 4 entities - 9
 
-Factions - 10 - 17 #We might be able to bundle up NPC factions into one layer and simply change the layer their units display on to match that of the player cameras. Probably better.
+Factions - 11 - 17 #We might be able to bundle up NPC factions into one layer and simply change the layer their units display on to match that of the player cameras. Probably better.
 CITIES - Layer 18
 NAV NODES - Layer 19
-LAND COLLIDERS - Layer 20
+LAND COLLIDERS - Collision Layer 20
 
 
 

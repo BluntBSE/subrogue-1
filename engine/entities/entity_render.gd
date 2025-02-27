@@ -1,7 +1,7 @@
 extends Node3D
 class_name EntityRender
-#@onready depth_mesh:MeshInstance3D = %DepthMesh
-
+@onready var depth_mesh:MeshInstance3D = %DepthMesh
+@onready var entity:Entity = get_parent()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass # Replace with function body.

@@ -1342,6 +1342,7 @@ script = ExtResource("9_xkk1b")
 [node name="OrbitalCamera" type="Camera3D" parent="Players/Player1/PlayerCameras" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 218.407, 0, 0)
+cull_mask = 1047571
 current = true
 fov = 15.5
 near = 0.21

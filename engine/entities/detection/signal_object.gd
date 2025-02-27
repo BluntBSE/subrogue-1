@@ -12,8 +12,8 @@ var hidden:bool
 #A certainty of (approaching) 0 is within 200km
 
 func offset_self():
-    var km_offset = 200
-    print("Km offset was calculated as ", km_offset, "with a certainty of ", certainty)
+    var km_offset = lerp(400.0,0.0,(certainty/100))
+    #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
     var anchor: Planet = detecting_object.anchor
     
     # Calculate a random tangential direction

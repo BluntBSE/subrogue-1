@@ -17,7 +17,7 @@ var controlled_by #NPC Factions?
 @onready var spotlight:SpotLight3D = %Spotlight
 @onready var range_spot:SpotLight3D = %RangeSpot
 @export var scale_factor:float = 1.0
-@export var faction:String = "none"
+@export var faction:int = GlobalConst.layers.PLAYER_1
 @export var can_move := true
 @onready var atts:EntityAtts = %EntityAttributes
 @onready var behavior:EntityBehavior = %EntityBehavior
@@ -30,9 +30,6 @@ var controlled_by #NPC Factions?
 func _ready() -> void:
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
         played_by = get_parent().get_parent()
-    if npc == true:
-        print(name, "instantiated as NPC")
-        behavior.enabled = true
     #temp spotlight adjustments
     spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)
@@ -42,6 +39,15 @@ func _ready() -> void:
    # ("shader_parameter/glow_color") = base_color
     pass # Replace with function body.
 
+func unpack(type_id, _faction):
+    var _type:EntityType = GlobalConst.entity_lib.get(type_id)
+    apply_entity_type(_type)
+    faction = _faction
+    var is_npc:bool = !GlobalConst.is_layer_player(_faction)  
+    npc = is_npc
+    if npc == true:
+        print(name, "instantiated as NPC")
+        behavior.enabled = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 

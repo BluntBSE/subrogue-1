@@ -7,6 +7,7 @@ class_name Player
 @onready var camera:OrbitalCamera = get_node("PlayerCameras/OrbitalCamera")
 @onready var UI:PlayerUIRoot = get_node("CanvasLayer/PlayerUIRoot")
 @onready var entities:PlayerEntities = get_node("PlayerEntities")
+@export var visible_layers=[2,5]#Defaults to "all entities" and "player 5"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     print("Connected ruler adjustment")
