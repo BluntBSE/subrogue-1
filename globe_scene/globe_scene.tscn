@@ -2198,6 +2198,7 @@ raycasting = false
 nav_parent = NodePath("../NavNodes")
 
 [node name="NavNodes" type="Node3D" parent="."]
+visible = false
 script = ExtResource("37_ue64j")
 
 [node name="NavNode_Miami" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]

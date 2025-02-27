@@ -19,6 +19,10 @@ func offset_self():
     # Calculate a random tangential direction
     var position_on_sphere = position
     var random_vector = Vector3(randf(), randf(), randf()).normalized()
+    #flip the random vector half the time to allow negatives
+    var rand = randf()
+    if rand < 0.49:
+        random_vector = -random_vector
     var new_direction = random_vector.cross(position_on_sphere).normalized()
     
     var new_position = position + (new_direction * GlobeHelpers.km_to_arc_distance(km_offset, anchor))
