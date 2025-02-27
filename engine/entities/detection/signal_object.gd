@@ -29,8 +29,8 @@ func offset_self():
     position = new_position
 
 func fix_height()->void:
-    #The  entity should always be 5 above the tangential surface of the anchor.
-    #If tne anchor has a radius of 100m, the entity shall sit at 100.25, but not otherwise modify its position.
+    #The  entity should always be a height above the surface of the anchor.
+    #If tne anchor has a radius of 100m, the entity shall sit at 100.25 (or GlobalConst.height), but not otherwise modify its position.
     #A higher height will be more permissive when colliding with the map
     var direction:Vector3 = (position - detecting_object.anchor.position).normalized()
     var desired_position:Vector3 = detecting_object.anchor.position + (direction * GlobalConst.height)
