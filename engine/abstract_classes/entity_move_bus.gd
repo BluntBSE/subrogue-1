@@ -46,7 +46,7 @@ func purge_old_waypoints():
     # Erase for every member of the queue that is not at queue[0]
     while queue.size() > 1:
         var frontier:Array = []
-        var command: MoveCommand = queue[1]
+        var command: MoveCommand = queue[0]
         var callable: Callable = Callable(command.waypoint, "queue_free")
         callable.call_deferred()
         queue.erase(command)
@@ -100,6 +100,7 @@ func reconstruct_path(came_from: Dictionary, start: NavNode, goal: NavNode) -> A
 func waypoints_from_nodes(nodes:Array):
     for node:NavNode in nodes:
         var command:MoveCommand = GlobeHelpers.generate_move_command(entity, node.position)
+        
         #entity_controller.relay_enqueue_move(command)#Weird, but...Whatever
         handle_enqueue_move(command)
     pass

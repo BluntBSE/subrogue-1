@@ -13,7 +13,7 @@ func _ready() -> void:
     if Engine.is_editor_hint():
         %DebugMesh.transparency = 0.5
     else:
-        pass
+        %DebugMesh.transparency = 1.0
     pass # Replace with function body.
 
 

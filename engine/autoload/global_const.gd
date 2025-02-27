@@ -18,6 +18,10 @@ var is_paused := false
 enum DEPTH {swim, crawl, surface}
 enum GUIDANCE {active, passive, wire, dumb, radar, actipass }
 
+var layer_navnode:int = 19
+var layer_planet:int = 1
+var layer_all_entities:int = 2
+
 """
 SCALE FACTORS:
     FAST:

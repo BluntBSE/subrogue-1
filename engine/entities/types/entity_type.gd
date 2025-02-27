@@ -29,8 +29,6 @@ enum munitition_types {torpedoes, missiles, all}
 #{swim, crawl, surface}
 @export var depths:Array #accepts enums
 @export var current_depth:int
-#DETECTION
-@export var base_passive_sensitivity:float #Range at which a 90DB,60hz sound will be identified with 100% certainty. 
-@export var base_active_max_volume:int #Db
+
 #META
 @export var base_cost:int

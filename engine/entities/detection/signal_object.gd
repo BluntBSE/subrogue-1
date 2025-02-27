@@ -1,0 +1,54 @@
+extends Node3D
+class_name SignalObject
+
+var faction #For visibility?
+var detecting_object:Entity
+var display_name:String
+var time_ago:float #Last time this signal was updated
+var detected_object:Entity
+var certainty:float = 50.0
+var hidden:bool
+#Certainty of 100 is perfectly accurate.
+#A certainty of (approaching) 0 is within 200km
+
+func offset_self():
+    var km_offset = 200
+    print("Km offset was calculated as ", km_offset, "with a certainty of ", certainty)
+    var anchor: Planet = detecting_object.anchor
+    
+    # Calculate a random tangential direction
+    var position_on_sphere = position
+    var random_vector = Vector3(randf(), randf(), randf()).normalized()
+    var new_direction = random_vector.cross(position_on_sphere).normalized()
+    
+    var new_position = position + (new_direction * GlobeHelpers.km_to_arc_distance(km_offset, anchor))
+    position = new_position
+
+func fix_height()->void:
+    #The  entity should always be 5 above the tangential surface of the anchor.
+    #If tne anchor has a radius of 100m, the entity shall sit at 100.25, but not otherwise modify its position.
+    #A higher height will be more permissive when colliding with the map
+    var direction:Vector3 = (position - detecting_object.anchor.position).normalized()
+    var desired_position:Vector3 = detecting_object.anchor.position + (direction * GlobalConst.height)
+    position = desired_position
+    pass
+    
+
+func unpack(_detecting_object:Entity, _detected_object:Entity):
+    print("Unpack called with ", _detecting_object, _detected_object)
+    detected_object = _detected_object
+    detecting_object = _detecting_object
+    position = _detected_object.position
+    offset_self()
+    #fix_height()
+    
+
+var elapsed = 0.0
+func _process(delta:float)->void:
+    var timer = 2.0
+    elapsed += delta
+    if elapsed >= timer:
+        position = detected_object.position
+        offset_self()
+        elapsed = 0.0
+    pass

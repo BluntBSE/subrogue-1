@@ -6,11 +6,11 @@ var controlled_by #NPC Factions?
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
-@export var height:float = 100.25; #Given that the planet has a known radius of 100. Height of 0.25
+@export var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
 @export var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
-@export var speed = GlobeHelpers.kph_to_game_s(60.0)
-@export var max_speed = GlobeHelpers.kph_to_game_s(60.0)
+@export var speed = GlobeHelpers.kph_to_game_s(120.0)
+@export var max_speed = GlobeHelpers.kph_to_game_s(120.0)
 @export var base_color:Color
 @export var spot_color:Color
 @export var range_color:Color
@@ -127,54 +127,7 @@ func check_reached_waypoint()->void:
         
         
 func apply_entity_type(type:EntityType):
-    """
-    enum munitition_types {torpedoes, missiles, all}
-    @export var id:String
-    @export var display_name:String
-    @export var display_class:String #Submarine, Commercial Vessel, etc
-    @export var category:String
-    #STRUCTURE
-    @export var base_hull:int
-    @export var base_cargo:int
-    #WEAPONS AND UPGRADES
-    @export var munition_types:int #Of an ENUM of 
-    @export var munition_slots:int #Number of distinct munitions
-    @export var munition_size:int
-    @export var utility_slots:int
-    @export var utility_size:int
-    @export var upgrade_slots:int
-    #VISUALS
-    @export var sprite:Texture2D
-    #@export var model
-    #NAVIGATION
-    @export var base_max_speed:int
-    @export var base_profile:float #From 0 to 1.0, how much like a military target does this thing look like?
-    @export var base_pitch:float 
-    @export var base_volume:float
 
-    @export var vol_speed_factor:float
-    #{swim, crawl, surface}
-    @export var depths:Array #accepts enums
-    @export var current_depth:int
-    #DETECTION
-    @export var base_passive_sensitivity:float #Range at which a 90DB,60hz sound will be identified with 100% certainty. 
-    @export var base_active_max_volume:int #Db
-    #META
-    @export var base_cost:int"""
-    # Update the entity's properties based on the EntityType instance
-    """extends Node3D
-    class_name EntityAtts
-
-    var type:EntityType
-    var current_hull
-    var current_pitch
-    var current_volume
-    var current_depth
-    var cargo:Array
-    var upgrades:Array
-    var utilities:Array
-    var depths:Array
-    """
     if not atts:
         atts = %EntityAttributes
         atts = get_node("EntityAttributes")
@@ -183,7 +136,6 @@ func apply_entity_type(type:EntityType):
     atts.type = type
     atts.current_hull = type.base_hull
     atts.current_pitch = type.base_pitch
-    atts.current_volume = type.base_active_max_volume
     atts.current_depth = type.depths[0]
     #max_speed = type.base_max_speed
     #TODO: This should probably move once we have different speeds. If we do.

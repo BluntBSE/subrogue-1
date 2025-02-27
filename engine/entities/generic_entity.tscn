@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=31 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -19,18 +19,17 @@
 [ext_resource type="Script" path="res://engine/entities/behavior/actions/keep_moving.gd" id="9_sd8qi"]
 [ext_resource type="Script" path="res://engine/entities/behavior/actions/flee_away.gd" id="12_akn2h"]
 [ext_resource type="Script" path="res://engine/entities/detection/entity_detector.gd" id="15_gt6ce"]
+[ext_resource type="Script" path="res://engine/entities/detection/entity_emission.gd" id="20_0c68s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ito3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e0wf7"]
 radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8l2mg"]
-radius = 20.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_sbk4o"]
-custom_solver_bias = 1.0
-radius = 0.1
+radius = 30.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_54rvg"]
 radius = 3.0
@@ -51,12 +50,9 @@ size = Vector2(2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ju4"]
 transparency = 1
+shading_mode = 0
 albedo_color = Color(0, 0.681901, 0.656941, 1)
 albedo_texture = ExtResource("9_oaqcn")
-emission = Color(0.0999336, 0.760538, 0.826485, 1)
-emission_energy_multiplier = 0.4
-subsurf_scatter_strength = 0.6
-subsurf_scatter_skin_mode = true
 refraction_scale = -0.11
 
 [sub_resource type="FogMaterial" id="FogMaterial_2rtqc"]
@@ -68,13 +64,16 @@ edge_fade = 2.0
 
 [node name="Entity" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
-collision_layer = 6
-collision_mask = 6
+collision_layer = 524290
+collision_mask = 524288
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true
 script = ExtResource("1_du6w5")
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3ito3")
 
 [node name="NavArea" type="Area3D" parent="."]
 collision_layer = 2
@@ -201,14 +200,9 @@ shape = SubResource("SphereShape3D_8l2mg")
 [node name="EntityRender" type="Node3D" parent="."]
 script = ExtResource("4_xb8gp")
 
-[node name="EntityShape" type="CollisionShape3D" parent="EntityRender"]
-visible = false
-shape = SubResource("SphereShape3D_sbk4o")
-
 [node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
-visible = false
 layers = 3
 texture = ExtResource("5_pq53b")
 
@@ -282,3 +276,6 @@ omni_range = 4.65
 
 [node name="EntityEmission" type="Node3D" parent="."]
 unique_name_in_owner = true
+script = ExtResource("20_0c68s")
+
+[connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]

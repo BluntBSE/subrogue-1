@@ -26,6 +26,9 @@ func input_clicks(event:InputEvent):
     #BECAUSE we're not shift clicking or doing waypoint logic right now, this always overwrites the most recent item in the queue.
     if Input.is_action_pressed("primary_action"):
         if ref.hovering_over != {}:
+            if !ref.hovering_over.collider:
+                #This one is just for the weird case where you've clicked on a freed instance of an existing waypoint
+                return
             if ref.hovering_over.collider.name == "ClickableSphere":
                 var click_position = ref.hovering_over.position
                 var click_normal = ref.hovering_over.normal
@@ -37,8 +40,8 @@ func input_clicks(event:InputEvent):
                 var wp_shape := SphereShape3D.new() #default radius of 0.5. If we use tolerance, this might be what we assign it to.
                 #Consider making these waypoints a child of the player's abstract node.
                 wp_collider.shape = wp_shape
-                waypoint.collision_layer = 2
-                waypoint.collision_mask = 2
+                waypoint.collision_layer = GlobalConst.layer_navnode
+                waypoint.collision_mask = GlobalConst.layer_navnode
                 waypoint.add_child(wp_collider)
                 ref.anchor.add_child(waypoint)
             

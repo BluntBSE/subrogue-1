@@ -111,3 +111,17 @@ static func generate_move_command(entity:Entity, target_position:Vector3, layer:
     move_command.waypoint = waypoint
     
     return move_command
+    
+static func offset_position_by_km(point: Vector3, direction: Vector3, km: float, anchor: Planet) -> Vector3:
+    print("Original position", point)
+    var anchor_mesh: SphereMesh = anchor.mesh
+    var sphere_radius = anchor_mesh.radius # This is 100 right now in game units
+
+    # Convert the distance from kilometers to arc distance in game units
+    var arc_distance_game_units = km_to_arc_distance(km, anchor)
+    
+    var new_position = arc_distance_game_units * direction
+    print("New position ", new_position)
+    
+    
+    return new_position
