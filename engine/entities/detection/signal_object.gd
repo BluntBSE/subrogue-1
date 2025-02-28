@@ -8,11 +8,13 @@ var time_ago:float #Last time this signal was updated
 var detected_object:Entity
 var certainty:float = 50.0
 var hidden:bool
+var last_sound:Sound
+@onready var sprite = get_node("Sprite3D")
 #Certainty of 100 is perfectly accurate.
 #A certainty of (approaching) 0 is within 200km
 
 func offset_self():
-    var km_offset = lerp(400.0,0.0,(certainty/100))
+    var km_offset = lerp(200.0,0.0,max((certainty/100), 1.0 ) )
     #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
     var anchor: Planet = detecting_object.anchor
     
@@ -38,8 +40,13 @@ func fix_height()->void:
     pass
     
 
-func unpack(_detecting_object:Entity, _detected_object:Entity):
+func unpack(_detecting_object:Entity, _detected_object:Entity, _sound:Sound, _certainty:float):
+    sprite.set_layer_mask_value(_detecting_object.faction, true)
+    for child in sprite.get_children():
+        child.set_layer_mask_value(_detecting_object.faction,true)
     print("Unpack called with ", _detecting_object, _detected_object)
+    last_sound = _sound
+    certainty = _certainty
     detected_object = _detected_object
     detecting_object = _detecting_object
     position = _detected_object.position

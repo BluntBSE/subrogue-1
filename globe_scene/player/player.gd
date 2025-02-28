@@ -8,10 +8,9 @@ class_name Player
 @onready var UI:PlayerUIRoot = get_node("CanvasLayer/PlayerUIRoot")
 @onready var entities:PlayerEntities = get_node("PlayerEntities")
 @export var visible_layers=[2,5]#Defaults to "all entities" and "player 5"
+var layer = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    print("Connected ruler adjustment")
-    print(UI)
     camera.camera_moved.connect(UI.adjust_ruler)
     pass # Replace with function body.
 

@@ -21,6 +21,8 @@ var controlled_by #NPC Factions?
 @export var can_move := true
 @onready var atts:EntityAtts = %EntityAttributes
 @onready var behavior:EntityBehavior = %EntityBehavior
+@onready var emission:EntityEmission = %EntityEmission
+@onready var render:EntityRender = %EntityRender
 @export var npc:bool = false
 
 
@@ -35,8 +37,11 @@ func _ready() -> void:
     var pos_dict := GlobeHelpers.rads_from_position(position)
     azimuth = pos_dict["azimuth"]
     polar = pos_dict["polar"]
-
-   # ("shader_parameter/glow_color") = base_color
+    #DEBUG NPC SETTING bc player unpack isn't a thing yet
+    if npc == false:
+        print(name, "instantiated as player")
+        render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, true)
+   # ("shader_parameter/glow_color") = base_color  
     pass # Replace with function body.
 
 func unpack(type_id, _faction):
@@ -48,6 +53,9 @@ func unpack(type_id, _faction):
     if npc == true:
         print(name, "instantiated as NPC")
         behavior.enabled = true
+        #DEBUG because of the non player unpack
+        render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, false)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 

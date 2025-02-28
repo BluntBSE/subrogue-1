@@ -50,9 +50,13 @@ size = Vector2(2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ju4"]
 transparency = 1
-shading_mode = 0
+specular_mode = 1
 albedo_color = Color(0, 0.681901, 0.656941, 1)
 albedo_texture = ExtResource("9_oaqcn")
+emission = Color(0.0999336, 0.760538, 0.826485, 1)
+emission_energy_multiplier = 0.4
+subsurf_scatter_strength = 0.6
+subsurf_scatter_skin_mode = true
 refraction_scale = -0.11
 
 [sub_resource type="FogMaterial" id="FogMaterial_2rtqc"]
@@ -198,6 +202,7 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_8l2mg")
 
 [node name="EntityRender" type="Node3D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("4_xb8gp")
 
 [node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
@@ -210,7 +215,7 @@ texture = ExtResource("5_pq53b")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.13916)
 visible = false
-layers = 3
+layers = 2
 light_color = Color(0.774024, 0.045353, 0.588677, 1)
 light_energy = 2.0
 shadow_enabled = true
@@ -229,7 +234,7 @@ skeleton = NodePath("../../Spotlight")
 [node name="Spotlight" type="SpotLight3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
-layers = 3
+layers = 2
 light_color = Color(0, 0.816604, 0.791994, 1)
 light_energy = 2.0
 light_cull_mask = 4294966275
@@ -248,6 +253,7 @@ skeleton = NodePath("../../RangeSpot")
 
 [node name="HighlightMesh" type="MeshInstance3D" parent="EntityRender"]
 unique_name_in_owner = true
+layers = 2
 material_override = SubResource("StandardMaterial3D_ls7x1")
 transparency = 0.99
 mesh = SubResource("QuadMesh_v1582")

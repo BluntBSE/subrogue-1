@@ -54,6 +54,9 @@ var noise_map := FastNoiseLite.new()
 var noise_y = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    set_cull_mask_value(GlobalConst.layers.PLANET, true)
+    set_cull_mask_value(GlobalConst.layers.PLAYER_1, true)
+    print("Cull mask values : ", GlobalConst.layers.PLANET, "and  ", GlobalConst.layers.PLAYER_1, "should be set to true")
     state_machine = StateMachine.new()
     state_machine.Add("navigating", CamNavState.new(self, {}))
     state_machine.Add("context", CamContextState.new(self,{}))

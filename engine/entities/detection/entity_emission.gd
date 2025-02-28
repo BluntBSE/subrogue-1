@@ -1,4 +1,5 @@
 extends Node3D
+class_name EntityEmission
 
 @onready var entity:Entity = get_parent()
 @export var pitch:float = 90.0 #Expressed as hz.

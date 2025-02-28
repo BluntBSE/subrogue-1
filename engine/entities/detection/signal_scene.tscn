@@ -7,5 +7,36 @@
 script = ExtResource("1_kaa7y")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+layers = 0
 billboard = 1
 texture = ExtResource("2_xg60q")
+
+[node name="TimeSince" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00208277, -1.24337, -0.00442767)
+layers = 0
+billboard = 1
+text = "3.0s"
+
+[node name="Volume" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27072, -0.0824654, -0.0208814)
+layers = 0
+billboard = 1
+text = "90db"
+
+[node name="Pitch" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29385, -0.0907743, -0.00460076)
+layers = 0
+billboard = 1
+text = "60hz"
+
+[node name="Class" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38999, 0.988479, -0.00460076)
+layers = 0
+billboard = 1
+text = "Commercial Vessel"
+
+[node name="Class2" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49563, 0.988479, -0.00460076)
+layers = 0
+billboard = 1
+text = "American Empire"

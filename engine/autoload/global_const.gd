@@ -41,6 +41,7 @@ var minor_factions:int = 18
 
 
 enum layers {
+    UNUSED, #Because cull masks, for whatever reason, are 1-indexed
     PLANET, #Render anything like nuclear warheads that everyone can see straight to the planet layer
     ALL_ENTITIES,
     ALL_MUNITIONS, #Do we want this?
@@ -61,6 +62,38 @@ enum layers {
     NAVNODES,
     #You got three left
 }
+
+#Acoustic modeling is complex, so we're cheating
+#For game reasons, we've decided that a 90db sound at 90hz is audible up to 500km away.
+#To a receiver with a sensitivity of 15db
+#Let's say for every 1hz drop in pitch, you hit 15db from 10km out
+#Such that an 80hz sound would attenuate to 15db at 600km
+
+
+func attenuate_sound(volume: float, frequency: float, distance: float) -> float:
+    # Returns the DB of the given sound at the given distance
+    var base_volume = 90.0 #dB
+    var base_frequency = 90.0 # Hz
+    var base_distance = 500.0 # km
+    var base_sensitivity = 15.0 # dB
+    var base_attenuation_rate = -0.12 # dB per km
+    var freq_diff = base_frequency - frequency
+    var f_att_mod = frequency/base_frequency 
+    var v_att_mod = volume/base_volume
+    var attenuation_rate = base_attenuation_rate * f_att_mod * v_att_mod
+    #print("New attenuation rate is ", attenuation_rate)
+    
+    # Calculate the total attenuation
+    var total_attenuation = attenuation_rate * distance
+    #print("Total attenuation was ", total_attenuation)
+    
+    # Calculate the final volume at the given distance
+    var final_volume = volume + total_attenuation
+    
+   # print("final volume for ", volume, " pitch ", frequency, "dist ", distance)
+    #print(final_volume)
+    return final_volume
+
 
 func is_layer_player(_int:int)->bool:
     if _int > layers.ALL_MUNITIONS:

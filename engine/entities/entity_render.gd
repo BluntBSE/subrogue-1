@@ -12,6 +12,15 @@ func _process(delta: float) -> void:
     pass
     
 
+func update_mesh_visibilities(layer:int, val:bool):
+    if not depth_mesh:
+        depth_mesh = %DepthMesh
+    depth_mesh.set_layer_mask_value(layer, val)
+    for child in get_children():
+        child.set_layer_mask_value(layer,val)
+    pass
+    
+
 func update_depth_sprite(depth:int):
     # GlobalConst.DEPTH  enum DEPTH {swim, crawl, surface}
     var swim_sprite:Texture2D = load("res://assets/UI/white_circle_2.png")
