@@ -14,7 +14,7 @@ var last_sound:Sound
 #A certainty of (approaching) 0 is within 200km
 
 func offset_self():
-    var km_offset = lerp(200.0,0.0,max((certainty/100), 1.0 ) )
+    var km_offset = lerp(200.0,0.0,(certainty/100) )
     #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
     var anchor: Planet = detecting_object.anchor
     

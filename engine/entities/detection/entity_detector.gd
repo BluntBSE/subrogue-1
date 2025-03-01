@@ -4,7 +4,7 @@ class_name EntityDetector
 #Passive detection stats
 @onready var entity:Entity = get_parent()
 @onready var detection_area = %DetectionArea
-var sensitivity:float = 20.0 #Expressed as minimum DB to hear
+var sensitivity:float = 15.0 #Expressed as minimum DB to hear
 var c100:float = 300.0 #Expressed as km
 var cfalloff:float = 1.0 #Certainty lost per 10km.
 var min_certainty: float = 20.0 #Always at least 20% certain in detection position
@@ -30,7 +30,6 @@ func _process(delta: float) -> void:
     
     #poll_bodies
     #update_signals
-    GlobalConst.attenuate_sound(100,70,1000)
     pass
 
 
@@ -61,15 +60,16 @@ func poll_entities():
         var sound = Sound.new(poll_entity, poll_entity.emission.volume, poll_entity.emission.pitch, poll_entity.emission.profile)
         var dist = GlobeHelpers.arc_to_km(entity.position, poll_entity.position, entity.anchor)
         var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
-        print ("final db ", final_db, "from body: ", poll_entity.name,  "vs sensitivty", sensitivity)
-        print("Dist is ", dist)
+        #print ("final db ", final_db, "from body: ", poll_entity.name,  "vs sensitivty", sensitivity)
+       # print("Dist is ", dist)
 
         if final_db >= sensitivity:
             #If no signal object exists, make one.
-            var certainty = c100 - (cfalloff * (dist-c100))
-            #More fun if we're always 10% certain
-            if certainty < 0.1:
-                certainty = 0.1
+            var from_c100 = cfalloff * dist-c100
+            var certainty = 100 - (cfalloff * (dist-c100))
+            #More fun if we're always at least 20% certain
+            if certainty < 0.2:
+                certainty = 0.2
             print("Certainty in signal is ", certainty)
             if !sigmap.has(poll_entity):
                 var sigob:SignalObject = load("res://engine/entities/detection/signal_scene.tscn").instantiate()

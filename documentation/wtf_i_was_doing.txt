@@ -12,7 +12,8 @@ but not so much the player can't bamboozle the AI.
 
 
 BUG: 
-    Left click not moving the entity as expected.
+    Can't fire munitions anymore?
+
 
 QUEUE:
     Fix left click movement bug
@@ -22,7 +23,7 @@ QUEUE:
     VISION:
         Entities have LISTENER CAMERAS that register to any EMITTER node that's in LOS.
         The EMITTER NODE broadcasts signals. SoundSignal, VisualSignal, etc.
-        SoundSignal = Hz, Db.
+        SoundSignal = Hz, Db. 
         VIsualSignal = Dist only (Unless we implement camoflauge)
         The range of this camera is equal to the biggest of among the vessel's detection modes (sonar, visual, whatever)
         

@@ -76,7 +76,7 @@ func attenuate_sound(volume: float, frequency: float, distance: float) -> float:
     var base_frequency = 90.0 # Hz
     var base_distance = 500.0 # km
     var base_sensitivity = 15.0 # dB
-    var base_attenuation_rate = -0.12 # dB per km
+    var base_attenuation_rate = -0.10 # dB per km
     var freq_diff = base_frequency - frequency
     var f_att_mod = frequency/base_frequency 
     var v_att_mod = volume/base_volume
