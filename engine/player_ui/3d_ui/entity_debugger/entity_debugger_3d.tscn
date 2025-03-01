@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://dagwxo37idw0u"]
+
+[ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="1_rglkq"]
+[ext_resource type="PackedScene" uid="uid://bm4nvcd1wepk1" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_2d.tscn" id="2_jf3bc"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_8dkyw"]
+size = Vector2(4, 5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2il6d"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_clhrm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8alx"]
+resource_local_to_scene = true
+blend_mode = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_2il6d")
+detail_mask = SubResource("ViewportTexture_clhrm")
+billboard_mode = 1
+billboard_keep_scale = true
+grow_amount = 1.438
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_d61o8"]
+data = PackedVector3Array(2, -2.5, 0, -2, -2.5, 0, 2, 2.5, 0, -2, -2.5, 0, -2, 2.5, 0, 2, 2.5, 0)
+
+[node name="ContextMarker" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24564, -1.8993)
+mesh = SubResource("QuadMesh_8dkyw")
+surface_material_override/0 = SubResource("StandardMaterial3D_p8alx")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.86265e-09, 0, -7.567e-10, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_d61o8")
+
+[node name="DistDisplay" type="Label3D" parent="MeshInstance3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.269663, 2.20385, 0)
+visible = false
+modulate = Color(0.360784, 0.901961, 0.960784, 1)
+outline_modulate = Color(0.3648, 0.90048, 0.96, 0)
+text = "3000.00km"
+font = ExtResource("1_rglkq")
+font_size = 64
+
+[node name="SubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(500, 500)
+
+[node name="Control" parent="SubViewport" instance=ExtResource("2_jf3bc")]

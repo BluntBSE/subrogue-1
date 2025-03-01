@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=33 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -20,6 +20,8 @@
 [ext_resource type="Script" path="res://engine/entities/behavior/actions/flee_away.gd" id="12_akn2h"]
 [ext_resource type="Script" path="res://engine/entities/detection/entity_detector.gd" id="15_gt6ce"]
 [ext_resource type="Script" path="res://engine/entities/detection/entity_emission.gd" id="20_0c68s"]
+[ext_resource type="Script" path="res://engine/entities/entity_debug.gd" id="21_7if8f"]
+[ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="22_loeq3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -50,7 +52,6 @@ size = Vector2(2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ju4"]
 transparency = 1
-specular_mode = 1
 albedo_color = Color(0, 0.681901, 0.656941, 1)
 albedo_texture = ExtResource("9_oaqcn")
 emission = Color(0.0999336, 0.760538, 0.826485, 1)
@@ -58,6 +59,7 @@ emission_energy_multiplier = 0.4
 subsurf_scatter_strength = 0.6
 subsurf_scatter_skin_mode = true
 refraction_scale = -0.11
+texture_repeat = false
 
 [sub_resource type="FogMaterial" id="FogMaterial_2rtqc"]
 resource_local_to_scene = true
@@ -209,6 +211,7 @@ script = ExtResource("4_xb8gp")
 [node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
+visible = false
 layers = 2
 texture = ExtResource("5_pq53b")
 
@@ -285,5 +288,17 @@ omni_range = 4.65
 [node name="EntityEmission" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("20_0c68s")
+
+[node name="EntityDebug" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
+top_level = true
+script = ExtResource("21_7if8f")
+
+[node name="ContextMarker" parent="EntityDebug" instance=ExtResource("22_loeq3")]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../EntityDebug")
+update_rotation = false
 
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]

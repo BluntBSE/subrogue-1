@@ -7,7 +7,7 @@ var controlled_by #NPC Factions?
 @export var azimuth:float
 @export var polar:float
 @export var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
-@export var move_tolerance = 0.0
+@onready var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
 @export var speed = GlobeHelpers.kph_to_game_s(120.0)
 @export var max_speed = GlobeHelpers.kph_to_game_s(120.0)
@@ -23,6 +23,7 @@ var controlled_by #NPC Factions?
 @onready var behavior:EntityBehavior = %EntityBehavior
 @onready var emission:EntityEmission = %EntityEmission
 @onready var render:EntityRender = %EntityRender
+@onready var debug:EntityDebug = %EntityDebug
 @export var npc:bool = false
 
 

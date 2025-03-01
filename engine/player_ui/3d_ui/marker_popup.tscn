@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://d4m5f8ce6m1yg"]
 
-[ext_resource type="Texture2D" uid="uid://djyhnpve3kxcy" path="res://assets/UI/blue_panels/SmallMenuBGT01.5BlueDark.png" id="1_2xycp"]
 [ext_resource type="Script" path="res://engine/player_ui/3d_ui/marker_popup.gd" id="1_8m3yu"]
-[ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="3_hj20s"]
-[ext_resource type="Texture2D" uid="uid://b1jxlcc8aq8gj" path="res://assets/UI/white_buttons/PCMainButtonHighlightedWhiteT02.png" id="3_xirwi"]
-[ext_resource type="FontFile" uid="uid://b3pxbbyvttwq8" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Rg.otf" id="4_q1pug"]
+[ext_resource type="Texture2D" uid="uid://djyhnpve3kxcy" path="res://assets/UI/blue_panels/SmallMenuBGT01.5BlueDark.png" id="2_45rlg"]
+[ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="3_ie65x"]
+[ext_resource type="Texture2D" uid="uid://b1jxlcc8aq8gj" path="res://assets/UI/white_buttons/PCMainButtonHighlightedWhiteT02.png" id="4_8m4rw"]
+[ext_resource type="FontFile" uid="uid://b3pxbbyvttwq8" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Rg.otf" id="5_nmu7m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vixht"]
 
@@ -18,7 +18,7 @@ Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 46
-Label/fonts/font = ExtResource("4_q1pug")
+Label/fonts/font = ExtResource("5_nmu7m")
 Label/styles/normal = SubResource("StyleBoxEmpty_vixht")
 
 [node name="Control" type="Control"]
@@ -38,7 +38,7 @@ offset_bottom = 40.0
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_2xycp")
+texture = ExtResource("2_45rlg")
 expand_mode = 1
 flip_h = true
 flip_v = true
@@ -49,9 +49,9 @@ offset_left = 25.0
 offset_top = 51.0
 offset_right = 319.0
 offset_bottom = 183.0
-texture_normal = ExtResource("3_hj20s")
-texture_pressed = ExtResource("3_hj20s")
-texture_hover = ExtResource("3_xirwi")
+texture_normal = ExtResource("3_ie65x")
+texture_pressed = ExtResource("3_ie65x")
+texture_hover = ExtResource("4_8m4rw")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -71,9 +71,9 @@ offset_left = 25.0
 offset_top = 186.0
 offset_right = 319.0
 offset_bottom = 318.0
-texture_normal = ExtResource("3_hj20s")
-texture_pressed = ExtResource("3_hj20s")
-texture_hover = ExtResource("3_xirwi")
+texture_normal = ExtResource("3_ie65x")
+texture_pressed = ExtResource("3_ie65x")
+texture_hover = ExtResource("4_8m4rw")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -93,9 +93,9 @@ offset_left = 25.0
 offset_top = 322.0
 offset_right = 319.0
 offset_bottom = 454.0
-texture_normal = ExtResource("3_hj20s")
-texture_pressed = ExtResource("3_hj20s")
-texture_hover = ExtResource("3_xirwi")
+texture_normal = ExtResource("3_ie65x")
+texture_pressed = ExtResource("3_ie65x")
+texture_hover = ExtResource("4_8m4rw")
 ignore_texture_size = true
 stretch_mode = 0
 

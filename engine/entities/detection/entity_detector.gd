@@ -60,8 +60,8 @@ func poll_entities():
         var sound = Sound.new(poll_entity, poll_entity.emission.volume, poll_entity.emission.pitch, poll_entity.emission.profile)
         var dist = GlobeHelpers.arc_to_km(entity.position, poll_entity.position, entity.anchor)
         var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
-        #print ("final db ", final_db, "from body: ", poll_entity.name,  "vs sensitivty", sensitivity)
-       # print("Dist is ", dist)
+        var dstr =  ("final db " +str (final_db) + "from body: " + poll_entity.name + "vs sensitivty" + str(sensitivity))
+        entity.debug.dmsg(dstr)
 
         if final_db >= sensitivity:
             #If no signal object exists, make one.
@@ -70,7 +70,6 @@ func poll_entities():
             #More fun if we're always at least 20% certain
             if certainty < 0.2:
                 certainty = 0.2
-            print("Certainty in signal is ", certainty)
             if !sigmap.has(poll_entity):
                 var sigob:SignalObject = load("res://engine/entities/detection/signal_scene.tscn").instantiate()
                 entity.anchor.add_child(sigob)

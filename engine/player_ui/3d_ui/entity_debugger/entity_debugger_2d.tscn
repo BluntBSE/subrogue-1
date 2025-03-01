@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm4nvcd1wepk1"]
+
+[ext_resource type="Script" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger.gd" id="1_7hp4b"]
+[ext_resource type="Texture2D" uid="uid://pdsxuv02jauc" path="res://assets/UI/white_panels/PanelBGWhite.png" id="1_vsurg"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7hp4b")
+
+[node name="BoundingBox" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 0
+offset_right = 792.0
+offset_bottom = 520.0
+
+[node name="TextureRect" type="TextureRect" parent="BoundingBox"]
+self_modulate = Color(0.314316, 0.314316, 0.314316, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_vsurg")
+expand_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BoundingBox/TextureRect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 0
+offset_left = 51.0
+offset_top = 9.0
+offset_right = 551.0
+offset_bottom = 509.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoundingBox/TextureRect/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2

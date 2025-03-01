@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bf05xxutehc2h"]
+
+[node name="RichTextLabel" type="RichTextLabel"]
+offset_left = 35.0
+offset_top = 17.0
+offset_right = 490.0
+offset_bottom = 113.0
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "1. Hello! I am a debug message related to the sub."
+fit_content = true
