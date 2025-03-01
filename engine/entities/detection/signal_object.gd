@@ -29,6 +29,13 @@ func offset_self():
     
     var new_position = position + (new_direction * GlobeHelpers.km_to_arc_distance(km_offset, anchor))
     position = new_position
+    var vecfloat = GlobeHelpers.km_to_arc_distance(km_offset, anchor) * 2.0
+    %CertaintyRadius.scale = Vector3(vecfloat, vecfloat, vecfloat)
+   # print("km_offset is ", km_offset)
+   # print("scale is ", vecfloat)
+   # print("Certainty is ", certainty)
+    %CertaintyLabel.text = str(certainty) + "%"
+    look_at(anchor.position)
 
 func fix_height()->void:
     #The  entity should always be a height above the surface of the anchor.

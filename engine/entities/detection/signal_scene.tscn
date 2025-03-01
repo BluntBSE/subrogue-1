@@ -1,42 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbmwj8rbjon7i"]
+[gd_scene load_steps=6 format=3 uid="uid://bbmwj8rbjon7i"]
 
 [ext_resource type="Script" path="res://engine/entities/detection/signal_object.gd" id="1_kaa7y"]
 [ext_resource type="Texture2D" uid="uid://colgufyqeccri" path="res://assets/UI/white_icons/ScopeIconWhite.png" id="2_xg60q"]
+[ext_resource type="Texture2D" uid="uid://b620b0yx3f6sq" path="res://assets/UI/white_icons/white_circle_3.png" id="3_n41g1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drk11"]
+transparency = 1
+blend_mode = 1
+albedo_texture = ExtResource("3_n41g1")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3c18i"]
 
 [node name="SignalScene" type="Node3D"]
 script = ExtResource("1_kaa7y")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-layers = 0
-billboard = 1
 texture = ExtResource("2_xg60q")
 
 [node name="TimeSince" type="Label3D" parent="Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00208277, -1.24337, -0.00442767)
-layers = 0
-billboard = 1
 text = "3.0s"
 
 [node name="Volume" type="Label3D" parent="Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27072, -0.0824654, -0.0208814)
-layers = 0
-billboard = 1
 text = "90db"
 
 [node name="Pitch" type="Label3D" parent="Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29385, -0.0907743, -0.00460076)
-layers = 0
-billboard = 1
 text = "60hz"
 
 [node name="Class" type="Label3D" parent="Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38999, 0.988479, -0.00460076)
-layers = 0
-billboard = 1
 text = "Commercial Vessel"
 
 [node name="Class2" type="Label3D" parent="Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49563, 0.988479, -0.00460076)
-layers = 0
-billboard = 1
 text = "American Empire"
+
+[node name="CertaintyRadius" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_drk11")
+mesh = SubResource("QuadMesh_3c18i")
+
+[node name="CertaintyLabel" type="Label3D" parent="CertaintyRadius"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.595119, 0)
+text = "Test"

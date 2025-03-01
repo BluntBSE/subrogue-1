@@ -291,13 +291,14 @@ script = ExtResource("20_0c68s")
 
 [node name="EntityDebug" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 5)
 top_level = true
 script = ExtResource("21_7if8f")
 
 [node name="ContextMarker" parent="EntityDebug" instance=ExtResource("22_loeq3")]
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 remote_path = NodePath("../EntityDebug")
 update_rotation = false
 

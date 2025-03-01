@@ -4,9 +4,9 @@ class_name EntityDetector
 #Passive detection stats
 @onready var entity:Entity = get_parent()
 @onready var detection_area = %DetectionArea
-var sensitivity:float = 15.0 #Expressed as minimum DB to hear
+var sensitivity:float = 5.0 #Expressed as minimum DB to hear
 var c100:float = 300.0 #Expressed as km
-var cfalloff:float = 1.0 #Certainty lost per 10km.
+var cfalloff:float = 0.2 #Certainty lost per 10km.
 var min_certainty: float = 20.0 #Always at least 20% certain in detection position
 var max_range:float = 2000.0 #Expressed as km
 
@@ -60,13 +60,20 @@ func poll_entities():
         var sound = Sound.new(poll_entity, poll_entity.emission.volume, poll_entity.emission.pitch, poll_entity.emission.profile)
         var dist = GlobeHelpers.arc_to_km(entity.position, poll_entity.position, entity.anchor)
         var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
-        var dstr =  ("final db " +str (final_db) + "from body: " + poll_entity.name + "vs sensitivty" + str(sensitivity))
+        var dstr =  ("final db " +str (final_db) + "from body: " + poll_entity.name + " vs sensitivty " + str(sensitivity) )
         entity.debug.dmsg(dstr)
 
         if final_db >= sensitivity:
             #If no signal object exists, make one.
-            var from_c100 = cfalloff * dist-c100
-            var certainty = 100 - (cfalloff * (dist-c100))
+            var certainty:float
+            var from_c100 =  (dist-c100)
+            if from_c100 > 0: #A positive number indicates the distance is greater than c100.
+                certainty = 100 - (cfalloff * (dist-c100))        
+                pass
+            else:
+                certainty = 100.0
+            var dstr2 = "Certainty is now " + str(certainty)
+            entity.debug.dmsg(dstr2)
             #More fun if we're always at least 20% certain
             if certainty < 0.2:
                 certainty = 0.2

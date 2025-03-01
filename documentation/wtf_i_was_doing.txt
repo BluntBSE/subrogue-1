@@ -16,9 +16,16 @@ BUG:
 
 
 QUEUE:
-    Fix left click movement bug
-    Make a function: create_waypoint_away_from(target, distance)
-    Make the NPC run away based on that function
+    Detection:
+        Any new contacts are added immediately
+        Contacts have a central handle. They have a radius around them based on the current uncertainty.
+        They spawn at a random offset, then *keep that offset and continue moving with the velocity of the entity they are bound to*
+        
+        After that, a pretty long (6s?) poll between updates.
+        Players have a button or slider that can manually poll or increase poll rate.
+
+    Make the NPC run
+    
     
     VISION:
         Entities have LISTENER CAMERAS that register to any EMITTER node that's in LOS.
