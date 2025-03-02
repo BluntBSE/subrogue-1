@@ -15,34 +15,58 @@ albedo_texture = ExtResource("3_n41g1")
 script = ExtResource("1_kaa7y")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visibility_range_begin_margin = 50.0
+visibility_range_end = 25.0
+visibility_range_end_margin = 200.0
+visibility_range_fade_mode = 1
 texture = ExtResource("2_xg60q")
 
-[node name="TimeSince" type="Label3D" parent="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00208277, -1.24337, -0.00442767)
-text = "3.0s"
-
-[node name="Volume" type="Label3D" parent="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27072, -0.0824654, -0.0208814)
-text = "90db"
-
-[node name="Pitch" type="Label3D" parent="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29385, -0.0907743, -0.00460076)
-text = "60hz"
-
-[node name="Class" type="Label3D" parent="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38999, 0.988479, -0.00460076)
-text = "Commercial Vessel"
-
-[node name="Class2" type="Label3D" parent="Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49563, 0.988479, -0.00460076)
-text = "American Empire"
-
-[node name="CertaintyRadius" type="MeshInstance3D" parent="."]
+[node name="CertaintyRadius" type="MeshInstance3D" parent="Sprite3D"]
 unique_name_in_owner = true
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_drk11")
+visibility_range_begin_margin = 50.0
+visibility_range_end = 25.0
+visibility_range_end_margin = 200.0
+visibility_range_fade_mode = 1
 mesh = SubResource("QuadMesh_3c18i")
+skeleton = NodePath("../..")
 
-[node name="CertaintyLabel" type="Label3D" parent="CertaintyRadius"]
+[node name="CertaintyLabel" type="Label3D" parent="Sprite3D/CertaintyRadius"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.595119, 0)
+visibility_range_begin_margin = 50.0
+visibility_range_end = 25.0
+visibility_range_end_margin = 200.0
+visibility_range_fade_mode = 1
 text = "Test"
+
+[node name="EntityLabel" type="Label3D" parent="Sprite3D/CertaintyRadius"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.687453, 0)
+visibility_range_begin_margin = 50.0
+visibility_range_end = 25.0
+visibility_range_end_margin = 200.0
+visibility_range_fade_mode = 1
+text = "Entity A2S3"
+
+[node name="PitchLabel" type="Label3D" parent="Sprite3D/CertaintyRadius"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.990286, 0.0507254, 0.0333817)
+layers = 0
+visibility_range_begin_margin = 50.0
+visibility_range_end = 25.0
+visibility_range_end_margin = 200.0
+visibility_range_fade_mode = 1
+text = "60hz"
+
+[node name="PitchLabel2" type="Label3D" parent="Sprite3D/CertaintyRadius"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.868851, 0.0223363, 0.0231677)
+layers = 0
+visibility_range_begin_margin = 50.0
+visibility_range_end = 25.0
+visibility_range_end_margin = 200.0
+visibility_range_fade_mode = 1
+text = "P80"

@@ -293,6 +293,7 @@ script = ExtResource("20_0c68s")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 5)
 top_level = true
+visible = false
 script = ExtResource("21_7if8f")
 
 [node name="ContextMarker" parent="EntityDebug" instance=ExtResource("22_loeq3")]

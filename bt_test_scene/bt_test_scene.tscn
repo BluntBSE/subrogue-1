@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1hafagwsx88"]
+[gd_scene load_steps=9 format=3 uid="uid://b1hafagwsx88"]
 
 [ext_resource type="Texture2D" uid="uid://w452s6v8ljb1" path="res://icon.svg" id="1_k52na"]
 [ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/behavior_tree_root.gd" id="2_4vafk"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/composites/sequencer.gd" id="4_yfrs8"]
 [ext_resource type="Script" path="res://bt_test_scene/go_to_mouse.gd" id="5_20a31"]
 [ext_resource type="Script" path="res://bt_test_scene/is_near_actor.gd" id="5_ne21m"]
+[ext_resource type="Texture2D" uid="uid://dsh7bmbsnxewg" path="res://assets/UI/white_icons/ArrowLeftIconWhite.png" id="7_opk5j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jaxen"]
+radius = 300.0
 
 [node name="BtTestScene" type="Node2D"]
 
@@ -37,3 +41,94 @@ script = ExtResource("5_ne21m")
 
 [node name="go_to_mouse" type="Node" parent="agent/BehaviorTreeRoot/SelectorComposite/Sequencer"]
 script = ExtResource("5_20a31")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(430, 307)
+texture = ExtResource("1_k52na")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("CircleShape2D_jaxen")
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+offset_left = 17.0
+offset_top = 65.0
+offset_right = 223.0
+offset_bottom = 105.0
+rotation = 1.59234
+
+[node name="Label" type="Label" parent="Sprite2D/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.101186
+anchor_top = -0.186266
+anchor_right = 0.101186
+anchor_bottom = -0.186266
+offset_left = 51.0959
+offset_top = 3.90044
+offset_right = 110.096
+offset_bottom = 26.9004
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "SWORD"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Sprite2D/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.53478
+anchor_top = -0.104791
+anchor_right = -1.53478
+anchor_bottom = -0.104791
+offset_left = 51.0959
+offset_top = 3.90044
+offset_right = 110.096
+offset_bottom = 26.9004
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "AXIS"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Sprite2D"]
+offset_left = -5.0
+offset_top = -293.0
+offset_bottom = 298.0
+color = Color(1, 0.290196, 0.290196, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Sprite2D"]
+modulate = Color(0.999986, 0.614702, 0.610733, 1)
+offset_left = 148.0
+offset_top = -156.0
+offset_right = 348.0
+offset_bottom = 44.0
+texture = ExtResource("7_opk5j")
+flip_h = true
+
+[node name="Label" type="RichTextLabel" parent="Sprite2D/TextureRect"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -95.0
+offset_right = 88.0
+offset_bottom = 2.0
+text = "Assuming you only want to hit items on the right side of the axis:
+"
+
+[node name="Label3" type="RichTextLabel" parent="Sprite2D/TextureRect"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 42.0
+offset_right = 308.0
+offset_bottom = 176.0
+text = "Because the player's mouse is on the right side or something
+"
+
+[node name="Label2" type="RichTextLabel" parent="Sprite2D/TextureRect"]
+layout_mode = 0
+offset_left = -71.0
+offset_top = 221.0
+offset_right = 232.0
+offset_bottom = 401.0
+text = "Have a circular collisionShape2D follow the sprite at all times.
+
+If target is in circle:
+Check if target dist from sprite is POSITIVE X(to the right)
+or NEGATIVE X(to the left)"

@@ -9,11 +9,13 @@ var detected_object:Entity
 var certainty:float = 50.0
 var hidden:bool
 var last_sound:Sound
+var lerping = false #For animation
 @onready var sprite = get_node("Sprite3D")
 #Certainty of 100 is perfectly accurate.
 #A certainty of (approaching) 0 is within 200km
 
 func offset_self():
+    #Used for appearing in a random location when first detected.
     var km_offset = lerp(200.0,0.0,(certainty/100) )
     #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
     var anchor: Planet = detecting_object.anchor
@@ -34,8 +36,35 @@ func offset_self():
    # print("km_offset is ", km_offset)
    # print("scale is ", vecfloat)
    # print("Certainty is ", certainty)
-    %CertaintyLabel.text = str(certainty) + "%"
+    %CertaintyLabel.text = str( snapped(certainty, 1) ) + "%"
     look_at(anchor.position)
+    
+func new_offset_position()->Vector3:
+    #After the initial detection, this is used to determine where the signal ought to lerp to
+    var km_offset = lerp(200.0,0.0,(certainty/100) )
+    #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
+    var anchor: Planet = detecting_object.anchor
+    
+    # Calculate a random tangential direction
+    var position_on_sphere = detected_object.position
+    var random_vector = Vector3(randf(), randf(), randf()).normalized()
+    #flip the random vector half the time to allow negatives
+    var rand = randf()
+    if rand < 0.49:
+        random_vector = -random_vector
+    var new_direction = random_vector.cross(position_on_sphere).normalized()
+    
+    var new_position = detected_object.position + (new_direction * GlobeHelpers.km_to_arc_distance(km_offset, anchor))
+    return new_position
+
+func new_certainty_scale()->Vector3:
+    var anchor: Planet = detecting_object.anchor
+    var km_offset = lerp(200.0,0.0,(certainty/100) )
+    var vecfloat = GlobeHelpers.km_to_arc_distance(km_offset, anchor) * 2.0
+    return clamp(Vector3(vecfloat, vecfloat, vecfloat), Vector3(3.0,3.0,3.0), Vector3(15.0,15.0,15.0))
+   
+ 
+    
 
 func fix_height()->void:
     #The  entity should always be a height above the surface of the anchor.
@@ -51,6 +80,8 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound:Sound, _ce
     sprite.set_layer_mask_value(_detecting_object.faction, true)
     for child in sprite.get_children():
         child.set_layer_mask_value(_detecting_object.faction,true)
+    for child in %CertaintyRadius.get_children():
+        child.set_layer_mask_value(_detecting_object.faction,true)
     print("Unpack called with ", _detecting_object, _detected_object)
     last_sound = _sound
     certainty = _certainty
@@ -59,14 +90,27 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound:Sound, _ce
     position = _detected_object.position
     offset_self()
     #fix_height()
+
+func tween_to_new():
+    var new_position = new_offset_position()
+    var new_scale = new_certainty_scale()
+    var tween = get_tree().create_tween()
+    tween.set_parallel(true)
+    tween.tween_property(%CertaintyRadius, "scale",new_scale, 1.0)
+    tween.tween_property(self, "position", new_position, 1.0)
+    %CertaintyLabel.text = str(  snapped(certainty, 1)  ) + "%"
+    
+    %CertaintyRadius.scale= clamp(%CertaintyRadius.scale, Vector3(3.0,3.0,3.0), Vector3(30.0,30.0,30.0))
+
+    
     
 
 var elapsed = 0.0
+var tween_progress = 0.0
+var tween_speed= 1.0
 func _process(delta:float)->void:
-    var timer = 2.0
-    elapsed += delta
-    if elapsed >= timer:
-        position = detected_object.position
-        offset_self()
-        elapsed = 0.0
+    if lerping == true:
+        tween_progress += delta * tween_speed
+    position += detected_object.linear_velocity /60 #Can we do this to actual engine frames? 60 is right if we're running at ideal speed but we might not be
+    
     pass
