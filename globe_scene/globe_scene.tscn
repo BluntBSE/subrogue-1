@@ -1,4 +1,4 @@
-[gd_scene load_steps=223 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=228 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" path="res://globe_scene/player/player.gd" id="9_xkk1b"]
 [ext_resource type="Script" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="PackedScene" uid="uid://ccpokifvegaoy" path="res://engine/entities/generic_entity.tscn" id="11_lgujk"]
+[ext_resource type="Shader" path="res://shaders/sonar_disc_test_1.gdshader" id="12_gdame"]
+[ext_resource type="Script" path="res://engine/entities/detection/sonar_control_field.gd" id="12_ojktk"]
+[ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="13_ep416"]
 [ext_resource type="Script" path="res://globe_scene/player/player_markers.gd" id="15_wdr3j"]
 [ext_resource type="AudioStream" uid="uid://c4pqqqemfw30i" path="res://assets/royalty_free_music/dark-ambient-126122.mp3" id="16_o22p0"]
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="17_eum53"]
@@ -241,6 +244,19 @@ volumetric_fog_density = 0.0
 volumetric_fog_length = 10.0
 volumetric_fog_detail_spread = 1.0
 volumetric_fog_ambient_inject = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdgja"]
+render_priority = 0
+shader = ExtResource("12_gdame")
+shader_parameter/start_angle = 140.0
+shader_parameter/end_angle = 160.0
+shader_parameter/frontier_head = 0.247356
+shader_parameter/frontier_tail = 0.0
+shader_parameter/disc_texture = ExtResource("13_ep416")
+
+[sub_resource type="QuadMesh" id="QuadMesh_cjcay"]
+lightmap_size_hint = Vector2i(27, 27)
+size = Vector2(5, 5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
 shader = ExtResource("21_bmluj")
@@ -1373,6 +1389,16 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100.25
 is_player = true
 base_color = Color(0, 0.69121, 0.737599, 1)
 spot_color = Color(0.509286, 0.509286, 0.509286, 1)
+
+[node name="SonarControlField" type="Node3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.22852, 0, 0)
+script = ExtResource("12_ojktk")
+
+[node name="SonarMesh" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity/SonarControlField"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0889282)
+material_override = SubResource("ShaderMaterial_gdgja")
+mesh = SubResource("QuadMesh_cjcay")
 
 [node name="PlayerMarkers" type="Node3D" parent="Players/Player1"]
 unique_name_in_owner = true
