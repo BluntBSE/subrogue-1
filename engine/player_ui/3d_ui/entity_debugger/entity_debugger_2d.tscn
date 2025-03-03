@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bm4nvcd1wepk1"]
 
-[ext_resource type="Script" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger.gd" id="1_7hp4b"]
+[ext_resource type="Script" uid="uid://cxhh3bropxo1s" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger.gd" id="1_7hp4b"]
 [ext_resource type="Texture2D" uid="uid://pdsxuv02jauc" path="res://assets/UI/white_panels/PanelBGWhite.png" id="1_vsurg"]
 
 [node name="Control" type="Control"]

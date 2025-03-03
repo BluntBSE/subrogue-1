@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://crpudkg33nnc2"]
 
-[ext_resource type="Shader" path="res://shaders/glitch_practice/glitch_1.gdshader" id="1_7leo8"]
+[ext_resource type="Shader" uid="uid://7w0mqy00qy8y" path="res://shaders/glitch_practice/glitch_1.gdshader" id="1_7leo8"]
 [ext_resource type="PackedScene" uid="uid://bnygsufjcl2ql" path="res://globe_scene/globe_scene.tscn" id="2_2y1du"]
 [ext_resource type="Texture2D" uid="uid://d1lub7ik0y0h8" path="res://assets/montage_photos/nasa-1lfI7wkGWZ4-unsplash.jpg" id="3_b3mrx"]
 

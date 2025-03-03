@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MunitionDef" load_steps=2 format=3 uid="uid://c2tt1184lqmkn"]
 
-[ext_resource type="Script" path="res://engine/entities/munitions/munition_def.gd" id="1_fgqn7"]
+[ext_resource type="Script" uid="uid://bf45y24rvoq1o" path="res://engine/entities/munitions/munition_def.gd" id="1_fgqn7"]
 
 [resource]
 script = ExtResource("1_fgqn7")

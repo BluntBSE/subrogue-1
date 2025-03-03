@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cpk54blusv338"]
 
-[ext_resource type="Script" path="res://loading_screen/loadingbar.gd" id="1_ae46u"]
+[ext_resource type="Script" uid="uid://b1c1mwl0brqsn" path="res://loading_screen/loadingbar.gd" id="1_ae46u"]
 [ext_resource type="Texture2D" uid="uid://b38f01iyq0i43" path="res://loading_screen/grid_purple.jpg" id="2_b4m6o"]
 [ext_resource type="Texture2D" uid="uid://bhbk1mvl4jcr7" path="res://loading_screen/LoadingBarEmptyT09White.png" id="2_yqgq8"]
 [ext_resource type="FontFile" uid="uid://ckkgmxhxnuee3" path="res://assets/UI/fonts/Ethnocentric Rg.otf" id="3_gdwg3"]
@@ -61,8 +61,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2youl"]
 _data = {
-"RESET": SubResource("Animation_887lg"),
-"texture_pan_up": SubResource("Animation_lr6to")
+&"RESET": SubResource("Animation_887lg"),
+&"texture_pan_up": SubResource("Animation_lr6to")
 }
 
 [node name="LoadingScreen" type="Control" node_paths=PackedStringArray("progressbar", "percent_label", "tooltip_label")]

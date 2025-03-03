@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bn06qee1syvgs"]
 
-[ext_resource type="Script" path="res://addons/godot-polyliner/demos/line3d fix/Line3D.gd" id="1"]
+[ext_resource type="Script" uid="uid://c0iabxqowxg42" path="res://addons/godot-polyliner/demos/line3d fix/Line3D.gd" id="1"]
 [ext_resource type="Shader" path="res://addons/godot-polyliner/demos/ropetesting/rope_raymarch.tres" id="2_kwlvr"]
 
 [sub_resource type="ShaderMaterial" id="3"]

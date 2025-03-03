@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://b1hafagwsx88"]
 
 [ext_resource type="Texture2D" uid="uid://w452s6v8ljb1" path="res://icon.svg" id="1_k52na"]
-[ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/behavior_tree_root.gd" id="2_4vafk"]
-[ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/composites/selector.gd" id="3_g5xg7"]
-[ext_resource type="Script" path="res://engine/abstract_classes/behavior_tree/composites/sequencer.gd" id="4_yfrs8"]
-[ext_resource type="Script" path="res://bt_test_scene/go_to_mouse.gd" id="5_20a31"]
-[ext_resource type="Script" path="res://bt_test_scene/is_near_actor.gd" id="5_ne21m"]
+[ext_resource type="Script" uid="uid://dub08cmps46gn" path="res://engine/abstract_classes/behavior_tree/behavior_tree_root.gd" id="2_4vafk"]
+[ext_resource type="Script" uid="uid://bl3j2m7vxf2bc" path="res://engine/abstract_classes/behavior_tree/composites/selector.gd" id="3_g5xg7"]
+[ext_resource type="Script" uid="uid://c724yyse3xmg0" path="res://engine/abstract_classes/behavior_tree/composites/sequencer.gd" id="4_yfrs8"]
+[ext_resource type="Script" uid="uid://bcbbkmkiyajld" path="res://bt_test_scene/go_to_mouse.gd" id="5_20a31"]
+[ext_resource type="Script" uid="uid://b03hlich4r3k8" path="res://bt_test_scene/is_near_actor.gd" id="5_ne21m"]
 [ext_resource type="Texture2D" uid="uid://dsh7bmbsnxewg" path="res://assets/UI/white_icons/ArrowLeftIconWhite.png" id="7_opk5j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jaxen"]

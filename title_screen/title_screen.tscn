@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://cdrj27u3ygxc0"]
 
-[ext_resource type="Script" path="res://title_screen/main_menu.gd" id="1_cr28v"]
+[ext_resource type="Script" uid="uid://bp1k42oqhod6q" path="res://title_screen/main_menu.gd" id="1_cr28v"]
 [ext_resource type="PackedScene" uid="uid://c4rbxieydn2a4" path="res://title_screen/wireframe_sub_space.tscn" id="2_rdkjt"]
-[ext_resource type="Shader" path="res://title_screen/vcr.gdshader" id="3_qq1wq"]
+[ext_resource type="Shader" uid="uid://c4ixw7o0cka8i" path="res://title_screen/vcr.gdshader" id="3_qq1wq"]
 [ext_resource type="FontFile" uid="uid://ckkgmxhxnuee3" path="res://assets/UI/fonts/Ethnocentric Rg.otf" id="4_eea5d"]
 [ext_resource type="FontFile" uid="uid://5muhrw1dex5u" path="res://assets/UI/fonts/Ethnocentric Rg It.otf" id="5_1ihsi"]
 

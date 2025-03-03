@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MunitionsLib" load_steps=3 format=3 uid="uid://4yama6mdtmju"]
 
 [ext_resource type="Resource" uid="uid://c2tt1184lqmkn" path="res://engine/entities/munitions/manta_torpedo.tres" id="1_mnoxi"]
-[ext_resource type="Script" path="res://engine/entities/munitions/munitions_lib.gd" id="1_xj7af"]
+[ext_resource type="Script" uid="uid://b0ysq4igkex31" path="res://engine/entities/munitions/munitions_lib.gd" id="1_xj7af"]
 
 [resource]
 script = ExtResource("1_xj7af")

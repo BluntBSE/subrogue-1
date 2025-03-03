@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://if5yqvdcqn1y"]
 
 [ext_resource type="PackedScene" uid="uid://b1cbsj2p5e84p" path="res://assets/3d/wired.glb" id="1_hq3xq"]
-[ext_resource type="Shader" path="res://title_screen/wireframe_sub_space_2.gdshader" id="2_yh1wl"]
+[ext_resource type="Shader" uid="uid://cxcpch6650t4q" path="res://title_screen/wireframe_sub_space_2.gdshader" id="2_yh1wl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pfggn"]
 render_priority = 0
