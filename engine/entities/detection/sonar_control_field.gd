@@ -36,8 +36,9 @@ func _process(delta:float)->void:
 func send_pulse():
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_head", 0.0)
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_tail", 0.0)
-    var tween:Tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_ease(1)
-    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_head", 1.0, 2.0).from_current()
-    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_tail", 1.0, 1.0).from_current()
+    var tween:Tween = get_tree().create_tween().set_trans(Tween.TRANS_QUINT).set_ease(1)
+    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_head", 1.0, 1.0).from_current()
+    tween.set_trans(Tween.TRANS_CIRC)
+    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_tail", 1.0, 0.5).from_current()
     
     

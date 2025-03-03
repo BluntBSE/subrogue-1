@@ -16,9 +16,10 @@ BUG:
 
 
 QUEUE:
+    Improved curve tweener per that video
+    
     The ping:
-        Circular mesh around the player with a texture tha gets occluded based on a shader parameter
-        Might need to use a remote transform to  preven it tfrom rotating along.
+        Set up some active/passive UI controls
     
     Detection:
         Any new contacts are added immediately
