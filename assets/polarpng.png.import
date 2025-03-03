@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wxcf6ul5hk7d"
-path.s3tc="res://.godot/imported/grid.jpg-0e2f0f1288eeb425849673460212ffcd.s3tc.ctex"
+uid="uid://b0ien5rugpxsy"
+path.s3tc="res://.godot/imported/polarpng.png-c0d8b1de255e8f1f56fd77330b91d69d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://loading_screen/grid.jpg"
-dest_files=["res://.godot/imported/grid.jpg-0e2f0f1288eeb425849673460212ffcd.s3tc.ctex"]
+source_file="res://assets/polarpng.png"
+dest_files=["res://.godot/imported/polarpng.png-c0d8b1de255e8f1f56fd77330b91d69d.s3tc.ctex"]
 
 [params]
 
