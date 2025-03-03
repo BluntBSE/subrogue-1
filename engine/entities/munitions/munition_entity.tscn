@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://qfiyabbs8j2l"]
 
-[ext_resource type="Script" path="res://engine/entities/munition.gd" id="1_8j1xm"]
-[ext_resource type="Script" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
+[ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
+[ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="3_frfhe"]
 [ext_resource type="Texture2D" uid="uid://67mmmqln0imo" path="res://assets/UI/blue_icons/ForwardIconBlue.png" id="4_4vp62"]
 [ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="5_e5swc"]
@@ -44,9 +44,9 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nc0bu"]
 render_priority = 0
 shader = SubResource("Shader_2djlq")
+shader_parameter/texture_albedo = ExtResource("3_frfhe")
 shader_parameter/glow_color = Color(0.665179, 0, 0.019218, 1)
 shader_parameter/glow_intensity = 2.272
-shader_parameter/texture_albedo = ExtResource("3_frfhe")
 
 [sub_resource type="FogMaterial" id="FogMaterial_jo44f"]
 resource_local_to_scene = true

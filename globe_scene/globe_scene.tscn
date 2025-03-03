@@ -1,32 +1,32 @@
 [gd_scene load_steps=237 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
-[ext_resource type="Script" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
-[ext_resource type="Script" path="res://globe_scene/planet.gd" id="2_0c888"]
-[ext_resource type="Script" path="res://engine/player_camera/orbital_camera.gd" id="2_xt6wy"]
-[ext_resource type="Script" path="res://debug_node.gd" id="4_lsblq"]
+[ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
+[ext_resource type="Script" uid="uid://dfy7slt7dt01i" path="res://globe_scene/planet.gd" id="2_0c888"]
+[ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_xt6wy"]
+[ext_resource type="Script" uid="uid://bn7mt5j4ydu5a" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Material" uid="uid://cx72xcf27h8qj" path="res://globe_scene/csgmat.tres" id="6_1twjn"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
-[ext_resource type="Script" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
-[ext_resource type="Script" path="res://globe_scene/player/player.gd" id="9_xkk1b"]
-[ext_resource type="Script" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
+[ext_resource type="Script" uid="uid://df4qigb0veuou" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
+[ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="9_xkk1b"]
+[ext_resource type="Script" uid="uid://c7feimtf0jnd2" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="PackedScene" uid="uid://ccpokifvegaoy" path="res://engine/entities/generic_entity.tscn" id="11_lgujk"]
-[ext_resource type="Script" path="res://engine/entities/detection/sonar_control_field.gd" id="12_ojktk"]
-[ext_resource type="Shader" path="res://engine/entities/detection/sonar_targeting_no_pulse.gdshader" id="13_7e8b4"]
-[ext_resource type="Shader" path="res://engine/entities/detection/sonar_pulse_2.gdshader" id="13_7t366"]
+[ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="12_ojktk"]
+[ext_resource type="Shader" uid="uid://cdoiv5cq5nyvy" path="res://engine/entities/detection/sonar_targeting_no_pulse.gdshader" id="13_7e8b4"]
+[ext_resource type="Shader" uid="uid://c2ffm8yh34ab5" path="res://engine/entities/detection/sonar_pulse_2.gdshader" id="13_7t366"]
 [ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="13_ep416"]
-[ext_resource type="Script" path="res://globe_scene/player/player_markers.gd" id="15_wdr3j"]
+[ext_resource type="Script" uid="uid://ddutyndli6okj" path="res://globe_scene/player/player_markers.gd" id="15_wdr3j"]
 [ext_resource type="AudioStream" uid="uid://c4pqqqemfw30i" path="res://assets/royalty_free_music/dark-ambient-126122.mp3" id="16_o22p0"]
-[ext_resource type="Shader" path="res://engine/entities/detection/piecemeal.gdshader" id="16_p37tr"]
+[ext_resource type="Shader" uid="uid://dc2pip1y3et5g" path="res://engine/entities/detection/piecemeal.gdshader" id="16_p37tr"]
 [ext_resource type="Texture2D" uid="uid://b0ien5rugpxsy" path="res://assets/polarpng.png" id="17_dm0pa"]
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="17_eum53"]
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="19_8gfvb"]
-[ext_resource type="Script" path="res://globe_scene/player_ui_root.gd" id="20_eaa56"]
+[ext_resource type="Script" uid="uid://bmp2rptgbgioi" path="res://globe_scene/player_ui_root.gd" id="20_eaa56"]
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="20_oyi6m"]
 [ext_resource type="Texture2D" uid="uid://c3j3ua0ninil2" path="res://assets/UI/white_buttons/PCMainButtonNormalWhiteT02_filled.png" id="21_5ntyb"]
-[ext_resource type="Shader" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="21_bmluj"]
-[ext_resource type="Script" path="res://engine/player_ui/time_manager.gd" id="22_ky6go"]
+[ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="21_bmluj"]
+[ext_resource type="Script" uid="uid://b1e3glbgg7wdy" path="res://engine/player_ui/time_manager.gd" id="22_ky6go"]
 [ext_resource type="Texture2D" uid="uid://co3mmtrqg447m" path="res://assets/UI/blue_buttons/LoadingBarEmptyT03Blue.png" id="22_l3nat"]
 [ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="23_mfwgd"]
 [ext_resource type="Texture2D" uid="uid://cgujj1t61jgne" path="res://assets/UI/blue_buttons/LoadingBarFullT03Blue.png" id="23_xmpwj"]
@@ -38,14 +38,14 @@
 [ext_resource type="Texture2D" uid="uid://drx46y536lmy6" path="res://assets/UI/blue_icons/ArrowRightIconBlue.png" id="26_v6n2o"]
 [ext_resource type="Texture2D" uid="uid://b1xemghegym28" path="res://assets/UI/blue_icons/FrontIconBlue.png" id="27_3xujn"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="27_ei3qn"]
-[ext_resource type="Script" path="res://globe_scene/debug_faction.gd" id="33_x8218"]
+[ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/debug_faction.gd" id="33_x8218"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="34_f1l1f"]
-[ext_resource type="Script" path="res://engine/abstract_classes/entity_controller.gd" id="34_n1474"]
+[ext_resource type="Script" uid="uid://dac1cpfprokkh" path="res://engine/abstract_classes/entity_controller.gd" id="34_n1474"]
 [ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="35_m4noy"]
 [ext_resource type="Texture2D" uid="uid://o4wfqpapu8p2" path="res://assets/UI/red_test.png" id="35_woink"]
-[ext_resource type="Script" path="res://engine/navigation/nav_node_drawer.gd" id="36_4wwom"]
+[ext_resource type="Script" uid="uid://bxkngpvs1vlr5" path="res://engine/navigation/nav_node_drawer.gd" id="36_4wwom"]
 [ext_resource type="PackedScene" uid="uid://m4t2hh3hak6e" path="res://engine/navigation/nav_node.tscn" id="36_nkwg1"]
-[ext_resource type="Script" path="res://globe_scene/nav_nodes.gd" id="37_ue64j"]
+[ext_resource type="Script" uid="uid://dpqmish1shthn" path="res://globe_scene/nav_nodes.gd" id="37_ue64j"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_wog1n"]
 material = ExtResource("1_jtrqq")
@@ -84,8 +84,8 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n6esi"]
 render_priority = 0
 shader = SubResource("Shader_g4r0d")
-shader_parameter/height_ratio = 3.0
 shader_parameter/heightmap = ExtResource("8_6dvw2")
+shader_parameter/height_ratio = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5glwl"]
 transparency = 4
@@ -251,21 +251,21 @@ volumetric_fog_ambient_inject = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d4a7o"]
 render_priority = 0
 shader = ExtResource("13_7t366")
+shader_parameter/disc_texture = ExtResource("13_ep416")
 shader_parameter/start_angle = 270.0
 shader_parameter/end_angle = 280.0
 shader_parameter/frontier_head = 1.0
 shader_parameter/frontier_tail = 1.0
-shader_parameter/disc_texture = ExtResource("13_ep416")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8xdoo"]
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_d4a7o")
 shader = ExtResource("13_7e8b4")
+shader_parameter/disc_texture = ExtResource("13_ep416")
 shader_parameter/start_angle = 270.0
 shader_parameter/end_angle = 280.0
 shader_parameter/frontier_head = 0.0
 shader_parameter/frontier_tail = 0.0
-shader_parameter/disc_texture = ExtResource("13_ep416")
 
 [sub_resource type="QuadMesh" id="QuadMesh_cjcay"]
 lightmap_size_hint = Vector2i(27, 27)
@@ -275,19 +275,19 @@ size = Vector2(25, 25)
 render_priority = 0
 shader = ExtResource("16_p37tr")
 shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("13_ep416")
 shader_parameter/distance_fade_min = 0.0
 shader_parameter/distance_fade_max = 104.89
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = null
+shader_parameter/texture_metallic = ExtResource("17_dm0pa")
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
 shader_parameter/specular = 0.45
 shader_parameter/metallic = 0.85
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = ExtResource("13_ep416")
-shader_parameter/texture_metallic = ExtResource("17_dm0pa")
 
 [sub_resource type="QuadMesh" id="QuadMesh_o1jyr"]
 lightmap_size_hint = Vector2i(27, 27)
@@ -346,8 +346,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_icumr"]
 _data = {
-"RESET": SubResource("Animation_ox0k3"),
-"sonar_pulse_1": SubResource("Animation_cnygr")
+&"RESET": SubResource("Animation_ox0k3"),
+&"sonar_pulse_1": SubResource("Animation_cnygr")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]

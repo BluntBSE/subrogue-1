@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://p4ynwvfel1iw"]
 
-[ext_resource type="Script" path="res://engine/sound/sound_manager.gd" id="1_hx4t6"]
+[ext_resource type="Script" uid="uid://ubu0licusod2" path="res://engine/sound/sound_manager.gd" id="1_hx4t6"]
 [ext_resource type="AudioStream" uid="uid://dyb82kmlta3fk" path="res://title_screen/assets/deep-in-the-ocean-116172.mp3" id="2_svqvd"]
 [ext_resource type="AudioStream" uid="uid://cx7tm5t34m8qj" path="res://title_screen/assets/034850_short-wave-radio-noise-4-73951.mp3" id="3_iwe6a"]
 

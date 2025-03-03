@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d4m5f8ce6m1yg"]
 
-[ext_resource type="Script" path="res://engine/player_ui/3d_ui/marker_popup.gd" id="1_8m3yu"]
+[ext_resource type="Script" uid="uid://bjv6c3bibvw7p" path="res://engine/player_ui/3d_ui/marker_popup.gd" id="1_8m3yu"]
 [ext_resource type="Texture2D" uid="uid://djyhnpve3kxcy" path="res://assets/UI/blue_panels/SmallMenuBGT01.5BlueDark.png" id="2_45rlg"]
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="3_ie65x"]
 [ext_resource type="Texture2D" uid="uid://b1jxlcc8aq8gj" path="res://assets/UI/white_buttons/PCMainButtonHighlightedWhiteT02.png" id="4_8m4rw"]
