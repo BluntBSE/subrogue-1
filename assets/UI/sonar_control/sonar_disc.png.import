@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wxcf6ul5hk7d"
-path.s3tc="res://.godot/imported/grid.jpg-0e2f0f1288eeb425849673460212ffcd.s3tc.ctex"
+uid="uid://cj21hnvierxk6"
+path.s3tc="res://.godot/imported/sonar_disc.png-499adcbc9b51911009d9a99a875c0b52.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://loading_screen/grid.jpg"
-dest_files=["res://.godot/imported/grid.jpg-0e2f0f1288eeb425849673460212ffcd.s3tc.ctex"]
+source_file="res://assets/UI/sonar_control/sonar_disc.png"
+dest_files=["res://.godot/imported/sonar_disc.png-499adcbc9b51911009d9a99a875c0b52.s3tc.ctex"]
 
 [params]
 

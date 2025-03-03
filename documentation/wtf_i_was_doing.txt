@@ -12,10 +12,15 @@ but not so much the player can't bamboozle the AI.
 
 
 BUG: 
-    Can't fire munitions anymore?
+    Sprite rotation looking kinda messed up when movnig?
 
 
 QUEUE:
+    Improved curve tweener per that video
+    
+    The ping:
+        Set up some active/passive UI controls
+    
     Detection:
         Any new contacts are added immediately
         Contacts have a central handle. They have a radius around them based on the current uncertainty.

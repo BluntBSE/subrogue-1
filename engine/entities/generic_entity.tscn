@@ -210,8 +210,7 @@ script = ExtResource("4_xb8gp")
 
 [node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
 unique_name_in_owner = true
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
-visible = false
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.010103)
 layers = 2
 texture = ExtResource("5_pq53b")
 
