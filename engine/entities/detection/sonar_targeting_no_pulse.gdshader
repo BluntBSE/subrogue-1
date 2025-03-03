@@ -49,7 +49,7 @@ void fragment() {
     }
     
     if (within_angle_range) {
-        ALPHA = ALPHA*0.1;
+        ALPHA = ALPHA*0.025;
     } else {
         ALPHA = 0.0;
     }    

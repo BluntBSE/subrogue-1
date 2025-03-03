@@ -11,6 +11,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 """
+Mathemetically based pulse example. Probably not going to use.
 
 var frontier_delta = 0.0
 var speed = 2.0
@@ -26,15 +27,17 @@ func _process(delta: float) -> void:
 """
 func _process(delta:float)->void:
     if pulse == true:
-        %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", 0.05)
-        %SonarPulseMesh.material_override.set_shader_parameter("frontier_tail", 0.0)
+
         send_pulse()
         pulse = false
     pass
     #send_pulse()
 
 func send_pulse():
-    var tween:Tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_parallel(true).set_loops(5).set_ease(1)
-    tween.tween_property(%SonarPulseMesh, "material_override:shader_parameter/frontier_head", 1.0, 2.0).from_current()
-    tween.tween_property(%SonarPulseMesh, "material_override:shader_parameter/frontier_tail", 0.95, 2.0).from_current()
+    %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_head", 0.0)
+    %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_tail", 0.0)
+    var tween:Tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_ease(1)
+    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_head", 1.0, 2.0).from_current()
+    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_tail", 1.0, 1.0).from_current()
+    
     
