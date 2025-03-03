@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
     frontier_delta += delta * speed
     var frontier_head = fmod(frontier_delta, PI) / PI #I don't actually understand why we do this part.
     print("Frontier head: ", frontier_head)
-    var frontier_tail = frontier_head - 0.2
+    var frontier_tail = frontier_head - 0.05
     %SonarMesh.material_override.set_shader_parameter("frontier_head", frontier_head)
     %SonarMesh.material_override.set_shader_parameter("frontier_tail", frontier_tail)
 

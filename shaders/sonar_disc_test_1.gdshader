@@ -42,8 +42,15 @@ void fragment() {
     bool within_frontier_limits=false;
     if (cdist < frontier_head){
         if (cdist>frontier_tail){
-            ALPHA = ALPHA * 0.2;
+            ALPHA = ALPHA;
         }
+    }
+    
+    if (cdist>frontier_head){
+        ALPHA = 0.0;
+    }
+    if (cdist<frontier_tail){
+        ALPHA = 0.0;
     }
     
     

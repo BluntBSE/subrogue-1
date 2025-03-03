@@ -250,8 +250,8 @@ render_priority = 0
 shader = ExtResource("12_gdame")
 shader_parameter/start_angle = 140.0
 shader_parameter/end_angle = 160.0
-shader_parameter/frontier_head = 0.247356
-shader_parameter/frontier_tail = 0.0
+shader_parameter/frontier_head = 0.0579951
+shader_parameter/frontier_tail = 0.00799513
 shader_parameter/disc_texture = ExtResource("13_ep416")
 
 [sub_resource type="QuadMesh" id="QuadMesh_cjcay"]
