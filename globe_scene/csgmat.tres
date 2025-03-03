@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cx72xcf27h8qj"]
 
-[ext_resource type="Shader" path="res://globe_scene/pulsing_wireframe.gdshader" id="1_i4ac8"]
+[ext_resource type="Shader" uid="uid://d3c8mu4cj4od6" path="res://globe_scene/pulsing_wireframe.gdshader" id="1_i4ac8"]
 
 [resource]
 render_priority = 0

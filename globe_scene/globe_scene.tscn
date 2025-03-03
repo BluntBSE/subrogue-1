@@ -1424,6 +1424,7 @@ path_interval_type = 0
 path_interval = 0.1
 path_simplify_angle = 0.0
 path_rotation = 2
+path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
@@ -1501,7 +1502,7 @@ mesh = SubResource("QuadMesh_o1jyr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Players/Player1/PlayerEntities/PlayerEntity/SonarControlField"]
 libraries = {
-"": SubResource("AnimationLibrary_icumr")
+&"": SubResource("AnimationLibrary_icumr")
 }
 
 [node name="PlayerMarkers" type="Node3D" parent="Players/Player1"]
