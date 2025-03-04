@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Node3D
 @export var draw_on:Area3D
 @export var raycasting:bool = true
@@ -19,8 +19,8 @@ signal add_and_link
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     add_node_at.connect(handle_add_node_at)
-    InputMap.load_from_project_settings()
-    InputMap.get_actions()
+    #InputMap.load_from_project_settings()
+    #InputMap.get_actions()
     pass # Replace with function body.
 
 
@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
             last_hovered._on_mouse_exited()
         last_hovered = null
 
-    input_clicks()
+    #input_clicks()
 
 func handle_add_node_at(_position: Vector3) -> void:
     var navnode:NavNode = load("res://engine/navigation/nav_node.tscn").instantiate()

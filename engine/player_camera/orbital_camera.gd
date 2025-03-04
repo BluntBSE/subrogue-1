@@ -66,8 +66,8 @@ func _ready() -> void:
     #position = destination
     look_at(anchor.position)
     if Engine.is_editor_hint(): print("Good morning from the editor")
-    InputMap.load_from_project_settings()
-    InputMap.get_actions()
+   # InputMap.load_from_project_settings()
+   # InputMap.get_actions()
     state_machine.Change("navigating", {})
     last_pos = position
     #TODO: Figure out how to randomize these later.

@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Node
 @export var draw_on:Area3D
 @export var drawing:bool = false
@@ -26,9 +26,9 @@ signal add_vertex_at
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    add_vertex_at.connect(handle_add_vertex_at)
-    InputMap.load_from_project_settings()
-    InputMap.get_actions()
+    #add_vertex_at.connect(handle_add_vertex_at)
+    #InputMap.load_from_project_settings()
+    #InputMap.get_actions()
     pass # Replace with function body.
 
 
@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
     # clear_data()
         bake_mesh = false
         
-    input_clicks()
+    #input_clicks()
     pass
 
 
