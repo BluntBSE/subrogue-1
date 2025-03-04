@@ -364,7 +364,7 @@ shader_parameter/active = false
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
 shader = ExtResource("31_i4tgh")
 shader_parameter/disc_texture = ExtResource("13_ep416")
-shader_parameter/start_angle = 252.071
+shader_parameter/start_angle = 165.664
 shader_parameter/end_angle = 45.0
 shader_parameter/between_angle_alpha = 1.0
 shader_parameter/beyond_angle_alpha = 0.2
@@ -374,7 +374,7 @@ shader_parameter/distance_factor = 0.0
 resource_local_to_scene = true
 shader = ExtResource("31_i4tgh")
 shader_parameter/disc_texture = ExtResource("30_04345")
-shader_parameter/start_angle = 252.071
+shader_parameter/start_angle = 165.664
 shader_parameter/end_angle = 45.0
 shader_parameter/between_angle_alpha = 1.0
 shader_parameter/beyond_angle_alpha = 0.2
@@ -2061,9 +2061,9 @@ offset_top = 885.0
 offset_right = 962.0
 offset_bottom = 925.0
 script = ExtResource("30_kyj5j")
-angle_1 = 252.071
+angle_1 = 165.664
 angle_2 = 45.0
-a_diff = 152.929
+a_diff = -120.664
 
 [node name="ActiveSonarBG" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
 unique_name_in_owner = true
@@ -2095,7 +2095,7 @@ offset_left = 75.0
 offset_top = 70.0
 offset_right = 115.0
 offset_bottom = 110.0
-rotation = 4.39947
+rotation = 2.89137
 
 [node name="ActiveSonarKnobOne" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobOnePivot"]
 layout_mode = 0

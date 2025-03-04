@@ -1,13 +1,15 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://1dxldgjx8y3r"]
 
-[ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="1_t8jak"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e4ld6"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/collision_mask.png-ee42fc5c96a68891d38d55de09527503.ctex"
 
 [resource]
 resource_local_to_scene = true
 transparency = 2
 alpha_scissor_threshold = 0.603
 alpha_antialiasing_mode = 0
-albedo_texture = ExtResource("1_t8jak")
+albedo_texture = SubResource("CompressedTexture2D_e4ld6")
 emission_enabled = true
 emission = Color(0.142281, 0, 0.905092, 1)
 emission_energy_multiplier = 10.28
