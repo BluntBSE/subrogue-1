@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://gfr8i88t0msh"]
+
+[ext_resource type="Texture2D" uid="uid://cp3g7kn76q3ta" path="res://assets/bluepolar3.png" id="1_ntvrh"]
+
+[resource]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.603
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_ntvrh")
+emission_enabled = true
+emission = Color(0.142281, 0, 0.905092, 1)
+emission_energy_multiplier = 2.77
