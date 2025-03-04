@@ -1,4 +1,4 @@
-[gd_scene load_steps=234 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=239 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -35,6 +35,9 @@
 [ext_resource type="Texture2D" uid="uid://b1xemghegym28" path="res://assets/UI/blue_icons/FrontIconBlue.png" id="27_3xujn"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="27_ei3qn"]
 [ext_resource type="Texture2D" uid="uid://cp3g7kn76q3ta" path="res://assets/bluepolar3.png" id="30_04345"]
+[ext_resource type="Script" uid="uid://dp4b2h8rbjnju" path="res://engine/player_ui/active_sonar_control.gd" id="30_kyj5j"]
+[ext_resource type="Shader" uid="uid://372drerjny0t" path="res://engine/player_ui/3d_ui/radial_control_fade.gdshader" id="31_i4tgh"]
+[ext_resource type="Texture2D" uid="uid://cvrep056uh18e" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04Blue.png" id="31_x2kcd"]
 [ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/debug_faction.gd" id="33_x8218"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="34_f1l1f"]
 [ext_resource type="Script" uid="uid://dac1cpfprokkh" path="res://engine/abstract_classes/entity_controller.gd" id="34_n1474"]
@@ -356,6 +359,25 @@ shader_parameter/freq_coeff = 2.0
 shader_parameter/shift_coeff = 0.5
 shader_parameter/speed = 1.0
 shader_parameter/active = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
+shader = ExtResource("31_i4tgh")
+shader_parameter/disc_texture = ExtResource("13_ep416")
+shader_parameter/start_angle = 27.7444
+shader_parameter/end_angle = 45.0
+shader_parameter/between_angle_alpha = 1.0
+shader_parameter/beyond_angle_alpha = 0.2
+shader_parameter/distance_factor = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4tgh"]
+resource_local_to_scene = true
+shader = ExtResource("31_i4tgh")
+shader_parameter/disc_texture = ExtResource("30_04345")
+shader_parameter/start_angle = 27.7444
+shader_parameter/end_angle = 45.0
+shader_parameter/between_angle_alpha = 1.0
+shader_parameter/beyond_angle_alpha = 0.2
+shader_parameter/distance_factor = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_6oioa"]
 
@@ -2037,15 +2059,69 @@ offset_left = 922.0
 offset_top = 885.0
 offset_right = 962.0
 offset_bottom = 925.0
+script = ExtResource("30_kyj5j")
+angle_1 = 27.7444
+angle_2 = 45.0
+a_diff = 17.2556
 
-[node name="TextureRect" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+[node name="ActiveSonarBG" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.54902)
+material = SubResource("ShaderMaterial_n7gus")
 layout_mode = 0
-offset_left = -26.0
-offset_top = -31.0
-offset_right = 694.0
-offset_bottom = 689.0
+offset_left = -43.0
+offset_top = -48.0
+offset_right = 677.0
+offset_bottom = 672.0
+scale = Vector2(0.320004, 0.320004)
+texture = ExtResource("13_ep416")
+
+[node name="ActiveSonarTexture" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_i4tgh")
+layout_mode = 0
+offset_left = -28.0
+offset_top = -34.0
+offset_right = 692.0
+offset_bottom = 686.0
 scale = Vector2(0.279999, 0.279999)
 texture = ExtResource("30_04345")
+
+[node name="ActiveSonarKnobOnePivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 75.0
+offset_top = 70.0
+offset_right = 115.0
+offset_bottom = 110.0
+rotation = 0.484231
+
+[node name="ActiveSonarKnobOne" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobOnePivot"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = -119.0
+offset_right = 79.0
+offset_bottom = -19.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("31_x2kcd")
+
+[node name="ActiveSonarKnobTwoPivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 75.0
+offset_top = 70.0
+offset_right = 115.0
+offset_bottom = 110.0
+rotation = 0.785398
+
+[node name="ActiveSonarKnobTwo" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobTwoPivot"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = -119.0
+offset_right = 79.0
+offset_bottom = -19.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("31_x2kcd")
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.4)
