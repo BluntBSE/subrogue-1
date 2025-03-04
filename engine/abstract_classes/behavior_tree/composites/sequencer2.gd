@@ -1,6 +1,7 @@
 extends Composite
 
-class_name Sequencer
+class_name Sequencer2
+
 #The idea here is that it won't proceed along the sequence if it gets a failure.
 #Therefore, the order of the child nodes matters.
 
