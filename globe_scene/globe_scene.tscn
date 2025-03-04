@@ -1,4 +1,4 @@
-[gd_scene load_steps=237 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=234 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -27,17 +27,14 @@
 [ext_resource type="Texture2D" uid="uid://c3j3ua0ninil2" path="res://assets/UI/white_buttons/PCMainButtonNormalWhiteT02_filled.png" id="21_5ntyb"]
 [ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="21_bmluj"]
 [ext_resource type="Script" uid="uid://b1e3glbgg7wdy" path="res://engine/player_ui/time_manager.gd" id="22_ky6go"]
-[ext_resource type="Texture2D" uid="uid://co3mmtrqg447m" path="res://assets/UI/blue_buttons/LoadingBarEmptyT03Blue.png" id="22_l3nat"]
 [ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="23_mfwgd"]
-[ext_resource type="Texture2D" uid="uid://cgujj1t61jgne" path="res://assets/UI/blue_buttons/LoadingBarFullT03Blue.png" id="23_xmpwj"]
 [ext_resource type="Texture2D" uid="uid://edgpj510s3iu" path="res://assets/UI/blue_icons/ArrowLeftIconBlue.png" id="24_c3qma"]
-[ext_resource type="Texture2D" uid="uid://bgjry422vvmdw" path="res://assets/UI/white_buttons/VolumeSliderKnobT05White.png" id="24_ebcmx"]
-[ext_resource type="Texture2D" uid="uid://dfjd0lk4gcs7c" path="res://assets/UI/white_buttons/LoadingBarFullT03White.png" id="25_btgnx"]
 [ext_resource type="Texture2D" uid="uid://b35duoo481ffc" path="res://assets/UI/blue_icons/PauseIconBlue.png" id="25_gln1r"]
 [ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="26_pvo63"]
 [ext_resource type="Texture2D" uid="uid://drx46y536lmy6" path="res://assets/UI/blue_icons/ArrowRightIconBlue.png" id="26_v6n2o"]
 [ext_resource type="Texture2D" uid="uid://b1xemghegym28" path="res://assets/UI/blue_icons/FrontIconBlue.png" id="27_3xujn"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="27_ei3qn"]
+[ext_resource type="Texture2D" uid="uid://cp3g7kn76q3ta" path="res://assets/bluepolar3.png" id="30_04345"]
 [ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/debug_faction.gd" id="33_x8218"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="34_f1l1f"]
 [ext_resource type="Script" uid="uid://dac1cpfprokkh" path="res://engine/abstract_classes/entity_controller.gd" id="34_n1474"]
@@ -1769,6 +1766,7 @@ text = "Manta Torpedo - 8"
 horizontal_alignment = 2
 
 [node name="TextureButton8" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+visible = false
 self_modulate = Color(0.77618, 0.381551, 0.177722, 1)
 clip_contents = true
 custom_minimum_size = Vector2(10, 40)
@@ -1794,6 +1792,7 @@ text = "Configure"
 horizontal_alignment = 2
 
 [node name="TextureButton10" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+visible = false
 self_modulate = Color(0.909711, 0.1743, 0.267254, 1)
 clip_contents = true
 custom_minimum_size = Vector2(10, 40)
@@ -1817,200 +1816,6 @@ theme = ExtResource("20_oyi6m")
 theme_override_colors/font_outline_color = Color(0.909804, 0.172549, 0.266667, 1)
 text = "Deploy"
 horizontal_alignment = 2
-
-[node name="TextureProgressBar2" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
-modulate = Color(1, 1, 1, 0.4)
-layout_mode = 0
-offset_left = 335.0
-offset_top = 986.0
-offset_right = 541.0
-offset_bottom = 1030.0
-value = 70.0
-nine_patch_stretch = true
-texture_under = ExtResource("22_l3nat")
-texture_progress = ExtResource("23_xmpwj")
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar2"]
-layout_mode = 0
-offset_left = 217.0
-offset_top = 15.0
-offset_right = 240.0
-offset_bottom = 30.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.423529, 0.92549, 0.968627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "60"
-
-[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar2"]
-layout_mode = 0
-offset_left = 74.0
-offset_top = -18.0
-offset_right = 116.0
-offset_bottom = -3.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.423529, 0.92549, 0.968627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "Km/h"
-
-[node name="Label4" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar2"]
-layout_mode = 0
-offset_left = 74.0
-offset_top = 48.0
-offset_right = 116.0
-offset_bottom = 63.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.423529, 0.92549, 0.968627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "Soeed"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar2"]
-layout_mode = 0
-offset_left = -21.0
-offset_top = 19.0
-offset_right = -9.0
-offset_bottom = 34.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.423529, 0.92549, 0.968627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "0"
-
-[node name="TextureProgressBar4" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
-layout_mode = 0
-offset_left = 860.0
-offset_top = 985.0
-offset_right = 1066.0
-offset_bottom = 1029.0
-value = 70.0
-nine_patch_stretch = true
-texture_under = ExtResource("22_l3nat")
-texture_progress = ExtResource("23_xmpwj")
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar4"]
-layout_mode = 0
-offset_left = 217.0
-offset_top = 15.0
-offset_right = 240.0
-offset_bottom = 30.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.423529, 0.92549, 0.968627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "360"
-
-[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar4"]
-layout_mode = 0
-offset_left = 46.0
-offset_top = 53.0
-offset_right = 161.0
-offset_bottom = 68.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.423529, 0.92549, 0.968627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "Sonar Angle"
-
-[node name="AlarmingStatusMessagesGoHere" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar4"]
-visible = false
-layout_mode = 0
-offset_left = 35.0
-offset_top = -60.0
-offset_right = 181.0
-offset_bottom = -45.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.423529, 0.92549, 0.968627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "Status: EMPED"
-
-[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar4"]
-layout_mode = 0
-offset_left = -21.0
-offset_top = 19.0
-offset_right = -9.0
-offset_bottom = 34.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.423529, 0.92549, 0.968627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "0"
-
-[node name="TextureRect" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar4"]
-modulate = Color(0.776471, 0.380392, 0.176471, 1)
-layout_mode = 0
-offset_left = 119.0
-offset_top = -6.0
-offset_right = 175.0
-offset_bottom = 50.0
-texture = ExtResource("24_ebcmx")
-expand_mode = 1
-
-[node name="TextureProgressBar3" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
-modulate = Color(1, 1, 1, 0.4)
-self_modulate = Color(0.584314, 0.239216, 0.282353, 1)
-layout_mode = 0
-offset_left = 1343.0
-offset_top = 983.0
-offset_right = 1549.0
-offset_bottom = 1027.0
-value = 70.0
-nine_patch_stretch = true
-texture_under = ExtResource("22_l3nat")
-texture_progress = ExtResource("25_btgnx")
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar3"]
-layout_mode = 0
-offset_left = 218.0
-offset_top = 14.0
-offset_right = 241.0
-offset_bottom = 29.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.203922, 0.866667, 0.92549, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "60"
-
-[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar3"]
-layout_mode = 0
-offset_left = 86.0
-offset_top = -19.0
-offset_right = 128.0
-offset_bottom = -4.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.203922, 0.866667, 0.92549, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "Db"
-horizontal_alignment = 1
-
-[node name="Label4" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar3"]
-layout_mode = 0
-offset_left = 71.0
-offset_top = 49.0
-offset_right = 155.0
-offset_bottom = 64.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.203922, 0.866667, 0.92549, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "Emission"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureProgressBar3"]
-layout_mode = 0
-offset_left = -20.0
-offset_top = 18.0
-offset_right = -8.0
-offset_bottom = 33.0
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(0.203922, 0.866667, 0.92549, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 12
-text = "0"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
 layout_mode = 0
@@ -2140,6 +1945,7 @@ scale = Vector2(0.769048, 1)
 points = PackedVector2Array(0, 0, 400, 0)
 
 [node name="FilterMaskGlitch" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+visible = false
 material = SubResource("ShaderMaterial_jitlb")
 layout_mode = 0
 offset_right = 1922.0
@@ -2224,6 +2030,22 @@ offset_right = 1913.0
 offset_bottom = 115.0
 text = "FPS: 60"
 fit_content = true
+
+[node name="ActiveSonarControl" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+anchors_preset = 0
+offset_left = 922.0
+offset_top = 885.0
+offset_right = 962.0
+offset_bottom = 925.0
+
+[node name="TextureRect" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -31.0
+offset_right = 694.0
+offset_bottom = 689.0
+scale = Vector2(0.279999, 0.279999)
+texture = ExtResource("30_04345")
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.4)
