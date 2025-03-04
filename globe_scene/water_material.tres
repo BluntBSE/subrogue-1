@@ -1,7 +1,17 @@
-[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://c0oh0tqawpdmg"]
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://c0oh0tqawpdmg"]
 
-[ext_resource type="Material" uid="uid://1dxldgjx8y3r" path="res://globe_scene/land_backup.tres" id="1_by6de"]
+[ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="1_u35sm"]
 [ext_resource type="Shader" uid="uid://b5dquojlweeoo" path="res://globe_scene/world_ripple.gdshader" id="2_6c4yd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_poq1q"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.603
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_u35sm")
+emission_enabled = true
+emission = Color(0.142281, 0, 0.905092, 1)
+emission_energy_multiplier = 10.28
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jph6l"]
 noise_type = 0
@@ -28,8 +38,9 @@ bump_strength = 32.0
 noise = SubResource("FastNoiseLite_fhr5f")
 
 [resource]
+resource_local_to_scene = true
 render_priority = 0
-next_pass = ExtResource("1_by6de")
+next_pass = SubResource("StandardMaterial3D_poq1q")
 shader = ExtResource("2_6c4yd")
 shader_parameter/uAlbedo = Color(0.00890561, 0.00177568, 0.143907, 1)
 shader_parameter/uTexureNormal = SubResource("NoiseTexture2D_noict")

@@ -14,7 +14,7 @@ signal game_loaded
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     scene_path = SceneChangeLoader.scene_path
-    ResourceLoader.load_threaded_request(scene_path, "", false) ##If true is not set, we activate a bug https://github.com/godotengine/godot/issues/102593
+    ResourceLoader.load_threaded_request(scene_path, "", true) ##If true is not set, we activate a bug https://github.com/godotengine/godot/issues/102593
     pass # Replace with function body.
 
 

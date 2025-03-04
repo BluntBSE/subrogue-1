@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="1_t8jak"]
 
 [resource]
+resource_local_to_scene = true
 transparency = 2
 alpha_scissor_threshold = 0.603
 alpha_antialiasing_mode = 0
