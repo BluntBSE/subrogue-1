@@ -36,6 +36,8 @@ func _process(delta: float) -> void:
         SoundManager.stop_sound_by_id("title_theme")
         SoundManager.stop_sound_by_id("title_ambience")
         if ResourceLoader.load_threaded_get_status(scene_path)==ResourceLoader.THREAD_LOAD_LOADED:
+            print("Is the material present?")
+            print(ResourceLoader.has_cached("res://globe_scene/land_backup.tres"))
             get_tree().change_scene_to_packed(
                 ResourceLoader.load_threaded_get(scene_path)
             )

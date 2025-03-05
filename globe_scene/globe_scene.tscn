@@ -1,4 +1,4 @@
-[gd_scene load_steps=239 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=240 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://cvrep056uh18e" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04Blue.png" id="31_x2kcd"]
 [ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/debug_faction.gd" id="33_x8218"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="34_f1l1f"]
+[ext_resource type="Texture2D" uid="uid://bdveri46dlmy4" path="res://assets/UI/white_buttons/VolumeSliderKnobT04White.png" id="34_n7gus"]
 [ext_resource type="Script" uid="uid://dac1cpfprokkh" path="res://engine/abstract_classes/entity_controller.gd" id="34_n1474"]
 [ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="35_m4noy"]
 [ext_resource type="Texture2D" uid="uid://o4wfqpapu8p2" path="res://assets/UI/red_test.png" id="35_woink"]
@@ -364,7 +365,7 @@ shader_parameter/active = false
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
 shader = ExtResource("31_i4tgh")
 shader_parameter/disc_texture = ExtResource("13_ep416")
-shader_parameter/start_angle = 165.664
+shader_parameter/start_angle = 10.0
 shader_parameter/end_angle = 45.0
 shader_parameter/between_angle_alpha = 1.0
 shader_parameter/beyond_angle_alpha = 0.2
@@ -374,7 +375,7 @@ shader_parameter/distance_factor = 0.0
 resource_local_to_scene = true
 shader = ExtResource("31_i4tgh")
 shader_parameter/disc_texture = ExtResource("30_04345")
-shader_parameter/start_angle = 165.664
+shader_parameter/start_angle = 10.0
 shader_parameter/end_angle = 45.0
 shader_parameter/between_angle_alpha = 1.0
 shader_parameter/beyond_angle_alpha = 0.2
@@ -2061,19 +2062,19 @@ offset_top = 885.0
 offset_right = 962.0
 offset_bottom = 925.0
 script = ExtResource("30_kyj5j")
-angle_1 = 165.664
+angle_1 = 10.0
 angle_2 = 45.0
-a_diff = -120.664
+a_diff = 35.0
 
 [node name="ActiveSonarBG" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.54902)
 material = SubResource("ShaderMaterial_n7gus")
 layout_mode = 0
-offset_left = -43.0
-offset_top = -48.0
-offset_right = 677.0
-offset_bottom = 672.0
+offset_left = -101.0
+offset_top = -108.0
+offset_right = 619.0
+offset_bottom = 612.0
 scale = Vector2(0.320004, 0.320004)
 texture = ExtResource("13_ep416")
 
@@ -2081,21 +2082,21 @@ texture = ExtResource("13_ep416")
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_i4tgh")
 layout_mode = 0
-offset_left = -28.0
-offset_top = -34.0
-offset_right = 692.0
-offset_bottom = 686.0
+offset_left = -86.0
+offset_top = -94.0
+offset_right = 634.0
+offset_bottom = 626.0
 scale = Vector2(0.279999, 0.279999)
 texture = ExtResource("30_04345")
 
 [node name="ActiveSonarKnobOnePivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
 unique_name_in_owner = true
 anchors_preset = 0
-offset_left = 75.0
-offset_top = 70.0
-offset_right = 115.0
-offset_bottom = 110.0
-rotation = 2.89137
+offset_left = 17.0
+offset_top = 10.0
+offset_right = 57.0
+offset_bottom = 50.0
+rotation = 0.174533
 
 [node name="ActiveSonarKnobOne" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobOnePivot"]
 layout_mode = 0
@@ -2104,15 +2105,19 @@ offset_top = -119.0
 offset_right = 79.0
 offset_bottom = -19.0
 scale = Vector2(0.4, 0.4)
+action_mode = 0
+keep_pressed_outside = true
 texture_normal = ExtResource("31_x2kcd")
+texture_pressed = ExtResource("34_n7gus")
+texture_hover = ExtResource("34_n7gus")
 
 [node name="ActiveSonarKnobTwoPivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
 unique_name_in_owner = true
 anchors_preset = 0
-offset_left = 75.0
-offset_top = 70.0
-offset_right = 115.0
-offset_bottom = 110.0
+offset_left = 17.0
+offset_top = 10.0
+offset_right = 57.0
+offset_bottom = 50.0
 rotation = 0.785398
 
 [node name="ActiveSonarKnobTwo" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobTwoPivot"]
@@ -2122,7 +2127,11 @@ offset_top = -119.0
 offset_right = 79.0
 offset_bottom = -19.0
 scale = Vector2(0.4, 0.4)
+action_mode = 0
+keep_pressed_outside = true
 texture_normal = ExtResource("31_x2kcd")
+texture_pressed = ExtResource("34_n7gus")
+texture_hover = ExtResource("34_n7gus")
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.4)
@@ -2798,3 +2807,7 @@ curve = SubResource("Curve3D_hkxrn")
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Slow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Normal" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [0]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Fast" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [3]]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_one_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]

@@ -109,7 +109,7 @@ func _unhandled_input(event: InputEvent) -> void:
     pass
     
 func drop_context_marker(point: Vector3) -> Node3D:
-    var marker:ContextMarker = load("res://engine/player_ui/3d_ui/marker_popup_3d.tscn").instantiate()
+    var marker:ContextMarker = preload("res://engine/player_ui/3d_ui/marker_popup_3d.tscn").instantiate()
  
     marker.position = hovering_over.position
     %PlayerMarkers.add_marker(marker)
