@@ -25,7 +25,7 @@ var controlled_by #NPC Factions?
 @onready var render:EntityRender = %EntityRender
 @onready var debug:EntityDebug = %EntityDebug
 @export var npc:bool = false
-
+@onready var sonar_node:SonarNode = %SonarNode
 
 
 

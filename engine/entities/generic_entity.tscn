@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=47 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -22,6 +22,12 @@
 [ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_0c68s"]
 [ext_resource type="Script" uid="uid://dc4ctyqdd1ybr" path="res://engine/entities/entity_debug.gd" id="21_7if8f"]
 [ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="22_loeq3"]
+[ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="23_op6l6"]
+[ext_resource type="Shader" uid="uid://c2ffm8yh34ab5" path="res://engine/entities/detection/sonar_pulse_2.gdshader" id="24_j3cwe"]
+[ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="25_hyfub"]
+[ext_resource type="Shader" uid="uid://cdoiv5cq5nyvy" path="res://engine/entities/detection/sonar_targeting_no_pulse.gdshader" id="26_5l3g8"]
+[ext_resource type="Shader" uid="uid://dc2pip1y3et5g" path="res://engine/entities/detection/piecemeal.gdshader" id="27_dwxad"]
+[ext_resource type="Texture2D" uid="uid://b0ien5rugpxsy" path="res://assets/polarpng.png" id="28_23k6d"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -68,15 +74,125 @@ albedo = Color(0, 0.818736, 0.815349, 1)
 height_falloff = 2.0
 edge_fade = 2.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6y0a6"]
+render_priority = 0
+shader = ExtResource("27_dwxad")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("25_hyfub")
+shader_parameter/distance_fade_min = 0.0
+shader_parameter/distance_fade_max = 104.89
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/texture_metallic = ExtResource("28_23k6d")
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.45
+shader_parameter/metallic = 0.85
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_l7f70"]
+lightmap_size_hint = Vector2i(27, 27)
+size = Vector2(5, 5)
+
+[sub_resource type="Animation" id="Animation_ox0k3"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_tail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_cnygr"]
+resource_name = "sonar_pulse_1"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.266667, 1.4, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.366667, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_tail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.075, -0.25, 0, 0.25, 0, 0.95, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.366667, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_icumr"]
+_data = {
+&"RESET": SubResource("Animation_ox0k3"),
+&"sonar_pulse_1": SubResource("Animation_cnygr")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4a7o"]
+render_priority = 0
+shader = ExtResource("24_j3cwe")
+shader_parameter/disc_texture = ExtResource("25_hyfub")
+shader_parameter/start_angle = 270.0
+shader_parameter/end_angle = 280.0
+shader_parameter/frontier_head = 1.0
+shader_parameter/frontier_tail = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqq6t"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_d4a7o")
+shader = ExtResource("26_5l3g8")
+shader_parameter/disc_texture = ExtResource("25_hyfub")
+shader_parameter/start_angle = 220.0
+shader_parameter/end_angle = 280.0
+shader_parameter/frontier_head = 0.0
+shader_parameter/frontier_tail = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]
+lightmap_size_hint = Vector2i(27, 27)
+size = Vector2(25, 25)
+
 [node name="Entity" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
 collision_layer = 524290
 collision_mask = 524288
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true
 script = ExtResource("1_du6w5")
+is_player = null
+azimuth = null
+polar = null
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
+spot_color = null
+range_color = null
+scale_factor = null
+faction = null
+can_move = null
+npc = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_3ito3")
@@ -290,7 +406,7 @@ script = ExtResource("20_0c68s")
 
 [node name="EntityDebug" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 top_level = true
 visible = false
 script = ExtResource("21_7if8f")
@@ -301,5 +417,35 @@ script = ExtResource("21_7if8f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 remote_path = NodePath("../EntityDebug")
 update_rotation = false
+
+[node name="SonarNode" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
+script = ExtResource("23_op6l6")
+
+[node name="SonarPulseMesh2" type="MeshInstance3D" parent="SonarNode"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97706, 0, 0.467125)
+visible = false
+material_override = SubResource("ShaderMaterial_6y0a6")
+mesh = SubResource("QuadMesh_l7f70")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SonarNode"]
+libraries = {
+&"": SubResource("AnimationLibrary_icumr")
+}
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="SonarNode"]
+remote_path = NodePath("../../TransformBreaker/SonarPulseMesh")
+update_rotation = false
+
+[node name="TransformBreaker" type="Node" parent="."]
+
+[node name="SonarPulseMesh" type="MeshInstance3D" parent="TransformBreaker"]
+unique_name_in_owner = true
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, -0.0201111, -0.0650034, 0.215542)
+material_override = SubResource("ShaderMaterial_dqq6t")
+mesh = SubResource("QuadMesh_3qnbj")
+skeleton = NodePath("../../SonarNode")
 
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]

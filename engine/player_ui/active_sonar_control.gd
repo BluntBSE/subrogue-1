@@ -9,6 +9,9 @@ class_name ActiveSonarControl
 var knob_1_active:bool = false
 var knob_2_active:bool = false
 
+signal s_angle_1
+signal s_angle_2
+
 var inc = 0.0
 func _process(delta: float) -> void:
 
@@ -32,7 +35,7 @@ func set_angle_1(deg:float)->void:#Expects degree, not rad
     %ActiveSonarKnobOnePivot.rotation = deg_to_rad(angle_1)
     %ActiveSonarTexture.material.set_shader_parameter("start_angle", angle_1)
     %ActiveSonarBG.material.set_shader_parameter("start_angle", angle_1)
-    
+    s_angle_1.emit(angle_1)
     
 
 func set_angle_2(deg:float)->void:#Expects degree, not rad
@@ -43,6 +46,7 @@ func set_angle_2(deg:float)->void:#Expects degree, not rad
     %ActiveSonarKnobTwoPivot.rotation = deg_to_rad(angle_2)
     %ActiveSonarTexture.material.set_shader_parameter("end_angle", angle_2)
     %ActiveSonarBG.material.set_shader_parameter("end_angle", angle_2)
+    s_angle_2.emit(angle_2)
     
 
 func handle_mouse_drag()->void:

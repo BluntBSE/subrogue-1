@@ -1,4 +1,4 @@
-[gd_scene load_steps=240 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=227 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -12,14 +12,9 @@
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="9_xkk1b"]
 [ext_resource type="Script" uid="uid://c7feimtf0jnd2" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="PackedScene" uid="uid://ccpokifvegaoy" path="res://engine/entities/generic_entity.tscn" id="11_lgujk"]
-[ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="12_ojktk"]
-[ext_resource type="Shader" uid="uid://cdoiv5cq5nyvy" path="res://engine/entities/detection/sonar_targeting_no_pulse.gdshader" id="13_7e8b4"]
-[ext_resource type="Shader" uid="uid://c2ffm8yh34ab5" path="res://engine/entities/detection/sonar_pulse_2.gdshader" id="13_7t366"]
 [ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="13_ep416"]
 [ext_resource type="Script" uid="uid://ddutyndli6okj" path="res://globe_scene/player/player_markers.gd" id="15_wdr3j"]
 [ext_resource type="AudioStream" uid="uid://c4pqqqemfw30i" path="res://assets/royalty_free_music/dark-ambient-126122.mp3" id="16_o22p0"]
-[ext_resource type="Shader" uid="uid://dc2pip1y3et5g" path="res://engine/entities/detection/piecemeal.gdshader" id="16_p37tr"]
-[ext_resource type="Texture2D" uid="uid://b0ien5rugpxsy" path="res://assets/polarpng.png" id="17_dm0pa"]
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="17_eum53"]
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="19_8gfvb"]
 [ext_resource type="Script" uid="uid://bmp2rptgbgioi" path="res://globe_scene/player_ui_root.gd" id="20_eaa56"]
@@ -249,108 +244,6 @@ volumetric_fog_density = 0.0
 volumetric_fog_length = 10.0
 volumetric_fog_detail_spread = 1.0
 volumetric_fog_ambient_inject = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4a7o"]
-render_priority = 0
-shader = ExtResource("13_7t366")
-shader_parameter/disc_texture = ExtResource("13_ep416")
-shader_parameter/start_angle = 270.0
-shader_parameter/end_angle = 280.0
-shader_parameter/frontier_head = 1.0
-shader_parameter/frontier_tail = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xdoo"]
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_d4a7o")
-shader = ExtResource("13_7e8b4")
-shader_parameter/disc_texture = ExtResource("13_ep416")
-shader_parameter/start_angle = 270.0
-shader_parameter/end_angle = 280.0
-shader_parameter/frontier_head = 0.0
-shader_parameter/frontier_tail = 0.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_cjcay"]
-lightmap_size_hint = Vector2i(27, 27)
-size = Vector2(25, 25)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pqj58"]
-render_priority = 0
-shader = ExtResource("16_p37tr")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("13_ep416")
-shader_parameter/distance_fade_min = 0.0
-shader_parameter/distance_fade_max = 104.89
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/texture_metallic = ExtResource("17_dm0pa")
-shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
-shader_parameter/specular = 0.45
-shader_parameter/metallic = 0.85
-shader_parameter/uv1_scale = Vector3(1, 1, 1)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-
-[sub_resource type="QuadMesh" id="QuadMesh_o1jyr"]
-lightmap_size_hint = Vector2i(27, 27)
-size = Vector2(5, 5)
-
-[sub_resource type="Animation" id="Animation_ox0k3"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%SonarPulseMesh:material_override:shader_parameter/frontier_head")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%SonarPulseMesh:material_override:shader_parameter/frontier_tail")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_cnygr"]
-resource_name = "sonar_pulse_1"
-length = 2.0
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%SonarPulseMesh:material_override:shader_parameter/frontier_head")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.266667, 1.4, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.366667, 2)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%SonarPulseMesh:material_override:shader_parameter/frontier_tail")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.075, -0.25, 0, 0.25, 0, 0.95, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.366667, 2)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_icumr"]
-_data = {
-&"RESET": SubResource("Animation_ox0k3"),
-&"sonar_pulse_1": SubResource("Animation_cnygr")
-}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
 shader = ExtResource("21_bmluj")
@@ -1504,28 +1397,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100.25
 is_player = true
 base_color = Color(0, 0.69121, 0.737599, 1)
 spot_color = Color(0.509286, 0.509286, 0.509286, 1)
-
-[node name="SonarControlField" type="Node3D" parent="Players/Player1/PlayerEntities/PlayerEntity"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0201087, -0.0650034, 0)
-script = ExtResource("12_ojktk")
-
-[node name="SonarPulseMesh" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity/SonarControlField"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0889282)
-material_override = SubResource("ShaderMaterial_8xdoo")
-mesh = SubResource("QuadMesh_cjcay")
-
-[node name="SonarPulseMesh2" type="MeshInstance3D" parent="Players/Player1/PlayerEntities/PlayerEntity/SonarControlField"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97706, 0, 0.467125)
-visible = false
-material_override = SubResource("ShaderMaterial_pqj58")
-mesh = SubResource("QuadMesh_o1jyr")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Players/Player1/PlayerEntities/PlayerEntity/SonarControlField"]
-libraries = {
-&"": SubResource("AnimationLibrary_icumr")
-}
 
 [node name="PlayerMarkers" type="Node3D" parent="Players/Player1"]
 unique_name_in_owner = true
