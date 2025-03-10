@@ -183,16 +183,7 @@ physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true
 script = ExtResource("1_du6w5")
-is_player = null
-azimuth = null
-polar = null
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
-spot_color = null
-range_color = null
-scale_factor = null
-faction = null
-can_move = null
-npc = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_3ito3")

@@ -11,11 +11,11 @@ class_name Player
 var layer = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    camera.camera_moved.connect(UI.adjust_ruler)
-    pass # Replace with function body.
+	camera.camera_moved.connect(UI.adjust_ruler)
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    pass
-    
+	pass
+	

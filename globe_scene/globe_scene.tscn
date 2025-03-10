@@ -1,4 +1,4 @@
-[gd_scene load_steps=227 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=226 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_xt6wy"]
 [ext_resource type="Script" uid="uid://bn7mt5j4ydu5a" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
-[ext_resource type="Material" uid="uid://cx72xcf27h8qj" path="res://globe_scene/csgmat.tres" id="6_1twjn"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
 [ext_resource type="Script" uid="uid://df4qigb0veuou" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="9_xkk1b"]
@@ -1330,22 +1329,6 @@ shape = SubResource("ConvexPolygonShape3D_8e1hw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GamePlanet/LandCollider/HaitiDR"]
 shape = SubResource("ConvexPolygonShape3D_1gt05")
 
-[node name="CSGCylinder3D" type="CSGPolygon3D" parent="GamePlanet"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.586, 0, 0)
-polygon = PackedVector2Array(0, 0, 0, 0.25, 0.25, 0.25, 0.25, 0)
-mode = 2
-path_node = NodePath("")
-path_interval_type = 0
-path_interval = 0.1
-path_simplify_angle = 0.0
-path_rotation = 2
-path_rotation_accurate = false
-path_local = false
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
-material = ExtResource("6_1twjn")
-
 [node name="DebugNode" type="Node" parent="."]
 script = ExtResource("4_lsblq")
 
@@ -2003,6 +1986,27 @@ keep_pressed_outside = true
 texture_normal = ExtResource("31_x2kcd")
 texture_pressed = ExtResource("34_n7gus")
 texture_hover = ExtResource("34_n7gus")
+
+[node name="PingButton" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+offset_left = 172.0
+offset_top = -11.0
+offset_right = 274.0
+offset_bottom = 29.0
+texture_normal = ExtResource("19_8gfvb")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/PingButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 30.0
+offset_top = 10.0
+offset_right = -23.0
+theme = ExtResource("20_oyi6m")
+text = "Ping"
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.4)
@@ -2682,3 +2686,4 @@ curve = SubResource("Curve3D_hkxrn")
 [connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
 [connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/PingButton" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_ping_button_button_up"]
