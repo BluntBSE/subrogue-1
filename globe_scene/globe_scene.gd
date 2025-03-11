@@ -17,3 +17,6 @@ func _process(delta: float) -> void:
         load_filter.modulate.a = lerp(load_filter.modulate.a, 0.0, delta * 0.5)
 
     pass
+    
+func _unhandled_input(event: InputEvent) -> void:
+    print(event)

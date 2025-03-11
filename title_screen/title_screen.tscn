@@ -255,4 +255,9 @@ theme_override_font_sizes/normal_font_size = 60
 bbcode_enabled = true
 text = "[center]SUB ROGUE[/center]"
 
+[node name="Label" type="Label" parent="."]
+offset_right = 54.0
+offset_bottom = 23.0
+text = "FPS: 60"
+
 [connection signal="button_up" from="VBoxContainer/BtnNewGame" to="." method="_on_btn_new_game_button_up"]

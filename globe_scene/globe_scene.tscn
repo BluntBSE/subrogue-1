@@ -1,4 +1,4 @@
-[gd_scene load_steps=226 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=227 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://drx46y536lmy6" path="res://assets/UI/blue_icons/ArrowRightIconBlue.png" id="26_v6n2o"]
 [ext_resource type="Texture2D" uid="uid://b1xemghegym28" path="res://assets/UI/blue_icons/FrontIconBlue.png" id="27_3xujn"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="27_ei3qn"]
+[ext_resource type="Texture2D" uid="uid://b4da1i6v747wi" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT01.png" id="29_wxry4"]
 [ext_resource type="Texture2D" uid="uid://cp3g7kn76q3ta" path="res://assets/bluepolar3.png" id="30_04345"]
 [ext_resource type="Script" uid="uid://dp4b2h8rbjnju" path="res://engine/player_ui/active_sonar_control.gd" id="30_kyj5j"]
 [ext_resource type="Shader" uid="uid://372drerjny0t" path="res://engine/player_ui/3d_ui/radial_control_fade.gdshader" id="31_i4tgh"]
@@ -1988,13 +1989,16 @@ texture_pressed = ExtResource("34_n7gus")
 texture_hover = ExtResource("34_n7gus")
 
 [node name="PingButton" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(50, 40)
+layout_mode = 0
 offset_left = 172.0
 offset_top = -11.0
 offset_right = 274.0
 offset_bottom = 29.0
 texture_normal = ExtResource("19_8gfvb")
+texture_pressed = ExtResource("29_wxry4")
 ignore_texture_size = true
 stretch_mode = 0
 
