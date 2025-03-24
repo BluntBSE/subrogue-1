@@ -66,6 +66,7 @@ func poll_entities():
         if final_db <= sensitivity:
             print("Too quiet. Attempting to erase signal")
             #If you had the signal, you've lost it now.
+            #Grace period for active pings?
             if tracked_entities.has(poll_entity):
                 if sigmap.has(poll_entity):
                    #tracked_entities.erase(poll_entity)

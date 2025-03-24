@@ -4,7 +4,7 @@ class_name PlayerUIRoot
 const TIMER_LIMIT = 2.0
 var timer = 0.0
 
-@onready var active_sonar_control:ActiveSonarControl = find_child("ActiveSonarControl", false, true)
+@onready var active_sonar_control:ActiveSonarControl = find_child("ActiveSonarControl", true, false)
 var player:Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
