@@ -1,3 +1,3 @@
 A subnautical roguelike
 
-Entry point is "title_screeb.tscn"
+Entry point is "title_screen.tscn"
