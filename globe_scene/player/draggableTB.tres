@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://gyu33c0cqh6p"]
+
+[ext_resource type="Shader" uid="uid://bu4v11jqc6r1g" path="res://globe_scene/draggableTPB.gdshader" id="1_jm7o7"]
+
+[resource]
+shader = ExtResource("1_jm7o7")
+shader_parameter/left_percent = 0.045
+shader_parameter/right_percent = 0.33
