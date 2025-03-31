@@ -16,6 +16,8 @@ BUG:
 
 
 QUEUE:
+    1. Active ping now reveals. For how long?
+    
     Improved curve tweener per that video
     
     The ping:

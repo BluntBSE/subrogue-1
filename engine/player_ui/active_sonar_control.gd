@@ -102,4 +102,5 @@ func _on_active_sonar_knob_two_button_up() -> void:
 func _on_ping_button_button_up() -> void:
     print("Ping button pressed!")
     ping_requested.emit(angle_1, angle_2)
+    SoundManager.play("sonar_1")
     pass # Replace with function body.

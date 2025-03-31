@@ -22,6 +22,10 @@ GlobalConst="*res://engine/autoload/global_const.gd"
 SceneChangeLoader="*res://engine/autoload/scene_change_loader.gd"
 SoundManager="*res://engine/sound/sound_manager.gd"
 
+[debug]
+
+gdscript/warnings/unused_variable=0
+
 [display]
 
 window/size/viewport_width=1920

@@ -1,4 +1,4 @@
-[gd_scene load_steps=227 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=231 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -22,6 +22,7 @@
 [ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="21_bmluj"]
 [ext_resource type="Script" uid="uid://b1e3glbgg7wdy" path="res://engine/player_ui/time_manager.gd" id="22_ky6go"]
 [ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="23_mfwgd"]
+[ext_resource type="Texture2D" uid="uid://bevlrjvu4mfk4" path="res://assets/UI/blue_panels/MediumMenuBGT01.3BlueDark.png" id="23_x2kcd"]
 [ext_resource type="Texture2D" uid="uid://edgpj510s3iu" path="res://assets/UI/blue_icons/ArrowLeftIconBlue.png" id="24_c3qma"]
 [ext_resource type="Texture2D" uid="uid://b35duoo481ffc" path="res://assets/UI/blue_icons/PauseIconBlue.png" id="25_gln1r"]
 [ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="26_pvo63"]
@@ -31,8 +32,11 @@
 [ext_resource type="Texture2D" uid="uid://b4da1i6v747wi" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT01.png" id="29_wxry4"]
 [ext_resource type="Texture2D" uid="uid://cp3g7kn76q3ta" path="res://assets/bluepolar3.png" id="30_04345"]
 [ext_resource type="Script" uid="uid://dp4b2h8rbjnju" path="res://engine/player_ui/active_sonar_control.gd" id="30_kyj5j"]
+[ext_resource type="Texture2D" uid="uid://cgujj1t61jgne" path="res://assets/UI/blue_buttons/LoadingBarFullT03Blue.png" id="30_x2kcd"]
 [ext_resource type="Shader" uid="uid://372drerjny0t" path="res://engine/player_ui/3d_ui/radial_control_fade.gdshader" id="31_i4tgh"]
 [ext_resource type="Texture2D" uid="uid://cvrep056uh18e" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04Blue.png" id="31_x2kcd"]
+[ext_resource type="FontFile" uid="uid://bvmpsl44wcfpl" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Bd.otf" id="32_i4tgh"]
+[ext_resource type="Texture2D" uid="uid://qgpd20oewpys" path="res://assets/UI/white_buttons/white_tab.png" id="32_kyj5j"]
 [ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/debug_faction.gd" id="33_x8218"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="34_f1l1f"]
 [ext_resource type="Texture2D" uid="uid://bdveri46dlmy4" path="res://assets/UI/white_buttons/VolumeSliderKnobT04White.png" id="34_n7gus"]
@@ -1403,126 +1407,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("20_eaa56")
 
-[node name="Weapons" type="ScrollContainer" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
-layout_direction = 2
-layout_mode = 0
-offset_left = 1610.0
-offset_top = 889.0
-offset_right = 1886.0
-offset_bottom = 1035.0
-theme = ExtResource("20_oyi6m")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons"]
-layout_mode = 2
-theme = ExtResource("20_oyi6m")
-
-[node name="MarginContainer" type="MarginContainer" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer"]
-custom_minimum_size = Vector2(200, 40)
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="TextureButton3" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer/MarginContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(250, 40)
-layout_mode = 2
-texture_normal = ExtResource("19_8gfvb")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer/MarginContainer/TextureButton3"]
-layout_mode = 2
-offset_left = 23.0
-offset_top = 11.0
-offset_right = 230.0
-offset_bottom = 31.0
-theme = ExtResource("20_oyi6m")
-text = "Manta Torpedo - 8"
-horizontal_alignment = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer"]
-custom_minimum_size = Vector2(200, 40)
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="TextureButton3" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer/MarginContainer2"]
-modulate = Color(1, 1, 1, 0.4)
-clip_contents = true
-custom_minimum_size = Vector2(250, 40)
-layout_mode = 2
-texture_normal = ExtResource("19_8gfvb")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer/MarginContainer2/TextureButton3"]
-layout_mode = 2
-offset_left = 23.0
-offset_top = 11.0
-offset_right = 230.0
-offset_bottom = 31.0
-theme = ExtResource("20_oyi6m")
-text = "Sfc. Missile - 3"
-horizontal_alignment = 2
-
-[node name="MarginContainer3" type="MarginContainer" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer"]
-custom_minimum_size = Vector2(200, 40)
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="TextureButton3" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer/MarginContainer3"]
-modulate = Color(1, 1, 1, 0.4)
-clip_contents = true
-custom_minimum_size = Vector2(250, 40)
-layout_mode = 2
-texture_normal = ExtResource("19_8gfvb")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer/MarginContainer3/TextureButton3"]
-layout_mode = 2
-offset_left = 23.0
-offset_top = 11.0
-offset_right = 230.0
-offset_bottom = 31.0
-theme = ExtResource("20_oyi6m")
-text = "Nuclear ICBM - 1"
-horizontal_alignment = 2
-
-[node name="MarginContainer4" type="MarginContainer" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer"]
-custom_minimum_size = Vector2(200, 40)
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="TextureButton3" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer/MarginContainer4"]
-clip_contents = true
-custom_minimum_size = Vector2(250, 40)
-layout_mode = 2
-texture_normal = ExtResource("19_8gfvb")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/Weapons/VBoxContainer/MarginContainer4/TextureButton3"]
-layout_mode = 2
-offset_left = 23.0
-offset_top = 11.0
-offset_right = 230.0
-offset_bottom = 31.0
-theme = ExtResource("20_oyi6m")
-text = "Manta Torpedo - 8"
-horizontal_alignment = 2
-
 [node name="Weapons2" type="ScrollContainer" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+visible = false
 layout_direction = 3
 layout_mode = 0
 offset_left = -268.0
@@ -1910,18 +1796,40 @@ offset_bottom = 115.0
 text = "FPS: 60"
 fit_content = true
 
-[node name="ActiveSonarControl" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+[node name="ColorRect" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+visible = false
+layout_mode = 0
+offset_top = 816.0
+offset_right = 1917.0
+offset_bottom = 1066.0
+color = Color(0.791999, 0.791999, 0.791999, 0.231373)
+
+[node name="TextureRect" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+layout_mode = 0
+offset_left = -11.0
+offset_top = 790.0
+offset_right = 989.0
+offset_bottom = 1290.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("23_x2kcd")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="ActiveSonarControl" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect"]
+z_index = 1
 anchors_preset = 0
-offset_left = 922.0
-offset_top = 885.0
-offset_right = 962.0
-offset_bottom = 925.0
+offset_left = 225.0
+offset_top = 235.0
+offset_right = 265.0
+offset_bottom = 275.0
+scale = Vector2(1.8, 1.8)
 script = ExtResource("30_kyj5j")
 angle_1 = 10.0
 angle_2 = 45.0
 a_diff = 35.0
 
-[node name="ActiveSonarBG" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+[node name="ActiveSonarBG" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.54902)
 material = SubResource("ShaderMaterial_n7gus")
@@ -1933,7 +1841,7 @@ offset_bottom = 612.0
 scale = Vector2(0.320004, 0.320004)
 texture = ExtResource("13_ep416")
 
-[node name="ActiveSonarTexture" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+[node name="ActiveSonarTexture" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_i4tgh")
 layout_mode = 0
@@ -1944,7 +1852,7 @@ offset_bottom = 626.0
 scale = Vector2(0.279999, 0.279999)
 texture = ExtResource("30_04345")
 
-[node name="ActiveSonarKnobOnePivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+[node name="ActiveSonarKnobOnePivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl"]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 17.0
@@ -1953,12 +1861,12 @@ offset_right = 57.0
 offset_bottom = 50.0
 rotation = 0.174533
 
-[node name="ActiveSonarKnobOne" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobOnePivot"]
+[node name="ActiveSonarKnobOne" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/ActiveSonarKnobOnePivot"]
 layout_mode = 0
-offset_left = -21.0
-offset_top = -119.0
-offset_right = 79.0
-offset_bottom = -19.0
+offset_left = -21.9119
+offset_top = -118.839
+offset_right = 78.0881
+offset_bottom = -18.8392
 scale = Vector2(0.4, 0.4)
 action_mode = 0
 keep_pressed_outside = true
@@ -1966,7 +1874,7 @@ texture_normal = ExtResource("31_x2kcd")
 texture_pressed = ExtResource("34_n7gus")
 texture_hover = ExtResource("34_n7gus")
 
-[node name="ActiveSonarKnobTwoPivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+[node name="ActiveSonarKnobTwoPivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl"]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 17.0
@@ -1975,12 +1883,12 @@ offset_right = 57.0
 offset_bottom = 50.0
 rotation = 0.785398
 
-[node name="ActiveSonarKnobTwo" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobTwoPivot"]
+[node name="ActiveSonarKnobTwo" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/ActiveSonarKnobTwoPivot"]
 layout_mode = 0
-offset_left = -21.0
-offset_top = -119.0
-offset_right = 79.0
-offset_bottom = -19.0
+offset_left = -22.9642
+offset_top = -119.655
+offset_right = 77.0358
+offset_bottom = -19.6547
 scale = Vector2(0.4, 0.4)
 action_mode = 0
 keep_pressed_outside = true
@@ -1988,29 +1896,245 @@ texture_normal = ExtResource("31_x2kcd")
 texture_pressed = ExtResource("34_n7gus")
 texture_hover = ExtResource("34_n7gus")
 
-[node name="PingButton" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl"]
+[node name="PingButton" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl"]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(50, 40)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 31.4796
+anchor_top = 0.597221
+anchor_right = 31.4796
+anchor_bottom = 0.597221
 offset_left = 172.0
 offset_top = -11.0
 offset_right = 274.0
 offset_bottom = 29.0
+scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("19_8gfvb")
 texture_pressed = ExtResource("29_wxry4")
 ignore_texture_size = true
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/PingButton"]
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/PingButton"]
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 0.75
-offset_left = 30.0
-offset_top = 10.0
-offset_right = -23.0
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
 theme = ExtResource("20_oyi6m")
 text = "Ping"
+
+[node name="RangeBar" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl"]
+layout_mode = 0
+offset_left = 150.926
+offset_top = -80.5555
+offset_right = 355.926
+offset_bottom = -69.5555
+value = 80.0
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+texture_progress = ExtResource("30_x2kcd")
+tint_under = Color(1, 1, 1, 0.184314)
+tint_over = Color(1, 0, 1, 0.117647)
+
+[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/RangeBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/RangeBar"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "200db - 1000km"
+horizontal_alignment = 1
+
+[node name="RangeBarControl" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/RangeBar"]
+layout_mode = 0
+offset_left = 179.63
+offset_top = -7.40735
+offset_right = 279.63
+offset_bottom = 92.5927
+rotation = 1.5708
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("31_x2kcd")
+texture_pressed = ExtResource("34_n7gus")
+texture_hover = ExtResource("34_n7gus")
+
+[node name="ProfileBar" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl"]
+layout_mode = 0
+offset_left = 148.148
+offset_top = 0.925939
+offset_right = 353.148
+offset_bottom = 11.9259
+value = 80.0
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+texture_progress = ExtResource("30_x2kcd")
+tint_under = Color(1, 1, 1, 0.184314)
+
+[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/ProfileBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Profile"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/ProfileBar"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "0.5"
+horizontal_alignment = 1
+
+[node name="ProfileBarControl1" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/ProfileBar"]
+layout_mode = 0
+offset_left = 182.407
+offset_top = -7.40737
+offset_right = 282.407
+offset_bottom = 92.5926
+rotation = 1.5708
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("31_x2kcd")
+texture_pressed = ExtResource("34_n7gus")
+texture_hover = ExtResource("34_n7gus")
+
+[node name="DepthBar" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl"]
+layout_mode = 0
+offset_left = 148.148
+offset_top = 76.8519
+offset_right = 353.148
+offset_bottom = 87.8519
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+
+[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/DepthBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Depth"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/DepthBar"]
+layout_mode = 0
+offset_left = 12.037
+offset_top = 20.3704
+offset_right = 186.037
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "Crawl, Swim, Surface"
+horizontal_alignment = 1
+
+[node name="OrdnanceTab" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect"]
+self_modulate = Color(0.00784314, 0.156863, 0.172549, 1)
+layout_mode = 0
+offset_left = 528.333
+offset_top = -38.3334
+offset_right = 860.333
+offset_bottom = 27.6666
+texture = ExtResource("32_kyj5j")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/OrdnanceTab"]
+self_modulate = Color(0.699653, 0.699653, 0.699653, 1)
+layout_mode = 0
+offset_left = 111.667
+offset_top = 20.0
+offset_right = 274.667
+offset_bottom = 50.0
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Ordnance"
+
+[node name="PassiveSonarTab" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect"]
+self_modulate = Color(0.0196078, 0.262745, 0.286275, 1)
+layout_mode = 0
+offset_left = 295.0
+offset_top = -38.3334
+offset_right = 627.0
+offset_bottom = 27.6666
+texture = ExtResource("32_kyj5j")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/PassiveSonarTab"]
+self_modulate = Color(0.699653, 0.699653, 0.699653, 1)
+layout_mode = 0
+offset_left = 87.0001
+offset_top = 20.0
+offset_right = 250.0
+offset_bottom = 50.0
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Passive"
+
+[node name="ActiveSonarTab" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect"]
+self_modulate = Color(0.627451, 0.627451, 0.627451, 1)
+layout_mode = 0
+offset_left = 10.0
+offset_top = -38.3334
+offset_right = 342.0
+offset_bottom = 27.6666
+texture = ExtResource("32_kyj5j")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarTab"]
+layout_mode = 0
+offset_left = 31.6667
+offset_top = 20.0001
+offset_right = 281.667
+offset_bottom = 50.0001
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Active Sonar"
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.4)
@@ -2686,8 +2810,8 @@ curve = SubResource("Curve3D_hkxrn")
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Slow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Normal" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [0]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Fast" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [3]]
-[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_one_button_up"]
-[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
-[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
-[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]
-[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl/PingButton" to="Players/Player1/CanvasLayer/PlayerUIRoot/ActiveSonarControl" method="_on_ping_button_button_up"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl" method="_on_active_sonar_knob_one_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl/PingButton" to="Players/Player1/CanvasLayer/PlayerUIRoot/TextureRect/ActiveSonarControl" method="_on_ping_button_button_up"]
