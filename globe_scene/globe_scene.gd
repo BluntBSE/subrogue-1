@@ -19,4 +19,4 @@ func _process(delta: float) -> void:
     pass
     
 func _unhandled_input(event: InputEvent) -> void:
-    print(event)
+    pass

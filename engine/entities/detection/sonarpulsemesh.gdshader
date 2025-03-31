@@ -3,25 +3,25 @@
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
 
-uniform vec4 albedo : source_color;
+instance uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_nearest, repeat_enable;
 
-uniform float distance_fade_min : hint_range(0.0, 4096.0, 0.01);
-uniform float distance_fade_max : hint_range(0.0, 4096.0, 0.01);
-uniform float point_size : hint_range(0.1, 128.0, 0.1);
+instance uniform float distance_fade_min : hint_range(0.0, 4096.0, 0.01);
+instance uniform float distance_fade_max : hint_range(0.0, 4096.0, 0.01);
+instance uniform float point_size : hint_range(0.1, 128.0, 0.1);
 
-uniform float roughness : hint_range(0.0, 1.0);
+instance uniform float roughness : hint_range(0.0, 1.0);
 uniform sampler2D texture_metallic : hint_default_white, filter_nearest, repeat_enable;
-uniform vec4 metallic_texture_channel;
+instance uniform vec4 metallic_texture_channel;
 uniform sampler2D texture_roughness : hint_roughness_r, filter_nearest, repeat_enable;
 
-uniform float specular : hint_range(0.0, 1.0, 0.01);
-uniform float metallic : hint_range(0.0, 1.0, 0.01);
+instance uniform float specular : hint_range(0.0, 1.0, 0.01);
+instance uniform float metallic : hint_range(0.0, 1.0, 0.01);
 
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
+instance uniform vec3 uv1_scale;
+instance uniform vec3 uv1_offset;
+instance uniform vec3 uv2_scale;
+instance uniform vec3 uv2_offset;
 
 void vertex() {
 	UV = UV * uv1_scale.xy + uv1_offset.xy;

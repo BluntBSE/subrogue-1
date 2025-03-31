@@ -12,6 +12,8 @@ func _ready() -> void:
     player = get_parent().get_parent()
     await player.ready
     var player_entity:Entity = player.entities.get_child(0)
+    print("Player Entity is", player_entity)
+
     active_sonar_control.s_angle_1.connect(player_entity.sonar_node.handle_angle_1)
     active_sonar_control.s_angle_2.connect(player_entity.sonar_node.handle_angle_2)
     active_sonar_control.ping_requested.connect(player_entity.sonar_node.handle_ping_request)

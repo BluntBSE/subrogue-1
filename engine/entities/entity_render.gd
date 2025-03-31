@@ -1,6 +1,7 @@
 extends Node3D
 class_name EntityRender
 @onready var depth_mesh:MeshInstance3D = %DepthMesh
+@onready var sonar_mesh:MeshInstance3D = %SonarPulseMesh
 @onready var entity:Entity = get_parent()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,9 +14,9 @@ func _process(delta: float) -> void:
     
 
 func update_mesh_visibilities(layer:int, val:bool):
-    if not depth_mesh:
-        depth_mesh = %DepthMesh
+    print("Updated mesh visibilities to ", layer, val)
     depth_mesh.set_layer_mask_value(layer, val)
+    sonar_mesh.set_layer_mask_value(layer,val)
     for child in get_children():
         child.set_layer_mask_value(layer,val)
     pass

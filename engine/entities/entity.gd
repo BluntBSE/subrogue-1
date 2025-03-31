@@ -54,8 +54,10 @@ func unpack(type_id, _faction):
     if npc == true:
         print(name, "instantiated as NPC")
         behavior.enabled = true
-        #DEBUG because there's not yet a non player unpack
+        #DEBUG because there's not yet a non player unpack, we hide again from the player layer
         render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, false)
+        #Then show on the NPC layer
+        render.update_mesh_visibilities(faction, true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

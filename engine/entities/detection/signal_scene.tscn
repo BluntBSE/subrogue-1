@@ -16,6 +16,7 @@ script = ExtResource("1_kaa7y")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+layers = 0
 visibility_range_begin_margin = 50.0
 visibility_range_end = 25.0
 visibility_range_end_margin = 200.0
@@ -25,6 +26,7 @@ texture = ExtResource("2_xg60q")
 [node name="CertaintyRadius" type="MeshInstance3D" parent="Sprite3D"]
 unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+layers = 0
 material_override = SubResource("StandardMaterial3D_drk11")
 visibility_range_begin_margin = 50.0
 visibility_range_end = 25.0
@@ -36,6 +38,7 @@ skeleton = NodePath("../..")
 [node name="CertaintyLabel" type="Label3D" parent="Sprite3D/CertaintyRadius"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.595119, 0)
+layers = 0
 visibility_range_begin_margin = 50.0
 visibility_range_end = 25.0
 visibility_range_end_margin = 200.0
@@ -45,6 +48,7 @@ text = "Test"
 [node name="EntityLabel" type="Label3D" parent="Sprite3D/CertaintyRadius"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.687453, 0)
+layers = 0
 visibility_range_begin_margin = 50.0
 visibility_range_end = 25.0
 visibility_range_end_margin = 200.0
