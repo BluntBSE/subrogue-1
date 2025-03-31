@@ -4,10 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cgujj1t61jgne" path="res://assets/UI/blue_buttons/LoadingBarFullT03Blue.png" id="2_1nblb"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_jj1jq")
 shader_parameter/texture_progress = ExtResource("2_1nblb")
 shader_parameter/texture_under = ExtResource("2_1nblb")
-shader_parameter/tint_progress = Color(1, 1, 1, 1)
 shader_parameter/tint_under = Color(0.894118, 0.894118, 0.894118, 0.345098)
-shader_parameter/left_percent = 0.0
-shader_parameter/right_percent = 0.809

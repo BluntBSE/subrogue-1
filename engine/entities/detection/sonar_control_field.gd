@@ -26,7 +26,6 @@ func _process(delta: float) -> void:
     pass
 """
 func _process(delta:float)->void:
-    %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", 1.0)
     var mesh_1:MeshInstance3D = %SonarPulseMesh
     var entity:Entity = get_parent()
     var up = (entity.anchor.position - entity.position).normalized()
@@ -43,10 +42,11 @@ func _process(delta:float)->void:
 func send_pulse():
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_head", 0.0)
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_tail", 0.0)
+    var max = %SonarPulseMesh.material_override.get_shader_parameter("frontier_head")
     var tween:Tween = get_tree().create_tween().set_trans(Tween.TRANS_QUINT).set_ease(1)
-    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_head", 1.0, 1.0).from_current()
+    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_head", max, 1.0).from_current()
     tween.set_trans(Tween.TRANS_CIRC)
-    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_tail", 1.0, 0.5).from_current()
+    tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_tail", max, 0.5).from_current()
     
 func handle_angle_1(angle):
     print("Handle angle 1 received ", angle)
@@ -61,6 +61,10 @@ func handle_angle_2(angle):
     #Foreground
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("end_angle", angle)
     pass    
+
+func handle_volume(dict:Dictionary):
+    print("Handle volume called with ", dict)
+    %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", dict.max)
 
 func handle_ping_request(_angle_1, _angle_2)->void:
     
