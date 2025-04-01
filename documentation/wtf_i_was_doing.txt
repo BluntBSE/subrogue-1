@@ -11,9 +11,10 @@ but not so much the player can't bamboozle the AI.
 
 
 
-BUG: 
-    Sprite rotation looking kinda messed up when movnig?
-
+TODO:
+    Animate the switches between UI tabs.
+    The control root knows what state it's in. There's a transitioning state
+    
 
 QUEUE:
     1. Active ping now reveals. For how long?

@@ -18,7 +18,7 @@ void fragment() {
     float cdist = length(cPos);
     float fade = 1.0 - cdist;
     ALPHA *= fade;
-    
+
     // Calculate the angle of a given in degrees relative to the center
     float angle = degrees(atan(cPos.y, cPos.x));
     if (angle < 0.0) {
@@ -32,29 +32,29 @@ void fragment() {
     } else {
         within_angle_range = angle >= start_angle || angle <= end_angle;
     }
-    
+
     if (within_angle_range) {
         ALPHA = ALPHA;
     } else {
         ALPHA = 0.0;
     }
-    
+
     bool within_frontier_limits=false;
     if (cdist < frontier_head){
         if (cdist>frontier_tail){
             ALPHA = ALPHA;
         }
     }
-    
+
     if (cdist>frontier_head){
         ALPHA = 0.0;
     }
     if (cdist<frontier_tail){
         ALPHA = 0.0;
     }
-    
-    
-    
+
+
+
 }
 
 //void light() {

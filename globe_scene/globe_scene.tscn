@@ -1,4 +1,4 @@
-[gd_scene load_steps=236 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=242 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -282,6 +282,212 @@ shader_parameter/end_angle = 45.0
 shader_parameter/between_angle_alpha = 1.0
 shader_parameter/beyond_angle_alpha = 0.2
 shader_parameter/distance_factor = 0.0
+
+[sub_resource type="Animation" id="Animation_pxv8h"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%ActiveSonarControl:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(225, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%ActiveSonarControl:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(235, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%ActiveSonarControl:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(225, 235)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%PingButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2928.33, 311.667)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PassiveSonarPanelGroup/PassiveSonarControl:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(225, 750)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PassiveSonarPanelGroup/ClearButton:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2928.33, 676.667)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PassiveSonarPanelGroup/UpdateButton:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2928.33, 555)]
+}
+
+[sub_resource type="Animation" id="Animation_ysxr2"]
+resource_name = "ActiveSonarOut"
+length = 0.14
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%ActiveSonarControl:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(225, 235), Vector2(-751.667, 235)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%PingButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(2928.33, 311.667), Vector2(3351.67, 311.667)]
+}
+
+[sub_resource type="Animation" id="Animation_labis"]
+resource_name = "PassiveSonarIn"
+length = 0.14
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PassiveSonarPanelGroup/PassiveSonarControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(225, 750), Vector2(225, 235)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PassiveSonarPanelGroup/ClearButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2928.33, 676.667), Vector2(2928.33, 365)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PassiveSonarPanelGroup/UpdateButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2928.33, 555), Vector2(2928.33, 243.333)]
+}
+
+[sub_resource type="Animation" id="Animation_gpuiy"]
+resource_name = "PassiveSonarOut"
+length = 0.14
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PassiveSonarPanelGroup/PassiveSonarControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(225, 235), Vector2(-746.667, 235)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PassiveSonarPanelGroup/ClearButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(2928.33, 365), Vector2(3351.67, 365)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PassiveSonarPanelGroup/UpdateButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(2928.33, 243.333), Vector2(3351.67, 243.333)]
+}
+
+[sub_resource type="Animation" id="Animation_oor6e"]
+resource_name = "ActiveSonarTabToDark2"
+length = 0.14
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_labis"]
+_data = {
+&"ActiveSonarOut": SubResource("Animation_ysxr2"),
+&"ActiveSonarTabToDark2": SubResource("Animation_oor6e"),
+&"PassiveSonarIn": SubResource("Animation_labis"),
+&"PassiveSonarOut": SubResource("Animation_gpuiy"),
+&"RESET": SubResource("Animation_pxv8h")
+}
 
 [sub_resource type="SphereMesh" id="SphereMesh_6oioa"]
 
@@ -1822,286 +2028,6 @@ stretch_mode = 4
 flip_h = true
 script = ExtResource("24_pxv8h")
 
-[node name="ActiveSonarControl" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI"]
-unique_name_in_owner = true
-z_index = 1
-anchors_preset = 0
-offset_left = 225.0
-offset_top = 235.0
-offset_right = 265.0
-offset_bottom = 275.0
-scale = Vector2(1.8, 1.8)
-script = ExtResource("30_kyj5j")
-angle_1 = 10.0
-angle_2 = 45.0
-a_diff = 35.0
-
-[node name="ActiveSonarBG" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl"]
-unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.54902)
-material = SubResource("ShaderMaterial_n7gus")
-layout_mode = 0
-offset_left = -101.0
-offset_top = -108.0
-offset_right = 619.0
-offset_bottom = 612.0
-scale = Vector2(0.320004, 0.320004)
-texture = ExtResource("13_ep416")
-
-[node name="ActiveSonarTexture" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_i4tgh")
-layout_mode = 0
-offset_left = -86.0
-offset_top = -94.0
-offset_right = 634.0
-offset_bottom = 626.0
-scale = Vector2(0.279999, 0.279999)
-texture = ExtResource("30_04345")
-
-[node name="ActiveSonarKnobOnePivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl"]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 10.0
-offset_right = 57.0
-offset_bottom = 50.0
-rotation = 0.174533
-
-[node name="ActiveSonarKnobOne" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/ActiveSonarKnobOnePivot"]
-layout_mode = 0
-offset_left = -21.9119
-offset_top = -118.839
-offset_right = 78.0881
-offset_bottom = -18.8392
-scale = Vector2(0.4, 0.4)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("31_x2kcd")
-texture_pressed = ExtResource("34_n7gus")
-texture_hover = ExtResource("34_n7gus")
-
-[node name="ActiveSonarKnobTwoPivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl"]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 10.0
-offset_right = 57.0
-offset_bottom = 50.0
-rotation = 0.785398
-
-[node name="ActiveSonarKnobTwo" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/ActiveSonarKnobTwoPivot"]
-layout_mode = 0
-offset_left = -22.9642
-offset_top = -119.655
-offset_right = 77.0358
-offset_bottom = -19.6547
-scale = Vector2(0.4, 0.4)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("31_x2kcd")
-texture_pressed = ExtResource("34_n7gus")
-texture_hover = ExtResource("34_n7gus")
-
-[node name="PingButton" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl"]
-unique_name_in_owner = true
-clip_contents = true
-custom_minimum_size = Vector2(50, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 31.4796
-anchor_top = 0.597221
-anchor_right = 31.4796
-anchor_bottom = 0.597221
-offset_left = 172.0
-offset_top = -11.0
-offset_right = 274.0
-offset_bottom = 29.0
-scale = Vector2(1.7, 1.7)
-texture_normal = ExtResource("19_8gfvb")
-texture_pressed = ExtResource("29_wxry4")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/PingButton"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 0.75
-offset_left = 26.0
-offset_top = 11.0
-offset_right = -27.0
-offset_bottom = 1.0
-theme = ExtResource("20_oyi6m")
-text = "Ping"
-
-[node name="VolumeBar" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
-unique_name_in_owner = true
-material = ExtResource("31_cluxj")
-instance_shader_parameters/right_percent = 1.0
-instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
-layout_mode = 0
-offset_left = 150.926
-offset_top = -80.5556
-offset_right = 355.926
-offset_bottom = -69.5556
-nine_patch_stretch = true
-texture_under = ExtResource("30_x2kcd")
-texture_progress_offset = Vector2(-20, 0)
-tint_under = Color(1, 1, 1, 0.996078)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0, 0, 0, 1)
-script = ExtResource("32_n7gus")
-handle_1 = NodePath("VolumeBarMax")
-output_label = NodePath("Values")
-mult_factor = 100.0
-output_symbol = "db"
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/VolumeBar"]
-layout_mode = 0
-offset_left = 58.0
-offset_top = -21.0
-offset_right = 139.0
-offset_bottom = -1.99999
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 14
-text = "Volume"
-horizontal_alignment = 1
-
-[node name="Values" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/VolumeBar"]
-layout_mode = 0
-offset_left = 40.7407
-offset_top = 20.3704
-offset_right = 162.741
-offset_bottom = 40.3704
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("32_i4tgh")
-theme_override_font_sizes/font_size = 10
-text = "100db"
-horizontal_alignment = 1
-
-[node name="VolumeBarMax" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/VolumeBar"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 178.704
-offset_top = -8.3335
-offset_right = 278.704
-offset_bottom = 91.6665
-scale = Vector2(0.25, 0.25)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("35_hshx3")
-texture_pressed = ExtResource("36_01tu7")
-texture_hover = ExtResource("36_01tu7")
-
-[node name="RangeBar2" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
-material = ExtResource("31_cluxj")
-instance_shader_parameters/right_percent = 1.0
-instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
-layout_mode = 0
-offset_left = 150.926
-offset_top = -6.48148
-offset_right = 355.926
-offset_bottom = 4.51852
-nine_patch_stretch = true
-texture_under = ExtResource("30_x2kcd")
-texture_progress_offset = Vector2(-20, 0)
-tint_under = Color(1, 1, 1, 0.996078)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0, 0, 0, 1)
-script = ExtResource("32_n7gus")
-handle_1 = NodePath("RangeBarControlMax")
-handle_2 = NodePath("RangeBarControlMin")
-output_label = NodePath("Values")
-mult_factor = 1.0
-
-[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2"]
-layout_mode = 0
-offset_left = 58.0
-offset_top = -21.0
-offset_right = 139.0
-offset_bottom = -1.99999
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 14
-text = "Profile"
-horizontal_alignment = 1
-
-[node name="Values" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2"]
-layout_mode = 0
-offset_left = 40.7407
-offset_top = 20.3704
-offset_right = 162.741
-offset_bottom = 40.3704
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("32_i4tgh")
-theme_override_font_sizes/font_size = 10
-text = "0.0 - 1.0"
-horizontal_alignment = 1
-
-[node name="RangeBarControlMax" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2"]
-layout_mode = 0
-offset_left = 178.704
-offset_top = -8.3335
-offset_right = 278.704
-offset_bottom = 91.6665
-scale = Vector2(0.25, 0.25)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("35_hshx3")
-texture_pressed = ExtResource("36_01tu7")
-texture_hover = ExtResource("36_01tu7")
-
-[node name="RangeBarControlMin" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2"]
-layout_mode = 0
-offset_left = -4.76837e-05
-offset_top = -7.40735
-offset_right = 99.9999
-offset_bottom = 92.5927
-scale = Vector2(0.25, 0.25)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("35_hshx3")
-texture_pressed = ExtResource("36_01tu7")
-texture_hover = ExtResource("36_01tu7")
-
-[node name="DepthBar" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl"]
-layout_mode = 0
-offset_left = 148.148
-offset_top = 76.8519
-offset_right = 353.148
-offset_bottom = 87.8519
-nine_patch_stretch = true
-texture_under = ExtResource("30_x2kcd")
-
-[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/DepthBar"]
-layout_mode = 0
-offset_left = 58.0
-offset_top = -21.0
-offset_right = 139.0
-offset_bottom = -1.99999
-theme = ExtResource("20_oyi6m")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 14
-text = "Depth"
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/DepthBar"]
-layout_mode = 0
-offset_left = 12.037
-offset_top = 20.3704
-offset_right = 186.037
-offset_bottom = 40.3704
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("32_i4tgh")
-theme_override_font_sizes/font_size = 10
-text = "Crawl, Swim, Surface"
-horizontal_alignment = 1
-
 [node name="OrdnanceTab" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI"]
 self_modulate = Color(0.00784314, 0.156863, 0.172549, 1)
 layout_mode = 0
@@ -2114,7 +2040,7 @@ expand_mode = 1
 stretch_mode = 4
 flip_h = true
 
-[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/OrdnanceTab"]
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/OrdnanceTab"]
 self_modulate = Color(0.699653, 0.699653, 0.699653, 1)
 layout_mode = 0
 offset_left = 111.667
@@ -2130,15 +2056,15 @@ text = "Ordnance"
 self_modulate = Color(0.0196078, 0.262745, 0.286275, 1)
 layout_mode = 0
 offset_left = 295.0
-offset_top = -38.3334
+offset_top = -38.0
 offset_right = 627.0
-offset_bottom = 27.6666
+offset_bottom = 28.0
 texture = ExtResource("32_kyj5j")
 expand_mode = 1
 stretch_mode = 4
 flip_h = true
 
-[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarTab"]
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarTab"]
 self_modulate = Color(0.699653, 0.699653, 0.699653, 1)
 layout_mode = 0
 offset_left = 87.0001
@@ -2172,6 +2098,727 @@ theme = ExtResource("20_oyi6m")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "Active Sonar"
+
+[node name="ActiveSonarPanelGroup" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ActiveSonarControl" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup"]
+unique_name_in_owner = true
+z_index = 1
+anchors_preset = 0
+offset_left = 225.0
+offset_top = 235.0
+offset_right = 265.0
+offset_bottom = 275.0
+scale = Vector2(1.8, 1.8)
+script = ExtResource("30_kyj5j")
+angle_1 = 10.0
+angle_2 = 45.0
+a_diff = 35.0
+
+[node name="ActiveSonarBG" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.54902)
+material = SubResource("ShaderMaterial_n7gus")
+layout_mode = 0
+offset_left = -101.0
+offset_top = -108.0
+offset_right = 619.0
+offset_bottom = 612.0
+scale = Vector2(0.320004, 0.320004)
+texture = ExtResource("13_ep416")
+
+[node name="ActiveSonarTexture" type="TextureRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_i4tgh")
+layout_mode = 0
+offset_left = -86.0
+offset_top = -94.0
+offset_right = 634.0
+offset_bottom = 626.0
+scale = Vector2(0.279999, 0.279999)
+texture = ExtResource("30_04345")
+
+[node name="ActiveSonarKnobOnePivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 10.0
+offset_right = 57.0
+offset_bottom = 50.0
+rotation = 0.174533
+
+[node name="ActiveSonarKnobOne" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot"]
+layout_mode = 0
+offset_left = -21.9119
+offset_top = -118.839
+offset_right = 78.0881
+offset_bottom = -18.8392
+scale = Vector2(0.4, 0.4)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("31_x2kcd")
+texture_pressed = ExtResource("34_n7gus")
+texture_hover = ExtResource("34_n7gus")
+
+[node name="ActiveSonarKnobTwoPivot" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 10.0
+offset_right = 57.0
+offset_bottom = 50.0
+rotation = 0.785398
+
+[node name="ActiveSonarKnobTwo" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot"]
+layout_mode = 0
+offset_left = -22.9642
+offset_top = -119.655
+offset_right = 77.0358
+offset_bottom = -19.6547
+scale = Vector2(0.4, 0.4)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("31_x2kcd")
+texture_pressed = ExtResource("34_n7gus")
+texture_hover = ExtResource("34_n7gus")
+
+[node name="VolumeBar" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+unique_name_in_owner = true
+material = ExtResource("31_cluxj")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 150.926
+offset_top = -80.5556
+offset_right = 355.926
+offset_bottom = -69.5556
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("32_n7gus")
+handle_1 = NodePath("VolumeBarMax")
+output_label = NodePath("Values")
+mult_factor = 100.0
+output_symbol = "db"
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "100db"
+horizontal_alignment = 1
+
+[node name="VolumeBarMax" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("35_hshx3")
+texture_pressed = ExtResource("36_01tu7")
+texture_hover = ExtResource("36_01tu7")
+
+[node name="RangeBar2" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+material = ExtResource("31_cluxj")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 150.926
+offset_top = -6.48148
+offset_right = 355.926
+offset_bottom = 4.51852
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("32_n7gus")
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+output_label = NodePath("Values")
+mult_factor = 1.0
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Profile"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "0.0 - 1.0"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("35_hshx3")
+texture_pressed = ExtResource("36_01tu7")
+texture_hover = ExtResource("36_01tu7")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("35_hshx3")
+texture_pressed = ExtResource("36_01tu7")
+texture_hover = ExtResource("36_01tu7")
+
+[node name="DepthBar" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+layout_mode = 0
+offset_left = 148.148
+offset_top = 76.8519
+offset_right = 353.148
+offset_bottom = 87.8519
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+
+[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/DepthBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Depth"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/DepthBar"]
+layout_mode = 0
+offset_left = 12.037
+offset_top = 20.3704
+offset_right = 186.037
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "Crawl, Swim, Surface"
+horizontal_alignment = 1
+
+[node name="PingButton" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 66.618
+anchor_top = 1.93389
+anchor_right = 66.618
+anchor_bottom = 1.93389
+offset_left = 263.614
+offset_top = 234.311
+offset_right = 365.614
+offset_bottom = 274.311
+scale = Vector2(1.7, 1.7)
+texture_normal = ExtResource("19_8gfvb")
+texture_pressed = ExtResource("29_wxry4")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/PingButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("20_oyi6m")
+text = "Ping"
+
+[node name="PassiveSonarPanelGroup" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PassiveSonarControl" type="Control" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup"]
+z_index = 1
+anchors_preset = 0
+offset_left = 225.0
+offset_top = 750.0
+offset_right = 265.0
+offset_bottom = 790.0
+scale = Vector2(1.8, 1.8)
+
+[node name="VolumeBar" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+material = ExtResource("31_cluxj")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 150.926
+offset_top = -80.5556
+offset_right = 355.926
+offset_bottom = -69.5556
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("32_n7gus")
+handle_1 = NodePath("VolumeBarMax")
+output_label = NodePath("Values")
+mult_factor = 100.0
+output_symbol = "db"
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "100db"
+horizontal_alignment = 1
+
+[node name="VolumeBarMax" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("35_hshx3")
+texture_pressed = ExtResource("36_01tu7")
+texture_hover = ExtResource("36_01tu7")
+
+[node name="VolumeBar2" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+material = ExtResource("31_cluxj")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = -75.9259
+offset_top = -80.5556
+offset_right = 129.074
+offset_bottom = -69.5556
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("32_n7gus")
+handle_1 = NodePath("VolumeBarMax")
+output_label = NodePath("Values")
+mult_factor = 100.0
+output_symbol = "db"
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = -21.0
+offset_right = 150.741
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Certainty"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "100db"
+horizontal_alignment = 1
+
+[node name="VolumeBarMax" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("35_hshx3")
+texture_pressed = ExtResource("36_01tu7")
+texture_hover = ExtResource("36_01tu7")
+
+[node name="RangeBar2" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+material = ExtResource("31_cluxj")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 150.926
+offset_top = -6.48148
+offset_right = 355.926
+offset_bottom = 4.51852
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("32_n7gus")
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+output_label = NodePath("Values")
+mult_factor = 1.0
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Profile"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "0.0 - 1.0"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("35_hshx3")
+texture_pressed = ExtResource("36_01tu7")
+texture_hover = ExtResource("36_01tu7")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("35_hshx3")
+texture_pressed = ExtResource("36_01tu7")
+texture_hover = ExtResource("36_01tu7")
+
+[node name="RangeBar3" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+material = ExtResource("31_cluxj")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = -72.2222
+offset_top = -6.48148
+offset_right = 132.778
+offset_bottom = 4.51852
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("32_n7gus")
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+output_label = NodePath("Values")
+mult_factor = 1.0
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+layout_mode = 0
+offset_left = 37.0371
+offset_top = -21.2962
+offset_right = 159.037
+offset_bottom = -2.29624
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Track Time"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "0.0 - 1.0"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("35_hshx3")
+texture_pressed = ExtResource("36_01tu7")
+texture_hover = ExtResource("36_01tu7")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("35_hshx3")
+texture_pressed = ExtResource("36_01tu7")
+texture_hover = ExtResource("36_01tu7")
+
+[node name="DepthBar" type="TextureProgressBar" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl"]
+layout_mode = 0
+offset_left = 148.148
+offset_top = 76.8519
+offset_right = 353.148
+offset_bottom = 87.8519
+nine_patch_stretch = true
+texture_under = ExtResource("30_x2kcd")
+
+[node name="Label2" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/DepthBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("20_oyi6m")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Depth"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/DepthBar"]
+layout_mode = 0
+offset_left = 12.037
+offset_top = 20.3704
+offset_right = 186.037
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("32_i4tgh")
+theme_override_font_sizes/font_size = 10
+text = "Crawl, Swim, Surface"
+horizontal_alignment = 1
+
+[node name="ClearButton" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 45.2846
+anchor_top = -13.6078
+anchor_right = 45.2846
+anchor_bottom = -13.6078
+offset_left = 1116.95
+offset_top = 1220.98
+offset_right = 1218.95
+offset_bottom = 1260.98
+scale = Vector2(1.7, 1.7)
+texture_normal = ExtResource("19_8gfvb")
+texture_pressed = ExtResource("29_wxry4")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/ClearButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 14.7059
+offset_top = 11.0
+offset_right = -26.2941
+offset_bottom = 1.0
+theme = ExtResource("20_oyi6m")
+text = "Clear"
+
+[node name="UpdateButton" type="TextureButton" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 45.2846
+anchor_top = -16.6494
+anchor_right = 45.2846
+anchor_bottom = -16.6494
+offset_left = 1116.95
+offset_top = 1220.98
+offset_right = 1218.95
+offset_bottom = 1260.98
+scale = Vector2(1.7, 1.7)
+texture_normal = ExtResource("19_8gfvb")
+texture_pressed = ExtResource("29_wxry4")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/UpdateButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 14.7059
+offset_top = 11.0
+offset_right = -13.2941
+offset_bottom = 20.0
+theme = ExtResource("20_oyi6m")
+text = "Update
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI"]
+libraries = {
+&"": SubResource("AnimationLibrary_labis")
+}
+playback_auto_capture_ease_type = 1
+
+[node name="AnimTopLineBot" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+custom_minimum_size = Vector2(1, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.71019
+anchor_top = -0.123914
+anchor_right = -9.71019
+anchor_bottom = -0.123914
+offset_left = 537.408
+offset_top = 1127.96
+offset_right = 2175.41
+offset_bottom = 1177.96
+scale = Vector2(1.00746, 0.174442)
+
+[node name="AnimCenterline1" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+custom_minimum_size = Vector2(1, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.71019
+anchor_top = -0.123914
+anchor_right = -9.71019
+anchor_bottom = -0.123914
+offset_left = -1374.59
+offset_top = 933.957
+offset_right = 2317.41
+offset_bottom = 983.957
+scale = Vector2(1.00746, 0.174442)
+
+[node name="AnimRightLineLeft" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+custom_minimum_size = Vector2(1, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.71019
+anchor_top = -0.123914
+anchor_right = -9.71019
+anchor_bottom = -0.123914
+offset_left = 313.408
+offset_top = 143.957
+offset_right = 336.408
+offset_bottom = 5595.96
+scale = Vector2(1.00746, 0.174442)
+
+[node name="AnimationLeftLineRight" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+custom_minimum_size = Vector2(1, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.71019
+anchor_top = -0.123914
+anchor_right = -9.71019
+anchor_bottom = -0.123914
+offset_left = 2365.41
+offset_top = 143.957
+offset_right = 2388.41
+offset_bottom = 5595.96
+scale = Vector2(1.00746, 0.174442)
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.4)
@@ -2847,14 +3494,26 @@ curve = SubResource("Curve3D_hkxrn")
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Slow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Normal" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [0]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Fast" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [3]]
-[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl" method="_on_active_sonar_knob_one_button_up"]
-[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
-[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
-[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]
-[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/PingButton" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl" method="_on_ping_button_button_up"]
-[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/VolumeBar/VolumeBarMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/VolumeBar/VolumeBarMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_button_up"]
-[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_one_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar/VolumeBarMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar/VolumeBarMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/PingButton" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_ping_button_button_up"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMin" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMin" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="Players/Player1/CanvasLayer/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
