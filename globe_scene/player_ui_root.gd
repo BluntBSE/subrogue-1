@@ -5,6 +5,7 @@ const TIMER_LIMIT = 2.0
 var timer = 0.0
 
 @onready var active_sonar_control:ActiveSonarControl = find_child("ActiveSonarControl", true, false)
+@onready var volume_bar:DraggableTPB = find_child("VolumeBar", true, false)
 var player:Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,10 +15,13 @@ func _ready() -> void:
     var player_entity:Entity = player.entities.get_child(0)
     print("Player Entity is", player_entity)
 
+    #We do all signal connections here because the player is the immediate parent of this node.
     active_sonar_control.s_angle_1.connect(player_entity.sonar_node.handle_angle_1)
     active_sonar_control.s_angle_2.connect(player_entity.sonar_node.handle_angle_2)
     active_sonar_control.ping_requested.connect(player_entity.sonar_node.handle_ping_request)
     active_sonar_control.unpack()
+    
+    volume_bar.handle_values.connect(player_entity.sonar_node.handle_volume)
     
     pass # Replace with function body.
 

@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dqq4y57jw3d0n"]
+
+[ext_resource type="Shader" uid="uid://bu4v11jqc6r1g" path="res://globe_scene/draggableTPB.gdshader" id="1_jj1jq"]
+[ext_resource type="Texture2D" uid="uid://cgujj1t61jgne" path="res://assets/UI/blue_buttons/LoadingBarFullT03Blue.png" id="2_1nblb"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_jj1jq")
+shader_parameter/texture_progress = ExtResource("2_1nblb")
+shader_parameter/texture_under = ExtResource("2_1nblb")
+shader_parameter/tint_under = Color(0.894118, 0.894118, 0.894118, 0.345098)

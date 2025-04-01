@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://mk8pfr0o221d"]
+
+[ext_resource type="Material" uid="uid://dqq4y57jw3d0n" path="res://globe_scene/player/draggableTPB.tres" id="1_fny7g"]
+[ext_resource type="Texture2D" uid="uid://cgujj1t61jgne" path="res://assets/UI/blue_buttons/LoadingBarFullT03Blue.png" id="2_62d5g"]
+[ext_resource type="Script" uid="uid://13s6hk60uute" path="res://globe_scene/adjustable_slider.gd" id="3_r8cuq"]
+[ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="4_tu0ub"]
+[ext_resource type="FontFile" uid="uid://bvmpsl44wcfpl" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Bd.otf" id="5_nr0eu"]
+[ext_resource type="Texture2D" uid="uid://du17cbk1h66aq" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04Blue_horizontal.png" id="6_iibdq"]
+[ext_resource type="Texture2D" uid="uid://cgd8r3p0kth43" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04White_horizontal.png" id="7_cucki"]
+
+[node name="RangeBar" type="TextureProgressBar" node_paths=PackedStringArray("handle_1", "handle_2")]
+material = ExtResource("1_fny7g")
+offset_left = 150.926
+offset_top = -80.5555
+offset_right = 355.926
+offset_bottom = -69.5555
+nine_patch_stretch = true
+texture_under = ExtResource("2_62d5g")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("3_r8cuq")
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("4_tu0ub")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("5_nr0eu")
+theme_override_font_sizes/font_size = 10
+text = "200db - 1000km"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("6_iibdq")
+texture_pressed = ExtResource("7_cucki")
+texture_hover = ExtResource("7_cucki")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("6_iibdq")
+texture_pressed = ExtResource("7_cucki")
+texture_hover = ExtResource("7_cucki")
+
+[connection signal="button_up" from="RangeBarControlMax" to="." method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="RangeBarControlMax" to="." method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="RangeBarControlMin" to="." method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="RangeBarControlMin" to="." method="_on_range_bar_control_min_pressed"]

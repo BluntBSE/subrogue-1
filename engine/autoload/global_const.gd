@@ -60,7 +60,7 @@ enum layers {
     FACTION_7,
     MINOR_FACTIONS,
     NAVNODES,
-    #You got three left
+    DEBUG,
 }
 
 #Acoustic modeling is complex, so we're cheating
