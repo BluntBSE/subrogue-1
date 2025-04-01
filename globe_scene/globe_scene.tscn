@@ -3106,6 +3106,7 @@ offset_bottom = 1177.96
 scale = Vector2(1.00746, 0.174442)
 
 [node name="AnimCenterline1" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+visible = false
 custom_minimum_size = Vector2(1, 50)
 layout_mode = 1
 anchors_preset = -1

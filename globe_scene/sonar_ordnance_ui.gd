@@ -71,7 +71,22 @@ func adjust_tab_z() -> void:
     var active_tab:TextureButton = tabs[active_index]
     active_tab.z_index += 2 #If this tab's neighbor is +1 z index by default, going +2 will overlap it.
     
+func adjust_tab_colors():
+    for tab in tabs:
+        var self_index:int = tabs.find(tab)
+        var index_diff:int = abs(active_index - self_index)
+        if index_diff == 0:
+            tab.self_modulate = active_color
+            tab.get_child(0).self_modulate = Color("#ffffff") #label
+        if index_diff == 1:
+            tab.self_modulate = dark_1_color
+            tab.get_child(0).self_modulate = Color("#b2b2b2")
+        if index_diff == 2:
+            tab.self_modulate = dark_2_color
+            tab.get_child(0).self_modulate = Color("#b2b2b2")
 
+        var label:Label = tab.get_child(0)
+        label.remove_theme_color_override("font_outline_color")
 
 #3 is just enough to make you wonder if you should do this for a more general case. Whatever.
 func _on_active_sonar_tab_button_up() -> void:

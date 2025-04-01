@@ -8,10 +8,12 @@ func stateEnter(_args:Dictionary)->void:
     ref.active_index = 1
     #Consider adding an 'initialized' bool to the reference to avoid playing this when the game starts.
     #Or maybe playing it really slow for ultimate vibe?
-    ref.anim_player.play("PassiveSonarIn")
+    ref.anim_player.queue("PassiveSonarIn")
+    ref.adjust_tab_z()
+    ref.adjust_tab_colors()
     pass
     
     
 
 func stateExit()->void:
-    ref.anim_player.play("PassiveSonarOut")
+    ref.anim_player.queue("PassiveSonarOut")
