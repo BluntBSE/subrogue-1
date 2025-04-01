@@ -38,7 +38,7 @@ func get_angle_diff(a1:float, a2:float)->float: #expecting degrees, not radians.
     return degdiff
 
 func set_angle_1(deg:float)->void:#Expects degree, not rad
-    print("Set angle 2 called with", deg)
+    print("Set angle 1 called with", deg)
     angle_1 = deg
     if angle_1 > 360.0:
         inc /= 360.0
@@ -55,7 +55,9 @@ func set_angle_2(deg:float)->void:#Expects degree, not rad
     print("Set angle 2 called with ", deg)
     angle_2 = deg
     if angle_2 > 360.0:
-        angle_2 /= 360.0
+        inc /= 360.0
+    if angle_2 < 0:
+        angle_2 += 360
         
     %ActiveSonarKnobTwoPivot.rotation = deg_to_rad(angle_2)
     %ActiveSonarTexture.material.set_shader_parameter("end_angle", angle_2)
