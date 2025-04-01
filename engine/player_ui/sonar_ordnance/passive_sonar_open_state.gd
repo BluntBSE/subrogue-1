@@ -5,6 +5,7 @@ var ref:SonarOrdnanceUI
 
 func stateEnter(_args:Dictionary)->void:
     ref = _reference
+    ref.active_index = 1
     #Consider adding an 'initialized' bool to the reference to avoid playing this when the game starts.
     #Or maybe playing it really slow for ultimate vibe?
     ref.anim_player.play("PassiveSonarIn")
