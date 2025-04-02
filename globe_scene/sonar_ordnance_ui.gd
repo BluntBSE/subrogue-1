@@ -64,13 +64,19 @@ func _on_tab_mouse_exit(tab:TextureButton)->void:
     label.remove_theme_color_override("font_outline_color")
     
 func adjust_tab_z() -> void:
-    #Set them all to what they ought to be by default
+    # Set the z_index for all tabs
     for index in range(tabs.size()):
         var tab = tabs[index]
-        tab.z_index = tabs.size() - index
-    var active_tab:TextureButton = tabs[active_index]
-    active_tab.z_index += 2 #If this tab's neighbor is +1 z index by default, going +2 will overlap it.
-    
+        if index == active_index:
+            # Active tab gets the highest z_index
+            tab.z_index = tabs.size()
+        else:
+            # Other tabs are layered below the active tab
+            tab.z_index = tabs.size() - index - 1
+        #Feels silly with just 3, but this is how we get that depth switch on right vs left tabs.
+        if active_index > (tabs.size()/2):
+            tab.z_index = tabs.size() + index - 1
+            
 func adjust_tab_colors():
     for tab in tabs:
         var self_index:int = tabs.find(tab)
