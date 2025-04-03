@@ -1,5 +1,5 @@
 shader_type spatial;
-
+render_mode unshaded;
 uniform sampler2D disc_texture;
 uniform float start_angle; // 0 - 360
 uniform float end_angle;   // 0 - 360

@@ -56,4 +56,5 @@ func _process(delta:float)->void:
     var up = (entity.anchor.position - entity.position).normalized()
     #This, along wth the funky rotations on the mesh, are how we keep the plane from clipping into the planet.
     mesh_1.look_at(entity.anchor.position)
-   # mesh_1.rotation.z += deg_to_rad(90.0)
+    mesh_1.rotation.z += deg_to_rad(90.0)
+    mesh_1.rotation.z += rotation.z

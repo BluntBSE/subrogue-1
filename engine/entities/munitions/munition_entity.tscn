@@ -172,5 +172,6 @@ unique_name_in_owner = true
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
 layers = 524289
 material_override = ExtResource("6_5spmm")
+cast_shadow = 0
 mesh = SubResource("QuadMesh_1r2o5")
 skeleton = NodePath("../../SonarNode")
