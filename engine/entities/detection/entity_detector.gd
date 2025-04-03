@@ -18,7 +18,6 @@ var sigmap = {} # {"entity":entity, "signal":signal} Signals match to the array 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     if entity is Munition:
-        entity as Munition
         #This means that the detector (for now) is totally subordinate to its parent.
         #Bind to the detection node of the originating entity
         detection_parent = entity.fired_from.detector
@@ -41,7 +40,6 @@ func _process(delta: float) -> void:
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
     if body is Entity and body != entity:
-        body as Entity
         #Check if body is already tracked
         print(entity.name + " detector just saw " + body.name + " enter ")
         if detection_parent == null:
@@ -53,6 +51,10 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                     
             if tracked == false:
                 #This represents only the fact that body is being polled for whether or not it is visible.
+                
+                #Don't track things belonging to your own faction, you already know where they are.
+                if body.faction == entity.faction:
+                    return
                 var track_obj = {"entity":body, "tracked_by":[self]}
                 tracked_entities.append(track_obj)
                 print("Added ", body.name, "to tracked entities, tracked by ", self)
@@ -72,7 +74,10 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                     
             if tracked == false:
                 #This represents only the fact that body is being polled for whether or not it is visible.
+                if body.faction == entity.faction:
+                    return
                 var track_obj = {"entity":body, "tracked_by":[self]}
+                
                 detection_parent.tracked_entities.append(track_obj)
                 print("Added ", body.name, "to tracked entities of parent: ,", detection_parent, "tracked by ", self)
             

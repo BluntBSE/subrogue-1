@@ -12,6 +12,7 @@ but not so much the player can't bamboozle the AI.
 
 
 TODO:
+    -Collisions on munitions. Again.
     -Munitions need to poll at a much higher frequency for themselves just to assign a lock on
     -Munition lock on is a toggle?
     

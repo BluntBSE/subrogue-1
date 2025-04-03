@@ -1,195 +1,274 @@
-[gd_scene load_steps=21 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=45 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
-[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="3_frfhe"]
-[ext_resource type="Texture2D" uid="uid://67mmmqln0imo" path="res://assets/UI/blue_icons/ForwardIconBlue.png" id="4_4vp62"]
-[ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="5_e5swc"]
+[ext_resource type="Script" uid="uid://c3uhvqictxnmv" path="res://engine/entities/entity_behavior.gd" id="3_5oit0"]
+[ext_resource type="Script" uid="uid://dub08cmps46gn" path="res://engine/abstract_classes/behavior_tree/behavior_tree_root.gd" id="4_gqccf"]
+[ext_resource type="Script" uid="uid://bl3j2m7vxf2bc" path="res://engine/abstract_classes/behavior_tree/composites/selector.gd" id="5_v6ety"]
 [ext_resource type="Material" uid="uid://glbx5xt4bbb" path="res://engine/entities/munitions/munition_tracking_cone.material" id="6_5spmm"]
+[ext_resource type="Script" uid="uid://bmkiinkj6uae8" path="res://engine/abstract_classes/behavior_tree/composites/sequencer2.gd" id="6_541b3"]
 [ext_resource type="Script" uid="uid://dc4ctyqdd1ybr" path="res://engine/entities/entity_debug.gd" id="7_frljg"]
+[ext_resource type="Script" uid="uid://g8onn4f6wfa1" path="res://engine/entities/behavior/conditions/has_destination.gd" id="7_vepk6"]
 [ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="8_nwqbh"]
+[ext_resource type="Script" uid="uid://c82icdgng3ns0" path="res://engine/entities/behavior/conditions/not_threatened.gd" id="8_vi68k"]
+[ext_resource type="Script" uid="uid://b3kuk6f6y1nqk" path="res://engine/entities/behavior/actions/keep_moving.gd" id="9_d6txb"]
 [ext_resource type="Script" uid="uid://btfo4hwoiyn01" path="res://engine/entities/detection/entity_detector.gd" id="9_oc7iw"]
+[ext_resource type="Script" uid="uid://0g03hqhrhuvh" path="res://engine/abstract_classes/behavior_tree/leaves/action_leaf.gd" id="10_oimx8"]
+[ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="10_x632v"]
+[ext_resource type="Shader" uid="uid://dc2pip1y3et5g" path="res://engine/entities/detection/sonarpulsemesh.gdshader" id="11_dnksr"]
+[ext_resource type="Script" uid="uid://dk82cqfncxi8f" path="res://engine/abstract_classes/behavior_tree/leaves/condition_leaf.gd" id="11_j5udo"]
+[ext_resource type="Script" uid="uid://8epfeqalkoqe" path="res://engine/entities/behavior/actions/flee_away.gd" id="12_sarf3"]
+[ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="12_x5ny6"]
+[ext_resource type="Texture2D" uid="uid://b0ien5rugpxsy" path="res://assets/polarpng.png" id="13_mpd0o"]
+[ext_resource type="Script" uid="uid://cki53fpug8114" path="res://engine/abstract_classes/behavior_tree/decorators/succeeder.gd" id="13_xyjcy"]
+[ext_resource type="Script" uid="uid://b0rx04rp06hig" path="res://engine/entities/entity_attributes.gd" id="14_ghaal"]
+[ext_resource type="Script" uid="uid://ir7kbv6gtrd4" path="res://engine/entities/entity_render.gd" id="16_cukoj"]
+[ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="17_o16hn"]
+[ext_resource type="Texture2D" uid="uid://dp8he1xlfl6bv" path="res://assets/UI/white_circle_2.png" id="18_2vr8v"]
+[ext_resource type="Texture2D" uid="uid://bsoi58tm3jjyk" path="res://assets/UI/white_icons/white_triangle_filled_2.png" id="19_rgexo"]
+[ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_p1ne5"]
+[ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_qfdwo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_68j6v"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ito3"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_1utme"]
-radius = 0.108231
+[sub_resource type="SphereShape3D" id="SphereShape3D_e0wf7"]
+radius = 1.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_m615s"]
-custom_solver_bias = 1.0
-radius = 0.1
+[sub_resource type="SphereShape3D" id="SphereShape3D_8l2mg"]
+radius = 30.0
 
-[sub_resource type="Shader" id="Shader_2djlq"]
-code = "shader_type spatial;
+[sub_resource type="SphereMesh" id="SphereMesh_54rvg"]
+radius = 3.0
+height = 6.0
 
-render_mode unshaded, blend_add, depth_draw_opaque;
+[sub_resource type="SphereMesh" id="SphereMesh_pcy2y"]
 
-uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
-uniform vec4 glow_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform float glow_intensity : hint_range(0.0, 100.0) = 1.0;
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ls7x1"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 0.815686, 0.792157, 1)
+albedo_texture = ExtResource("18_2vr8v")
+emission = Color(0, 0.815686, 0.792157, 1)
+emission_energy_multiplier = 6.0
 
-void fragment() {
-    vec4 tex_color = texture(texture_albedo, UV);
+[sub_resource type="QuadMesh" id="QuadMesh_v1582"]
+size = Vector2(2, 2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ju4"]
+transparency = 1
+albedo_color = Color(0, 0.681901, 0.656941, 1)
+albedo_texture = ExtResource("19_rgexo")
+emission = Color(0.0999336, 0.760538, 0.826485, 1)
+emission_energy_multiplier = 0.4
+subsurf_scatter_strength = 0.6
+subsurf_scatter_skin_mode = true
+refraction_scale = -0.11
+texture_repeat = false
 
-    // Apply the falloff to the alpha channel
-    float alpha = tex_color.a;
-
-    // Preserve the alpha channel for transparency
-    ALBEDO = tex_color.rgb * glow_color.rgb * glow_intensity;
-    ALPHA = alpha;
-
-    // Additive blending for the glow effect
-    EMISSION = tex_color.rgb * glow_color.rgb * glow_intensity * (1.0);
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nc0bu"]
-render_priority = 0
-shader = SubResource("Shader_2djlq")
-shader_parameter/texture_albedo = ExtResource("3_frfhe")
-shader_parameter/glow_color = Color(0.665179, 0, 0.019218, 1)
-shader_parameter/glow_intensity = 2.272
-
-[sub_resource type="FogMaterial" id="FogMaterial_jo44f"]
+[sub_resource type="FogMaterial" id="FogMaterial_2rtqc"]
 resource_local_to_scene = true
 density = 8.134
 albedo = Color(0, 0.818736, 0.815349, 1)
 height_falloff = 2.0
 edge_fade = 2.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_ojsed"]
-radius = 3.0
-height = 6.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6y0a6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("11_dnksr")
+shader_parameter/texture_albedo = ExtResource("12_x5ny6")
+shader_parameter/texture_metallic = ExtResource("13_mpd0o")
 
-[sub_resource type="SphereMesh" id="SphereMesh_rkfvs"]
+[sub_resource type="QuadMesh" id="QuadMesh_l7f70"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(27, 27)
+size = Vector2(5, 5)
 
-[sub_resource type="QuadMesh" id="QuadMesh_1r2o5"]
+[sub_resource type="Animation" id="Animation_ox0k3"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_tail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_cnygr"]
+resource_name = "sonar_pulse_1"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.266667, 1.4, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.366667, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_tail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.075, -0.25, 0, 0.25, 0, 0.95, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.366667, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_icumr"]
+_data = {
+&"RESET": SubResource("Animation_ox0k3"),
+&"sonar_pulse_1": SubResource("Animation_cnygr")
+}
+
+[sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]
 lightmap_size_hint = Vector2i(27, 27)
 size = Vector2(25, 25)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_1r2o5"]
-radius = 30.0
-
 [node name="MunitionEntity" type="RigidBody3D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 524290
+collision_mask = 524288
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true
 script = ExtResource("1_8j1xm")
-base_color = Color(0.913867, 0.546384, 0.919942, 1)
 
-[node name="EntityMesh" type="MeshInstance3D" parent="."]
-visible = false
-gi_mode = 2
-mesh = SubResource("SphereMesh_68j6v")
-skeleton = NodePath("")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3ito3")
 
 [node name="NavArea" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="EntityNavShape" type="CollisionShape3D" parent="NavArea"]
-shape = SubResource("SphereShape3D_1utme")
+shape = SubResource("SphereShape3D_e0wf7")
 
-[node name="EntityMoveBus" type="Node3D" parent="."]
+[node name="EntityMoveBus" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_i7nli")
 
-[node name="EntityShape" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_m615s")
-
-[node name="MarkerSprite" type="Sprite3D" parent="."]
-transform = Transform3D(-1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, 0, 0, 0.25, 0, 0, 0)
-material_overlay = SubResource("ShaderMaterial_nc0bu")
-modulate = Color(0, 0.815686, 0.792157, 1)
-shaded = true
-alpha_antialiasing_mode = 1
-texture = ExtResource("4_4vp62")
-
-[node name="FogVolume" type="FogVolume" parent="MarkerSprite"]
-size = Vector3(1, 1, 1)
-shape = 0
-material = SubResource("FogMaterial_jo44f")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="MarkerSprite/FogVolume"]
-visible = false
-light_color = Color(0.928687, 0.35569, 0.750399, 1)
-omni_range = 4.65
-
-[node name="HeadingSprite" type="Sprite3D" parent="."]
+[node name="EntityBehavior" type="Node" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.0667473)
-modulate = Color(0.909804, 0.054902, 0, 1)
-texture = ExtResource("5_e5swc")
+script = ExtResource("3_5oit0")
 
-[node name="RangeSpot" type="SpotLight3D" parent="."]
+[node name="BehaviorTreeRoot" type="Node" parent="EntityBehavior"]
+script = ExtResource("4_gqccf")
+
+[node name="SelectorComposite" type="Node" parent="EntityBehavior/BehaviorTreeRoot"]
+script = ExtResource("5_v6ety")
+
+[node name="MoveToDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="MoveSequencer" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination"]
+script = ExtResource("6_541b3")
+
+[node name="HasDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/MoveSequencer"]
+script = ExtResource("7_vepk6")
+
+[node name="NotThreatened" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/MoveSequencer"]
+script = ExtResource("8_vi68k")
+
+[node name="KeepMoving" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/MoveSequencer"]
+script = ExtResource("9_d6txb")
+
+[node name="AssignDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination"]
+script = ExtResource("10_oimx8")
+
+[node name="DoesNotHaveDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/AssignDestination"]
+script = ExtResource("11_j5udo")
+
+[node name="AssignDestinationAction" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/AssignDestination"]
+script = ExtResource("10_oimx8")
+
+[node name="FleeThreat" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="FleeAway" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
+script = ExtResource("12_sarf3")
+
+[node name="FleeToFriends" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
+script = ExtResource("6_541b3")
+
+[node name="FriendsNearby" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat/FleeToFriends"]
+script = ExtResource("11_j5udo")
+
+[node name="NotNearFriend" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat/FleeToFriends"]
+script = ExtResource("11_j5udo")
+
+[node name="FleeToFriend" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat/FleeToFriends"]
+script = ExtResource("10_oimx8")
+
+[node name="FleeToDock" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/FleeThreat"]
+script = ExtResource("6_541b3")
+
+[node name="Patrol" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="EscortTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="FindTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="HailTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="AttackTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="SeekDestroy" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="SeekHail" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="FleeSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="FindWrecks" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="SalvageWreck" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="SalvageSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("6_541b3")
+
+[node name="STOP-AlwaysSucceed" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+script = ExtResource("13_xyjcy")
+
+[node name="ActionLeaf" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/STOP-AlwaysSucceed"]
+script = ExtResource("10_oimx8")
+
+[node name="EntityCargo" type="Node" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.13916)
-visible = false
-layers = 5
-light_color = Color(0.774024, 0.045353, 0.588677, 1)
-light_energy = 2.0
-shadow_enabled = true
-shadow_bias = 0.265
-spot_range = 20.808
-spot_attenuation = -4.0
-spot_angle = 55.0
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="RangeSpot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
-layers = 4
-cast_shadow = 3
-mesh = SubResource("SphereMesh_ojsed")
-skeleton = NodePath("../../Spotlight")
-
-[node name="Spotlight" type="SpotLight3D" parent="."]
+[node name="EntityAttributes" type="Node" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
-light_color = Color(0.909804, 0.054902, 0, 1)
-light_energy = 2.0
-light_cull_mask = 4294966277
-shadow_enabled = true
-shadow_bias = 0.265
-spot_range = 20.808
-spot_attenuation = -4.0
-spot_angle = 10.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Spotlight"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
-layers = 4
-cast_shadow = 3
-mesh = SubResource("SphereMesh_rkfvs")
-skeleton = NodePath("../../RangeSpot")
-
-[node name="EntityBehavior" type="Node3D" parent="."]
-
-[node name="EntityCargo" type="Node3D" parent="."]
-
-[node name="MunitionConfig" type="Node3D" parent="."]
-
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-
-[node name="TrackingConeMesh" type="MeshInstance3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
-layers = 524289
-material_override = ExtResource("6_5spmm")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_1r2o5")
-skeleton = NodePath("../../SonarNode")
-
-[node name="EntityDebug" type="Node3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-top_level = true
-visible = false
-script = ExtResource("7_frljg")
-
-[node name="ContextMarker" parent="EntityDebug" instance=ExtResource("8_nwqbh")]
+script = ExtResource("14_ghaal")
 
 [node name="EntityDetector" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -202,6 +281,141 @@ collision_mask = 2
 input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntityDetector/DetectionArea"]
-shape = SubResource("SphereShape3D_1r2o5")
+shape = SubResource("SphereShape3D_8l2mg")
+
+[node name="EntityRender" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("16_cukoj")
+
+[node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
+unique_name_in_owner = true
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.010103)
+layers = 2
+texture = ExtResource("17_o16hn")
+
+[node name="RangeSpot" type="SpotLight3D" parent="EntityRender"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.13916)
+visible = false
+layers = 2
+light_color = Color(0.774024, 0.045353, 0.588677, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.265
+spot_range = 20.808
+spot_attenuation = -4.0
+spot_angle = 55.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="EntityRender/RangeSpot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
+layers = 2
+cast_shadow = 3
+mesh = SubResource("SphereMesh_54rvg")
+skeleton = NodePath("../../Spotlight")
+
+[node name="Spotlight" type="SpotLight3D" parent="EntityRender"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
+layers = 2
+light_color = Color(0, 0.816604, 0.791994, 1)
+light_energy = 2.0
+light_cull_mask = 4294966275
+shadow_enabled = true
+shadow_bias = 0.265
+spot_attenuation = -1.78
+spot_angle = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntityRender/Spotlight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
+visible = false
+layers = 2
+cast_shadow = 3
+mesh = SubResource("SphereMesh_pcy2y")
+skeleton = NodePath("../../RangeSpot")
+
+[node name="HighlightMesh" type="MeshInstance3D" parent="EntityRender"]
+unique_name_in_owner = true
+layers = 2
+material_override = SubResource("StandardMaterial3D_ls7x1")
+transparency = 0.99
+mesh = SubResource("QuadMesh_v1582")
+skeleton = NodePath("../..")
+
+[node name="DepthMesh" type="MeshInstance3D" parent="EntityRender"]
+unique_name_in_owner = true
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+layers = 2
+material_override = SubResource("StandardMaterial3D_x4ju4")
+mesh = SubResource("QuadMesh_v1582")
+skeleton = NodePath("../..")
+
+[node name="FogVolume" type="FogVolume" parent="EntityRender/DepthMesh"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
+size = Vector3(1, 1, 1)
+shape = 0
+material = SubResource("FogMaterial_2rtqc")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="EntityRender/DepthMesh/FogVolume"]
+visible = false
+light_color = Color(0.928687, 0.35569, 0.750399, 1)
+omni_range = 4.65
+
+[node name="EntityActionBus" type="Node" parent="."]
+
+[node name="EntityEmission" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("20_p1ne5")
+
+[node name="EntityDebug" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+top_level = true
+visible = false
+script = ExtResource("7_frljg")
+
+[node name="ContextMarker" parent="EntityDebug" instance=ExtResource("8_nwqbh")]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+remote_path = NodePath("../EntityDebug")
+update_rotation = false
+
+[node name="SonarNode" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
+script = ExtResource("10_x632v")
+
+[node name="SonarPulseMesh2" type="MeshInstance3D" parent="SonarNode"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97706, 0, 0.467125)
+visible = false
+material_override = SubResource("ShaderMaterial_6y0a6")
+mesh = SubResource("QuadMesh_l7f70")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SonarNode"]
+libraries = {
+&"": SubResource("AnimationLibrary_icumr")
+}
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="SonarNode"]
+remote_path = NodePath("../../TransformBreaker/SonarPulseMesh")
+update_rotation = false
+
+[node name="TransformBreaker" type="Node" parent="."]
+
+[node name="SonarPulseMesh" type="MeshInstance3D" parent="TransformBreaker"]
+unique_name_in_owner = true
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, -0.0201111, -0.0650034, 0.215542)
+layers = 524288
+material_override = ExtResource("27_qfdwo")
+mesh = SubResource("QuadMesh_3qnbj")
+skeleton = NodePath("../../SonarNode")
+
+[node name="TrackingConeMesh" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.461)
+material_override = ExtResource("6_5spmm")
+mesh = SubResource("QuadMesh_l7f70")
 
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]

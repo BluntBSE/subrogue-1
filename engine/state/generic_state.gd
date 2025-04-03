@@ -2,7 +2,7 @@ extends Node
 class_name GenericState
 
 var _reference: Node
-var _args: Dictionary
+var state_args: Dictionary
 
 func stateUpdate(_dt: float) -> void:
     pass
@@ -16,7 +16,7 @@ func stateExit() -> void:
 #This is called when we do State.new(self, args.) It allows a reference to the parent node to be passed around.
 func _init(reference: Node, args: Dictionary) -> void:
     _reference = reference
-    _args = args
+    state_args = args
     unpack(args)
 
 

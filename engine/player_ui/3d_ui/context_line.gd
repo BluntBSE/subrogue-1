@@ -16,7 +16,7 @@ func unpack(_node_a, _node_b, _anchor):
     
 
 func update_line3d(_node_a:Node3D, _node_b:Node3D, anchor):
-    line.material = load("res://engine/player_ui/context_line.material")
+    line.material = load("res://engine/player_ui/3d_ui/context_line.material")
     
 
     var curve: Curve3D = Curve3D.new()

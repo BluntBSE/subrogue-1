@@ -46,6 +46,9 @@ enum DEPTH {swim, crawl, surface}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    faction = fired_from.faction
+    render.update_mesh_visibilities(faction, true)
+    
     pass # Replace with function body.
 
 

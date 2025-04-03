@@ -27,7 +27,7 @@ func update_depth_sprite(depth:int):
     var swim_sprite:Texture2D = load("res://assets/UI/white_circle_2.png")
     var crawl_sprite:Texture2D = load("res://assets/UI/white_icons/white_square_filled.png")
     var surface_sprite:Texture2D = load("res://assets/UI/white_icons/white_triangle.png")
-    var depth_mesh:MeshInstance3D = %DepthMesh
+    depth_mesh = %DepthMesh
     if depth == 0:
         depth_mesh.material_override.albedo_texture = swim_sprite
     if depth == 1:

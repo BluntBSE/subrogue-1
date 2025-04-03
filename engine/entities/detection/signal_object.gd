@@ -43,7 +43,7 @@ func new_offset_position()->Vector3:
     #After the initial detection, this is used to determine where the signal ought to lerp to
     var km_offset = lerp(200.0,0.0,(certainty/100) )
     #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
-    var anchor: Planet = detecting_object.anchor
+    anchor = detecting_object.anchor
     
     # Calculate a random tangential direction
     var position_on_sphere = detected_object.position
