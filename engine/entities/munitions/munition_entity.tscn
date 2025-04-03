@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=21 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://67mmmqln0imo" path="res://assets/UI/blue_icons/ForwardIconBlue.png" id="4_4vp62"]
 [ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="5_e5swc"]
 [ext_resource type="Material" uid="uid://glbx5xt4bbb" path="res://engine/entities/munitions/munition_tracking_cone.material" id="6_5spmm"]
+[ext_resource type="Script" uid="uid://dc4ctyqdd1ybr" path="res://engine/entities/entity_debug.gd" id="7_frljg"]
+[ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="8_nwqbh"]
+[ext_resource type="Script" uid="uid://btfo4hwoiyn01" path="res://engine/entities/detection/entity_detector.gd" id="9_oc7iw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -65,6 +68,9 @@ height = 6.0
 [sub_resource type="QuadMesh" id="QuadMesh_1r2o5"]
 lightmap_size_hint = Vector2i(27, 27)
 size = Vector2(25, 25)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1r2o5"]
+radius = 30.0
 
 [node name="MunitionEntity" type="RigidBody3D"]
 collision_layer = 0
@@ -175,3 +181,27 @@ material_override = ExtResource("6_5spmm")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_1r2o5")
 skeleton = NodePath("../../SonarNode")
+
+[node name="EntityDebug" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+top_level = true
+visible = false
+script = ExtResource("7_frljg")
+
+[node name="ContextMarker" parent="EntityDebug" instance=ExtResource("8_nwqbh")]
+
+[node name="EntityDetector" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("9_oc7iw")
+
+[node name="DetectionArea" type="Area3D" parent="EntityDetector"]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 2
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntityDetector/DetectionArea"]
+shape = SubResource("SphereShape3D_1r2o5")
+
+[connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]

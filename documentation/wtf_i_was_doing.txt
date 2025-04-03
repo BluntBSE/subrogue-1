@@ -12,8 +12,9 @@ but not so much the player can't bamboozle the AI.
 
 
 TODO:
-    FIX - DONE: Munition collision when launching is weird.
-    FIX: Munitions stop short of where we expect them to go
+    -Munitions need to poll at a much higher frequency for themselves just to assign a lock on
+    -Munition lock on is a toggle?
+    
     Debug Munition can find and hit targets.
     -Do depth, profile checks to track.
     -Do depth, profile checks to hit.
