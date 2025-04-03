@@ -18,6 +18,9 @@ enum DEPTH {swim, crawl, surface}
 @export var target_node:Node3D
 @export var sprite_override:Texture2D
 #PASSIVE SONAR PARAMETERS
+@export var tracking_angle:float
+@export var tracking_range:float
+#@export var activate_after:float #distance to travel before turning on...
 
 """
     fired from
@@ -47,5 +50,10 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-    pass
+func _process(delta:float)->void:
+    var mesh_1:MeshInstance3D = %TrackingConeMesh
+    var entity:Munition = self
+    var up = (entity.anchor.position - entity.position).normalized()
+    #This, along wth the funky rotations on the mesh, are how we keep the plane from clipping into the planet.
+    mesh_1.look_at(entity.anchor.position)
+   # mesh_1.rotation.z += deg_to_rad(90.0)

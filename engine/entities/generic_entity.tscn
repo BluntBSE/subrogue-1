@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=44 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -23,9 +23,8 @@
 [ext_resource type="Script" uid="uid://dc4ctyqdd1ybr" path="res://engine/entities/entity_debug.gd" id="21_7if8f"]
 [ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="22_loeq3"]
 [ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="23_op6l6"]
-[ext_resource type="Shader" uid="uid://c2ffm8yh34ab5" path="res://engine/entities/detection/sonar_pulse_2.gdshader" id="24_j3cwe"]
 [ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="25_hyfub"]
-[ext_resource type="Shader" uid="uid://cdoiv5cq5nyvy" path="res://engine/entities/detection/sonar_targeting_no_pulse.gdshader" id="26_5l3g8"]
+[ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_3qfs3"]
 [ext_resource type="Shader" uid="uid://dc2pip1y3et5g" path="res://engine/entities/detection/sonarpulsemesh.gdshader" id="27_dwxad"]
 [ext_resource type="Texture2D" uid="uid://b0ien5rugpxsy" path="res://assets/polarpng.png" id="28_23k6d"]
 
@@ -142,27 +141,6 @@ _data = {
 &"RESET": SubResource("Animation_ox0k3"),
 &"sonar_pulse_1": SubResource("Animation_cnygr")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4a7o"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("24_j3cwe")
-shader_parameter/disc_texture = ExtResource("25_hyfub")
-shader_parameter/start_angle = 0.0
-shader_parameter/end_angle = 0.0
-shader_parameter/frontier_head = 0.0
-shader_parameter/frontier_tail = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqq6t"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_d4a7o")
-shader = ExtResource("26_5l3g8")
-shader_parameter/disc_texture = ExtResource("25_hyfub")
-shader_parameter/start_angle = 20.0
-shader_parameter/end_angle = 30.0
-shader_parameter/frontier_head = 0.0
-shader_parameter/frontier_tail = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]
 lightmap_size_hint = Vector2i(27, 27)
@@ -427,8 +405,8 @@ update_rotation = false
 [node name="SonarPulseMesh" type="MeshInstance3D" parent="TransformBreaker"]
 unique_name_in_owner = true
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, -0.0201111, -0.0650034, 0.215542)
-layers = 0
-material_override = SubResource("ShaderMaterial_dqq6t")
+layers = 524288
+material_override = ExtResource("27_3qfs3")
 mesh = SubResource("QuadMesh_3qnbj")
 skeleton = NodePath("../../SonarNode")
 

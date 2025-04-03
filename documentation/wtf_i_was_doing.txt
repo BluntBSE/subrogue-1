@@ -12,10 +12,14 @@ but not so much the player can't bamboozle the AI.
 
 
 TODO:
-    Animate the switches between UI tabs.
-    The control root knows what state it's in. There's a transitioning state
-    
-
+    FIX - DONE: Munition collision when launching is weird.
+    FIX: Munitions stop short of where we expect them to go
+    Debug Munition can find and hit targets.
+    -Do depth, profile checks to track.
+    -Do depth, profile checks to hit.
+    It'd be great to show a cone in front of the munition
+    FIX: "Too quiet." keeps triggering after the signal has been erased.
+    Set up configuration parameters
 QUEUE:
     1. Active ping now reveals. For how long?
     

@@ -1,17 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=17 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="3_frfhe"]
 [ext_resource type="Texture2D" uid="uid://67mmmqln0imo" path="res://assets/UI/blue_icons/ForwardIconBlue.png" id="4_4vp62"]
 [ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="5_e5swc"]
+[ext_resource type="Material" uid="uid://glbx5xt4bbb" path="res://engine/entities/munitions/munition_tracking_cone.material" id="6_5spmm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_68j6v"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1utme"]
-radius = 1.0
+radius = 0.108231
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_m615s"]
 custom_solver_bias = 1.0
@@ -61,9 +62,13 @@ height = 6.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_rkfvs"]
 
+[sub_resource type="QuadMesh" id="QuadMesh_1r2o5"]
+lightmap_size_hint = Vector2i(27, 27)
+size = Vector2(25, 25)
+
 [node name="MunitionEntity" type="RigidBody3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100.25, 0, 0)
-collision_mask = 3
+collision_layer = 0
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true
@@ -157,3 +162,15 @@ skeleton = NodePath("../../RangeSpot")
 [node name="EntityCargo" type="Node3D" parent="."]
 
 [node name="MunitionConfig" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+
+[node name="TrackingConeMesh" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+layers = 524289
+material_override = ExtResource("6_5spmm")
+mesh = SubResource("QuadMesh_1r2o5")
+skeleton = NodePath("../../SonarNode")

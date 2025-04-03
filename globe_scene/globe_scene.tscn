@@ -283,6 +283,34 @@ shader_parameter/between_angle_alpha = 1.0
 shader_parameter/beyond_angle_alpha = 0.2
 shader_parameter/distance_factor = 0.0
 
+[sub_resource type="Animation" id="Animation_gcn3n"]
+resource_name = "ActiveSonarIn"
+length = 0.14
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%ActiveSonarControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(225, 765), Vector2(225, 235)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%PingButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(2925, 566.667), Vector2(2928.33, 311.667)]
+}
+
 [sub_resource type="Animation" id="Animation_ysxr2"]
 resource_name = "ActiveSonarOut"
 length = 0.14
@@ -314,6 +342,86 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_oor6e"]
 resource_name = "ActiveSonarTabToDark2"
 length = 0.14
+
+[sub_resource type="Animation" id="Animation_nbion"]
+resource_name = "OrdnanceIn"
+length = 0.14
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OrdnancePanelGroup/OrdnanceControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 506.667), Vector2(0, -3.33334)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%ConfigureButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2811.67, 565), Vector2(2811.67, 246.667)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%LaunchButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2811.67, 643), Vector2(2811.67, 324.667)]
+}
+
+[sub_resource type="Animation" id="Animation_bl0gl"]
+resource_name = "OrdnanceOut"
+length = 0.14
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OrdnancePanelGroup/OrdnanceControl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, -3.33334), Vector2(-945, -3.33334)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%ConfigureButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(2811.67, 246.667), Vector2(3351.67, 246.667)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%LaunchButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(2811.67, 324.667), Vector2(3351.67, 324.667)]
+}
 
 [sub_resource type="Animation" id="Animation_labis"]
 resource_name = "PassiveSonarIn"
@@ -514,114 +622,6 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(2811.67, 643)]
-}
-
-[sub_resource type="Animation" id="Animation_gcn3n"]
-resource_name = "ActiveSonarIn"
-length = 0.14
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%ActiveSonarControl:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(225, 765), Vector2(225, 235)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%PingButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(2925, 566.667), Vector2(2928.33, 311.667)]
-}
-
-[sub_resource type="Animation" id="Animation_nbion"]
-resource_name = "OrdnanceIn"
-length = 0.14
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OrdnancePanelGroup/OrdnanceControl:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 506.667), Vector2(0, -3.33334)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%ConfigureButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2811.67, 565), Vector2(2811.67, 246.667)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("%LaunchButton:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2811.67, 643), Vector2(2811.67, 324.667)]
-}
-
-[sub_resource type="Animation" id="Animation_bl0gl"]
-resource_name = "OrdnanceOut"
-length = 0.14
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OrdnancePanelGroup/OrdnanceControl:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(0, -3.33334), Vector2(-945, -3.33334)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%ConfigureButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(2811.67, 246.667), Vector2(3351.67, 246.667)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("%LaunchButton:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(2811.67, 324.667), Vector2(3351.67, 324.667)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_labis"]
