@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=18 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
@@ -61,6 +61,9 @@ radius = 3.0
 height = 6.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_rkfvs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5spmm"]
+radius = 50.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_1r2o5"]
 lightmap_size_hint = Vector2i(27, 27)
@@ -166,6 +169,7 @@ skeleton = NodePath("../../RangeSpot")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_5spmm")
 
 [node name="TrackingConeMesh" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

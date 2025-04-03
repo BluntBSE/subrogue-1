@@ -1,0 +1,8 @@
+All entities have an EntityMoveBus that has a queue on them. 
+As part of their process function, Entities do something like:
+    update_coords()
+    move_to_next()  - Here's where the entity moves to the next item in the Bus queue, if any.
+    check_reached_waypoint()
+
+Move commands are generated with GlobeHelpers.generate_move_command(Entity, target_position)
+MoveCommands are what the EntityBus queue contains.

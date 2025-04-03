@@ -1,19 +1,18 @@
 extends Entity
 class_name Munition
 
-enum GUIDANCE {active, passive, wire, dumb, radar, actipass }
-enum DEPTH {swim, crawl, surface}
+
 @export var id:String
 @export var display_name:String
 @export var fired_from:Entity
 @export var munition_type:String
-@export var guidance_type: int #accepts GUIDANCE enums
+@export var guidance_type: int #accepts GUIDANCE enums from GlobalConst
 @export var impact_radius:float
 @export var fuel_remaining:float
 @export var fuel_max:float
 @export var fuel_burn:float
-@export var current_depth:int #accepts DEPTH enums
-@export var target_depths:Array #accepts DEPTH enums
+@export var current_depth:int #accepts DEPTH enums from GlobalConst
+@export var target_depths:Array #accepts DEPTH enums from GlobalConst
 @export var target_pos:Vector3
 @export var target_node:Node3D
 @export var sprite_override:Texture2D
@@ -21,6 +20,8 @@ enum DEPTH {swim, crawl, surface}
 @export var tracking_angle:float
 @export var tracking_range:float
 #@export var activate_after:float #distance to travel before turning on...
+
+@export var locked_target:Entity #Should this be Entity? Maybe one day we'll hit cities. Maybe cities are also entities.
 
 """
     fired from
@@ -58,3 +59,7 @@ func _process(delta:float)->void:
     mesh_1.look_at(entity.anchor.position)
     mesh_1.rotation.z += deg_to_rad(90.0)
     mesh_1.rotation.z += rotation.z
+    
+    
+func seek_with_passive()->void:
+    pass
