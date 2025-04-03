@@ -11,7 +11,7 @@ var cfalloff:float = 0.2 #Certainty lost per 10km.
 var min_certainty: float = 20.0 #Always at least 20% certain in detection position
 var max_range:float = 2000.0 #Expressed as km
 var positively_identified = [] #Signals from this source will always be marked if the profile, etc. is the same.
-var tracked_entities = [] 
+var tracked_entities = [] #{"entity":entity, "tracked_by":[self, child, child]}
 var known_signals = [] 
 var sigmap = {} # {"entity":entity, "signal":signal} Signals match to the array below, which we for updating those independently.
 
@@ -43,20 +43,32 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
         body as Entity
         #Check if body is already tracked
         print(entity.name + " detector just saw " + body.name + " enter ")
-        if body not in tracked_entities:
-            #This represents only the fact that body is being polled for whether or not it is visible.
-            tracked_entities.append(body)
-            print("Added ", body.name, "to tracked entities")
-
+        if detection_parent == null:
+            #If this is a vessel, not a munition or sub entity, tracked items are associated with the vessel
+            var tracked = false
+            for track_obj in tracked_entities:
+                if track_obj.entity == body:
+                    tracked = true
+                    
+            if tracked == false:
+                #This represents only the fact that body is being polled for whether or not it is visible.
+                var track_obj = {"entity":body, "tracked_by":[self]}
+                tracked_entities.append(body)
+                print("Added ", body.name, "to tracked entities, tracked by ", self)
             
-        pass
-    pass # Replace with function body.
-    
+            if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
+               var tracked_by_this = false
+               for track_obj in tracked_entities:
+                    if track_obj.entity == body:
+                        if !track_obj.tracked_by.has(self): 
+                            track_obj.tracked_by.append(self)
+            #Otherwise do nothing
+
 func poll_entities():
     #Every few seconds, calculate the sound that would reach this node, the listener, based on the body's emitter
-    for poll_entity:Entity in tracked_entities:
+    for dict:Dictionary in tracked_entities:
         #Check sound
-        var emission:EntityEmission = poll_entity.emission
+        var emission:EntityEmission = dict.entity.emission
         var sound = Sound.new(poll_entity, poll_entity.emission.volume, poll_entity.emission.pitch, poll_entity.emission.profile)
         var dist = GlobeHelpers.arc_to_km(entity.position, poll_entity.position, entity.anchor)
         var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
