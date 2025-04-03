@@ -9,8 +9,8 @@ var detected_object:Entity
 var certainty:float = 50.0
 var hidden:bool
 var last_sound:Sound
+var anchor:Planet
 var lerping = false #For animation
-@onready var sprite = get_node("Sprite3D")
 #Certainty of 100 is perfectly accurate.
 #A certainty of (approaching) 0 is within 200km
 
@@ -18,7 +18,7 @@ func offset_self():
     #Used for appearing in a random location when first detected.
     var km_offset = lerp(200.0,0.0,(certainty/100) )
     #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
-    var anchor: Planet = detecting_object.anchor
+    anchor = detecting_object.anchor
     
     # Calculate a random tangential direction
     var position_on_sphere = position
@@ -77,6 +77,7 @@ func fix_height()->void:
     
 
 func unpack(_detecting_object:Entity, _detected_object:Entity, _sound:Sound, _certainty:float):
+    var sprite = get_node("Sprite3D")
     sprite.set_layer_mask_value(_detecting_object.faction, true)
     for child in sprite.get_children():
         child.set_layer_mask_value(_detecting_object.faction,true)
@@ -91,6 +92,10 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound:Sound, _ce
     offset_self()
     #fix_height()
 
+func turn_red():
+    
+    var sprite:Sprite3D = get_node("Sprite3D")
+    sprite.modulate = Color("#ff0000")
 func tween_to_new():
     var new_position = new_offset_position()
     var new_scale = new_certainty_scale()
@@ -112,5 +117,5 @@ func _process(delta:float)->void:
     if lerping == true:
         tween_progress += delta * tween_speed
     position += detected_object.linear_velocity /60 #Can we do this to actual engine frames? 60 is right if we're running at ideal speed but we might not be
-    
+    look_at(anchor.position)
     pass
