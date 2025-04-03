@@ -4,12 +4,12 @@ class_name EntityDetector
 #Passive detection stats
 @onready var entity:Entity = get_parent()
 @onready var detection_area = %DetectionArea
+var detection_parent:Entity = null #Used for ordnance that updates detection for its parent.
 var sensitivity:float = 5.0 #Expressed as minimum DB to hear
 var c100:float = 300.0 #Expressed as km
 var cfalloff:float = 0.2 #Certainty lost per 10km.
 var min_certainty: float = 20.0 #Always at least 20% certain in detection position
 var max_range:float = 2000.0 #Expressed as km
-
 var positively_identified = [] #Signals from this source will always be marked if the profile, etc. is the same.
 var tracked_entities = [] 
 var known_signals = [] 
@@ -17,6 +17,11 @@ var sigmap = {} # {"entity":entity, "signal":signal} Signals match to the array 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    if entity is Munition:
+        entity as Munition
+        #This means that the detector (for now) is totally subordinate to its parent.
+        detection_parent = entity.fired_from
+        print("DETECTION PARENT IS", detection_parent)
     pass # Replace with function body.
 
 var poll_elapsed:float = 0.0
@@ -42,11 +47,6 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
             #This represents only the fact that body is being polled for whether or not it is visible.
             tracked_entities.append(body)
             print("Added ", body.name, "to tracked entities")
-            
-           # var sigob:SignalObject = load("res://engine/entities/detection/signal_scene.tscn").instantiate()
-            #entity.anchor.add_child(sigob)
-           # print("Detection area parent: ", entity)
-            #sigob.unpack(entity,body,)
 
             
         pass

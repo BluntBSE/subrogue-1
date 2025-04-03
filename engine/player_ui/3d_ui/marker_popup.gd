@@ -29,6 +29,6 @@ func pressed_launch_button()->void:
     var debug_munition:Munition = MunitionHelpers.munition_by_id("manta_torpedo")
     #Requires muniition, start, end.
     #For now, there is only the one originating entity.
-    var args = {"munition": debug_munition, "start_position": context.originating_entities[0].position, "target_position": context.position, "trauma":0.5}
+    var args = {"munition": debug_munition, "originating_entity":context.originating_entities[0], "start_position": context.originating_entities[0].position, "target_position": context.position, "trauma":0.5}
     pressed_launch.emit(args) #Should there a custom signal type?A Launchcommmand?
     SoundManager.play("launch_thump_1", "randpitch_small", "game", 6.0)
