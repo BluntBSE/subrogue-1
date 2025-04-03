@@ -53,7 +53,7 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
             if tracked == false:
                 #This represents only the fact that body is being polled for whether or not it is visible.
                 var track_obj = {"entity":body, "tracked_by":[self]}
-                tracked_entities.append(body)
+                tracked_entities.append(track_obj)
                 print("Added ", body.name, "to tracked entities, tracked by ", self)
             
             if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
@@ -69,21 +69,25 @@ func poll_entities():
     for dict:Dictionary in tracked_entities:
         #Check sound
         var emission:EntityEmission = dict.entity.emission
-        var sound = Sound.new(poll_entity, poll_entity.emission.volume, poll_entity.emission.pitch, poll_entity.emission.profile)
-        var dist = GlobeHelpers.arc_to_km(entity.position, poll_entity.position, entity.anchor)
+        var sound = Sound.new(dict.entity, dict.entity.emission.volume, dict.entity.emission.pitch, dict.entity.emission.profile)
+        var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
         var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
-        var dstr =  ("final db " +str (final_db) + "from body: " + poll_entity.name + " vs sensitivty " + str(sensitivity) )
+        var dstr =  ("final db " +str (final_db) + "from body: " + dict.entity.name + " vs sensitivty " + str(sensitivity) )
         entity.debug.dmsg(dstr)
         
         if final_db <= sensitivity:
             print("Too quiet. Attempting to erase signal")
             #If you had the signal, you've lost it now.
             #Grace period for active pings?
-            if tracked_entities.has(poll_entity):
-                if sigmap.has(poll_entity):
-                   #tracked_entities.erase(poll_entity)
-                    sigmap[poll_entity].queue_free()
-                    sigmap.erase(poll_entity)
+            var tracked = false
+            for track_obj in tracked_entities:
+                if track_obj.entity == dict.entity:
+                    tracked = true
+            if tracked == true:
+                if sigmap.has(dict.entity):
+                   #tracked_entities.erase(dict.entity)
+                    sigmap[dict.entity].queue_free()
+                    sigmap.erase(dict.entity)
 
         if final_db >= sensitivity:
             #If no signal object exists, make one.
@@ -99,29 +103,29 @@ func poll_entities():
             #More fun if we're always at least 20% certain
             if certainty < 0.2:
                 certainty = 0.2
-            if !sigmap.has(poll_entity):
+            if !sigmap.has(dict.entity):
                 var sigob:SignalObject = load("res://engine/entities/detection/signal_scene.tscn").instantiate()
                 entity.anchor.add_child(sigob)
-                sigob.unpack(entity, poll_entity, sound, certainty)
-                sigmap[poll_entity] = sigob
+                sigob.unpack(entity, dict.entity, sound, certainty)
+                sigmap[dict.entity] = sigob
             else:
-                sigmap[poll_entity].certainty =certainty
-                sigmap[poll_entity].tween_to_new()
+                sigmap[dict.entity].certainty =certainty
+                sigmap[dict.entity].tween_to_new()
            
             #See if the entity in is within the C100 range.
             if dist <= c100:
                 #Hide the associated signal object and reveal the actual entity
                 print("Entity within C100, make actively tracked")
-                poll_entity.render.update_mesh_visibilities(entity.faction, true)
-                positively_identified.append(poll_entity)
-                sigmap[poll_entity].visible = false
+                dict.entity.render.update_mesh_visibilities(entity.faction, true)
+                positively_identified.append(dict.entity)
+                sigmap[dict.entity].visible = false
                 pass
             
             #If we already have a signal, and the target is drifting out of C100...
             if dist > c100 + 50.0: # 50 being an arbitrary threshold to let you keep positively identified targets around longer
-                if sigmap[poll_entity].visible == false:
-                    sigmap[poll_entity].visible = true
-                    poll_entity.render.update_mesh_visibilities(entity.faction, false)
+                if sigmap[dict.entity].visible == false:
+                    sigmap[dict.entity].visible = true
+                    dict.entity.render.update_mesh_visibilities(entity.faction, false)
             
             
             pass
