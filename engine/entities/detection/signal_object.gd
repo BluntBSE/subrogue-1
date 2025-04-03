@@ -58,7 +58,7 @@ func new_offset_position()->Vector3:
     return new_position
 
 func new_certainty_scale()->Vector3:
-    var anchor: Planet = detecting_object.anchor
+    anchor = detecting_object.anchor
     var km_offset = lerp(200.0,0.0,(certainty/100) )
     var vecfloat = GlobeHelpers.km_to_arc_distance(km_offset, anchor) * 2.0
     return clamp(Vector3(vecfloat, vecfloat, vecfloat), Vector3(3.0,3.0,3.0), Vector3(15.0,15.0,15.0))

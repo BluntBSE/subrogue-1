@@ -15,7 +15,7 @@ func unpack(_node_a, _node_b, _anchor):
     anchor = _anchor
     
 
-func update_line3d(_node_a:Node3D, _node_b:Node3D, anchor):
+func update_line3d(_node_a:Node3D, _node_b:Node3D, _anchor):
     line.material = load("res://engine/player_ui/3d_ui/context_line.material")
     
 
