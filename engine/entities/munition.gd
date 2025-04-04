@@ -31,7 +31,9 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+var interval = 0.0
 func _process(delta:float)->void:
+    interval += delta
     var mesh_1:MeshInstance3D = %TrackingConeMesh
     var entity:Munition = self
     var up = (entity.anchor.position - entity.position).normalized()
@@ -40,13 +42,15 @@ func _process(delta:float)->void:
     mesh_1.rotation.z += deg_to_rad(90.0)
     mesh_1.rotation.z += rotation.z
     
-    target_entity = seek_new_target_passive()
-    #Generating a new move command every frame might be excessive. But maybe it's fine?
-    #Probably I should put some kind of delta that scales based on how far away we are.
-    #Oh well.
-    if target_entity:
-        var move_command = GlobeHelpers.generate_move_command(self, target_entity.position)
-        controller.order_move.emit(move_command)
+    if interval > 1.0:
+        interval = 0.0
+        target_entity = seek_new_target_passive()
+        #Generating a new move command every frame might be excessive. But maybe it's fine?
+        #Probably I should put some kind of delta that scales based on how far away we are.
+        #Oh well.
+        if target_entity:
+            var move_command = GlobeHelpers.generate_move_command(self, target_entity.position)
+            controller.order_move.emit(move_command)
 
 func seek_new_target_passive():
     var valid_targets:Array = []

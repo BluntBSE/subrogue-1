@@ -70,7 +70,8 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
         if detection_parent:
             #Local tracking of munition's contacts, not shared with parent but used in homing calculations
             if body not in local_entities:
-                local_entities.append(body)
+                if body.faction != entity.faction:
+                    local_entities.append(body)
                 
             var tracked = false
             for track_obj in detection_parent.tracked_entities:
