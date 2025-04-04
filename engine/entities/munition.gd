@@ -42,7 +42,7 @@ func _process(delta:float)->void:
     mesh_1.rotation.z += deg_to_rad(90.0)
     mesh_1.rotation.z += rotation.z
     
-    if interval > 1.0:
+    if interval > 0.25:
         interval = 0.0
         target_entity = seek_new_target_passive()
         #Generating a new move command every frame might be excessive. But maybe it's fine?
@@ -51,15 +51,11 @@ func _process(delta:float)->void:
         #TODO:
         #Also using the entity's basic move_towards might be more appropriate. 
         #You could then use a move command if the signal is LOST.
-    if target_entity:
-        #I dont actually know why the move_towards approach didnt work
-        #move_bus.purge_old_waypoints()
-        #move_bus.queue = []
-        #print(move_bus.queue)
-        #move_towards(target_entity.position)
-            
-        var move_command = GlobeHelpers.generate_move_command(self, target_entity.position)
-        controller.order_move.emit(move_command)
+        if target_entity:
+            #I dont actually know why the move_towards approach didnt work.
+                
+            var move_command = GlobeHelpers.generate_move_command(self, target_entity.position)
+            controller.order_move.emit(move_command)
 
 func seek_new_target_passive():
     var valid_targets:Array = []
