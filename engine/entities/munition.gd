@@ -48,9 +48,18 @@ func _process(delta:float)->void:
         #Generating a new move command every frame might be excessive. But maybe it's fine?
         #Probably I should put some kind of delta that scales based on how far away we are.
         #Oh well.
-        if target_entity:
-            var move_command = GlobeHelpers.generate_move_command(self, target_entity.position)
-            controller.order_move.emit(move_command)
+        #TODO:
+        #Also using the entity's basic move_towards might be more appropriate. 
+        #You could then use a move command if the signal is LOST.
+    if target_entity:
+        #I dont actually know why the move_towards approach didnt work
+        #move_bus.purge_old_waypoints()
+        #move_bus.queue = []
+        #print(move_bus.queue)
+        #move_towards(target_entity.position)
+            
+        var move_command = GlobeHelpers.generate_move_command(self, target_entity.position)
+        controller.order_move.emit(move_command)
 
 func seek_new_target_passive():
     var valid_targets:Array = []

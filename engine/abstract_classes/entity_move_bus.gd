@@ -40,7 +40,8 @@ func handle_finished(command:MoveCommand):
 func _process(delta: float) -> void:
     pass
     
-    
+
+  
 func purge_old_waypoints():
     # For allowing the active move command to be continually updated with mouse position
     # Erase for every member of the queue that is not at queue[0]

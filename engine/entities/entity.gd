@@ -10,8 +10,8 @@ var controlled_by #NPC Factions?
 @export var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
 @onready var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
-@export var speed = GlobeHelpers.kph_to_game_s(60.0) #Debug - hyperfast
-@export var max_speed = GlobeHelpers.kph_to_game_s(60.0)
+@export var speed = GlobeHelpers.kph_to_game_s(240.0) #Debug - hyperfast
+@export var max_speed = GlobeHelpers.kph_to_game_s(240.0)
 @export var base_color:Color
 @export var spot_color:Color
 @export var range_color:Color
@@ -104,6 +104,7 @@ func move_to_next()->void:
         move_towards(dest.position)
 
 func move_towards(pos: Vector3) -> void:
+    
     var direction = (pos - position).normalized()
     # Calculate the vector from the center of the sphere to the current position
     var center_to_position = (position - anchor.position).normalized()
