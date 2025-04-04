@@ -101,8 +101,9 @@ func tween_to_new():
     var new_scale = new_certainty_scale()
     var tween = get_tree().create_tween()
     tween.set_parallel(true)
-    tween.tween_property(%CertaintyRadius, "scale",new_scale, 1.0)
-    tween.tween_property(self, "position", new_position, 1.0)
+    #Currently this tween timing is equal to the polling rate. Consider making it longer than polling rate for more ucnertainty
+    tween.tween_property(%CertaintyRadius, "scale",new_scale, 2.0)
+    tween.tween_property(self, "position", new_position, 2.0)
     %CertaintyLabel.text = str(  snapped(certainty, 1)  ) + "%"
     
     %CertaintyRadius.scale= clamp(%CertaintyRadius.scale, Vector3(3.0,3.0,3.0), Vector3(30.0,30.0,30.0))

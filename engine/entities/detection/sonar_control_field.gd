@@ -44,7 +44,7 @@ func send_pulse():
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_head", 0.0)
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_tail", 0.0)
     var maximum = %SonarPulseMesh.material_override.get_shader_parameter("frontier_head")
-    var tween:Tween = get_tree().create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EaseType.EASE_IN_OUT)
+    var tween:Tween = get_tree().create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EaseType.EASE_OUT)
     tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_head", maximum, 1.0).from_current()
     tween.set_trans(Tween.TRANS_CIRC)
     tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_tail", maximum, 0.5).from_current()

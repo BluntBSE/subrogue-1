@@ -39,6 +39,7 @@ func update_line3d(_node_a:Node3D, _node_b:Node3D, _anchor):
     var start_tangent: Vector3 = (mid_point - start_point) * 0.5
     var mid_tangent: Vector3 = (end_point - start_point) * 0.25
     var end_tangent: Vector3 = (end_point - mid_point) * 0.5
+   
     
     # Add points to the curve with tangents - In the abstract, if you want the path to sit on the ground, do this.
     #curve.add_point(start_point, Vector3(), start_tangent) # idx 0

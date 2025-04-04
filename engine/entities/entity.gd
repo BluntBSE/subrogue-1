@@ -3,14 +3,15 @@ class_name Entity
 @export var is_player:bool
 var played_by:Player
 var controlled_by #NPC Factions?
+@onready var controller:EntityController = get_parent()
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
 @export var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
 @onready var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
-@export var speed = GlobeHelpers.kph_to_game_s(240.0) #Debug - hyperfast
-@export var max_speed = GlobeHelpers.kph_to_game_s(240.0)
+@export var speed = GlobeHelpers.kph_to_game_s(60.0) #Debug - hyperfast
+@export var max_speed = GlobeHelpers.kph_to_game_s(60.0)
 @export var base_color:Color
 @export var spot_color:Color
 @export var range_color:Color
