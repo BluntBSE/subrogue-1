@@ -10,6 +10,9 @@ class_name MunitionDef
 @export var fuel_remaining: float
 @export var fuel_max: float
 @export var fuel_burn: float
+#enum IMPACT_TYPES {munitions, ships, both}
+
+@export var impact_type:int 
 ## enum DEPTH {swim, crawl, surface}
 @export var current_depth: int # accepts DEPTH enums
 ## enum DEPTH {swim, crawl, surface}

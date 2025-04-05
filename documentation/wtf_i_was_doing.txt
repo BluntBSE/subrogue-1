@@ -11,6 +11,10 @@ but not so much the player can't bamboozle the AI.
 
 
 
+BUG: Clicking RIGHT as the game loads can cause a crash. Fix!
+BUG:Munitions update signal object to their perspective even if outside of the targeting arc.
+
+
 TODO:
     -Munitions need to poll at a much higher frequency for themselves just to assign a lock on
     -Munition lock on is a toggle?

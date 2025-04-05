@@ -15,7 +15,6 @@ var controlled_by #NPC Factions?
 @export var base_color:Color
 @export var spot_color:Color
 @export var range_color:Color
-@onready var spotlight:SpotLight3D = %Spotlight
 @onready var range_spot:SpotLight3D = %RangeSpot
 @export var scale_factor:float = 1.0
 @export var faction:int = GlobalConst.layers.PLAYER_1
@@ -28,11 +27,8 @@ var controlled_by #NPC Factions?
 @onready var detector:EntityDetector = %EntityDetector
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
-
-#Event signals
-signal destroyed
-signal spawned
-
+@onready var notifications:Notifications = %Notifications
+signal died
 
 
 
@@ -74,7 +70,7 @@ func _physics_process(delta: float) -> void:
     update_coords()
     move_to_next()
     check_reached_waypoint()
-    spotlight.look_at(self.position)
+    #spotlight.look_at(self.position)
 
 
 

@@ -3,11 +3,13 @@ class_name Munition
 
 enum GUIDANCE {active, passive, wire, dumb, radar, actipass }
 enum DEPTH {swim, crawl, surface}
+enum IMPACT_TYPES {munitions, ships, both}
 @export var id:String
 @export var display_name:String
 @export var fired_from:Entity
 @export var munition_type:String
 @export var guidance_type: int #accepts GUIDANCE enums
+@export var impact_type:int = 2 #Accepts IMPACT_TYPES enums
 @export var impact_radius:float
 @export var fuel_remaining:float
 @export var fuel_max:float
@@ -60,6 +62,8 @@ func _process(delta:float)->void:
 func seek_new_target_passive():
     var valid_targets:Array = []
     for _entity in detector.local_entities: #{"entity":entity, "tracked_by":[self, child, child]}
+        if _entity == null:
+            continue
         #See if the target is within range and can be picked up at all.
         var within = is_within_angle(_entity, 40.0)
         if within:
@@ -82,11 +86,34 @@ func seek_new_target_passive():
     return closest_target        
             
  
-func check_for_impact(body):
+func on_body_entered_check_for_impact(body):
+    print("Checked for impact")
+    #Connected to collision area signal through editor
+    #TODO: impact area should be a configurable at some point
     #Don't collide on your own faction
     if body.faction != faction:
-        
+        print("Factions not matched, good. Impact type is", impact_type)
+        #TODO:
+        #Don't collide with other munitions unless you're supposed to (Not yet implemented)
+        if impact_type == IMPACT_TYPES.ships:
+            print("Impact type is ships only")
+            if !(body is Munition):
+                var event:EntityDied = EntityDied.new()
+                event.died = body
+                event.killed_by = self
+                print("Should have notified")
+                notifications.notify(event)
+                damage_target(body)
+
+func damage_target(target:Entity)->void:
+    print("Target damaged")
+    #TODO: Implement damage. Just kill for now.
+    target.died.emit(target)
+    target.queue_free()
+    queue_free()
+    #TODO: Kill any related signal object on the parent
     pass
+                
  
 func is_within_angle(target: Node3D, angle: float) -> bool:
     # If the provided angle is 40, this function checks if a target

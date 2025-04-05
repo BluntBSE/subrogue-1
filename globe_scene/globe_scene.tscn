@@ -1524,7 +1524,10 @@ point_count = 2
 script = ExtResource("1_msvd6")
 
 [node name="GameObserver" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_ysxr2")
+
+[node name="KillTracker" type="Node" parent="GameObserver"]
 
 [node name="GamePlanet" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

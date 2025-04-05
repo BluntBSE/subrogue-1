@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=48 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://bsoi58tm3jjyk" path="res://assets/UI/white_icons/white_triangle_filled_2.png" id="19_rgexo"]
 [ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_p1ne5"]
 [ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_qfdwo"]
+[ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="29_v6ety"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -149,6 +150,8 @@ size = Vector2(25, 25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v6ety"]
 radius = 0.862371
+
+[sub_resource type="QuadMesh" id="QuadMesh_v6ety"]
 
 [node name="MunitionEntity" type="RigidBody3D"]
 collision_layer = 2
@@ -319,10 +322,11 @@ skeleton = NodePath("../../Spotlight")
 [node name="Spotlight" type="SpotLight3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
+visible = false
 layers = 2
 light_color = Color(0, 0.816604, 0.791994, 1)
 light_energy = 2.0
-light_cull_mask = 4294966275
+light_cull_mask = 4294966272
 shadow_enabled = true
 shadow_bias = 0.265
 spot_attenuation = -1.78
@@ -363,8 +367,6 @@ material = SubResource("FogMaterial_2rtqc")
 visible = false
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
-
-[node name="EntityActionBus" type="Node" parent="."]
 
 [node name="EntityEmission" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -429,4 +431,12 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ImpactArea"]
 shape = SubResource("SphereShape3D_v6ety")
 
+[node name="Notifications" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("29_v6ety")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_v6ety")
+
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]
+[connection signal="body_entered" from="ImpactArea" to="." method="on_body_entered_check_for_impact"]
