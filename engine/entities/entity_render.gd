@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
     
 
 func update_mesh_visibilities(layer:int, val:bool):
-    print("Updated mesh visibilities to ", layer, val)
+   # print("Updated mesh visibilities to ", layer, val)
     depth_mesh.set_layer_mask_value(layer, val)
     sonar_mesh.set_layer_mask_value(layer,val)
     for child in get_children():

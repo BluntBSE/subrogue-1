@@ -41,6 +41,7 @@ func _process(delta: float) -> void:
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
     if body is Entity and body != entity:
+        body = body as Entity
         #Check if body is already tracked
         print(entity.name + " detector just saw " + body.name + " enter ")
         if detection_parent == null:
@@ -58,6 +59,8 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                     return
                 var track_obj = {"entity":body, "tracked_by":[self]}
                 tracked_entities.append(track_obj)
+                body.died.connect(handle_tracked_object_died)
+
                 print("Added ", body.name, "to tracked entities, tracked by ", self)
             
             if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
@@ -85,6 +88,7 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                 var track_obj = {"entity":body, "tracked_by":[self]}
                 
                 detection_parent.tracked_entities.append(track_obj)
+                body.died.connect(detection_parent.handle_tracked_object_died)
                 print("Added ", body.name, "to tracked entities of parent: ,", detection_parent, "tracked by ", self)
             
             if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
@@ -97,6 +101,10 @@ func poll_entities():
     # Every few seconds, calculate the sound that would reach this node, the listener, based on the body's emitter
     if detection_parent == null: # Child detectors don't do their own polling; they leave it to their parents
         for dict: Dictionary in tracked_entities:
+            #If the entity no longer exists because it died or docked, discard it.
+            if dict.entity == null:
+                tracked_entities.erase(dict)
+                continue
             var max_certainty = 0.0
             var most_certain_detector = null
             var emission: EntityEmission = dict.entity.emission
@@ -157,3 +165,12 @@ func calculate_certainty(dist: float, c100: float, cfalloff: float, min_certaint
         certainty = min_certainty
 
     return certainty        
+
+func handle_tracked_object_died(_entity:Entity)->void:
+    print("Detector is handling target died")
+    local_entities.erase(_entity)
+    for dict:Dictionary in tracked_entities:
+        if dict.entity == _entity:
+            tracked_entities.erase(dict)
+    pass
+    

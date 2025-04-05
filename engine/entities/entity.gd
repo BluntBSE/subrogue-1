@@ -28,11 +28,8 @@ var controlled_by #NPC Factions?
 @onready var detector:EntityDetector = %EntityDetector
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
-
-#Event signals
-signal destroyed
-signal spawned
-
+@onready var notifications:Notifications = %Notifications
+signal died
 
 
 

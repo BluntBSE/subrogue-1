@@ -11,6 +11,7 @@ impact_radius = 1.0
 fuel_remaining = 100.0
 fuel_max = 0.0
 fuel_burn = 10.0
+impact_type = 1
 current_depth = 0
 target_depths = Array[int]([])
 target_pos = Vector3(0, 0, 0)

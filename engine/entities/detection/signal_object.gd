@@ -87,6 +87,7 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound:Sound, _ce
     last_sound = _sound
     certainty = _certainty
     detected_object = _detected_object
+    detected_object.died.connect(handle_died)
     detecting_object = _detecting_object
     position = _detected_object.position
     offset_self()
@@ -115,8 +116,16 @@ var elapsed = 0.0
 var tween_progress = 0.0
 var tween_speed= 1.0
 func _process(delta:float)->void:
+    if detected_object == null:
+        #Detected object died, we're about to be queue_freed. Or should be!
+        
+        return
     if lerping == true:
         tween_progress += delta * tween_speed
     position += detected_object.linear_velocity /60 #Can we do this to actual engine frames? 60 is right if we're running at ideal speed but we might not be
     look_at(anchor.position)
     pass
+
+func handle_died(_body:Entity)->void:
+    print("Signal Scene is handling target died")
+    queue_free()
