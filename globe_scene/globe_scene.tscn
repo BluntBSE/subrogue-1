@@ -16,11 +16,11 @@
 [ext_resource type="Script" uid="uid://ddutyndli6okj" path="res://globe_scene/player/player_markers.gd" id="15_wdr3j"]
 [ext_resource type="AudioStream" uid="uid://c4pqqqemfw30i" path="res://assets/royalty_free_music/dark-ambient-126122.mp3" id="16_o22p0"]
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="17_eum53"]
+[ext_resource type="Shader" uid="uid://dr2sw5ylj7jrv" path="res://globe_scene/grayscale_screen.gdshader" id="17_ysxr2"]
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="19_8gfvb"]
 [ext_resource type="Script" uid="uid://bmp2rptgbgioi" path="res://globe_scene/player_ui_root.gd" id="20_eaa56"]
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="20_oyi6m"]
 [ext_resource type="Texture2D" uid="uid://c3j3ua0ninil2" path="res://assets/UI/white_buttons/PCMainButtonNormalWhiteT02_filled.png" id="21_5ntyb"]
-[ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="21_bmluj"]
 [ext_resource type="Script" uid="uid://b1e3glbgg7wdy" path="res://engine/player_ui/time_manager.gd" id="22_ky6go"]
 [ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="23_mfwgd"]
 [ext_resource type="Texture2D" uid="uid://bevlrjvu4mfk4" path="res://assets/UI/blue_panels/MediumMenuBGT01.3BlueDark.png" id="23_x2kcd"]
@@ -256,14 +256,11 @@ volumetric_fog_detail_spread = 1.0
 volumetric_fog_ambient_inject = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
-shader = ExtResource("21_bmluj")
-shader_parameter/octave_count = 10
-shader_parameter/amp_start = 0.5
-shader_parameter/amp_coeff = 0.5
-shader_parameter/freq_coeff = 2.0
-shader_parameter/shift_coeff = 0.5
-shader_parameter/speed = 1.0
-shader_parameter/active = false
+shader = ExtResource("17_ysxr2")
+shader_parameter/flicker_intensity = 0.0
+shader_parameter/flicker_speed = 0.2
+shader_parameter/pale_intensity = 0.02
+shader_parameter/active = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
 shader = ExtResource("31_i4tgh")
@@ -3159,6 +3156,14 @@ offset_top = 143.957
 offset_right = 2388.41
 offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
+
+[node name="FilterMaskGray" type="ColorRect" parent="Players/Player1/CanvasLayer/PlayerUIRoot"]
+material = SubResource("ShaderMaterial_jitlb")
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1076.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="Players/Player1/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.4)
