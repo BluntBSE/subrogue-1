@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=61 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_p1ne5"]
 [ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_qfdwo"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="29_v6ety"]
+[ext_resource type="Texture2D" uid="uid://y87vux4ggt0" path="res://engine/particles/assets/vfx3_FLORB_0035.png" id="30_541b3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -151,7 +152,72 @@ size = Vector2(25, 25)
 [sub_resource type="SphereShape3D" id="SphereShape3D_v6ety"]
 radius = 0.862371
 
-[sub_resource type="QuadMesh" id="QuadMesh_v6ety"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vepk6"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("30_541b3")
+
+[sub_resource type="Curve" id="Curve_541b3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.520325, 0.0855514), 0.0, 0.0, 0, 0, Vector2(1, 0.3673), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vepk6"]
+curve = SubResource("Curve_541b3")
+
+[sub_resource type="Gradient" id="Gradient_vi68k"]
+offsets = PackedFloat32Array(0, 0.493562, 1)
+colors = PackedColorArray(0.270222, 0.270222, 0.270222, 1, 0.227468, 0.227468, 0.227468, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d6txb"]
+gradient = SubResource("Gradient_vi68k")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_j5udo"]
+_data = [Vector2(0.0243902, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sarf3"]
+curve = SubResource("Curve_j5udo")
+
+[sub_resource type="Curve" id="Curve_vi68k"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_d6txb"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_oimx8"]
+_limits = [0.0, 1.56999, 0.0, 1.0]
+_data = [Vector2(0, 1.56999), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_j5udo"]
+curve_x = SubResource("Curve_vi68k")
+curve_y = SubResource("Curve_d6txb")
+curve_z = SubResource("Curve_oimx8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sarf3"]
+lifetime_randomness = 0.34
+emission_shape = 1
+emission_sphere_radius = 0.5
+spread = 180.0
+flatness = 0.5
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(-1, 0, 0)
+scale_min = 0.5
+scale_max = 1.2
+scale_curve = SubResource("CurveXYZTexture_j5udo")
+color_initial_ramp = SubResource("GradientTexture1D_d6txb")
+alpha_curve = SubResource("CurveTexture_vepk6")
+emission_curve = SubResource("CurveTexture_sarf3")
+
+[sub_resource type="QuadMesh" id="QuadMesh_xyjcy"]
 
 [node name="MunitionEntity" type="RigidBody3D"]
 collision_layer = 2
@@ -322,8 +388,7 @@ skeleton = NodePath("../../Spotlight")
 [node name="Spotlight" type="SpotLight3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
-visible = false
-layers = 2
+layers = 3
 light_color = Color(0, 0.816604, 0.791994, 1)
 light_energy = 2.0
 light_cull_mask = 4294966272
@@ -435,8 +500,16 @@ shape = SubResource("SphereShape3D_v6ety")
 unique_name_in_owner = true
 script = ExtResource("29_v6ety")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("QuadMesh_v6ety")
+[node name="Particles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.379816)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Particles"]
+material_override = SubResource("StandardMaterial3D_vepk6")
+amount = 20
+lifetime = 2.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sarf3")
+draw_pass_1 = SubResource("QuadMesh_xyjcy")
 
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="ImpactArea" to="." method="on_body_entered_check_for_impact"]
