@@ -42,7 +42,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-polyliner/plugin.cfg")
+enabled=PackedStringArray("res://addons/format_on_save/plugin.cfg", "res://addons/gdLinter/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg")
 
 [global_group]
 

@@ -30,7 +30,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3ito3"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_3qfs3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e0wf7"]
 radius = 1.0
@@ -147,7 +147,7 @@ lightmap_size_hint = Vector2i(27, 27)
 size = Vector2(25, 25)
 
 [node name="Entity" type="RigidBody3D"]
-collision_layer = 524290
+collision_layer = 2
 collision_mask = 524288
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
@@ -156,7 +156,7 @@ script = ExtResource("1_du6w5")
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_3ito3")
+shape = SubResource("SphereShape3D_3qfs3")
 
 [node name="NavArea" type="Area3D" parent="."]
 collision_layer = 2

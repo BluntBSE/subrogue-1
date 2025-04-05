@@ -46,7 +46,7 @@ void fragment() {
     // Combine all conditions to create the hollow slice
     if ((within_outer_arc || within_inner_arc || within_left_side || within_right_side) && within_angle_range) {
         // Keep the outline visible
-        ALPHA = 1.0;
+        ALPHA = 0.3;
     } else {
         // Make everything else transparent
         ALPHA = 0.0;

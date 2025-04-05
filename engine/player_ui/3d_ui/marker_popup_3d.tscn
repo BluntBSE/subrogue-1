@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://risi5i7imk04"]
+[gd_scene load_steps=16 format=3 uid="uid://risi5i7imk04"]
 
 [ext_resource type="Script" uid="uid://dotn55r8pvoob" path="res://engine/player_ui/3d_ui/ui_quad.gd" id="1_2pv6f"]
 [ext_resource type="PackedScene" uid="uid://d4m5f8ce6m1yg" path="res://engine/player_ui/3d_ui/marker_popup.tscn" id="2_2gvl6"]
 [ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="2_tkj7p"]
 [ext_resource type="Shader" uid="uid://c1on4axafa5yx" path="res://globe_scene/test_3d_1.gdshader" id="3_jiq8v"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="4_qvsad"]
-[ext_resource type="Script" uid="uid://oadg1ekxcwn7" path="res://engine/player_ui/3d_ui/self_updating_CSG.gd" id="5_w0apk"]
 [ext_resource type="Script" uid="uid://dkjvk1iyomojp" path="res://engine/player_ui/3d_ui/context_line.gd" id="6_gfy2j"]
 [ext_resource type="Script" uid="uid://dflmlcor5j3yp" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="7_msqlf"]
 [ext_resource type="Material" uid="uid://42x084ogj248" path="res://engine/player_ui/3d_ui/context_line.material" id="8_dl31f"]
@@ -87,14 +86,6 @@ texture = ExtResource("4_qvsad")
 [node name="OmniLight3D" type="OmniLight3D" parent="MarkSprite"]
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
-
-[node name="SUCSG" type="Node3D" parent="." node_paths=PackedStringArray("csg")]
-unique_name_in_owner = true
-script = ExtResource("5_w0apk")
-csg = NodePath("CSGPolygon3D")
-
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="SUCSG"]
-visible = false
 
 [node name="ContextLine" type="Node3D" parent="."]
 unique_name_in_owner = true

@@ -3,6 +3,7 @@ class_name Entity
 @export var is_player:bool
 var played_by:Player
 var controlled_by #NPC Factions?
+@onready var controller:EntityController = get_parent()
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
@@ -27,6 +28,11 @@ var controlled_by #NPC Factions?
 @onready var detector:EntityDetector = %EntityDetector
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
+
+#Event signals
+signal destroyed
+signal spawned
+
 
 
 
@@ -89,9 +95,7 @@ func fix_height()->void:
 
 func fix_rotation() -> void:
     look_at(anchor.position)
-
-
-    
+   
 
 func move_to_next()->void:
     if move_bus.queue.size() < 1:
@@ -103,6 +107,7 @@ func move_to_next()->void:
         move_towards(dest.position)
 
 func move_towards(pos: Vector3) -> void:
+    
     var direction = (pos - position).normalized()
     # Calculate the vector from the center of the sphere to the current position
     var center_to_position = (position - anchor.position).normalized()

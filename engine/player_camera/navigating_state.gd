@@ -22,7 +22,7 @@ func stateHandleInput(_args:Dictionary)->void:
 
 
 func input_clicks(event:InputEvent):
-    var ref:OrbitalCamera = _reference
+    ref = _reference
     #BECAUSE we're not shift clicking or doing waypoint logic right now, this always overwrites the most recent item in the queue.
     if Input.is_action_pressed("primary_action"):
         if ref.hovering_over != {}:

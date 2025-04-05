@@ -1,9 +1,10 @@
-[gd_scene load_steps=245 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=246 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
 [ext_resource type="Script" uid="uid://dfy7slt7dt01i" path="res://globe_scene/planet.gd" id="2_0c888"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_xt6wy"]
+[ext_resource type="Script" uid="uid://c05cqteukierk" path="res://engine/game_observer.gd" id="2_ysxr2"]
 [ext_resource type="Script" uid="uid://bn7mt5j4ydu5a" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
@@ -1522,6 +1523,9 @@ point_count = 2
 [node name="GameMain" type="Node3D"]
 script = ExtResource("1_msvd6")
 
+[node name="GameObserver" type="Node" parent="."]
+script = ExtResource("2_ysxr2")
+
 [node name="GamePlanet" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 mesh = SubResource("SphereMesh_wog1n")
@@ -2332,9 +2336,9 @@ anchor_left = 66.5347
 anchor_top = 1.68388
 anchor_right = 66.5347
 anchor_bottom = 1.68388
-offset_left = 266.941
+offset_left = 266.942
 offset_top = 244.312
-offset_right = 368.941
+offset_right = 368.942
 offset_bottom = 284.312
 scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("19_8gfvb")
@@ -3035,9 +3039,9 @@ anchor_left = 77.2014
 anchor_top = -6.31612
 anchor_right = 78.8264
 anchor_bottom = -6.31612
-offset_left = -276.39
+offset_left = -276.386
 offset_top = 817.645
-offset_right = -174.39
+offset_right = -174.386
 offset_bottom = 857.645
 scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("19_8gfvb")
@@ -3067,9 +3071,9 @@ anchor_left = 77.2014
 anchor_top = -4.36612
 anchor_right = 78.8264
 anchor_bottom = -4.36612
-offset_left = -276.39
+offset_left = -276.386
 offset_top = 817.645
-offset_right = -174.39
+offset_right = -174.386
 offset_bottom = 857.645
 scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("19_8gfvb")

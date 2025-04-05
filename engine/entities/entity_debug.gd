@@ -3,8 +3,8 @@ class_name EntityDebug
 
 signal debug_message
 
-func dmsg(str:String)->void:
-    debug_message.emit(str)
+func dmsg(string:String)->void:
+    debug_message.emit(string)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -28,7 +28,7 @@ func _ready() -> void:
 
 
 
-func adjust_ruler(camera_pos:Vector3, anchor:Vector3) -> void:
+func adjust_ruler(camera_pos:Vector3, _anchor:Vector3) -> void:
     pass
     
     

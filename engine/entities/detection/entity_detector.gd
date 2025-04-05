@@ -12,13 +12,13 @@ var min_certainty: float = 20.0 #Always at least 20% certain in detection positi
 var max_range:float = 2000.0 #Expressed as km
 var positively_identified = [] #Signals from this source will always be marked if the profile, etc. is the same.
 var tracked_entities = [] #{"entity":entity, "tracked_by":[self, child, child]}
+var local_entities = []#Used for situations where we want to think about what this munition sees ONLY
 var known_signals = [] 
 var sigmap = {} # {"entity":entity, "signal":signal} Signals match to the array below, which we for updating those independently.
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     if entity is Munition:
-        entity as Munition
         #This means that the detector (for now) is totally subordinate to its parent.
         #Bind to the detection node of the originating entity
         detection_parent = entity.fired_from.detector
@@ -28,7 +28,7 @@ func _ready() -> void:
 var poll_elapsed:float = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    var polling_frequency = 3.0
+    var polling_frequency = 2.0
     poll_elapsed += delta
     if poll_elapsed > polling_frequency:
         poll_elapsed = 0.0
@@ -41,7 +41,6 @@ func _process(delta: float) -> void:
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
     if body is Entity and body != entity:
-        body as Entity
         #Check if body is already tracked
         print(entity.name + " detector just saw " + body.name + " enter ")
         if detection_parent == null:
@@ -53,6 +52,10 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                     
             if tracked == false:
                 #This represents only the fact that body is being polled for whether or not it is visible.
+                
+                #Don't track things belonging to your own faction, you already know where they are.
+                if body.faction == entity.faction:
+                    return
                 var track_obj = {"entity":body, "tracked_by":[self]}
                 tracked_entities.append(track_obj)
                 print("Added ", body.name, "to tracked entities, tracked by ", self)
@@ -65,6 +68,11 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                             track_obj.tracked_by.append(self)
             #Otherwise do nothing
         if detection_parent:
+            #Local tracking of munition's contacts, not shared with parent but used in homing calculations
+            if body not in local_entities:
+                if body.faction != entity.faction:
+                    local_entities.append(body)
+                
             var tracked = false
             for track_obj in detection_parent.tracked_entities:
                 if track_obj.entity == body:
@@ -72,7 +80,10 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                     
             if tracked == false:
                 #This represents only the fact that body is being polled for whether or not it is visible.
+                if body.faction == entity.faction:
+                    return
                 var track_obj = {"entity":body, "tracked_by":[self]}
+                
                 detection_parent.tracked_entities.append(track_obj)
                 print("Added ", body.name, "to tracked entities of parent: ,", detection_parent, "tracked by ", self)
             
@@ -90,25 +101,16 @@ func poll_entities():
             var most_certain_detector = null
             var emission: EntityEmission = dict.entity.emission
             var sound = Sound.new(dict.entity, dict.entity.emission.volume, dict.entity.emission.pitch, dict.entity.emission.profile)
+
             # Iterate through all detectors in `tracked_by`
             for detector in dict.tracked_by:
                 # Check sound for this detector
-
                 var dist = GlobeHelpers.arc_to_km(detector.entity.position, dict.entity.position, detector.entity.anchor)
                 var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
 
                 if final_db >= sensitivity:
-                    # Calculate certainty
-                    var certainty: float
-                    var from_c100 = (dist - c100)
-                    if from_c100 > 0:
-                        certainty = 100 - (cfalloff * from_c100)
-                    else:
-                        certainty = 100.0
-
-                    # Ensure minimum certainty
-                    if certainty < min_certainty:
-                        certainty = min_certainty
+                    # Calculate certainty using the new function
+                    var certainty = calculate_certainty(dist, c100, cfalloff, min_certainty)
 
                     # Track the detector with the highest certainty
                     if certainty > max_certainty:
@@ -124,7 +126,6 @@ func poll_entities():
                     sigmap[dict.entity] = sigob
 
                 sigmap[dict.entity].certainty = max_certainty
-
                 sigmap[dict.entity].tween_to_new()
 
                 # If the most certain detector is not `self`, call `turn_red()`
@@ -134,7 +135,6 @@ func poll_entities():
                 # Handle visibility and identification
                 var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
                 if dist <= c100:
-                    print("Entity within C100, make actively tracked")
                     dict.entity.render.update_mesh_visibilities(entity.faction, true)
                     positively_identified.append(dict.entity)
                     sigmap[dict.entity].visible = false
@@ -142,4 +142,18 @@ func poll_entities():
                     if sigmap[dict.entity].visible == false:
                         sigmap[dict.entity].visible = true
                         dict.entity.render.update_mesh_visibilities(entity.faction, false)
-        
+                        
+func calculate_certainty(dist: float, c100: float, cfalloff: float, min_certainty: float) -> float:
+    # Calculate certainty based on distance
+    var certainty: float
+    var from_c100 = (dist - c100)
+    if from_c100 > 0:
+        certainty = 100 - (cfalloff * from_c100)
+    else:
+        certainty = 100.0
+
+    # Ensure minimum certainty
+    if certainty < min_certainty:
+        certainty = min_certainty
+
+    return certainty        

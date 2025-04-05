@@ -43,7 +43,7 @@ func new_offset_position()->Vector3:
     #After the initial detection, this is used to determine where the signal ought to lerp to
     var km_offset = lerp(200.0,0.0,(certainty/100) )
     #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
-    var anchor: Planet = detecting_object.anchor
+    anchor = detecting_object.anchor
     
     # Calculate a random tangential direction
     var position_on_sphere = detected_object.position
@@ -58,7 +58,7 @@ func new_offset_position()->Vector3:
     return new_position
 
 func new_certainty_scale()->Vector3:
-    var anchor: Planet = detecting_object.anchor
+    anchor = detecting_object.anchor
     var km_offset = lerp(200.0,0.0,(certainty/100) )
     var vecfloat = GlobeHelpers.km_to_arc_distance(km_offset, anchor) * 2.0
     return clamp(Vector3(vecfloat, vecfloat, vecfloat), Vector3(3.0,3.0,3.0), Vector3(15.0,15.0,15.0))
@@ -101,8 +101,9 @@ func tween_to_new():
     var new_scale = new_certainty_scale()
     var tween = get_tree().create_tween()
     tween.set_parallel(true)
-    tween.tween_property(%CertaintyRadius, "scale",new_scale, 1.0)
-    tween.tween_property(self, "position", new_position, 1.0)
+    #Currently this tween timing is equal to the polling rate. Consider making it longer than polling rate for more ucnertainty
+    tween.tween_property(%CertaintyRadius, "scale",new_scale, 2.0)
+    tween.tween_property(self, "position", new_position, 2.0)
     %CertaintyLabel.text = str(  snapped(certainty, 1)  ) + "%"
     
     %CertaintyRadius.scale= clamp(%CertaintyRadius.scale, Vector3(3.0,3.0,3.0), Vector3(30.0,30.0,30.0))
