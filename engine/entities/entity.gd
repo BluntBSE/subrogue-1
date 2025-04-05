@@ -29,6 +29,11 @@ var controlled_by #NPC Factions?
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
 
+#Event signals
+signal destroyed
+signal spawned
+
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -90,9 +95,7 @@ func fix_height()->void:
 
 func fix_rotation() -> void:
     look_at(anchor.position)
-
-
-    
+   
 
 func move_to_next()->void:
     if move_bus.queue.size() < 1:

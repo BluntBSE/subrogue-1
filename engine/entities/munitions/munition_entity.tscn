@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=46 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
@@ -31,10 +31,10 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3ito3"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_gqccf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e0wf7"]
-radius = 1.0
+radius = 0.574991
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8l2mg"]
 radius = 30.0
@@ -147,6 +147,9 @@ _data = {
 lightmap_size_hint = Vector2i(27, 27)
 size = Vector2(25, 25)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_v6ety"]
+radius = 0.862371
+
 [node name="MunitionEntity" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 524288
@@ -156,7 +159,7 @@ contact_monitor = true
 script = ExtResource("1_8j1xm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_3ito3")
+shape = SubResource("SphereShape3D_gqccf")
 
 [node name="NavArea" type="Area3D" parent="."]
 collision_layer = 2
@@ -417,5 +420,13 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.461)
 material_override = ExtResource("6_5spmm")
 mesh = SubResource("QuadMesh_l7f70")
+
+[node name="ImpactArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ImpactArea"]
+shape = SubResource("SphereShape3D_v6ety")
 
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]

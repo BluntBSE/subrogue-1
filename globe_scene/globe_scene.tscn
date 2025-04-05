@@ -1,9 +1,10 @@
-[gd_scene load_steps=245 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=246 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
 [ext_resource type="Script" uid="uid://dfy7slt7dt01i" path="res://globe_scene/planet.gd" id="2_0c888"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_xt6wy"]
+[ext_resource type="Script" uid="uid://c05cqteukierk" path="res://engine/game_observer.gd" id="2_ysxr2"]
 [ext_resource type="Script" uid="uid://bn7mt5j4ydu5a" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
@@ -1521,6 +1522,9 @@ point_count = 2
 
 [node name="GameMain" type="Node3D"]
 script = ExtResource("1_msvd6")
+
+[node name="GameObserver" type="Node" parent="."]
+script = ExtResource("2_ysxr2")
 
 [node name="GamePlanet" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

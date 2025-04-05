@@ -81,7 +81,13 @@ func seek_new_target_passive():
     
     return closest_target        
             
-  
+ 
+func check_for_impact(body):
+    #Don't collide on your own faction
+    if body.faction != faction:
+        
+    pass
+ 
 func is_within_angle(target: Node3D, angle: float) -> bool:
     # If the provided angle is 40, this function checks if a target
     # is within the Detection Area and within 20 degrees clockwise and 20 degrees counterclockwise
