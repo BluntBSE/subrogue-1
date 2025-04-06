@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdrj27u3ygxc0"]
+[gd_scene load_steps=15 format=3 uid="uid://cdrj27u3ygxc0"]
 
 [ext_resource type="Script" uid="uid://bp1k42oqhod6q" path="res://title_screen/main_menu.gd" id="1_cr28v"]
 [ext_resource type="PackedScene" uid="uid://c4rbxieydn2a4" path="res://title_screen/wireframe_sub_space.tscn" id="2_rdkjt"]
 [ext_resource type="Shader" uid="uid://c4ixw7o0cka8i" path="res://title_screen/vcr.gdshader" id="3_qq1wq"]
 [ext_resource type="FontFile" uid="uid://ckkgmxhxnuee3" path="res://assets/UI/fonts/Ethnocentric Rg.otf" id="4_eea5d"]
 [ext_resource type="FontFile" uid="uid://5muhrw1dex5u" path="res://assets/UI/fonts/Ethnocentric Rg It.otf" id="5_1ihsi"]
+[ext_resource type="Script" uid="uid://ck7f1l4fnromj" path="res://title_screen/multi_player_root.gd" id="6_fk0fn"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dbuyn"]
 viewport_path = NodePath("TextureRect/SubViewport")
@@ -260,4 +261,31 @@ offset_right = 54.0
 offset_bottom = 23.0
 text = "FPS: 60"
 
+[node name="MultiPlayerRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_fk0fn")
+
+[node name="Host" type="Button" parent="MultiPlayerRoot"]
+layout_mode = 2
+offset_left = 558.0
+offset_top = 566.0
+offset_right = 914.0
+offset_bottom = 619.0
+theme = SubResource("Theme_cdp6a")
+text = "Host"
+
+[node name="Join" type="Button" parent="MultiPlayerRoot"]
+layout_mode = 2
+offset_left = 558.0
+offset_top = 638.0
+offset_right = 914.0
+offset_bottom = 691.0
+theme = SubResource("Theme_cdp6a")
+text = "Join"
+
 [connection signal="button_up" from="VBoxContainer/BtnNewGame" to="." method="_on_btn_new_game_button_up"]
+[connection signal="button_up" from="MultiPlayerRoot/Host" to="MultiPlayerRoot" method="_on_host_button_button_up"]
+[connection signal="button_up" from="MultiPlayerRoot/Join" to="MultiPlayerRoot" method="_on_join_button_button_up"]
