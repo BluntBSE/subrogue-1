@@ -1,0 +1,37 @@
+Each client has a global script, SteamManager, that contains the steam information
+for the player
+
+
+What ACTUALLY needs to be synced across players?
+The position and existence of entities. I think that's really it.
+
+So, entity spawning: always done as an RPC?
+There's a multiplayerspawner node that might solve this.
+Perhaps all entities need to be a child of the multiplayer spawner?
+The multiplayerspawner needs a nodepath.
+It's probably going to be like
+
+Spawn the node into some abstract holding node, then in unpack() put the node where it belongs when spawned.
+I'll probably implement that abstract holding node as a queue that empties itself
+calling an unpack() type method on each thing in it
+
+Oh it looks like multiplayer spawner is already set up with that via Auto Spawn List?
+Looks like that's "When it detects one of nodes of the Autospawn type added to the Spawn Path mode..."
+
+NOTE:
+    
+    Spawning does NOT automatically replicate position, etc.
+    
+
+What is the role of the multiplayercontroller?
+Inputsychronizer?
+Idk if I actually need the serve to be authoritative on everything just don't be an asshole?
+
+
+in ready:
+    if get_multiplayer_authority() = get_multiplayer_id(), turn off process? (Rely on  multiplayer synchronizers?)
+    
+    Possible vote in favor of server-authoritative architecture: maybe easier to write as a multiplayer or single player game?
+    Since in single player it'd be identical but you are the server?
+    
+    I think we're gonna switch the game loading to use a multiplayer spawner of the globe scene. Let's see how that goes.
