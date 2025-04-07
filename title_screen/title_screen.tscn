@@ -1,125 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://cdrj27u3ygxc0"]
+[gd_scene load_steps=9 format=3 uid="uid://cdrj27u3ygxc0"]
 
 [ext_resource type="Script" uid="uid://bp1k42oqhod6q" path="res://title_screen/main_menu.gd" id="1_cr28v"]
 [ext_resource type="PackedScene" uid="uid://c4rbxieydn2a4" path="res://title_screen/wireframe_sub_space.tscn" id="2_rdkjt"]
-[ext_resource type="Shader" uid="uid://c4ixw7o0cka8i" path="res://title_screen/vcr.gdshader" id="3_qq1wq"]
-[ext_resource type="FontFile" uid="uid://ckkgmxhxnuee3" path="res://assets/UI/fonts/Ethnocentric Rg.otf" id="4_eea5d"]
+[ext_resource type="Theme" uid="uid://dgo5di4ew147w" path="res://engine/themes/title_screen.theme" id="4_fk0fn"]
 [ext_resource type="FontFile" uid="uid://5muhrw1dex5u" path="res://assets/UI/fonts/Ethnocentric Rg It.otf" id="5_1ihsi"]
 [ext_resource type="Script" uid="uid://ck7f1l4fnromj" path="res://title_screen/multi_player_root.gd" id="6_fk0fn"]
+[ext_resource type="Script" uid="uid://0oygg3kjgh57" path="res://title_screen/lobby_root.gd" id="6_fv0o7"]
+[ext_resource type="Theme" uid="uid://cewdeyanue7xi" path="res://engine/themes/mp_lobby_theme.theme" id="6_oqrgu"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dbuyn"]
 viewport_path = NodePath("TextureRect/SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ny2f1"]
-shader = ExtResource("3_qq1wq")
-shader_parameter/curvature = 0.0
-shader_parameter/skip = 0.0
-shader_parameter/image_flicker = 0.0
-shader_parameter/use_noise = false
-shader_parameter/vignette_flicker_speed = 0.25
-shader_parameter/vignette_strength = 0.54
-shader_parameter/small_scanlines_speed = 1.0
-shader_parameter/small_scanlines_proximity = 1.0
-shader_parameter/small_scanlines_opacity = 1.0
-shader_parameter/scanlines_opacity = 0.0
-shader_parameter/scanlines_speed = 0.1
-shader_parameter/scanline_thickness = 0.2
-shader_parameter/scanlines_spacing = 1.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orbx5"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.3)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wmaxc"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.75)
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63mdo"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.225, 0.225, 0.225, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxsfg"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.101961, 0.101961, 0.101961, 0)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1qc2"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0, 0, 0, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="Theme" id="Theme_cdp6a"]
-Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
-Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
-Button/colors/icon_focus_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_normal_color = Color(1, 1, 1, 1)
-Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
-Button/constants/align_to_largest_stylebox = 0
-Button/constants/h_separation = 4
-Button/constants/icon_max_width = 0
-Button/constants/outline_size = 0
-Button/font_sizes/font_size = 36
-Button/fonts/font = ExtResource("4_eea5d")
-Button/styles/disabled = SubResource("StyleBoxFlat_orbx5")
-Button/styles/focus = SubResource("StyleBoxFlat_wmaxc")
-Button/styles/hover = SubResource("StyleBoxFlat_63mdo")
-Button/styles/normal = SubResource("StyleBoxFlat_rxsfg")
-Button/styles/pressed = SubResource("StyleBoxFlat_e1qc2")
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_cr28v")
@@ -143,13 +33,6 @@ size = Vector2i(1920, 1080)
 
 [node name="WireframeSubSpace" parent="TextureRect/SubViewport" instance=ExtResource("2_rdkjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14476, 0, 9.24166)
-
-[node name="ColorRect" type="ColorRect" parent="TextureRect"]
-visible = false
-material = SubResource("ShaderMaterial_ny2f1")
-layout_mode = 0
-offset_right = 1922.0
-offset_bottom = 1074.0
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 visible = false
@@ -223,27 +106,27 @@ theme_override_constants/separation = 20
 
 [node name="BtnNewGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_cdp6a")
+theme = ExtResource("4_fk0fn")
 text = "NEW GAME"
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_cdp6a")
+theme = ExtResource("4_fk0fn")
 text = "LOAD GAME"
 
-[node name="Button5" type="Button" parent="VBoxContainer"]
+[node name="MultiplayerButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_cdp6a")
+theme = ExtResource("4_fk0fn")
 text = "MULTIPLAYER"
 
 [node name="Button4" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_cdp6a")
+theme = ExtResource("4_fk0fn")
 text = "SETTINGS"
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_cdp6a")
+theme = ExtResource("4_fk0fn")
 text = "QUIT"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -268,24 +151,155 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_fk0fn")
 
-[node name="Host" type="Button" parent="MultiPlayerRoot"]
+[node name="LobbyRoot" type="Control" parent="MultiPlayerRoot"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_fv0o7")
+
+[node name="LobbyChatBG" type="ColorRect" parent="MultiPlayerRoot/LobbyRoot"]
+layout_mode = 0
+offset_left = 727.0
+offset_top = 417.0
+offset_right = 1877.0
+offset_bottom = 871.0
+color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="ChatEntry" type="LineEdit" parent="MultiPlayerRoot/LobbyRoot/LobbyChatBG"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 415.0
+offset_right = 1020.0
+offset_bottom = 446.0
+placeholder_text = "Type your message here
+"
+
+[node name="SubmitButton" type="Button" parent="MultiPlayerRoot/LobbyRoot/LobbyChatBG"]
+layout_mode = 0
+offset_left = 1025.0
+offset_top = 414.0
+offset_right = 1126.0
+offset_bottom = 445.0
+text = "Submit Text"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MultiPlayerRoot/LobbyRoot/LobbyChatBG"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 16.0
+offset_right = 877.0
+offset_bottom = 412.0
+horizontal_scroll_mode = 0
+
+[node name="ChatVBox" type="VBoxContainer" parent="MultiPlayerRoot/LobbyRoot/LobbyChatBG/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-offset_left = 558.0
-offset_top = 566.0
-offset_right = 914.0
-offset_bottom = 619.0
-theme = SubResource("Theme_cdp6a")
+
+[node name="ChatLabel" type="Label" parent="MultiPlayerRoot/LobbyRoot/LobbyChatBG/ScrollContainer/ChatVBox"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+text = "[DEBUG] Message number 1"
+
+[node name="PlayersLabel" type="Label" parent="MultiPlayerRoot/LobbyRoot/LobbyChatBG"]
+layout_mode = 0
+offset_left = 1034.0
+offset_top = 14.0
+offset_right = 1091.0
+offset_bottom = 37.0
+text = "Players"
+
+[node name="LobbyPlayers" type="VBoxContainer" parent="MultiPlayerRoot/LobbyRoot/LobbyChatBG/PlayersLabel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 39.0
+offset_right = 103.0
+offset_bottom = 79.0
+
+[node name="Label" type="Label" parent="MultiPlayerRoot/LobbyRoot/LobbyChatBG/PlayersLabel/LobbyPlayers"]
+layout_mode = 2
+text = "Debug Player"
+
+[node name="LobbySearchRoot" type="Control" parent="MultiPlayerRoot"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LobbySearchBG" type="ColorRect" parent="MultiPlayerRoot/LobbySearchRoot"]
+layout_mode = 0
+offset_left = 645.0
+offset_top = 388.0
+offset_right = 1913.0
+offset_bottom = 835.0
+color = Color(0, 0, 0, 0.792157)
+
+[node name="Host" type="Button" parent="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG"]
+layout_mode = 2
+offset_left = 910.0
+offset_top = 344.0
+offset_right = 1266.0
+offset_bottom = 397.0
+theme = ExtResource("4_fk0fn")
 text = "Host"
 
-[node name="Join" type="Button" parent="MultiPlayerRoot"]
+[node name="Refresh" type="Button" parent="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG"]
 layout_mode = 2
-offset_left = 558.0
-offset_top = 638.0
-offset_right = 914.0
-offset_bottom = 691.0
-theme = SubResource("Theme_cdp6a")
-text = "Join"
+offset_left = 910.0
+offset_top = 266.0
+offset_right = 1266.0
+offset_bottom = 319.0
+theme = ExtResource("4_fk0fn")
+text = "Refresh"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG"]
+layout_mode = 2
+offset_left = 40.0
+offset_top = 84.0
+offset_right = 948.0
+offset_bottom = 420.0
+theme = ExtResource("6_oqrgu")
+vertical_scroll_mode = 2
+
+[node name="LobbyList" type="VBoxContainer" parent="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/ScrollContainer/LobbyList"]
+layout_mode = 2
+text = "Not A Lobby"
+
+[node name="LobbyNameLabel" type="Label" parent="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 26.0
+offset_right = 189.0
+offset_bottom = 49.0
+theme = ExtResource("4_fk0fn")
+text = "Lobby Name"
+
+[node name="LobbyNameLabel2" type="Label" parent="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG"]
+layout_mode = 0
+offset_left = 362.0
+offset_top = 26.0
+offset_right = 609.0
+offset_bottom = 56.0
+theme = ExtResource("4_fk0fn")
+text = "Num. Players"
+
+[node name="LobbyNameLabel3" type="Label" parent="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG"]
+layout_mode = 0
+offset_left = 707.0
+offset_top = 26.0
+offset_right = 954.0
+offset_bottom = 56.0
+theme = ExtResource("4_fk0fn")
+text = "Private"
 
 [connection signal="button_up" from="VBoxContainer/BtnNewGame" to="." method="_on_btn_new_game_button_up"]
-[connection signal="button_up" from="MultiPlayerRoot/Host" to="MultiPlayerRoot" method="_on_host_button_button_up"]
-[connection signal="button_up" from="MultiPlayerRoot/Join" to="MultiPlayerRoot" method="_on_join_button_button_up"]
+[connection signal="button_up" from="VBoxContainer/MultiplayerButton" to="MultiPlayerRoot" method="_on_multiplayer_button_up"]
+[connection signal="text_submitted" from="MultiPlayerRoot/LobbyRoot/LobbyChatBG/ChatEntry" to="MultiPlayerRoot/LobbyRoot" method="_on_line_edit_text_submitted"]
+[connection signal="button_up" from="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/Host" to="MultiPlayerRoot" method="_on_host_button_up"]
+[connection signal="button_up" from="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/Refresh" to="MultiPlayerRoot" method="_on_refresh_button_up"]
