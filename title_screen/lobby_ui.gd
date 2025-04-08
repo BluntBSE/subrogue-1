@@ -8,56 +8,103 @@ enum search_distance {Close, Default, Far, Worldwide} #Probably dont need this h
 @onready var steam_name:Label = %SteamUsername
 @onready var lobby_set_name:Button = %SetName
 @onready var lobby_name:LineEdit = %LobbyName
-@onready var lobby_output:VBoxContainer = %LobbyChatVBox
+@onready var lobby_output:RichTextLabel = %LobbyChatRTL
 @onready var chat_input = %SubmitMsg
 @onready var player_list = %PlayerVBox
 
 
 func _ready():
     steam_name.text = SteamManager.steam_username
-    Steam.lobby_created.connect(on_lobby_created)
-    #Steam.connect("lobby_match_list", self, "on_lobby-Match_list
-    Steam.connect("lobby_joined", on_lobby_joined)
+    SteamManager.lobby_ready.connect(on_lobby_created) #See callback for why this isnt direct
+    SteamManager.lobby_joined.connect(on_lobby_joined)
     Steam.connect("lobby_chat_update", on_lobby_chat_update)
     Steam.connect("lobby_message", on_lobby_message)
     Steam.connect("join_requested", on_join_requested)
-    Steam.connect("lobby_data_update", on_lobby_data_update)
+    Steam.lobby_data_update.connect(on_lobby_data_update)
     check_command_line()
 
 
 func _process(delta:float)->void:
-    Steam.run_callbacks()
+    pass
 ###
 ##STEAM CALLBACKS
 ###
+
+
 func on_lobby_created(connection, lobby_id):
-    print("Lobby UI: On lobby created! If you're seeing this, it means that having Steam.runCallbacks in this node was enough")
+    #It actually looks like this one callback isn't firing unless I provide it 
+    #A separate signal from the SteamManager. Doing #Steam.lobby_created.connect...No funcione
+    print("Lobby UI: On Lobby Created")
     if connection == 1:
         SteamManager.lobby_id = lobby_id
         SteamManager.hosted_lobby_id = lobby_id
         #TODO: Make name configurable at some point
         Steam.setLobbyData(lobby_id, "name", SteamManager.LOBBY_NAME)
         %LobbyName.text = Steam.getLobbyData(lobby_id, "name")
+        display_message("Created Lobby: " + str(Steam.getLobbyData(lobby_id, "name")))
         
         
     print("On lobby created!")
 
-func on_lobby_data_update():
-    print("Lobby UI: on lobby data update")
+func on_lobby_data_update(_success, _lobby_id, _member_id):
+    print("Lobby metadata updated")
+    print(str(_success), str(_lobby_id), str(_member_id))
 
 func on_join_requested():
     print("Lobby UI: On join requested")
 
-func on_lobby_message():
+func on_lobby_message(result, user, message, type):
     print("Lobby UI: Lobby message")    
-
-func on_lobby_chat_update():
-    print("Lobby UI: Lobby chat update")
-
-func on_lobby_joined():
-    print("ON lobby joined from Lobby UI")
+    var sender = Steam.getFriendPersonaName(user)
+    display_message(str(sender)+ ": " + str(message))
 
 
+func on_lobby_joined(_lobby: int, _permissions: int, _locked: bool, _response: int):
+    for child in %PlayerVBox.get_children():
+        child.queue_free()
+    #SteamManager should have already set our variables so..
+    render_players()
+
+func render_players():
+    for member:Dictionary in SteamManager.lobby_members: #{"steam_id":member_id, "steam_name":member_name}
+        var player_label := RichTextLabel.new()
+        player_label.fit_content = true
+        player_label.text = Steam.getFriendPersonaName(member["steam_id"])
+        %PlayerVBox.add_child(player_label)
+
+func display_message(message):
+    lobby_output.add_text("\n" + str(message))
+    pass
+
+
+func send_chat_message():
+    var msg = %ChatInput.text
+    var sent = Steam.sendLobbyChatMsg(SteamManager.lobby_id, msg)
+    
+    if not sent:
+        display_message("message failed to send")
+        
+    %ChatInput.text = ""
+    
+    
+    pass
+
+func on_lobby_chat_update(lobby_id, changed_id, making_change_id, chat_state):
+    print("Lobby UI: Chat Update")
+    var changer = Steam.getFriendPersonaName(making_change_id)
+    
+    if chat_state == 1:
+        display_message(str(changer)+" has joined the lobby")
+    if chat_state == 2:
+        display_message(str(changer)+ "has left the lobby")
+    elif chat_state == 8:
+        display_message(str(changer) + " has been kicked from the lobby")
+    else:
+        (display_message(str(changer) + "did....something"))
+    
+    #Is this good?
+    SteamManager.get_lobby_members()
+    render_players()
 ### Command Line ###
 ## Probably this doesn't belong in LobbyUI but in lobby creation
 func check_command_line():
@@ -87,4 +134,5 @@ func _on_leave_lobby_button_up() -> void:
 
 func _on_submit_msg_button_up() -> void:
     print("Lobby UI: On submit msg button up")
+    send_chat_message()
     pass # Replace with function body.

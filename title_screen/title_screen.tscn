@@ -267,7 +267,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Players"
 
-[node name="TextInput" type="LineEdit" parent="MultiPlayerRoot/LobbyUI"]
+[node name="ChatInput" type="LineEdit" parent="MultiPlayerRoot/LobbyUI"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 569.0
@@ -276,7 +276,7 @@ offset_right = 1257.0
 offset_bottom = 851.0
 placeholder_text = "Write your message here"
 
-[node name="SubmitMsg" type="Button" parent="MultiPlayerRoot/LobbyUI/TextInput"]
+[node name="SubmitMsg" type="Button" parent="MultiPlayerRoot/LobbyUI/ChatInput"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -296,19 +296,12 @@ offset_top = 255.0
 offset_right = 1574.0
 offset_bottom = 788.0
 
-[node name="LobbyChatVBox" type="VBoxContainer" parent="MultiPlayerRoot/LobbyUI/LobbyChatContainer"]
+[node name="LobbyChatRTL" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/LobbyChatContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="MultiPlayerRoot/LobbyUI/LobbyChatContainer/LobbyChatVBox"]
-layout_mode = 2
-text = "[NO SENDER]: I am a debug message 1"
-
-[node name="Label2" type="Label" parent="MultiPlayerRoot/LobbyUI/LobbyChatContainer/LobbyChatVBox"]
-layout_mode = 2
-text = "[NO SENDER]: I am a debug message 2"
+text = "Heck"
+fit_content = true
 
 [node name="PlayerVBox" type="VBoxContainer" parent="MultiPlayerRoot/LobbyUI"]
 unique_name_in_owner = true
@@ -319,55 +312,6 @@ offset_top = 257.0
 offset_right = 516.0
 offset_bottom = 297.0
 
-[node name="RTL" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
-custom_minimum_size = Vector2(200, 30)
-layout_mode = 2
-text = "DEBUG - Blunt but Sharp Enough"
-scroll_active = false
-autowrap_mode = 0
-
-[node name="RTL2" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
-custom_minimum_size = Vector2(200, 30)
-layout_mode = 2
-text = "DEBUG - Blunt but Sharp Enough"
-scroll_active = false
-autowrap_mode = 0
-
-[node name="RTL3" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
-custom_minimum_size = Vector2(200, 30)
-layout_mode = 2
-text = "DEBUG - Blunt but Sharp Enough"
-scroll_active = false
-autowrap_mode = 0
-
-[node name="RTL4" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
-custom_minimum_size = Vector2(200, 30)
-layout_mode = 2
-text = "DEBUG - Blunt but Sharp Enough"
-scroll_active = false
-autowrap_mode = 0
-
-[node name="RTL5" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
-custom_minimum_size = Vector2(200, 30)
-layout_mode = 2
-text = "DEBUG - Blunt but Sharp Enough"
-scroll_active = false
-autowrap_mode = 0
-
-[node name="RTL6" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
-custom_minimum_size = Vector2(200, 30)
-layout_mode = 2
-text = "DEBUG - Blunt but Sharp Enough"
-scroll_active = false
-autowrap_mode = 0
-
-[node name="RTL7" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
-custom_minimum_size = Vector2(200, 30)
-layout_mode = 2
-text = "DEBUG - Blunt but Sharp Enough"
-scroll_active = false
-autowrap_mode = 0
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 
 [connection signal="button_up" from="MenuVBox/BtnNewGame" to="." method="_on_btn_new_game_button_up"]
@@ -376,4 +320,4 @@ autowrap_mode = 0
 [connection signal="button_up" from="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/Refresh" to="MultiPlayerRoot" method="_on_refresh_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbyUI/ColorRect/SetName" to="MultiPlayerRoot/LobbyUI" method="_on_set_name_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbyUI/ColorRect/LeaveLobby" to="MultiPlayerRoot/LobbyUI" method="_on_leave_lobby_button_up"]
-[connection signal="button_up" from="MultiPlayerRoot/LobbyUI/TextInput/SubmitMsg" to="MultiPlayerRoot/LobbyUI" method="_on_submit_msg_button_up"]
+[connection signal="button_up" from="MultiPlayerRoot/LobbyUI/ChatInput/SubmitMsg" to="MultiPlayerRoot/LobbyUI" method="_on_submit_msg_button_up"]

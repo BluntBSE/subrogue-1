@@ -40,3 +40,7 @@ in ready:
     Since in single player it'd be identical but you are the server?
     
     I think we're gonna switch the game loading to use a multiplayer spawner of the globe scene. Let's see how that goes.
+
+
+I think we'll ultimately have the lobby data be globally accessible, along with an is_multiplayer tag
+With that, we'll pass it all to the GlobeScene's unpack or something.
