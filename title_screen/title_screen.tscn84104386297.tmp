@@ -34,8 +34,66 @@ size = Vector2i(1920, 1080)
 [node name="WireframeSubSpace" parent="TextureRect/SubViewport" instance=ExtResource("2_rdkjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14476, 0, 9.24166)
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+offset_left = 281.0
+offset_top = 364.0
+offset_right = 731.0
+offset_bottom = 814.0
+color = Color(0.00784314, 0.00784314, 0.00784314, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 180.0
+offset_top = 8.0
+offset_right = -159.0
+offset_bottom = 455.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[center]SUB ROGUE[/center]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -262.0
+offset_top = -36.0
+offset_right = 288.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Start Game"
+
+[node name="Button2" type="Button" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Start Game"
+
+[node name="Button3" type="Button" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Start Game"
+
+[node name="TextureButton" type="TextureButton" parent="ColorRect2/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+visible = false
+offset_left = 83.0
+offset_top = 167.0
+offset_right = 722.0
+offset_bottom = 971.0
+color = Color(0, 0, 0, 1)
+
 [node name="MenuVBox" type="VBoxContainer" parent="."]
-unique_name_in_owner = true
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -73,7 +131,7 @@ theme = ExtResource("4_fk0fn")
 text = "QUIT"
 
 [node name="TitleLabel" type="RichTextLabel" parent="."]
-unique_name_in_owner = true
+visible = false
 offset_left = 9.0
 offset_top = 247.0
 offset_right = 642.0
@@ -174,7 +232,6 @@ text = "Private"
 
 [node name="LobbyUI" type="Control" parent="MultiPlayerRoot"]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -310,8 +367,7 @@ text = "[NO SENDER]: I am a debug message 1"
 layout_mode = 2
 text = "[NO SENDER]: I am a debug message 2"
 
-[node name="PlayerVBox" type="VBoxContainer" parent="MultiPlayerRoot/LobbyUI"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="MultiPlayerRoot/LobbyUI"]
 clip_contents = true
 layout_mode = 0
 offset_left = 261.0
@@ -319,49 +375,49 @@ offset_top = 257.0
 offset_right = 516.0
 offset_bottom = 297.0
 
-[node name="RTL" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
+[node name="RTL" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/VBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 text = "DEBUG - Blunt but Sharp Enough"
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RTL2" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
+[node name="RTL2" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/VBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 text = "DEBUG - Blunt but Sharp Enough"
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RTL3" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
+[node name="RTL3" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/VBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 text = "DEBUG - Blunt but Sharp Enough"
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RTL4" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
+[node name="RTL4" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/VBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 text = "DEBUG - Blunt but Sharp Enough"
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RTL5" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
+[node name="RTL5" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/VBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 text = "DEBUG - Blunt but Sharp Enough"
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RTL6" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
+[node name="RTL6" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/VBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 text = "DEBUG - Blunt but Sharp Enough"
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RTL7" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/PlayerVBox"]
+[node name="RTL7" type="RichTextLabel" parent="MultiPlayerRoot/LobbyUI/VBoxContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 text = "DEBUG - Blunt but Sharp Enough"
@@ -374,6 +430,3 @@ autowrap_mode = 0
 [connection signal="button_up" from="MenuVBox/MultiplayerButton" to="MultiPlayerRoot" method="_on_multiplayer_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/Host" to="MultiPlayerRoot" method="_on_host_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/Refresh" to="MultiPlayerRoot" method="_on_refresh_button_up"]
-[connection signal="button_up" from="MultiPlayerRoot/LobbyUI/ColorRect/SetName" to="MultiPlayerRoot/LobbyUI" method="_on_set_name_button_up"]
-[connection signal="button_up" from="MultiPlayerRoot/LobbyUI/ColorRect/LeaveLobby" to="MultiPlayerRoot/LobbyUI" method="_on_leave_lobby_button_up"]
-[connection signal="button_up" from="MultiPlayerRoot/LobbyUI/TextInput/SubmitMsg" to="MultiPlayerRoot/LobbyUI" method="_on_submit_msg_button_up"]

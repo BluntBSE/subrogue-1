@@ -1,6 +1,11 @@
 Each client has a global script, SteamManager, that contains the steam information
 for the player
 
+IMPORTANT NOTES:
+    It appears that attempts to connect to the steam signals only works
+    if, for example, the create_lobby call and the on_create_lobby callback
+    are in the same node
+
 
 What ACTUALLY needs to be synced across players?
 The position and existence of entities. I think that's really it.

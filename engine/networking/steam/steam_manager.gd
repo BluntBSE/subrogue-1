@@ -20,7 +20,7 @@ var lobby_max_players = 6
 var LOBBY_NAME = "SUBROGUE1"
 var LOBBY_MODE = "PRIVATEER"
 signal lobby_ready #I'm positive there's a built in way to do this, but I couldn't get it working with GodotSteam
-
+#Actually, it appears that 
 func _init()->void:
     print("Initializing Steam")
     #What's the difference between AppID and GameID?
@@ -53,9 +53,12 @@ func on_lobby_created(peer_id, lobby_id): #peer id (0  for server, 1, for host..
     print("lobby id: ", lobby_id)
 
 func become_host():
-
+    if SteamManager.hosted_lobby_id != 0:
+        print("Lobby already running! It's: ", SteamManager.hosted_lobby_id)
+        return
     print("Starting host!")
-    multiplayer_peer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_PUBLIC, 4)
+    #TODO: Make lobby type configurable. Probably has an argument to this function
+    multiplayer_peer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_PUBLIC, 6)
     multiplayer_peer.lobby_created.connect(on_lobby_created)
     if not OS.has_feature("dedicated_server"):  # Not doing this yet.
         pass
@@ -81,7 +84,6 @@ func _on_lobby_created(connect: int, lobby_id):
         Steam.setLobbyJoinable(hosted_lobby_id, true)
         Steam.setLobbyData(hosted_lobby_id, "name", LOBBY_NAME)
         Steam.setLobbyData(hosted_lobby_id, "mode", LOBBY_MODE)
-        print("Should be emitting right now. The heck?")
         lobby_ready.emit()
 
 

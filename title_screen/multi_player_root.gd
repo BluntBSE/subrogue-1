@@ -1,6 +1,6 @@
 extends Control
 @onready var lobby_search = %LobbySearchRoot
-@onready var lobby_root = %LobbyRoot
+@onready var lobby_root = %LobbyUI
 
 func _ready()->void:
     pass
@@ -24,7 +24,11 @@ func _on_multiplayer_button_up() -> void:
 func _on_host_button_up() -> void:
     #We don't really want games in which the host isn't present.
     NetworkManager.become_host() #TODO: Dedicated server? idk if we really need/want that
-    #Refresh list
+    lobby_search.visible = false
+    %TitleLabel.visible = false
+    %MenuVBox.visible = false
+    #Maybe shouldn't set the lobby root to visible directly, but do some kind of callback?
+    lobby_root.visible = true
     
 
 func on_lobby_created()->void:
