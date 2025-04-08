@@ -64,8 +64,6 @@ func on_self_joined_new_lobby(_lobby_id):
 
 #Anyone joined the lobby
 func on_lobby_joined(_lobby: int, _permissions: int, _locked: bool, _response: int):
-    SteamManager.get_lobby_members()
-
     #SteamManager should have already set our variables so..
     render_players()
 
@@ -77,6 +75,7 @@ func render_players():
         var player_label := RichTextLabel.new()
         player_label.fit_content = true
         player_label.text = Steam.getFriendPersonaName(member["steam_id"])
+        print("Made a label for ", player_label.text)
         %PlayerVBox.add_child(player_label)
 
 func display_message(message):
@@ -108,9 +107,9 @@ func on_lobby_chat_update(lobby_id, changed_id, making_change_id, chat_state):
         display_message(str(changer) + " has been kicked from the lobby")
 
     
-    #This is here because it could respond to kicking etc.
+    #Is this good?
     SteamManager.get_lobby_members()
-   # render_players()
+    render_players()
 ### Command Line ###
 ## Probably this doesn't belong in LobbyUI but in lobby creation
 func check_command_line():
