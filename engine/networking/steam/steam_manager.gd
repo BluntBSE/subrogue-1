@@ -23,8 +23,8 @@ signal lobby_ready #I'm positive there's a built in way to do this, but I couldn
 #Actually, it appears that callbacks only work if the peer etc. is in the node, so duplicating these is necessary if I want this global
 #The below signals actually work if I wire up UI to the Steam callbacks directly
 #But I actually want the global modification of the client variables in one place
-#So I duplicate the signals here. This file updates global state. UI implements only UI.
-
+#So I duplicate the signals here. 
+signal self_joined_new_lobby
 signal lobby_joined
 func _init()->void:
     print("Initializing Steam")
@@ -73,6 +73,8 @@ func join_as_client(_lobby_id):
     lobby_members.clear()
     print("Joining lobby as client, lobby id: ", str(_lobby_id))
     multiplayer_peer.connect_lobby(_lobby_id)
+    lobby_id = _lobby_id
+    self_joined_new_lobby.emit(_lobby_id)
     #TODO: Where to add players to the lobby members array?
     #Tempted to do it here but the tutorial did not...
 

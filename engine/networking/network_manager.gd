@@ -29,7 +29,6 @@ func build_multiplayer_network():
                 print("No matching network type")
 
 func set_active_network(active_network_node):
-    SteamManager
     active_network = active_network_node
     
 
@@ -40,6 +39,7 @@ func become_host(is_dedicated_server = false):
     active_network.become_host()
     
 func join_as_client(lobby_id = 0): #0 == ?
+    SteamManager
     join_lobby(lobby_id)
     
     

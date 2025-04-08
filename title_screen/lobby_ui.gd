@@ -17,6 +17,7 @@ func _ready():
     steam_name.text = SteamManager.steam_username
     SteamManager.lobby_ready.connect(on_lobby_created) #See callback for why this isnt direct
     SteamManager.lobby_joined.connect(on_lobby_joined)
+    SteamManager.self_joined_new_lobby.connect(on_self_joined_new_lobby)
     Steam.connect("lobby_chat_update", on_lobby_chat_update)
     Steam.connect("lobby_message", on_lobby_message)
     Steam.connect("join_requested", on_join_requested)
@@ -58,7 +59,10 @@ func on_lobby_message(result, user, message, type):
     var sender = Steam.getFriendPersonaName(user)
     display_message(str(sender)+ ": " + str(message))
 
+func on_self_joined_new_lobby(_lobby_id):
+    render_players()
 
+#Anyone joined the lobby
 func on_lobby_joined(_lobby: int, _permissions: int, _locked: bool, _response: int):
     for child in %PlayerVBox.get_children():
         child.queue_free()
