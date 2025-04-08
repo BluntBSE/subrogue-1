@@ -136,14 +136,8 @@ func _on_set_name_button_up() -> void:
 func spawn_globe():
     print("This should be printing on the client machine too")
     #TODO: Actually instantiate with data.
-    var spawner:MultiplayerSpawner = get_tree().root.find_child("MPGlobeSpawner", true, false)
-    var GameRoot:Node3D = get_tree().root.find_child("GameRoot", true, false)
-    #WARNING: Preloading here moves the load time to when the application first boots. That may or may not be okay.
-    #In fact it seems preferable right now, but if it becomes an issue this is to blame.
-    var globe_root:GlobeRoot = preload("res://globe_scene/globe_scene.tscn").instantiate()
-    GameRoot.add_child(globe_root)
-    var menu = get_tree().root.find_child("MainMenu", true, false)
-    menu.queue_free()
+    var spawner:GlobeSpawner = get_tree().root.find_child("MPGlobeSpawner", true, false)
+    spawner.spawn_globe()
 
 
 
