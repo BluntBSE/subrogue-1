@@ -134,6 +134,7 @@ func _on_set_name_button_up() -> void:
 
 @rpc("any_peer", "call_local")
 func spawn_globe():
+    print("This should be printing on the client machine too")
     #TODO: Actually instantiate with data.
     var spawner:MultiplayerSpawner = get_tree().root.find_child("MPGlobeSpawner", true, false)
     var GameRoot:Node3D = get_tree().root.find_child("GameRoot", true, false)
@@ -158,5 +159,5 @@ func _on_submit_msg_button_up() -> void:
 
 
 func _on_start_game_button_up() -> void:
-    spawn_globe()
+    spawn_globe.rpc()
     pass # Replace with function body.
