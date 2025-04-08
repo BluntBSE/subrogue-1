@@ -58,7 +58,8 @@ func _on_lobby_match_list(lobbies:Array):
 
 func join_lobby(lobby_id)->void:
     NetworkManager.join_as_client(lobby_id)
-        
+    lobby_search.visible = false
+    lobby_root.visible = true        
     
 
 
