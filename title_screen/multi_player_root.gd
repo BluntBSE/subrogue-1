@@ -58,12 +58,6 @@ func _on_lobby_match_list(lobbies:Array):
 
 func join_lobby(lobby_id)->void:
     NetworkManager.join_as_client(lobby_id)
-    var num_mem = Steam.getNumLobbyMembers(lobby_id)
-    print("Num members in lobby: ", num_mem)
-    for i in range(num_mem):
-        var member = Steam.getLobbyMemberByIndex(lobby_id, i)
-        var mname = Steam.getFriendPersonaName(member)
-        print("mname ", i, "  is ", mname)
         
     
 
