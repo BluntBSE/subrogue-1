@@ -128,7 +128,7 @@ func poll_entities():
             # Update the signal object with the highest certainty
             if max_certainty > 0.0:
                 if !sigmap.has(dict.entity):
-                    var sigob: SignalObject = load("res://engine/entities/detection/signal_scene.tscn").instantiate()
+                    var sigob: SignalObject = preload("res://engine/entities/detection/signal_scene.tscn").instantiate()
                     sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
                     entity.anchor.add_child(sigob)
                     sigmap[dict.entity] = sigob

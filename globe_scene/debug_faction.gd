@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 
 
 func spawn_entity_at_node(node:NavNode, type_id:String, for_faction:int):
-    var entity:Entity = load("res://engine/entities/generic_entity.tscn").instantiate()
+    var entity:Entity = preload("res://engine/entities/generic_entity.tscn").instantiate()
     var entity_controller:EntityController = get_node("FactionEntities")
     var is_npc:bool = GlobalConst.is_layer_player(for_faction)
     

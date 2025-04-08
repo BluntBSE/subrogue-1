@@ -10,7 +10,7 @@ func add_message(message:String)->void:
     messages.append(message)
     var idx = messages.size()
     var display_str = str(idx) + " - " + message
-    var label:RichTextLabel = load("res://engine/player_ui/3d_ui/entity_debugger/debug_label.tscn").instantiate()
+    var label:RichTextLabel = preload("res://engine/player_ui/3d_ui/entity_debugger/debug_label.tscn").instantiate()
     label.text = display_str
     %VBoxContainer.add_child(label)
 # Called when the node enters the scene tree for the first time.

@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
     #input_clicks()
 
 func handle_add_node_at(_position: Vector3) -> void:
-    var navnode:NavNode = load("res://engine/navigation/nav_node.tscn").instantiate()
+    var navnode:NavNode = preload("res://engine/navigation/nav_node.tscn").instantiate()
     nav_parent.add_child(navnode)
     var rads = GlobeHelpers.rads_from_position(_position)
     navnode.owner = get_tree().edited_scene_root
@@ -63,7 +63,7 @@ func handle_add_node_at(_position: Vector3) -> void:
     pass
 
 func handle_add_and_link(_position:Vector3)->void:
-    var navnode:NavNode = load("res://engine/navigation/nav_node.tscn").instantiate()
+    var navnode:NavNode = preload("res://engine/navigation/nav_node.tscn").instantiate()
     nav_parent.add_child(navnode)
     var rads = GlobeHelpers.rads_from_position(_position)
     navnode.owner = get_tree().edited_scene_root
