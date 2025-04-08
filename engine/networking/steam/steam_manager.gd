@@ -52,8 +52,6 @@ func initialize_steam():
 func _ready():
     initialize_steam()
     #TODO: Probably need to lift this multiplayer peer out if we do direct networking
-    
-    multiplayer.multiplayer_peer = multiplayer_peer
     print("MY PEER IS: ")
     print(multiplayer.multiplayer_peer)
     multiplayer_peer.lobby_created.connect(on_lobby_created)
@@ -69,6 +67,8 @@ func become_host():
     print("Starting host!")
     #TODO: Make lobby type configurable. Probably has an argument to this function
     multiplayer_peer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_PUBLIC, 6)
+    multiplayer.multiplayer_peer = multiplayer_peer
+    print("HOSTED! Godot MP peer is ", multiplayer.multiplayer_peer)
     #hosted_lobby_id is set by the callback triggered by the above
     if not OS.has_feature("dedicated_server"):  # Not doing this yet.
         pass
@@ -80,6 +80,9 @@ func join_as_client(_lobby_id):
     multiplayer_peer.connect_lobby(_lobby_id)
     lobby_id = _lobby_id
     self_joined_new_lobby.emit(_lobby_id)
+    #Godot peer = steam peer. 
+    multiplayer.multiplayer_peer = multiplayer_peer
+    print("Joined! Godot MP peer is", multiplayer.multiplayer_peer)
     #TODO: Where to add players to the lobby members array?
     #Tempted to do it here but the tutorial did not...
 

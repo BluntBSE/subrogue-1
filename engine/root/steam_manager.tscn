@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7pb6u6mwq7tw"]
+
+[ext_resource type="Script" uid="uid://cwj1vop2jcppi" path="res://engine/networking/steam/steam_manager.gd" id="1_fn23f"]
+
+[node name="SteamManager" type="Node"]
+script = ExtResource("1_fn23f")
