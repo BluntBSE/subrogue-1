@@ -132,11 +132,13 @@ func _on_set_name_button_up() -> void:
     print("Lobby UI: Set name button")
     pass # Replace with function body.
 
-@rpc("call_local")
+@rpc("any_peer", "call_local")
 func spawn_globe():
     #TODO: Actually instantiate with data.
     var spawner:MultiplayerSpawner = get_tree().root.find_child("MPGlobeSpawner", true, false)
     var GameRoot:Node3D = get_tree().root.find_child("GameRoot", true, false)
+    #WARNING: Preloading here moves the load time to when the application first boots. That may or may not be okay.
+    #In fact it seems preferable right now, but if it becomes an issue this is to blame.
     var globe_root:GlobeRoot = preload("res://globe_scene/globe_scene.tscn").instantiate()
     GameRoot.add_child(globe_root)
     var menu = get_tree().root.find_child("MainMenu", true, false)
