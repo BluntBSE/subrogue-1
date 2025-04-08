@@ -128,8 +128,20 @@ func check_command_line():
 ###
 
 func _on_set_name_button_up() -> void:
+    #DEBUG - Spawn with no data. 
     print("Lobby UI: Set name button")
     pass # Replace with function body.
+
+@rpc("call_local")
+func spawn_globe():
+    #TODO: Actually instantiate with data.
+    var spawner:MultiplayerSpawner = get_tree().root.find_child("MPGlobeSpawner", true, false)
+    var GameRoot:Node3D = get_tree().root.find_child("GameRoot", true, false)
+    var globe_root:GlobeRoot = preload("res://globe_scene/globe_scene.tscn").instantiate()
+    GameRoot.add_child(globe_root)
+    var menu = get_tree().root.find_child("MainMenu", true, false)
+    menu.queue_free()
+
 
 
 func _on_leave_lobby_button_up() -> void:
@@ -140,4 +152,9 @@ func _on_leave_lobby_button_up() -> void:
 func _on_submit_msg_button_up() -> void:
     print("Lobby UI: On submit msg button up")
     send_chat_message()
+    pass # Replace with function body.
+
+
+func _on_start_game_button_up() -> void:
+    spawn_globe()
     pass # Replace with function body.

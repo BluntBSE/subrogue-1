@@ -1,4 +1,5 @@
 extends Node3D
+class_name GlobeRoot
 @onready var load_filter:ColorRect = %OnLoadFilter
 
 

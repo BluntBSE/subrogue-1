@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp52ovget6aq2"]
+
+[ext_resource type="PackedScene" uid="uid://cdrj27u3ygxc0" path="res://title_screen/title_screen.tscn" id="1_lv5bk"]
+
+[node name="GameRoot" type="Node3D"]
+
+[node name="MainMenu" parent="." instance=ExtResource("1_lv5bk")]
+unique_name_in_owner = true
+
+[node name="MPGlobeSpawner" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql")
+spawn_path = NodePath("..")
+spawn_limit = 1
