@@ -65,12 +65,14 @@ func on_self_joined_new_lobby(_lobby_id):
 #Anyone joined the lobby
 func on_lobby_joined(_lobby: int, _permissions: int, _locked: bool, _response: int):
     SteamManager.get_lobby_members()
-    for child in %PlayerVBox.get_children():
-        child.queue_free()
+
     #SteamManager should have already set our variables so..
     render_players()
 
 func render_players():
+    for child in %PlayerVBox.get_children():
+        child.queue_free()
+        
     for member:Dictionary in SteamManager.lobby_members: #{"steam_id":member_id, "steam_name":member_name}
         var player_label := RichTextLabel.new()
         player_label.fit_content = true
