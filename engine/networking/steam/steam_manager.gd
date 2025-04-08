@@ -51,6 +51,11 @@ func initialize_steam():
     
 func _ready():
     initialize_steam()
+    #TODO: Probably need to lift this multiplayer peer out if we do direct networking
+    
+    multiplayer.multiplayer_peer = multiplayer_peer
+    print("MY PEER IS: ")
+    print(multiplayer.multiplayer_peer)
     multiplayer_peer.lobby_created.connect(on_lobby_created)
     multiplayer_peer.lobby_joined.connect(on_lobby_joined)
 

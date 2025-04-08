@@ -132,7 +132,7 @@ func _on_set_name_button_up() -> void:
     print("Lobby UI: Set name button")
     pass # Replace with function body.
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func spawn_globe():
     print("This should be printing on the client machine too")
     #TODO: Actually instantiate with data.
