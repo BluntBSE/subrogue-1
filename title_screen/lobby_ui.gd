@@ -64,6 +64,7 @@ func on_self_joined_new_lobby(_lobby_id):
 
 #Anyone joined the lobby
 func on_lobby_joined(_lobby: int, _permissions: int, _locked: bool, _response: int):
+    SteamManager.get_lobby_members()
     for child in %PlayerVBox.get_children():
         child.queue_free()
     #SteamManager should have already set our variables so..
@@ -103,12 +104,11 @@ func on_lobby_chat_update(lobby_id, changed_id, making_change_id, chat_state):
         display_message(str(changer)+ "has left the lobby")
     elif chat_state == 8:
         display_message(str(changer) + " has been kicked from the lobby")
-    else:
-        (display_message(str(changer) + "did....something"))
+
     
-    #Is this good?
+    #This is here because it could respond to kicking etc.
     SteamManager.get_lobby_members()
-    render_players()
+   # render_players()
 ### Command Line ###
 ## Probably this doesn't belong in LobbyUI but in lobby creation
 func check_command_line():
