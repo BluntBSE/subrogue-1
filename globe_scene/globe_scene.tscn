@@ -1,4 +1,4 @@
-[gd_scene load_steps=246 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=247 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bn7mt5j4ydu5a" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
+[ext_resource type="Script" uid="uid://bvar4t0qcswwh" path="res://globe_scene/players.gd" id="8_labis"]
 [ext_resource type="Script" uid="uid://df4qigb0veuou" path="res://globe_scene/player/player_entities.gd" id="9_ak5in"]
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="9_xkk1b"]
 [ext_resource type="Script" uid="uid://c7feimtf0jnd2" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
@@ -1704,6 +1705,7 @@ unique_name_in_owner = true
 environment = SubResource("Environment_13rd1")
 
 [node name="Players" type="Node3D" parent="."]
+script = ExtResource("8_labis")
 
 [node name="Player1" type="Node3D" parent="Players"]
 unique_name_in_owner = true
@@ -3834,6 +3836,15 @@ curve = SubResource("Curve3D_xepjb")
 
 [node name="@Path3D@58712" type="Path3D" parent="NavNodes/NavNode--6_33lon-16_33lat"]
 curve = SubResource("Curve3D_hkxrn")
+
+[node name="PlayerSpawnLocations" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="player_1" type="Node3D" parent="PlayerSpawnLocations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
+
+[node name="player_2" type="Node3D" parent="PlayerSpawnLocations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, -3.42545)
 
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/VerySlow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
 [connection signal="button_up" from="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager/Slow" to="Players/Player1/CanvasLayer/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
