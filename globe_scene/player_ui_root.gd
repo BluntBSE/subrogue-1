@@ -42,7 +42,6 @@ func adjust_ruler(camera_pos: Vector3, _anchor: Vector3) -> void:
 
 @onready var viewport = get_viewport()  # Adjust the path to your Viewport node
 
-
 func _process(delta: float) -> void:
     %FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
 

@@ -32,7 +32,8 @@ func configure_sub_nodes(anchor, spawn_node):
     entity.unpack(anchor, "debug_commercial", layer)
     
     var camera:OrbitalCamera = %OrbitalCamera
-    camera.unpack(anchor, layer)
+    camera.unpack(self, anchor, layer)
+    camera.position = entity.position
     
     var controller:PlayerEntities = %PlayerEntities
     controller.unpack(camera)

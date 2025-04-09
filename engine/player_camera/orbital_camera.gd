@@ -1,6 +1,7 @@
 @tool
 extends Camera3D
 class_name OrbitalCamera
+var player:Player
 @export var enable_debug_movement:bool = false
 @export var anchor:Node3D
 @export var min_distance := 105.0 
@@ -53,8 +54,9 @@ var noise_map := FastNoiseLite.new()
 
 var noise_y = 0
 
-func unpack(_anchor, _layer):
+func unpack(_player, _anchor, _layer):
     anchor = _anchor
+    player = _player
     #TODO Layer
 # Called when the node enters the scene tree for the first time.
 
@@ -112,7 +114,9 @@ func _input(event:InputEvent):
     pass  
     
 func _unhandled_input(event: InputEvent) -> void:
-    state_machine.handleInput({"event":event})
+    print("CAMERA for ", player, "MP AUTH: ", player.get_multiplayer_authority(), " UID ", multiplayer.get_unique_id() )
+    if player.get_multiplayer_authority() == multiplayer.get_unique_id():
+        state_machine.handleInput({"event":event})
     pass
     
 func drop_context_marker(point: Vector3) -> Node3D:
