@@ -3,11 +3,12 @@ class_name PlayerUIRoot
 
 const TIMER_LIMIT = 2.0
 var timer = 0.0
-
+var camera:OrbitalCamera
+var anchor:Planet
 @onready var active_sonar_control: ActiveSonarControl = find_child("ActiveSonarControl", true, false)
 @onready var volume_bar: DraggableTPB = find_child("VolumeBar", true, false)
 var player: Player
-
+var unpacked = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,17 +29,21 @@ func _ready() -> void:
     pass  # Replace with function body.
 
 
+
+func unpack(_camera:OrbitalCamera, _anchor:Planet):
+    print("UI Unpack called, got: ", _camera, _anchor)
+    camera = _camera
+    anchor = _anchor
+    unpacked = true
+
 func adjust_ruler(camera_pos: Vector3, _anchor: Vector3) -> void:
     pass
 
 
-@onready var camera = %OrbitalCamera  # Adjust the path to your Camera3D node
 @onready var viewport = get_viewport()  # Adjust the path to your Viewport node
-@onready var anchor = %GamePlanet
 
 
 func _process(delta: float) -> void:
-    #FPS
     %FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
 
     #RANGEFINDING

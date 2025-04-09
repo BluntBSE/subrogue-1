@@ -4,7 +4,7 @@ class_name Entity
 var played_by:Player
 var controlled_by #NPC Factions?
 @onready var controller:EntityController = get_parent()
-@onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
+var anchor:Planet
 @export var azimuth:float
 @export var polar:float
 @export var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
@@ -49,7 +49,8 @@ func _ready() -> void:
    # ("shader_parameter/glow_color") = base_color  
     pass # Replace with function body.
 
-func unpack(type_id, _faction):
+func unpack(_anchor:Planet, type_id, _faction):
+    anchor = _anchor
     var _type:EntityType = GlobalConst.entity_lib.get(type_id)
     apply_entity_type(_type)
     faction = _faction

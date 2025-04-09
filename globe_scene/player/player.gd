@@ -2,7 +2,8 @@ extends Node3D
 class_name Player
 
 @onready var markers:PlayerMarkers = get_node("PlayerMarkers")
-
+var anchor:Planet
+var spawn_point:Node3D
 @onready var selected = [%PlayerEntity] #Selection is not a feature of the game for now.
 @onready var camera:OrbitalCamera = get_node("PlayerCameras/OrbitalCamera")
 @onready var UI:PlayerUIRoot = get_node("CanvasLayer/PlayerUIRoot")
@@ -10,12 +11,36 @@ class_name Player
 @export var visible_layers=[2,5]#Defaults to "all entities" and "player 5"
 var layer = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
 # Called when the node enters the scene tree for the first time.
+
+func unpack(_anchor, _spawn_point):
+    anchor = _anchor
+    spawn_point = _spawn_point
+    configure_sub_nodes(anchor, spawn_point)
+
+
 func _ready() -> void:
     camera.camera_moved.connect(UI.adjust_ruler)
-    pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     pass
+ 
+func configure_sub_nodes(anchor, spawn_node):
+    var entity:Entity = %PlayerEntity
+    entity.position = spawn_node.position
+    entity.unpack(anchor, "debug_commercial", layer)
+    
+    var camera:OrbitalCamera = %OrbitalCamera
+    camera.unpack(anchor, layer)
+    
+    var controller:PlayerEntities = %PlayerEntities
+    controller.unpack(camera)
+    
+    var ui:PlayerUIRoot = %PlayerUIRoot
+    ui.unpack(camera, anchor)
+    
+func start_at(anchor:Planet, spawn_node:Node):
+    pass
+
     

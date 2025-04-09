@@ -52,8 +52,14 @@ var trauma_power = 2 #2, 3. Exponent
 var noise_map := FastNoiseLite.new()
 
 var noise_y = 0
+
+func unpack(_anchor, _layer):
+    anchor = _anchor
+    #TODO Layer
 # Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+    #TODO Layer
     set_cull_mask_value(GlobalConst.layers.PLANET, true)
     set_cull_mask_value(GlobalConst.layers.PLAYER_1, true)
     print("Cull mask values : ", GlobalConst.layers.PLANET, "and  ", GlobalConst.layers.PLAYER_1, "should be set to true")
@@ -61,6 +67,8 @@ func _ready() -> void:
     state_machine.Add("navigating", CamNavState.new(self, {}))
     state_machine.Add("context", CamContextState.new(self,{}))
     #destination = position #Initialize to editor position for now
+    if not anchor:
+        anchor = get_tree().root.find_child("GamePlanet", true, false)
     initialize_angles()
     destination = move_in_orbit()
     #position = destination
@@ -95,7 +103,6 @@ func _process(delta: float) -> void:
     #print(hovering_over.collider.name)
     var dist = anchor.position - position
     dist = dist.length()
-    %WorldEnvironment.environment.set_volumetric_fog_length(dist) #If we do multiplayer this can't be the way this works. Can each player have their own world environment node? Probably, honestly.
     input_movement() #At least until I want a state machine to change its behavior.
     emit_position()
     if trauma:
