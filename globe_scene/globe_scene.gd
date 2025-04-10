@@ -14,6 +14,7 @@ func _ready() -> void:
         single_player_ready()
         
     var mainmenu = get_tree().root.find_child("MainMenu", true, false)
+    mainmenu.queue_free()
 
     pass # Replace with function body.
 
