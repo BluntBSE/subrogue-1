@@ -7,12 +7,21 @@ var timer = 0.0
 @onready var active_sonar_control: ActiveSonarControl = find_child("ActiveSonarControl", true, false)
 @onready var volume_bar: DraggableTPB = find_child("VolumeBar", true, false)
 var player: Player
-
-
+var camera 
+var viewport
+var anchor
+var unpacked = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    print("Ready from UI root")
+    pass
+
+
+func unpack():
     player = get_parent().get_parent()
+    camera = player.camera  # Adjust the path to your Camera3D node
+    viewport = get_viewport()  # Adjust the path to your Viewport node
+    anchor = get_tree().root.find_child("GamePlanet", true, false)
+    print("unpack from UI root")
     await player.ready
     var player_entity: Entity = player.entities.get_child(0)
     print("Player Entity is", player_entity)
@@ -27,17 +36,16 @@ func _ready() -> void:
 
     pass  # Replace with function body.
 
-
 func adjust_ruler(camera_pos: Vector3, _anchor: Vector3) -> void:
     pass
 
 
-@onready var camera = %OrbitalCamera  # Adjust the path to your Camera3D node
-@onready var viewport = get_viewport()  # Adjust the path to your Viewport node
-@onready var anchor = %GamePlanet
+
 
 
 func _process(delta: float) -> void:
+    if unpacked != true:
+        return
     #FPS
     %FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
 

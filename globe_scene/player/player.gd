@@ -11,6 +11,11 @@ class_name Player
 var layer = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    #We put child nodes unpacks here so all the parent data can be set first
+    %OrbitalCamera.unpack()
+    %PlayerMarkers.unpack()
+    %PlayerEntities.unpack()
+    UI.unpack()
     camera.camera_moved.connect(UI.adjust_ruler)
     pass # Replace with function body.
 

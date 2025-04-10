@@ -25,8 +25,8 @@ var destination:Vector3:
         dh.dprint(db,self, dstr)
         destination = value
 var db:bool = false
-@onready var player:Player = get_parent().get_parent()
-@onready var active_entity:Entity = player.entities.find_child("PlayerEntity") #May be pluralized into an array later.
+var player:Player
+var active_entity:Entity
 
 #Self
 signal camera_moved
@@ -53,8 +53,14 @@ var trauma_power = 2 #2, 3. Exponent
 var noise_map := FastNoiseLite.new()
 
 var noise_y = 0
+var unpacked = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    pass
+func unpack():
+    anchor = get_tree().root.find_child("GamePlanet", true, false)
+    player = get_parent().get_parent()
+    active_entity = player.entities.find_child("PlayerEntity") #May be pluralized into an array later.
     set_cull_mask_value(GlobalConst.layers.PLANET, true)
     set_cull_mask_value(GlobalConst.layers.PLAYER_1, true)
     print("Cull mask values : ", GlobalConst.layers.PLANET, "and  ", GlobalConst.layers.PLAYER_1, "should be set to true")
@@ -77,9 +83,12 @@ func _ready() -> void:
     noise_map.frequency = 4
     noise_map.fractal_octaves = 2
     randomize()
+    unpacked = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+    if unpacked != true:
+        return
     if Engine.is_editor_hint():
         if enable_debug_movement == false:
             return
@@ -96,7 +105,7 @@ func _process(delta: float) -> void:
     #print(hovering_over.collider.name)
     var dist = anchor.position - position
     dist = dist.length()
-    %WorldEnvironment.environment.set_volumetric_fog_length(dist) #If we do multiplayer this can't be the way this works. Can each player have their own world environment node? Probably, honestly.
+    #%WorldEnvironment.environment.set_volumetric_fog_length(dist) #If we do multiplayer this can't be the way this works. Can each player have their own world environment node? Probably, honestly.
     input_movement() #At least until I want a state machine to change its behavior.
     emit_position()
     if trauma:
@@ -106,6 +115,8 @@ func _input(event:InputEvent):
     pass  
     
 func _unhandled_input(event: InputEvent) -> void:
+    if unpacked != true:
+        return
     state_machine.handleInput({"event":event})
     pass
     

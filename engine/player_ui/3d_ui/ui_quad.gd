@@ -30,7 +30,7 @@ func unpack(_player:Player, node_a, node_b, _anchor):
     %MarkerPopup.unpack(_player, self)
     #Register self with player and its marker observer
     player = _player
-    originating_entities = player.selected #For now, the player only has the one entity the whole game.
+    originating_entities = [player.entities.get_node("PlayerEntity")] #For now, the player only has the one entity the whole game.
     %DistDisplay.text = str(get_distance_in_km()) + " km"   
 
 func _ready():

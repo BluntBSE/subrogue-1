@@ -30,11 +30,17 @@ var controlled_by #NPC Factions?
 @onready var sonar_node:SonarNode = %SonarNode
 @onready var notifications:Notifications = %Notifications
 signal died
+var unpacked := false
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
+   # ("shader_parameter/glow_color") = base_color  
+    pass # Replace with function body.
+
+func unpack(type_id, _faction):
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
         played_by = get_parent().get_parent()
     #temp spotlight adjustments
@@ -46,10 +52,7 @@ func _ready() -> void:
     if npc == false:
         print(name, "instantiated as player")
         render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, true)
-   # ("shader_parameter/glow_color") = base_color  
-    pass # Replace with function body.
-
-func unpack(type_id, _faction):
+        
     var _type:EntityType = GlobalConst.entity_lib.get(type_id)
     apply_entity_type(_type)
     faction = _faction
@@ -62,10 +65,11 @@ func unpack(type_id, _faction):
         render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, false)
         #Then show on the NPC layer
         render.update_mesh_visibilities(faction, true)
-
+    unpacked = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-
+    if unpacked != true:
+        return
     fix_height()
     fix_rotation()
     update_coords()

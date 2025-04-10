@@ -289,7 +289,7 @@ script = ExtResource("4_xb8gp")
 [node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.010103)
-layers = 2
+layers = 524290
 texture = ExtResource("5_pq53b")
 
 [node name="RangeSpot" type="SpotLight3D" parent="EntityRender"]
@@ -343,7 +343,7 @@ skeleton = NodePath("../..")
 [node name="DepthMesh" type="MeshInstance3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
-layers = 2
+layers = 524290
 material_override = SubResource("StandardMaterial3D_x4ju4")
 mesh = SubResource("QuadMesh_v1582")
 skeleton = NodePath("../..")

@@ -1,14 +1,17 @@
 extends Node3D
 class_name PlayerMarkers
-@onready var player:Player = get_parent()
-@onready var camera = player.get_node("PlayerCameras/OrbitalCamera")
+var player:Player
+var camera
 var context_markers := []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    camera.close_context.connect(handle_close_context)
     pass # Replace with function body.
 
+func unpack():
+    player = get_parent()
+    camera = player.get_node("PlayerCameras/OrbitalCamera")
+    camera.close_context.connect(handle_close_context)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
