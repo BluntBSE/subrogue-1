@@ -53,10 +53,12 @@ func multi_player_ready():
         #TODO: If this isn't a game being loaded...
         print("Did we even get a player obj?", player_obj)
         #Actually we gotta SPAWN!
-        player_obj.unpack(%GamePlanet, spawn_points[i+1])
         #The MP spawner will automatically spawn anything that's childed to SE, I think
         #So...
         %SE.add_child(player_obj)
+        #Because we can only RPC something that already exists for everyone else, we must do it after the spawn.
+        player_obj.unpack.rpc(%GamePlanet, spawn_points[i+1])
+
         #%SES.spawn(player_obj) #Synchronized Entity Spawner
         #Might need to set the SES to call unpack on anything it needs to...
 

@@ -12,6 +12,7 @@ var spawn_point:Node3D
 var layer = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
 # Called when the node enters the scene tree for the first time.
 
+@rpc("call_local")
 func unpack(_anchor, _spawn_point):
     anchor = _anchor
     spawn_point = _spawn_point
@@ -25,7 +26,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     pass
- 
+ #Needs to be rpcd, wow.
 func configure_sub_nodes(anchor, spawn_node):
     var entity:Entity = %PlayerEntity
     entity.position = spawn_node.position
