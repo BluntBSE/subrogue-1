@@ -36,7 +36,7 @@ var unpacked := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
+    unpack("debug_commercial", 5)
    # ("shader_parameter/glow_color") = base_color  
     pass # Replace with function body.
 
