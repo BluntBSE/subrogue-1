@@ -9,13 +9,13 @@ var camera:OrbitalCamera
 func _ready() -> void:
     
     #relay move commands to their destination
-    camera.order_move.connect(relay_order_move)
-    camera.enqueue_move.connect(relay_enqueue_move)
+
     pass # Replace with function body.
 
 func unpack(_camera):
     camera = _camera
-
+    camera.order_move.connect(relay_order_move)
+    camera.enqueue_move.connect(relay_enqueue_move)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     pass
