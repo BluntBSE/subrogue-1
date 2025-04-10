@@ -11,6 +11,8 @@ but not so much the player can't bamboozle the AI.
 
 
 
+BUG: "Summary of current problem: trying to call RPCs on lobby UI after deleting the lobby UI from the server is a problem. Additionally, it seems we can't extra-arboreally call Unpack on the player object"
+
 BUG: Clicking RIGHT as the game loads can cause a crash. Fix!
 BUG:Munitions update signal object to their perspective even if outside of the targeting arc.
 

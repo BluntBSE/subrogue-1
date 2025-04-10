@@ -5,12 +5,16 @@ class_name GlobeRoot
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
     if is_game_multiplayer == true:
         print("It's multiplayer!")
         multi_player_ready()
     else:
         print("It's not multiplayer!")
         single_player_ready()
+        
+    var mainmenu = get_tree().root.find_child("MainMenu", true, false)
+
     pass # Replace with function body.
 
 

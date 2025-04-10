@@ -142,6 +142,7 @@ func spawn_globe():
     var test_data = {"test": "Test Data Retrieved!"}
     spawner.spawn(test_data)
     rpc_debug_late.rpc()
+    #
     #hide_ui.rpc()  # Notify clients to hide the UI
 
 
