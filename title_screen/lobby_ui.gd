@@ -134,13 +134,14 @@ func _on_set_name_button_up() -> void:
 
 #@rpc("any_peer", "call_local", "reliable")
 func spawn_globe():
-    #TODO: Actually instantiate with data.
-    rpc_debug.rpc()
+    if not multiplayer.is_server():
+        return  # Only the server should execute this function
+
+    print("Spawning globe on the server")
     var spawner:GlobeSpawner = get_tree().root.find_child("MPGlobeSpawner", true, false)
-    var test_data = {"test":"Test Data Retrieved!"}
-    rpc_debug.rpc()
+    var test_data = {"test": "Test Data Retrieved!"}
     spawner.spawn(test_data)
-    hide_ui.rpc()
+    hide_ui.rpc()  # Notify clients to hide the UI
 
 
 
@@ -156,9 +157,14 @@ func _on_submit_msg_button_up() -> void:
 
 
 func _on_start_game_button_up() -> void:
+    rpc_debug_early.rpc()
     spawn_globe()#We DONT RPC this because its the servers job and the mp spawner should handle it?
     #But we do have to RPC closing the UI
     pass # Replace with function body.
+
+@rpc("any_peer", "call_local", "reliable")
+func rpc_debug_early():
+    print("Made it to the early RPC debug")
     
 @rpc("any_peer", "call_local", "reliable")
 func rpc_debug():

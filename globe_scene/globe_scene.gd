@@ -33,12 +33,11 @@ func single_player_ready():
     
 #Only the server should do this, huh.
 func multi_player_ready():
-    print("Globe root fired multiplayer ready!")
+    print("Globe root fired multiplayer ready! Clients only count this if you see 'we think we're the server'")
     if multiplayer.is_server():
         print("We think we're the server alright!")
     if not multiplayer.is_server():
         return
-    print("Globe root fired multiplayer ready")
     var spawn_points = %PlayerSpawnLocations.get_children()
     var peers = multiplayer.get_peers()
     for i in range(peers.size()):
