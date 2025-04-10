@@ -21,8 +21,7 @@ func spawn_globe(_data):
         globe_root.is_game_multiplayer = true
     
     
-    var mainmenu = get_tree().root.find_child("MainMenu", true, false)
-    mainmenu.queue_free()
+
     var game_root = get_tree().root.find_child("GameRoot", true, false)
     #game_root.add_child(globe_root)
     return globe_root
