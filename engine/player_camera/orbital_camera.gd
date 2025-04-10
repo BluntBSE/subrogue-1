@@ -25,7 +25,8 @@ var destination:Vector3:
         dh.dprint(db,self, dstr)
         destination = value
 var db:bool = false
-@onready var active_entity:Entity = %PlayerEntity #May be pluralized into an array later.
+@onready var player:Player = get_parent().get_parent()
+@onready var active_entity:Entity = player.entities.find_child("PlayerEntity") #May be pluralized into an array later.
 
 #Self
 signal camera_moved
@@ -115,7 +116,7 @@ func drop_context_marker(point: Vector3) -> Node3D:
     %PlayerMarkers.add_marker(marker)
 
     #If hovering over an entity, unpack such that node b is the entity not the marker. For now:
-    marker.unpack(%Player1, %PlayerEntity, marker, anchor)
+    marker.unpack(player, player.entities.find_child("PlayerEntity"), marker, anchor)
     
   
     return marker

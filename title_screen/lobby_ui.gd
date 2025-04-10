@@ -141,3 +141,10 @@ func _on_submit_msg_button_up() -> void:
     print("Lobby UI: On submit msg button up")
     send_chat_message()
     pass # Replace with function body.
+
+
+func _on_start_game_button_up() -> void:
+    var spawner:MultiplayerSpawner = get_tree().root.find_child("GlobeSpawner", true, false)
+    var globe_scene = preload("res://globe_scene/globe_scene.tscn").instantiate()
+    spawner.add_child(globe_scene)
+    pass # Replace with function body.

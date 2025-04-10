@@ -1,11 +1,12 @@
 extends Node3D
 class_name PlayerMarkers
-
+@onready var player:Player = get_parent()
+@onready var camera = player.get_node("PlayerCameras/OrbitalCamera")
 var context_markers := []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    %OrbitalCamera.close_context.connect(handle_close_context)
+    camera.close_context.connect(handle_close_context)
     pass # Replace with function body.
 
 

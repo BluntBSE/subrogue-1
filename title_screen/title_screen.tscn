@@ -318,6 +318,7 @@ offset_bottom = 297.0
 [connection signal="button_up" from="MenuVBox/MultiplayerButton" to="MultiPlayerRoot" method="_on_multiplayer_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/Host" to="MultiPlayerRoot" method="_on_host_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/Refresh" to="MultiPlayerRoot" method="_on_refresh_button_up"]
+[connection signal="button_up" from="MultiPlayerRoot/LobbyUI/ColorRect/StartGame" to="MultiPlayerRoot/LobbyUI" method="_on_start_game_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbyUI/ColorRect/SetName" to="MultiPlayerRoot/LobbyUI" method="_on_set_name_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbyUI/ColorRect/LeaveLobby" to="MultiPlayerRoot/LobbyUI" method="_on_leave_lobby_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbyUI/ChatInput/SubmitMsg" to="MultiPlayerRoot/LobbyUI" method="_on_submit_msg_button_up"]

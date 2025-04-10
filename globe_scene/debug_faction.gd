@@ -3,7 +3,7 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    spawn_entity_at_node(%test_node, "debug_commercial", GlobalConst.layers.FACTION_1)
+    #spawn_entity_at_node(%test_node, "debug_commercial", GlobalConst.layers.FACTION_1)
     pass # Replace with function body.
 
 
