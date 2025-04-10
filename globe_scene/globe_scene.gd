@@ -55,7 +55,7 @@ func multi_player_ready():
         #Actually we gotta SPAWN!
         #The MP spawner will automatically spawn anything that's childed to SE, I think
         #So...
-        %SE.add_child(player_obj)
+        %Players.add_child(player_obj)
         #Because we can only RPC something that already exists for everyone else, we must do it after the spawn.
         player_obj.unpack.rpc(%GamePlanet, spawn_points[i+1])
 

@@ -1295,6 +1295,9 @@ environment = SubResource("Environment_13rd1")
 unique_name_in_owner = true
 script = ExtResource("8_labis")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
+spawn_path = NodePath("..")
+
 [node name="Factions" type="Node3D" parent="."]
 
 [node name="Cities" type="Node3D" parent="Factions"]
