@@ -55,7 +55,8 @@ func multi_player_ready():
         #Because we can only RPC something that already exists for everyone else, we must do it after the spawn.
         #I suspect that we're trying to do this to soon by putting it here actually...Custom spawn?
         var s:MPSpawnerPlayer = %MPSpawnerPlayer
-        s.custom_spawn(%GamePlanet, spawn_points[i+1], layer_int, peer)
+        var args = {"anchor": %GamePlanet, "spawn_point":spawn_points[i+1], "layer":layer_int, "peer":peer}
+        s.spawn(args)
        # player_obj.unpack.rpc(%GamePlanet, spawn_points[i+1])
 
         #%SES.spawn(player_obj) #Synchronized Entity Spawner

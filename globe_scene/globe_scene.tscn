@@ -1108,7 +1108,6 @@ point_count = 2
 
 [node name="GlobeMain" type="Node3D"]
 script = ExtResource("1_msvd6")
-is_game_multiplayer = null
 
 [node name="GameObserver" type="Node" parent="."]
 unique_name_in_owner = true
