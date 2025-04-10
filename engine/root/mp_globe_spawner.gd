@@ -16,9 +16,9 @@ func spawn_globe(_data):
     #WARNING: Preloading here moves the load time to when the application first boots. That may or may not be okay.
     #In fact it seems preferable right now, but if it becomes an issue this is to blame.
     var globe_root:GlobeRoot = preload("res://globe_scene/globe_scene.tscn").instantiate()
-    if peers.size()>1:
+    if peers.size()>0:
+        print("There's at least one connected peer")
         globe_root.is_game_multiplayer = true
-        
     
     
     var mainmenu = get_tree().root.find_child("MainMenu", true, false)
