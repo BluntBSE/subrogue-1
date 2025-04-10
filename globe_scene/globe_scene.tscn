@@ -1,4 +1,4 @@
-[gd_scene load_steps=201 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=202 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
 [ext_resource type="Script" uid="uid://bvar4t0qcswwh" path="res://globe_scene/players.gd" id="8_labis"]
+[ext_resource type="Script" uid="uid://ctxe5w6cp4bim" path="res://globe_scene/mp_spawner_player.gd" id="9_8vb4v"]
 [ext_resource type="Script" uid="uid://c7feimtf0jnd2" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="AudioStream" uid="uid://c4pqqqemfw30i" path="res://assets/royalty_free_music/dark-ambient-126122.mp3" id="16_o22p0"]
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="17_eum53"]
@@ -1107,6 +1108,7 @@ point_count = 2
 
 [node name="GlobeMain" type="Node3D"]
 script = ExtResource("1_msvd6")
+is_game_multiplayer = null
 
 [node name="GameObserver" type="Node" parent="."]
 unique_name_in_owner = true
@@ -1295,8 +1297,10 @@ environment = SubResource("Environment_13rd1")
 unique_name_in_owner = true
 script = ExtResource("8_labis")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
+[node name="MPSpawnerPlayer" type="MultiplayerSpawner" parent="Players"]
+unique_name_in_owner = true
 spawn_path = NodePath("..")
+script = ExtResource("9_8vb4v")
 
 [node name="Factions" type="Node3D" parent="."]
 

@@ -47,17 +47,16 @@ func multi_player_ready():
         var layer_string = "PLAYER_"+str(i+1)
         print("Layer string was: ", layer_string)
         var layer_int = GlobalConst.layers[layer_string]
-        var player_obj:Player = preload("res://globe_scene/player/player.tscn").instantiate()
-        player_obj.layer = layer_int
-        player_obj.set_multiplayer_authority(peer)
-        #TODO: If this isn't a game being loaded...
-        print("Did we even get a player obj?", player_obj)
+
+
         #Actually we gotta SPAWN!
-        #The MP spawner will automatically spawn anything that's childed to SE, I think
-        #So...
-        %Players.add_child(player_obj)
+        
+       # %Players.add_child(player_obj)
         #Because we can only RPC something that already exists for everyone else, we must do it after the spawn.
-        player_obj.unpack.rpc(%GamePlanet, spawn_points[i+1])
+        #I suspect that we're trying to do this to soon by putting it here actually...Custom spawn?
+        var s:MPSpawnerPlayer = %MPSpawnerPlayer
+        s.custom_spawn(%GamePlanet, spawn_points[i+1], layer_int, peer)
+       # player_obj.unpack.rpc(%GamePlanet, spawn_points[i+1])
 
         #%SES.spawn(player_obj) #Synchronized Entity Spawner
         #Might need to set the SES to call unpack on anything it needs to...
