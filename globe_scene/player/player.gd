@@ -14,12 +14,11 @@ var layer = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in
 
 @rpc("any_peer", "call_local")
 func unpack(_anchor, _spawn_point):
-    anchor = _anchor
-    spawn_point = _spawn_point
-    configure_sub_nodes(anchor, spawn_point)
+    pass
 
 
 func _ready() -> void:
+    configure_sub_nodes(anchor, spawn_point)
     camera.camera_moved.connect(UI.adjust_ruler)
 
 

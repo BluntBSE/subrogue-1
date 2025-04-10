@@ -29,24 +29,14 @@ var anchor:Planet
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
 @onready var notifications:Notifications = %Notifications
+
+var unpacked:bool = false
 signal died
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
-        played_by = get_parent().get_parent()
-    #temp spotlight adjustments
-    spot_color = Color("d1001a")
-    var pos_dict := GlobeHelpers.rads_from_position(position)
-    azimuth = pos_dict["azimuth"]
-    polar = pos_dict["polar"]
-    #DEBUG NPC SETTING bc player unpack isn't a thing yet
-    if npc == false:
-        print(name, "instantiated as player")
-        render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, true)
-   # ("shader_parameter/glow_color") = base_color  
     pass # Replace with function body.
 
 func unpack(_anchor:Planet, type_id, _faction):
@@ -63,10 +53,24 @@ func unpack(_anchor:Planet, type_id, _faction):
         render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, false)
         #Then show on the NPC layer
         render.update_mesh_visibilities(faction, true)
-
+    if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
+        played_by = get_parent().get_parent()
+    #temp spotlight adjustments
+    spot_color = Color("d1001a")
+    var pos_dict := GlobeHelpers.rads_from_position(position)
+    azimuth = pos_dict["azimuth"]
+    polar = pos_dict["polar"]
+    #DEBUG NPC SETTING bc player unpack isn't a thing yet
+    if npc == false:
+        print(name, "instantiated as player")
+        render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, true)
+    
+    unpacked = true
+        
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-
+    if unpacked != true:
+        return
     fix_height()
     fix_rotation()
     update_coords()

@@ -1,4 +1,3 @@
-@tool
 extends Camera3D
 class_name OrbitalCamera
 var player:Player
@@ -54,14 +53,12 @@ var noise_map := FastNoiseLite.new()
 
 var noise_y = 0
 
+var unpacked:bool = false
+
 func unpack(_player, _anchor, _layer):
     anchor = _anchor
     player = _player
-    #TODO Layer
-# Called when the node enters the scene tree for the first time.
-
-func _ready() -> void:
-    #TODO Layer
+    #TODO, make use of layer. Currently these share vis
     set_cull_mask_value(GlobalConst.layers.PLANET, true)
     set_cull_mask_value(GlobalConst.layers.PLAYER_1, true)
     set_cull_mask_value(GlobalConst.layers.PLAYER_2, true)
@@ -88,11 +85,15 @@ func _ready() -> void:
     noise_map.fractal_octaves = 2
     randomize()
 
+func _ready() -> void:
+    #TODO Layer
+    pass
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    if Engine.is_editor_hint():
-        if enable_debug_movement == false:
-            return
+    if unpacked != true:
+        return
+    
             
     if not trauma:
         if return_to_pre_trauma:
@@ -115,6 +116,8 @@ func _input(event:InputEvent):
     pass  
     
 func _unhandled_input(event: InputEvent) -> void:
+    if unpacked != true:
+        return
     #print("CAMERA for ", player, "MP AUTH: ", player.get_multiplayer_authority(), " UID ", multiplayer.get_unique_id() )
     if player.get_multiplayer_authority() == multiplayer.get_unique_id():
         state_machine.handleInput({"event":event})

@@ -10,7 +10,11 @@ func custom_spawn(args):
     var layer_int = args["layer"]
     var peer  = args["peer"]
     var player_obj:Player = preload("res://globe_scene/player/player.tscn").instantiate()
+    #Can't do this in an unpack function before the player object is returned
+    #BECAUSE references are encodedobjects as ID
+    
     player_obj.layer = layer_int
     player_obj.set_multiplayer_authority(peer)
-    player_obj.unpack(anchor, spawn_point)
+    player_obj.anchor = anchor
+    player_obj.spawn_point = spawn_point
     return player_obj
