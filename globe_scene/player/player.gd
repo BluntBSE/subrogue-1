@@ -12,7 +12,7 @@ var spawn_point:Node3D
 var layer = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
 # Called when the node enters the scene tree for the first time.
 
-@rpc("call_local")
+@rpc("any_peer", "call_local")
 func unpack(_anchor, _spawn_point):
     anchor = _anchor
     spawn_point = _spawn_point

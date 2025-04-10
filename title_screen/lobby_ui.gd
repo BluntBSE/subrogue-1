@@ -134,10 +134,11 @@ func _on_set_name_button_up() -> void:
 
 #@rpc("any_peer", "call_local", "reliable")
 func spawn_globe():
-    print("This should be printing on the client machine too")
     #TODO: Actually instantiate with data.
+    rpc_debug.rpc()
     var spawner:GlobeSpawner = get_tree().root.find_child("MPGlobeSpawner", true, false)
     var test_data = {"test":"Test Data Retrieved!"}
+    rpc_debug.rpc()
     spawner.spawn(test_data)
     hide_ui.rpc()
 
@@ -158,9 +159,13 @@ func _on_start_game_button_up() -> void:
     spawn_globe()#We DONT RPC this because its the servers job and the mp spawner should handle it?
     #But we do have to RPC closing the UI
     pass # Replace with function body.
+    
+@rpc("any_peer", "call_local", "reliable")
+func rpc_debug():
+    print("Made it here on the client")
 
-
-@rpc("call_local","any_peer","reliable")
+@rpc("any_peer", "call_local", "reliable")
 func hide_ui():
+    print("Called the RPC hide UI")
     var mainmenu = get_tree().root.find_child("MainMenu", true, false)
     mainmenu.queue_free()    
