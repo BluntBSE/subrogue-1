@@ -43,8 +43,9 @@ func multi_player_ready():
     var peers = multiplayer.get_peers()
     for i in range(peers.size()):
         var peer = peers[i]
-        print("Peer is: ", peer) #Expecting 1 and onward
-        var layer_string = "PLAYER_"+str(peer)
+        print("Peer is: ", peer) #Peer is actually the full peer ID, oops.
+        var layer_string = "PLAYER_"+str(i+1)
+        print("Layer string was: ", layer_string)
         var layer_int = GlobalConst.layers[layer_string]
         var player_obj:Player = preload("res://globe_scene/player/player.tscn").instantiate()
         player_obj.layer = layer_int
