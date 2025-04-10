@@ -29,7 +29,13 @@ func single_player_ready():
     player_obj.unpack(%GamePlanet, spawn_point)
     %Players.add_child(player_obj)
     
+#Only the server should do this, huh.
 func multi_player_ready():
+    print("Globe root fired multiplayer ready!")
+    if multiplayer.is_server():
+        print("We think we're the server alright!")
+    if not multiplayer.is_server():
+        return
     print("Globe root fired multiplayer ready")
     var spawn_points = %PlayerSpawnLocations.get_children()
     var peers = multiplayer.get_peers()
@@ -42,9 +48,11 @@ func multi_player_ready():
         player_obj.layer = layer_int
         player_obj.set_multiplayer_authority(peer)
         #TODO: If this isn't a game being loaded...
-        player_obj.unpack(%GamePlanet, spawn_points[peer+1])
         print("Did we even get a player obj?", player_obj)
-        %Players.add_child(player_obj)        
-        
+        #Actually we gotta SPAWN!
+        player_obj.unpack(%GamePlanet, spawn_points[peer+1])
+        %SES.spawn(player_obj) #Synchronized Entity Spawner
+        #Might need to set the SES to call unpack on anything it needs to...
+
         pass
     pass

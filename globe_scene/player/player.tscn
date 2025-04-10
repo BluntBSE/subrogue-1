@@ -36,6 +36,9 @@
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_lu2fn"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iwyah"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
 shader = ExtResource("10_558vm")
@@ -426,7 +429,7 @@ script = ExtResource("1_iwyah")
 [node name="OrbitalCamera" type="Camera3D" parent="PlayerCameras"]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 218.407, 0, 0)
-cull_mask = 13
+cull_mask = 29
 current = true
 fov = 15.5
 near = 0.21

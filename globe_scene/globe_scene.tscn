@@ -1963,3 +1963,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, 0)
 
 [node name="player_2" type="Node3D" parent="PlayerSpawnLocations"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.25, 0, -3.42545)
+
+[node name="SE" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="SES" type="MultiplayerSpawner" parent="SE"]
+unique_name_in_owner = true
+_spawnable_scenes = PackedStringArray("uid://chk248t7rdjuy")
+spawn_path = NodePath("..")
