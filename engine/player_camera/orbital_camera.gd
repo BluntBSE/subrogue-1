@@ -115,7 +115,7 @@ func _input(event:InputEvent):
     pass  
     
 func _unhandled_input(event: InputEvent) -> void:
-    print("CAMERA for ", player, "MP AUTH: ", player.get_multiplayer_authority(), " UID ", multiplayer.get_unique_id() )
+    #print("CAMERA for ", player, "MP AUTH: ", player.get_multiplayer_authority(), " UID ", multiplayer.get_unique_id() )
     if player.get_multiplayer_authority() == multiplayer.get_unique_id():
         state_machine.handleInput({"event":event})
     pass
