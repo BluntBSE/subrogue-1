@@ -312,8 +312,6 @@ offset_top = 257.0
 offset_right = 516.0
 offset_bottom = 297.0
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-
 [connection signal="button_up" from="MenuVBox/BtnNewGame" to="." method="_on_btn_new_game_button_up"]
 [connection signal="button_up" from="MenuVBox/MultiplayerButton" to="MultiPlayerRoot" method="_on_multiplayer_button_up"]
 [connection signal="button_up" from="MultiPlayerRoot/LobbySearchRoot/LobbySearchBG/Host" to="MultiPlayerRoot" method="_on_host_button_up"]

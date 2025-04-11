@@ -4,11 +4,14 @@ var is_multiplayer:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    #Once this enters the tree, kill the main menu UI. This should probably live elsewhere later.
+    get_tree().root.find_child("MainMenu", true, false).queue_free()
+        
     if multiplayer.get_peers().size()>0:
         is_multiplayer = true
+        multi_player_start()
     else:
         single_player_start()
-    pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
