@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://5kgcmm5506n4"]
+[gd_scene load_steps=47 format=3 uid="uid://8ijex5nq5y25"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_70e0q"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_wa0u7"]

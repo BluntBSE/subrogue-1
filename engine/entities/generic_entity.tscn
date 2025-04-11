@@ -416,7 +416,7 @@ skeleton = NodePath("../../SonarNode")
 unique_name_in_owner = true
 script = ExtResource("28_op6l6")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="EntitySynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hyfub")
 script = ExtResource("29_j3cwe")
 

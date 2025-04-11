@@ -448,6 +448,10 @@ omni_range = 600.0
 unique_name_in_owner = true
 script = ExtResource("3_og8ew")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="PlayerEntities"]
+_spawnable_scenes = PackedStringArray("uid://qfiyabbs8j2l", "uid://ccpokifvegaoy")
+spawn_path = NodePath("..")
+
 [node name="PlayerEntity" parent="PlayerEntities" instance=ExtResource("4_smroy")]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

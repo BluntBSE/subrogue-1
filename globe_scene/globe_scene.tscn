@@ -1294,7 +1294,7 @@ environment = SubResource("Environment_13rd1")
 unique_name_in_owner = true
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="Players"]
-_spawnable_scenes = PackedStringArray("uid://5kgcmm5506n4")
+_spawnable_scenes = PackedStringArray("uid://8ijex5nq5y25")
 spawn_path = NodePath("..")
 
 [node name="Factions" type="Node3D" parent="."]
