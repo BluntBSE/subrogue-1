@@ -28,8 +28,13 @@ func _process(delta: float) -> void:
     pass
     
 func determine_spawn_point()->Node3D:
-    var spawn_str = "player_" + str(get_multiplayer_authority())
-    var spawn_nodes = get_tree().root.find_child("PlayerSpawnNodes",true,false)
-    var spawn_node = spawn_nodes.find_child(spawn_str)
-    return spawn_node
+    var peer = get_multiplayer_authority()
+    var game_root:GameRoot = get_tree().root.find_child("GameRoot", true, false)
+    for player in game_root.players.keys():#Assumes spawn points match the keys of the player
+        if game_root.players[player] == peer:    
+            var spawn_nodes = get_tree().root.find_child("PlayerSpawnNodes",true,false)
+            var spawn_node = spawn_nodes.find_child(player)
+            return spawn_node
+    print("ERORR! could not find a spawn node for ", self.name)
+    return null
     

@@ -414,7 +414,7 @@ _data = {
 &"RESET": SubResource("Animation_pxv8h")
 }
 
-[node name="Player1" type="Node3D"]
+[node name="player" type="Node3D"]
 script = ExtResource("1_iwyah")
 
 [node name="PlayerCommandBus" type="Node3D" parent="."]
