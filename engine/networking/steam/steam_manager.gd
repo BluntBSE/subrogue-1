@@ -100,6 +100,7 @@ func on_lobby_created(connect: int, _lobby_id):
         Steam.setLobbyData(hosted_lobby_id, "mode", LOBBY_MODE)
         print("Lobby ready should emit")
         lobby_ready.emit(connect, lobby_id)
+        multiplayer.multiplayer_peer = multiplayer_peer
 
 
 func list_lobbies():
@@ -115,6 +116,7 @@ func on_lobby_joined(lobby: int, permissions: int, locked: bool, response: int):
     #LOBBY_NAME = Steam.getLobbyData(lobbyID, "name")
     get_lobby_members()
     lobby_joined.emit(lobby, permissions, locked, response)
+    multiplayer.multiplayer_peer = multiplayer_peer
 
     
 func get_lobby_members():

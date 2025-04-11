@@ -146,5 +146,6 @@ func _on_submit_msg_button_up() -> void:
 func _on_start_game_button_up() -> void:
     var game_root = get_tree().root.find_child("GameRoot", true, false)
     var globe_scene = preload("res://globe_scene/globe_scene.tscn").instantiate()
+    print("Peers upon hitting start button are ", multiplayer.get_peers())
     game_root.add_child(globe_scene)
     pass # Replace with function body.
