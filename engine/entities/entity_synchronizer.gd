@@ -6,6 +6,11 @@ class_name EntitySynchronizer
 func _ready() -> void:
     # Add the rotation of all children and their recursive sub-children to the replication config
     add_recursive_rotation_properties(get_parent())
+    #Add parent position which should be the only position property we care about
+    var parent_position = str( get_parent().get_path() ) +":position"
+    var parent_rotation = str( get_parent().get_path() ) +":rotation"
+    rcfig.add_property(parent_position)
+    rcfig.add_property(parent_rotation)
     # Assign the replication config to the MultiplayerSynchronizer
     set_replication_config(rcfig)
     
@@ -23,8 +28,3 @@ func add_recursive_rotation_properties(node: Node) -> void:
         # Recursively call the function for sub-children
         add_recursive_rotation_properties(child)
         
-    #Add parent position which should be the only position property we care about
-    var parent_position = str( get_parent().get_path() ) +":position"
-    var parent_rotation = str( get_parent().get_path() ) +":rotation"
-    rcfig.add_property(parent_position)
-    rcfig.add_property(parent_rotation)
