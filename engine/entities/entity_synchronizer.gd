@@ -2,7 +2,7 @@ extends MultiplayerSynchronizer
 class_name EntitySynchronizer
 
 @onready var rcfig:SceneReplicationConfig = SceneReplicationConfig.new()
-
+@onready var entity:Entity = get_parent()
 func _ready() -> void:
     # Add the rotation of all children and their recursive sub-children to the replication config
     add_recursive_rotation_properties(get_parent())
@@ -13,6 +13,11 @@ func _ready() -> void:
     rcfig.add_property(parent_rotation)
     # Assign the replication config to the MultiplayerSynchronizer
     set_replication_config(rcfig)
+    if entity.get_parent() is Player:
+        var player:Player = entity.get_parent()
+        var player_authority = player.get_multiplayer_authority()
+        set_multiplayer_authority(player_authority)
+
     
 func _process(delta: float) -> void:
     # Print all tracked properties during _process

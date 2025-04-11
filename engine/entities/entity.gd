@@ -1,6 +1,6 @@
 extends RigidBody3D
 class_name Entity
-@export var is_player:bool
+@export var is_player:bool = true
 var played_by:Player
 var controlled_by #NPC Factions?
 @onready var controller:EntityController = get_parent()
