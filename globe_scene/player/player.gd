@@ -18,7 +18,7 @@ func _ready() -> void:
     UI.unpack()
     camera.camera_moved.connect(UI.adjust_ruler)
     #Only do this if the game has not started before.
-    %PlayerEntity.position = determine_spawn_point().position
+    entities.get_node("PlayerEntity").position = determine_spawn_point().position
     camera.make_current()
     pass # Replace with function body.
 
