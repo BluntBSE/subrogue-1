@@ -89,6 +89,10 @@ func unpack():
 func _process(delta: float) -> void:
     if unpacked != true:
         return
+    
+    if !is_multiplayer_authority():
+        return
+        
     if Engine.is_editor_hint():
         if enable_debug_movement == false:
             return
@@ -117,6 +121,10 @@ func _input(event:InputEvent):
 func _unhandled_input(event: InputEvent) -> void:
     if unpacked != true:
         return
+    
+    if !is_multiplayer_authority():
+        return
+        
     state_machine.handleInput({"event":event})
     pass
     
