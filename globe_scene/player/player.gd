@@ -5,7 +5,7 @@ class_name Player
 
 #@onready var selected = [%PlayerEntity] #Selection is not a feature of the game for now.
 @onready var camera:OrbitalCamera = get_node("PlayerCameras/OrbitalCamera")
-@onready var UI:PlayerUIRoot = get_node("CanvasLayer/PlayerUIRoot")
+@onready var UI:PlayerUIRoot = get_node("UICanvas/PlayerUIRoot")
 @onready var entities:PlayerEntities = get_node("PlayerEntities")
 @export var visible_layers=[2,5]#Defaults to "all entities" and "player 1"
 var layer = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
@@ -20,6 +20,8 @@ func _ready() -> void:
     #Only do this if the game has not started before.
     entities.get_node("PlayerEntity").position = determine_spawn_point().position
     camera.make_current()
+    if is_multiplayer_authority():
+        get_node("UICanvas").visible = true
     pass # Replace with function body.
 
 

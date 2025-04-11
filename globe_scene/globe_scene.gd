@@ -31,7 +31,7 @@ func single_player_start():
     peers.append(multiplayer.get_unique_id()) #Get peers alone doesnt return yourself
     print("All peers for SPS, should be just us ", peers)
     for peer in peers:
-        var player_obj = preload("res://globe_scene/player.tscn").instantiate()
+        var player_obj = preload("res://globe_scene/player/player.tscn").instantiate()
         player_obj.set_multiplayer_authority(peer)
         player_obj.name = "player_"+str(peer)
         game_root.players["player_1"] = peer
@@ -51,7 +51,7 @@ func multi_player_start():
         var peer = peers[i]
         var slot_str = "player_"+str(i+1) #Player 1 is 1, not 0.
         game_root.players[slot_str]=peer
-        var player_obj = preload("res://globe_scene/player.tscn").instantiate()
+        var player_obj = preload("res://globe_scene/player/player.tscn").instantiate()
         player_obj.set_multiplayer_authority(peer)
         player_obj.name = "player_"+str(peer)
         %Players.add_child(player_obj)
