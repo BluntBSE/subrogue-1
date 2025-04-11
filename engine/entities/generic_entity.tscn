@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=47 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -28,6 +28,7 @@
 [ext_resource type="Shader" uid="uid://dc2pip1y3et5g" path="res://engine/entities/detection/sonarpulsemesh.gdshader" id="27_dwxad"]
 [ext_resource type="Texture2D" uid="uid://b0ien5rugpxsy" path="res://assets/polarpng.png" id="28_23k6d"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="28_op6l6"]
+[ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="29_j3cwe"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -146,6 +147,8 @@ _data = {
 [sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]
 lightmap_size_hint = Vector2i(27, 27)
 size = Vector2(25, 25)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hyfub"]
 
 [node name="Entity" type="RigidBody3D"]
 collision_layer = 2
@@ -412,5 +415,9 @@ skeleton = NodePath("../../SonarNode")
 [node name="Notifications" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("28_op6l6")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hyfub")
+script = ExtResource("29_j3cwe")
 
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]

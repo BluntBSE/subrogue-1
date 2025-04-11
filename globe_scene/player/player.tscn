@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://ccnbj1u845pfo"]
+[gd_scene load_steps=47 format=3 uid="uid://ccnbj1u845pfo"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -34,11 +34,6 @@
 [ext_resource type="Texture2D" uid="uid://b4da1i6v747wi" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT01.png" id="32_4elw6"]
 [ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="33_abu4l"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_lu2fn"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iwyah"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
 shader = ExtResource("10_558vm")
@@ -455,13 +450,10 @@ script = ExtResource("3_og8ew")
 
 [node name="PlayerEntity" parent="PlayerEntities" instance=ExtResource("4_smroy")]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 100.25, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 is_player = true
 base_color = Color(0, 0.69121, 0.737599, 1)
 spot_color = Color(0.509286, 0.509286, 0.509286, 1)
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="PlayerEntities/PlayerEntity"]
-replication_config = SubResource("SceneReplicationConfig_iwyah")
 
 [node name="PlayerMarkers" type="Node3D" parent="."]
 unique_name_in_owner = true

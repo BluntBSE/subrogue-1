@@ -17,10 +17,18 @@ func _ready() -> void:
     %PlayerEntities.unpack()
     UI.unpack()
     camera.camera_moved.connect(UI.adjust_ruler)
+    #Only do this if the game has not started before.
+    %PlayerEntity.position = determine_spawn_point().position
     pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     pass
+    
+func determine_spawn_point()->Node3D:
+    var spawn_str = "player_" + str(get_multiplayer_authority())
+    var spawn_nodes = get_tree().root.find_child("PlayerSpawnNodes",true,false)
+    var spawn_node = spawn_nodes.find_child(spawn_str)
+    return spawn_node
     

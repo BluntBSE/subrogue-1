@@ -1956,3 +1956,12 @@ curve = SubResource("Curve3D_xepjb")
 
 [node name="@Path3D@58712" type="Path3D" parent="NavNodes/NavNode--6_33lon-16_33lat"]
 curve = SubResource("Curve3D_hkxrn")
+
+[node name="PlayerSpawnNodes" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="player_1" type="Node3D" parent="PlayerSpawnNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.5, 0, 0)
+
+[node name="player_2" type="Node3D" parent="PlayerSpawnNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.5, 0, -5)

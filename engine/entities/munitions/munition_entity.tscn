@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=50 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
@@ -30,6 +30,7 @@
 [ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_qfdwo"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="29_v6ety"]
 [ext_resource type="PackedScene" uid="uid://d1ad5q0tg3jb4" path="res://particle_node.tscn" id="30_541b3"]
+[ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="31_vepk6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -151,6 +152,11 @@ size = Vector2(25, 25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v6ety"]
 radius = 0.862371
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_541b3"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="MunitionEntity" type="RigidBody3D"]
 collision_layer = 2
@@ -295,7 +301,7 @@ script = ExtResource("16_cukoj")
 [node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.010103)
-layers = 2
+layers = 524290
 texture = ExtResource("17_o16hn")
 
 [node name="RangeSpot" type="SpotLight3D" parent="EntityRender"]
@@ -349,7 +355,7 @@ skeleton = NodePath("../..")
 [node name="DepthMesh" type="MeshInstance3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
-layers = 2
+layers = 524290
 material_override = SubResource("StandardMaterial3D_x4ju4")
 mesh = SubResource("QuadMesh_v1582")
 skeleton = NodePath("../..")
@@ -436,6 +442,10 @@ script = ExtResource("29_v6ety")
 [node name="Particles" parent="." instance=ExtResource("30_541b3")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.273297)
+
+[node name="EntitySynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_541b3")
+script = ExtResource("31_vepk6")
 
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="ImpactArea" to="." method="on_body_entered_check_for_impact"]
