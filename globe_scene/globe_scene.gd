@@ -53,6 +53,7 @@ func multi_player_start():
         game_root.players[slot_str]=peer
         var player_obj = preload("res://globe_scene/player.tscn").instantiate()
         player_obj.set_multiplayer_authority(peer)
+        player_obj.name = "player_"+str(peer)
         %Players.add_child(player_obj)
     
     pass

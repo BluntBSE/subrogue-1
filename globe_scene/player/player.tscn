@@ -451,7 +451,6 @@ script = ExtResource("3_og8ew")
 [node name="PlayerEntity" parent="PlayerEntities" instance=ExtResource("4_smroy")]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-is_player = true
 base_color = Color(0, 0.69121, 0.737599, 1)
 spot_color = Color(0.509286, 0.509286, 0.509286, 1)
 

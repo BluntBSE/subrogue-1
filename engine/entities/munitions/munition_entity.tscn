@@ -30,7 +30,7 @@
 [ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_qfdwo"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="29_v6ety"]
 [ext_resource type="PackedScene" uid="uid://d1ad5q0tg3jb4" path="res://particle_node.tscn" id="30_541b3"]
-[ext_resource type="Script" path="res://engine/entities/entity_synchronizer.gd" id="31_vepk6"]
+[ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="31_vepk6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
