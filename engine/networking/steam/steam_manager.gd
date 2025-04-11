@@ -23,7 +23,7 @@ signal lobby_ready #I'm positive there's a built in way to do this, but I couldn
 #Actually, it appears that callbacks only work if the peer etc. is in the node, so duplicating these is necessary if I want this global
 #The below signals actually work if I wire up UI to the Steam callbacks directly
 #But I actually want the global modification of the client variables in one place
-#So I duplicate the signals here. 
+#So I duplicate the signals here.
 signal self_joined_new_lobby
 signal lobby_joined
 func _init()->void:
@@ -42,15 +42,18 @@ func initialize_steam():
     if initialize_response['status'] > 0:
         print("Steam did not initialize! Perish, fool")
         get_tree().quit()
-    
+
     is_owned = Steam.isSubscribed()
     steam_id = Steam.getSteamID()
     online = Steam.loggedOn()
     steam_username = Steam.getPersonaName()
-    
-    
+
+
 func _ready():
     initialize_steam()
+    #TODO: Probably need to lift this multiplayer peer out if we do direct networking
+    print("MY PEER IS: ")
+    print(multiplayer.multiplayer_peer)
     multiplayer_peer.lobby_created.connect(on_lobby_created)
     multiplayer_peer.lobby_joined.connect(on_lobby_joined)
 
@@ -64,10 +67,12 @@ func become_host():
     print("Starting host!")
     #TODO: Make lobby type configurable. Probably has an argument to this function
     multiplayer_peer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_PUBLIC, 6)
+    multiplayer.multiplayer_peer = multiplayer_peer
+    print("HOSTED! Godot MP peer is ", multiplayer.multiplayer_peer)
     #hosted_lobby_id is set by the callback triggered by the above
     if not OS.has_feature("dedicated_server"):  # Not doing this yet.
         pass
-        
+
 func join_as_client(_lobby_id):
     #Clear previous lobby members
     lobby_members.clear()
@@ -75,6 +80,9 @@ func join_as_client(_lobby_id):
     multiplayer_peer.connect_lobby(_lobby_id)
     lobby_id = _lobby_id
     self_joined_new_lobby.emit(_lobby_id)
+    #Godot peer = steam peer.
+    multiplayer.multiplayer_peer = multiplayer_peer
+    print("Joined! Godot MP peer is", multiplayer.multiplayer_peer)
     #TODO: Where to add players to the lobby members array?
     #Tempted to do it here but the tutorial did not...
 
@@ -94,13 +102,12 @@ func on_lobby_created(connect: int, _lobby_id):
         hosted_lobby_id = _lobby_id
         lobby_id = _lobby_id
         print("Created lobby, lobby id: ", str(hosted_lobby_id))
-        
+
         Steam.setLobbyJoinable(hosted_lobby_id, true)
         Steam.setLobbyData(hosted_lobby_id, "name", LOBBY_NAME)
         Steam.setLobbyData(hosted_lobby_id, "mode", LOBBY_MODE)
         print("Lobby ready should emit")
         lobby_ready.emit(connect, lobby_id)
-        multiplayer.multiplayer_peer = multiplayer_peer
 
 
 func list_lobbies():
@@ -116,13 +123,12 @@ func on_lobby_joined(lobby: int, permissions: int, locked: bool, response: int):
     #LOBBY_NAME = Steam.getLobbyData(lobbyID, "name")
     get_lobby_members()
     lobby_joined.emit(lobby, permissions, locked, response)
-    multiplayer.multiplayer_peer = multiplayer_peer
 
-    
+
 func get_lobby_members():
     lobby_members.clear()
     var num_members = Steam.getNumLobbyMembers(lobby_id)
-    
+
     for member in range(num_members):
         var member_id = Steam.getLobbyMemberByIndex(lobby_id,member)
         var member_name = Steam.getFriendPersonaName(member_id)
@@ -130,10 +136,10 @@ func get_lobby_members():
 
 func add_player_list():
     pass
-    
+
 func on_lobby_join_requested(_lobbyID, friendID):
     var owner_name = Steam.getFriendPersonaName(friendID)
-    
+
     #Message here if you want
-    
+
     join_as_client(_lobbyID)
