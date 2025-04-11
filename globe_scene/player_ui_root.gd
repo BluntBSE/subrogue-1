@@ -23,7 +23,7 @@ func unpack():
     anchor = get_tree().root.find_child("GamePlanet", true, false)
     print("unpack from UI root")
     await player.ready
-    var player_entity: Entity = player.entities.get_child(0)
+    var player_entity: Entity = player.entities.find_child("PlayerEntity")
     print("Player Entity is", player_entity)
 
     #We do all signal connections here because the player is the immediate parent of this node.
