@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SubRogue-1"
-run/main_scene="uid://cyb75rhx4srfa"
+run/main_scene="uid://lu0nrobkk2ji"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"

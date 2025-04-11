@@ -70,12 +70,27 @@ func unpack(type_id, _faction):
 func _physics_process(delta: float) -> void:
     if unpacked != true:
         return
-    fix_height()
-    fix_rotation()
-    update_coords()
-    move_to_next()
-    check_reached_waypoint()
-    spotlight.look_at(self.position)
+    #Because clients sync their own information, only run this stuff if it belongs to you.
+    if is_player:
+        if controller.player.is_multiplayer_authority():
+            fix_height()
+            fix_rotation()
+            update_coords()
+            move_to_next()
+            check_reached_waypoint()
+            spotlight.look_at(self.position)
+    #If this is an NPC, it's the server's job to move it.
+    #Execute only if we're the server
+    else:
+        if multiplayer.get_unique_id() == 1 :
+            #Will this work on single player? I tried to make this the case, but if experiencing issues, check this
+            fix_height()
+            fix_rotation()
+            update_coords()
+            move_to_next()
+            check_reached_waypoint()
+            spotlight.look_at(self.position)           
+            pass
 
 
 
