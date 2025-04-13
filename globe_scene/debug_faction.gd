@@ -14,14 +14,15 @@ func _process(delta: float) -> void:
 
 
 func spawn_entity_at_node(node:NavNode, type_id:String, for_faction:int):
-    var entity:Entity = load("res://engine/entities/generic_entity.tscn").instantiate()
-    var entity_controller:EntityController = get_node("FactionEntities")
-    var is_npc:bool = GlobalConst.is_layer_player(for_faction)
-    
-    entity_controller.add_child(entity)
-    entity.behavior.destination_node = get_tree().root.find_child("NavNode_Gibraltar", true, false)
-    entity.position = node.position
-    entity.unpack(type_id, for_faction)
+    if get_multiplayer_authority() == 1:
+        var entity:Entity = load("res://engine/entities/generic_entity.tscn").instantiate()
+        var entity_controller:EntityController = get_node("FactionEntities")
+        var is_npc:bool = GlobalConst.is_layer_player(for_faction)
+        entity.is_player != is_npc
+        entity_controller.add_child(entity)
+        entity.behavior.destination_node = get_tree().root.find_child("NavNode_Gibraltar", true, false)
+        entity.position = node.position
+        entity.unpack(type_id, for_faction)
 
 
     

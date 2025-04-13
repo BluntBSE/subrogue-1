@@ -12,12 +12,17 @@ func _ready() -> void:
     rcfig.add_property(parent_position)
     rcfig.add_property(parent_rotation)
     # Assign the replication config to the MultiplayerSynchronizer
-    set_replication_config(rcfig)
     if entity.get_parent() is Player:
         var player:Player = entity.get_parent()
         var player_authority = player.get_multiplayer_authority()
         set_multiplayer_authority(player_authority)
-
+    
+    if entity is Munition:
+        var fired_from = str( get_parent().get_path() )+":fired_from"
+        rcfig.add_property(fired_from)
+        pass
+        
+    set_replication_config(rcfig)
     
 func _process(delta: float) -> void:
     # Print all tracked properties during _process

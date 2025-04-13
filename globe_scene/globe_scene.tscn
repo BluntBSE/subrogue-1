@@ -1354,6 +1354,9 @@ script = ExtResource("33_x8218")
 [node name="FactionEntities" type="Node3D" parent="Factions/DebugFaction"]
 script = ExtResource("34_n1474")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/DebugFaction/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 2
