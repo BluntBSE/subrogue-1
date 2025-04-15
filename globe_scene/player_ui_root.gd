@@ -124,3 +124,8 @@ func handle_impact_1() -> void:
     gray_mask.material.set("shader_parameter/active", false)
 
     # Remove the Tween node after it's done
+    
+func _unhandled_input(event):
+    if event is InputEventKey and event.pressed and event.key_label == KEY_1:
+        # Toggle the visibility of %PresentationOverlay
+        %PresentationOverlay.visible = not %PresentationOverlay.visible

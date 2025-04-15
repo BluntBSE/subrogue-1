@@ -41,6 +41,7 @@ func _process(delta:float)->void:
     #send_pulse()
 
 func send_pulse():
+    #PRESENTATION2
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_head", 0.0)
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_tail", 0.0)
     var maximum = %SonarPulseMesh.material_override.get_shader_parameter("frontier_head")

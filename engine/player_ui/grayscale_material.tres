@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cyjekb0iu5kew"]
+
+[ext_resource type="Shader" uid="uid://dr2sw5ylj7jrv" path="res://globe_scene/grayscale_screen.gdshader" id="1_fd3lj"]
+
+[resource]
+shader = ExtResource("1_fd3lj")
+shader_parameter/flicker_intensity = 0.0
+shader_parameter/flicker_speed = 0.2
+shader_parameter/pale_intensity = 0.02
+shader_parameter/active = true
