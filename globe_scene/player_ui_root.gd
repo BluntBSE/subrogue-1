@@ -94,33 +94,7 @@ func handle_launch(_args: Dictionary) -> void:
 
 
 func handle_impact_1() -> void:
-    var gray_mask: ColorRect = get_node("FilterMaskGray")
-    gray_mask.material.set("shader_parameter/active", true)
-
-    # Create a Tween node
-    var tween = get_tree().create_tween()
-
-    # Tween flicker_intensity up to 0.2 and back down
-    tween.tween_property(
-        gray_mask.material, 
-        "shader_parameter/flicker_intensity", 
-        0.2,  # Target value
-        0.4,  # Duration for the build-up (half of 0.8 seconds)
-    )
-    tween.tween_property(
-        gray_mask.material, 
-        "shader_parameter/flicker_intensity", 
-        0.0,  # Target value for the build-down
-        0.4,  # Duration for the build-down
-    )
-
-    # Start the tween
-    
-
-    # Wait for the total duration (0.8 seconds)
-    await get_tree().create_timer(0.8).timeout
-
-    # Deactivate the shader effect
-    gray_mask.material.set("shader_parameter/active", false)
-
+    #var gray_mask: ColorRect = get_node("FilterMaskGray")
+    #TODO: Rework impact shader
+   pass
     # Remove the Tween node after it's done

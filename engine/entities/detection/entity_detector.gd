@@ -22,7 +22,6 @@ func _ready() -> void:
         #This means that the detector (for now) is totally subordinate to its parent.
         #Bind to the detection node of the originating entity
         detection_parent = entity.fired_from.detector
-        print("DETECTION PARENT IS", detection_parent)
     pass # Replace with function body.
 
 var poll_elapsed:float = 0.0

@@ -132,8 +132,7 @@ func _process(delta: float) -> void:
     # Update game_date
     game_date = base_date + int(game_adjusted_msec_elapsed / 1000)
     
-    # Print the current game date for debugging purposes
-    # print("Game Date: ", Time.get_datetime_string_from_unix_time(game_date))
+
     
 func use_time_enum() -> void:
     match current_scale_enum:

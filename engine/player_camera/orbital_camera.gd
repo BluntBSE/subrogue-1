@@ -63,7 +63,6 @@ func unpack():
     active_entity = player.entities.find_child("PlayerEntity") #May be pluralized into an array later.
     set_cull_mask_value(GlobalConst.layers.PLANET, true)
     set_cull_mask_value(player.faction, true)
-    print("Cull mask values : ", GlobalConst.layers.PLANET, "and  ", player.faction, "should be set to true")
     state_machine = StateMachine.new()
     state_machine.Add("navigating", CamNavState.new(self, {}))
     state_machine.Add("context", CamContextState.new(self,{}))

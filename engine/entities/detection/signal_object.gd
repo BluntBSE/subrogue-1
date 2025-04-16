@@ -17,7 +17,6 @@ var lerping = false #For animation
 func offset_self():
     #Used for appearing in a random location when first detected.
     var km_offset = lerp(200.0,0.0,(certainty/100) )
-    #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
     anchor = detecting_object.anchor
     
     # Calculate a random tangential direction
@@ -33,9 +32,7 @@ func offset_self():
     position = new_position
     var vecfloat = GlobeHelpers.km_to_arc_distance(km_offset, anchor) * 2.0
     %CertaintyRadius.scale = Vector3(vecfloat, vecfloat, vecfloat)
-   # print("km_offset is ", km_offset)
-   # print("scale is ", vecfloat)
-   # print("Certainty is ", certainty)
+ 
     %CertaintyLabel.text = str( snapped(certainty, 1) ) + "%"
     look_at(anchor.position)
     

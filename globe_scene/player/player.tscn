@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="7_nwwe3"]
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="8_fq2vg"]
 [ext_resource type="Texture2D" uid="uid://c3j3ua0ninil2" path="res://assets/UI/white_buttons/PCMainButtonNormalWhiteT02_filled.png" id="9_q7i7m"]
-[ext_resource type="Shader" uid="uid://dr2sw5ylj7jrv" path="res://globe_scene/grayscale_screen.gdshader" id="10_558vm"]
 [ext_resource type="Script" uid="uid://b1e3glbgg7wdy" path="res://engine/player_ui/time_manager.gd" id="11_oh4je"]
 [ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="12_ljsgx"]
 [ext_resource type="Texture2D" uid="uid://edgpj510s3iu" path="res://assets/UI/blue_icons/ArrowLeftIconBlue.png" id="13_itjk8"]
@@ -36,14 +35,18 @@
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_lu2fn"]
 [ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="35_smroy"]
 [ext_resource type="Shader" uid="uid://bjysmg5kwy2ke" path="res://title_screen/wireframe_sub_space.gdshader" id="36_3h4iq"]
+[ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="37_3h4iq"]
 [ext_resource type="ArrayMesh" uid="uid://dkb6osgay2qlt" path="res://assets/3d/cargo_ship_1.obj" id="37_7xmbg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
-shader = ExtResource("10_558vm")
-shader_parameter/flicker_intensity = 0.0
-shader_parameter/flicker_speed = 0.2
-shader_parameter/pale_intensity = 0.02
-shader_parameter/active = true
+shader = ExtResource("37_3h4iq")
+shader_parameter/octave_count = 10
+shader_parameter/amp_start = 0.5
+shader_parameter/amp_coeff = 0.5
+shader_parameter/freq_coeff = 2.0
+shader_parameter/shift_coeff = 1.0
+shader_parameter/speed = 0.5
+shader_parameter/active = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
 shader = ExtResource("21_fwoy0")
@@ -737,7 +740,6 @@ text = "750 km"
 metadata/_edit_use_anchors_ = true
 
 [node name="FilterMaskGlitch" type="ColorRect" parent="UICanvas/PlayerUIRoot"]
-visible = false
 material = SubResource("ShaderMaterial_jitlb")
 layout_mode = 0
 offset_right = 1922.0
@@ -2002,15 +2004,6 @@ offset_top = 143.957
 offset_right = 2388.41
 offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
-
-[node name="FilterMaskGray" type="ColorRect" parent="UICanvas/PlayerUIRoot"]
-visible = false
-material = SubResource("ShaderMaterial_jitlb")
-layout_mode = 0
-offset_right = 1922.0
-offset_bottom = 1076.0
-mouse_filter = 2
-color = Color(1, 1, 1, 0)
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="UICanvas"]
 modulate = Color(1, 1, 1, 0.4)
