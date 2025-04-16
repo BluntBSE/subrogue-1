@@ -555,7 +555,7 @@ script = ExtResource("1_iwyah")
 [node name="OrbitalCamera" type="Camera3D" parent="PlayerCameras"]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 218.407, 0, 0)
-cull_mask = 524319
+cull_mask = 524289
 current = true
 fov = 15.5
 near = 0.21
@@ -586,17 +586,11 @@ spawn_path = NodePath("..")
 [node name="PlayerEntity" parent="PlayerEntities" instance=ExtResource("4_smroy")]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-is_player = true
-given_name = ""
-azimuth = 0.0
-polar = 0.0
 base_color = Color(0, 0.69121, 0.737599, 1)
 spot_color = Color(0.509286, 0.509286, 0.509286, 1)
-range_color = Color(0, 0, 0, 1)
 scale_factor = 1.0
 faction = 2
 can_move = true
-npc = false
 
 [node name="PlayerMarkers" type="Node3D" parent="."]
 unique_name_in_owner = true

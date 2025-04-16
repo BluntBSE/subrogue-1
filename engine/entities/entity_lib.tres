@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="EntityLib" load_steps=3 format=3 uid="uid://drkl0u67f7dfr"]
+[gd_resource type="Resource" script_class="EntityLib" load_steps=4 format=3 uid="uid://drkl0u67f7dfr"]
 
 [ext_resource type="Script" uid="uid://di0x2plvotfys" path="res://engine/entities/entity_lib.gd" id="1_22d0a"]
 [ext_resource type="Resource" uid="uid://dcpa4ui8otfyx" path="res://engine/entities/types/commercial_freighter_1.tres" id="1_et3xr"]
+[ext_resource type="Resource" uid="uid://c8vdewfemsmme" path="res://engine/entities/types/player_sub.tres" id="2_et3xr"]
 
 [resource]
 script = ExtResource("1_22d0a")
 debug_commercial = ExtResource("1_et3xr")
+player_sub = ExtResource("2_et3xr")

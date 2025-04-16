@@ -7,8 +7,8 @@ class_name Player
 @onready var camera:OrbitalCamera = get_node("PlayerCameras/OrbitalCamera")
 @onready var UI:PlayerUIRoot = get_node("UICanvas/PlayerUIRoot")
 @onready var entities:PlayerEntities = get_node("PlayerEntities")
-@export var visible_layers=[2,5]#Defaults to "all entities" and "player 1"
-var layer = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
+var visible_layers=[]
+var faction = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     #We put child nodes unpacks here so all the parent data can be set first
@@ -19,6 +19,7 @@ func _ready() -> void:
     camera.camera_moved.connect(UI.adjust_ruler)
     #Only do this if the game has not started before.
     entities.get_node("PlayerEntity").position = determine_spawn_point().position
+    entities.get_node("PlayerEntity").unpack("player_sub", faction, null)
     camera.make_current()
     if is_multiplayer_authority():
         get_node("UICanvas").visible = true

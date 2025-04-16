@@ -295,7 +295,6 @@ script = ExtResource("4_xb8gp")
 [node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.010103)
-layers = 524291
 texture = ExtResource("5_pq53b")
 
 [node name="RangeSpot" type="SpotLight3D" parent="EntityRender"]
@@ -319,10 +318,9 @@ skeleton = NodePath("../../Spotlight")
 [node name="Spotlight" type="SpotLight3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
-layers = 3
 light_color = Color(0, 0.816604, 0.791994, 1)
 light_energy = 2.0
-light_cull_mask = 4294966275
+light_cull_mask = 4293918721
 shadow_enabled = true
 shadow_bias = 0.265
 spot_attenuation = -1.78

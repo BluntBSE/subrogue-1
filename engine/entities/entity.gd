@@ -47,6 +47,8 @@ func _ready() -> void:
     pass # Replace with function body.
 
 func unpack(type_id, _faction, with_name):
+    print("ENTITY UNPACKING: ", name)
+    faction = _faction
     is_player = GlobalConst.is_layer_player(_faction)
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
         played_by = get_parent().get_parent()
@@ -56,29 +58,22 @@ func unpack(type_id, _faction, with_name):
             given_name = NameGenerator.generate_name()
             
             
-        
+    render.update_mesh_visibilities(faction, true)   
     #temp spotlight adjustments
     spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)
     azimuth = pos_dict["azimuth"]
     polar = pos_dict["polar"]
-    #DEBUG NPC SETTING bc player unpack isn't a thing yet
-    if npc == false:
-        print(name, "instantiated as player")
-        render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, true)
+
         
     var _type:EntityType = GlobalConst.entity_lib.get(type_id)
     apply_entity_type(_type)
     faction = _faction
-    var is_npc:bool = !GlobalConst.is_layer_player(_faction)  
+    var is_npc:bool = !GlobalConst.is_layer_player(faction)  
     npc = is_npc
-    if npc == true:
-        print(name, "instantiated as NPC")
+    #Turn on AI only for NPCs. We might also want to enable it if this is a munition. Stay tuned.
+    if is_npc:
         behavior.enabled = true
-        #DEBUG because there's not yet a non player unpack, we hide again from the player layer
-        render.update_mesh_visibilities(GlobalConst.layers.PLAYER_1, false)
-        #Then show on the NPC layer
-        render.update_mesh_visibilities(faction, true)
     unpacked = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -203,7 +198,9 @@ func apply_entity_type(type:EntityType):
 
 func recursively_update_debug_layers(node, _visible):
     for child in node.get_children():
+        print("inspecting ", child.name)
         if child.get("layers") != null:
+            print("ABOUT TO SET ", child.name, " TO ", _visible)
             child.set_layer_mask_value(1, _visible)
         recursively_update_debug_layers(child, _visible)
     
