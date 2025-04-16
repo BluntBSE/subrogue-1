@@ -157,7 +157,6 @@ physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true
 script = ExtResource("1_du6w5")
-height = 0.0
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
 scale_factor = 0.0
 faction = 0

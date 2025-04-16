@@ -9,7 +9,7 @@ var controlled_by #NPC Factions?
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
-@export var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
+var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
 @onready var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
 @export var speed = GlobeHelpers.kph_to_game_s(240.0) #Debug - hyperfast
@@ -82,8 +82,6 @@ func unpack(type_id, _faction, with_name):
     unpacked = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-    if Engine.is_editor_hint():
-        return
     if unpacked != true:
         return
     #Because clients sync their own information, only run this stuff if it belongs to you.
