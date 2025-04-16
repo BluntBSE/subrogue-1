@@ -3,6 +3,7 @@ class_name Entity
 @export var is_player:bool = true
 var played_by:Player
 var controlled_by #NPC Factions?
+@export var given_name:String
 @onready var controller:EntityController = get_parent()
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
@@ -36,14 +37,21 @@ var unpacked := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    unpack("debug_commercial", GlobalConst.layers.FACTION_1)
+    unpack("debug_commercial", GlobalConst.layers.FACTION_1, null)
    # ("shader_parameter/glow_color") = base_color  
     pass # Replace with function body.
 
-func unpack(type_id, _faction):
+func unpack(type_id, _faction, with_name):
     is_player = GlobalConst.is_layer_player(_faction)
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
         played_by = get_parent().get_parent()
+    else:
+        #When we create missions, we will want to generate entities with specific names.
+        if with_name == null:
+            given_name = NameGenerator.generate_name()
+            
+            
+        
     #temp spotlight adjustments
     spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)

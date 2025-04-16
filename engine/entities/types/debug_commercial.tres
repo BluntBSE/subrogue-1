@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_mhiw2")
-id = "debug_commercial"
-display_name = "Debug Commercial"
+id = "commercial_freighter_1"
+display_name = "Hanka Freighter"
 display_class = "Commercial Freighter"
 category = "commercial"
 base_hull = 1
