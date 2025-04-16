@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="7_jcwaj"]
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="8_7rfwi"]
 [ext_resource type="Texture2D" uid="uid://c3j3ua0ninil2" path="res://assets/UI/white_buttons/PCMainButtonNormalWhiteT02_filled.png" id="9_mocrc"]
-[ext_resource type="Shader" uid="uid://dr2sw5ylj7jrv" path="res://globe_scene/grayscale_screen.gdshader" id="10_fplcu"]
+[ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="10_70e0q"]
 [ext_resource type="Script" uid="uid://b1e3glbgg7wdy" path="res://engine/player_ui/time_manager.gd" id="11_lymlk"]
 [ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="12_1x0f7"]
 [ext_resource type="Texture2D" uid="uid://edgpj510s3iu" path="res://assets/UI/blue_icons/ArrowLeftIconBlue.png" id="13_ygmue"]
@@ -36,10 +36,13 @@
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_tq7ai"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
-shader = ExtResource("10_fplcu")
-shader_parameter/flicker_intensity = 0.0
-shader_parameter/flicker_speed = 0.2
-shader_parameter/pale_intensity = 0.02
+shader = ExtResource("10_70e0q")
+shader_parameter/octave_count = 10
+shader_parameter/amp_start = 0.5
+shader_parameter/amp_coeff = 0.5
+shader_parameter/freq_coeff = 2.0
+shader_parameter/shift_coeff = 1.0
+shader_parameter/speed = 0.5
 shader_parameter/active = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
@@ -597,7 +600,6 @@ text = "750 km"
 metadata/_edit_use_anchors_ = true
 
 [node name="FilterMaskGlitch" type="ColorRect" parent="CanvasLayer/PlayerUIRoot"]
-visible = false
 material = SubResource("ShaderMaterial_jitlb")
 layout_mode = 0
 offset_right = 1922.0
@@ -1864,6 +1866,7 @@ offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
 
 [node name="FilterMaskGray" type="ColorRect" parent="CanvasLayer/PlayerUIRoot"]
+visible = false
 material = SubResource("ShaderMaterial_jitlb")
 layout_mode = 0
 offset_right = 1922.0
