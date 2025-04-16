@@ -26,7 +26,7 @@ func spawn_entity_at_node(node:NavNode, type_id:String, for_faction:int):
         entity_controller.add_child(entity)
         entity.behavior.destination_node = get_tree().root.find_child("NavNode_Gibraltar", true, false)
         entity.position = node.position
-        entity.unpack(type_id, for_faction)
+        entity.unpack(type_id, for_faction, null)
 
 
     

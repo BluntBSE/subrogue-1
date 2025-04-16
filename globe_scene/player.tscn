@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://8ijex5nq5y25"]
+[gd_scene load_steps=53 format=3 uid="uid://oafvbh26aglu"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_70e0q"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_wa0u7"]
@@ -33,7 +33,10 @@
 [ext_resource type="Texture2D" uid="uid://cgd8r3p0kth43" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04White_horizontal.png" id="31_xshbc"]
 [ext_resource type="Texture2D" uid="uid://b4da1i6v747wi" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT01.png" id="32_imv0u"]
 [ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="33_j7uhd"]
+[ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="33_wa0u7"]
+[ext_resource type="Shader" uid="uid://bjysmg5kwy2ke" path="res://title_screen/wireframe_sub_space.gdshader" id="34_38hme"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_tq7ai"]
+[ext_resource type="ArrayMesh" uid="uid://dkb6osgay2qlt" path="res://assets/3d/cargo_ship_1.obj" id="35_k1qhg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
 shader = ExtResource("10_fplcu")
@@ -413,6 +416,18 @@ _data = {
 &"PassiveSonarOut": SubResource("Animation_gpuiy"),
 &"RESET": SubResource("Animation_pxv8h")
 }
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_j5fbn"]
+viewport_path = NodePath("CanvasLayer/PlayerUIRoot/EntityInspection/TextureRect/ShipPreview/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jcwaj"]
+render_priority = 0
+shader = ExtResource("34_38hme")
+shader_parameter/albedo = Color(0.860369, 0.860369, 0.860369, 1)
+shader_parameter/outline_width = 3.0
+
+[sub_resource type="Environment" id="Environment_7rfwi"]
+background_energy_multiplier = 0.0
 
 [node name="Player1" type="Node3D"]
 script = ExtResource("1_70e0q")
@@ -1864,6 +1879,7 @@ offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
 
 [node name="FilterMaskGray" type="ColorRect" parent="CanvasLayer/PlayerUIRoot"]
+visible = false
 material = SubResource("ShaderMaterial_jitlb")
 layout_mode = 0
 offset_right = 1922.0
@@ -1871,9 +1887,56 @@ offset_bottom = 1076.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="CanvasLayer"]
+[node name="EntityInspection" type="Control" parent="CanvasLayer/PlayerUIRoot"]
+anchors_preset = 0
+offset_left = 1723.0
+offset_top = 485.0
+offset_right = 1763.0
+offset_bottom = 525.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PlayerUIRoot/EntityInspection"]
+layout_mode = 0
+offset_left = -500.0
+offset_top = -385.0
+offset_right = 186.0
+offset_bottom = 615.0
+texture = ExtResource("33_wa0u7")
+
+[node name="ShipPreview" type="TextureRect" parent="CanvasLayer/PlayerUIRoot/EntityInspection/TextureRect"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 164.0
+offset_right = 587.0
+offset_bottom = 627.0
+texture = SubResource("ViewportTexture_j5fbn")
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/PlayerUIRoot/EntityInspection/TextureRect/ShipPreview"]
+size = Vector2i(256, 256)
+
+[node name="Node3D" type="Node3D" parent="CanvasLayer/PlayerUIRoot/EntityInspection/TextureRect/ShipPreview/SubViewport"]
+
+[node name="CargoShip1" type="MeshInstance3D" parent="CanvasLayer/PlayerUIRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -30.024, 0)
+material_override = SubResource("ShaderMaterial_jcwaj")
+mesh = ExtResource("35_k1qhg")
+skeleton = NodePath("../../../../../../../..")
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/PlayerUIRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Node3D"]
+transform = Transform3D(-0.0817297, 0, 0.996655, 0, 1, 0, -0.996655, 0, -0.0817297, 101.03, 7.67518, -8.84612)
+fov = 79.4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer/PlayerUIRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Node3D"]
+environment = SubResource("Environment_7rfwi")
+
+[node name="ToggleMenuSprite" type="Sprite2D" parent="CanvasLayer"]
+visible = false
 modulate = Color(1, 1, 1, 0.4)
 position = Vector2(1927, 492)
+texture = ExtResource("33_j7uhd")
+
+[node name="ToggleMenuSprite2" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.4)
+position = Vector2(1425, 492)
 texture = ExtResource("33_j7uhd")
 
 [node name="SettingsIconFilledBlue" type="Sprite2D" parent="CanvasLayer"]
