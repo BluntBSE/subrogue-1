@@ -17,6 +17,9 @@ func _ready() -> void:
         if mm:
             mm.queue_free()
         single_player_start()
+    #TODO: Move this to when all players are connected, etc.
+    SoundManager.stop_sound_by_id("title_ambience")
+    SoundManager.stop_sound_by_id("title_theme")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -12,7 +12,12 @@ func _ready():
 func _on_btn_new_game_button_up() -> void:
     #Start the game
     SoundManager.play_straight("sonar_1", "ui")
-    SceneChangeLoader.change_scene("res://globe_scene/globe_scene.tscn")
+    var game_root = get_tree().root.find_child("GameRoot", true, false)
+    var globe_scene = preload("res://globe_scene/globe_scene.tscn").instantiate()
+    print("Peers upon hitting start button are ", multiplayer.get_peers())
+    game_root.add_child(globe_scene)
+    #No loading screens for now, we're preloading the world.
+    #SceneChangeLoader.change_scene("res://globe_scene/globe_scene.tscn")
     pass # Replace with function body.
 
 

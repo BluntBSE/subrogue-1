@@ -43,8 +43,6 @@ var minor_factions:int = 18
 enum layers {
     UNUSED, #Because cull masks, for whatever reason, are 1-indexed
     PLANET, #Render anything like nuclear warheads that everyone can see straight to the planet layer
-    ALL_ENTITIES,
-    ALL_MUNITIONS, #Do we want this?
     PLAYER_1,
     PLAYER_2,
     PLAYER_3,
@@ -58,9 +56,11 @@ enum layers {
     FACTION_5,
     FACTION_6,
     FACTION_7,
+    FACTION_8,
+    FACTION_9,
+    FACTION_10,
+    FACTION_11,
     MINOR_FACTIONS,
-    NAVNODES,
-    DEBUG,
 }
 
 #Acoustic modeling is complex, so we're cheating
@@ -96,7 +96,7 @@ func attenuate_sound(volume: float, frequency: float, distance: float) -> float:
 
 
 func is_layer_player(_int:int)->bool:
-    if _int > layers.ALL_MUNITIONS:
+    if _int > layers.PLANET:
         if _int < layers.FACTION_1:
             return true
     return false

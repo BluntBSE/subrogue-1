@@ -221,27 +221,6 @@ volumetric_fog_length = 10.0
 volumetric_fog_detail_spread = 1.0
 volumetric_fog_ambient_inject = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_6oioa"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ho0hv"]
-transparency = 4
-blend_mode = 1
-shading_mode = 0
-albedo_color = Color(1, 0, 1, 1)
-albedo_texture = ExtResource("34_f1l1f")
-
-[sub_resource type="SphereMesh" id="SphereMesh_rcc5k"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slecc"]
-transparency = 1
-blend_mode = 1
-albedo_texture = ExtResource("35_woink")
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 0.0
-anisotropy = 0.56
-disable_receive_shadows = true
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8w7ix"]
@@ -1104,6 +1083,27 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="SphereMesh" id="SphereMesh_6oioa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ho0hv"]
+transparency = 4
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 1, 1)
+albedo_texture = ExtResource("34_f1l1f")
+
+[sub_resource type="SphereMesh" id="SphereMesh_rcc5k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slecc"]
+transparency = 1
+blend_mode = 1
+albedo_texture = ExtResource("35_woink")
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 0.0
+anisotropy = 0.56
+disable_receive_shadows = true
+
 [node name="GlobeRoot" type="Node3D"]
 script = ExtResource("1_msvd6")
 
@@ -1299,63 +1299,160 @@ spawn_path = NodePath("..")
 
 [node name="Factions" type="Node3D" parent="."]
 
-[node name="Cities" type="Node3D" parent="Factions"]
-
-[node name="Miami" type="Node3D" parent="Factions/Cities"]
-transform = Transform3D(0.977072, -0.212911, 0, 0.212911, 0.977072, 0, 0, 0, 1, 97.535, 22.506, -1.75084)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="Factions/Cities/Miami"]
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Factions/Cities/Miami/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
-mesh = SubResource("SphereMesh_6oioa")
-
-[node name="Sprite3D" type="Sprite3D" parent="Factions/Cities/Miami"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0727158, 0, 0)
-material_override = SubResource("StandardMaterial3D_ho0hv")
-axis = 0
-texture = ExtResource("34_f1l1f")
-
-[node name="DockingSpot" type="SpotLight3D" parent="Factions/Cities/Miami"]
-transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
-visible = false
-light_cull_mask = 4294443009
-shadow_enabled = true
-spot_range = 16.407
-spot_attenuation = -5.66
-spot_angle = 43.28
-
-[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Factions/Cities/Miami/DockingSpot"]
-transform = Transform3D(1, 2.35071e-10, -4.65661e-09, -2.91034e-10, 1, -3.72522e-08, -4.65661e-09, 1.49032e-08, 1, -0.00889826, 0.0111237, -0.764389)
-layers = 524288
-transparency = 1.0
-mesh = SubResource("SphereMesh_rcc5k")
-
-[node name="Label3D" type="Label3D" parent="Factions/Cities/Miami"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.246742, 1.61078, -8.88178e-16)
-billboard = 1
-alpha_cut = 1
-modulate = Color(1, 0, 1, 1)
-text = "Miami"
-font = ExtResource("35_m4noy")
-font_size = 160
-
-[node name="Sprite3D2" type="Sprite3D" parent="Factions/Cities/Miami"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.13311, 0, 0)
-material_override = SubResource("StandardMaterial3D_slecc")
-transparency = 0.99
-axis = 0
-texture = ExtResource("35_woink")
-
-[node name="DebugFaction" type="Node3D" parent="Factions"]
+[node name="AmazonDominion" type="Node3D" parent="Factions"]
 script = ExtResource("33_x8218")
+faction_color = Color(0, 0.819608, 0, 1)
 
-[node name="FactionEntities" type="Node3D" parent="Factions/DebugFaction"]
+[node name="FactionEntities" type="Node3D" parent="Factions/AmazonDominion"]
 script = ExtResource("34_n1474")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/DebugFaction/FactionEntities"]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/AmazonDominion/FactionEntities"]
 _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="CentralAmericanFederation" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 10
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/CentralAmericanFederation"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/CentralAmericanFederation/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="AtlanticEmpire" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 11
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/AtlanticEmpire"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/AtlanticEmpire/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="Cascadia" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 12
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/Cascadia"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/Cascadia/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="EuropeanUnion" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 13
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/EuropeanUnion"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/EuropeanUnion/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="Austro-PacificUnion" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 14
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/Austro-PacificUnion"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/Austro-PacificUnion/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="KJCAlliance" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 15
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/KJCAlliance"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/KJCAlliance/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="ArabLeague" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 16
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/ArabLeague"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/ArabLeague/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="IndianEmpire" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 17
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/IndianEmpire"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/IndianEmpire/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="SubSaharanCompact" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 18
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/SubSaharanCompact"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/SubSaharanCompact/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="UnitedSlavicStates" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 18
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/UnitedSlavicStates"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/UnitedSlavicStates/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="UnitedIndustrialists" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 19
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/UnitedIndustrialists"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/UnitedIndustrialists/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="NovaBasilica" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_id = 19
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/NovaBasilica"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/NovaBasilica/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
@@ -1968,3 +2065,52 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.5, 0, 0)
 
 [node name="player_2" type="Node3D" parent="PlayerSpawnNodes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.5, 0, -5)
+
+[node name="Cities" type="Node3D" parent="."]
+
+[node name="Miami" type="Node3D" parent="Cities"]
+transform = Transform3D(0.977072, -0.212911, 0, 0.212911, 0.977072, 0, 0, 0, 1, 97.535, 22.506, -1.75084)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Cities/Miami"]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Miami/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+mesh = SubResource("SphereMesh_6oioa")
+
+[node name="Sprite3D" type="Sprite3D" parent="Cities/Miami"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0727158, 0, 0)
+material_override = SubResource("StandardMaterial3D_ho0hv")
+axis = 0
+texture = ExtResource("34_f1l1f")
+
+[node name="DockingSpot" type="SpotLight3D" parent="Cities/Miami"]
+transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
+visible = false
+light_cull_mask = 4294443009
+shadow_enabled = true
+spot_range = 16.407
+spot_attenuation = -5.66
+spot_angle = 43.28
+
+[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Cities/Miami/DockingSpot"]
+transform = Transform3D(1, 2.35071e-10, -4.65661e-09, -2.91034e-10, 1, -3.72522e-08, -4.65661e-09, 1.49032e-08, 1, -0.00889826, 0.0111237, -0.764389)
+layers = 524288
+transparency = 1.0
+mesh = SubResource("SphereMesh_rcc5k")
+
+[node name="Label3D" type="Label3D" parent="Cities/Miami"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.246742, 1.61078, -8.88178e-16)
+billboard = 1
+alpha_cut = 1
+modulate = Color(1, 0, 1, 1)
+text = "Miami"
+font = ExtResource("35_m4noy")
+font_size = 160
+
+[node name="Sprite3D2" type="Sprite3D" parent="Cities/Miami"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.13311, 0, 0)
+material_override = SubResource("StandardMaterial3D_slecc")
+transparency = 0.99
+axis = 0
+texture = ExtResource("35_woink")

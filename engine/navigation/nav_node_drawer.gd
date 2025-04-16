@@ -1,4 +1,4 @@
-#@tool
+@tool
 extends Node3D
 @export var draw_on:Area3D
 @export var raycasting:bool = true
