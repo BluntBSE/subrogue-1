@@ -23,7 +23,6 @@ func spawn_entity_at_node(node:NavNode, type_id:String, for_faction:int):
         #TODO: update this to the appropriate faction entity controller
         var entity_controller:EntityController = get_node("FactionEntities")
         var is_npc:bool = GlobalConst.is_layer_player(for_faction)
-        entity.is_player != is_npc
         entity_controller.add_child(entity)
         entity.behavior.destination_node = get_tree().root.find_child("NavNode_Gibraltar", true, false)
         entity.position = node.position

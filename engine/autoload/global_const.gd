@@ -97,8 +97,12 @@ func attenuate_sound(volume: float, frequency: float, distance: float) -> float:
 
 func is_layer_player(_int:int)->bool:
     if _int > layers.PLANET:
+        print("INT WAS ", _int, "WHICH IS GREATER THAN", layers.PLANET)
         if _int < layers.FACTION_1:
+            print("INT WAS ", _int, "WHICH IS LESS THAN", layers.FACTION_1)
             return true
+        else:
+            return false
     return false
 """
 SCALE FACTORS:

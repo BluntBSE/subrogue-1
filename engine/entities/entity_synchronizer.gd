@@ -34,7 +34,6 @@ func add_recursive_rotation_properties(node: Node) -> void:
             var prop_str = str(child.get_path()) + ":rotation"
             # Add the rotation property of the child to the replication config
             rcfig.add_property(prop_str)
-            print("RCFIG:", rcfig.get_properties())
         # Recursively call the function for sub-children
         add_recursive_rotation_properties(child)
         

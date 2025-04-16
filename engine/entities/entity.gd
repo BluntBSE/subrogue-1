@@ -36,11 +36,12 @@ var unpacked := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    unpack("debug_commercial", 5)
+    unpack("debug_commercial", GlobalConst.layers.FACTION_1)
    # ("shader_parameter/glow_color") = base_color  
     pass # Replace with function body.
 
 func unpack(type_id, _faction):
+    is_player = GlobalConst.is_layer_player(_faction)
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
         played_by = get_parent().get_parent()
     #temp spotlight adjustments
