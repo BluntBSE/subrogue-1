@@ -157,17 +157,11 @@ physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true
 script = ExtResource("1_du6w5")
-is_player = null
-given_name = null
-azimuth = null
-polar = null
+height = 0.0
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
-spot_color = null
-range_color = null
-scale_factor = null
-faction = null
-can_move = null
-npc = null
+scale_factor = 0.0
+faction = 0
+can_move = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_3qfs3")
@@ -302,14 +296,13 @@ script = ExtResource("4_xb8gp")
 [node name="HeadingSprite" type="Sprite3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0259705, 0.610446, 0.010103)
-layers = 524290
+layers = 524291
 texture = ExtResource("5_pq53b")
 
 [node name="RangeSpot" type="SpotLight3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.13916)
 visible = false
-layers = 2
 light_color = Color(0.774024, 0.045353, 0.588677, 1)
 light_energy = 2.0
 shadow_enabled = true
@@ -320,7 +313,6 @@ spot_angle = 55.0
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="EntityRender/RangeSpot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60515e-07, 0, -3.67215)
-layers = 2
 cast_shadow = 3
 mesh = SubResource("SphereMesh_54rvg")
 skeleton = NodePath("../../Spotlight")
@@ -328,7 +320,7 @@ skeleton = NodePath("../../Spotlight")
 [node name="Spotlight" type="SpotLight3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
-layers = 2
+layers = 3
 light_color = Color(0, 0.816604, 0.791994, 1)
 light_energy = 2.0
 light_cull_mask = 4294966275
@@ -340,14 +332,12 @@ spot_angle = 10.0
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EntityRender/Spotlight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67435e-08, 0, -3.06942)
 visible = false
-layers = 2
 cast_shadow = 3
 mesh = SubResource("SphereMesh_pcy2y")
 skeleton = NodePath("../../RangeSpot")
 
 [node name="HighlightMesh" type="MeshInstance3D" parent="EntityRender"]
 unique_name_in_owner = true
-layers = 2
 material_override = SubResource("StandardMaterial3D_ls7x1")
 transparency = 0.99
 mesh = SubResource("QuadMesh_v1582")
@@ -356,7 +346,6 @@ skeleton = NodePath("../..")
 [node name="DepthMesh" type="MeshInstance3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
-layers = 524290
 material_override = SubResource("StandardMaterial3D_x4ju4")
 mesh = SubResource("QuadMesh_v1582")
 skeleton = NodePath("../..")
@@ -417,7 +406,7 @@ update_rotation = false
 [node name="SonarPulseMesh" type="MeshInstance3D" parent="TransformBreaker"]
 unique_name_in_owner = true
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, -0.0201111, -0.0650034, 0.215542)
-layers = 524288
+layers = 524289
 material_override = ExtResource("27_3qfs3")
 mesh = SubResource("QuadMesh_3qnbj")
 skeleton = NodePath("../../SonarNode")

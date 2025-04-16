@@ -1,3 +1,4 @@
+@tool
 extends RigidBody3D
 class_name Entity
 @export var is_player:bool = true
@@ -37,8 +38,12 @@ var unpacked := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    unpack("debug_commercial", GlobalConst.layers.FACTION_1, null)
-   # ("shader_parameter/glow_color") = base_color  
+    if Engine.is_editor_hint():
+        recursively_update_debug_layers(self, true)
+        set_physics_process(false)
+        set_process(false)
+    else:
+        recursively_update_debug_layers(self, false)
     pass # Replace with function body.
 
 func unpack(type_id, _faction, with_name):
@@ -77,6 +82,8 @@ func unpack(type_id, _faction, with_name):
     unpacked = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+    if Engine.is_editor_hint():
+        return
     if unpacked != true:
         return
     #Because clients sync their own information, only run this stuff if it belongs to you.
@@ -196,4 +203,9 @@ func apply_entity_type(type:EntityType):
     atts.depths = type.depths
     atts.debuffs = []
 
+func recursively_update_debug_layers(node, _visible):
+    for child in node.get_children():
+        if child.get("layers") != null:
+            child.set_layer_mask_value(1, _visible)
+        recursively_update_debug_layers(child, _visible)
     
