@@ -176,6 +176,7 @@ func check_reached_waypoint()->void:
         
         
 func apply_entity_type(type:EntityType):
+    print(name, "Called apply entity type with", type)
 
     if not atts:
         atts = %EntityAttributes
@@ -188,6 +189,7 @@ func apply_entity_type(type:EntityType):
     atts.current_depth = type.depths[0]
     #max_speed = type.base_max_speed
     #TODO: This should probably move once we have different speeds. If we do.
+    print("Just set speed to", speed)
     speed = GlobeHelpers.kph_to_game_s(type.base_max_speed)
     atts.cargo = []
     atts.upgrades = []

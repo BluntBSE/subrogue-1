@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://di0x2plvotfys" path="res://engine/entities/entity_lib.gd" id="1_22d0a"]
 [ext_resource type="Resource" uid="uid://dcpa4ui8otfyx" path="res://engine/entities/types/commercial_freighter_1.tres" id="1_et3xr"]
-[ext_resource type="Resource" uid="uid://c8vdewfemsmme" path="res://engine/entities/types/player_sub.tres" id="2_et3xr"]
+[ext_resource type="Resource" uid="uid://b47347s2uieu6" path="res://engine/entities/types/player_sub.tres" id="2_et3xr"]
 
 [resource]
 script = ExtResource("1_22d0a")

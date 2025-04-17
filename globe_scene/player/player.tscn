@@ -2061,6 +2061,7 @@ scale = Vector2(1.00746, 0.174442)
 z_index = 1
 texture_filter = 1
 material = SubResource("ShaderMaterial_7xmbg")
+layout_mode = 0
 offset_right = 1958.0
 offset_bottom = 1076.0
 mouse_filter = 2
@@ -2077,6 +2078,7 @@ scale = Vector2(0.21625, 0.21625)
 texture = ExtResource("34_lu2fn")
 
 [node name="EntityInspection" type="Control" parent="UICanvas"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1723.0
