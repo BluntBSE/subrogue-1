@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=59 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -38,6 +38,7 @@
 [ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="37_3h4iq"]
 [ext_resource type="ArrayMesh" uid="uid://dkb6osgay2qlt" path="res://assets/3d/cargo_ship_1.obj" id="37_7xmbg"]
 [ext_resource type="Shader" uid="uid://c4ixw7o0cka8i" path="res://title_screen/vcr.gdshader" id="38_3h4iq"]
+[ext_resource type="Script" uid="uid://d1otdxkyfls70" path="res://globe_scene/player/console_input.gd" id="39_7xmbg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
 shader = ExtResource("37_3h4iq")
@@ -430,7 +431,7 @@ shader_parameter/skip = 0.0
 shader_parameter/image_flicker = 1.0
 shader_parameter/use_noise = true
 shader_parameter/vignette_flicker_speed = 2.0
-shader_parameter/vignette_strength = 0.36
+shader_parameter/vignette_strength = 0.75
 shader_parameter/small_scanlines_speed = 3.5
 shader_parameter/small_scanlines_proximity = 0.73
 shader_parameter/small_scanlines_opacity = 0.71
@@ -2249,6 +2250,21 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Strike Depth: C"
 fit_content = true
 
+[node name="Console" type="Control" parent="UICanvas"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ConsoleInput" type="LineEdit" parent="UICanvas/Console"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 51.0
+offset_right = 456.0
+offset_bottom = 82.0
+placeholder_text = "Welcome to the cheatzone"
+script = ExtResource("39_7xmbg")
+
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/VerySlow" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Slow" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Normal" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [0]]
@@ -2280,3 +2296,4 @@ fit_content = true
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/ShaderTest" to="UICanvas/PlayerUIRoot" method="handle_impact_1"]
+[connection signal="text_submitted" from="UICanvas/Console/ConsoleInput" to="UICanvas/Console/ConsoleInput" method="_on_text_submitted"]
