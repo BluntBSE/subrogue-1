@@ -24,43 +24,40 @@ func _ready() -> void:
         detection_parent = entity.fired_from.detector
     pass # Replace with function body.
 
-var poll_elapsed:float = 0.0
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+var poll_elapsed: float = 0.0
 func _process(delta: float) -> void:
-    var polling_frequency = 2.0
     poll_elapsed += delta
-    if poll_elapsed > polling_frequency:
+    if poll_elapsed > 2.0: # Polling frequency
         poll_elapsed = 0.0
         poll_entities()
-    
-    #poll_bodies
-    #update_signals
-    pass
 
+func is_already_tracked(_entity:Entity, entity_list:Array)->bool:
+    var is_tracked = false
+    for track_obj:Dictionary in entity_list:
+        if track_obj.entity == _entity:
+            is_tracked = true
+    return is_tracked
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
     if body is Entity and body != entity:
         body = body as Entity
         #Check if body is already tracked
+        #Don't track things belonging to your own faction, you already know where they are.
+        if body.faction == entity.faction:
+            return
+        #'Tracked' represents only the fact that body can be polled for whether or not it is visible.
+        var tracked:bool = is_already_tracked(body, tracked_entities)
+        
+            
         print(entity.name + " detector just saw " + body.name + " enter ")
         if detection_parent == null:
-            #If this is a vessel, not a munition or sub entity, tracked items are associated with the vessel
-            var tracked = false
-            for track_obj in tracked_entities:
-                if track_obj.entity == body:
-                    tracked = true
+            #If this is a vessel, not a munition or sub entity, tracked items are associated with the vessel directly
                     
             if tracked == false:
-                #This represents only the fact that body is being polled for whether or not it is visible.
-                
-                #Don't track things belonging to your own faction, you already know where they are.
-                if body.faction == entity.faction:
-                    return
                 var track_obj = {"entity":body, "tracked_by":[self]}
                 tracked_entities.append(track_obj)
                 body.died.connect(handle_tracked_object_died)
-
-                print("Added ", body.name, "to tracked entities, tracked by ", self)
+                print("Added ", body.name, "to own tracked entities, tracked by ", self)
             
             if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
                var tracked_by_this = false
@@ -68,34 +65,23 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                     if track_obj.entity == body:
                         if !track_obj.tracked_by.has(self): 
                             track_obj.tracked_by.append(self)
-            #Otherwise do nothing
+                            
         if detection_parent:
-            #Local tracking of munition's contacts, not shared with parent but used in homing calculations
+            #Local tracking of munition's contacts, not shared with parent but used in homing calculations.
+            #Essentially a local-only tracked_entities.
             if body not in local_entities:
                 if body.faction != entity.faction:
                     local_entities.append(body)
-                
-            var tracked = false
-            for track_obj in detection_parent.tracked_entities:
-                if track_obj.entity == body:
-                    tracked = true
+                    
+            #See if the parent is already seeing this
+            tracked = is_already_tracked(body, detection_parent.tracked_entities)
                     
             if tracked == false:
-                #This represents only the fact that body is being polled for whether or not it is visible.
-                if body.faction == entity.faction:
-                    return
                 var track_obj = {"entity":body, "tracked_by":[self]}
-                
                 detection_parent.tracked_entities.append(track_obj)
                 body.died.connect(detection_parent.handle_tracked_object_died)
                 print("Added ", body.name, "to tracked entities of parent: ,", detection_parent, "tracked by ", self)
             
-            if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
-               var tracked_by_this = false
-               for track_obj in detection_parent.tracked_entities:
-                    if track_obj.entity == body:
-                        if !track_obj.tracked_by.has(self): 
-                            track_obj.tracked_by.append(self)
 func poll_entities():
     # Every few seconds, calculate the sound that would reach this node, the listener, based on the body's emitter
     if detection_parent == null: # Child detectors don't do their own polling; they leave it to their parents
