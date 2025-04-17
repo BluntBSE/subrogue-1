@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=58 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -37,6 +37,7 @@
 [ext_resource type="Shader" uid="uid://bjysmg5kwy2ke" path="res://title_screen/wireframe_sub_space.gdshader" id="36_3h4iq"]
 [ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="37_3h4iq"]
 [ext_resource type="ArrayMesh" uid="uid://dkb6osgay2qlt" path="res://assets/3d/cargo_ship_1.obj" id="37_7xmbg"]
+[ext_resource type="Shader" uid="uid://c4ixw7o0cka8i" path="res://title_screen/vcr.gdshader" id="38_3h4iq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
 shader = ExtResource("37_3h4iq")
@@ -419,6 +420,24 @@ _data = {
 &"PassiveSonarOut": SubResource("Animation_gpuiy"),
 &"RESET": SubResource("Animation_pxv8h")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xmbg"]
+shader = ExtResource("38_3h4iq")
+shader_parameter/active = true
+shader_parameter/opacity = 0.0
+shader_parameter/curvature = 0.0
+shader_parameter/skip = 0.0
+shader_parameter/image_flicker = 1.0
+shader_parameter/use_noise = true
+shader_parameter/vignette_flicker_speed = 2.0
+shader_parameter/vignette_strength = 0.36
+shader_parameter/small_scanlines_speed = 3.5
+shader_parameter/small_scanlines_proximity = 0.73
+shader_parameter/small_scanlines_opacity = 0.71
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_speed = 0.0
+shader_parameter/scanline_thickness = 0.0
+shader_parameter/scanlines_spacing = 1.16
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nwwe3"]
 viewport_path = NodePath("UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport")
@@ -826,6 +845,7 @@ text = "FPS: 60"
 fit_content = true
 
 [node name="SonarOrdnanceUI" type="TextureRect" parent="UICanvas/PlayerUIRoot"]
+show_behind_parent = true
 z_as_relative = false
 layout_mode = 0
 offset_left = -11.0
@@ -1909,6 +1929,38 @@ offset_bottom = 1.0
 theme = ExtResource("8_fq2vg")
 text = "Configure"
 
+[node name="ShaderTest" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 62.243
+anchor_top = -14.5661
+anchor_right = 63.868
+anchor_bottom = -14.5661
+offset_left = -276.386
+offset_top = 817.645
+offset_right = -174.386
+offset_bottom = 857.645
+scale = Vector2(1.7, 1.7)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/ShaderTest"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "TestShader"
+
 [node name="LaunchButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup"]
 unique_name_in_owner = true
 clip_contents = true
@@ -2004,6 +2056,15 @@ offset_top = 143.957
 offset_right = 2388.41
 offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
+
+[node name="VHSScreenShader" type="ColorRect" parent="UICanvas/PlayerUIRoot"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_7xmbg")
+offset_right = 1958.0
+offset_bottom = 1076.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="UICanvas"]
 modulate = Color(1, 1, 1, 0.4)
@@ -2216,3 +2277,4 @@ fit_content = true
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/ShaderTest" to="UICanvas/PlayerUIRoot" method="handle_impact_1"]

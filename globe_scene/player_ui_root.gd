@@ -94,7 +94,34 @@ func handle_launch(_args: Dictionary) -> void:
 
 
 func handle_impact_1() -> void:
-    #var gray_mask: ColorRect = get_node("FilterMaskGray")
-    #TODO: Rework impact shader
-   pass
+
+    var vhs_mask: ColorRect = find_child("VHSScreenShader", true, false)
+    vhs_mask.material.set("shader_parameter/active", true)
+    vhs_mask.material.set("shader_parameter/opacity", 0.0)
+    # Create a Tween node
+    var tween = get_tree().create_tween()
+
+
+    tween.tween_property(
+        vhs_mask.material, 
+        "shader_parameter/opacity", 
+        1.0,  # Target value
+        0.5,  # Duration for the build-up (half of 0.8 seconds)
+    )
+
+
+    tween.tween_property(
+        vhs_mask.material, 
+        "shader_parameter/opacity", 
+        0.0,  # Target value
+        0.5,  # Duration for the build-up (half of 0.8 seconds)
+    )
+
+    # Wait for the total duration (0.8 seconds)
+    await get_tree().create_timer(1.0).timeout
+
+    # Deactivate the shader effect
+    print("Should be inactive now, wtf")
+    vhs_mask.material.set("shader_parameter/active", false)
+
     # Remove the Tween node after it's done
