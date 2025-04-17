@@ -1,5 +1,6 @@
 extends Node3D
-class_name ContextMarker
+class_name SignalPopup
+
 # Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside = false
 # The last processed input touch/mouse event. To calculate relative movement.
@@ -10,6 +11,7 @@ var last_event_time: float = -1.0
 @export var node_viewport:SubViewport
 @export var node_quad:MeshInstance3D
 @export var node_area:Area3D #Should have a collisionshape under it that matches the meshInstance3D
+#Generate it from the Mesh button at the top of the editor while mesh is selected
 
 var anchor:Node3D
 var initial_position:Vector3
@@ -23,17 +25,15 @@ var player:Node3D
 var over_entity:Node3D #If the player dropped this over an entity, it must track the entity and also allow hailing
 #var line_to #Possibly give this node ownerhsip over the line
 
-func unpack(_player:Player, node_a, node_b, _anchor):
+func unpack(_player:Player, _anchor):
     anchor = _anchor
-    print("Context marker unpack called")
-    %ContextLine.unpack(node_a,node_b,anchor)
-    %MarkerPopup.unpack(_player, self)
     #Register self with player and its marker observer
     player = _player
-    originating_entities = [player.entities.get_node("PlayerEntity")] #For now, the player only has the one entity the whole game.
-    %DistDisplay.text = str(get_distance_in_km()) + " km"   
+    originating_entities = [player.entities.find_child("PlayerEntity", true, false)] #For now, the player only has the one entity the whole game.
+   # %DistDisplay.text = str(get_distance_in_km()) + " km"   
 
 func _ready():
+    print("Signal popup has entered the scene tree")
     initial_position = position
     target_position = position
     node_area.mouse_entered.connect(_mouse_entered_area)
@@ -51,7 +51,7 @@ func _process(_delta):
     adjust_height()
     update_timer += _delta
     if update_timer > 0.5:
-        %DistDisplay.text = str(get_distance_in_km()) + " km"
+        #%DistDisplay.text = str(get_distance_in_km()) + " km"
         update_timer = 0.0
 
 
@@ -149,6 +149,7 @@ func rotate_area_to_billboard_backup():
     var camera = get_viewport().get_camera_3d()
     #var mouse = get_viewport().get_mouse_position()
     var custom_up:Vector3 = Vector3(0.0, 1.0,0.0)
+    #custom up should be 20% towards the camera relative to the up vector. If up is 90 degrees, I want it 70.
     node_quad.look_at(camera.position, custom_up, true)
     pass
     
@@ -178,12 +179,5 @@ func rotate_area_to_billboard():
 
     node_quad.look_at(camera.global_transform.origin, camera_up): Rotate the node to look at the camera using the camera's 'up' vector. This ensures that the node's 'up' direction is aligned with the camera's 'up' direction.
     """
-    %MarkSprite.look_at(camera.global_transform.origin, camera_up, true)
 
     
-func get_distance_in_km():
-    var point_a:Vector3 = originating_entities[0].position#For now, players only have one entity under their control. When there are more, this function should probably determine average distance
-    var point_b:Vector3 = target_position
-    var dist := GlobeHelpers.arc_to_km(point_a, point_b, anchor)
-    dist = snapped(dist, 0.1)
-    return dist

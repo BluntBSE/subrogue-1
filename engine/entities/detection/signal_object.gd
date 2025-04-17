@@ -100,11 +100,11 @@ func tween_to_new():
     var tween = get_tree().create_tween()
     tween.set_parallel(true)
     #Currently this tween timing is equal to the polling rate. Consider making it longer than polling rate for more ucnertainty
-    tween.tween_property(%CertaintyRadius, "scale",new_scale, 2.0)
+    #tween.tween_property(%CertaintyRadius, "scale",new_scale, 2.0)
     tween.tween_property(self, "position", new_position, 2.0)
     %CertaintyLabel.text = str(  snapped(certainty, 1)  ) + "%"
     
-    %CertaintyRadius.scale= clamp(%CertaintyRadius.scale, Vector3(3.0,3.0,3.0), Vector3(30.0,30.0,30.0))
+    #%CertaintyRadius.scale= clamp(%CertaintyRadius.scale, Vector3(3.0,3.0,3.0), Vector3(30.0,30.0,30.0))
 
     
     
@@ -112,6 +112,8 @@ func tween_to_new():
 var elapsed = 0.0
 var tween_progress = 0.0
 var tween_speed= 1.0
+
+
 func _process(delta:float)->void:
     if detected_object == null:
         #Detected object died, we're about to be queue_freed. Or should be!

@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_dgi73")
-id = "commercial_freighter_1"
-display_name = "Hanka Freighter"
-display_class = "Commercial Freighter"
-category = "commercial"
+id = "player_sub"
+display_name = "Moondance"
+display_class = "Player Sub"
+category = "player_sub"
 base_hull = 1
 base_cargo = 3
 munition_types = 0

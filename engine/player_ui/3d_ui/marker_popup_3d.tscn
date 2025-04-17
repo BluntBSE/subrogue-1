@@ -1,13 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://risi5i7imk04"]
+[gd_scene load_steps=16 format=3 uid="uid://clbwgosi7mkey"]
 
-[ext_resource type="Script" uid="uid://dotn55r8pvoob" path="res://engine/player_ui/3d_ui/ui_quad.gd" id="1_2pv6f"]
-[ext_resource type="PackedScene" uid="uid://d4m5f8ce6m1yg" path="res://engine/player_ui/3d_ui/marker_popup.tscn" id="2_2gvl6"]
-[ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="2_tkj7p"]
-[ext_resource type="Shader" uid="uid://c1on4axafa5yx" path="res://globe_scene/test_3d_1.gdshader" id="3_jiq8v"]
-[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="4_qvsad"]
-[ext_resource type="Script" uid="uid://dkjvk1iyomojp" path="res://engine/player_ui/3d_ui/context_line.gd" id="6_gfy2j"]
-[ext_resource type="Script" uid="uid://dflmlcor5j3yp" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="7_msqlf"]
-[ext_resource type="Material" uid="uid://42x084ogj248" path="res://engine/player_ui/3d_ui/context_line.material" id="8_dl31f"]
+[ext_resource type="Script" uid="uid://dotn55r8pvoob" path="res://engine/player_ui/3d_ui/ui_quad.gd" id="1_7o2e5"]
+[ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="2_a1ct5"]
+[ext_resource type="PackedScene" uid="uid://d4m5f8ce6m1yg" path="res://engine/player_ui/3d_ui/marker_popup.tscn" id="3_shufu"]
+[ext_resource type="Shader" uid="uid://c1on4axafa5yx" path="res://globe_scene/test_3d_1.gdshader" id="4_o1efl"]
+[ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="5_4vk0a"]
+[ext_resource type="Script" uid="uid://dkjvk1iyomojp" path="res://engine/player_ui/3d_ui/context_line.gd" id="6_ox8sv"]
+[ext_resource type="Script" uid="uid://dflmlcor5j3yp" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="7_jitiw"]
+[ext_resource type="Material" uid="uid://42x084ogj248" path="res://engine/player_ui/3d_ui/context_line.material" id="8_0jeaf"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_8dkyw"]
 size = Vector2(4, 5)
@@ -31,15 +31,15 @@ data = PackedVector3Array(2, -2.5, 0, -2, -2.5, 0, 2, 2.5, 0, -2, -2.5, 0, -2, 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i0x80"]
 render_priority = 0
-shader = ExtResource("3_jiq8v")
-shader_parameter/texture_albedo = ExtResource("4_qvsad")
+shader = ExtResource("4_o1efl")
+shader_parameter/texture_albedo = ExtResource("5_4vk0a")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_intensity = 5.0
 
 [sub_resource type="Curve3D" id="Curve3D_k0k1k"]
 
 [node name="ContextMarker" type="Node3D" node_paths=PackedStringArray("node_viewport", "node_quad", "node_area")]
-script = ExtResource("1_2pv6f")
+script = ExtResource("1_7o2e5")
 node_viewport = NodePath("SubViewport")
 node_quad = NodePath("MeshInstance3D")
 node_area = NodePath("MeshInstance3D/Area3D")
@@ -63,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.269663, 2.20385, 0)
 modulate = Color(0.360784, 0.901961, 0.960784, 1)
 outline_modulate = Color(0.3648, 0.90048, 0.96, 0)
 text = "3000.00km"
-font = ExtResource("2_tkj7p")
+font = ExtResource("2_a1ct5")
 font_size = 64
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -71,7 +71,7 @@ unique_name_in_owner = true
 transparent_bg = true
 size = Vector2i(400, 500)
 
-[node name="MarkerPopup" parent="SubViewport" instance=ExtResource("2_2gvl6")]
+[node name="MarkerPopup" parent="SubViewport" instance=ExtResource("3_shufu")]
 unique_name_in_owner = true
 
 [node name="MarkSprite" type="Sprite3D" parent="."]
@@ -81,7 +81,7 @@ material_overlay = SubResource("ShaderMaterial_i0x80")
 modulate = Color(0, 0.815686, 0.792157, 0)
 shaded = true
 alpha_antialiasing_mode = 1
-texture = ExtResource("4_qvsad")
+texture = ExtResource("5_4vk0a")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="MarkSprite"]
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
@@ -89,10 +89,10 @@ omni_range = 4.65
 
 [node name="ContextLine" type="Node3D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("6_gfy2j")
+script = ExtResource("6_ox8sv")
 
 [node name="Line3D" type="Path3D" parent="ContextLine"]
 unique_name_in_owner = true
 curve = SubResource("Curve3D_k0k1k")
-script = ExtResource("7_msqlf")
-material = ExtResource("8_dl31f")
+script = ExtResource("7_jitiw")
+material = ExtResource("8_0jeaf")

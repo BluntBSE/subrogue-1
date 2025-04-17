@@ -1930,38 +1930,6 @@ offset_bottom = 1.0
 theme = ExtResource("8_fq2vg")
 text = "Configure"
 
-[node name="ShaderTest" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup"]
-unique_name_in_owner = true
-clip_contents = true
-custom_minimum_size = Vector2(50, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 62.243
-anchor_top = -14.5661
-anchor_right = 63.868
-anchor_bottom = -14.5661
-offset_left = -276.386
-offset_top = 817.645
-offset_right = -174.386
-offset_bottom = 857.645
-scale = Vector2(1.7, 1.7)
-texture_normal = ExtResource("7_nwwe3")
-texture_pressed = ExtResource("32_4elw6")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/ShaderTest"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 0.75
-offset_left = 26.0
-offset_top = 11.0
-offset_right = -27.0
-offset_bottom = 1.0
-theme = ExtResource("8_fq2vg")
-text = "TestShader"
-
 [node name="LaunchButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup"]
 unique_name_in_owner = true
 clip_contents = true
@@ -2295,5 +2263,4 @@ script = ExtResource("39_7xmbg")
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/ShaderTest" to="UICanvas/PlayerUIRoot" method="handle_impact_1"]
 [connection signal="text_submitted" from="UICanvas/Console/ConsoleInput" to="UICanvas/Console/ConsoleInput" method="_on_text_submitted"]

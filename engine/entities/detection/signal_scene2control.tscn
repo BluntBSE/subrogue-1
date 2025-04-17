@@ -1,0 +1,122 @@
+[gd_scene load_steps=8 format=3 uid="uid://yfg73ny7omnl"]
+
+[ext_resource type="Texture2D" uid="uid://bsoi58tm3jjyk" path="res://assets/UI/white_icons/white_triangle_filled_2.png" id="1_pknvo"]
+[ext_resource type="Script" uid="uid://ct6euk83xdi21" path="res://engine/entities/detection/signal_scene_control.gd" id="1_y867n"]
+[ext_resource type="FontFile" uid="uid://bvmpsl44wcfpl" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Bd.otf" id="2_u576x"]
+[ext_resource type="Shader" uid="uid://brbkexwujlyae" path="res://engine/entities/detection/radial_fade_2d.gdshader" id="3_680jo"]
+[ext_resource type="Texture2D" uid="uid://p88yqscmaw7y" path="res://assets/UI/white_icons/white_filled_circle.png" id="3_aqybd"]
+
+[sub_resource type="Theme" id="Theme_aqybd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y867n"]
+shader = ExtResource("3_680jo")
+shader_parameter/disc_texture = ExtResource("3_aqybd")
+shader_parameter/start_angle = 0.0
+shader_parameter/end_angle = 360.0
+shader_parameter/frontier_head = 1.0
+shader_parameter/frontier_tail = 0.805
+
+[node name="SignalScene2Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 145.0
+offset_top = 107.0
+offset_right = 145.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y867n")
+
+[node name="FactionModulator" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="FactionModulator"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 99.0
+offset_right = 373.0
+offset_bottom = 355.0
+texture = ExtResource("1_pknvo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FactionModulator/TextureRect"]
+layout_mode = 0
+offset_left = 216.0
+offset_right = 529.0
+offset_bottom = 112.0
+
+[node name="Label" type="Label" parent="FactionModulator/TextureRect/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_aqybd")
+theme_override_fonts/font = ExtResource("2_u576x")
+theme_override_font_sizes/font_size = 20
+text = "Depth: S"
+
+[node name="Label2" type="Label" parent="FactionModulator/TextureRect/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_aqybd")
+theme_override_fonts/font = ExtResource("2_u576x")
+theme_override_font_sizes/font_size = 20
+text = "Size: 1000-3000 M3"
+
+[node name="Label3" type="Label" parent="FactionModulator/TextureRect/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_aqybd")
+theme_override_fonts/font = ExtResource("2_u576x")
+theme_override_font_sizes/font_size = 20
+text = "Pitch: 60hz"
+
+[node name="Label4" type="Label" parent="FactionModulator/TextureRect/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_aqybd")
+theme_override_fonts/font = ExtResource("2_u576x")
+theme_override_font_sizes/font_size = 20
+text = "Volume: 90db"
+
+[node name="TextureRect2" type="TextureRect" parent="FactionModulator/TextureRect"]
+material = SubResource("ShaderMaterial_y867n")
+layout_mode = 0
+offset_left = -128.0
+offset_top = -110.0
+offset_right = 397.0
+offset_bottom = 415.0
+texture = ExtResource("3_aqybd")
+
+[node name="Button" type="Button" parent="FactionModulator/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.023
+anchor_bottom = 0.029
+offset_left = 77.0
+offset_top = 442.0
+offset_right = 173.112
+offset_bottom = 470.576
+theme_override_font_sizes/font_size = 20
+text = "Pin Signal"
+
+[node name="Label5" type="Label" parent="FactionModulator/TextureRect"]
+layout_mode = 2
+offset_top = 270.0
+offset_right = 251.0
+offset_bottom = 290.0
+theme = SubResource("Theme_aqybd")
+theme_override_fonts/font = ExtResource("2_u576x")
+theme_override_font_sizes/font_size = 20
+text = "Entity 12ACD"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="FactionModulator/TextureRect"]
+layout_mode = 2
+offset_top = 306.0
+offset_right = 251.0
+offset_bottom = 326.0
+theme = SubResource("Theme_aqybd")
+theme_override_fonts/font = ExtResource("2_u576x")
+theme_override_font_sizes/font_size = 20
+text = "28%"
+horizontal_alignment = 1
+
+[connection signal="button_up" from="FactionModulator/TextureRect/Button" to="." method="_on_button_button_up"]
