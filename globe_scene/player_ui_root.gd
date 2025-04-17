@@ -99,8 +99,9 @@ func handle_impact_1() -> void:
     vhs_mask.material.set("shader_parameter/active", true)
     vhs_mask.material.set("shader_parameter/opacity", 0.0)
     # Create a Tween node
-    var tween = get_tree().create_tween()
+    await get_tree().create_timer(1.0).timeout
 
+    var tween = get_tree().create_tween()
 
     tween.tween_property(
         vhs_mask.material, 
