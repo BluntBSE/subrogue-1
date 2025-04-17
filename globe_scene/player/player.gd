@@ -41,3 +41,7 @@ func determine_spawn_point()->Node3D:
     print("ERORR! could not find a spawn node for ", self.name)
     return null
     
+
+
+func _on_console_input_text_submitted(new_text: String) -> void:
+    pass # Replace with function body.

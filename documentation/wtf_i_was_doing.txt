@@ -12,12 +12,13 @@ but not so much the player can't bamboozle the AI.
 
 
 BUG: Clicking RIGHT as the game loads can cause a crash. Fix!
-BUG:Munitions update signal object to their perspective even if outside of the targeting arc.
+
 
 
 TODO:
-    -Munitions need to poll at a much higher frequency for themselves just to assign a lock on
-    -Munition lock on is a toggle?
+
+
+
     
     Debug Munition can find and hit targets.
     -Do depth, profile checks to track.
@@ -28,10 +29,8 @@ TODO:
 QUEUE:
     1. Active ping now reveals. For how long?
     
-    Improved curve tweener per that video
     
     The ping:
-        Set up some active/passive UI controls
     
     Detection:
         Any new contacts are added immediately
@@ -41,39 +40,7 @@ QUEUE:
         After that, a pretty long (6s?) poll between updates.
         Players have a button or slider that can manually poll or increase poll rate.
 
-    Make the NPC run
-    
-    
-    VISION:
-        Entities have LISTENER CAMERAS that register to any EMITTER node that's in LOS.
-        The EMITTER NODE broadcasts signals. SoundSignal, VisualSignal, etc.
-        SoundSignal = Hz, Db. 
-        VIsualSignal = Dist only (Unless we implement camoflauge)
-        The range of this camera is equal to the biggest of among the vessel's detection modes (sonar, visual, whatever)
-        
-        Entity LISTENER CAMERAS have the following values:
-        Sensitivity: The smallest DB value that will render a signal marker. E.g: 20db.
-        Certainty-100 (C100): The range at which a sound source can be positively identified and tracked
-        Certainty-falloff: Expressed as percent/km, the rate at which certainty falls from C-100
-        Range: The absolute max range at which signals will be captured, usually very high, may not be worth showing to the player
-        
-        So, when a listener sees an emitter within its range, it subscribes to emission events
-        It calculates, based on the range, what the DB is by the time it would reach the listener
-        If the DB is at the sensitivity or greater, create a signal marker and associate it 1) with the entity/player doing the spotting and 2) with the entity that emitted the signal
-        If the DB comes from a signal that has already been positively identified (a marker for the entity exists for this player)
-        It retains that information. The marker had all that information populated even if it was hidden during the period
-        Where the entity was actively tracked (fully visible in real time)
-        
-        Anyway, if that signal falls under the C-100 threshold, calculate the remaining certainty
-        Place the signal marker on the map with a visual representation of the margin of error. 
-        Update that marker's position every so often (or maybe make it move smoothly with the originating entity)
-        Allow players to update the signal marker with information
-        
-        AREA ENTERED should be on the all entities layer, but the RAYCAST should include terrain.
-    
-    
-Remember to add active sonar target profile and passive hz to  UI instead
-    
+
 
 
 IDEAS:
