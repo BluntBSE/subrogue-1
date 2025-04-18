@@ -37,24 +37,32 @@ var initial_position:Vector3
 var target_position:Vector3
 var hover_height := 2.0 #If we are south of the equator, ke
 
+var update_threshold:float #Distance that either entity must be crossed by either entity before triggering an update
+#Checks the distance between these two values with GlobeHelpers game to km
+var last_detector_position:Vector3
+var last_detected_position:Vector3
+var offset:Vector3
 
 #CONTEXT ARGS
 var originating_entities:Array #For now this is exclusively the one entity under the player's control.
 var player:Node3D
 var over_entity:Node3D #If the player dropped this over an entity, it must track the entity and also allow hailing
 #var line_to #Possibly give this node ownerhsip over the line
-
-func unpack(detecting_object:Entity, _detected_object:Entity, _sound, _certainty):
-    position += _detected_object.linear_velocity
+func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certainty):
+    print("Signal popup unpack")
+    detecting_object = _detecting_object
+    position = _detected_object.position
     initial_position = position
     target_position = position
     print("Called signal object unpack! DO was", _detected_object)
     anchor = detecting_object.anchor
     sound = _sound
     detected_object = _detected_object
-    #Register self with player and its marker observer
+
+    # Calculate the offset once and store it
+    offset = calculate_offset()
     
-   # %DistDisplay.text = str(get_distance_in_km()) + " km"  
+    # Register self with player and its marker observer
     set_process(true)
     unpacked = true
 
@@ -67,23 +75,63 @@ func _ready():
 
  
         
+func calculate_offset() -> Vector3:
+    if not anchor or not detected_object:
+        return Vector3.ZERO
 
+    # Calculate the offset distance based on certainty
+    var km_offset = lerp(400.0, 0.0, certainty / 100.0)
+
+    # Get the position on the sphere
+    var position_on_sphere = detected_object.global_position.normalized()
+
+    # Generate a random vector
+    var random_vector = Vector3(randf(), randf(), randf()).normalized()
+
+    # Ensure the random vector is perpendicular to the sphere's surface
+    var tangential_direction = random_vector.cross(position_on_sphere).normalized()
+
+    # Calculate the offset position
+    var offset_distance = GlobeHelpers.km_to_arc_distance(km_offset, anchor)
+    return tangential_direction * offset_distance
+    
 func match_detected_velocity():
-    position = detected_object.position
-
+    if detected_object:  # Ensure the detected object exists
+        # Get the detected object's velocity
+        target_position += detected_object.linear_velocity/60
+     
 func _process(_delta):
-    #rotate_area_to_billboard()
+    # Update the target position to the detected object's position with the precomputed offset
+    target_position = detected_object.position + offset
+
+    # Adjust height, scale, and rotation
     adjust_height()
     scale_with_camera_distance()
-    match_detected_velocity()
     rotate_area_to_anchor()
 
 
-    
-    
+func add_random_offset():
+    if not anchor or not detected_object:
+        return
 
+    # Calculate the offset distance based on certainty
+    var km_offset = lerp(900.0, 0.0, certainty / 100.0)
 
+    # Get the position on the sphere
+    var position_on_sphere = detected_object.global_position.normalized()
 
+    # Generate a random vector
+    var random_vector = Vector3(randf(), randf(), randf()).normalized()
+
+    # Ensure the random vector is perpendicular to the sphere's surface
+    var tangential_direction = random_vector.cross(position_on_sphere).normalized()
+
+    # Calculate the offset position
+    var offset_distance = GlobeHelpers.km_to_arc_distance(km_offset, anchor)
+    var offset_position = tangential_direction * offset_distance
+
+    # Apply the offset to the target position
+    target_position += offset_position
 
 func _mouse_entered_area():
     is_mouse_inside = true
@@ -93,48 +141,6 @@ func _mouse_exited_area():
     is_mouse_inside = false
 
 
-
-func offset_self():
-    #Used for appearing in a random location when first detected.
-    var km_offset = lerp(200.0,0.0,(certainty/100) )
-    anchor = detecting_object.anchor
-    
-    # Calculate a random tangential direction
-    var position_on_sphere = position
-    var random_vector = Vector3(randf(), randf(), randf()).normalized()
-    #flip the random vector half the time to allow negatives
-    var rand = randf()
-    if rand < 0.49:
-        random_vector = -random_vector
-    var new_direction = random_vector.cross(position_on_sphere).normalized()
-    var new_position = position + (new_direction * GlobeHelpers.km_to_arc_distance(km_offset, anchor))
-    
-    position = new_position
-    look_at(anchor.position)
-    
-func new_offset_position()->Vector3:
-    #After the initial detection, this is used to determine where the signal ought to lerp to
-    var km_offset = lerp(200.0,0.0,(certainty/100) )
-    #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
-    anchor = detecting_object.anchor
-    
-    # Calculate a random tangential direction
-    var position_on_sphere = detected_object.position
-    var random_vector = Vector3(randf(), randf(), randf()).normalized()
-    #flip the random vector half the time to allow negatives
-    var rand = randf()
-    if rand < 0.49:
-        random_vector = -random_vector
-    var new_direction = random_vector.cross(position_on_sphere).normalized()
-    
-    var new_position = detected_object.position + (new_direction * GlobeHelpers.km_to_arc_distance(km_offset, anchor))
-    return new_position
-
-func new_certainty_scale()->Vector3:
-    anchor = detecting_object.anchor
-    var km_offset = lerp(200.0,0.0,(certainty/100) )
-    var vecfloat = GlobeHelpers.km_to_arc_distance(km_offset, anchor) * 2.0
-    return clamp(Vector3(vecfloat, vecfloat, vecfloat), Vector3(3.0,3.0,3.0), Vector3(15.0,15.0,15.0))
 
 func _unhandled_input(event):
     # Check if the event is a non-mouse/non-touch event
@@ -211,25 +217,13 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
     node_viewport.push_input(event)
 
 func adjust_height()->void:
+    #Move to surface of sphere relative to the camera
     var camera = get_viewport().get_camera_3d()
     var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized()
     var factor:float = abs((target_position.y / 10.0)) + 1.0
     position = lerp(target_position, target_position + (direction_to_camera * hover_height), factor)
     
 
-func rotate_area_to_billboard():
-    var camera = get_viewport().get_camera_3d()
-    
-    # Calculate the direction from the node to the camera
-    var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized()
-    
-    # Get the camera's up vector
-    var camera_up: Vector3 = camera.global_transform.basis.y
-    
-    # Rotate the node to look at the camera with the camera's up vector
-    node_quad.look_at(camera.global_transform.origin, camera_up, true)
-
-  
 
 func rotate_area_to_anchor():
     var camera = get_viewport().get_camera_3d()
@@ -248,3 +242,15 @@ func scale_with_camera_distance():
     var sf = lerp(0.2,1.8, ratio)
     sf = clamp(sf, 0.2,2.5)
     scale = Vector3(sf,sf,sf)
+
+
+func calculate_update_threshold():
+    pass
+
+func check_for_updates():
+    var diff:Vector3 = last_detected_position-last_detector_position
+    var dist:float = diff.length()
+    if dist > update_threshold:
+        #Do update
+        pass
+    pass

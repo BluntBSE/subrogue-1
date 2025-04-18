@@ -59,10 +59,7 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                 tracked_entities.append(track_obj)
                 body.died.connect(handle_tracked_object_died)
                 print("Added ", body.name, "to own tracked entities, tracked by ", self)
-                 #DEBUG - Signal test
-                var signal_scene = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
-                signal_scene.global_position = body.global_position           
-                entity.anchor.add_child(signal_scene)
+
             if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
                var tracked_by_this = false
                for track_obj in tracked_entities:
