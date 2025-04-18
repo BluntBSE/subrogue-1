@@ -27,9 +27,10 @@ func _ready() -> void:
 var poll_elapsed: float = 0.0
 func _process(delta: float) -> void:
     poll_elapsed += delta
-    if poll_elapsed > 2.0: # Polling frequency
+    if poll_elapsed > 1.0: # Polling frequency
         poll_elapsed = 0.0
-       # poll_entities()
+        poll_entities()
+
 
 func is_already_tracked(_entity:Entity, entity_list:Array)->bool:
     var is_tracked = false
@@ -86,8 +87,6 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                 print("Added ", body.name, "to tracked entities of parent: ,", detection_parent, "tracked by ", self)
 
 
-
-
             
 func poll_entities():
     # Every few seconds, calculate the sound that would reach this node, the listener, based on the body's emitter
@@ -120,18 +119,20 @@ func poll_entities():
             # Update the signal object with the highest certainty
             if max_certainty > 0.0:
                 if !sigmap.has(dict.entity):
-                    var sigob: SignalObject = load("res://engine/entities/detection/signal_scene.tscn").instantiate()
-                    sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
+                    var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
                     entity.anchor.add_child(sigob)
+                    sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
                     sigmap[dict.entity] = sigob
-
+            
                 sigmap[dict.entity].certainty = max_certainty
-                sigmap[dict.entity].tween_to_new()
+                #Should we be constantly updating the sound? Might as well since it's the attenuated DB right?
+                sigmap.sound = sound
 
                 # If the most certain detector is not `self`, call `turn_red()`
                 if most_certain_detector != self:
-                    sigmap[dict.entity].turn_red()
-
+                    pass
+                    
+                #ACTIVE IDENTIFICATION
                 # Handle visibility and identification
                 var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
                 if dist <= c100:
@@ -142,7 +143,9 @@ func poll_entities():
                     if sigmap[dict.entity].visible == false:
                         sigmap[dict.entity].visible = true
                         dict.entity.render.update_mesh_visibilities(entity.faction, false)
-                        
+ 
+
+  
 func calculate_certainty(dist: float, c100: float, cfalloff: float, min_certainty: float) -> float:
     # Calculate certainty based on distance
     var certainty: float

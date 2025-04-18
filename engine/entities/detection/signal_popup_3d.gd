@@ -1,6 +1,25 @@
 extends Node3D
 class_name SignalPopup
 
+####SIGNAL DATA ITSELF####
+var faction #For visibility?
+var detecting_object:Entity
+var display_name:String
+var time_ago:float #Last time this signal was updated
+var detected_object:Entity
+var certainty:float = 50.0
+var hidden:bool
+var sound:Sound
+var last_sound:Sound
+var lerping = false #For animation
+
+#unpacked
+var unpacked:bool = false
+
+
+
+
+####3D VARIABLES####
 # Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside = false
 # The last processed input touch/mouse event. To calculate relative movement.
@@ -25,36 +44,44 @@ var player:Node3D
 var over_entity:Node3D #If the player dropped this over an entity, it must track the entity and also allow hailing
 #var line_to #Possibly give this node ownerhsip over the line
 
-func unpack(_player:Player, _anchor):
-    anchor = _anchor
+func unpack(detecting_object:Entity, _detected_object:Entity, _sound, _certainty):
+    position += _detected_object.linear_velocity
+    initial_position = position
+    target_position = position
+    print("Called signal object unpack! DO was", _detected_object)
+    anchor = detecting_object.anchor
+    sound = _sound
+    detected_object = _detected_object
     #Register self with player and its marker observer
-    player = _player
-    originating_entities = [player.entities.find_child("PlayerEntity", true, false)] #For now, the player only has the one entity the whole game.
-   # %DistDisplay.text = str(get_distance_in_km()) + " km"   
+    
+   # %DistDisplay.text = str(get_distance_in_km()) + " km"  
+    set_process(true)
+    unpacked = true
 
 func _ready():
     print("Signal popup has entered the scene tree")
-    initial_position = position
-    target_position = position
     node_area.mouse_entered.connect(_mouse_entered_area)
     node_area.mouse_exited.connect(_mouse_exited_area)
     node_area.input_event.connect(_mouse_input_event)
+    set_process(false)
 
  
         
 
+func match_detected_velocity():
+    position = detected_object.position
 
-
-var update_timer:float = 0.0 #How often does the dist display update?
 func _process(_delta):
-    rotate_area_to_billboard()
+    #rotate_area_to_billboard()
     adjust_height()
     scale_with_camera_distance()
+    match_detected_velocity()
+    rotate_area_to_anchor()
+
+
     
-    update_timer += _delta
-    if update_timer > 0.5:
-        #%DistDisplay.text = str(get_distance_in_km()) + " km"
-        update_timer = 0.0
+    
+
 
 
 
@@ -65,6 +92,49 @@ func _mouse_entered_area():
 func _mouse_exited_area():
     is_mouse_inside = false
 
+
+
+func offset_self():
+    #Used for appearing in a random location when first detected.
+    var km_offset = lerp(200.0,0.0,(certainty/100) )
+    anchor = detecting_object.anchor
+    
+    # Calculate a random tangential direction
+    var position_on_sphere = position
+    var random_vector = Vector3(randf(), randf(), randf()).normalized()
+    #flip the random vector half the time to allow negatives
+    var rand = randf()
+    if rand < 0.49:
+        random_vector = -random_vector
+    var new_direction = random_vector.cross(position_on_sphere).normalized()
+    var new_position = position + (new_direction * GlobeHelpers.km_to_arc_distance(km_offset, anchor))
+    
+    position = new_position
+    look_at(anchor.position)
+    
+func new_offset_position()->Vector3:
+    #After the initial detection, this is used to determine where the signal ought to lerp to
+    var km_offset = lerp(200.0,0.0,(certainty/100) )
+    #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
+    anchor = detecting_object.anchor
+    
+    # Calculate a random tangential direction
+    var position_on_sphere = detected_object.position
+    var random_vector = Vector3(randf(), randf(), randf()).normalized()
+    #flip the random vector half the time to allow negatives
+    var rand = randf()
+    if rand < 0.49:
+        random_vector = -random_vector
+    var new_direction = random_vector.cross(position_on_sphere).normalized()
+    
+    var new_position = detected_object.position + (new_direction * GlobeHelpers.km_to_arc_distance(km_offset, anchor))
+    return new_position
+
+func new_certainty_scale()->Vector3:
+    anchor = detecting_object.anchor
+    var km_offset = lerp(200.0,0.0,(certainty/100) )
+    var vecfloat = GlobeHelpers.km_to_arc_distance(km_offset, anchor) * 2.0
+    return clamp(Vector3(vecfloat, vecfloat, vecfloat), Vector3(3.0,3.0,3.0), Vector3(15.0,15.0,15.0))
 
 func _unhandled_input(event):
     # Check if the event is a non-mouse/non-touch event
@@ -146,15 +216,7 @@ func adjust_height()->void:
     var factor:float = abs((target_position.y / 10.0)) + 1.0
     position = lerp(target_position, target_position + (direction_to_camera * hover_height), factor)
     
-func rotate_area_to_billboard_backup():
-    
-    var camera = get_viewport().get_camera_3d()
-    #var mouse = get_viewport().get_mouse_position()
-    var custom_up:Vector3 = Vector3(0.0, 1.0,0.0)
-    #custom up should be 20% towards the camera relative to the up vector. If up is 90 degrees, I want it 70.
-    node_quad.look_at(camera.position, custom_up, true)
-    pass
-    
+
 func rotate_area_to_billboard():
     var camera = get_viewport().get_camera_3d()
     
@@ -166,30 +228,23 @@ func rotate_area_to_billboard():
     
     # Rotate the node to look at the camera with the camera's up vector
     node_quad.look_at(camera.global_transform.origin, camera_up, true)
-    """
-    Explanation
-    Get the Camera:
 
-    var camera = get_viewport().get_camera_3d(): Get the current 3D camera from the viewport.
-    Calculate the Direction to the Camera:
+  
 
-    var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized(): Calculate the normalized direction vector from the node to the camera.
-    Get the Camera's Up Vector:
-    ##It's this basis part that confuses me a bit. 
-    var camera_up: Vector3 = camera.global_transform.basis.y: Extract the 'up' vector from the camera's transform. This vector represents the camera's 'up' direction.
-    Rotate the Node to Look at the Camera:
-
-    node_quad.look_at(camera.global_transform.origin, camera_up): Rotate the node to look at the camera using the camera's 'up' vector. This ensures that the node's 'up' direction is aligned with the camera's 'up' direction.
-    """
-
-    
+func rotate_area_to_anchor():
+    var camera = get_viewport().get_camera_3d()
+    var direction_to_anchor:Vector3 = (camera.global_transform.origin - anchor.global_transform.origin).normalized()
+    var camera_up = camera.global_transform.basis.y
+    node_quad.look_at(anchor.global_transform.origin, camera_up, false)
+    rotation.y = 90.0
+    pass
+  
 func scale_with_camera_distance():
     #Base parameters: at 200 distance, scale of 1.0.
     #At 1000 distance, scale of 3.0
     var camera = get_viewport().get_camera_3d()
-    var distance = camera.position - position
-    print("Distance is", distance.length())
-    var ratio = inverse_lerp(80, 200, distance.length())
-    var sf = lerp(0.9,3.0, ratio)
-    sf = clamp(sf, 0.9,2.4)
+    var distance = camera.global_position - global_position
+    var ratio = inverse_lerp(30, 300, distance.length())
+    var sf = lerp(0.2,1.8, ratio)
+    sf = clamp(sf, 0.2,2.5)
     scale = Vector3(sf,sf,sf)
