@@ -122,7 +122,6 @@ func handle_impact_1() -> void:
     await get_tree().create_timer(1.0).timeout
 
     # Deactivate the shader effect
-    print("Should be inactive now, wtf")
     vhs_mask.material.set("shader_parameter/active", false)
 
     # Remove the Tween node after it's done

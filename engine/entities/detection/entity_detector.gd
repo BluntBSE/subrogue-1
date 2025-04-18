@@ -7,7 +7,7 @@ class_name EntityDetector
 var detection_parent:EntityDetector = null #Used for ordnance that updates detection for its parent.
 var sensitivity:float = 5.0 #Expressed as minimum DB to hear
 var c100:float = 200.0 #Expressed as km
-var cfalloff:float = 0.1 #Certainty lost per 10km.
+var cfalloff:float = 0.15 #Certainty lost per 10km.
 var min_certainty: float = 10.0 #Always at least 10% certain in detection position
 var max_range:float = 2000.0 #Expressed as km
 var positively_identified = [] #Signals from this source will always be marked if the profile, etc. is the same.
@@ -15,7 +15,7 @@ var tracked_entities = [] #{"entity":entity, "tracked_by":[self, child, child]}
 var local_entities = []#Used for situations where we want to think about what this munition sees ONLY
 var known_signals = [] 
 var sigmap = {} # {"entity":entity, "signal":signal} Signals match to the array below, which we for updating those independently.
-
+var archive_map = {}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     if entity is Munition:
@@ -113,17 +113,31 @@ func poll_entities():
                         max_certainty = certainty
                         most_certain_detector = detector
 
+            if max_certainty  <= 0.0:
+                #Can't hear it. If you previously saw it, put it in the archive
+                if sigmap.has(dict.entity):
+                    var sigob:SignalPopup = sigmap[dict.entity]
+                    sigmap[dict.entity].disable()
+                    archive_map[dict.entity] = sigmap[dict.entity]
+                    sigmap.erase(dict.entity)
             # Update the signal object with the highest certainty
             if max_certainty > 0.0:
                 if !sigmap.has(dict.entity):
-                    var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
-                    entity.anchor.add_child(sigob)
-                    sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
-                    sigmap[dict.entity] = sigob
-            
+                    if !archive_map.has(dict.entity):
+                        #This signal has never been tracked before
+                        var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
+                        entity.anchor.add_child(sigob)
+                        sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
+                        sigmap[dict.entity] = sigob
+                    else:
+                        var sigob:SignalPopup = archive_map[dict.entity]
+                        sigmap[dict.entity] = sigob
+                        archive_map.erase(dict.entity)
+                        sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
+        
                 sigmap[dict.entity].certainty = max_certainty
                 #Should we be constantly updating the sound? Might as well since it's the attenuated DB right?
-                sigmap.sound = sound
+                sigmap[dict.entity].sound = sound
 
                 # If the most certain detector is not `self`, call `turn_red()`
                 if most_certain_detector != self:

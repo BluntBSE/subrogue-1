@@ -53,7 +53,13 @@ var originating_entities:Array #For now this is exclusively the one entity under
 var player:Node3D
 var over_entity:Node3D #If the player dropped this over an entity, it must track the entity and also allow hailing
 #var line_to #Possibly give this node ownerhsip over the line
+
+func disable():
+    visible = false
+    set_process(false)
+
 func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certainty):
+    visible = true
     print("Signal popup unpack")
     detecting_object = _detecting_object
     position = _detected_object.position
@@ -240,9 +246,8 @@ func scale_with_camera_distance():
 func calculate_update_threshold()->float:
     #How far can the distance between the entities change before an update is necessary?
     #Let's say at certainty 20, you must have 500km of change. At certainty 99, you must travel only 50km
-    print("Certainty is: ", certainty)
     var factor = inverse_lerp(10.0, 100.0, certainty)
-    var threshold = lerp(500.0, 25.0, factor)
+    var threshold = lerp(300.0, 25.0, factor)
     return threshold
 
 
