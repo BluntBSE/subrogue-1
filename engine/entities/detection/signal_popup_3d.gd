@@ -49,6 +49,8 @@ var update_timer:float = 0.0 #How often does the dist display update?
 func _process(_delta):
     rotate_area_to_billboard()
     adjust_height()
+    scale_with_camera_distance()
+    
     update_timer += _delta
     if update_timer > 0.5:
         #%DistDisplay.text = str(get_distance_in_km()) + " km"
@@ -181,3 +183,13 @@ func rotate_area_to_billboard():
     """
 
     
+func scale_with_camera_distance():
+    #Base parameters: at 200 distance, scale of 1.0.
+    #At 1000 distance, scale of 3.0
+    var camera = get_viewport().get_camera_3d()
+    var distance = camera.position - position
+    print("Distance is", distance.length())
+    var ratio = inverse_lerp(80, 200, distance.length())
+    var sf = lerp(0.9,3.0, ratio)
+    sf = clamp(sf, 0.9,2.4)
+    scale = Vector3(sf,sf,sf)

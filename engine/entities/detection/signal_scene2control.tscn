@@ -43,6 +43,7 @@ offset_bottom = 355.0
 texture = ExtResource("1_pknvo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FactionModulator/TextureRect"]
+visible = false
 layout_mode = 0
 offset_left = 216.0
 offset_right = 529.0
@@ -85,37 +86,53 @@ offset_right = 397.0
 offset_bottom = 415.0
 texture = ExtResource("3_aqybd")
 
+[node name="TextureRect" type="TextureRect" parent="FactionModulator/TextureRect"]
+modulate = Color(0.0562916, 0.0562916, 0.0562916, 1)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -77.0
+offset_top = -59.0
+offset_right = 350.0
+offset_bottom = 368.0
+texture = ExtResource("3_aqybd")
+
 [node name="Button" type="Button" parent="FactionModulator/TextureRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.023
 anchor_bottom = 0.029
-offset_left = 77.0
-offset_top = 442.0
-offset_right = 173.112
-offset_bottom = 470.576
-theme_override_font_sizes/font_size = 20
+offset_left = 22.0
+offset_top = -110.0
+offset_right = 257.112
+offset_bottom = -40.424
+theme_override_font_sizes/font_size = 50
 text = "Pin Signal"
 
 [node name="Label5" type="Label" parent="FactionModulator/TextureRect"]
 layout_mode = 2
-offset_top = 270.0
-offset_right = 251.0
-offset_bottom = 290.0
+offset_left = -77.0
+offset_top = 268.0
+offset_right = 330.0
+offset_bottom = 363.0
 theme = SubResource("Theme_aqybd")
+theme_override_colors/font_outline_color = Color(1.8049e-08, 0.107273, 0.188867, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = ExtResource("2_u576x")
-theme_override_font_sizes/font_size = 20
-text = "Entity 12ACD"
+theme_override_font_sizes/font_size = 78
+text = "Roma-92"
 horizontal_alignment = 1
 
 [node name="Label6" type="Label" parent="FactionModulator/TextureRect"]
+visible = false
 layout_mode = 2
-offset_top = 306.0
-offset_right = 251.0
-offset_bottom = 326.0
+offset_left = 303.0
+offset_top = 112.0
+offset_right = 554.0
+offset_bottom = 173.0
 theme = SubResource("Theme_aqybd")
 theme_override_fonts/font = ExtResource("2_u576x")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 78
 text = "28%"
 horizontal_alignment = 1
 
