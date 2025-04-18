@@ -47,4 +47,5 @@ size = Vector2i(500, 500)
 size_2d_override = Vector2i(800, 800)
 size_2d_override_stretch = true
 
-[node name="SignalScene2Control" parent="SubViewport" instance=ExtResource("3_fg65r")]
+[node name="SignalControlScene" parent="SubViewport" instance=ExtResource("3_fg65r")]
+unique_name_in_owner = true

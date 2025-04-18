@@ -6,8 +6,8 @@ class_name EntityDetector
 @onready var detection_area = %DetectionArea
 var detection_parent:EntityDetector = null #Used for ordnance that updates detection for its parent.
 var sensitivity:float = 5.0 #Expressed as minimum DB to hear
-var c100:float = 300.0 #Expressed as km
-var cfalloff:float = 0.2 #Certainty lost per 10km.
+var c100:float = 200.0 #Expressed as km
+var cfalloff:float = 0.1 #Certainty lost per 10km.
 var min_certainty: float = 10.0 #Always at least 10% certain in detection position
 var max_range:float = 2000.0 #Expressed as km
 var positively_identified = [] #Signals from this source will always be marked if the profile, etc. is the same.
