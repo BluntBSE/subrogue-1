@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://8k5fjvye3gcg"]
+
+[ext_resource type="Script" uid="uid://clx601o6rx1iu" path="res://engine/entities/detection/spiky_boy.gd" id="1_cv6f5"]
+[ext_resource type="Shader" uid="uid://vcf2tkc18xlt" path="res://engine/entities/detection/spiky_boy.gdshader" id="1_u1dcd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s5n5v"]
+render_priority = 0
+shader = ExtResource("1_u1dcd")
+
+[sub_resource type="SphereMesh" id="SphereMesh_x8ony"]
+radial_segments = 32
+rings = 16
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.04408)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_s5n5v")
+mesh = SubResource("SphereMesh_x8ony")
+script = ExtResource("1_cv6f5")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=61 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -39,6 +39,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dkb6osgay2qlt" path="res://assets/3d/cargo_ship_1.obj" id="37_7xmbg"]
 [ext_resource type="Shader" uid="uid://c4ixw7o0cka8i" path="res://title_screen/vcr.gdshader" id="38_3h4iq"]
 [ext_resource type="Script" uid="uid://d1otdxkyfls70" path="res://globe_scene/player/console_input.gd" id="39_7xmbg"]
+[ext_resource type="PackedScene" uid="uid://8k5fjvye3gcg" path="res://engine/entities/detection/spiky_boy.tscn" id="39_nwwe3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
 shader = ExtResource("37_3h4iq")
@@ -567,6 +568,9 @@ _data = {
 &"camera_rotate_1": SubResource("Animation_smroy"),
 &"rock_horizontal_1": SubResource("Animation_7xmbg")
 }
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fq2vg"]
+viewport_path = NodePath("UICanvas/SignalInspection/TextureRect/ShipPreview/SubViewport")
 
 [node name="player" type="Node3D"]
 script = ExtResource("1_iwyah")
@@ -2216,6 +2220,114 @@ theme = ExtResource("8_fq2vg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Strike Depth: C"
+fit_content = true
+
+[node name="SignalInspection" type="Control" parent="UICanvas"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1723.0
+offset_top = 485.0
+offset_right = 1763.0
+offset_bottom = 525.0
+
+[node name="TextureRect" type="TextureRect" parent="UICanvas/SignalInspection"]
+layout_mode = 0
+offset_left = -204.0
+offset_top = -385.0
+offset_right = 214.0
+offset_bottom = 615.0
+texture = ExtResource("35_smroy")
+expand_mode = 5
+flip_v = true
+
+[node name="ShipPreview" type="TextureRect" parent="UICanvas/SignalInspection/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 71.0
+offset_top = 132.0
+offset_right = 327.0
+offset_bottom = 388.0
+texture = SubResource("ViewportTexture_fq2vg")
+stretch_mode = 3
+
+[node name="SubViewport" type="SubViewport" parent="UICanvas/SignalInspection/TextureRect/ShipPreview"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_scale = 2.0
+texture_mipmap_bias = -0.109
+anisotropic_filtering_level = 0
+fsr_sharpness = 2.0
+canvas_item_default_texture_filter = 0
+size = Vector2i(256, 256)
+
+[node name="Node3D" parent="UICanvas/SignalInspection/TextureRect/ShipPreview/SubViewport" instance=ExtResource("39_nwwe3")]
+
+[node name="LineEdit" type="LineEdit" parent="UICanvas/SignalInspection/TextureRect"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 98.0
+offset_right = 322.0
+offset_bottom = 129.0
+theme = ExtResource("8_fq2vg")
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 16
+text = "ROMA-97"
+placeholder_text = "Unknown SIgnal"
+
+[node name="LineEdit2" type="LineEdit" parent="UICanvas/SignalInspection/TextureRect"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 406.0
+offset_right = 322.0
+offset_bottom = 437.0
+theme = ExtResource("8_fq2vg")
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 16
+text = "Perseus Freighter?"
+placeholder_text = "Unknown SIgnal"
+
+[node name="Label3" type="Label" parent="UICanvas/SignalInspection/TextureRect"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 61.0
+offset_right = 290.0
+offset_bottom = 84.0
+theme = ExtResource("8_fq2vg")
+theme_override_font_sizes/font_size = 16
+text = "Unidentified Signal"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/SignalInspection"]
+layout_mode = 0
+offset_left = -123.0
+offset_top = 80.0
+offset_right = 195.0
+offset_bottom = 367.0
+theme = ExtResource("8_fq2vg")
+theme_override_constants/separation = 10
+
+[node name="Label5" type="RichTextLabel" parent="UICanvas/SignalInspection/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Pitch: 80hz"
+fit_content = true
+
+[node name="Label6" type="RichTextLabel" parent="UICanvas/SignalInspection/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Volume: 90db"
+fit_content = true
+
+[node name="Label12" type="RichTextLabel" parent="UICanvas/SignalInspection/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Depth: S"
 fit_content = true
 
 [node name="Console" type="Control" parent="UICanvas"]
