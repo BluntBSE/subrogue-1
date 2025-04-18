@@ -43,7 +43,6 @@ offset_bottom = 355.0
 texture = ExtResource("1_pknvo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FactionModulator/TextureRect"]
-visible = false
 layout_mode = 0
 offset_left = 216.0
 offset_right = 529.0
@@ -70,12 +69,21 @@ theme_override_fonts/font = ExtResource("2_u576x")
 theme_override_font_sizes/font_size = 20
 text = "Pitch: 60hz"
 
-[node name="Label4" type="Label" parent="FactionModulator/TextureRect/VBoxContainer"]
+[node name="Volume" type="Label" parent="FactionModulator/TextureRect/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_aqybd")
 theme_override_fonts/font = ExtResource("2_u576x")
 theme_override_font_sizes/font_size = 20
 text = "Volume: 90db"
+
+[node name="Certainty" type="Label" parent="FactionModulator/TextureRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_aqybd")
+theme_override_fonts/font = ExtResource("2_u576x")
+theme_override_font_sizes/font_size = 20
+text = "Certainty: 20%"
 
 [node name="TextureRect2" type="TextureRect" parent="FactionModulator/TextureRect"]
 material = SubResource("ShaderMaterial_y867n")

@@ -7,7 +7,10 @@ var detecting_object:Entity
 var display_name:String
 var time_ago:float #Last time this signal was updated
 var detected_object:Entity
-var certainty:float = 50.0
+var certainty:float = 50.0:
+    set(value):
+        certainty = value
+        update_threshold = calculate_update_threshold()
 var hidden:bool
 var sound:Sound
 var last_sound:Sound
@@ -37,7 +40,8 @@ var initial_position:Vector3
 var target_position:Vector3
 var hover_height := 2.0 #If we are south of the equator, ke
 
-var update_threshold:float #Distance that either entity must be crossed by either entity before triggering an update
+var needs_update:bool = false
+var update_threshold:float #Distance in game KM that either entity must be crossed by either entity before triggering an update
 #Checks the distance between these two values with GlobeHelpers game to km
 var last_detector_position:Vector3
 var last_detected_position:Vector3
@@ -61,9 +65,12 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
 
     # Calculate the offset once and store it
     offset = calculate_offset()
+    #How far must the entities travel before updating again?
+    update_threshold = calculate_update_threshold()
     
     # Register self with player and its marker observer
     set_process(true)
+    needs_update = false
     unpacked = true
 
 func _ready():
@@ -102,36 +109,21 @@ func match_detected_velocity():
      
 func _process(_delta):
     # Update the target position to the detected object's position with the precomputed offset
-    target_position = detected_object.position + offset
 
-    # Adjust height, scale, and rotation
-    adjust_height()
+    # Move to target position
+    adjust_position(_delta)
     scale_with_camera_distance()
     rotate_area_to_anchor()
+    check_update_necessary()
+    update_if_needed()
+    
+    #DEBUG
+    var vol_display = find_child("Volume", true, false)
+    var cert_display = find_child("Certainty", true, false)
+    vol_display.text = "Volume: " + str(sound.volume) +"db"
+    cert_display.text = "Certainty: " + str(certainty) + "%"
 
 
-func add_random_offset():
-    if not anchor or not detected_object:
-        return
-
-    # Calculate the offset distance based on certainty
-    var km_offset = lerp(900.0, 0.0, certainty / 100.0)
-
-    # Get the position on the sphere
-    var position_on_sphere = detected_object.global_position.normalized()
-
-    # Generate a random vector
-    var random_vector = Vector3(randf(), randf(), randf()).normalized()
-
-    # Ensure the random vector is perpendicular to the sphere's surface
-    var tangential_direction = random_vector.cross(position_on_sphere).normalized()
-
-    # Calculate the offset position
-    var offset_distance = GlobeHelpers.km_to_arc_distance(km_offset, anchor)
-    var offset_position = tangential_direction * offset_distance
-
-    # Apply the offset to the target position
-    target_position += offset_position
 
 func _mouse_entered_area():
     is_mouse_inside = true
@@ -150,6 +142,9 @@ func _unhandled_input(event):
             # handled via Physics Picking.
             return
     node_viewport.push_input(event)
+    
+    
+
 
 
 func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
@@ -216,11 +211,11 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
     # Finally, send the processed input event to the viewport.
     node_viewport.push_input(event)
 
-func adjust_height()->void:
+func adjust_position()->void:
     #Move to surface of sphere relative to the camera
     var camera = get_viewport().get_camera_3d()
     var direction_to_camera: Vector3 = (camera.global_transform.origin - node_quad.global_transform.origin).normalized()
-    var factor:float = abs((target_position.y / 10.0)) + 1.0
+    var factor:float = abs((target_position.y / 10.0)) + 1.0 #I forgot why I did this, but I'm not touching it. Kind of looks like it's meant to rotate the panel as you move up and down the planetary pole
     position = lerp(target_position, target_position + (direction_to_camera * hover_height), factor)
     
 
@@ -244,13 +239,53 @@ func scale_with_camera_distance():
     scale = Vector3(sf,sf,sf)
 
 
-func calculate_update_threshold():
+func calculate_update_threshold()->float:
+    #How far can the distance between the entities change before an update is necessary?
+    #Let's say at certainty 20, you must have 500km of change. At certainty 99, you must travel only 50km
+    var factor = inverse_lerp(1.0, 70.0, certainty)
+    var threshold = lerp(300.0, 0.1, factor)
+    return threshold
+
+
+func check_update_necessary()->void:
+    
+    var last_dist_km = GlobeHelpers.arc_to_km(last_detected_position, last_detector_position, anchor)
+    var cur_dist_km = GlobeHelpers.arc_to_km(detected_object.global_position, detecting_object.global_position, anchor)
+    var dist_diff = abs(last_dist_km - cur_dist_km)
+    print("dist diff: ", dist_diff, " vs ", update_threshold)
+    if dist_diff > update_threshold:
+        needs_update = true
+
+func update_if_needed()->void:
+    if needs_update == true:
+        print("Update for signal popup was called!")
+        last_detected_position = detected_object.global_position
+        last_detector_position = detecting_object.global_position
+        update_threshold = calculate_update_threshold()
+        print("Threshold calculated to be", update_threshold)
+        #Move to a new random offset based on certainty
+        offset = calculate_offset()
+        needs_update = false
+        target_position = detected_object.position + offset
+
+        #Scale based on certainty etc.
+    pass
+    
+func handle_detected_object_died():
+    queue_free()
     pass
 
-func check_for_updates():
-    var diff:Vector3 = last_detected_position-last_detector_position
-    var dist:float = diff.length()
-    if dist > update_threshold:
-        #Do update
-        pass
+func handle_detecting_object_died():
+    #Actually maybe it's notj ust a queue_free here because there may be other objects detecting the same object, and we need
+    #To reassign
+    #queue_free()
+    #This will also involve updating last_detected_position if necessary, maybe handled by "do_update"
     pass
+
+#TODO:
+#Handle when detected destroyed
+#Handle when detector destroyed
+#Update offset as a function of time (engine or game time?) * certainty
+#Fade colors (and size?) as a function of certainty
+#Once size is implemented, modify size as a function of size.
+#Once depth is implemented, modify sprite as a function of depth
