@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://risi5i7imk04"]
+
+[ext_resource type="Script" uid="uid://bvdy134j6801h" path="res://engine/entities/detection/signal_popup_3d.gd" id="1_xcvil"]
+[ext_resource type="PackedScene" uid="uid://yfg73ny7omnl" path="res://engine/entities/detection/signal_scene2control.tscn" id="3_fg65r"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_8dkyw"]
+size = Vector2(4, 4)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2il6d"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_clhrm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8alx"]
+resource_local_to_scene = true
+blend_mode = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_2il6d")
+detail_mask = SubResource("ViewportTexture_clhrm")
+billboard_keep_scale = true
+grow_amount = 1.438
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rtv0r"]
+data = PackedVector3Array(2, -2, 0, -2, -2, 0, 2, 2, 0, -2, -2, 0, -2, 2, 0, 2, 2, 0)
+
+[node name="SignalPopup" type="Node3D" node_paths=PackedStringArray("node_viewport", "node_quad", "node_area")]
+script = ExtResource("1_xcvil")
+node_viewport = NodePath("SubViewport")
+node_quad = NodePath("MeshInstance3D")
+node_area = NodePath("MeshInstance3D/Area3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+mesh = SubResource("QuadMesh_8dkyw")
+surface_material_override/0 = SubResource("StandardMaterial3D_p8alx")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("ConcavePolygonShape3D_rtv0r")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(500, 500)
+size_2d_override = Vector2i(800, 800)
+size_2d_override_stretch = true
+
+[node name="SignalScene2Control" parent="SubViewport" instance=ExtResource("3_fg65r")]

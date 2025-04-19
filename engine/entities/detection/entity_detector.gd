@@ -6,16 +6,16 @@ class_name EntityDetector
 @onready var detection_area = %DetectionArea
 var detection_parent:EntityDetector = null #Used for ordnance that updates detection for its parent.
 var sensitivity:float = 5.0 #Expressed as minimum DB to hear
-var c100:float = 300.0 #Expressed as km
-var cfalloff:float = 0.2 #Certainty lost per 10km.
-var min_certainty: float = 20.0 #Always at least 20% certain in detection position
+var c100:float = 200.0 #Expressed as km
+var cfalloff:float = 0.15 #Certainty lost per 10km.
+var min_certainty: float = 10.0 #Always at least 10% certain in detection position
 var max_range:float = 2000.0 #Expressed as km
 var positively_identified = [] #Signals from this source will always be marked if the profile, etc. is the same.
 var tracked_entities = [] #{"entity":entity, "tracked_by":[self, child, child]}
 var local_entities = []#Used for situations where we want to think about what this munition sees ONLY
 var known_signals = [] 
 var sigmap = {} # {"entity":entity, "signal":signal} Signals match to the array below, which we for updating those independently.
-
+var archive_map = {}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     if entity is Munition:
@@ -27,9 +27,10 @@ func _ready() -> void:
 var poll_elapsed: float = 0.0
 func _process(delta: float) -> void:
     poll_elapsed += delta
-    if poll_elapsed > 2.0: # Polling frequency
+    if poll_elapsed > 1.0: # Polling frequency
         poll_elapsed = 0.0
         poll_entities()
+
 
 func is_already_tracked(_entity:Entity, entity_list:Array)->bool:
     var is_tracked = false
@@ -58,7 +59,7 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                 tracked_entities.append(track_obj)
                 body.died.connect(handle_tracked_object_died)
                 print("Added ", body.name, "to own tracked entities, tracked by ", self)
-            
+
             if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
                var tracked_by_this = false
                for track_obj in tracked_entities:
@@ -81,6 +82,8 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                 detection_parent.tracked_entities.append(track_obj)
                 body.died.connect(detection_parent.handle_tracked_object_died)
                 print("Added ", body.name, "to tracked entities of parent: ,", detection_parent, "tracked by ", self)
+
+
             
 func poll_entities():
     # Every few seconds, calculate the sound that would reach this node, the listener, based on the body's emitter
@@ -110,21 +113,37 @@ func poll_entities():
                         max_certainty = certainty
                         most_certain_detector = detector
 
+            if max_certainty  <= 0.0:
+                #Can't hear it. If you previously saw it, put it in the archive
+                if sigmap.has(dict.entity):
+                    var sigob:SignalPopup = sigmap[dict.entity]
+                    sigmap[dict.entity].disable()
+                    archive_map[dict.entity] = sigmap[dict.entity]
+                    sigmap.erase(dict.entity)
             # Update the signal object with the highest certainty
             if max_certainty > 0.0:
                 if !sigmap.has(dict.entity):
-                    var sigob: SignalObject = load("res://engine/entities/detection/signal_scene.tscn").instantiate()
-                    sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
-                    entity.anchor.add_child(sigob)
-                    sigmap[dict.entity] = sigob
-
+                    if !archive_map.has(dict.entity):
+                        #This signal has never been tracked before
+                        var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
+                        entity.anchor.add_child(sigob)
+                        sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
+                        sigmap[dict.entity] = sigob
+                    else:
+                        var sigob:SignalPopup = archive_map[dict.entity]
+                        sigmap[dict.entity] = sigob
+                        archive_map.erase(dict.entity)
+                        sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
+        
                 sigmap[dict.entity].certainty = max_certainty
-                sigmap[dict.entity].tween_to_new()
+                #Should we be constantly updating the sound? Might as well since it's the attenuated DB right?
+                sigmap[dict.entity].sound = sound
 
                 # If the most certain detector is not `self`, call `turn_red()`
                 if most_certain_detector != self:
-                    sigmap[dict.entity].turn_red()
-
+                    pass
+                    
+                #ACTIVE IDENTIFICATION
                 # Handle visibility and identification
                 var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
                 if dist <= c100:
@@ -135,7 +154,9 @@ func poll_entities():
                     if sigmap[dict.entity].visible == false:
                         sigmap[dict.entity].visible = true
                         dict.entity.render.update_mesh_visibilities(entity.faction, false)
-                        
+ 
+
+  
 func calculate_certainty(dist: float, c100: float, cfalloff: float, min_certainty: float) -> float:
     # Calculate certainty based on distance
     var certainty: float

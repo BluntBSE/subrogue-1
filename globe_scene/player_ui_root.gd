@@ -107,7 +107,7 @@ func handle_impact_1() -> void:
         vhs_mask.material, 
         "shader_parameter/opacity", 
         1.0,  # Target value
-        0.5,  # Duration for the build-up (half of 0.8 seconds)
+        0.5,  # Duration
     )
 
 
@@ -115,14 +115,61 @@ func handle_impact_1() -> void:
         vhs_mask.material, 
         "shader_parameter/opacity", 
         0.0,  # Target value
-        0.5,  # Duration for the build-up (half of 0.8 seconds)
+        0.5,  
     )
 
-    # Wait for the total duration (0.8 seconds)
     await get_tree().create_timer(1.0).timeout
 
     # Deactivate the shader effect
-    print("Should be inactive now, wtf")
     vhs_mask.material.set("shader_parameter/active", false)
 
-    # Remove the Tween node after it's done
+###SIGNAL INSPECTION
+var inspecting_signal:SignalPopup
+signal edited_signal_name
+signal edited_signal_type
+signal edited_color
+
+func handle_opened_signal(sig:SignalPopup):
+    inspecting_signal = sig
+    %SignalInspection.visible  = true
+    var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
+    player.play("slide_in")
+    pass
+
+
+func _on_signal_inspector_toggle_button_up() -> void:
+    var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
+    player.play_backwards("slide_in")
+    await player.animation_finished
+    %SignalInspection.visible = false
+    inspecting_signal.stream.disconnect(handle_SI_stream)
+    pass # Replace with function body.
+
+func handle_SI_stream(dict:Dictionary):#{"volume":x, "certainty":x, "pitch":x}
+    %SignalPitch.text = "Pitch: " + str(dict.pitch)
+    %SignalCertainty.text = "Certainty: "+str(dict.certainty)
+    %SignalVolume.text = "Volume: " + str(dict.volume)+"db"
+    pass
+
+
+func _on_signal_id_input_text_changed(new_text: String) -> void:
+    edited_signal_name.emit(new_text)
+    pass # Replace with function body.
+
+
+func _on_signal_color_changer_color_changed(color: Color) -> void:
+    edited_color.emit(color)
+    pass # Replace with function body.
+
+func handle_color_stream(color:Color)->void:
+    print("Called handle color stream idk", color)
+    #We do this as opposed to updating directly from the color picker because there might be events that cause signal objects to change their own color
+    #And we want to update the player accordingly
+    #E.G: Faction identification, if not perfect identification.
+    var spike_mesh:MeshInstance3D = %SpikyBoy.get_node("MeshInstance3D")
+    print(spike_mesh)
+    print("Merp")
+    print(spike_mesh.material_override)
+    var shader_color:Vector3 = Vector3(color.r,color.g,color.b)
+    spike_mesh.material_override.set("shader_parameter/color", shader_color)
+    %SignalColorChanger.modulate = color

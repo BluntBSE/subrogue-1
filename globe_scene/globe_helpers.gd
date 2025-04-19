@@ -125,3 +125,9 @@ static func offset_position_by_km(point: Vector3, direction: Vector3, km: float,
     
     
     return new_position
+
+static func recursively_update_visibility(node, layer, _visible):
+    for child in node.get_children():
+        if child.get("layers") != null:
+            child.set_layer_mask_value(layer, _visible)
+        recursively_update_visibility(child,layer, _visible)

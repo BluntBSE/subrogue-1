@@ -8,6 +8,7 @@ TODO:
     The signal appears offset from the actual position with some kind of uncertainty modifier.
     The signal updates to a new location if the target's actual position exceeds some kind of threshold
     Proposal: 600km when last at 20%, 50km when at 90%+, so closer targets update more frequently.
+
     Signals should be clickable, and open the side panel (or mid panel)
     
 Current description:

@@ -149,7 +149,6 @@ func rotate_area_to_billboard_backup():
     var camera = get_viewport().get_camera_3d()
     #var mouse = get_viewport().get_mouse_position()
     var custom_up:Vector3 = Vector3(0.0, 1.0,0.0)
-    #custom up should be 20% towards the camera relative to the up vector. If up is 90 degrees, I want it 70.
     node_quad.look_at(camera.position, custom_up, true)
     pass
     
