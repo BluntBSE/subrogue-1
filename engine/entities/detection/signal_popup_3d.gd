@@ -31,6 +31,8 @@ var unpacked:bool = false
 ####3D VARIABLES####
 # Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside = false
+
+var is_mouse_over_transparent = true
 # The last processed input touch/mouse event. To calculate relative movement.
 var last_event_pos2D = null
 # The time of the last event in seconds since engine start.
@@ -176,9 +178,8 @@ func _unhandled_input(event):
     
 
 
-
 func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
-    # Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
+    # Get mesh size to detect edges and make conversions. This code only supports PlaneMesh and QuadMesh.
     var quad_mesh_size = node_quad.mesh.size
 
     # Event position in Area3D in world coordinate space.
@@ -190,7 +191,6 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
     # Convert position to a coordinate space relative to the Area3D node.
     # NOTE: affine_inverse accounts for the Area3D node's scale, rotation, and position in the scene!
     event_pos3D = node_quad.global_transform.affine_inverse() * event_pos3D
-
 
     var event_pos2D: Vector2 = Vector2()
 
@@ -210,6 +210,17 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
         event_pos2D.x *= node_viewport.size.x
         event_pos2D.y *= node_viewport.size.y
         # We need to do these conversions so the event's position is in the viewport's coordinate system.
+
+        # Check if the pixel at event_pos2D is transparent
+        var viewport_texture: ViewportTexture = node_viewport.get_texture()
+        if viewport_texture:
+            var image: Image = node_viewport.get_texture().get_image()
+            var pixel_color: Color = image.get_pixelv(event_pos2D)
+
+            if pixel_color.a == 0.0:
+                # The pixel is fully transparent, forward the input to the game world
+                get_viewport().push_input(event)
+                return
 
     elif last_event_pos2D != null:
         # Fall back to the last known event position.
@@ -239,6 +250,7 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
     # Finally, send the processed input event to the viewport.
     node_viewport.push_input(event)
+ 
 
 
 
