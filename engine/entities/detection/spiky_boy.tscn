@@ -4,8 +4,10 @@
 [ext_resource type="Shader" uid="uid://vcf2tkc18xlt" path="res://engine/entities/detection/spiky_boy.gdshader" id="1_u1dcd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s5n5v"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_u1dcd")
+shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_x8ony"]
 radial_segments = 32

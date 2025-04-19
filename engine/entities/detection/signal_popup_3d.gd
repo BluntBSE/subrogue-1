@@ -2,6 +2,9 @@ extends Node3D
 class_name SignalPopup
 
 ####SIGNAL DATA ITSELF####
+var positively_identified:bool = false
+var signal_id = "Roma-97"
+var color:Color = Color("ffffff")
 var faction #For visibility?
 var detecting_object:Entity
 var display_name:String
@@ -57,27 +60,33 @@ var over_entity:Node3D #If the player dropped this over an entity, it must track
 #SIGNALS
 signal opened
 signal closed
+signal stream
+signal stream_color
 
 func disable():
+    #TODO unhook any signals here
     visible = false
     set_process(false)
 
 func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certainty):
     visible = true
-    print("Signal popup unpack")
     detecting_object = _detecting_object
     position = _detected_object.position
     initial_position = position
     target_position = position
-    print("Called signal object unpack! DO was", _detected_object)
     anchor = detecting_object.anchor
     sound = _sound
     detected_object = _detected_object
     if detecting_object.is_player:
+        #TODO: Disconnect and connect all these signals as something fades in and out of view.
         player = detecting_object.played_by
         opened.connect(player.UI.handle_opened_signal)
+        player.UI.edited_signal_name.connect(handle_update_name)
+        player.UI.edited_color.connect(handle_update_color)
+        stream_color.connect(player.UI.handle_color_stream)
     
     #Signals
+    #TODO: If they're already connected, don't do it again.
     detected_object.died.connect(handle_detected_object_died)
     detecting_object.died.connect(handle_detecting_object_died)
     # Calculate the offset once and store it
@@ -92,7 +101,6 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     
 
 func _ready():
-    print("Signal popup has entered the scene tree")
     node_area.mouse_entered.connect(_mouse_entered_area)
     node_area.mouse_exited.connect(_mouse_exited_area)
     node_area.input_event.connect(_mouse_input_event)
@@ -136,11 +144,8 @@ func _process(_delta):
     
     if last_velocity:
         position += last_velocity / 60
-    #DEBUG
-    var vol_display = find_child("Volume", true, false)
-    var cert_display = find_child("Certainty", true, false)
-    vol_display.text = "Volume: " + str(sound.volume) +"db"
-    cert_display.text = "Certainty: " + str(certainty) + "%"
+    print("EMITTING ", color)
+    stream_color.emit(color)   
 
 
 
@@ -290,6 +295,8 @@ func update_if_needed() -> void:
         last_update_time = current_time
         last_velocity = detected_object.linear_velocity
         modulate_by_certainty()
+        stream.emit({"volume":sound.volume, "pitch":sound.pitch, "certainty":certainty})
+
     
 func handle_detected_object_died(_entity:Entity):
     queue_free()
@@ -342,3 +349,14 @@ func _on_area_3d_mouse_exited() -> void:
     hover_modulator.modulate = Color("ffffff")
     
     pass # Replace with function body.
+
+func handle_update_name(str:String):
+    if positively_identified == false:
+        signal_id = str
+        var id_label:Label = find_child("SignalID", true, false)
+        id_label.text = signal_id
+        
+func handle_update_color(_color:Color):
+    %SignalControlScene.get_node("AssignedColorModulator").modulate = _color
+    color = _color
+    
