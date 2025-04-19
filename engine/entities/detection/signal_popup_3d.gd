@@ -4,7 +4,10 @@ class_name SignalPopup
 ####SIGNAL DATA ITSELF####
 var positively_identified:bool = false
 var signal_id = "Roma-97"
-var color:Color = Color("ffffff")
+var color:Color = Color("ffffff"):
+    set(value):
+        color = value
+        stream_color.emit(color)   
 var faction #For visibility?
 var detecting_object:Entity
 var display_name:String
@@ -148,8 +151,7 @@ func _process(_delta):
     
     if last_velocity:
         position += last_velocity / 60
-    print("EMITTING ", color)
-    stream_color.emit(color)   
+
 
 
 
@@ -189,7 +191,6 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
     # NOTE: affine_inverse accounts for the Area3D node's scale, rotation, and position in the scene!
     event_pos3D = node_quad.global_transform.affine_inverse() * event_pos3D
 
-    # TODO: Adapt to bilboard mode or avoid completely.
 
     var event_pos2D: Vector2 = Vector2()
 
@@ -369,6 +370,7 @@ func handle_update_color(_color:Color):
     color = _color
 
 func positively_identify():
-    positively_identified = true   
-    #If the unidentified UI is open, this should close it and open the positive ID one.
-    identified.emit(self) 
+    if positively_identified == false:
+        positively_identified = true   
+        #If the unidentified UI is open, this should close it and open the positive ID one.
+        identified.emit(self) 
