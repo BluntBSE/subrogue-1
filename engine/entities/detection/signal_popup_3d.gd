@@ -54,6 +54,10 @@ var player:Node3D
 var over_entity:Node3D #If the player dropped this over an entity, it must track the entity and also allow hailing
 #var line_to #Possibly give this node ownerhsip over the line
 
+#SIGNALS
+signal opened
+signal closed
+
 func disable():
     visible = false
     set_process(false)
@@ -69,6 +73,9 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     anchor = detecting_object.anchor
     sound = _sound
     detected_object = _detected_object
+    if detecting_object.is_player:
+        player = detecting_object.played_by
+        opened.connect(player.UI.handle_opened_signal)
     
     #Signals
     detected_object.died.connect(handle_detected_object_died)
@@ -82,6 +89,7 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     set_process(true)
     needs_update = false
     unpacked = true
+    
 
 func _ready():
     print("Signal popup has entered the scene tree")
@@ -312,3 +320,25 @@ func modulate_by_certainty():
 #Fade colors (and size?) as a function of certainty
 #Once size is implemented, modify size as a function of size.
 #Once depth is implemented, modify sprite as a function of depth
+
+
+func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+    #print("Got an input event")
+    #if event is InputEventMouse:
+    if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+        print("Got a LEFT CLICK on the signal event")
+        opened.emit(self)
+    pass # Replace with function body.
+
+
+func _on_area_3d_mouse_entered() -> void:
+    var hover_modulator = find_child("HoverModulator", true, false)
+    hover_modulator.modulate = Color("00aea8")
+    pass # Replace with function body.
+
+
+func _on_area_3d_mouse_exited() -> void:
+    var hover_modulator = find_child("HoverModulator", true, false)
+    hover_modulator.modulate = Color("ffffff")
+    
+    pass # Replace with function body.

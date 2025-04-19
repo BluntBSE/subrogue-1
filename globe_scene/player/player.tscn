@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=64 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -571,6 +571,63 @@ _data = {
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fq2vg"]
 viewport_path = NodePath("UICanvas/SignalInspection/TextureRect/ShipPreview/SubViewport")
+
+[sub_resource type="Animation" id="Animation_nwwe3"]
+resource_name = "slide_in"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2113, -0.25, 0, 0.25, 0, 1720, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(483, -0.25, 0, 0.25, 0, 483, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_fq2vg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2113, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(483, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q7i7m"]
+_data = {
+&"RESET": SubResource("Animation_fq2vg"),
+&"slide_in": SubResource("Animation_nwwe3")
+}
 
 [node name="player" type="Node3D"]
 script = ExtResource("1_iwyah")
@@ -2223,12 +2280,14 @@ text = "Strike Depth: C"
 fit_content = true
 
 [node name="SignalInspection" type="Control" parent="UICanvas"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1723.0
-offset_top = 485.0
-offset_right = 1763.0
-offset_bottom = 525.0
+offset_left = 2113.0
+offset_top = 483.0
+offset_right = 2153.0
+offset_bottom = 523.0
 
 [node name="TextureRect" type="TextureRect" parent="UICanvas/SignalInspection"]
 layout_mode = 0
@@ -2329,6 +2388,20 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Depth: S"
 fit_content = true
+
+[node name="VolumeSliderKnobT03Blue2" type="TextureButton" parent="UICanvas/SignalInspection"]
+modulate = Color(1, 1, 1, 0.4)
+layout_mode = 0
+offset_left = -238.0
+offset_top = -42.0
+offset_right = -138.0
+offset_bottom = 58.0
+texture_normal = ExtResource("33_abu4l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/SignalInspection"]
+libraries = {
+&"": SubResource("AnimationLibrary_q7i7m")
+}
 
 [node name="Console" type="Control" parent="UICanvas"]
 layout_mode = 3

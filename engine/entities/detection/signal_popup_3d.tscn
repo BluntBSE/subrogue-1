@@ -49,3 +49,7 @@ size_2d_override_stretch = true
 
 [node name="SignalControlScene" parent="SubViewport" instance=ExtResource("3_fg65r")]
 unique_name_in_owner = true
+
+[connection signal="input_event" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_input_event"]
+[connection signal="mouse_entered" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_mouse_exited"]

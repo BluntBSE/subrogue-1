@@ -125,3 +125,9 @@ func handle_impact_1() -> void:
     vhs_mask.material.set("shader_parameter/active", false)
 
     # Remove the Tween node after it's done
+    
+func handle_opened_signal(sig:SignalPopup):
+    %SignalInspection.visible  = true
+    var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
+    player.play("slide_in")
+    pass
