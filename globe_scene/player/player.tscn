@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=69 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -571,8 +571,90 @@ _data = {
 &"rock_horizontal_1": SubResource("Animation_7xmbg")
 }
 
+[sub_resource type="Animation" id="Animation_q7i7m"]
+resource_name = "slide_in"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2113, -0.15, 0, 0.15, 0, 1720, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(483, -0.15, 0, 0.15, 0, 483, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_558vm"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2113, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(483, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oh4je"]
+_data = {
+&"RESET": SubResource("Animation_558vm"),
+&"slide_in": SubResource("Animation_q7i7m")
+}
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_fq2vg"]
 viewport_path = NodePath("UICanvas/SignalInspection/TextureRect/SignalPreview/SubViewport")
+
+[sub_resource type="Animation" id="Animation_fq2vg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2113, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(483, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_nwwe3"]
 resource_name = "slide_in"
@@ -598,31 +680,6 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(483, -0.25, 0, 0.25, 0, 483, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.3)
-}
-
-[sub_resource type="Animation" id="Animation_fq2vg"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(2113, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(483, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q7i7m"]
@@ -2110,13 +2167,13 @@ scale = Vector2(0.21625, 0.21625)
 texture = ExtResource("34_lu2fn")
 
 [node name="EntityInspection" type="Control" parent="UICanvas"]
-visible = false
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1723.0
-offset_top = 485.0
-offset_right = 1763.0
-offset_bottom = 525.0
+offset_left = 2113.0
+offset_top = 483.0
+offset_right = 2153.0
+offset_bottom = 523.0
 
 [node name="TextureRect" type="TextureRect" parent="UICanvas/EntityInspection"]
 layout_mode = 0
@@ -2281,8 +2338,24 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Strike Depth: C"
 fit_content = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/EntityInspection"]
+libraries = {
+&"": SubResource("AnimationLibrary_oh4je")
+}
+
+[node name="EntityInspectorToggle" type="TextureButton" parent="UICanvas/EntityInspection"]
+modulate = Color(1, 1, 1, 0.4)
+layout_mode = 0
+offset_left = 155.0
+offset_top = -42.0
+offset_right = 255.0
+offset_bottom = 58.0
+texture_normal = ExtResource("33_abu4l")
+texture_hover = ExtResource("40_fq2vg")
+
 [node name="SignalInspection" type="Control" parent="UICanvas"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2113.0
@@ -2425,7 +2498,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_q7i7m")
 }
 
-[node name="TextureButton" type="TextureButton" parent="UICanvas/SignalInspection"]
+[node name="EditButton" type="TextureButton" parent="UICanvas/SignalInspection"]
 layout_mode = 0
 offset_left = 113.0
 offset_top = -294.0
@@ -2480,6 +2553,7 @@ script = ExtResource("39_7xmbg")
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/EntityInspection/EntityInspectorToggle" to="UICanvas/PlayerUIRoot" method="_on_entity_inspector_toggle_button_up"]
 [connection signal="text_changed" from="UICanvas/SignalInspection/TextureRect/SignalIDInput" to="UICanvas/PlayerUIRoot" method="_on_signal_id_input_text_changed"]
 [connection signal="color_changed" from="UICanvas/SignalInspection/VBoxContainer/SignalColorChanger" to="UICanvas/PlayerUIRoot" method="_on_signal_color_changer_color_changed"]
 [connection signal="button_up" from="UICanvas/SignalInspection/SignalInspectorToggle" to="UICanvas/PlayerUIRoot" method="_on_signal_inspector_toggle_button_up"]

@@ -129,6 +129,7 @@ signal edited_signal_name
 signal edited_signal_type
 signal edited_color
 
+#Unidentified open
 func handle_opened_signal(sig:SignalPopup):
     inspecting_signal = sig
     %SignalInspection.visible  = true
@@ -136,6 +137,26 @@ func handle_opened_signal(sig:SignalPopup):
     player.play("slide_in")
     pass
 
+#Identified open
+func handle_openened_identified_signal(sig:SignalPopup):
+    inspecting_signal = sig
+    %SignalInspection.visible = false
+    %EntityInspection.visible = true
+    var player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
+    player.play("slide_in")
+
+func handle_identified_signal(sig:SignalPopup):
+    #If this is the signal you were already looking at, and it's positive now,
+    #Close signal inspector and open the more detailed entity inspector
+    if sig == inspecting_signal:
+        var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
+        player.play_backwards("slide_in")
+        await player.animation_finished
+        %SignalInspection.visible = false
+        %EntityInspection.visible = true
+        player = %EntityInspection.get_node("AnimationPlayer")
+        player.play("slide_in")
+    #entityinspection.load_entity()
 
 func _on_signal_inspector_toggle_button_up() -> void:
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
@@ -173,3 +194,11 @@ func handle_color_stream(color:Color)->void:
     var shader_color:Vector3 = Vector3(color.r,color.g,color.b)
     spike_mesh.material_override.set("shader_parameter/color", shader_color)
     %SignalColorChanger.modulate = color
+
+
+func _on_entity_inspector_toggle_button_up() -> void:
+    var player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
+    player.play_backwards("slide_in")
+    await player.animation_finished
+    %EntityInspection.visible = false
+    pass # Replace with function body.

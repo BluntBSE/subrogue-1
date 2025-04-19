@@ -58,7 +58,9 @@ var over_entity:Node3D #If the player dropped this over an entity, it must track
 #var line_to #Possibly give this node ownerhsip over the line
 
 #SIGNALS
-signal opened
+signal unidentified_opened
+signal identified
+signal identified_opened
 signal closed
 signal stream
 signal stream_color
@@ -80,7 +82,9 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     if detecting_object.is_player:
         #TODO: Disconnect and connect all these signals as something fades in and out of view.
         player = detecting_object.played_by
-        opened.connect(player.UI.handle_opened_signal)
+        unidentified_opened.connect(player.UI.handle_opened_signal)
+        identified_opened.connect(player.UI.handle_openened_identified_signal)
+        identified.connect(player.UI.handle_identified_signal)
         player.UI.edited_signal_name.connect(handle_update_name)
         player.UI.edited_color.connect(handle_update_color)
         stream_color.connect(player.UI.handle_color_stream)
@@ -333,8 +337,11 @@ func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Ve
     #print("Got an input event")
     #if event is InputEventMouse:
     if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
-        print("Got a LEFT CLICK on the signal event")
-        opened.emit(self)
+        if positively_identified == false:
+         unidentified_opened.emit(self)
+        if positively_identified == true:
+            identified_opened.emit(self)
+            pass
     pass # Replace with function body.
 
 
@@ -351,12 +358,17 @@ func _on_area_3d_mouse_exited() -> void:
     pass # Replace with function body.
 
 func handle_update_name(str:String):
-    if positively_identified == false:
         signal_id = str
         var id_label:Label = find_child("SignalID", true, false)
         id_label.text = signal_id
         
+
+        
 func handle_update_color(_color:Color):
     %SignalControlScene.get_node("AssignedColorModulator").modulate = _color
     color = _color
-    
+
+func positively_identify():
+    positively_identified = true   
+    #If the unidentified UI is open, this should close it and open the positive ID one.
+    identified.emit(self) 
