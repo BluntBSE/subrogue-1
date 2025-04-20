@@ -37,7 +37,9 @@ func single_player_start():
         var player_obj = preload("res://globe_scene/player/player.tscn").instantiate()
         player_obj.set_multiplayer_authority(peer)
         player_obj.name = "player_"+str(peer)
-        game_root.players["player_1"] = peer
+        game_root.peers["player_1"] = peer
+        game_root.players["player_1"] = player_obj
+        player_obj.faction_layer = GlobalConst.layers.PLAYER_1
         %Players.add_child(player_obj)   
     pass
     
@@ -53,10 +55,12 @@ func multi_player_start():
     for i in range(peers.size()):
         var peer = peers[i]
         var slot_str = "player_"+str(i+1) #Player 1 is 1, not 0.
-        game_root.players[slot_str]=peer
+        game_root.peers[slot_str]=peer
         var player_obj = preload("res://globe_scene/player/player.tscn").instantiate()
         player_obj.set_multiplayer_authority(peer)
         player_obj.name = "player_"+str(peer)
+        player_obj.faction_layer = GlobalConst.layers[slot_str]
+        game_root.players[slot_str] = player_obj
         %Players.add_child(player_obj)
     
     pass

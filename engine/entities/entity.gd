@@ -20,7 +20,7 @@ var height:float = GlobalConst.height; #Given that the planet has a known radius
 @onready var spotlight:SpotLight3D = %Spotlight
 @onready var range_spot:SpotLight3D = %RangeSpot
 @export var scale_factor:float = 1.0
-@export var faction:int = GlobalConst.layers.PLAYER_1
+@export var faction:Faction
 @export var can_move := true
 @onready var atts:EntityAtts = %EntityAttributes
 @onready var behavior:EntityBehavior = %EntityBehavior
@@ -46,19 +46,22 @@ func _ready() -> void:
         recursively_update_debug_layers(self, false)
     pass # Replace with function body.
 
-func unpack(type_id, _faction, with_name):
-    print("ENTITY UNPACKING: ", name)
+func unpack(type_id, _faction:Faction, with_name):
     faction = _faction
-    is_player = GlobalConst.is_layer_player(_faction)
+    is_player = GlobalConst.is_layer_player(_faction.faction_layer)
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
         played_by = get_parent().get_parent()
+        #TODO: Replace with a name chosen by player in advance, or from a list of player sub names
+        given_name = NameGenerator.generate_name()
     else:
         #When we create missions, we will want to generate entities with specific names.
         if with_name == null:
             given_name = NameGenerator.generate_name()
             
-            
-    render.update_mesh_visibilities(faction, true)   
+    if faction.faction_color:
+        render.update_colors(faction.faction_color)
+        
+    render.update_mesh_visibilities(faction.faction_layer, true)   
     #temp spotlight adjustments
     spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)
@@ -69,7 +72,7 @@ func unpack(type_id, _faction, with_name):
     var _type:EntityType = GlobalConst.entity_lib.get(type_id)
     apply_entity_type(_type)
     faction = _faction
-    var is_npc:bool = !GlobalConst.is_layer_player(faction)  
+    var is_npc:bool = !GlobalConst.is_layer_player(faction.faction_layer)  
     npc = is_npc
     #Turn on AI only for NPCs. We might also want to enable it if this is a munition. Stay tuned.
     if is_npc:

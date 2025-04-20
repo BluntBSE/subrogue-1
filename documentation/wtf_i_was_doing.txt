@@ -16,7 +16,8 @@ BUG: Clicking RIGHT as the game loads can cause a crash. Fix!
 
 
 TODO:
-
+    -Add "MOVE" to the list of right click commands unless we can make it possible to pass
+    input from the mesh that signals occupy
 
 
     

@@ -1334,7 +1334,7 @@ spawn_path = NodePath("..")
 
 [node name="Cascadia" type="Node3D" parent="Factions"]
 script = ExtResource("33_x8218")
-faction_color = Color(0.826088, 1, 0.80839, 1)
+faction_color = Color(0, 0.819608, 0, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/Cascadia"]
 script = ExtResource("34_n1474")
@@ -1417,6 +1417,28 @@ faction_color = Color(0, 0.819608, 0, 1)
 script = ExtResource("34_n1474")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/UnitedSlavicStates/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="UnitedIndustrialists" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/UnitedIndustrialists"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/UnitedIndustrialists/FactionEntities"]
+_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
+spawn_path = NodePath("..")
+
+[node name="NovaBasilica" type="Node3D" parent="Factions"]
+script = ExtResource("33_x8218")
+faction_color = Color(0, 0.819608, 0, 1)
+
+[node name="FactionEntities" type="Node3D" parent="Factions/NovaBasilica"]
+script = ExtResource("34_n1474")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/NovaBasilica/FactionEntities"]
 _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
 spawn_path = NodePath("..")
 

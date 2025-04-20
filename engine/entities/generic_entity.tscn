@@ -58,6 +58,7 @@ emission_energy_multiplier = 6.0
 size = Vector2(2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ju4"]
+resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0, 0.681901, 0.656941, 1)
 albedo_texture = ExtResource("9_oaqcn")
@@ -159,7 +160,6 @@ contact_monitor = true
 script = ExtResource("1_du6w5")
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
 scale_factor = 0.0
-faction = 0
 can_move = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

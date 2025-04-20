@@ -72,6 +72,23 @@ static func kph_to_game_s(kph: float) -> float:
     var game_units_per_second = kpmin * conversion_factor
     
     return game_units_per_second
+    
+
+
+static func game_s_to_kph(game_units_per_second: float) -> float:
+    var sphere_radius = 100.0 # in game units
+    var earth_radius_km = 6378.0 # in kilometers
+    
+    # Calculate the conversion factor from game units to kilometers
+    var conversion_factor = earth_radius_km / sphere_radius
+    
+    # Convert game units per second to kilometers per minute
+    var kpmin = game_units_per_second * conversion_factor
+    
+    # Convert kilometers per minute to kilometers per hour
+    var kph = kpmin * 60
+    
+    return kph
 
 static func generate_move_command(entity:Entity, target_position:Vector3, layer:int = 2, mask:int = 2) ->MoveCommand:
     #print("MOVE COMMAND GENERATED FOR ENTITY: ", entity.name)

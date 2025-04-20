@@ -10,6 +10,7 @@ var c100:float = 200.0 #Expressed as km
 var cfalloff:float = 0.15 #Certainty lost per 10km.
 var min_certainty: float = 10.0 #Always at least 10% certain in detection position
 var max_range:float = 2000.0 #Expressed as km
+#Signals themselves carry a positively_identified signal. We might not neeed the array here.
 var positively_identified = [] #Signals from this source will always be marked if the profile, etc. is the same.
 var tracked_entities = [] #{"entity":entity, "tracked_by":[self, child, child]}
 var local_entities = []#Used for situations where we want to think about what this munition sees ONLY
@@ -24,11 +25,7 @@ func _ready() -> void:
         detection_parent = entity.fired_from.detector
     pass # Replace with function body.
 
-var poll_elapsed: float = 0.0
 func _process(delta: float) -> void:
-    poll_elapsed += delta
-    if poll_elapsed > 1.0: # Polling frequency
-        poll_elapsed = 0.0
         poll_entities()
 
 
@@ -147,13 +144,13 @@ func poll_entities():
                 # Handle visibility and identification
                 var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
                 if dist <= c100:
-                    dict.entity.render.update_mesh_visibilities(entity.faction, true)
-                    positively_identified.append(dict.entity)
+                    dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, true)
+                    sigmap[dict.entity].positively_identify()
                     sigmap[dict.entity].visible = false
                 elif dist > c100 + 50.0:
                     if sigmap[dict.entity].visible == false:
                         sigmap[dict.entity].visible = true
-                        dict.entity.render.update_mesh_visibilities(entity.faction, false)
+                        dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, false)
  
 
   
