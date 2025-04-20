@@ -93,6 +93,7 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
         player.UI.edited_signal_name.connect(handle_update_name)
         player.UI.edited_color.connect(handle_update_color)
         stream_color.connect(player.UI.handle_color_stream)
+
     
     #Signals
     #TODO: If they're already connected, don't do it again.

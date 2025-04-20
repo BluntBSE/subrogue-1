@@ -142,15 +142,17 @@ func handle_openened_identified_signal(sig:SignalPopup):
     inspecting_signal = sig
     %SignalInspection.visible = false
     %EntityInspection.visible = true
+    load_inspected_entity(sig)
     var player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
     player.play("slide_in")
 
 func handle_identified_signal(sig:SignalPopup):
     #If this is the signal you were already looking at, and it's positive now,
     #Close signal inspector and open the more detailed entity inspector
-    if sig == inspecting_signal:
+    if sig == inspecting_signal and %SignalInspection.visible == true:
         var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
         player.play_backwards("slide_in")
+        load_inspected_entity(sig)
         await player.animation_finished
         %SignalInspection.visible = false
         %EntityInspection.visible = true
@@ -202,3 +204,15 @@ func _on_entity_inspector_toggle_button_up() -> void:
     await player.animation_finished
     %EntityInspection.visible = false
     pass # Replace with function body.
+
+
+func load_inspected_entity(sig:SignalPopup):
+    var entity:Entity = sig.detected_object
+    %EntityName.text = entity.given_name
+    %EntityClass.text = entity.atts.type.display_name
+    %EntitySpeed.text = "Max speed: " + str(GlobeHelpers.game_s_to_kph(entity.max_speed))
+    %EntityPitch.text = "Pitch: " +str(entity.emission.pitch)
+    %EntityProfile.text = "Profile: " + str(entity.emission.profile)
+    %EntityVolume.text = "Volume: " + str(entity.emission.volume)
+    %EntityDepth.text = "Depth: " + str(entity.atts.current_depth)
+    

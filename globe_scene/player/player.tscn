@@ -2186,6 +2186,7 @@ expand_mode = 5
 flip_v = true
 
 [node name="ShipPreview" type="TextureRect" parent="UICanvas/EntityInspection/TextureRect"]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 0
 offset_left = 71.0
@@ -2227,7 +2228,8 @@ libraries = {
 }
 autoplay = "rock_horizontal_1"
 
-[node name="Label" type="Label" parent="UICanvas/EntityInspection/TextureRect"]
+[node name="EntityName" type="Label" parent="UICanvas/EntityInspection/TextureRect"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 71.0
 offset_top = 98.0
@@ -2237,7 +2239,8 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 16
 text = "HMS Golden Horizon"
 
-[node name="Label3" type="Label" parent="UICanvas/EntityInspection/TextureRect"]
+[node name="EntityFaction" type="Label" parent="UICanvas/EntityInspection/TextureRect"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 70.0
 offset_top = 61.0
@@ -2247,7 +2250,8 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 16
 text = "Atlantic Empire"
 
-[node name="Label2" type="Label" parent="UICanvas/EntityInspection/TextureRect"]
+[node name="EntityClass" type="Label" parent="UICanvas/EntityInspection/TextureRect"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 82.0
 offset_top = 290.0
@@ -2266,7 +2270,8 @@ offset_bottom = 243.0
 theme = ExtResource("8_fq2vg")
 theme_override_constants/separation = 10
 
-[node name="Label4" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntitySpeed" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -2274,7 +2279,8 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Speed: 20km/h"
 fit_content = true
 
-[node name="Label5" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityPitch" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -2282,7 +2288,17 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Pitch: 80hz"
 fit_content = true
 
-[node name="Label6" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityProfile" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Profile: 0.1"
+fit_content = true
+
+[node name="EntityVolume" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -2290,15 +2306,17 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Volume: 90db"
 fit_content = true
 
-[node name="Label10" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityDetectable" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("29_ai432")
-text = "Detectable: 900km"
+text = "Detectable: N/A"
 fit_content = true
 
-[node name="Label12" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityDepth" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -2306,7 +2324,8 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Depth: S"
 fit_content = true
 
-[node name="Label7" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntitySonar" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -2314,7 +2333,8 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Sonar: Active"
 fit_content = true
 
-[node name="Label8" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityWeapons" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -2322,20 +2342,13 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Weapons: None"
 fit_content = true
 
-[node name="Label9" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityDestination" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("29_ai432")
-text = "Destination: New Gibraltar"
-fit_content = true
-
-[node name="Label11" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("8_fq2vg")
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("29_ai432")
-text = "Strike Depth: C"
+text = "Destination: N/A"
 fit_content = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/EntityInspection"]

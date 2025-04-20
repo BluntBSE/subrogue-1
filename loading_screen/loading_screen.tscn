@@ -87,7 +87,7 @@ texture = ExtResource("2_b4m6o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
 libraries = {
-"": SubResource("AnimationLibrary_2youl")
+&"": SubResource("AnimationLibrary_2youl")
 }
 autoplay = "texture_pan_up"
 
