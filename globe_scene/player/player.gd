@@ -1,4 +1,4 @@
-extends Node3D
+extends Faction
 class_name Player
 
 @onready var markers:PlayerMarkers = get_node("PlayerMarkers")
@@ -8,7 +8,7 @@ class_name Player
 @onready var UI:PlayerUIRoot = get_node("UICanvas/PlayerUIRoot")
 @onready var entities:PlayerEntities = get_node("PlayerEntities")
 var visible_layers=[]
-var faction = GlobalConst.layers.PLAYER_1 #At some point we'll need to set this in code for multiple players
+var faction:Faction = self #At some point we'll need to set this in code for multiple players
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     #We put child nodes unpacks here so all the parent data can be set first
@@ -34,13 +34,17 @@ func determine_spawn_point()->Node3D:
     var peer = get_multiplayer_authority()
     var game_root:GameRoot = get_tree().root.find_child("GameRoot", true, false)
     for player in game_root.players.keys():#Assumes spawn points match the keys of the player
-        if game_root.players[player] == peer:    
+        if game_root.peers[player] == peer:    
             var spawn_nodes = get_tree().root.find_child("PlayerSpawnNodes",true,false)
             var spawn_node = spawn_nodes.find_child(player)
             return spawn_node
     print("ERORR! could not find a spawn node for ", self.name)
     return null
     
+func set_faction_ids():
+    print("Player set faction ID")
+    #Override the faction version of this to do nothing because players are set up at the very, very, beginning by the globe scene.
+    pass
 
 
 func _on_console_input_text_submitted(new_text: String) -> void:

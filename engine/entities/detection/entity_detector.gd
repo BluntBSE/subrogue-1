@@ -144,13 +144,13 @@ func poll_entities():
                 # Handle visibility and identification
                 var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
                 if dist <= c100:
-                    dict.entity.render.update_mesh_visibilities(entity.faction, true)
+                    dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, true)
                     sigmap[dict.entity].positively_identify()
                     sigmap[dict.entity].visible = false
                 elif dist > c100 + 50.0:
                     if sigmap[dict.entity].visible == false:
                         sigmap[dict.entity].visible = true
-                        dict.entity.render.update_mesh_visibilities(entity.faction, false)
+                        dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, false)
  
 
   

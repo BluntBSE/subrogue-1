@@ -31,7 +31,7 @@ func _ready() -> void:
     #TODO: Played_by is just...whatever for now! It should be set by the base class, not this. 
     played_by = get_parent().get_parent()
     faction = fired_from.faction
-    render.update_mesh_visibilities(faction, true)
+    render.update_mesh_visibilities(faction.faction_layer, true)
 
     pass  # Replace with function body.
 

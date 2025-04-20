@@ -1,7 +1,8 @@
 extends Node3D
 class_name GameRoot
 
-var players = {
+#Multiplayer peer ids
+var peers = {
     "player_1": null,
     "player_2": null,
     "player_3": null,
@@ -10,7 +11,17 @@ var players = {
     "player_6": null,
 }
 
+#Player faction objects
+var players = {
+    "player_1": null,
+    "player_2": null,
+    "player_3": null,
+    "player_4": null,
+    "player_5": null,
+    "player_6": null,   
+}
 
+#Faction Nodes
 var factions = {
     "faction_1": null,
     "faction_2": null,

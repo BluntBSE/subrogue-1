@@ -732,7 +732,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 base_color = Color(0, 0.69121, 0.737599, 1)
 spot_color = Color(0.509286, 0.509286, 0.509286, 1)
 scale_factor = 1.0
-faction = 2
 can_move = true
 
 [node name="PlayerMarkers" type="Node3D" parent="."]

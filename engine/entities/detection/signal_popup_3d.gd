@@ -104,7 +104,7 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     #How far must the entities travel before updating again?
     update_threshold = calculate_update_threshold()
     GlobeHelpers.recursively_update_visibility(self, 1, false)
-    GlobeHelpers.recursively_update_visibility(self, detecting_object.faction, true)
+    GlobeHelpers.recursively_update_visibility(self, detecting_object.faction.faction_layer, true)
     set_process(true)
     needs_update = false
     unpacked = true
@@ -385,5 +385,6 @@ func handle_update_color(_color:Color):
 func positively_identify():
     if positively_identified == false:
         positively_identified = true   
+        color = detected_object.faction.faction_color
         #If the unidentified UI is open, this should close it and open the positive ID one.
         identified.emit(self) 

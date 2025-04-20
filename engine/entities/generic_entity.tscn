@@ -159,7 +159,6 @@ contact_monitor = true
 script = ExtResource("1_du6w5")
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
 scale_factor = 0.0
-faction = 0
 can_move = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
