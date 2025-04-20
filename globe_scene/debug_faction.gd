@@ -43,8 +43,9 @@ func set_faction_ids():
             var layer_key_string = "FACTION_"+str(my_num)
             faction_layer = GlobalConst.layers[layer_key_string]
             #Register with global faction list
-            var faction_key_string = "faction"+str(my_num)
+            var faction_key_string = "faction_"+str(my_num)
             var game_root:GameRoot = get_tree().root.find_child("GameRoot", true, false)
             game_root.factions[faction_key_string] = self
+
     
     pass

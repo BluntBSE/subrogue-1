@@ -99,7 +99,6 @@ func on_body_entered_check_for_impact(body):
     #TODO: impact area should be a configurable at some point
     #Don't collide on your own faction
     if body.faction != faction:
-        print("Factions not matched, good. Impact type is", impact_type)
         #TODO:
         #Don't collide with other munitions unless you're supposed to (Not yet implemented)
         if impact_type == IMPACT_TYPES.ships:
