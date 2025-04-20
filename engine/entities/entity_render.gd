@@ -34,3 +34,6 @@ func update_depth_sprite(depth:int):
         depth_mesh.material_override.albedo_texture = crawl_sprite
     if depth == 2:
         depth_mesh.material_override.albedo_texture = surface_sprite
+
+func update_colors(color:Color):
+    %DepthMesh.material_override.albedo_color = color

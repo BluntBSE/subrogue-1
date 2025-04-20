@@ -11,6 +11,8 @@ var visible_layers=[]
 var faction:Faction = self #At some point we'll need to set this in code for multiple players
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    faction_color = Color("00aea8") #At least until we decide how to sync these. Or not. Honestly
+    #You could put NPC synchronizers on the factions and not the player factions
     #We put child nodes unpacks here so all the parent data can be set first
     %OrbitalCamera.unpack()
     %PlayerMarkers.unpack()

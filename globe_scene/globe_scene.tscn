@@ -1334,7 +1334,7 @@ spawn_path = NodePath("..")
 
 [node name="Cascadia" type="Node3D" parent="Factions"]
 script = ExtResource("33_x8218")
-faction_color = Color(0, 0.819608, 0, 1)
+faction_color = Color(0.826088, 1, 0.80839, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/Cascadia"]
 script = ExtResource("34_n1474")

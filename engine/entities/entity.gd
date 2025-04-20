@@ -52,12 +52,16 @@ func unpack(type_id, _faction:Faction, with_name):
     is_player = GlobalConst.is_layer_player(_faction.faction_layer)
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
         played_by = get_parent().get_parent()
+        #TODO: Replace with a name chosen by player in advance, or from a list of player sub names
+        given_name = NameGenerator.generate_name()
     else:
         #When we create missions, we will want to generate entities with specific names.
         if with_name == null:
             given_name = NameGenerator.generate_name()
             
-            
+    if faction.faction_color:
+        render.update_colors(faction.faction_color)
+        
     render.update_mesh_visibilities(faction.faction_layer, true)   
     #temp spotlight adjustments
     spot_color = Color("d1001a")

@@ -2,8 +2,8 @@ extends Node3D
 class_name Faction
 var faction_layer:int
 
-@export var faction_color:Color = Color("00aea8") #We kind of always want players to be the same color to themselves.
-#Is this a simple matter of not synchronizing the property in multiplayer?
+@export var faction_color:Color #We kind of always want players to be the same color to themselves.
+#Is this a simple matter of not synchronizing the property in multiplayer? 00aea8
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

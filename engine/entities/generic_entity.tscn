@@ -58,6 +58,7 @@ emission_energy_multiplier = 6.0
 size = Vector2(2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ju4"]
+resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0, 0.681901, 0.656941, 1)
 albedo_texture = ExtResource("9_oaqcn")
