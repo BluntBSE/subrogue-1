@@ -16,6 +16,9 @@ BUG: Clicking RIGHT as the game loads can cause a crash. Fix!
 
 
 TODO:
+    -Fix my map editing tools
+    -Step 1: See if you can make an editor extension print somethign when you click a custom command on the mouse
+    -Rename signals once they're positively ID'd
     -Add "MOVE" to the list of right click commands unless we can make it possible to pass
     input from the mesh that signals occupy
 
