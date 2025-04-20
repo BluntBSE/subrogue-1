@@ -88,12 +88,12 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     if detecting_object.is_player:
         #TODO: Disconnect and connect all these signals as something fades in and out of view.
         player = detecting_object.played_by
-        unidentified_opened.connect(player.UI.handle_opened_signal)
-        identified_opened.connect(player.UI.handle_openened_identified_signal)
-        identified.connect(player.UI.handle_identified_signal)
-        player.UI.edited_signal_name.connect(handle_update_name)
-        player.UI.edited_color.connect(handle_update_color)
-        stream_color.connect(player.UI.handle_color_stream)
+        unidentified_opened.connect(player.UI.inspection_root.handle_opened_signal)
+        identified_opened.connect(player.UI.inspection_root.handle_openened_identified_signal)
+        identified.connect(player.UI.inspection_root.handle_identified_signal)
+        player.UI.inspection_root.edited_signal_name.connect(handle_update_name)
+        player.UI.inspection_root.edited_color.connect(handle_update_color)
+        stream_color.connect(player.UI.inspection_root.handle_color_stream)
 
     
     #Signals

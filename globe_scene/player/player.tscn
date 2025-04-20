@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=70 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://cgd8r3p0kth43" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04White_horizontal.png" id="31_sljp2"]
 [ext_resource type="Texture2D" uid="uid://b4da1i6v747wi" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT01.png" id="32_4elw6"]
 [ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="33_abu4l"]
+[ext_resource type="Script" uid="uid://dxfcu2yvec3m6" path="res://engine/player_ui/2d_ui/inspection_root.gd" id="34_558vm"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_lu2fn"]
 [ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="35_smroy"]
 [ext_resource type="Shader" uid="uid://bjysmg5kwy2ke" path="res://title_screen/wireframe_sub_space.gdshader" id="36_3h4iq"]
@@ -444,7 +445,7 @@ shader_parameter/scanline_thickness = 0.0
 shader_parameter/scanlines_spacing = 1.16
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nwwe3"]
-viewport_path = NodePath("UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport")
+viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_smroy"]
 resource_local_to_scene = true
@@ -630,7 +631,7 @@ _data = {
 }
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fq2vg"]
-viewport_path = NodePath("UICanvas/SignalInspection/TextureRect/SignalPreview/SubViewport")
+viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalPreview/SubViewport")
 
 [sub_resource type="Animation" id="Animation_fq2vg"]
 length = 0.001
@@ -2156,17 +2157,13 @@ offset_bottom = 1076.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="UICanvas"]
-modulate = Color(1, 1, 1, 0.4)
-position = Vector2(1927, 492)
-texture = ExtResource("33_abu4l")
+[node name="InspectionRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("34_558vm")
 
-[node name="SettingsIconFilledBlue" type="Sprite2D" parent="UICanvas"]
-position = Vector2(1876, 36)
-scale = Vector2(0.21625, 0.21625)
-texture = ExtResource("34_lu2fn")
-
-[node name="EntityInspection" type="Control" parent="UICanvas"]
+[node name="EntityInspection" type="Control" parent="UICanvas/PlayerUIRoot/InspectionRoot"]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
@@ -2175,7 +2172,7 @@ offset_top = 483.0
 offset_right = 2153.0
 offset_bottom = 523.0
 
-[node name="TextureRect" type="TextureRect" parent="UICanvas/EntityInspection"]
+[node name="TextureRect" type="TextureRect" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection"]
 layout_mode = 0
 offset_left = -204.0
 offset_top = -385.0
@@ -2185,7 +2182,7 @@ texture = ExtResource("35_smroy")
 expand_mode = 5
 flip_v = true
 
-[node name="ShipPreview" type="TextureRect" parent="UICanvas/EntityInspection/TextureRect"]
+[node name="ShipPreview" type="TextureRect" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 0
@@ -2196,7 +2193,7 @@ offset_bottom = 357.0
 texture = SubResource("ViewportTexture_nwwe3")
 stretch_mode = 3
 
-[node name="SubViewport" type="SubViewport" parent="UICanvas/EntityInspection/TextureRect/ShipPreview"]
+[node name="SubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
@@ -2207,29 +2204,29 @@ fsr_sharpness = 2.0
 canvas_item_default_texture_filter = 0
 size = Vector2i(256, 256)
 
-[node name="Ship3DRoot" type="Node3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport"]
+[node name="Ship3DRoot" type="Node3D" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport"]
 unique_name_in_owner = true
 
-[node name="CargoShip1" type="MeshInstance3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot"]
+[node name="CargoShip1" type="MeshInstance3D" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_smroy")
 mesh = ExtResource("37_7xmbg")
 skeleton = NodePath("../../..")
 
-[node name="CameraPivot" type="Node3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot"]
+[node name="CameraPivot" type="Node3D" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot"]
 
-[node name="Camera3D" type="Camera3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot/CameraPivot"]
+[node name="Camera3D" type="Camera3D" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot/CameraPivot"]
 transform = Transform3D(-0.0727333, 0, 0.997351, 0, 1, 0, -0.997351, 0, -0.0727333, 101.845, 39.1139, -4.7975)
 fov = 80.0
 far = 200.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot/CameraPivot"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot/CameraPivot"]
 libraries = {
 &"": SubResource("AnimationLibrary_3h4iq")
 }
 autoplay = "rock_horizontal_1"
 
-[node name="EntityName" type="Label" parent="UICanvas/EntityInspection/TextureRect"]
+[node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 71.0
@@ -2240,7 +2237,7 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 16
 text = "HMS Golden Horizon"
 
-[node name="EntityFaction" type="Label" parent="UICanvas/EntityInspection/TextureRect"]
+[node name="EntityFaction" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 70.0
@@ -2251,7 +2248,7 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 16
 text = "Atlantic Empire"
 
-[node name="EntityClass" type="Label" parent="UICanvas/EntityInspection/TextureRect"]
+[node name="EntityClass" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 82.0
@@ -2262,7 +2259,7 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 16
 text = "Perseus Freighter"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/EntityInspection"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection"]
 layout_mode = 0
 offset_left = -123.0
 offset_top = -44.0
@@ -2271,7 +2268,7 @@ offset_bottom = 243.0
 theme = ExtResource("8_fq2vg")
 theme_override_constants/separation = 10
 
-[node name="EntitySpeed" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntitySpeed" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2280,7 +2277,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Speed: 20km/h"
 fit_content = true
 
-[node name="EntityPitch" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityPitch" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2289,7 +2286,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Pitch: 80hz"
 fit_content = true
 
-[node name="EntityProfile" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityProfile" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2298,7 +2295,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Profile: 0.1"
 fit_content = true
 
-[node name="EntityVolume" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityVolume" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2307,7 +2304,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Volume: 90db"
 fit_content = true
 
-[node name="EntityDetectable" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityDetectable" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2316,7 +2313,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Detectable: N/A"
 fit_content = true
 
-[node name="EntityDepth" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityDepth" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2325,7 +2322,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Depth: S"
 fit_content = true
 
-[node name="EntitySonar" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntitySonar" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2334,7 +2331,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Sonar: Active"
 fit_content = true
 
-[node name="EntityWeapons" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityWeapons" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2343,7 +2340,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Weapons: None"
 fit_content = true
 
-[node name="EntityDestination" type="RichTextLabel" parent="UICanvas/EntityInspection/VBoxContainer"]
+[node name="EntityDestination" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2352,22 +2349,22 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Destination: N/A"
 fit_content = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/EntityInspection"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection"]
 libraries = {
 &"": SubResource("AnimationLibrary_oh4je")
 }
 
-[node name="EntityInspectorToggle" type="TextureButton" parent="UICanvas/EntityInspection"]
+[node name="EntityInspectorToggle" type="TextureButton" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection"]
 modulate = Color(1, 1, 1, 0.4)
 layout_mode = 0
-offset_left = 155.0
+offset_left = -232.0
 offset_top = -42.0
-offset_right = 255.0
+offset_right = -132.0
 offset_bottom = 58.0
 texture_normal = ExtResource("33_abu4l")
 texture_hover = ExtResource("40_fq2vg")
 
-[node name="SignalInspection" type="Control" parent="UICanvas"]
+[node name="SignalInspection" type="Control" parent="UICanvas/PlayerUIRoot/InspectionRoot"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
@@ -2377,7 +2374,7 @@ offset_top = 483.0
 offset_right = 2153.0
 offset_bottom = 523.0
 
-[node name="TextureRect" type="TextureRect" parent="UICanvas/SignalInspection"]
+[node name="TextureRect" type="TextureRect" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
 layout_mode = 0
 offset_left = -204.0
 offset_top = -385.0
@@ -2387,7 +2384,7 @@ texture = ExtResource("35_smroy")
 expand_mode = 5
 flip_v = true
 
-[node name="SignalPreview" type="TextureRect" parent="UICanvas/SignalInspection/TextureRect"]
+[node name="SignalPreview" type="TextureRect" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 0
@@ -2398,7 +2395,7 @@ offset_bottom = 388.0
 texture = SubResource("ViewportTexture_fq2vg")
 stretch_mode = 3
 
-[node name="SubViewport" type="SubViewport" parent="UICanvas/SignalInspection/TextureRect/SignalPreview"]
+[node name="SubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalPreview"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
@@ -2409,10 +2406,10 @@ fsr_sharpness = 2.0
 canvas_item_default_texture_filter = 0
 size = Vector2i(256, 256)
 
-[node name="SpikyBoy" parent="UICanvas/SignalInspection/TextureRect/SignalPreview/SubViewport" instance=ExtResource("39_nwwe3")]
+[node name="SpikyBoy" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalPreview/SubViewport" instance=ExtResource("39_nwwe3")]
 unique_name_in_owner = true
 
-[node name="SignalIDInput" type="LineEdit" parent="UICanvas/SignalInspection/TextureRect"]
+[node name="SignalIDInput" type="LineEdit" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 71.0
@@ -2424,7 +2421,7 @@ theme_override_fonts/font = ExtResource("29_ai432")
 theme_override_font_sizes/font_size = 16
 text = "Roma 97"
 
-[node name="LineEdit2" type="LineEdit" parent="UICanvas/SignalInspection/TextureRect"]
+[node name="LineEdit2" type="LineEdit" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect"]
 layout_mode = 0
 offset_left = 71.0
 offset_top = 406.0
@@ -2435,7 +2432,7 @@ theme_override_fonts/font = ExtResource("29_ai432")
 theme_override_font_sizes/font_size = 16
 placeholder_text = "Enter ship type"
 
-[node name="Label3" type="Label" parent="UICanvas/SignalInspection/TextureRect"]
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect"]
 layout_mode = 0
 offset_left = 70.0
 offset_top = 61.0
@@ -2445,7 +2442,7 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 16
 text = "Unidentified Signal"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/SignalInspection"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
 layout_mode = 0
 offset_left = -123.0
 offset_top = 80.0
@@ -2454,14 +2451,14 @@ offset_bottom = 367.0
 theme = ExtResource("8_fq2vg")
 theme_override_constants/separation = 10
 
-[node name="SignalColorChanger" type="ColorPickerButton" parent="UICanvas/SignalInspection/VBoxContainer"]
+[node name="SignalColorChanger" type="ColorPickerButton" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "TETSTXXX"
 color = Color(1, 1, 1, 1)
 
-[node name="SignalCertainty" type="RichTextLabel" parent="UICanvas/SignalInspection/VBoxContainer"]
+[node name="SignalCertainty" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2470,7 +2467,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Certainty: 20%"
 fit_content = true
 
-[node name="SignalPitch" type="RichTextLabel" parent="UICanvas/SignalInspection/VBoxContainer"]
+[node name="SignalPitch" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2479,7 +2476,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Pitch: 80hz"
 fit_content = true
 
-[node name="SignalVolume" type="RichTextLabel" parent="UICanvas/SignalInspection/VBoxContainer"]
+[node name="SignalVolume" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2488,7 +2485,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Volume: 90db"
 fit_content = true
 
-[node name="SignalDepth" type="RichTextLabel" parent="UICanvas/SignalInspection/VBoxContainer"]
+[node name="SignalDepth" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -2497,7 +2494,7 @@ theme_override_fonts/normal_font = ExtResource("29_ai432")
 text = "Depth: S"
 fit_content = true
 
-[node name="SignalInspectorToggle" type="TextureButton" parent="UICanvas/SignalInspection"]
+[node name="SignalInspectorToggle" type="TextureButton" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
 modulate = Color(1, 1, 1, 0.4)
 layout_mode = 0
 offset_left = -238.0
@@ -2507,12 +2504,12 @@ offset_bottom = 58.0
 texture_normal = ExtResource("33_abu4l")
 texture_hover = ExtResource("40_fq2vg")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/SignalInspection"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
 libraries = {
 &"": SubResource("AnimationLibrary_q7i7m")
 }
 
-[node name="EditButton" type="TextureButton" parent="UICanvas/SignalInspection"]
+[node name="EditButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
 layout_mode = 0
 offset_left = 113.0
 offset_top = -294.0
@@ -2521,6 +2518,16 @@ offset_bottom = -253.0
 texture_normal = ExtResource("41_q7i7m")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="UICanvas"]
+modulate = Color(1, 1, 1, 0.4)
+position = Vector2(1927, 492)
+texture = ExtResource("33_abu4l")
+
+[node name="SettingsIconFilledBlue" type="Sprite2D" parent="UICanvas"]
+position = Vector2(1876, 36)
+scale = Vector2(0.21625, 0.21625)
+texture = ExtResource("34_lu2fn")
 
 [node name="Console" type="Control" parent="UICanvas"]
 layout_mode = 3
@@ -2567,8 +2574,8 @@ script = ExtResource("39_7xmbg")
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
-[connection signal="button_up" from="UICanvas/EntityInspection/EntityInspectorToggle" to="UICanvas/PlayerUIRoot" method="_on_entity_inspector_toggle_button_up"]
-[connection signal="text_changed" from="UICanvas/SignalInspection/TextureRect/SignalIDInput" to="UICanvas/PlayerUIRoot" method="_on_signal_id_input_text_changed"]
-[connection signal="color_changed" from="UICanvas/SignalInspection/VBoxContainer/SignalColorChanger" to="UICanvas/PlayerUIRoot" method="_on_signal_color_changer_color_changed"]
-[connection signal="button_up" from="UICanvas/SignalInspection/SignalInspectorToggle" to="UICanvas/PlayerUIRoot" method="_on_signal_inspector_toggle_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/EntityInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_entity_inspector_toggle_button_up"]
+[connection signal="text_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalIDInput" to="UICanvas/PlayerUIRoot" method="_on_signal_id_input_text_changed"]
+[connection signal="color_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer/SignalColorChanger" to="UICanvas/PlayerUIRoot" method="_on_signal_color_changer_color_changed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/SignalInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_inspector_toggle_button_up"]
 [connection signal="text_submitted" from="UICanvas/Console/ConsoleInput" to="UICanvas/Console/ConsoleInput" method="_on_text_submitted"]
