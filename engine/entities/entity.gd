@@ -47,7 +47,6 @@ func _ready() -> void:
     pass # Replace with function body.
 
 func unpack(type_id, _faction:Faction, with_name):
-    print("ENTITY UNPACKING: ", name)
     faction = _faction
     is_player = GlobalConst.is_layer_player(_faction.faction_layer)
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer

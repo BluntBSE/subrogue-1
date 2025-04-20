@@ -447,6 +447,7 @@ shader_parameter/scanlines_spacing = 1.16
 viewport_path = NodePath("UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_smroy"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("36_3h4iq")
 shader_parameter/albedo = Color(1, 1, 1, 1)
@@ -571,6 +572,31 @@ _data = {
 &"rock_horizontal_1": SubResource("Animation_7xmbg")
 }
 
+[sub_resource type="Animation" id="Animation_558vm"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2113, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(483, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="Animation" id="Animation_q7i7m"]
 resource_name = "slide_in"
 length = 0.3
@@ -595,31 +621,6 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(483, -0.15, 0, 0.15, 0, 483, -0.15, 0, 0.15, 0),
 "times": PackedFloat32Array(0, 0.3)
-}
-
-[sub_resource type="Animation" id="Animation_558vm"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(2113, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(483, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oh4je"]
@@ -2206,22 +2207,23 @@ fsr_sharpness = 2.0
 canvas_item_default_texture_filter = 0
 size = Vector2i(256, 256)
 
-[node name="Node3D" type="Node3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport"]
+[node name="Ship3DRoot" type="Node3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport"]
+unique_name_in_owner = true
 
-[node name="CargoShip1" type="MeshInstance3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Node3D"]
+[node name="CargoShip1" type="MeshInstance3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_smroy")
 mesh = ExtResource("37_7xmbg")
 skeleton = NodePath("../../..")
 
-[node name="CameraPivot" type="Node3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Node3D"]
+[node name="CameraPivot" type="Node3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot"]
 
-[node name="Camera3D" type="Camera3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Node3D/CameraPivot"]
+[node name="Camera3D" type="Camera3D" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot/CameraPivot"]
 transform = Transform3D(-0.0727333, 0, 0.997351, 0, 1, 0, -0.997351, 0, -0.0727333, 101.845, 39.1139, -4.7975)
 fov = 80.0
 far = 200.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Node3D/CameraPivot"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot/CameraPivot"]
 libraries = {
 &"": SubResource("AnimationLibrary_3h4iq")
 }

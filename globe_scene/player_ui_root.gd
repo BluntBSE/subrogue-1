@@ -190,12 +190,18 @@ func handle_color_stream(color:Color)->void:
     #And we want to update the player accordingly
     #E.G: Faction identification, if not perfect identification.
     var spike_mesh:MeshInstance3D = %SpikyBoy.get_node("MeshInstance3D")
-    print(spike_mesh)
-    print("Merp")
-    print(spike_mesh.material_override)
     var shader_color:Vector3 = Vector3(color.r,color.g,color.b)
     spike_mesh.material_override.set("shader_parameter/color", shader_color)
     %SignalColorChanger.modulate = color
+    #Positively identified:
+    var ship_mesh:MeshInstance3D = %Ship3DRoot.get_child(0)#The first child of this root should always be a ship mesh.
+    print("SHIP MESH: ", ship_mesh)
+    #Probably we'll switch out scenes for every ship type and attach them directly to Ship3D root.
+    #These scenes will be defined on the entity resource itself
+    ship_mesh.material_override.set("shader_parameter/albedo", shader_color)
+    %EntityName.add_theme_color_override("font_outline_color", color)
+    %EntityFaction.add_theme_color_override("font_outline_color", color)
+    %EntityClass.add_theme_color_override("font_outline_color", color)
 
 
 func _on_entity_inspector_toggle_button_up() -> void:

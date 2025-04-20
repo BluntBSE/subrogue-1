@@ -8,6 +8,7 @@ var color:Color = Color("ffffff"):
     set(value):
         color = value
         stream_color.emit(color)   
+        find_child("FactionModulator", true, false).modulate = color
 var faction #For visibility?
 var detecting_object:Entity
 var display_name:String
