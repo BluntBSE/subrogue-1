@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 func handle_set_time_scale(time_enum:int):
     dh.dprint(true, self, "Handle set time called")
     GlobalConst.handle_set_time_scale(time_enum)
+    get_viewport().gui_release_focus()
 
 
 func _on_normal_button_up(extra_arg_0: int) -> void:

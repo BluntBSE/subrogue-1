@@ -98,6 +98,10 @@ func poll_entities():
             # Iterate through all detectors in `tracked_by`
             for detector in dict.tracked_by:
                 # Check sound for this detector
+                if detector == null:
+                    dict.tracked_by.erase(detector)
+                    continue
+                    
                 var dist = GlobeHelpers.arc_to_km(detector.entity.position, dict.entity.position, detector.entity.anchor)
                 var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
 

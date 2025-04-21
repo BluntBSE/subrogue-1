@@ -3,7 +3,7 @@ class_name SignalPopup
 
 ####SIGNAL DATA ITSELF####
 var positively_identified:bool = false
-var signal_id = "Roma-97"
+var signal_id
 var color:Color = Color("ffffff"):
     set(value):
         color = value
@@ -88,12 +88,14 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     #Signal connections only need to be done once ever, even if we call unpack again later
     if unpacked == false:
         if detecting_object.is_player:
+            var id_label = find_child("SignalID", true, false)
+            signal_id = SignalHelpers.generate_default_signal_id()
+            id_label.text = signal_id
             #TODO: Disconnect and connect all these signals as something fades in and out of view.
             player = detecting_object.played_by
             unidentified_opened.connect(player.UI.inspection_root.handle_opened_signal)
             identified_opened.connect(player.UI.inspection_root.handle_openened_identified_signal)
             identified.connect(player.UI.inspection_root.handle_identified_signal)
-            player.UI.inspection_root.edited_signal_name.connect(handle_update_name)
 
         
         #Signals
@@ -374,7 +376,7 @@ func _on_area_3d_mouse_exited() -> void:
 
 func handle_update_name(str:String):
         signal_id = str
-        var id_label:Label = find_child("SignalID", true, false)
+        var id_label:RichTextLabel = find_child("SignalID", true, false)
         id_label.text = signal_id
         
 
@@ -387,5 +389,13 @@ func positively_identify():
     if positively_identified == false:
         positively_identified = true   
         color = detected_object.faction.faction_color
+        var id_label:RichTextLabel = find_child("SignalID", true, false)
+        var class_label:RichTextLabel = find_child("SignalClass", true, false)
+        id_label.text = detected_object.given_name
+        #TODO: This is just a workaround until munitions get a real post-tree-add unpack
+        if detected_object.atts.type:    
+            class_label.text = detected_object.atts.type.display_name
+        else:
+            class_label.text = "DANGER - MUNITION"
         #If the unidentified UI is open, this should close it and open the positive ID one.
         identified.emit(self) 

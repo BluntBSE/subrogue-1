@@ -2230,7 +2230,6 @@ texture_hover = ExtResource("40_fq2vg")
 
 [node name="SignalInspection" type="Control" parent="UICanvas/PlayerUIRoot/InspectionRoot"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2113.0

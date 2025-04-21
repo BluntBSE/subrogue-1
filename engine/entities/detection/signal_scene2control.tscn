@@ -128,20 +128,20 @@ offset_bottom = -40.424
 theme_override_font_sizes/font_size = 50
 text = "Pin Signal"
 
-[node name="SignalID" type="Label" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
+[node name="SignalID" type="RichTextLabel" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = -117.0
+offset_left = -486.0
 offset_top = -202.0
-offset_right = 357.0
-offset_bottom = -107.0
+offset_right = 784.0
+offset_bottom = 12.0
 theme = SubResource("Theme_aqybd")
 theme_override_colors/font_outline_color = Color(1.8049e-08, 0.107273, 0.188867, 1)
 theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = ExtResource("2_u576x")
-theme_override_font_sizes/font_size = 78
-text = "Roma-92"
+theme_override_font_sizes/normal_font_size = 78
+text = "Golden Crest"
+fit_content = true
 horizontal_alignment = 1
 
 [node name="SignalClass" type="RichTextLabel" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
@@ -156,7 +156,7 @@ theme_override_colors/font_outline_color = Color(1.8049e-08, 0.107273, 0.188867,
 theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 20
 theme_override_font_sizes/normal_font_size = 78
-text = "Commercial Freighter"
+text = "Unknown Large"
 fit_content = true
 horizontal_alignment = 1
 

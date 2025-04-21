@@ -3,10 +3,14 @@ class_name SignalHelpers
 
 
 
-var signal_prefixes = ["Roma", "Calypso", "Bravo", "Alpha", "Gemini", "Foxtrot", "Delta", "Mu", "Echo", "Hyperion", "Indigo", "Juliet", "Kilo", "Lima", "Sierra", "November", "Oleander", "Queen", "Tango", "Uniform", "Virgo"]
+static var signal_prefixes = ["Roma", "Calypso", "Bravo", "Alpha", "Gemini", "Foxtrot", "Delta", "Mu", "Echo", "Hyperion", "Indigo", "Juliet", "Kilo", "Lima", "Sierra", "November", "Oleander", "Queen", "Tango", "Uniform", "Virgo"]
 
-static func generate_default_signal_name()->String:
-    return ""
+static func generate_default_signal_id()->String:
+    var rand_idx = randi_range(0, signal_prefixes.size()-1)
+    var rand_prefix = signal_prefixes[rand_idx]
+    var rand_num = randi() % 99 + 10 #10 thru 99
+    var output = rand_prefix + "-" + str(rand_num)
+    return output
     
 
 static func prevent_name_collision():
