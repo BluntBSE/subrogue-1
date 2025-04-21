@@ -2,6 +2,7 @@ extends Node
 class_name EntityAtts
 
 var type:EntityType
+var display_name
 var size
 var current_hull
 var current_pitch

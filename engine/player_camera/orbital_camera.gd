@@ -110,12 +110,14 @@ func _process(delta: float) -> void:
     dist = dist.length()
     #%WorldEnvironment.environment.set_volumetric_fog_length(dist) #If we do multiplayer this can't be the way this works. Can each player have their own world environment node? Probably, honestly.
     input_movement() #At least until I want a state machine to change its behavior.
+
     emit_position()
     if trauma:
         trauma = max(trauma - trauma_decay * delta, 0)
         shake()
-func _input(event:InputEvent):
-    pass  
+        
+func _input(event: InputEvent) -> void:
+    pass
     
 func _unhandled_input(event: InputEvent) -> void:
     if unpacked != true:
@@ -123,6 +125,15 @@ func _unhandled_input(event: InputEvent) -> void:
     
     if !is_multiplayer_authority():
         return
+        
+    if event is InputEventMouseButton and event.is_released():
+        print("All focus released")   
+        get_viewport().gui_release_focus()
+        #event.set_as_handled
+    if event is InputEventKey and event.keycode in [KEY_ESCAPE, KEY_W, KEY_A, KEY_S, KEY_D]:
+        print("All focus released!")
+        get_viewport().gui_release_focus()
+        
         
     state_machine.handleInput({"event":event})
     pass
@@ -178,18 +189,20 @@ func move_in_orbit()->Vector3:
     
     
 func input_movement():
+    if !get_viewport().gui_get_focus_owner() == null:
+        return
     var moved:bool = false
     var zoomed:bool = false
-    if Input.is_action_pressed("ui_up"):
+    if Input.is_key_label_pressed(KEY_W):
         polar += move_speed
         moved = true
-    if Input.is_action_pressed("ui_left"):
+    if Input.is_key_label_pressed(KEY_A):
         azimuth -= move_speed
         moved = true
-    if Input.is_action_pressed("ui_down"):
+    if Input.is_key_label_pressed(KEY_S):
         polar -= move_speed
         moved = true
-    if Input.is_action_pressed("ui_right"):
+    if Input.is_key_label_pressed(KEY_D):
         azimuth += move_speed
         moved = true
     if Input.is_key_label_pressed(KEY_R):

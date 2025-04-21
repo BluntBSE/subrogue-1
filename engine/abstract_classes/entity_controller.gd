@@ -18,6 +18,9 @@ func launch_munition(args:Dictionary):
     var target_position:Vector3 = args.target_position
     munition.fired_from = args.originating_entity
     add_child(munition)
+    #TODO: Really got set this up into a better unpack...
+    munition.atts.display_name = munition.display_name
+    
     munition.position = start_position #Global?
     var command = GlobeHelpers.generate_move_command(munition, target_position)
     order_move.emit(command)

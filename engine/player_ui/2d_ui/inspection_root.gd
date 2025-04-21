@@ -13,14 +13,16 @@ signal edited_color
 #Unidentified open
 func handle_opened_signal(sig:SignalPopup):
     if inspecting_signal:
-        disconnect_unidentified(sig)
+        disconnect_unidentified(inspecting_signal)
 
     inspecting_signal = sig
+    #Close Entity inspection if it's open
     if %EntityInspection.visible == true:
         %EntityInspection.get_node("AnimationPlayer").play_backwards("slide_in")
         await %EntityInspection.get_node("AnimationPlayer").animation_finished
         %EntityInspection.visible = false
-        
+    print("MARP?", sig.signal_id)
+    %SignalIDInput.text = sig.signal_id
     %SignalInspection.visible  = true
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
     player.play("slide_in")
@@ -48,7 +50,8 @@ func handle_identified_signal(sig:SignalPopup):
         %EntityInspection.visible = true
         player = %EntityInspection.get_node("AnimationPlayer")
         player.play("slide_in")
-        disconnect_unidentified(sig)
+    #No matter what, positively identified signals no longer respond to the panel    
+    disconnect_unidentified(sig)
 
 func _on_signal_inspector_toggle_button_up() -> void:
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
@@ -89,7 +92,6 @@ func handle_color_stream(color:Color)->void:
     %SignalColorChanger.modulate = color
     #Positively identified:
     var ship_mesh:MeshInstance3D = find_child("Ship3DRoot", true, false).get_child(0)#The first child of this root should always be a ship mesh.
-    print("SHIP MESH: ", ship_mesh)
     #Probably we'll switch out scenes for every ship type and attach them directly to Ship3D root.
     #These scenes will be defined on the entity resource itself
     ship_mesh.material_override.set("shader_parameter/albedo", shader_color)
@@ -120,13 +122,15 @@ func load_inspected_entity(sig:SignalPopup):
 
 
 func connect_unidentified(sig:SignalPopup):
-    inspecting_signal.stream_color.connect(handle_color_stream)
-    inspecting_signal.stream.connect(handle_SI_stream)
-    inspecting_signal.stream.connect(handle_SI_stream)
-    edited_color.connect(inspecting_signal.handle_update_color)
+    sig.stream_color.connect(handle_color_stream)
+    sig.stream.connect(handle_SI_stream)
+    sig.stream.connect(handle_SI_stream)
+    edited_color.connect(sig.handle_update_color)
+    edited_signal_name.connect(sig.handle_update_name)
 
 func disconnect_unidentified(sig:SignalPopup):
-    inspecting_signal.stream_color.disconnect(handle_color_stream)
-    inspecting_signal.stream.disconnect(handle_SI_stream)
-    inspecting_signal.stream.disconnect(handle_SI_stream)
+    sig.stream_color.disconnect(handle_color_stream)
+    sig.stream.disconnect(handle_SI_stream)
+    sig.stream.disconnect(handle_SI_stream)
     edited_color.disconnect(inspecting_signal.handle_update_color)
+    edited_signal_name.disconnect(sig.handle_update_name)
