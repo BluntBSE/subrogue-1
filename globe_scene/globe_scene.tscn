@@ -1,4 +1,4 @@
-[gd_scene load_steps=287 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=294 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -8,9 +8,11 @@
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
 [ext_resource type="Script" uid="uid://c7feimtf0jnd2" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
+[ext_resource type="Script" uid="uid://b1m1p2n51hjao" path="res://globe_scene/city.gd" id="14_8vb4v"]
 [ext_resource type="Script" uid="uid://3bnjuwak0g44" path="res://engine/navigation/nav_node.gd" id="16_ni20c"]
 [ext_resource type="AudioStream" uid="uid://c4pqqqemfw30i" path="res://assets/royalty_free_music/dark-ambient-126122.mp3" id="16_o22p0"]
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="17_eum53"]
+[ext_resource type="Script" uid="uid://cxnd8ugn2eha1" path="res://globe_scene/tools/node_teleporter.gd" id="17_ni20c"]
 [ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/debug_faction.gd" id="33_x8218"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="34_f1l1f"]
 [ext_resource type="Script" uid="uid://dac1cpfprokkh" path="res://engine/abstract_classes/entity_controller.gd" id="34_n1474"]
@@ -224,26 +226,6 @@ volumetric_fog_ambient_inject = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8w7ix"]
-_surfaces = [{
-"aabb": AABB(91.2029, -13.7359, -12.6692, 23.8225, 17.3545, 25.6912),
-"format": 34359738375,
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 144,
-"vertex_data": PackedByteArray("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")
-}]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_17syb"]
-_surfaces = [{
-"aabb": AABB(89.6583, 5.51527, -24.4732, 24.373, 6.9684, 14.089),
-"format": 34359738375,
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 150,
-"vertex_data": PackedByteArray("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")
-}]
-
 [sub_resource type="Curve3D" id="Curve3D_8706f"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1.6445, 6.2749, 1.93871),
@@ -272,65 +254,65 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_5fhpd"]
+[sub_resource type="Curve3D" id="Curve3D_n045l"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.65759, -4.67365, 3.20444),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.65759, -4.6736, 3.20444),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_183yr"]
+[sub_resource type="Curve3D" id="Curve3D_6fu50"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.42837, 5.16632, -4.9861),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.42841, 5.81082, -3.32751),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_4moxy"]
+[sub_resource type="Curve3D" id="Curve3D_u0pbh"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.23605, -5.11938, -4.92014),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.236, -5.1193, -4.92012),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_5864d"]
+[sub_resource type="Curve3D" id="Curve3D_bikou"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.42837, -5.16632, 4.9861),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.42841, -5.81082, 3.32751),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_05wm4"]
+[sub_resource type="Curve3D" id="Curve3D_kk8hn"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.93814, 5.09771, -4.39793),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.9381, 4.45328, -6.05651),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_f6xil"]
+[sub_resource type="Curve3D" id="Curve3D_s0ym7"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.925217, -5.81195, -8.20959),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.925201, -6.45642, -9.86821),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_6i2rg"]
+[sub_resource type="Curve3D" id="Curve3D_7qyab"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.93814, -5.09771, 4.39793),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.9381, -4.45328, 6.05651),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_iya4h"]
+[sub_resource type="Curve3D" id="Curve3D_u1j7w"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.81554, 5.51819, 0.623923),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.81561, 5.5181, 0.623899),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_gphgm"]
+[sub_resource type="Curve3D" id="Curve3D_o38n6"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.86336, -10.9097, -3.81166),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.8633, -10.9097, -3.8117),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -1049,6 +1031,13 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Curve3D" id="Curve3D_a4fps"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.750668, -4.14474, -1.75053),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
 [sub_resource type="Curve3D" id="Curve3D_s20yn"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.95279, -3.53755, 2.04398),
@@ -1252,58 +1241,58 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_52ueo"]
+[sub_resource type="Curve3D" id="Curve3D_wkflt"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.2026, -10.84, 0.387333),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.2026, -10.84, 0.3874),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_25nl3"]
+[sub_resource type="Curve3D" id="Curve3D_xx0vb"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -7.51198, 15.5321, -2.06462),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -7.512, 15.5321, -2.0646),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_bvo4t"]
+[sub_resource type="Curve3D" id="Curve3D_27qiv"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.45975, 0.0202065, -9.50473),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.4597, 0.0201988, -9.5047),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_sc4w0"]
+[sub_resource type="Curve3D" id="Curve3D_vbj1f"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -9.703, 14.2697, -11.5785),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_c6tfh"]
+[sub_resource type="Curve3D" id="Curve3D_2em6w"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.03302, -11.44, -9.04384),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.033, -11.44, -9.0438),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_bmnhq"]
+[sub_resource type="Curve3D" id="Curve3D_1kfpn"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.7392, -4.47375, 8.27555),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.7392, -4.4737, 8.2756),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_xjy76"]
+[sub_resource type="Curve3D" id="Curve3D_ikx0j"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.925217, 5.81195, 8.20959),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.925201, 6.45642, 9.86821),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve3D" id="Curve3D_61b7l"]
+[sub_resource type="Curve3D" id="Curve3D_0n1r6"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.86336, 10.9097, 3.81166),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.8633, 10.9097, 3.8117),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -1686,7 +1675,31 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Curve3D" id="Curve3D_kolfg"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.750668, 4.14474, 1.75053),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_lqawd"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -4.35762, -5.17338, -3.66112),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_fuf2i"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.35762, 5.17338, 3.66112),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
 [sub_resource type="SphereMesh" id="SphereMesh_6oioa"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ni20c"]
+points = PackedVector3Array(0.457871, 0.198079, 0.0157824, -0.48874, -0.0916874, -0.0451868, -0.471509, -0.137027, -0.0907015, 0.0763591, -0.333275, 0.364179, 0.136569, -0.332425, -0.346906, -0.151617, 0.471982, -0.0602459, -0.105347, 0.211936, 0.43966, -0.0450169, 0.198098, -0.456416, 0.409077, -0.151168, 0.242516, -0.271376, -0.377761, 0.181871, 0.41148, -0.075981, -0.27324, 0.198197, -0.456161, -0.044931, -0.240641, -0.331674, -0.285768, 0.227137, 0.25672, 0.363041, 0.227522, 0.423604, -0.135488, -0.37899, 0.0607022, 0.319462, -0.406747, 0.181049, -0.225691, -0.0146313, -0.0917695, 0.490229, -0.377855, 0.302793, 0.121712, 0.0462323, 0.456011, 0.198185, -0.227464, -0.0607863, -0.440348, 0.228455, 0.0607228, -0.439887, -0.0911376, -0.489246, -0.045174, 0.441865, -0.228216, -0.0449581, 0.317179, 0.241214, -0.300812, -0.0448487, 0.394737, -0.302955, -0.316348, -0.196222, 0.332551, 0.198442, -0.0304293, 0.457237, 0.0614714, -0.152246, -0.471307, 0.363089, 0.256708, 0.227079, 0.152134, -0.439489, 0.182379, -0.210725, 0.362276, 0.27223)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ho0hv"]
 transparency = 4
@@ -1706,6 +1719,26 @@ emission = Color(1, 0, 0, 1)
 emission_energy_multiplier = 0.0
 anisotropy = 0.56
 disable_receive_shadows = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8w7ix"]
+_surfaces = [{
+"aabb": AABB(91.2029, -13.7359, -12.6692, 23.8225, 17.3545, 25.6912),
+"format": 34359738375,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 144,
+"vertex_data": PackedByteArray("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")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_17syb"]
+_surfaces = [{
+"aabb": AABB(89.6583, 5.51527, -24.4732, 24.373, 6.9684, 14.089),
+"format": 34359738375,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 150,
+"vertex_data": PackedByteArray("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")
+}]
 
 [node name="GlobeRoot" type="Node3D"]
 script = ExtResource("1_msvd6")
@@ -2030,20 +2063,6 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_5v0fy")
 
-[node name="GeometryDrawer" type="Node3D" parent="." node_paths=PackedStringArray("draw_on")]
-script = ExtResource("11_6u1es")
-draw_on = NodePath("../GamePlanet/ClickableSphere")
-drawing = true
-flipped_normal = false
-
-[node name="@MeshInstance3D@93055" type="MeshInstance3D" parent="GeometryDrawer"]
-visible = false
-mesh = SubResource("ArrayMesh_8w7ix")
-
-[node name="@MeshInstance3D@48828" type="MeshInstance3D" parent="GeometryDrawer"]
-visible = false
-mesh = SubResource("ArrayMesh_17syb")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_o22p0")
 volume_db = -12.0
@@ -2053,13 +2072,6 @@ autoplay = true
 stream = ExtResource("17_eum53")
 volume_db = -3.0
 autoplay = true
-
-[node name="NavNodeDrawer" type="Node3D" parent="." node_paths=PackedStringArray("draw_on", "nav_parent")]
-script = ExtResource("36_4wwom")
-draw_on = NodePath("../GamePlanet/ClickableSphere")
-raycasting = false
-active = true
-nav_parent = NodePath("../NavNodes")
 
 [node name="NavNodes" type="Node3D" parent="."]
 script = ExtResource("37_ue64j")
@@ -2090,44 +2102,44 @@ curve = SubResource("Curve3D_uqpkb")
 [node name="NavNode--3_44lon-19_41lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.2393, 33.27, -5.66358)
 neighbors = [NodePath("../NavNode--1_47lon-16_6lat"), NodePath("../NavNode--6_62lon-22_58lat"), NodePath("../NavNode--6_33lon-16_33lat")]
-neighbor_paths = [NodePath("@Path3D@57423"), NodePath("@Path3D@57426"), NodePath("@Path3D@58707")]
+neighbor_paths = [NodePath("@Path3D@80125"), NodePath("@Path3D@80126"), NodePath("@Path3D@80127")]
 
-[node name="@Path3D@57423" type="Path3D" parent="NavNodes/NavNode--3_44lon-19_41lat"]
-curve = SubResource("Curve3D_5fhpd")
+[node name="@Path3D@80125" type="Path3D" parent="NavNodes/NavNode--3_44lon-19_41lat"]
+curve = SubResource("Curve3D_n045l")
 
-[node name="@Path3D@57426" type="Path3D" parent="NavNodes/NavNode--3_44lon-19_41lat"]
-curve = SubResource("Curve3D_183yr")
+[node name="@Path3D@80126" type="Path3D" parent="NavNodes/NavNode--3_44lon-19_41lat"]
+curve = SubResource("Curve3D_6fu50")
 
-[node name="@Path3D@58707" type="Path3D" parent="NavNodes/NavNode--3_44lon-19_41lat"]
-curve = SubResource("Curve3D_4moxy")
+[node name="@Path3D@80127" type="Path3D" parent="NavNodes/NavNode--3_44lon-19_41lat"]
+curve = SubResource("Curve3D_u0pbh")
 
 [node name="NavNode--6_62lon-22_58lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.8109, 38.4364, -10.6497)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.8109, 39.0808, -8.99109)
 neighbors = [NodePath("../NavNode--3_44lon-19_41lat"), NodePath("../NavNode--9_61lon-25_78lat"), NodePath("../NavNode--11_5lon-19_02lat")]
-neighbor_paths = [NodePath("@Path3D@57425"), NodePath("@Path3D@57428"), NodePath("@Path3D@58715")]
+neighbor_paths = [NodePath("@Path3D@80124"), NodePath("@Path3D@80128"), NodePath("@Path3D@80132")]
 
-[node name="@Path3D@57425" type="Path3D" parent="NavNodes/NavNode--6_62lon-22_58lat"]
-curve = SubResource("Curve3D_5864d")
+[node name="@Path3D@80124" type="Path3D" parent="NavNodes/NavNode--6_62lon-22_58lat"]
+curve = SubResource("Curve3D_bikou")
 
-[node name="@Path3D@57428" type="Path3D" parent="NavNodes/NavNode--6_62lon-22_58lat"]
-curve = SubResource("Curve3D_05wm4")
+[node name="@Path3D@80128" type="Path3D" parent="NavNodes/NavNode--6_62lon-22_58lat"]
+curve = SubResource("Curve3D_kk8hn")
 
-[node name="@Path3D@58715" type="Path3D" parent="NavNodes/NavNode--6_62lon-22_58lat"]
-curve = SubResource("Curve3D_f6xil")
+[node name="@Path3D@80132" type="Path3D" parent="NavNodes/NavNode--6_62lon-22_58lat"]
+curve = SubResource("Curve3D_s0ym7")
 
 [node name="NavNode--9_61lon-25_78lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.8728, 43.5341, -15.0476)
 neighbors = [NodePath("../NavNode--6_62lon-22_58lat"), NodePath("../NavNode--9_51lon-29_34lat"), NodePath("../NavNode--11_5lon-19_02lat")]
-neighbor_paths = [NodePath("@Path3D@57427"), NodePath("@Path3D@57430"), NodePath("@Path3D@58716")]
+neighbor_paths = [NodePath("@Path3D@80129"), NodePath("@Path3D@80130"), NodePath("@Path3D@80131")]
 
-[node name="@Path3D@57427" type="Path3D" parent="NavNodes/NavNode--9_61lon-25_78lat"]
-curve = SubResource("Curve3D_6i2rg")
+[node name="@Path3D@80129" type="Path3D" parent="NavNodes/NavNode--9_61lon-25_78lat"]
+curve = SubResource("Curve3D_7qyab")
 
-[node name="@Path3D@57430" type="Path3D" parent="NavNodes/NavNode--9_61lon-25_78lat"]
-curve = SubResource("Curve3D_iya4h")
+[node name="@Path3D@80130" type="Path3D" parent="NavNodes/NavNode--9_61lon-25_78lat"]
+curve = SubResource("Curve3D_u1j7w")
 
-[node name="@Path3D@58716" type="Path3D" parent="NavNodes/NavNode--9_61lon-25_78lat"]
-curve = SubResource("Curve3D_gphgm")
+[node name="@Path3D@80131" type="Path3D" parent="NavNodes/NavNode--9_61lon-25_78lat"]
+curve = SubResource("Curve3D_o38n6")
 
 [node name="NavNode--9_51lon-29_34lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.0572, 49.0522, -14.4237)
@@ -2556,8 +2568,8 @@ curve = SubResource("Curve3D_grkxb")
 
 [node name="NavNode--58_99lon-16_43lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.4593, 28.3104, -82.2941)
-neighbors = [NodePath("../NavNode--55_56lon-14_94lat"), NodePath("../NavNode--62_71lon-18_55lat"), NodePath("../NavNode--56_17lon-19_74lat"), NodePath("../NavNode--62_37lon-21_37lat")]
-neighbor_paths = [NodePath("@Path3D@58184"), NodePath("@Path3D@58187"), NodePath("@Path3D@40851"), NodePath("@Path3D@40853")]
+neighbors = [NodePath("../NavNode--55_56lon-14_94lat"), NodePath("../NavNode--62_71lon-18_55lat"), NodePath("../NavNode--56_17lon-19_74lat"), NodePath("../NavNode--62_37lon-21_37lat"), NodePath("../NavNode--59_91lon-13_97lat")]
+neighbor_paths = [NodePath("@Path3D@58184"), NodePath("@Path3D@58187"), NodePath("@Path3D@40851"), NodePath("@Path3D@40853"), NodePath("@Path3D@75196")]
 
 [node name="@Path3D@58184" type="Path3D" parent="NavNodes/NavNode--58_99lon-16_43lat"]
 curve = SubResource("Curve3D_6wllq")
@@ -2570,6 +2582,9 @@ curve = SubResource("Curve3D_1sjbi")
 
 [node name="@Path3D@40853" type="Path3D" parent="NavNodes/NavNode--58_99lon-16_43lat"]
 curve = SubResource("Curve3D_xs1fx")
+
+[node name="@Path3D@75196" type="Path3D" parent="NavNodes/NavNode--58_99lon-16_43lat"]
+curve = SubResource("Curve3D_a4fps")
 
 [node name="NavNode--62_71lon-18_55lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.5065, 31.8479, -84.338)
@@ -2691,31 +2706,31 @@ curve = SubResource("Curve3D_8j8br")
 [node name="NavNode--11_5lon-19_02lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.7361, 32.6244, -18.8593)
 neighbors = [NodePath("../NavNode--10_9lon-12_57lat"), NodePath("../NavNode--13_79lon-28_76lat"), NodePath("../NavNode--17_44lon-19_03lat"), NodePath("../NavNode--20_13lon-27_94lat"), NodePath("../test_node"), NodePath("../NavNode--6_33lon-16_33lat"), NodePath("../NavNode--6_62lon-22_58lat"), NodePath("../NavNode--9_61lon-25_78lat")]
-neighbor_paths = [NodePath("@Path3D@58222"), NodePath("@Path3D@58224"), NodePath("@Path3D@58226"), NodePath("@Path3D@58384"), NodePath("@Path3D@58705"), NodePath("@Path3D@58713"), NodePath("@Path3D@58714"), NodePath("@Path3D@58717")]
+neighbor_paths = [NodePath("@Path3D@80133"), NodePath("@Path3D@80134"), NodePath("@Path3D@80135"), NodePath("@Path3D@80136"), NodePath("@Path3D@80137"), NodePath("@Path3D@80138"), NodePath("@Path3D@80139"), NodePath("@Path3D@80140")]
 
-[node name="@Path3D@58222" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
-curve = SubResource("Curve3D_52ueo")
+[node name="@Path3D@80133" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
+curve = SubResource("Curve3D_wkflt")
 
-[node name="@Path3D@58224" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
-curve = SubResource("Curve3D_25nl3")
+[node name="@Path3D@80134" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
+curve = SubResource("Curve3D_xx0vb")
 
-[node name="@Path3D@58226" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
-curve = SubResource("Curve3D_bvo4t")
+[node name="@Path3D@80135" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
+curve = SubResource("Curve3D_27qiv")
 
-[node name="@Path3D@58384" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
-curve = SubResource("Curve3D_sc4w0")
+[node name="@Path3D@80136" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
+curve = SubResource("Curve3D_vbj1f")
 
-[node name="@Path3D@58705" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
-curve = SubResource("Curve3D_c6tfh")
+[node name="@Path3D@80137" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
+curve = SubResource("Curve3D_2em6w")
 
-[node name="@Path3D@58713" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
-curve = SubResource("Curve3D_bmnhq")
+[node name="@Path3D@80138" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
+curve = SubResource("Curve3D_1kfpn")
 
-[node name="@Path3D@58714" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
-curve = SubResource("Curve3D_xjy76")
+[node name="@Path3D@80139" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
+curve = SubResource("Curve3D_ikx0j")
 
-[node name="@Path3D@58717" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
-curve = SubResource("Curve3D_61b7l")
+[node name="@Path3D@80140" type="Path3D" parent="NavNodes/NavNode--11_5lon-19_02lat"]
+curve = SubResource("Curve3D_0n1r6")
 
 [node name="NavNode--6_33lon-16_33lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.4753, 28.1507, -10.5837)
@@ -2734,20 +2749,16 @@ curve = SubResource("Curve3D_xepjb")
 [node name="@Path3D@58712" type="Path3D" parent="NavNodes/NavNode--6_33lon-16_33lat"]
 curve = SubResource("Curve3D_hkxrn")
 
-[node name="NavNode--10_93lon-10_08lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--10_93lon-10_08lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.7666, 17.5203, -18.6889)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--16_16lon-9_53lat")]
 neighbor_paths = [NodePath("@Path3D@39474")]
 
 [node name="@Path3D@39474" type="Path3D" parent="NavNodes/NavNode--10_93lon-10_08lat"]
 curve = SubResource("Curve3D_d3h56")
 
-[node name="NavNode--16_16lon-9_53lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--16_16lon-9_53lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.8189, 16.5766, -27.47)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--10_93lon-10_08lat"), NodePath("../NavNode--20_31lon-9_05lat"), NodePath("../NavNode--10_9lon-12_57lat"), NodePath("../test_node"), NodePath("../NavNode--20_64lon-11_86lat")]
 neighbor_paths = [NodePath("@Path3D@39473"), NodePath("@Path3D@39475"), NodePath("@Path3D@39477"), NodePath("@Path3D@39484"), NodePath("@Path3D@39888")]
 
@@ -2766,10 +2777,8 @@ curve = SubResource("Curve3D_reg1r")
 [node name="@Path3D@39888" type="Path3D" parent="NavNodes/NavNode--16_16lon-9_53lat"]
 curve = SubResource("Curve3D_fwqld")
 
-[node name="NavNode--20_31lon-9_05lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--20_31lon-9_05lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.7081, 15.7525, -34.3086)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--16_16lon-9_53lat"), NodePath("../NavNode--20_64lon-11_86lat")]
 neighbor_paths = [NodePath("@Path3D@39476"), NodePath("@Path3D@39885")]
 
@@ -2779,10 +2788,8 @@ curve = SubResource("Curve3D_5ijs5")
 [node name="@Path3D@39885" type="Path3D" parent="NavNodes/NavNode--20_31lon-9_05lat"]
 curve = SubResource("Curve3D_afmti")
 
-[node name="NavNode--35_33lon-18_01lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--35_33lon-18_01lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.661, 30.9485, -55.0542)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--40_34lon-25_8lat"), NodePath("../NavNode--33_92lon-26_58lat"), NodePath("../NavNode--30_23lon-18_76lat"), NodePath("."), NodePath("../NavNode--36_65lon-8_86lat")]
 neighbor_paths = [NodePath("@Path3D@41214"), NodePath("@Path3D@41215"), NodePath("@Path3D@41218"), NodePath("@Path3D@42490"), NodePath("@Path3D@42492")]
 
@@ -2801,10 +2808,8 @@ curve = SubResource("Curve3D_wg1n2")
 [node name="@Path3D@42492" type="Path3D" parent="NavNodes/NavNode--35_33lon-18_01lat"]
 curve = SubResource("Curve3D_ld7gi")
 
-[node name="NavNode--40_92lon-17_76lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--40_92lon-17_76lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0336, 30.5338, -62.4408)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--47_02lon-24_89lat"), NodePath("../NavNode--46_04lon-17_32lat"), NodePath("."), NodePath("../NavNode--36_65lon-8_86lat"), NodePath("../NavNode--40_46lon-8_65lat"), NodePath("../NavNode--44_74lon-9_21lat")]
 neighbor_paths = [NodePath("@Path3D@41208"), NodePath("@Path3D@41209"), NodePath("@Path3D@41219"), NodePath("@Path3D@42493"), NodePath("@Path3D@42496"), NodePath("@Path3D@42497")]
 
@@ -2826,10 +2831,8 @@ curve = SubResource("Curve3D_7rm2x")
 [node name="@Path3D@42497" type="Path3D" parent="NavNodes/NavNode--40_92lon-17_76lat"]
 curve = SubResource("Curve3D_dnlen")
 
-[node name="NavNode--46_04lon-17_32lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--46_04lon-17_32lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.3305, 29.7943, -68.7937)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--52_88lon-24_2lat"), NodePath("../NavNode--51_02lon-18_86lat"), NodePath("../NavNode--48_86lon-10_92lat"), NodePath("../NavNode--47_02lon-24_89lat"), NodePath("../NavNode--40_92lon-17_76lat"), NodePath("../NavNode--40_34lon-25_8lat"), NodePath("../NavNode--44_74lon-9_21lat")]
 neighbor_paths = [NodePath("@Path3D@40840"), NodePath("@Path3D@40841"), NodePath("@Path3D@41203"), NodePath("@Path3D@41205"), NodePath("@Path3D@41210"), NodePath("@Path3D@41211"), NodePath("@Path3D@42500")]
 
@@ -2854,10 +2857,8 @@ curve = SubResource("Curve3D_ejcoy")
 [node name="@Path3D@42500" type="Path3D" parent="NavNodes/NavNode--46_04lon-17_32lat"]
 curve = SubResource("Curve3D_t1rle")
 
-[node name="NavNode--51_02lon-18_86lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--51_02lon-18_86lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.5836, 32.3606, -73.6383)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--52_88lon-24_2lat"), NodePath("../NavNode--56_17lon-19_74lat"), NodePath("../NavNode--46_04lon-17_32lat"), NodePath("../NavNode--55_56lon-14_94lat"), NodePath("../NavNode--52_71lon-12_92lat")]
 neighbor_paths = [NodePath("@Path3D@40834"), NodePath("@Path3D@40835"), NodePath("@Path3D@40842"), NodePath("@Path3D@40848"), NodePath("@Path3D@40849")]
 
@@ -2876,10 +2877,8 @@ curve = SubResource("Curve3D_yndl2")
 [node name="@Path3D@40849" type="Path3D" parent="NavNodes/NavNode--51_02lon-18_86lat"]
 curve = SubResource("Curve3D_a4r6n")
 
-[node name="NavNode--56_17lon-19_74lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--56_17lon-19_74lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.4549, 33.8074, -78.2659)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--62_24lon-24_08lat"), NodePath("../NavNode--57_28lon-24_12lat"), NodePath("../NavNode--62_37lon-21_37lat"), NodePath("../NavNode--51_02lon-18_86lat"), NodePath("../NavNode--52_88lon-24_2lat"), NodePath("../NavNode--52_71lon-12_92lat"), NodePath("../NavNode--55_56lon-14_94lat"), NodePath("../NavNode--58_99lon-16_43lat")]
 neighbor_paths = [NodePath("@Path3D@40828"), NodePath("@Path3D@40830"), NodePath("@Path3D@40831"), NodePath("@Path3D@40836"), NodePath("@Path3D@40837"), NodePath("@Path3D@40844"), NodePath("@Path3D@40845"), NodePath("@Path3D@40852")]
 
@@ -2907,10 +2906,8 @@ curve = SubResource("Curve3D_6ia2d")
 [node name="@Path3D@40852" type="Path3D" parent="NavNodes/NavNode--56_17lon-19_74lat"]
 curve = SubResource("Curve3D_2r65u")
 
-[node name="NavNode--62_37lon-21_37lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--62_37lon-21_37lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.232, 36.482, -82.5836)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--66_47lon-22_21lat"), NodePath("../NavNode--62_24lon-24_08lat"), NodePath("../NavNode--56_17lon-19_74lat"), NodePath("../NavNode--58_99lon-16_43lat"), NodePath("../NavNode--62_71lon-18_55lat")]
 neighbor_paths = [NodePath("@Path3D@40823"), NodePath("@Path3D@40825"), NodePath("@Path3D@40832"), NodePath("@Path3D@40854"), NodePath("@Path3D@40856")]
 
@@ -2929,10 +2926,8 @@ curve = SubResource("Curve3D_rgo2u")
 [node name="@Path3D@40856" type="Path3D" parent="NavNodes/NavNode--62_37lon-21_37lat"]
 curve = SubResource("Curve3D_18l1v")
 
-[node name="NavNode--66_47lon-22_21lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+[node name="NavNode--66_47lon-22_21lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9984, 37.8361, -84.968)
-collision_layer = 262144
-script = ExtResource("16_ni20c")
 neighbors = [NodePath("../NavNode--67lon-24_09lat"), NodePath("../NavNode--70_3lon-23_85lat"), NodePath("../NavNode--69_65lon-21_84lat"), NodePath("../NavNode--66_07lon-20_08lat"), NodePath("../NavNode--62_71lon-18_55lat"), NodePath("../NavNode--62_37lon-21_37lat")]
 neighbor_paths = [NodePath("@Path3D@40813"), NodePath("@Path3D@40815"), NodePath("@Path3D@40817"), NodePath("@Path3D@40820"), NodePath("@Path3D@40821"), NodePath("@Path3D@40824")]
 
@@ -2954,6 +2949,27 @@ curve = SubResource("Curve3D_yrq4h")
 [node name="@Path3D@40824" type="Path3D" parent="NavNodes/NavNode--66_47lon-22_21lat"]
 curve = SubResource("Curve3D_fru7v")
 
+[node name="NavNode--59_91lon-13_97lat" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.7086, 24.1657, -84.0446)
+neighbors = [NodePath("../NavNode--58_99lon-16_43lat"), NodePath("../NavNode--63_18lon-10_94lat")]
+neighbor_paths = [NodePath("@Path3D@75197"), NodePath("@Path3D@84163")]
+
+[node name="@Path3D@75197" type="Path3D" parent="NavNodes/NavNode--59_91lon-13_97lat"]
+curve = SubResource("Curve3D_kolfg")
+
+[node name="@Path3D@84163" type="Path3D" parent="NavNodes/NavNode--59_91lon-13_97lat"]
+curve = SubResource("Curve3D_lqawd")
+
+[node name="NavNode--63_18lon-10_94lat" type="Area3D" parent="NavNodes" node_paths=PackedStringArray("neighbors", "neighbor_paths") groups=["nav_nodes"] instance=ExtResource("36_nkwg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.351, 18.9923, -87.7057)
+collision_layer = 262144
+script = ExtResource("16_ni20c")
+neighbors = [NodePath("../NavNode--59_91lon-13_97lat")]
+neighbor_paths = [NodePath("@Path3D@84162")]
+
+[node name="@Path3D@84162" type="Path3D" parent="NavNodes/NavNode--63_18lon-10_94lat"]
+curve = SubResource("Curve3D_fuf2i")
+
 [node name="PlayerSpawnNodes" type="Node3D" parent="."]
 unique_name_in_owner = true
 
@@ -2965,23 +2981,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.5, 0, -5)
 
 [node name="Cities" type="Node3D" parent="."]
 
-[node name="Miami" type="Node3D" parent="Cities"]
-transform = Transform3D(0.977072, -0.212911, 0, 0.212911, 0.977072, 0, 0, 0, 1, 97.535, 22.506, -1.75084)
+[node name="Miami2" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+transform = Transform3D(-0.162589, -0.490087, 0.856374, 0, 0.867925, 0.496695, -0.986694, 0.0807575, -0.141115, 85.8517, 49.7938, -14.1468)
+script = ExtResource("14_8vb4v")
+anchor = NodePath("../../GamePlanet")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Cities/Miami"]
-visible = false
+[node name="RigidBody3D" type="RigidBody3D" parent="Cities/Miami2"]
+collision_layer = 262144
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Miami/RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Miami2/RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_6oioa")
 
-[node name="Sprite3D" type="Sprite3D" parent="Cities/Miami"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0727158, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Miami2/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ni20c")
+
+[node name="Sprite3D" type="Sprite3D" parent="Cities/Miami2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0727158, 0, 0)
 material_override = SubResource("StandardMaterial3D_ho0hv")
 axis = 0
 texture = ExtResource("34_f1l1f")
 
-[node name="DockingSpot" type="SpotLight3D" parent="Cities/Miami"]
+[node name="DockingSpot" type="SpotLight3D" parent="Cities/Miami2"]
 transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
 visible = false
 light_cull_mask = 4294443009
@@ -2990,24 +3013,208 @@ spot_range = 16.407
 spot_attenuation = -5.66
 spot_angle = 43.28
 
-[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Cities/Miami/DockingSpot"]
+[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Cities/Miami2/DockingSpot"]
 transform = Transform3D(1, 2.35071e-10, -4.65661e-09, -2.91034e-10, 1, -3.72522e-08, -4.65661e-09, 1.49032e-08, 1, -0.00889826, 0.0111237, -0.764389)
 layers = 524288
 transparency = 1.0
 mesh = SubResource("SphereMesh_rcc5k")
 
-[node name="Label3D" type="Label3D" parent="Cities/Miami"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.246742, 1.61078, -8.88178e-16)
-billboard = 1
+[node name="Label3D" type="Label3D" parent="Cities/Miami2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246742, 1.61078, -8.88178e-16)
+alpha_cut = 1
+modulate = Color(1, 0, 1, 1)
+text = "New York"
+font = ExtResource("35_m4noy")
+font_size = 160
+
+[node name="Sprite3D2" type="Sprite3D" parent="Cities/Miami2"]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0.13311, 0, 0)
+material_override = SubResource("StandardMaterial3D_slecc")
+transparency = 0.99
+axis = 0
+texture = ExtResource("35_woink")
+
+[node name="Miami5" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+transform = Transform3D(-0.020001, -0.221501, 0.974953, 0, 0.97515, 0.221545, -0.9998, 0.00443112, -0.0195039, 97.7392, 22.2099, -1.95527)
+script = ExtResource("14_8vb4v")
+anchor = NodePath("../../GamePlanet")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Cities/Miami5"]
+collision_layer = 262144
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Miami5/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_6oioa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Miami5/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ni20c")
+
+[node name="Sprite3D" type="Sprite3D" parent="Cities/Miami5"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0727158, 0, 0)
+material_override = SubResource("StandardMaterial3D_ho0hv")
+axis = 0
+texture = ExtResource("34_f1l1f")
+
+[node name="DockingSpot" type="SpotLight3D" parent="Cities/Miami5"]
+transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
+visible = false
+light_cull_mask = 4294443009
+shadow_enabled = true
+spot_range = 16.407
+spot_attenuation = -5.66
+spot_angle = 43.28
+
+[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Cities/Miami5/DockingSpot"]
+transform = Transform3D(1, 2.35071e-10, -4.65661e-09, -2.91034e-10, 1, -3.72522e-08, -4.65661e-09, 1.49032e-08, 1, -0.00889826, 0.0111237, -0.764389)
+layers = 524288
+transparency = 1.0
+mesh = SubResource("SphereMesh_rcc5k")
+
+[node name="Label3D" type="Label3D" parent="Cities/Miami5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246742, 1.61078, -8.88178e-16)
 alpha_cut = 1
 modulate = Color(1, 0, 1, 1)
 text = "Miami"
 font = ExtResource("35_m4noy")
 font_size = 160
 
-[node name="Sprite3D2" type="Sprite3D" parent="Cities/Miami"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.13311, 0, 0)
+[node name="Sprite3D2" type="Sprite3D" parent="Cities/Miami5"]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0.13311, 0, 0)
 material_override = SubResource("StandardMaterial3D_slecc")
 transparency = 0.99
 axis = 0
 texture = ExtResource("35_woink")
+
+[node name="Miami3" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+transform = Transform3D(-0.958, -0.118882, 0.260967, -7.45058e-09, 0.910024, 0.414554, -0.28677, 0.397144, -0.871801, 26.162, 41.5592, -87.3982)
+script = ExtResource("14_8vb4v")
+anchor = NodePath("../../GamePlanet")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Cities/Miami3"]
+collision_layer = 262144
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Miami3/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_6oioa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Miami3/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ni20c")
+
+[node name="Sprite3D" type="Sprite3D" parent="Cities/Miami3"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0727158, 0, 0)
+material_override = SubResource("StandardMaterial3D_ho0hv")
+axis = 0
+texture = ExtResource("34_f1l1f")
+
+[node name="DockingSpot" type="SpotLight3D" parent="Cities/Miami3"]
+transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
+visible = false
+light_cull_mask = 4294443009
+shadow_enabled = true
+spot_range = 16.407
+spot_attenuation = -5.66
+spot_angle = 43.28
+
+[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Cities/Miami3/DockingSpot"]
+transform = Transform3D(1, 2.35071e-10, -4.65661e-09, -2.91034e-10, 1, -3.72522e-08, -4.65661e-09, 1.49032e-08, 1, -0.00889826, 0.0111237, -0.764389)
+layers = 524288
+transparency = 1.0
+mesh = SubResource("SphereMesh_rcc5k")
+
+[node name="Label3D" type="Label3D" parent="Cities/Miami3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246742, 1.61078, -8.88178e-16)
+alpha_cut = 1
+modulate = Color(1, 0, 1, 1)
+text = "New Gibraltar"
+font = ExtResource("35_m4noy")
+font_size = 160
+
+[node name="Sprite3D2" type="Sprite3D" parent="Cities/Miami3"]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0.13311, 0, 0)
+material_override = SubResource("StandardMaterial3D_slecc")
+transparency = 0.99
+axis = 0
+texture = ExtResource("35_woink")
+
+[node name="Miami4" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+transform = Transform3D(-0.899545, -0.0815192, 0.429153, 0, 0.982433, 0.186616, -0.436828, 0.16787, -0.883741, 43.0227, 18.7083, -88.5952)
+script = ExtResource("14_8vb4v")
+anchor = NodePath("../../GamePlanet")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Cities/Miami4"]
+collision_layer = 262144
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Miami4/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_6oioa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Miami4/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ni20c")
+
+[node name="Sprite3D" type="Sprite3D" parent="Cities/Miami4"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0727158, 0, 0)
+material_override = SubResource("StandardMaterial3D_ho0hv")
+axis = 0
+texture = ExtResource("34_f1l1f")
+
+[node name="DockingSpot" type="SpotLight3D" parent="Cities/Miami4"]
+transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
+visible = false
+light_cull_mask = 4294443009
+shadow_enabled = true
+spot_range = 16.407
+spot_attenuation = -5.66
+spot_angle = 43.28
+
+[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Cities/Miami4/DockingSpot"]
+transform = Transform3D(1, 2.35071e-10, -4.65661e-09, -2.91034e-10, 1, -3.72522e-08, -4.65661e-09, 1.49032e-08, 1, -0.00889826, 0.0111237, -0.764389)
+layers = 524288
+transparency = 1.0
+mesh = SubResource("SphereMesh_rcc5k")
+
+[node name="Label3D" type="Label3D" parent="Cities/Miami4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246742, 1.61078, -8.88178e-16)
+alpha_cut = 1
+modulate = Color(1, 0, 1, 1)
+text = "Dakhla"
+font = ExtResource("35_m4noy")
+font_size = 160
+
+[node name="Sprite3D2" type="Sprite3D" parent="Cities/Miami4"]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0.13311, 0, 0)
+material_override = SubResource("StandardMaterial3D_slecc")
+transparency = 0.99
+axis = 0
+texture = ExtResource("35_woink")
+
+[node name="Tools" type="Node3D" parent="."]
+
+[node name="NodeTeleporter" type="Node3D" parent="Tools"]
+script = ExtResource("17_ni20c")
+
+[node name="GeometryDrawer" type="Node3D" parent="Tools" node_paths=PackedStringArray("draw_on")]
+script = ExtResource("11_6u1es")
+draw_on = NodePath("../../GamePlanet/ClickableSphere")
+raycasting = false
+flipped_normal = false
+
+[node name="@MeshInstance3D@93055" type="MeshInstance3D" parent="Tools/GeometryDrawer"]
+visible = false
+mesh = SubResource("ArrayMesh_8w7ix")
+
+[node name="@MeshInstance3D@48828" type="MeshInstance3D" parent="Tools/GeometryDrawer"]
+visible = false
+mesh = SubResource("ArrayMesh_17syb")
+
+[node name="NavNodeDrawer" type="Node3D" parent="Tools" node_paths=PackedStringArray("draw_on", "nav_parent")]
+script = ExtResource("36_4wwom")
+draw_on = NodePath("../../GamePlanet/ClickableSphere")
+raycasting = false
+active = true
+nav_parent = NodePath("../../NavNodes")
