@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Node
 
 @export var draw_on: Area3D
@@ -27,8 +27,8 @@ signal add_vertex_at
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     add_vertex_at.connect(handle_add_vertex_at)
-    InputMap.load_from_project_settings()
-    InputMap.get_actions()
+    #InputMap.load_from_project_settings()
+    #InputMap.get_actions()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
