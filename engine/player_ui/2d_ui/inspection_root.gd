@@ -12,11 +12,20 @@ signal edited_color
 
 #Unidentified open
 func handle_opened_signal(sig:SignalPopup):
+    if inspecting_signal:
+        disconnect_unidentified(sig)
+
     inspecting_signal = sig
+    if %EntityInspection.visible == true:
+        %EntityInspection.get_node("AnimationPlayer").play_backwards("slide_in")
+        await %EntityInspection.get_node("AnimationPlayer").animation_finished
+        %EntityInspection.visible = false
+        
     %SignalInspection.visible  = true
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
     player.play("slide_in")
-    pass
+    handle_color_stream(sig.color)
+    connect_unidentified(sig)
 
 #Identified open
 func handle_openened_identified_signal(sig:SignalPopup):
@@ -39,19 +48,23 @@ func handle_identified_signal(sig:SignalPopup):
         %EntityInspection.visible = true
         player = %EntityInspection.get_node("AnimationPlayer")
         player.play("slide_in")
-    #entityinspection.load_entity()
+        disconnect_unidentified(sig)
 
 func _on_signal_inspector_toggle_button_up() -> void:
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
     player.play_backwards("slide_in")
     await player.animation_finished
     %SignalInspection.visible = false
-    inspecting_signal.stream.disconnect(handle_SI_stream)
+    disconnect_unidentified(inspecting_signal)
+
     pass # Replace with function body.
 
-func handle_SI_stream(dict:Dictionary):#{"volume":x, "certainty":x, "pitch":x}
+func handle_SI_stream(dict:Dictionary):#{"volume":x, "certainty":x, "pitch":x, "entity": x}
+    print("Handle SI stream called")
     %SignalPitch.text = "Pitch: " + str(dict.pitch)
     %SignalCertainty.text = "Certainty: "+str(dict.certainty)
+    var _entity:Entity = dict.entity
+    %SignalSize.text = "Size: " + str(SignalHelpers.get_uncertain_size(dict.entity.atts.size, dict.certainty))
     %SignalVolume.text = "Volume: " + str(dict.volume)+"db"
     pass
 
@@ -75,7 +88,7 @@ func handle_color_stream(color:Color)->void:
     spike_mesh.material_override.set("shader_parameter/color", shader_color)
     %SignalColorChanger.modulate = color
     #Positively identified:
-    var ship_mesh:MeshInstance3D = %Ship3DRoot.get_child(0)#The first child of this root should always be a ship mesh.
+    var ship_mesh:MeshInstance3D = find_child("Ship3DRoot", true, false).get_child(0)#The first child of this root should always be a ship mesh.
     print("SHIP MESH: ", ship_mesh)
     #Probably we'll switch out scenes for every ship type and attach them directly to Ship3D root.
     #These scenes will be defined on the entity resource itself
@@ -96,6 +109,7 @@ func _on_entity_inspector_toggle_button_up() -> void:
 func load_inspected_entity(sig:SignalPopup):
     var entity:Entity = sig.detected_object
     %EntityName.text = entity.given_name
+    %EntitySize.text = "Size: " + str(entity.atts.size)+"m³"
     %EntityClass.text = entity.atts.type.display_name
     %EntitySpeed.text = "Max speed: " + str(GlobeHelpers.game_s_to_kph(entity.max_speed))
     %EntityPitch.text = "Pitch: " +str(entity.emission.pitch)
@@ -103,3 +117,16 @@ func load_inspected_entity(sig:SignalPopup):
     %EntityVolume.text = "Volume: " + str(entity.emission.volume)
     %EntityDepth.text = "Depth: " + str(entity.atts.current_depth)
     
+
+
+func connect_unidentified(sig:SignalPopup):
+    inspecting_signal.stream_color.connect(handle_color_stream)
+    inspecting_signal.stream.connect(handle_SI_stream)
+    inspecting_signal.stream.connect(handle_SI_stream)
+    edited_color.connect(inspecting_signal.handle_update_color)
+
+func disconnect_unidentified(sig:SignalPopup):
+    inspecting_signal.stream_color.disconnect(handle_color_stream)
+    inspecting_signal.stream.disconnect(handle_SI_stream)
+    inspecting_signal.stream.disconnect(handle_SI_stream)
+    edited_color.disconnect(inspecting_signal.handle_update_color)

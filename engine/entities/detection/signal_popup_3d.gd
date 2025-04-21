@@ -85,21 +85,21 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     anchor = detecting_object.anchor
     sound = _sound
     detected_object = _detected_object
-    if detecting_object.is_player:
-        #TODO: Disconnect and connect all these signals as something fades in and out of view.
-        player = detecting_object.played_by
-        unidentified_opened.connect(player.UI.inspection_root.handle_opened_signal)
-        identified_opened.connect(player.UI.inspection_root.handle_openened_identified_signal)
-        identified.connect(player.UI.inspection_root.handle_identified_signal)
-        player.UI.inspection_root.edited_signal_name.connect(handle_update_name)
-        player.UI.inspection_root.edited_color.connect(handle_update_color)
-        stream_color.connect(player.UI.inspection_root.handle_color_stream)
+    #Signal connections only need to be done once ever, even if we call unpack again later
+    if unpacked == false:
+        if detecting_object.is_player:
+            #TODO: Disconnect and connect all these signals as something fades in and out of view.
+            player = detecting_object.played_by
+            unidentified_opened.connect(player.UI.inspection_root.handle_opened_signal)
+            identified_opened.connect(player.UI.inspection_root.handle_openened_identified_signal)
+            identified.connect(player.UI.inspection_root.handle_identified_signal)
+            player.UI.inspection_root.edited_signal_name.connect(handle_update_name)
 
-    
-    #Signals
-    #TODO: If they're already connected, don't do it again.
-    detected_object.died.connect(handle_detected_object_died)
-    detecting_object.died.connect(handle_detecting_object_died)
+        
+        #Signals
+        #TODO: If they're already connected, don't do it again.
+        detected_object.died.connect(handle_detected_object_died)
+        detecting_object.died.connect(handle_detecting_object_died)
     # Calculate the offset once and store it
     offset = calculate_offset()
     #How far must the entities travel before updating again?
@@ -300,7 +300,6 @@ var update_interval: float = 0.5  # Minimum interval between updates (in seconds
 func update_if_needed() -> void:
     var current_time = Time.get_ticks_msec() * 1000  # Get the current time in seconds
     if needs_update and (current_time - last_update_time >= update_interval):
-        print("Update for signal popup was called!")
         last_detected_position = detected_object.global_position
         last_detector_position = detecting_object.global_position
         update_threshold = calculate_update_threshold()
@@ -314,7 +313,8 @@ func update_if_needed() -> void:
         last_update_time = current_time
         last_velocity = detected_object.linear_velocity
         modulate_by_certainty()
-        stream.emit({"volume":sound.volume, "pitch":sound.pitch, "certainty":certainty})
+        #Stream qualities that might appear to change over time.
+        stream.emit({"volume":sound.volume, "pitch":sound.pitch, "certainty":certainty, "entity": detected_object})
 
     
 func handle_detected_object_died(_entity:Entity):

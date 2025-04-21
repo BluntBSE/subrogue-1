@@ -1,0 +1,151 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfgnhjrv8rjgx"]
+
+[ext_resource type="Shader" uid="uid://bjysmg5kwy2ke" path="res://title_screen/wireframe_sub_space.gdshader" id="1_208rp"]
+[ext_resource type="ArrayMesh" uid="uid://dkb6osgay2qlt" path="res://assets/3d/cargo_ship_1.obj" id="2_pwxti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smroy"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_208rp")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 3.0
+
+[sub_resource type="Animation" id="Animation_3h4iq"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_smroy"]
+resource_name = "camera_rotate_1"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 30)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 6.28319, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 30)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 30)
+}
+
+[sub_resource type="Animation" id="Animation_7xmbg"]
+resource_name = "rock_horizontal_1"
+length = 30.0
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 15.0272, 30)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.523599, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.523599, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 15.0272, 30)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 15.0272, 30)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3h4iq"]
+_data = {
+&"RESET": SubResource("Animation_3h4iq"),
+&"camera_rotate_1": SubResource("Animation_smroy"),
+&"rock_horizontal_1": SubResource("Animation_7xmbg")
+}
+
+[node name="Ship3DRoot" type="Node3D"]
+
+[node name="CargoShip1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_smroy")
+mesh = ExtResource("2_pwxti")
+skeleton = NodePath("../../..")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-0.0727333, 0, 0.997351, 0, 1, 0, -0.997351, 0, -0.0727333, 101.845, 39.1139, -4.7975)
+fov = 80.0
+far = 200.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraPivot"]
+libraries = {
+&"": SubResource("AnimationLibrary_3h4iq")
+}
+autoplay = "rock_horizontal_1"
