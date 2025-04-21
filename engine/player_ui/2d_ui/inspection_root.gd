@@ -12,11 +12,20 @@ signal edited_color
 
 #Unidentified open
 func handle_opened_signal(sig:SignalPopup):
+    if inspecting_signal:
+        disconnect_unidentified(sig)
+
     inspecting_signal = sig
+    if %EntityInspection.visible == true:
+        %EntityInspection.get_node("AnimationPlayer").play_backwards("slide_in")
+        await %EntityInspection.get_node("AnimationPlayer").animation_finished
+        %EntityInspection.visible = false
+        
     %SignalInspection.visible  = true
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
     player.play("slide_in")
-    pass
+    handle_color_stream(sig.color)
+    connect_unidentified(sig)
 
 #Identified open
 func handle_openened_identified_signal(sig:SignalPopup):
@@ -39,14 +48,15 @@ func handle_identified_signal(sig:SignalPopup):
         %EntityInspection.visible = true
         player = %EntityInspection.get_node("AnimationPlayer")
         player.play("slide_in")
-    #entityinspection.load_entity()
+        disconnect_unidentified(sig)
 
 func _on_signal_inspector_toggle_button_up() -> void:
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
     player.play_backwards("slide_in")
     await player.animation_finished
     %SignalInspection.visible = false
-    inspecting_signal.stream.disconnect(handle_SI_stream)
+    disconnect_unidentified(inspecting_signal)
+
     pass # Replace with function body.
 
 func handle_SI_stream(dict:Dictionary):#{"volume":x, "certainty":x, "pitch":x, "entity": x}
@@ -107,3 +117,16 @@ func load_inspected_entity(sig:SignalPopup):
     %EntityVolume.text = "Volume: " + str(entity.emission.volume)
     %EntityDepth.text = "Depth: " + str(entity.atts.current_depth)
     
+
+
+func connect_unidentified(sig:SignalPopup):
+    inspecting_signal.stream_color.connect(handle_color_stream)
+    inspecting_signal.stream.connect(handle_SI_stream)
+    inspecting_signal.stream.connect(handle_SI_stream)
+    edited_color.connect(inspecting_signal.handle_update_color)
+
+func disconnect_unidentified(sig:SignalPopup):
+    inspecting_signal.stream_color.disconnect(handle_color_stream)
+    inspecting_signal.stream.disconnect(handle_SI_stream)
+    inspecting_signal.stream.disconnect(handle_SI_stream)
+    edited_color.disconnect(inspecting_signal.handle_update_color)
