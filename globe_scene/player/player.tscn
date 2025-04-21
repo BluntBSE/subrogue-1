@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=64 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -35,9 +35,8 @@
 [ext_resource type="Script" uid="uid://dxfcu2yvec3m6" path="res://engine/player_ui/2d_ui/inspection_root.gd" id="34_558vm"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_lu2fn"]
 [ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="35_smroy"]
-[ext_resource type="Shader" uid="uid://bjysmg5kwy2ke" path="res://title_screen/wireframe_sub_space.gdshader" id="36_3h4iq"]
+[ext_resource type="PackedScene" uid="uid://bfgnhjrv8rjgx" path="res://engine/entities/3d_scenes/commercial_freighter_1.tscn" id="36_q7i7m"]
 [ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="37_3h4iq"]
-[ext_resource type="ArrayMesh" uid="uid://dkb6osgay2qlt" path="res://assets/3d/cargo_ship_1.obj" id="37_7xmbg"]
 [ext_resource type="Shader" uid="uid://c4ixw7o0cka8i" path="res://title_screen/vcr.gdshader" id="38_3h4iq"]
 [ext_resource type="Script" uid="uid://d1otdxkyfls70" path="res://globe_scene/player/console_input.gd" id="39_7xmbg"]
 [ext_resource type="PackedScene" uid="uid://8k5fjvye3gcg" path="res://engine/entities/detection/spiky_boy.tscn" id="39_nwwe3"]
@@ -446,132 +445,6 @@ shader_parameter/scanlines_spacing = 1.16
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nwwe3"]
 viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_smroy"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("36_3h4iq")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/outline_width = 3.0
-
-[sub_resource type="Animation" id="Animation_3h4iq"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_smroy"]
-resource_name = "camera_rotate_1"
-length = 30.0
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 30)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 6.28319, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 30)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 30)
-}
-
-[sub_resource type="Animation" id="Animation_7xmbg"]
-resource_name = "rock_horizontal_1"
-length = 30.0
-loop_mode = 2
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 15.0272, 30)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-0.523599, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.523599, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 15.0272, 30)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 15.0272, 30)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3h4iq"]
-_data = {
-&"RESET": SubResource("Animation_3h4iq"),
-&"camera_rotate_1": SubResource("Animation_smroy"),
-&"rock_horizontal_1": SubResource("Animation_7xmbg")
-}
 
 [sub_resource type="Animation" id="Animation_558vm"]
 length = 0.001
@@ -2204,27 +2077,8 @@ fsr_sharpness = 2.0
 canvas_item_default_texture_filter = 0
 size = Vector2i(256, 256)
 
-[node name="Ship3DRoot" type="Node3D" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport"]
+[node name="Ship3DRoot" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport" instance=ExtResource("36_q7i7m")]
 unique_name_in_owner = true
-
-[node name="CargoShip1" type="MeshInstance3D" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-material_override = SubResource("ShaderMaterial_smroy")
-mesh = ExtResource("37_7xmbg")
-skeleton = NodePath("../../..")
-
-[node name="CameraPivot" type="Node3D" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot"]
-
-[node name="Camera3D" type="Camera3D" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot/CameraPivot"]
-transform = Transform3D(-0.0727333, 0, 0.997351, 0, 1, 0, -0.997351, 0, -0.0727333, 101.845, 39.1139, -4.7975)
-fov = 80.0
-far = 200.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport/Ship3DRoot/CameraPivot"]
-libraries = {
-&"": SubResource("AnimationLibrary_3h4iq")
-}
-autoplay = "rock_horizontal_1"
 
 [node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
 unique_name_in_owner = true
@@ -2267,6 +2121,15 @@ offset_right = 195.0
 offset_bottom = 243.0
 theme = ExtResource("8_fq2vg")
 theme_override_constants/separation = 10
+
+[node name="EntitySize" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Size: 352640 m³"
+fit_content = true
 
 [node name="EntitySpeed" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
 unique_name_in_owner = true
@@ -2457,6 +2320,15 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "TETSTXXX"
 color = Color(1, 1, 1, 1)
+
+[node name="SignalSize" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Size: 300,000 m3"
+fit_content = true
 
 [node name="SignalCertainty" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
 unique_name_in_owner = true

@@ -94,7 +94,7 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
         player.UI.inspection_root.edited_signal_name.connect(handle_update_name)
         player.UI.inspection_root.edited_color.connect(handle_update_color)
         stream_color.connect(player.UI.inspection_root.handle_color_stream)
-
+        stream.connect(player.UI.inspection_root.handle_SI_stream)
     
     #Signals
     #TODO: If they're already connected, don't do it again.
@@ -314,7 +314,8 @@ func update_if_needed() -> void:
         last_update_time = current_time
         last_velocity = detected_object.linear_velocity
         modulate_by_certainty()
-        stream.emit({"volume":sound.volume, "pitch":sound.pitch, "certainty":certainty})
+        #Stream qualities that might appear to change over time.
+        stream.emit({"volume":sound.volume, "pitch":sound.pitch, "certainty":certainty, "entity": detected_object})
 
     
 func handle_detected_object_died(_entity:Entity):

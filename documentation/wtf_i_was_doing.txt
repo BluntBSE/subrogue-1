@@ -10,7 +10,7 @@ skewing interactions towards interacting with the player vs npcs,
 but not so much the player can't bamboozle the AI.
 
 
-
+BUG: Certainty scales even when approaching/leaving the wrong signal
 BUG: Clicking RIGHT as the game loads can cause a crash. Fix!
 
 

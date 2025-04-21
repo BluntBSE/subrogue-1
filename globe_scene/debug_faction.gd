@@ -13,6 +13,13 @@ func _ready() -> void:
     if faction_layer == GlobalConst.layers.FACTION_1:
         print("Spawning entity at test node", %test_node.position)
         spawn_entity_at_node(%test_node, "debug_commercial", self)
+        spawn_entity_at_node(%test_navnode_2, "debug_commercial", self)
+        spawn_entity_at_node(%test_navnode_3, "debug_commercial", self)
+        spawn_entity_at_node(%test_navnode_4, "debug_commercial", self)
+        spawn_entity_at_node(%test_navnode_5, "debug_commercial", self)
+        spawn_entity_at_node(%test_navnode_6, "debug_commercial", self)
+        spawn_entity_at_node(%test_navnode_7, "debug_commercial", self)
+        spawn_entity_at_node(%test_navnode_8, "debug_commercial", self)
     pass # Replace with function body.
 
 

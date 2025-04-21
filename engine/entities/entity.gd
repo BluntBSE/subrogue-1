@@ -187,6 +187,7 @@ func apply_entity_type(type:EntityType):
         print("ATTS SHOULD BE", atts)
     print("We skipped the check, and atts is ", atts)
     atts.type = type
+    atts.size = type.size
     atts.current_hull = type.base_hull
     atts.current_pitch = type.base_pitch
     atts.current_depth = type.depths[0]
