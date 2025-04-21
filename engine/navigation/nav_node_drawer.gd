@@ -15,6 +15,33 @@ var selected_node:NavNode
 signal add_node_at
 signal add_and_link
 
+func _enter_tree():
+    print("Navnode plugin initiated")
+    #GODOTMEETUP1 - Doing "load_from_project_settings" in a @tool causes all kinds of noisy errors.
+    #I would take a stab at modifying this but I don't really know where to start.
+    #InputMap.load_from_project_settings()
+    
+    #The workaround I use to avoid this as follows.
+    if !InputMap.has_action("editor_apply_to"):
+        InputMap.add_action("editor_apply_to")
+        var mouse_event_EAT := InputEventMouseButton.new()
+        mouse_event_EAT.button_index = MOUSE_BUTTON_XBUTTON2
+        InputMap.action_add_event("editor_apply_to", mouse_event_EAT)
+        
+    if !InputMap.has_action("editor_log"):
+        InputMap.add_action("editor_log")
+        var mouse_event_EAT := InputEventMouseButton.new()
+        mouse_event_EAT.button_index = MOUSE_BUTTON_XBUTTON1
+        InputMap.action_add_event("editor_apply_to", mouse_event_EAT)
+        
+    if not InputMap.has_action("editor_clear"):
+        InputMap.add_action("editor_clear")
+        var mouse_event_EAT = InputEventMouseButton.new()
+        mouse_event_EAT.button_index = MOUSE_BUTTON_XBUTTON1
+        mouse_event_EAT.shift = true  # Require SHIFT to be held
+        mouse_event_EAT.pressed = true  # Indicates the button is pressed
+        # Add the event to the action
+        InputMap.action_add_event("editor_log", mouse_event_EAT)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,7 +77,7 @@ func _process(delta: float) -> void:
             last_hovered._on_mouse_exited()
         last_hovered = null
 
-    #input_clicks()
+    input_clicks()
 
 func handle_add_node_at(_position: Vector3) -> void:
     var navnode:NavNode = load("res://engine/navigation/nav_node.tscn").instantiate()

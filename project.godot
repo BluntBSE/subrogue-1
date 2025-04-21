@@ -43,7 +43,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-polyliner/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-polyliner/plugin.cfg", "res://addons/navnodedrawer/plugin.cfg")
 
 [global_group]
 
@@ -81,7 +81,7 @@ ui_down={
 }
 editor_apply_to={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":256,"position":Vector2(134, 16),"global_position":Vector2(143, 64),"factor":1.0,"button_index":9,"canceled":false,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":256,"position":Vector2(169, 15),"global_position":Vector2(178, 63),"factor":1.0,"button_index":9,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
 editor_log={
