@@ -72,13 +72,13 @@ func get_entities_between_angle_bad(entity_list: Array):
 
     # Create a vector pointing "above" the entity relative to the sphere's surface
     var global_up: Vector3 = Vector3(0, 1, 0)
-    var local_northsouth: Vector3 = global_up.cross(axis_to_planet).normalized()
+    var local_eastwest: Vector3 = global_up.cross(axis_to_planet).normalized()
 
     # If axis_to_planet is parallel to global_up, use a fallback tangential vector
-    if local_northsouth.length() == 0:
-        local_northsouth = axis_to_planet.cross(Vector3(1, 0, 0)).normalized()
+    if local_eastwest.length() == 0:
+        local_eastwest = axis_to_planet.cross(Vector3(1, 0, 0)).normalized()
 
-    var local_eastwest: Vector3 = axis_to_planet.cross(local_northsouth).normalized()
+    var local_northsouth: Vector3 = axis_to_planet.cross(local_eastwest.normalized())
     visualize_axis(axis_to_planet, own_entity.anchor, Color("ff00ff"))
     visualize_axis(global_up, own_entity.anchor, Color("ffffff"))
     visualize_axis(local_eastwest, own_entity.anchor, Color("00ff00"))
