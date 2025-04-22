@@ -55,14 +55,17 @@ func handle_volume(dict:Dictionary):
 func handle_ping_request(_angle_1, _angle_2)->void:
     send_pulse()
     
-func get_entities_between_angle_bad(entity_list: Array) -> Array:
+func get_entities_between_angle_bad(entity_list: Array):
 
     # Array to store entities that meet the criteria
     var filtered_entities: Array = []
 
     # Normalize angle_1 and angle_2. E.g: 370 becomes 10.
     var normalized_angle_1 = normalize_angle(angle_1)
+    print("Angle 1 was ", angle_1, "normalized to ", normalized_angle_1)
+    
     var normalized_angle_2 = normalize_angle(angle_2)
+    print("Angle 2 was ", angle_2, "normalized to", angle_2)
 
     # Direction from own_entity to the planet's center
     var axis_to_planet: Vector3 = (own_entity.anchor.position - own_entity.position).normalized()
@@ -76,26 +79,10 @@ func get_entities_between_angle_bad(entity_list: Array) -> Array:
         local_northsouth = axis_to_planet.cross(Vector3(1, 0, 0)).normalized()
 
     var local_eastwest: Vector3 = axis_to_planet.cross(local_northsouth).normalized()
-    visualize_wedge(local_northsouth, local_eastwest, angle_1, angle_2)
-    for obj in entity_list:
-        var entity: Entity = obj.entity
-
-        # Direction from own_entity to the detected entity
-        var direction_to_entity: Vector3 = (entity.position - own_entity.position).normalized()
-        #Get the entity's position on the local plane of local_northsouth, local_eastwest
-        var entity_position_on_local_plane = Vector3(
-            direction_to_entity.dot(local_northsouth),
-            direction_to_entity.dot(local_eastwest),
-            0  # The Z-component is 0 because it's on the local plane
-        )     
-        
-        #Get the entity's angle relative to own_entity on this plane. Being directly ahead on local_northsouth should be an angle of 0. 
-        var local_angle = rad_to_deg(atan2(entity_position_on_local_plane.y, entity_position_on_local_plane.x))
-        print("local angle of  ", entity.given_name, " is ", local_angle)
-    # Print the filtered entities for debugging
-    print("Filtered entities from bad function:", filtered_entities)
-
-    return filtered_entities
+    visualize_axis(axis_to_planet, own_entity.anchor, Color("ff00ff"))
+    visualize_axis(global_up, own_entity.anchor, Color("ffffff"))
+    visualize_axis(local_eastwest, own_entity.anchor, Color("00ff00"))
+    visualize_axis(local_northsouth, own_entity.anchor, Color("ff0000"))
 
 func normalize_angle(angle: float) -> float:
     # Normalize the angle to the range [0, 360)
@@ -105,38 +92,101 @@ func normalize_angle(angle: float) -> float:
     return normalized
 
 
-
-func visualize_wedge(ns, ew, angle_1, angle_2):
-    var  node:Node3D = %DebugMeshes
-    for child in node.get_children():
-        child.queue_free()
-    # Create or get an ImmediateGeometry node for visualization
-    var debug_mesh:MeshInstance3D = MeshInstance3D.new()
-    var debug_draw = ImmediateMesh.new()
- 
-
-    # Clear previous drawings
-    debug_draw.clear_surfaces()
-
-    # Start drawing
+func visualize_axis(axis, anchor, color):
+    var debug_draw := ImmediateMesh.new()
     debug_draw.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
-    # Add the center point of the wedge
-    debug_draw.surface_add_vertex(Vector3.ZERO)
+    # Define the box's dimensions
+    var length = 60.0  # Total length along to_planet
+    var width = 1.0    # Width of the box
+    var height = 1.0   # Height of the box
 
-    # Calculate the wedge points
+    # Calculate the rectangle's base vertices
+    var forward = axis.normalized() * (length / 2.0)  # Half-length forward and backward
+    var right = Vector3(0, 1, 0).cross(forward).normalized() * (width / 2.0)  # Perpendicular vector for width
+    var up = Vector3(0, 1, 0).normalized() * (height / 2.0)  # Vertical height
 
-    var first_angle = deg_to_rad(angle_1)
-    var first_point = ns * cos(first_angle) + ew * sin(first_angle)
-    debug_draw.surface_add_vertex(first_point * 30.0)  # Scale the wedge outward
-    
-    var second_angle = deg_to_rad(angle_2)
-    var second_point = ns * cos(second_angle) + ew * sin(second_angle)
-    debug_draw.surface_add_vertex(second_point * 30.0)
+    # Top face vertices
+    var top_front_left = forward + right + up
+    var top_front_right = forward - right + up
+    var top_back_left = -forward + right + up
+    var top_back_right = -forward - right + up
+
+    # Bottom face vertices
+    var bottom_front_left = forward + right - up
+    var bottom_front_right = forward - right - up
+    var bottom_back_left = -forward + right - up
+    var bottom_back_right = -forward - right - up
+
+    # Add vertices for the top face (two triangles)
+    debug_draw.surface_add_vertex(top_front_left)
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(top_front_right)
+
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(top_back_right)
+    debug_draw.surface_add_vertex(top_front_right)
+
+    # Add vertices for the bottom face (two triangles)
+    debug_draw.surface_add_vertex(bottom_front_left)
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(bottom_back_left)
+
+    debug_draw.surface_add_vertex(bottom_back_left)
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(bottom_back_right)
+
+    # Add vertices for the side faces (four sides, two triangles each)
+    # Front face
+    debug_draw.surface_add_vertex(top_front_left)
+    debug_draw.surface_add_vertex(bottom_front_left)
+    debug_draw.surface_add_vertex(top_front_right)
+
+    debug_draw.surface_add_vertex(bottom_front_left)
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(top_front_right)
+
+    # Back face
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(top_back_right)
+    debug_draw.surface_add_vertex(bottom_back_left)
+
+    debug_draw.surface_add_vertex(bottom_back_left)
+    debug_draw.surface_add_vertex(top_back_right)
+    debug_draw.surface_add_vertex(bottom_back_right)
+
+    # Left face
+    debug_draw.surface_add_vertex(top_front_left)
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(bottom_front_left)
+
+    debug_draw.surface_add_vertex(bottom_front_left)
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(bottom_back_left)
+
+    # Right face
+    debug_draw.surface_add_vertex(top_front_right)
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(top_back_right)
+
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(bottom_back_right)
+    debug_draw.surface_add_vertex(top_back_right)
+
     # End drawing
     debug_draw.surface_end()
-    debug_mesh.mesh = debug_draw
-    debug_mesh.name = "debug_mesh"
-    %DebugMeshes.add_child(debug_mesh)
-    debug_mesh.rotation.y += deg_to_rad(90.0)
-    debug_mesh.rotation.z += deg_to_rad(180.0)
+
+    # Create a MeshInstance3D and assign the mesh
+    var mesh := MeshInstance3D.new()
+    mesh.mesh = debug_draw
+
+    # Create a double-sided material
+    var material = StandardMaterial3D.new()
+    material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Disable back-face culling
+    material.albedo_color = color
+    # Assign the material to the mesh
+    mesh.material_override = material
+
+    # Add the mesh to the anchor node
+    anchor.add_child(mesh)
+    mesh.global_position = global_position
