@@ -393,9 +393,7 @@ func positively_identify():
         var class_label:RichTextLabel = find_child("SignalClass", true, false)
         id_label.text = detected_object.given_name
         #TODO: This is just a workaround until munitions get a real post-tree-add unpack
-        if detected_object.atts.type:    
-            class_label.text = detected_object.atts.type.display_name
-        else:
-            class_label.text = "DANGER - MUNITION"
+        class_label.text = detected_object.atts.class_display_name
+
         #If the unidentified UI is open, this should close it and open the positive ID one.
         identified.emit(self) 

@@ -186,6 +186,7 @@ func apply_entity_type(type:EntityType):
         atts = get_node("EntityAttributes")
         print("ATTS SHOULD BE", atts)
     print("We skipped the check, and atts is ", atts)
+    atts.class_display_name = type.display_class
     atts.type = type
     atts.size = type.size
     atts.current_hull = type.base_hull

@@ -3,7 +3,6 @@ class_name EntityType
 
 enum munitition_types {torpedoes, missiles, all}
 @export var id:String
-@export var display_name:String
 @export var display_class:String #Submarine, Commercial Vessel, etc
 @export var category:String
 #STRUCTURE
