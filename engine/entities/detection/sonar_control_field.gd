@@ -66,13 +66,16 @@ func get_entities_between_angle(entity_list: Array) -> Array:
     # Direction from own_entity to the planet's center
     var axis_to_planet: Vector3 = (own_entity.anchor.position - own_entity.position).normalized()
 
-    # Create a tangential vector perpendicular to axis_to_planet
+    # Create a vector pointing "above" the entity relative to the sphere's surface
     var global_up: Vector3 = Vector3(0, 1, 0)
-    var tangential_vector: Vector3 = axis_to_planet.cross(global_up).normalized()
+    var tangential_vector: Vector3 = global_up.cross(axis_to_planet).normalized()
 
     # If axis_to_planet is parallel to global_up, use a fallback tangential vector
     if tangential_vector.length() == 0:
         tangential_vector = axis_to_planet.cross(Vector3(1, 0, 0)).normalized()
+
+    # Rotate the tangential vector to align with the "upward" direction relative to the sphere
+    var upward_vector: Vector3 = axis_to_planet.cross(tangential_vector).normalized()
 
     for obj in entity_list:
         var entity: Entity = obj.entity
@@ -80,8 +83,8 @@ func get_entities_between_angle(entity_list: Array) -> Array:
         # Direction from own_entity to the detected entity
         var direction_to_entity: Vector3 = (entity.position - own_entity.position).normalized()
 
-        # Calculate the angle between tangential_vector and direction_to_entity
-        var angle_to_entity: float = rad_to_deg(tangential_vector.angle_to(direction_to_entity))
+        # Calculate the angle between upward_vector and direction_to_entity
+        var angle_to_entity: float = rad_to_deg(upward_vector.angle_to(direction_to_entity))
         angle_to_entity = normalize_angle(angle_to_entity)
 
         print("Angle to entity ", entity.given_name, "was ", angle_to_entity)
