@@ -21,7 +21,6 @@ func handle_opened_signal(sig:SignalPopup):
         %EntityInspection.get_node("AnimationPlayer").play_backwards("slide_in")
         await %EntityInspection.get_node("AnimationPlayer").animation_finished
         %EntityInspection.visible = false
-    print("MARP?", sig.signal_id)
     %SignalIDInput.text = sig.signal_id
     %SignalInspection.visible  = true
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
@@ -58,7 +57,8 @@ func _on_signal_inspector_toggle_button_up() -> void:
     player.play_backwards("slide_in")
     await player.animation_finished
     %SignalInspection.visible = false
-    disconnect_unidentified(inspecting_signal)
+    if inspecting_signal:
+        disconnect_unidentified(inspecting_signal)
 
     pass # Replace with function body.
 
@@ -132,5 +132,5 @@ func disconnect_unidentified(sig:SignalPopup):
     sig.stream_color.disconnect(handle_color_stream)
     sig.stream.disconnect(handle_SI_stream)
     sig.stream.disconnect(handle_SI_stream)
-    edited_color.disconnect(inspecting_signal.handle_update_color)
+    edited_color.disconnect(sig.handle_update_color)
     edited_signal_name.disconnect(sig.handle_update_name)
