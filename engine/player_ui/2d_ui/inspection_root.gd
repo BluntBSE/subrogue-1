@@ -58,7 +58,8 @@ func _on_signal_inspector_toggle_button_up() -> void:
     player.play_backwards("slide_in")
     await player.animation_finished
     %SignalInspection.visible = false
-    disconnect_unidentified(inspecting_signal)
+    if inspecting_signal:
+        disconnect_unidentified(inspecting_signal)
 
     pass # Replace with function body.
 
@@ -129,8 +130,10 @@ func connect_unidentified(sig:SignalPopup):
     edited_signal_name.connect(sig.handle_update_name)
 
 func disconnect_unidentified(sig:SignalPopup):
-    sig.stream_color.disconnect(handle_color_stream)
-    sig.stream.disconnect(handle_SI_stream)
-    sig.stream.disconnect(handle_SI_stream)
-    edited_color.disconnect(inspecting_signal.handle_update_color)
-    edited_signal_name.disconnect(sig.handle_update_name)
+    #May have been destroyed before this, so we check
+    if sig:       
+        sig.stream_color.disconnect(handle_color_stream)
+        sig.stream.disconnect(handle_SI_stream)
+        sig.stream.disconnect(handle_SI_stream)
+        edited_color.disconnect(sig.handle_update_color)
+        edited_signal_name.disconnect(sig.handle_update_name)
