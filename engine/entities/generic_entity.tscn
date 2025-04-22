@@ -416,4 +416,7 @@ script = ExtResource("28_op6l6")
 replication_config = SubResource("SceneReplicationConfig_hyfub")
 script = ExtResource("29_j3cwe")
 
+[node name="DebugMeshes" type="Node3D" parent="."]
+unique_name_in_owner = true
+
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]

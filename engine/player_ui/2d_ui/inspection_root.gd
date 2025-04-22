@@ -113,7 +113,7 @@ func load_inspected_entity(sig:SignalPopup):
     var entity:Entity = sig.detected_object
     %EntityName.text = entity.given_name
     %EntitySize.text = "Size: " + str(entity.atts.size)+"m³"
-    %EntityClass.text = entity.atts.type.display_name
+    %EntityClass.text = entity.atts.class_display_name
     %EntitySpeed.text = "Max speed: " + str(GlobeHelpers.game_s_to_kph(entity.max_speed))
     %EntityPitch.text = "Pitch: " +str(entity.emission.pitch)
     %EntityProfile.text = "Profile: " + str(entity.emission.profile)
