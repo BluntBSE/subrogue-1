@@ -16,9 +16,26 @@ BUG: Clicking RIGHT as the game loads can cause a crash. Fix!
 
 
 TODO:
-    -Fix my map editing tools
-    -Step 1: See if you can make an editor extension print somethign when you click a custom command on the mouse
-    -Rename signals once they're positively ID'd
+    Entity names should go straight into atts, not be accessed as atts.display_name
+    Because munitions technically don't inherit from "EntityTYpe", they are Munitions
+    
+    IDK YET: Give signals a heading sprite? Possibly as an upgrade
+    
+    Positively identify via sonar
+    
+    
+    How long does positive ID last? - GIve sonar signal objects a lifespan after a life ping before they do the C100 thing.
+    
+    Click on enemies while they are directly observed (sonar, etc.)
+    
+    SPeaking of, clicking behavior seems meh post trying to account for empty space
+    
+    Entities of different depth & size
+    
+    Mass spawn of NPCs with traffic patterns
+    
+    Filtering signals based on parameters
+    
     -Add "MOVE" to the list of right click commands unless we can make it possible to pass
     input from the mesh that signals occupy
 
