@@ -156,7 +156,13 @@ func move_towards(pos: Vector3) -> void:
     heading_sprite.visible = true
     
     # Rotate the whole sprite and heading sprite towards the target
-    look_at(direction, center_to_position, false)
+    
+    
+    if direction != center_to_position:
+        if position != anchor.position:
+          
+            if !is_zero_approx(direction.cross(center_to_position).length()):
+                look_at(direction, center_to_position, false)
 
     #adjust heading sprite rotation to match, assuming Vector3(0,1,0) is the angle to compare to.
 
