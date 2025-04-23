@@ -58,8 +58,7 @@ func _on_signal_inspector_toggle_button_up() -> void:
     player.play_backwards("slide_in")
     await player.animation_finished
     %SignalInspection.visible = false
-    if inspecting_signal:
-        disconnect_unidentified(inspecting_signal)
+
 
     pass # Replace with function body.
 
@@ -79,6 +78,7 @@ func _on_signal_id_input_text_changed(new_text: String) -> void:
 
 
 func _on_signal_color_changer_color_changed(color: Color) -> void:
+    print("on_signal_color_changer_color_changed")
     edited_color.emit(color)
     pass # Replace with function body.
 
@@ -113,7 +113,7 @@ func load_inspected_entity(sig:SignalPopup):
     var entity:Entity = sig.detected_object
     %EntityName.text = entity.given_name
     %EntitySize.text = "Size: " + str(entity.atts.size)+"m³"
-    %EntityClass.text = entity.atts.type.display_name
+    %EntityClass.text = entity.atts.class_display_name
     %EntitySpeed.text = "Max speed: " + str(GlobeHelpers.game_s_to_kph(entity.max_speed))
     %EntityPitch.text = "Pitch: " +str(entity.emission.pitch)
     %EntityProfile.text = "Profile: " + str(entity.emission.profile)

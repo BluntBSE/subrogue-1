@@ -1,6 +1,128 @@
 class_name GlobeHelpers
 
 
+func visualize_axis(target, axis, anchor, color):
+    var debug_draw := ImmediateMesh.new()
+    debug_draw.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+    # Define the box's dimensions
+    var length = 60.0  # Total length along to_planet
+    var width = 1.0    # Width of the box
+    var height = 1.0   # Height of the box
+
+    # Calculate the rectangle's base vertices
+    var forward = axis.normalized() * (length / 2.0)  # Half-length forward and backward
+    var right = Vector3(0, 1, 0).cross(forward).normalized() * (width / 2.0)  # Perpendicular vector for width
+    var up = Vector3(0, 1, 0).normalized() * (height / 2.0)  # Vertical height
+
+    # Top face vertices
+    var top_front_left = forward + right + up
+    var top_front_right = forward - right + up
+    var top_back_left = -forward + right + up
+    var top_back_right = -forward - right + up
+
+    # Bottom face vertices
+    var bottom_front_left = forward + right - up
+    var bottom_front_right = forward - right - up
+    var bottom_back_left = -forward + right - up
+    var bottom_back_right = -forward - right - up
+
+    # Add vertices for the top face (two triangles)
+    debug_draw.surface_add_vertex(top_front_left)
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(top_front_right)
+
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(top_back_right)
+    debug_draw.surface_add_vertex(top_front_right)
+
+    # Add vertices for the bottom face (two triangles)
+    debug_draw.surface_add_vertex(bottom_front_left)
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(bottom_back_left)
+
+    debug_draw.surface_add_vertex(bottom_back_left)
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(bottom_back_right)
+
+    # Add vertices for the side faces (four sides, two triangles each)
+    # Front face
+    debug_draw.surface_add_vertex(top_front_left)
+    debug_draw.surface_add_vertex(bottom_front_left)
+    debug_draw.surface_add_vertex(top_front_right)
+
+    debug_draw.surface_add_vertex(bottom_front_left)
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(top_front_right)
+
+    # Back face
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(top_back_right)
+    debug_draw.surface_add_vertex(bottom_back_left)
+
+    debug_draw.surface_add_vertex(bottom_back_left)
+    debug_draw.surface_add_vertex(top_back_right)
+    debug_draw.surface_add_vertex(bottom_back_right)
+
+    # Left face
+    debug_draw.surface_add_vertex(top_front_left)
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(bottom_front_left)
+
+    debug_draw.surface_add_vertex(bottom_front_left)
+    debug_draw.surface_add_vertex(top_back_left)
+    debug_draw.surface_add_vertex(bottom_back_left)
+
+    # Right face
+    debug_draw.surface_add_vertex(top_front_right)
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(top_back_right)
+
+    debug_draw.surface_add_vertex(bottom_front_right)
+    debug_draw.surface_add_vertex(bottom_back_right)
+    debug_draw.surface_add_vertex(top_back_right)
+
+    # End drawing
+    debug_draw.surface_end()
+
+    # Create a MeshInstance3D and assign the mesh
+    var mesh := MeshInstance3D.new()
+    mesh.mesh = debug_draw
+
+    # Create a double-sided material
+    var material = StandardMaterial3D.new()
+    material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Disable back-face culling
+    material.albedo_color = color
+    # Assign the material to the mesh
+    mesh.material_override = material
+
+    # Add the mesh to the anchor node
+    anchor.add_child(mesh)
+    mesh.global_position = target.global_position
+
+
+func visualize_entity_position(entity_position, anchor, color):
+    # Create a sphere mesh
+    var sphere_mesh := SphereMesh.new()
+    sphere_mesh.radius = 1.0  # Set the radius of the sphere
+    sphere_mesh.height = 1.0  # Set the height of the sphere
+
+    # Create a MeshInstance3D to hold the sphere
+    var sphere_instance := MeshInstance3D.new()
+    sphere_instance.mesh = sphere_mesh
+
+    # Create an orange material
+    var material := StandardMaterial3D.new()
+    material.albedo_color = color  # Orange color
+    sphere_instance.material_override = material
+
+    # Set the sphere's position in the local 2D plane
+    sphere_instance.global_position = entity_position
+
+    # Add the sphere to the anchor node
+    anchor.add_child(sphere_instance)
+
+
 static func rads_from_position(vec:Vector3)->Dictionary:
     var db := true
     #The centerpoint of the globe is vec3(0.0), so:

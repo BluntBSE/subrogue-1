@@ -6,8 +6,9 @@ var positively_identified:bool = false
 var signal_id
 var color:Color = Color("ffffff"):
     set(value):
+        print("Custom color setter called  with", value)
         color = value
-        stream_color.emit(color)   
+        stream_color.emit(value)   
         find_child("FactionModulator", true, false).modulate = color
 var faction #For visibility?
 var detecting_object:Entity
@@ -96,7 +97,7 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
             unidentified_opened.connect(player.UI.inspection_root.handle_opened_signal)
             identified_opened.connect(player.UI.inspection_root.handle_openened_identified_signal)
             identified.connect(player.UI.inspection_root.handle_identified_signal)
-
+            stream_color.connect(player.UI.inspection_root.handle_color_stream)
         
         #Signals
         #TODO: If they're already connected, don't do it again.
@@ -389,13 +390,14 @@ func positively_identify():
     if positively_identified == false:
         positively_identified = true   
         color = detected_object.faction.faction_color
+        print("PI set color to ", color) #For some reason, putting stream_color in the setter didn't seem 100% reliable
+        stream_color.emit(color)
         var id_label:RichTextLabel = find_child("SignalID", true, false)
         var class_label:RichTextLabel = find_child("SignalClass", true, false)
         id_label.text = detected_object.given_name
         #TODO: This is just a workaround until munitions get a real post-tree-add unpack
-        if detected_object.atts.type:    
-            class_label.text = detected_object.atts.type.display_name
-        else:
-            class_label.text = "DANGER - MUNITION"
+        class_label.text = detected_object.atts.class_display_name
+
         #If the unidentified UI is open, this should close it and open the positive ID one.
         identified.emit(self) 
+        position = detected_object.position

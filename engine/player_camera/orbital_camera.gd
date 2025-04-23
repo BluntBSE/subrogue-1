@@ -98,7 +98,6 @@ func _process(delta: float) -> void:
             
     if not trauma:
         if return_to_pre_trauma:
-            print("Returnt oo pre")
             #destination = pre_trauma_position
             return_to_pre_trauma = false
             
@@ -125,15 +124,15 @@ func _unhandled_input(event: InputEvent) -> void:
     
     if !is_multiplayer_authority():
         return
-        
-    if event is InputEventMouseButton and event.is_released():
-        print("All focus released")   
-        get_viewport().gui_release_focus()
-        #event.set_as_handled
-    if event is InputEventKey and event.keycode in [KEY_ESCAPE, KEY_W, KEY_A, KEY_S, KEY_D]:
-        print("All focus released!")
-        get_viewport().gui_release_focus()
-        
+    if get_viewport().gui_get_focus_owner() != null:
+        if event is InputEventMouseButton and event.is_released():
+            print("All focus released")   
+            get_viewport().gui_release_focus()
+            #event.set_as_handled
+        if event is InputEventKey and event.keycode in [KEY_ESCAPE, KEY_W, KEY_A, KEY_S, KEY_D]:
+            print("All focus released!")
+            get_viewport().gui_release_focus()
+            
         
     state_machine.handleInput({"event":event})
     pass
