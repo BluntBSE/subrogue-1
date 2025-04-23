@@ -123,8 +123,7 @@ func load_inspected_entity(sig:SignalPopup):
 
 
 func connect_unidentified(sig:SignalPopup):
-    sig.stream_color.connect(handle_color_stream)
-    sig.stream.connect(handle_SI_stream)
+    #sig.stream_color.connect(handle_color_stream) This connection is actually managed by the signalobject because it needs to be set up right away
     sig.stream.connect(handle_SI_stream)
     edited_color.connect(sig.handle_update_color)
     edited_signal_name.connect(sig.handle_update_name)
@@ -133,7 +132,6 @@ func disconnect_unidentified(sig:SignalPopup):
     #May have been destroyed before this, so we check
     if sig:       
         sig.stream_color.disconnect(handle_color_stream)
-        sig.stream.disconnect(handle_SI_stream)
         sig.stream.disconnect(handle_SI_stream)
         edited_color.disconnect(sig.handle_update_color)
         edited_signal_name.disconnect(sig.handle_update_name)
