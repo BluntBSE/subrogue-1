@@ -215,7 +215,11 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
         event_pos2D.x *= node_viewport.size.x
         event_pos2D.y *= node_viewport.size.y
         # We need to do these conversions so the event's position is in the viewport's coordinate system.
-
+        """
+        This didn't work so well. If you find the clickable area is too big, why not create a more precise shape in the 
+        Control itself, and check if you're inside that instead of querying transparency?
+        Code remains for reference, though.
+        
         # Check if the pixel at event_pos2D is transparent
         var viewport_texture: ViewportTexture = node_viewport.get_texture()
         if viewport_texture:
@@ -226,7 +230,7 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
                 # The pixel is fully transparent, forward the input to the game world
                 get_viewport().push_input(event)
                 return
-
+        """
     elif last_event_pos2D != null:
         # Fall back to the last known event position.
         event_pos2D = last_event_pos2D
