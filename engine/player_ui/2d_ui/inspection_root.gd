@@ -58,8 +58,7 @@ func _on_signal_inspector_toggle_button_up() -> void:
     player.play_backwards("slide_in")
     await player.animation_finished
     %SignalInspection.visible = false
-    if inspecting_signal:
-        disconnect_unidentified(inspecting_signal)
+
 
     pass # Replace with function body.
 
@@ -79,6 +78,7 @@ func _on_signal_id_input_text_changed(new_text: String) -> void:
 
 
 func _on_signal_color_changer_color_changed(color: Color) -> void:
+    print("on_signal_color_changer_color_changed")
     edited_color.emit(color)
     pass # Replace with function body.
 

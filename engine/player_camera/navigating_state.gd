@@ -24,8 +24,6 @@ func stateHandleInput(_args:Dictionary)->void:
 func input_clicks(event:InputEvent):
 
     ref = _reference
-    if !ref.get_viewport().gui_get_focus_owner() == null:
-        return
     #BECAUSE we're not shift clicking or doing waypoint logic right now, this always overwrites the most recent item in the queue.
     if Input.is_action_pressed("primary_action"):
         if ref.hovering_over != {}:
