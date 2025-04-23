@@ -83,6 +83,33 @@ func get_entities_between_angle_bad(entity_list: Array):
     visualize_axis(global_up, own_entity.anchor, Color("ffffff"))
     visualize_axis(local_eastwest, own_entity.anchor, Color("00ff00"))
     visualize_axis(local_northsouth, own_entity.anchor, Color("ff0000"))
+    
+    for obj in %EntityDetector.tracked_entities:
+        var entity: Entity = obj.entity
+
+        # Calculate the relative position of the entity in global space
+        var relative_position = entity.global_position - own_entity.global_position
+
+        # Project the relative position onto the local plane (northsouth/eastwest)
+        var entity_position_on_local_plane = Vector3(
+            relative_position.dot(local_eastwest),
+            relative_position.dot(local_northsouth),
+            0  # Ignore the axis_to_planet component for the 2D plane
+        )
+
+        # Calculate the angle relative to the northsouth axis (clockwise adjustment)
+        var local_angle = rad_to_deg(atan2(
+            -entity_position_on_local_plane.x,  # Negate the X component to flip direction
+            entity_position_on_local_plane.y   # Y component remains the same
+        ))
+
+        # Normalize the angle to [0, 360)
+        local_angle = normalize_angle(local_angle)
+
+        # Print the entity's name and its local angle
+        print("Entity: ", entity.given_name, ", Local Angle: ", local_angle)
+        
+        pass
 
 func normalize_angle(angle: float) -> float:
     # Normalize the angle to the range [0, 360)
@@ -190,3 +217,48 @@ func visualize_axis(axis, anchor, color):
     # Add the mesh to the anchor node
     anchor.add_child(mesh)
     mesh.global_position = global_position
+
+
+func visualize_entity_position(entity_position, anchor, color):
+    # Create a sphere mesh
+    var sphere_mesh := SphereMesh.new()
+    sphere_mesh.radius = 1.0  # Set the radius of the sphere
+    sphere_mesh.height = 1.0  # Set the height of the sphere
+
+    # Create a MeshInstance3D to hold the sphere
+    var sphere_instance := MeshInstance3D.new()
+    sphere_instance.mesh = sphere_mesh
+
+    # Create an orange material
+    var material := StandardMaterial3D.new()
+    material.albedo_color = color  # Orange color
+    sphere_instance.material_override = material
+
+    # Set the sphere's position in the local 2D plane
+    sphere_instance.global_position = entity_position
+
+    # Add the sphere to the anchor node
+    anchor.add_child(sphere_instance)
+
+
+func visualize_entity_relative_position(entity_position_in_local_space, anchor, color):
+    # Create a sphere mesh
+    var sphere_mesh := SphereMesh.new()
+    sphere_mesh.radius = 1.0  # Set the radius of the sphere
+    sphere_mesh.height = 1.0  # Set the height of the sphere
+
+    # Create a MeshInstance3D to hold the sphere
+    var sphere_instance := MeshInstance3D.new()
+    sphere_instance.mesh = sphere_mesh
+
+    # Create an orange material
+    var material := StandardMaterial3D.new()
+    material.albedo_color = color  # Orange color
+    sphere_instance.material_override = material
+
+    # Set the sphere's position in the local 2D plane
+    sphere_instance.global_position = own_entity.global_position
+    sphere_instance.global_position += entity_position_in_local_space
+
+    # Add the sphere to the anchor node
+    anchor.add_child(sphere_instance)
