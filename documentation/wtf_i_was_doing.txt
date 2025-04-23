@@ -12,7 +12,7 @@ but not so much the player can't bamboozle the AI.
 
 BUG: Certainty scales even when approaching/leaving the wrong signal
 BUG: Clicking RIGHT as the game loads can cause a crash. Fix!
-
+BUG: Your control focus thing didn't really pan out.
 
 
 TODO:

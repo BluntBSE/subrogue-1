@@ -15,7 +15,7 @@ var positively_identified = [] #Signals from this source will always be marked i
 var tracked_entities = [] #{"entity":entity, "tracked_by":[self, child, child]}
 var local_entities = []#Used for situations where we want to think about what this munition sees ONLY
 var known_signals = [] 
-var sigmap = {} # {"entity":entity, "signal":signal} Signals match to the array below, which we for updating those independently.
+var sigmap = {} # {entity rigid object as key: signalpopup} Signals match to the array below, which we for updating those independently.
 var archive_map = {}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

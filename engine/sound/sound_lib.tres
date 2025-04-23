@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="SoundLib" load_steps=9 format=3 uid="uid://530rapawcb1y"]
+[gd_resource type="Resource" script_class="SoundLib" load_steps=10 format=3 uid="uid://530rapawcb1y"]
 
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="1_8y6jw"]
+[ext_resource type="AudioStream" uid="uid://pr7e3i74ec5p" path="res://assets/sounds/sonar-ping-289721.mp3" id="1_115jf"]
 [ext_resource type="Script" uid="uid://d1aoxaxdw5q04" path="res://engine/sound/sound_lib.gd" id="1_c1pf3"]
 [ext_resource type="AudioStream" uid="uid://bww1rwlw3ly6a" path="res://assets/sounds/strike_explosion_1.wav" id="1_l0hu1"]
 [ext_resource type="AudioStream" uid="uid://dgl3boybfpbb2" path="res://assets/royalty_free_music/dark-dub-techno-somewhere-we-got-lost-no-copyright-music-144827.mp3" id="2_3ge5n"]
@@ -11,6 +12,7 @@
 
 [resource]
 script = ExtResource("1_c1pf3")
+button_hover = ExtResource("1_115jf")
 title_theme = ExtResource("5_rrkwm")
 title_ambience = ExtResource("4_wn42p")
 game_theme = ExtResource("2_3ge5n")

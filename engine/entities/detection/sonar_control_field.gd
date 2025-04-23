@@ -4,7 +4,10 @@ class_name SonarNode
 @onready var own_entity:Entity = get_parent()
 var angle_1
 var angle_2
-
+var volume
+var dist #May be modified based on volume.
+var max_dist = 800.0 #In km. This is what the sonar is set to in the UI. It's about 750 KM. We add 50km of buffer to just compensate for any arc shenanigans.
+signal pinged
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,9 +35,43 @@ func send_pulse():
     tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_head", maximum, 1.0).from_current()
     tween.set_trans(Tween.TRANS_CIRC)
     tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_tail", maximum, 0.5).from_current()
-    #Maybe need to store those angle 1, 2, and volume here as well as on shader
-    get_entities_between_angle_bad(%EntityDetector.tracked_entities)
-    #get_entities_between_angle_good(%EntityDetector.tracked_entities)
+    #WHO DID YOU PING?
+    var entities = get_entities_between_angle(%EntityDetector.tracked_entities)
+    var range_entities = get_entities_within_range(entities)
+    process_entities_with_tween(range_entities, max_dist, 0.5)
+    
+func process_entities_with_tween(entities: Array, max_distance: float, tween_duration: float):
+    # Sort entities by distance
+    entities.sort_custom(_compare_entity_distance)
+
+    # Iterate through entities and synchronize with the trans_circ tween
+    for entity in entities:
+        var timer = Timer.new()
+        timer.wait_time = 0.2
+        timer.one_shot = true
+        timer.connect("timeout", _on_entity_reached.bind(entity))
+        add_child(timer)
+        timer.start()
+        await timer.timeout
+
+
+# Helper function to compare entities by distance
+func _compare_entity_distance(a, b):
+    var distance_a = a.global_position.distance_to(own_entity.global_position)
+    var distance_b = b.global_position.distance_to(own_entity.global_position)
+    return distance_a < distance_b
+
+# Function to handle when the tween catches up with an entity
+func _on_entity_reached(entity:Entity):
+    print("Entity reached:", entity, "at time ", Time.get_ticks_usec())
+    SoundManager.play("button_hover", "randpitch_small", "ui")
+    #Move below into something managed by the detector, sent via signal
+    for obj in %EntityDetector.sigmap:
+        if obj == entity:
+            var sig:SignalPopup =%EntityDetector.sigmap[obj]
+            sig.positively_identify()
+        pass
+    
 func handle_angle_1(angle):
     print("Handle angle 1 received ", angle)
     #BG
@@ -42,6 +79,7 @@ func handle_angle_1(angle):
     #Foreground
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("start_angle", angle)
     angle_1 = angle
+
 func handle_angle_2(angle):
     %SonarPulseMesh.material_override.set_shader_parameter("end_angle", angle)
     #Foreground
@@ -50,12 +88,18 @@ func handle_angle_2(angle):
     pass    
 
 func handle_volume(dict:Dictionary):
+    volume = dict.max
+    var effective_range = volume * max_dist
+    print("Effective ping range", effective_range)
     %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", dict.max)
-
+ 
+    
+    
 func handle_ping_request(_angle_1, _angle_2)->void:
     send_pulse()
+
     
-func get_entities_between_angle_bad(entity_list: Array):
+func get_entities_between_angle(entity_list: Array): #Array of dictionaries. You want obj.entity
 
     # Array to store entities that meet the criteria
     var filtered_entities: Array = []
@@ -83,7 +127,7 @@ func get_entities_between_angle_bad(entity_list: Array):
     #visualize_axis(global_up, own_entity.anchor, Color("ffffff"))
     #visualize_axis(local_eastwest, own_entity.anchor, Color("00ff00"))
     #visualize_axis(local_northsouth, own_entity.anchor, Color("ff0000"))
-    for obj in %EntityDetector.tracked_entities:
+    for obj in %EntityDetector.tracked_entities: 
         var entity: Entity = obj.entity
 
         # Calculate the relative position of the entity in global space
@@ -106,20 +150,28 @@ func get_entities_between_angle_bad(entity_list: Array):
         local_angle = normalize_angle(local_angle)
 
         # Print the entity's name and its local angle
-        print("Entity: ", entity.given_name, ", Local Angle: ", local_angle)
 
         # Check if the angle is within the range, handling wrap-around
         if normalized_angle_1 <= normalized_angle_2:
             # Normal case: no wrap-around
             if (normalized_angle_1 <= local_angle) && (local_angle <= normalized_angle_2):
-                filtered_entities.append(entity.given_name)
+                filtered_entities.append(entity)
         else:
             # Wrap-around case: range spans 0 degrees
             if local_angle >= normalized_angle_1 or local_angle <= normalized_angle_2:
-                filtered_entities.append(entity.given_name)
+                filtered_entities.append(entity)
 
     # Print the filtered entities for debugging
-    print("Filtered entities: ", filtered_entities)
+    return filtered_entities
+
+
+func get_entities_within_range(entity_list:Array): #Array of entities
+    var filtered_entities = []
+    for entity:Entity in entity_list:
+        var dist = GlobeHelpers.arc_to_km(own_entity.position, entity.position, own_entity.anchor)
+        if dist <= max_dist:
+            filtered_entities.append(entity)
+    return filtered_entities
 
 func normalize_angle(angle: float) -> float:
     # Normalize the angle to the range [0, 360)
@@ -127,148 +179,3 @@ func normalize_angle(angle: float) -> float:
     if normalized < 0:
         normalized += 360.0
     return normalized
-
-
-func visualize_axis(axis, anchor, color):
-    var debug_draw := ImmediateMesh.new()
-    debug_draw.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-
-    # Define the box's dimensions
-    var length = 60.0  # Total length along to_planet
-    var width = 1.0    # Width of the box
-    var height = 1.0   # Height of the box
-
-    # Calculate the rectangle's base vertices
-    var forward = axis.normalized() * (length / 2.0)  # Half-length forward and backward
-    var right = Vector3(0, 1, 0).cross(forward).normalized() * (width / 2.0)  # Perpendicular vector for width
-    var up = Vector3(0, 1, 0).normalized() * (height / 2.0)  # Vertical height
-
-    # Top face vertices
-    var top_front_left = forward + right + up
-    var top_front_right = forward - right + up
-    var top_back_left = -forward + right + up
-    var top_back_right = -forward - right + up
-
-    # Bottom face vertices
-    var bottom_front_left = forward + right - up
-    var bottom_front_right = forward - right - up
-    var bottom_back_left = -forward + right - up
-    var bottom_back_right = -forward - right - up
-
-    # Add vertices for the top face (two triangles)
-    debug_draw.surface_add_vertex(top_front_left)
-    debug_draw.surface_add_vertex(top_back_left)
-    debug_draw.surface_add_vertex(top_front_right)
-
-    debug_draw.surface_add_vertex(top_back_left)
-    debug_draw.surface_add_vertex(top_back_right)
-    debug_draw.surface_add_vertex(top_front_right)
-
-    # Add vertices for the bottom face (two triangles)
-    debug_draw.surface_add_vertex(bottom_front_left)
-    debug_draw.surface_add_vertex(bottom_front_right)
-    debug_draw.surface_add_vertex(bottom_back_left)
-
-    debug_draw.surface_add_vertex(bottom_back_left)
-    debug_draw.surface_add_vertex(bottom_front_right)
-    debug_draw.surface_add_vertex(bottom_back_right)
-
-    # Add vertices for the side faces (four sides, two triangles each)
-    # Front face
-    debug_draw.surface_add_vertex(top_front_left)
-    debug_draw.surface_add_vertex(bottom_front_left)
-    debug_draw.surface_add_vertex(top_front_right)
-
-    debug_draw.surface_add_vertex(bottom_front_left)
-    debug_draw.surface_add_vertex(bottom_front_right)
-    debug_draw.surface_add_vertex(top_front_right)
-
-    # Back face
-    debug_draw.surface_add_vertex(top_back_left)
-    debug_draw.surface_add_vertex(top_back_right)
-    debug_draw.surface_add_vertex(bottom_back_left)
-
-    debug_draw.surface_add_vertex(bottom_back_left)
-    debug_draw.surface_add_vertex(top_back_right)
-    debug_draw.surface_add_vertex(bottom_back_right)
-
-    # Left face
-    debug_draw.surface_add_vertex(top_front_left)
-    debug_draw.surface_add_vertex(top_back_left)
-    debug_draw.surface_add_vertex(bottom_front_left)
-
-    debug_draw.surface_add_vertex(bottom_front_left)
-    debug_draw.surface_add_vertex(top_back_left)
-    debug_draw.surface_add_vertex(bottom_back_left)
-
-    # Right face
-    debug_draw.surface_add_vertex(top_front_right)
-    debug_draw.surface_add_vertex(bottom_front_right)
-    debug_draw.surface_add_vertex(top_back_right)
-
-    debug_draw.surface_add_vertex(bottom_front_right)
-    debug_draw.surface_add_vertex(bottom_back_right)
-    debug_draw.surface_add_vertex(top_back_right)
-
-    # End drawing
-    debug_draw.surface_end()
-
-    # Create a MeshInstance3D and assign the mesh
-    var mesh := MeshInstance3D.new()
-    mesh.mesh = debug_draw
-
-    # Create a double-sided material
-    var material = StandardMaterial3D.new()
-    material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Disable back-face culling
-    material.albedo_color = color
-    # Assign the material to the mesh
-    mesh.material_override = material
-
-    # Add the mesh to the anchor node
-    anchor.add_child(mesh)
-    mesh.global_position = global_position
-
-
-func visualize_entity_position(entity_position, anchor, color):
-    # Create a sphere mesh
-    var sphere_mesh := SphereMesh.new()
-    sphere_mesh.radius = 1.0  # Set the radius of the sphere
-    sphere_mesh.height = 1.0  # Set the height of the sphere
-
-    # Create a MeshInstance3D to hold the sphere
-    var sphere_instance := MeshInstance3D.new()
-    sphere_instance.mesh = sphere_mesh
-
-    # Create an orange material
-    var material := StandardMaterial3D.new()
-    material.albedo_color = color  # Orange color
-    sphere_instance.material_override = material
-
-    # Set the sphere's position in the local 2D plane
-    sphere_instance.global_position = entity_position
-
-    # Add the sphere to the anchor node
-    anchor.add_child(sphere_instance)
-
-
-func visualize_entity_relative_position(entity_position_in_local_space, anchor, color):
-    # Create a sphere mesh
-    var sphere_mesh := SphereMesh.new()
-    sphere_mesh.radius = 1.0  # Set the radius of the sphere
-    sphere_mesh.height = 1.0  # Set the height of the sphere
-
-    # Create a MeshInstance3D to hold the sphere
-    var sphere_instance := MeshInstance3D.new()
-    sphere_instance.mesh = sphere_mesh
-
-    # Create an orange material
-    var material := StandardMaterial3D.new()
-    material.albedo_color = color  # Orange color
-    sphere_instance.material_override = material
-
-    # Set the sphere's position in the local 2D plane
-    sphere_instance.global_position = own_entity.global_position
-    sphere_instance.global_position += entity_position_in_local_space
-
-    # Add the sphere to the anchor node
-    anchor.add_child(sphere_instance)

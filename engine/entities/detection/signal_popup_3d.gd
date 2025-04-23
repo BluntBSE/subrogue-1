@@ -397,3 +397,4 @@ func positively_identify():
 
         #If the unidentified UI is open, this should close it and open the positive ID one.
         identified.emit(self) 
+        position = detected_object.position
