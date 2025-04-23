@@ -79,11 +79,10 @@ func get_entities_between_angle_bad(entity_list: Array):
         local_eastwest = axis_to_planet.cross(Vector3(1, 0, 0)).normalized()
 
     var local_northsouth: Vector3 = axis_to_planet.cross(local_eastwest.normalized())
-    visualize_axis(axis_to_planet, own_entity.anchor, Color("ff00ff"))
-    visualize_axis(global_up, own_entity.anchor, Color("ffffff"))
-    visualize_axis(local_eastwest, own_entity.anchor, Color("00ff00"))
-    visualize_axis(local_northsouth, own_entity.anchor, Color("ff0000"))
-    
+    #visualize_axis(axis_to_planet, own_entity.anchor, Color("ff00ff"))
+    #visualize_axis(global_up, own_entity.anchor, Color("ffffff"))
+    #visualize_axis(local_eastwest, own_entity.anchor, Color("00ff00"))
+    #visualize_axis(local_northsouth, own_entity.anchor, Color("ff0000"))
     for obj in %EntityDetector.tracked_entities:
         var entity: Entity = obj.entity
 
@@ -108,8 +107,19 @@ func get_entities_between_angle_bad(entity_list: Array):
 
         # Print the entity's name and its local angle
         print("Entity: ", entity.given_name, ", Local Angle: ", local_angle)
-        
-        pass
+
+        # Check if the angle is within the range, handling wrap-around
+        if normalized_angle_1 <= normalized_angle_2:
+            # Normal case: no wrap-around
+            if (normalized_angle_1 <= local_angle) && (local_angle <= normalized_angle_2):
+                filtered_entities.append(entity.given_name)
+        else:
+            # Wrap-around case: range spans 0 degrees
+            if local_angle >= normalized_angle_1 or local_angle <= normalized_angle_2:
+                filtered_entities.append(entity.given_name)
+
+    # Print the filtered entities for debugging
+    print("Filtered entities: ", filtered_entities)
 
 func normalize_angle(angle: float) -> float:
     # Normalize the angle to the range [0, 360)
