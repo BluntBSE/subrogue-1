@@ -18,7 +18,7 @@ CONSIDER:
         
 IDK YET: Give signals a heading sprite? Possibly as an upgrade
 IDK YET: How long does positive ID last? - GIve sonar signal objects a lifespan after a life ping before they do the C100 thing.
-
+IF NEEDED TO IMPROVE PERFORMANCE: Maybe only turn on NPC "Brains" if a player wanders within some large distance. Kind of like an AI 'chunking' that way. 
 
 
 TODO:
