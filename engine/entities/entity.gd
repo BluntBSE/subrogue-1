@@ -1,4 +1,3 @@
-@tool
 extends RigidBody3D
 class_name Entity
 @export var is_player:bool = true
@@ -211,9 +210,7 @@ func apply_entity_type(type:EntityType):
 
 func recursively_update_debug_layers(node, _visible):
     for child in node.get_children():
-        print("inspecting ", child.name)
         if child.get("layers") != null:
-            print("ABOUT TO SET ", child.name, " TO ", _visible)
             child.set_layer_mask_value(1, _visible)
         recursively_update_debug_layers(child, _visible)
     

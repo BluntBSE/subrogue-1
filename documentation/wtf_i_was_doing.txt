@@ -24,7 +24,6 @@ IDK YET: How long does positive ID last? - GIve sonar signal objects a lifespan 
 TODO:
 
 
-    Positively identify via sonar - done. 
     
     
     
