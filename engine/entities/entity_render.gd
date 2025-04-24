@@ -5,20 +5,39 @@ var default_color:Color
 @onready var sonar_mesh:MeshInstance3D = %SonarPulseMesh
 @onready var entity:Entity = get_parent()
 var scaling = false
+var selected = false
+var hovered = false
+var released_by_observer = true #This variable tracks whether or not the thing that did the selecting has 'let go' of this selection
+#Usually that's the camera.
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
     pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     scale_with_camera_distance()
-    #scale_with_fov()
-    if scaling == false:
-        scale = Vector3(1.0,1.0,1.0)
-    else:
-        scale_with_fov()
-    pass
+    
+    if scaling == true:
+
+            scale_with_fov()
+    if selected == true:
+            scale_with_fov()
+
+
+func _unhandled_input(event:InputEvent):
+    if selected == true and hovered == false: #AND THIS SIGNAL IS NOT CURRRENTLY WHAT THE PLAYERS LOOKING AT? CHRIST ALMIGHTY
+        if event is InputEventMouseButton:
+             if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+                print("Wtf")
+                deselect()
+    
+        
+
+
+        
     
 
 func update_mesh_visibilities(layer:int, val:bool):
@@ -61,6 +80,7 @@ func update_colors(color:Color):
 
 func _on_entity_mouse_entered() -> void:
     scaling = true
+    hovered = true
     #modulate = Color("ffffff")
     %Spotlight.light_color = Color("ffffff")
     %HighlightMesh.visible = true
@@ -68,6 +88,7 @@ func _on_entity_mouse_entered() -> void:
 
 func _on_entity_mouse_exited() -> void:
     scaling = false
+    hovered = false
     #modulate = Color("ffffff")
     %Spotlight.light_color = default_color
     %HighlightMesh.visible = false
@@ -81,7 +102,7 @@ func scale_with_camera_distance():
     var distance = camera.global_position - global_position
     var ratio = inverse_lerp(30, 300, distance.length())
     var sf = lerp(1.0,3.0, ratio)
-    sf = clamp(sf, 0.2,2.7)
+    sf = clamp(sf, 0.2,1.5)
     scale = Vector3(sf,sf,sf)
 
 func scale_with_fov():
@@ -101,3 +122,22 @@ func scale_with_fov():
     # Clamp the scale factor to avoid extreme values
     sf = clamp(sf, 0.2, 3.0)
     scale = Vector3(sf, sf, sf)
+
+func select(observer:OrbitalCamera): #Usually OrbitalCamera though
+    print("Select triggered")
+    selected = true
+    released_by_observer = false
+    observer.release_observed.connect(handle_release_observed)
+
+func deselect():
+    print("Deselect triggered")
+    selected = false
+    released_by_observer = true
+    
+func handle_deselection():
+    print("Shouldn't see this")
+    deselect()
+    
+func handle_release_observed():
+    released_by_observer = true
+    selected = false

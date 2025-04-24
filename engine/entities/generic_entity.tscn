@@ -149,7 +149,7 @@ size = Vector2(25, 25)
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hyfub"]
 
 [node name="Entity" type="RigidBody3D"]
-collision_layer = 2
+collision_layer = 3
 collision_mask = 524288
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
@@ -341,6 +341,7 @@ skeleton = NodePath("../..")
 [node name="HighlightMesh" type="MeshInstance3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.00775754, -0.00129523, -0.0038967)
+visible = false
 material_override = SubResource("StandardMaterial3D_j3cwe")
 mesh = SubResource("QuadMesh_5l3g8")
 skeleton = NodePath("../..")

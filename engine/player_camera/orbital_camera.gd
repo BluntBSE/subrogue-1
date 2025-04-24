@@ -39,6 +39,9 @@ signal order_move
 signal enqueue_move
 signal close_context
 
+#VISUAL INTERACTION (selection etc.)
+signal release_observed
+
 var state_machine:StateMachine
 
 #Screen shake params
@@ -128,10 +131,13 @@ func _unhandled_input(event: InputEvent) -> void:
         if event is InputEventMouseButton and event.is_released():
             print("All focus released")   
             get_viewport().gui_release_focus()
-            #event.set_as_handled
-        if event is InputEventKey and event.keycode in [KEY_ESCAPE]:
-            print("All focus released!")
-            get_viewport().gui_release_focus()
+            release_observed.emit()
+     
+        #event.set_as_handled
+    if event is InputEventKey and event.keycode == KEY_ESCAPE:
+        print("All focus released!")
+        get_viewport().gui_release_focus()
+        release_observed.emit()
             
         
     state_machine.handleInput({"event":event})
@@ -151,7 +157,7 @@ func drop_context_marker(point: Vector3) -> Node3D:
     
  
 func cast_from_camera()->Dictionary:
-    #Raycast from the orbital camera and
+    #Raycast from the orbital camera and collide with the planet or floating GUI elements (layer 1)
     var space_state := get_world_3d().direct_space_state
     var mouse_position = get_viewport().get_mouse_position()
     var raycast_origin = project_ray_origin(mouse_position)
@@ -168,6 +174,7 @@ func cast_from_camera()->Dictionary:
         hovering_over = intersection
     else:
         hovering_over = {}
+    
     
     return hovering_over
 
@@ -255,6 +262,9 @@ func handle_launch(_args:Dictionary)->void:
     state_machine.Change("navigating", {})
     pass
 
+func select_entity(entity:Entity):
+    print("Attempting to select ", entity.name)
+    entity.render.select(self)
 
 """
 func collider_check():
@@ -283,3 +293,4 @@ func collider_check():
                 print("BOOP!")
                 print("Collider name:", result.collider.name)
 """
+ 

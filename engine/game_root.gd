@@ -36,3 +36,6 @@ var factions = {
     "faction_11": null,
     "faction_12": null,
 }
+
+
+#This feels like a code smell to me, but I can't think of a sounder way to do this than to track the client level 
