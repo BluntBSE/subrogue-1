@@ -16,24 +16,36 @@ static func generate_default_signal_id()->String:
 static func prevent_name_collision():
     pass
 
-static func get_uncertain_size(_size:float, certainty:float):
-    # Generate a random value of either -1 or 1
-    var rand = randf()
-    var plus_or_minus:float
-    if randf() < 0.5:
+static func get_uncertain_size(_size: float, certainty: float) -> float:
+    randomize()
+    # Certainty comes in as a number between 1 and 100
+    # Clamp certainty to ensure it's within the valid range
+    certainty = clamp(certainty, 1.0, 100.0)
+
+    # Calculate the uncertainty factor (randomized based on certainty)
+    var uncertainty_factor = randf_range(0.0, 100.0 - certainty)
+
+    # Determine the maximum displacement as a percentage of the size
+    var max_displacement = 0.25 * _size  # 25% of the size
+
+    # Scale the displacement based on the uncertainty factor
+    var displacement = lerp(0.0, max_displacement, uncertainty_factor / 100.0)
+
+    # Randomly decide if the displacement is positive or negative
+    var plus_or_minus = 1.0
+    if randf_range(-1.0, 1.0) < 0.0:
         plus_or_minus = -1.0
-    else:
-        plus_or_minus = 1.0
-    
-    #0 to 80 percent certain = possible shifting of +/- .8 at the most etreme
-    var uncertainty_factor = randf_range(0.0, certainty)
-    var dist_from_certain = 100 - uncertainty_factor
-    dist_from_certain = clamp(dist_from_certain, 20.0, 0.0)
-    var size_displacement = dist_from_certain * _size * plus_or_minus
-    print("Uncertainty factor was determined to be", uncertainty_factor)
-    print("Modified by ", size_displacement)
-    var output = size_displacement + _size
-    print("Output was therefore", output)
+        displacement *= plus_or_minus
+
+    # Calculate the final size with displacement
+    var output = round(_size + displacement)
+
+    # Debugging output
+    print("Certainty:", certainty)
+    print("Uncertainty factor:", uncertainty_factor)
+    print("Displacement:", displacement)
+    print("Output size:", output)
+
     return output
     
         

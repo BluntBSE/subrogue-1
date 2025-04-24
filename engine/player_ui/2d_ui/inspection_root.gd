@@ -26,11 +26,13 @@ func handle_opened_signal(sig:SignalPopup):
         %EntityInspection.visible = false
         closed_identified.emit()
 
-    print("MARP?", sig.signal_id)
     %SignalIDInput.text = sig.signal_id
     %SignalInspection.visible  = true
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
     player.play("slide_in")
+    #The second you open, recalculate stuff like size, etc. Forces an update.
+    sig.stream.emit({"volume":sig.sound.volume, "pitch":sig.sound.pitch, "certainty":sig.certainty, "entity": sig.detected_object})
+
     handle_color_stream(sig.color)
     connect_unidentified(sig)
 
@@ -68,10 +70,10 @@ func _on_signal_inspector_toggle_button_up() -> void:
     pass # Replace with function body.
 
 func handle_SI_stream(dict:Dictionary):#{"volume":x, "certainty":x, "pitch":x, "entity": x}
-    print("Handle SI stream called")
     %SignalPitch.text = "Pitch: " + str(dict.pitch)
     %SignalCertainty.text = "Certainty: "+str(dict.certainty)
     var _entity:Entity = dict.entity
+    randomize()
     %SignalSize.text = "Size: " + str(SignalHelpers.get_uncertain_size(dict.entity.atts.size, dict.certainty))
     %SignalVolume.text = "Volume: " + str(dict.volume)+"db"
     pass
@@ -83,12 +85,10 @@ func _on_signal_id_input_text_changed(new_text: String) -> void:
 
 
 func _on_signal_color_changer_color_changed(color: Color) -> void:
-    print("on_signal_color_changer_color_changed")
     edited_color.emit(color)
     pass # Replace with function body.
 
 func handle_color_stream(color:Color)->void:
-    print("Called handle color stream idk", color)
     #We do this as opposed to updating directly from the color picker because there might be events that cause signal objects to change their own color
     #And we want to update the player accordingly
     #E.G: Faction identification, if not perfect identification.
