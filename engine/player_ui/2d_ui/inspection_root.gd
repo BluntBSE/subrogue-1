@@ -6,6 +6,9 @@ class_name InspectionRoot
 #We also have signals that toggle visibility in mutually dependent ways
 #Bigger file, but easier debugging I think?
 var inspecting_signal:SignalPopup
+var inspecting_entity:Entity #Positively ID'd
+signal closed_unidentified
+signal closed_identified
 signal edited_signal_name
 signal edited_signal_type
 signal edited_color
@@ -21,11 +24,15 @@ func handle_opened_signal(sig:SignalPopup):
         %EntityInspection.get_node("AnimationPlayer").play_backwards("slide_in")
         await %EntityInspection.get_node("AnimationPlayer").animation_finished
         %EntityInspection.visible = false
-    print("MARP?", sig.signal_id)
+        closed_identified.emit()
+
     %SignalIDInput.text = sig.signal_id
     %SignalInspection.visible  = true
     var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
     player.play("slide_in")
+    #The second you open, recalculate stuff like size, etc. Forces an update.
+    sig.stream.emit({"volume":sig.sound.volume, "pitch":sig.sound.pitch, "certainty":sig.certainty, "entity": sig.detected_object})
+
     handle_color_stream(sig.color)
     connect_unidentified(sig)
 
@@ -34,7 +41,7 @@ func handle_openened_identified_signal(sig:SignalPopup):
     inspecting_signal = sig
     %SignalInspection.visible = false
     %EntityInspection.visible = true
-    load_inspected_entity(sig)
+    load_inspected_entity(sig.detected_object)
     var player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
     player.play("slide_in")
 
@@ -44,7 +51,7 @@ func handle_identified_signal(sig:SignalPopup):
     if sig == inspecting_signal and %SignalInspection.visible == true:
         var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
         player.play_backwards("slide_in")
-        load_inspected_entity(sig)
+        load_inspected_entity(sig.detected_object)
         await player.animation_finished
         %SignalInspection.visible = false
         %EntityInspection.visible = true
@@ -63,10 +70,10 @@ func _on_signal_inspector_toggle_button_up() -> void:
     pass # Replace with function body.
 
 func handle_SI_stream(dict:Dictionary):#{"volume":x, "certainty":x, "pitch":x, "entity": x}
-    print("Handle SI stream called")
     %SignalPitch.text = "Pitch: " + str(dict.pitch)
     %SignalCertainty.text = "Certainty: "+str(dict.certainty)
     var _entity:Entity = dict.entity
+    randomize()
     %SignalSize.text = "Size: " + str(SignalHelpers.get_uncertain_size(dict.entity.atts.size, dict.certainty))
     %SignalVolume.text = "Volume: " + str(dict.volume)+"db"
     pass
@@ -78,12 +85,10 @@ func _on_signal_id_input_text_changed(new_text: String) -> void:
 
 
 func _on_signal_color_changer_color_changed(color: Color) -> void:
-    print("on_signal_color_changer_color_changed")
     edited_color.emit(color)
     pass # Replace with function body.
 
 func handle_color_stream(color:Color)->void:
-    print("Called handle color stream idk", color)
     #We do this as opposed to updating directly from the color picker because there might be events that cause signal objects to change their own color
     #And we want to update the player accordingly
     #E.G: Faction identification, if not perfect identification.
@@ -106,11 +111,13 @@ func _on_entity_inspector_toggle_button_up() -> void:
     player.play_backwards("slide_in")
     await player.animation_finished
     %EntityInspection.visible = false
+    closed_identified.emit()
     pass # Replace with function body.
 
 
-func load_inspected_entity(sig:SignalPopup):
-    var entity:Entity = sig.detected_object
+func load_inspected_entity(entity:Entity):
+    if inspecting_entity:
+        closed_identified.disconnect(entity.render.handle_release_observed)
     %EntityName.text = entity.given_name
     %EntitySize.text = "Size: " + str(entity.atts.size)+"m³"
     %EntityClass.text = entity.atts.class_display_name
@@ -119,6 +126,7 @@ func load_inspected_entity(sig:SignalPopup):
     %EntityProfile.text = "Profile: " + str(entity.emission.profile)
     %EntityVolume.text = "Volume: " + str(entity.emission.volume)
     %EntityDepth.text = "Depth: " + str(entity.atts.current_depth)
+    #closed_identified.connect(entity.render.handle_release_observed)
     
 
 
@@ -127,11 +135,27 @@ func connect_unidentified(sig:SignalPopup):
     sig.stream.connect(handle_SI_stream)
     edited_color.connect(sig.handle_update_color)
     edited_signal_name.connect(sig.handle_update_name)
+    #closed_unidentified.connect(sig.detected_object.render.handle_release_observed)
 
 func disconnect_unidentified(sig:SignalPopup):
-    #May have been destroyed before this, so we check
-    if sig:       
-        sig.stream_color.disconnect(handle_color_stream)
-        sig.stream.disconnect(handle_SI_stream)
-        edited_color.disconnect(sig.handle_update_color)
-        edited_signal_name.disconnect(sig.handle_update_name)
+    #May have been destroyed before this, so we check if it exists at all.
+    if sig:
+        #We occasionally use this to just clear any connections for a clean slate. The check below is just for error quieting.
+        if sig.stream_color.is_connected(handle_color_stream):
+            sig.stream_color.disconnect(handle_color_stream)
+        if sig.stream_color.is_connected(handle_color_stream):  
+            sig.stream.disconnect(handle_SI_stream)
+        if edited_color.is_connected(sig.handle_update_color):
+            edited_color.disconnect(sig.handle_update_color)
+        if edited_signal_name.is_connected(sig.handle_update_name):
+            edited_signal_name.disconnect(sig.handle_update_name)
+       # closed_unidentified.disconnect(sig.detected_object.render.handle_release_observed)
+
+
+#For when you click on something you can actually 'see' (no longer a signal)
+func handle_openened_identified_entity(entity:Entity):
+    %SignalInspection.visible = false
+    %EntityInspection.visible = true
+    load_inspected_entity(entity)
+    var player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
+    player.play("slide_in")

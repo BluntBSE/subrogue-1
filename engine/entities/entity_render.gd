@@ -1,16 +1,44 @@
 extends Node3D
 class_name EntityRender
+var default_color:Color
 @onready var depth_mesh:MeshInstance3D = %DepthMesh
 @onready var sonar_mesh:MeshInstance3D = %SonarPulseMesh
 @onready var entity:Entity = get_parent()
+var scaling = false
+var selected = false
+var hovered = false
+var observed_by:OrbitalCamera
+var released_by_observer = true #This variable tracks whether or not the thing that did the selecting has 'let go' of this selection
+#Usually that's the camera.
+signal was_selected
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
     pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    pass
+    scale_with_camera_distance()
+    
+    if scaling == true:
+
+            scale_with_fov()
+    if selected == true:
+            scale_with_fov()
+
+
+func _unhandled_input(event:InputEvent):
+    if selected == true and hovered == false: #AND THIS SIGNAL IS NOT CURRRENTLY WHAT THE PLAYERS LOOKING AT? CHRIST ALMIGHTY
+        if event is InputEventMouseButton:
+             if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+                print("Wtf")
+                deselect()
+    
+        
+
+
+        
     
 
 func update_mesh_visibilities(layer:int, val:bool):
@@ -21,6 +49,16 @@ func update_mesh_visibilities(layer:int, val:bool):
         child.set_layer_mask_value(layer,val)
     pass
     
+
+
+func recursively_modulate_all(node:Node3D, _color:Color):
+    #Uniformly sets modulation, albedo, and light color where available.
+    for child in get_children():
+        if child.get("modulate") != null:
+            child.modulate = _color
+        
+        recursively_modulate_all(child, _color)
+
 
 func update_depth_sprite(depth:int):
     # GlobalConst.DEPTH  enum DEPTH {swim, crawl, surface}
@@ -36,4 +74,79 @@ func update_depth_sprite(depth:int):
         depth_mesh.material_override.albedo_texture = surface_sprite
 
 func update_colors(color:Color):
+    default_color = color
     %DepthMesh.material_override.albedo_color = color
+    %Spotlight.light_color = color
+    %HeadingSprite.modulate = color
+
+func _on_entity_mouse_entered() -> void:
+    scaling = true
+    hovered = true
+    #modulate = Color("ffffff")
+    %Spotlight.light_color = Color("ffffff")
+    %HighlightMesh.visible = true
+    pass # Replace with function body.
+
+func _on_entity_mouse_exited() -> void:
+    scaling = false
+    hovered = false
+    #modulate = Color("ffffff")
+    %Spotlight.light_color = default_color
+    %HighlightMesh.visible = false
+
+    pass # Replace with function body.
+
+func scale_with_camera_distance():
+    #Base parameters: at 200 distance, scale of 1.0.
+    #At 1000 distance, scale of 3.0
+    var camera = get_viewport().get_camera_3d()
+    var distance = camera.global_position - global_position
+    var ratio = inverse_lerp(30, 300, distance.length())
+    var sf = lerp(1.0,3.0, ratio)
+    sf = clamp(sf, 0.2,1.5)
+    scale = Vector3(sf,sf,sf)
+
+func scale_with_fov():
+    # Get the camera and its FOV
+    var camera = get_viewport().get_camera_3d()
+    if camera == null:
+        return
+
+    var fov = deg_to_rad(camera.fov)  # Convert FOV to radians
+    var distance = (camera.global_position - global_position).length()
+
+    # Calculate the scale factor to maintain a constant size
+    # The apparent size is proportional to the tangent of half the FOV
+    var desired_size = 1.0  # The desired size of the entity in world units
+    var sf = 2.0 * distance * tan(fov / 2.0) * desired_size
+
+    # Clamp the scale factor to avoid extreme values
+    sf = clamp(sf, 0.2, 3.0)
+    scale = Vector3(sf, sf, sf)
+
+func select(observer:OrbitalCamera): #Usually OrbitalCamera though
+    observed_by = observer
+    print("Select triggered")
+    selected = true
+    released_by_observer = false
+    observer.release_observed.connect(handle_release_observed)
+    was_selected.connect(observer.player.UI.inspection_root.handle_openened_identified_entity)
+    observer.player.UI.inspection_root.closed_identified.connect(handle_release_observed)
+    was_selected.emit(entity)
+
+func deselect():
+    print("Deselect triggered")
+    selected = false
+    released_by_observer = true
+    
+func handle_deselection():
+    print("Shouldn't see this")
+    deselect()
+    
+func handle_release_observed():
+    released_by_observer = true
+    selected = false
+    observed_by.release_observed.disconnect(handle_release_observed)
+    was_selected.disconnect(observed_by.player.UI.inspection_root.handle_openened_identified_entity)
+    observed_by.player.UI.inspection_root.closed_identified.disconnect(handle_release_observed)
+    observed_by = null

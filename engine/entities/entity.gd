@@ -1,4 +1,3 @@
-@tool
 extends RigidBody3D
 class_name Entity
 @export var is_player:bool = true
@@ -185,13 +184,11 @@ func check_reached_waypoint()->void:
         
         
 func apply_entity_type(type:EntityType):
-    print(name, "Called apply entity type with", type)
 
     if not atts:
         atts = %EntityAttributes
         atts = get_node("EntityAttributes")
-        print("ATTS SHOULD BE", atts)
-    print("We skipped the check, and atts is ", atts)
+
     atts.class_display_name = type.display_class
     atts.type = type
     atts.size = type.size
@@ -200,7 +197,6 @@ func apply_entity_type(type:EntityType):
     atts.current_depth = type.depths[0]
     #max_speed = type.base_max_speed
     #TODO: This should probably move once we have different speeds. If we do.
-    print("Just set speed to", speed)
     speed = GlobeHelpers.kph_to_game_s(type.base_max_speed)
     atts.cargo = []
     atts.upgrades = []
@@ -211,9 +207,18 @@ func apply_entity_type(type:EntityType):
 
 func recursively_update_debug_layers(node, _visible):
     for child in node.get_children():
-        print("inspecting ", child.name)
         if child.get("layers") != null:
-            print("ABOUT TO SET ", child.name, " TO ", _visible)
             child.set_layer_mask_value(1, _visible)
         recursively_update_debug_layers(child, _visible)
+        
+
+func query_any_on_layer(node, layer: int) -> bool:
+    for child in node.get_children():
+        if child.has_method("get_layer_mask_value"):  # Ensure the child has the method
+            if child.get_layer_mask_value(layer):
+                return true  # Found a match
+        # Recurse into the child
+        if query_any_on_layer(child, layer):
+            return true
+    return false  # No match found
     

@@ -58,6 +58,11 @@ func input_clicks(event:InputEvent):
                 move_command.tolerance = ref.active_entity.move_tolerance #Currently 0.0, intolerant.
                 move_command.waypoint = waypoint
                 ref.order_move.emit(move_command)
-                
+            
+            if ref.hovering_over.collider is Entity:
+                var clicked_entity = ref.hovering_over.collider
+                print("Clicked on ", clicked_entity.name)
+                ref.select_entity(clicked_entity)
+                pass
     if Input.is_action_just_released("open_context"): #Could be secondary action...
         ref.state_machine.Change("context", {})

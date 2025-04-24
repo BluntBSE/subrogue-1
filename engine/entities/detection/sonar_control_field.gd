@@ -68,7 +68,7 @@ func _on_entity_reached(entity:Entity):
     #Move below into something managed by the detector, sent via signal
     for obj in %EntityDetector.sigmap:
         if obj == entity:
-            var sig:SignalPopup =%EntityDetector.sigmap[obj]
+            var sig = %EntityDetector.sigmap[obj]
             sig.positively_identify()
         pass
     

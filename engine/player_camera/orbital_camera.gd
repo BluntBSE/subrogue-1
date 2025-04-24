@@ -39,6 +39,9 @@ signal order_move
 signal enqueue_move
 signal close_context
 
+#VISUAL INTERACTION (selection etc.)
+signal release_observed
+
 var state_machine:StateMachine
 
 #Screen shake params
@@ -128,10 +131,13 @@ func _unhandled_input(event: InputEvent) -> void:
         if event is InputEventMouseButton and event.is_released():
             print("All focus released")   
             get_viewport().gui_release_focus()
-            #event.set_as_handled
-        if event is InputEventKey and event.keycode in [KEY_ESCAPE, KEY_W, KEY_A, KEY_S, KEY_D]:
-            print("All focus released!")
-            get_viewport().gui_release_focus()
+            release_observed.emit()
+     
+        #event.set_as_handled
+    if event is InputEventKey and event.keycode == KEY_ESCAPE:
+        print("All focus released!")
+        get_viewport().gui_release_focus()
+        release_observed.emit()
             
         
     state_machine.handleInput({"event":event})
@@ -151,7 +157,7 @@ func drop_context_marker(point: Vector3) -> Node3D:
     
  
 func cast_from_camera()->Dictionary:
-    #Raycast from the orbital camera and
+    #Raycast from the orbital camera and collide with the planet or floating GUI elements (layer 1)
     var space_state := get_world_3d().direct_space_state
     var mouse_position = get_viewport().get_mouse_position()
     var raycast_origin = project_ray_origin(mouse_position)
@@ -168,6 +174,7 @@ func cast_from_camera()->Dictionary:
         hovering_over = intersection
     else:
         hovering_over = {}
+    
     
     return hovering_over
 
@@ -254,3 +261,43 @@ func shake():
 func handle_launch(_args:Dictionary)->void:
     state_machine.Change("navigating", {})
     pass
+
+func select_entity(_entity:Entity):
+    #Selectable units are only selectable if they exist in the sigmap, so...
+    var in_sig_map = false
+    var player_entity:Entity = player.entities.find_child("PlayerEntity",true,false)
+    if player_entity.detector.sigmap.get(_entity) != null:
+        var sig:SignalPopup = player_entity.detector.sigmap.get(_entity)
+        print("Entity existed in the sigmap. Is it positive id though?")
+        if (sig.positively_identified == true) and _entity.query_any_on_layer(_entity, player.faction_layer):
+            print("Attempting to select ", _entity.name)
+            _entity.render.select(self)
+
+"""
+func collider_check():
+    #print("Running collider pre check")
+    if Input.is_action_just_pressed("primary_action"):  # Detect left mouse click
+        print("Running collider check!")
+        var camera = get_viewport().get_camera_3d()
+        if camera:
+            # Get the mouse position in the viewport
+            var mouse_position = get_viewport().get_mouse_position()
+
+            # Cast a ray from the camera to the mouse position
+            var from = camera.project_ray_origin(mouse_position)
+            var to = from + camera.project_ray_normal(mouse_position) * 1000  # Extend the ray far enough
+
+            # Perform the raycast
+            var space_state = get_world_3d().direct_space_state
+            var ray_params = PhysicsRayQueryParameters3D.new()
+            ray_params.from = from
+            ray_params.to = to
+
+            var result = space_state.intersect_ray(ray_params)
+
+            # Check if a collider was hit
+            if result and result.has("collider"):
+                print("BOOP!")
+                print("Collider name:", result.collider.name)
+"""
+ 
