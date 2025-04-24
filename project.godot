@@ -26,6 +26,7 @@ NetworkManager="*res://engine/networking/network_manager.gd"
 
 [debug]
 
+settings/stdout/print_gpu_profile=true
 gdscript/warnings/unused_variable=0
 gdscript/warnings/unused_local_constant=0
 gdscript/warnings/unused_private_class_variable=0
