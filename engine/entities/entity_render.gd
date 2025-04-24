@@ -7,9 +7,10 @@ var default_color:Color
 var scaling = false
 var selected = false
 var hovered = false
+var observed_by:OrbitalCamera
 var released_by_observer = true #This variable tracks whether or not the thing that did the selecting has 'let go' of this selection
 #Usually that's the camera.
-
+signal was_selected
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
@@ -124,10 +125,14 @@ func scale_with_fov():
     scale = Vector3(sf, sf, sf)
 
 func select(observer:OrbitalCamera): #Usually OrbitalCamera though
+    observed_by = observer
     print("Select triggered")
     selected = true
     released_by_observer = false
     observer.release_observed.connect(handle_release_observed)
+    was_selected.connect(observer.player.UI.inspection_root.handle_openened_identified_entity)
+    observer.player.UI.inspection_root.closed_identified.connect(handle_release_observed)
+    was_selected.emit(entity)
 
 func deselect():
     print("Deselect triggered")
@@ -141,3 +146,7 @@ func handle_deselection():
 func handle_release_observed():
     released_by_observer = true
     selected = false
+    observed_by.release_observed.disconnect(handle_release_observed)
+    was_selected.disconnect(observed_by.player.UI.inspection_root.handle_openened_identified_entity)
+    observed_by.player.UI.inspection_root.closed_identified.disconnect(handle_release_observed)
+    observed_by = null
