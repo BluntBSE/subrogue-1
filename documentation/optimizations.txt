@@ -1,0 +1,13 @@
+
+https://www.reddit.com/r/godot/comments/w4g51g/why_is_my_physics_time_so_high/
+
+An entity's behaviortree ticks (or doesn't) based on if it is awake or not.
+Same with detection
+
+Try putting detection + behavior ina  thread
+
+Camera movement also seems weirdly expensive? Can THAT be threaded?
+
+Entities wake up if they are near a player
+
+could also just try dumping it into another process

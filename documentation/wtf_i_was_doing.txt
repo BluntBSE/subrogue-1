@@ -25,7 +25,6 @@ TODO:
 
     
         
-    Entities of different depth & size
     
     Mass spawn of NPCs with traffic patterns
     

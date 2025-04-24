@@ -54,7 +54,7 @@ func unpack(type_id, _faction:Faction, with_name):
         given_name = NameGenerator.generate_name()
     else:
         #When we create missions, we will want to generate entities with specific names.
-        if with_name == null:
+        if with_name == null or with_name == "":
             given_name = NameGenerator.generate_name()
             
     if faction.faction_color:
@@ -75,7 +75,9 @@ func unpack(type_id, _faction:Faction, with_name):
     npc = is_npc
     #Turn on AI only for NPCs. We might also want to enable it if this is a munition. Stay tuned.
     if is_npc:
-        behavior.enabled = true
+        pass
+        #DEBUG: We've temporarily turned their sad brains off because they're expensive
+        #behavior.enabled = true
     unpacked = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -171,6 +173,8 @@ func move_towards(pos: Vector3) -> void:
     
 func check_reached_waypoint()->void:
     if move_bus.queue.size() < 1:
+        if behavior.destination_node:
+            check_at_destination()
         return
     var cmd:MoveCommand = move_bus.queue[0]
     var wp:Area3D = cmd.waypoint
@@ -222,3 +226,35 @@ func query_any_on_layer(node, layer: int) -> bool:
             return true
     return false  # No match found
     
+#DEBUG INITIATLIZE MOVEMENT
+func initial_go_to_destination():
+        print("Initial path was ", move_bus.find_closest_node())
+        var debug_dest = behavior.destination_node
+        print("Initial debug_dest was, ", debug_dest)
+        var path = move_bus.path_between_nodes(move_bus.find_closest_node(), behavior.destination_node, get_tree().root.find_child("NavNodes", true, false))
+        move_bus.waypoints_from_nodes(path)
+
+func check_at_destination():
+    print("Checking if we reached the destination", behavior.destination_node.name)
+    # Get the world and its direct space state for physics queries
+    var space_state = get_world_3d().direct_space_state
+
+    # Create a PhysicsShapeQueryParameters3D for a sphere query
+    var query := PhysicsShapeQueryParameters3D.new()
+    var sphere_shape = SphereShape3D.new()
+    sphere_shape.radius = 2.0
+    query.shape = sphere_shape
+    query.transform = Transform3D(Basis(), self.global_position)  # Center the sphere at the node's position
+    query.collision_mask = 1 << 18  # Adjust the collision mask if needed to match navnodes (layer 19)
+    query.collide_with_areas = true
+    # Perform the query
+    var results = space_state.intersect_shape(query)
+    print("ALL RESULTS: ", results)
+
+    # Check if any of the results are entities
+    for result in results:
+        print("DESTINATION RESULT ", result)
+        if result.collider == behavior.destination_node:
+            queue_free()
+            return true
+    return false

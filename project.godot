@@ -112,11 +112,11 @@ secondary_action={
 
 [physics]
 
-common/physics_ticks_per_second=30
 common/max_physics_steps_per_frame=16
 3d/default_gravity=0.0
 3d/default_linear_damp=0.0
 3d/default_angular_damp=100.0
+common/physics_interpolation=true
 
 [rendering]
 
