@@ -210,4 +210,15 @@ func recursively_update_debug_layers(node, _visible):
         if child.get("layers") != null:
             child.set_layer_mask_value(1, _visible)
         recursively_update_debug_layers(child, _visible)
+        
+
+func query_any_on_layer(node, layer: int) -> bool:
+    for child in node.get_children():
+        if child.has_method("get_layer_mask_value"):  # Ensure the child has the method
+            if child.get_layer_mask_value(layer):
+                return true  # Found a match
+        # Recurse into the child
+        if query_any_on_layer(child, layer):
+            return true
+    return false  # No match found
     

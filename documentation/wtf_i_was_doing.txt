@@ -10,7 +10,7 @@ but I think something like a "player bias" would be helpful, that is
 skewing interactions towards interacting with the player vs npcs,
 but not so much the player can't bamboozle the AI.
 
-
+BUG: If you get lucky and click on a unit directly, you can get its proper identification right away. No!
 BUG: Your control focus thing didn't really pan out.
 
 
@@ -24,10 +24,7 @@ IF NEEDED TO IMPROVE PERFORMANCE: All that ping polling and stuff could be on di
 TODO:
 
     
-    Click on enemies while they are directly observed (sonar, etc.)
-    
-    SPeaking of, clicking behavior seems meh post trying to account for empty space
-    
+        
     Entities of different depth & size
     
     Mass spawn of NPCs with traffic patterns

@@ -26,8 +26,14 @@ static func get_uncertain_size(_size:float, certainty:float):
         plus_or_minus = 1.0
     
     #0 to 80 percent certain = possible shifting of +/- .8 at the most etreme
-    var uncertainty_factor = randf_range(0.0, certainty)/100.0
-    var output = (uncertainty_factor * plus_or_minus) + _size
+    var uncertainty_factor = randf_range(0.0, certainty)
+    var dist_from_certain = 100 - uncertainty_factor
+    dist_from_certain = clamp(dist_from_certain, 20.0, 0.0)
+    var size_displacement = dist_from_certain * _size * plus_or_minus
+    print("Uncertainty factor was determined to be", uncertainty_factor)
+    print("Modified by ", size_displacement)
+    var output = size_displacement + _size
+    print("Output was therefore", output)
     return output
     
         

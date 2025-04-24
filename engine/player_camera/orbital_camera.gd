@@ -262,9 +262,16 @@ func handle_launch(_args:Dictionary)->void:
     state_machine.Change("navigating", {})
     pass
 
-func select_entity(entity:Entity):
-    print("Attempting to select ", entity.name)
-    entity.render.select(self)
+func select_entity(_entity:Entity):
+    #Selectable units are only selectable if they exist in the sigmap, so...
+    var in_sig_map = false
+    var player_entity:Entity = player.entities.find_child("PlayerEntity",true,false)
+    if player_entity.detector.sigmap.get(_entity) != null:
+        var sig:SignalPopup = player_entity.detector.sigmap.get(_entity)
+        print("Entity existed in the sigmap. Is it positive id though?")
+        if (sig.positively_identified == true) and _entity.query_any_on_layer(_entity, player.faction_layer):
+            print("Attempting to select ", _entity.name)
+            _entity.render.select(self)
 
 """
 func collider_check():
