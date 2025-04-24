@@ -4,7 +4,7 @@ var default_color:Color
 @onready var depth_mesh:MeshInstance3D = %DepthMesh
 @onready var sonar_mesh:MeshInstance3D = %SonarPulseMesh
 @onready var entity:Entity = get_parent()
-var scaling
+var scaling = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass # Replace with function body.
@@ -63,14 +63,14 @@ func _on_entity_mouse_entered() -> void:
     scaling = true
     #modulate = Color("ffffff")
     %Spotlight.light_color = Color("ffffff")
-    %DepthMesh2.visible = true
+    %HighlightMesh.visible = true
     pass # Replace with function body.
 
 func _on_entity_mouse_exited() -> void:
     scaling = false
     #modulate = Color("ffffff")
     %Spotlight.light_color = default_color
-    %DepthMesh2.visible = false
+    %HighlightMesh.visible = false
 
     pass # Replace with function body.
 

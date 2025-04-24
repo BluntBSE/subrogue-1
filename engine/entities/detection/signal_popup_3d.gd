@@ -87,8 +87,10 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     if _detecting_object.is_player == false:
         belongs_to_npc = true
         visible = false
+        %Area3D.collision_layer = 0
     else:
         %Area3D.input_ray_pickable = true
+        
   
     detecting_object = _detecting_object
     position = _detected_object.position

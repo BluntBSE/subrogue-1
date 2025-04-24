@@ -36,8 +36,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_p8alx")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D"]
 unique_name_in_owner = true
-collision_layer = 2
-collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
 shape = SubResource("ConcavePolygonShape3D_rtv0r")

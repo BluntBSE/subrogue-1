@@ -129,7 +129,7 @@ func _unhandled_input(event: InputEvent) -> void:
             print("All focus released")   
             get_viewport().gui_release_focus()
             #event.set_as_handled
-        if event is InputEventKey and event.keycode in [KEY_ESCAPE, KEY_W, KEY_A, KEY_S, KEY_D]:
+        if event is InputEventKey and event.keycode in [KEY_ESCAPE]:
             print("All focus released!")
             get_viewport().gui_release_focus()
             
