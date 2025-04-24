@@ -18,6 +18,7 @@ func _ready() -> void:
 
 
 func unpack():
+    print("Called UI unpack")
     player = get_parent().get_parent()
     camera = player.camera  # Adjust the path to your Camera3D node
     viewport = get_viewport()  # Adjust the path to your Viewport node
@@ -34,6 +35,7 @@ func unpack():
     active_sonar_control.unpack()
 
     volume_bar.handle_values.connect(player_entity.sonar_node.handle_volume)
+    unpacked = true
 
     pass  # Replace with function body.
 
@@ -44,12 +46,12 @@ func adjust_ruler(camera_pos: Vector3, _anchor: Vector3) -> void:
 func _process(delta: float) -> void:
     if unpacked != true:
         return
-    #FPS
+
     %FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
 
     #RANGEFINDING
     # Get the mouse position relative to the Control node
-    var ray_length = 8000.0  # Adjust the ray length as needed
+    var ray_length = 300.0  # Adjust the ray length as needed
     var mouse_pos = get_global_mouse_position()
 
     var ray_origin_a = camera.project_ray_origin(%RangeFinder1.position)

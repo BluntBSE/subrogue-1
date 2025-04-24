@@ -26,6 +26,8 @@ func _ready() -> void:
     pass # Replace with function body.
 
 func _process(delta: float) -> void:
+    #DEBUG: REMOVE ME. JUST TURNED OFF DETECTION TO SEE IF THATS THE LAG SOURCE
+        return
         poll_entities()
 
 

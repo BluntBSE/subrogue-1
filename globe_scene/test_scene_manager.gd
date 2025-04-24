@@ -19,6 +19,7 @@ var faction_ids = ["SaharanFreeLeague", "AtlanticEmpire", "EuropeanFront", "Unit
 
 var spawn_check_time = 0.0
 func _process(_delta:float)->void:
+
     spawn_check_time += _delta
     if spawn_check_time >= 2.0:
         print("10s elapsed. Checking for opportunities to make new entities")
@@ -123,5 +124,8 @@ func no_entities_near_node(node: NavNode, distance: float) -> bool:
 func configure_behavior(entity:Entity, destination_id:String)->void:
     #For now, this only sets a destination for our critter
     var dest:NavNode = entity.get_tree().root.find_child(destination_id, true, false)
+    print("CONFIGURE BEHAVIOR ASSIGNED A DESTINATION NODE OF", dest, "WITH THE ID ", destination_id)
     entity.behavior.destination_node = dest
+    entity.initial_go_to_destination()
     pass
+    

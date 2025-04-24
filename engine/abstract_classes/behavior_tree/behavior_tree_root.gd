@@ -17,8 +17,7 @@ func _ready():
         disable()
         return
 
-var tick_increment = 0.0
-var tick_speed = 5.0
+
 func _process(delta:float):
     #I chose process instead of physics process because I lowered my physics frames a *lot*
     #Possibly we can throttle how often this runs to improve performance if needed
