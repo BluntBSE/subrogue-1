@@ -27,4 +27,13 @@ func _on_text_submitted(new_text: String) -> void:
     if new_text == "new target":
          var test_node = get_tree().root.find_child("test_node", true, false)
          spawn_entity_at_node(test_node, "debug_commercial", gr.factions.faction_1)       
+    if new_text == "i see everything":
+        see_everything()
     pass # Replace with function body.
+
+
+
+func see_everything()->void:
+    var camera:Camera3D = get_tree().root.find_child("OrbitalCamera", true, false)
+    for idx in range(0, 19):
+        camera.set_cull_mask_value(idx+1, true)
