@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=65 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -9,8 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="7_nwwe3"]
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="8_fq2vg"]
 [ext_resource type="Texture2D" uid="uid://c3j3ua0ninil2" path="res://assets/UI/white_buttons/PCMainButtonNormalWhiteT02_filled.png" id="9_q7i7m"]
-[ext_resource type="Texture2D" uid="uid://biopgmfrbkuc7" path="res://assets/UI/blue_panels/LargeMenuBGT03.1BlueDark.png" id="10_oh4je"]
-[ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="11_ljsgx"]
+[ext_resource type="PackedScene" uid="uid://b6wq3ox1h0lcj" path="res://engine/cities/city_ui/texture_rect.tscn" id="10_558vm"]
 [ext_resource type="Script" uid="uid://b1e3glbgg7wdy" path="res://engine/player_ui/time_manager.gd" id="11_oh4je"]
 [ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="12_ljsgx"]
 [ext_resource type="Texture2D" uid="uid://edgpj510s3iu" path="res://assets/UI/blue_icons/ArrowLeftIconBlue.png" id="13_itjk8"]
@@ -44,14 +43,6 @@
 [ext_resource type="PackedScene" uid="uid://8k5fjvye3gcg" path="res://engine/entities/detection/spiky_boy.tscn" id="39_nwwe3"]
 [ext_resource type="Texture2D" uid="uid://b6wq5dkmmxdtv" path="res://assets/UI/white_buttons/VolumeSliderKnobT03White.png" id="40_fq2vg"]
 [ext_resource type="Texture2D" uid="uid://8bqmk8uxc6mg" path="res://assets/UI/white_icons/EditIconWhite.png" id="41_q7i7m"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itjk8"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.203922, 0.866667, 0.92549, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
 shader = ExtResource("21_fwoy0")
@@ -774,193 +765,12 @@ offset_right = 1932.0
 offset_bottom = 1086.0
 color = Color(0, 0, 0, 0.741176)
 
-[node name="TextureRect" type="TextureRect" parent="UICanvas/PlayerUIRoot/CityUIRoot"]
-z_index = 800
-offset_left = 365.0
-offset_top = 107.0
-offset_right = 1645.0
-offset_bottom = 1007.0
-texture = ExtResource("10_oh4je")
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect"]
+[node name="CityUI" parent="UICanvas/PlayerUIRoot/CityUIRoot" instance=ExtResource("10_558vm")]
 layout_mode = 0
-offset_left = 94.0
-offset_top = 129.0
-offset_right = 433.0
-offset_bottom = 161.0
-theme = ExtResource("8_fq2vg")
-theme_override_font_sizes/font_size = 20
-text = "Atlantic Empire"
-
-[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect"]
-layout_mode = 0
-offset_left = 773.0
-offset_top = 67.0
-offset_right = 916.0
-offset_bottom = 99.0
-theme = ExtResource("8_fq2vg")
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 20
-text = "Heat: 0%"
-
-[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect"]
-layout_mode = 0
-offset_left = 954.0
-offset_top = 67.0
-offset_right = 1146.0
-offset_bottom = 99.0
-theme = ExtResource("8_fq2vg")
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 20
-text = "Acclaim: 0%"
-
-[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect"]
-layout_mode = 0
-offset_left = 86.0
-offset_top = 69.0
-offset_right = 493.0
-offset_bottom = 128.0
-theme = ExtResource("8_fq2vg")
-theme_override_font_sizes/font_size = 36
-text = "NEW GIBRALTAR"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect"]
-layout_mode = 0
-offset_left = 596.0
-offset_top = 165.0
-offset_right = 1148.0
-offset_bottom = 536.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_itjk8")
-
-[node name="TextureRect" type="TextureRect" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/PanelContainer"]
-layout_mode = 2
-texture = ExtResource("11_ljsgx")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect"]
-layout_mode = 0
-offset_left = 594.0
-offset_top = 567.0
-offset_right = 1114.0
-offset_bottom = 807.0
-theme = ExtResource("8_fq2vg")
-text = "The docks of New Gibraltar are electrifying. Military vessels, luxury yachts, and cruise ships form an unlikely crowd as they jostle to enter the Mediterranean. Wild-eyed patriots preach a return to independence, and perfumed businesspeople in the \"defense industry\" offer drinks to every captain coming ashore.
-
-The on-again off-again independence of this tiny city state has attracted some of the most ambitious, wanted, and opportunistic people on this side of the Atlantic. It's an intoxicatinging mix, punctuated by constant smell of ozone in the air. Energy weapons are fired here. And often.
-
-"
-fit_content = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect"]
-layout_mode = 0
-offset_left = 87.0
-offset_top = 216.0
-offset_right = 350.0
-offset_bottom = 416.0
-
-[node name="TextureButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("8_fq2vg")
-texture_normal = ExtResource("7_nwwe3")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer/TextureButton"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 46.0
-theme_override_font_sizes/font_size = 20
-text = "Diplomacy"
-
-[node name="TextureButton5" type="TextureButton" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("8_fq2vg")
-texture_normal = ExtResource("7_nwwe3")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer/TextureButton5"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 46.0
-theme_override_font_sizes/font_size = 20
-text = "City Info"
-
-[node name="TextureButton2" type="TextureButton" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("8_fq2vg")
-texture_normal = ExtResource("7_nwwe3")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer/TextureButton2"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 46.0
-theme_override_font_sizes/font_size = 20
-text = "Contracts"
-
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("8_fq2vg")
-texture_normal = ExtResource("7_nwwe3")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer/TextureButton3"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 46.0
-theme_override_font_sizes/font_size = 20
-text = "Bar"
-
-[node name="TextureButton4" type="TextureButton" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("8_fq2vg")
-texture_normal = ExtResource("7_nwwe3")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer/TextureButton4"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 46.0
-theme_override_font_sizes/font_size = 20
-text = "Docks"
-
-[node name="TextureButton6" type="TextureButton" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("8_fq2vg")
-texture_normal = ExtResource("7_nwwe3")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/TextureRect/VBoxContainer/TextureButton6"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 46.0
-theme_override_font_sizes/font_size = 20
-text = "Military"
+offset_left = 362.0
+offset_top = 106.0
+offset_right = 1642.0
+offset_bottom = 1006.0
 
 [node name="TimeManager" type="Label" parent="UICanvas/PlayerUIRoot"]
 unique_name_in_owner = true

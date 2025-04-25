@@ -1,0 +1,263 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6wq3ox1h0lcj"]
+
+[ext_resource type="Texture2D" uid="uid://biopgmfrbkuc7" path="res://assets/UI/blue_panels/LargeMenuBGT03.1BlueDark.png" id="1_tf3wp"]
+[ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="2_spgwn"]
+[ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="3_71dqv"]
+[ext_resource type="Texture2D" uid="uid://10iq42ux2jj" path="res://assets/UI/placeholder/chiara-summer-mO9EzDBd5nI-unsplash.png" id="4_71dqv"]
+[ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="4_ttruw"]
+[ext_resource type="FontFile" uid="uid://bvmpsl44wcfpl" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Bd.otf" id="5_ttruw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itjk8"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.203922, 0.866667, 0.92549, 1)
+
+[node name="CityUI" type="TextureRect"]
+z_index = 800
+offset_left = 365.0
+offset_top = 107.0
+offset_right = 1645.0
+offset_bottom = 1007.0
+texture = ExtResource("1_tf3wp")
+
+[node name="FactionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 94.0
+offset_top = 129.0
+offset_right = 433.0
+offset_bottom = 161.0
+theme = ExtResource("2_spgwn")
+theme_override_font_sizes/font_size = 20
+text = "Atlantic Empire"
+
+[node name="HeatLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 773.0
+offset_top = 67.0
+offset_right = 916.0
+offset_bottom = 99.0
+theme = ExtResource("2_spgwn")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+text = "Heat: 0%"
+
+[node name="AcclaimLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 954.0
+offset_top = 67.0
+offset_right = 1146.0
+offset_bottom = 99.0
+theme = ExtResource("2_spgwn")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+text = "Acclaim: 0%"
+
+[node name="CityNameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 86.0
+offset_top = 69.0
+offset_right = 493.0
+offset_bottom = 128.0
+theme = ExtResource("2_spgwn")
+theme_override_font_sizes/font_size = 36
+text = "NEW GIBRALTAR"
+horizontal_alignment = 1
+
+[node name="MainOptions" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 87.0
+offset_top = 216.0
+offset_right = 350.0
+offset_bottom = 416.0
+
+[node name="TextureButton" type="TextureButton" parent="MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_spgwn")
+texture_normal = ExtResource("4_ttruw")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainOptions/TextureButton"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Diplomacy"
+
+[node name="TextureButton5" type="TextureButton" parent="MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_spgwn")
+texture_normal = ExtResource("4_ttruw")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainOptions/TextureButton5"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "City Info"
+
+[node name="TextureButton2" type="TextureButton" parent="MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_spgwn")
+texture_normal = ExtResource("4_ttruw")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainOptions/TextureButton2"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Contracts"
+
+[node name="TextureButton3" type="TextureButton" parent="MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_spgwn")
+texture_normal = ExtResource("4_ttruw")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainOptions/TextureButton3"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Bar"
+
+[node name="TextureButton4" type="TextureButton" parent="MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_spgwn")
+texture_normal = ExtResource("4_ttruw")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainOptions/TextureButton4"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Docks"
+
+[node name="TextureButton6" type="TextureButton" parent="MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_spgwn")
+texture_normal = ExtResource("4_ttruw")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainOptions/TextureButton6"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Military"
+
+[node name="ContractContacts" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 87.0
+offset_top = 216.0
+offset_right = 350.0
+offset_bottom = 416.0
+
+[node name="BoxContainer" type="BoxContainer" parent="ContractContacts"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="ContractContacts/BoxContainer"]
+custom_minimum_size = Vector2(32, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_71dqv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContractContacts/BoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ContractContacts/BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_ttruw")
+theme_override_font_sizes/font_size = 14
+text = "Chiara Summer"
+
+[node name="Label2" type="Label" parent="ContractContacts/BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Atlantic Empire"
+
+[node name="Label3" type="Label" parent="ContractContacts/BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Ambassador"
+
+[node name="Label4" type="Label" parent="ContractContacts/BoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Opinion: 0 / 100"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CityGreeting" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CityGreeting"]
+layout_mode = 0
+offset_left = 596.0
+offset_top = 165.0
+offset_right = 1148.0
+offset_bottom = 536.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_itjk8")
+
+[node name="TextureRect" type="TextureRect" parent="CityGreeting/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("3_71dqv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CityDescription" type="RichTextLabel" parent="CityGreeting"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 594.0
+offset_top = 567.0
+offset_right = 1114.0
+offset_bottom = 807.0
+theme = ExtResource("2_spgwn")
+text = "The docks of New Gibraltar are electrifying. Military vessels, luxury yachts, and cruise ships form an unlikely crowd as they jostle to enter the Mediterranean. Wild-eyed patriots preach a return to independence, and perfumed businesspeople in the \"defense industry\" offer drinks to every captain coming ashore.
+
+The on-again off-again independence of this tiny city state has attracted some of the most ambitious, wanted, and opportunistic people on this side of the Atlantic. It's an intoxicatinging mix, punctuated by constant smell of ozone in the air. Energy weapons are fired here. Often.
+
+"
+fit_content = true
