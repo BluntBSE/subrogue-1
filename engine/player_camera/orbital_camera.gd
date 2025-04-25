@@ -27,6 +27,7 @@ var destination:Vector3:
 var db:bool = false
 var player:Player
 var active_entity:Entity
+var follow_cam:bool = true
 
 #Self
 signal camera_moved
@@ -99,19 +100,32 @@ func _process(delta: float) -> void:
         if enable_debug_movement == false:
             return
             
-    if not trauma:
-        if return_to_pre_trauma:
-            #destination = pre_trauma_position
-            return_to_pre_trauma = false
+    if follow_cam and active_entity:
+            # Get the active entity's position
+            var target_position = active_entity.global_position
+
+            # Calculate the camera's position based on the active entity's polar coordinates
+            var x_new = target_position.x + (distance * sin(azimuth) * cos(polar))
+            var y_new = target_position.y + (distance * sin(polar))
+            var z_new = target_position.z + (distance * cos(azimuth) * cos(polar))
+            var new_position = Vector3(x_new, y_new, z_new)
+            # Smoothly interpolate the camera's position to the new position
+            position = position.lerp(new_position, 0.1)  # Adjust the interpolation factor (0.1) as needed
+            look_at(active_entity.position)
+            # Look at the anchor
+ 
+    else:
+        if not trauma:
+            if return_to_pre_trauma:
+                return_to_pre_trauma = false
             
-    position = lerp(position, destination, 0.1)
-    look_at(anchor.position)
+        position = lerp(position, destination, 0.1)
+        look_at(anchor.position)
+    
     hovering_over = cast_from_camera()
-    #print(hovering_over.collider.name)
     var dist = anchor.position - position
     dist = dist.length()
-    #%WorldEnvironment.environment.set_volumetric_fog_length(dist) #If we do multiplayer this can't be the way this works. Can each player have their own world environment node? Probably, honestly.
-    input_movement() #At least until I want a state machine to change its behavior.
+    input_movement()  # At least until I want a state machine to change its behavior.
 
     emit_position()
     if trauma:
@@ -135,10 +149,16 @@ func _unhandled_input(event: InputEvent) -> void:
      
         #event.set_as_handled
     if event is InputEventKey and event.keycode == KEY_ESCAPE:
+        follow_cam = false
         print("All focus released!")
         get_viewport().gui_release_focus()
         release_observed.emit()
-            
+        
+    if event is InputEventKey and event.keycode in [KEY_W, KEY_A, KEY_S, KEY_D]:
+        follow_cam = false
+        
+    if event is InputEventKey and event.keycode == KEY_SPACE:
+        follow_cam = true
         
     state_machine.handleInput({"event":event})
     pass
@@ -301,3 +321,6 @@ func collider_check():
                 print("Collider name:", result.collider.name)
 """
  
+func match_polar_coordinates(entity:Entity):
+    
+    pass
