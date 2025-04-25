@@ -26,9 +26,9 @@ func _ready() -> void:
     pass # Replace with function body.
 
 func _process(delta: float) -> void:
-    #DEBUG: REMOVE ME. JUST TURNED OFF DETECTION TO SEE IF THATS THE LAG SOURCE
-        return
-        poll_entities()
+    #DEBUG: RIGHT NOW ONLY PLAYERS CAN DETECT. THAT"S NOT WHAT WE WANT IN THE END.
+        if entity.is_player == true:
+         poll_entities()
 
 
 func is_already_tracked(_entity:Entity, entity_list:Array)->bool:
@@ -49,7 +49,6 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
         var tracked:bool = is_already_tracked(body, tracked_entities)
         
             
-        print(entity.name + " detector just saw " + body.name + " enter ")
         if detection_parent == null:
             #If this is a vessel, not a munition or sub entity, tracked items are associated with the vessel directly
                     
@@ -57,8 +56,6 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                 var track_obj = {"entity":body, "tracked_by":[self]}
                 tracked_entities.append(track_obj)
                 body.died.connect(handle_tracked_object_died)
-                print("Added ", body.name, "to own tracked entities, tracked by ", self)
-
             if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
                var tracked_by_this = false
                for track_obj in tracked_entities:
@@ -80,7 +77,6 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                 var track_obj = {"entity":body, "tracked_by":[self]}
                 detection_parent.tracked_entities.append(track_obj)
                 body.died.connect(detection_parent.handle_tracked_object_died)
-                print("Added ", body.name, "to tracked entities of parent: ,", detection_parent, "tracked by ", self)
 
 
             

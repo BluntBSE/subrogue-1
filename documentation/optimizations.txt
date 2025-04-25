@@ -11,3 +11,6 @@ Camera movement also seems weirdly expensive? Can THAT be threaded?
 Entities wake up if they are near a player
 
 could also just try dumping it into another process
+
+
+If you want to simulate global events far away from the player, just create a random sphere somewhere else and turn on all the AI in that neighborhood for a given amount of time
