@@ -27,6 +27,7 @@ var destination:Vector3:
 var db:bool = false
 var player:Player
 var active_entity:Entity
+var follow_cam:bool = true
 
 #Self
 signal camera_moved
@@ -95,25 +96,41 @@ func _process(delta: float) -> void:
     if !is_multiplayer_authority():
         return
         
-    if Engine.is_editor_hint():
-        if enable_debug_movement == false:
-            return
+    if Engine.is_editor_hint() and not enable_debug_movement:
+        return
             
-    if not trauma:
-        if return_to_pre_trauma:
-            #destination = pre_trauma_position
-            return_to_pre_trauma = false
-            
-    position = lerp(position, destination, 0.1)
-    look_at(anchor.position)
+    if follow_cam and active_entity:
+        # Follow the active entity
+        var target_position = active_entity.global_position
+
+        # Update polar and azimuth to match the active entity
+        polar = atan2(target_position.y - anchor.position.y, distance)
+        azimuth = atan2(target_position.x - anchor.position.x, target_position.z - anchor.position.z)
+
+        # Calculate the camera's position based on the active entity's polar coordinates
+        var x_new = anchor.position.x + (distance * sin(azimuth) * cos(polar))
+        var y_new = anchor.position.y + (distance * sin(polar))
+        var z_new = anchor.position.z + (distance * cos(azimuth) * cos(polar))
+        var new_position = Vector3(x_new, y_new, z_new)
+
+        # Smoothly interpolate the camera's position to the new position
+        position = position.lerp(new_position, 0.1)  # Adjust the interpolation factor (0.1) as needed
+        look_at(active_entity.position)
+    else:
+        # Interpolate to the destination in manual mode
+        position = position.lerp(destination, 0.1)
+        look_at(anchor.position)
+    
+    # Handle hovering and input
     hovering_over = cast_from_camera()
-    #print(hovering_over.collider.name)
     var dist = anchor.position - position
     dist = dist.length()
-    #%WorldEnvironment.environment.set_volumetric_fog_length(dist) #If we do multiplayer this can't be the way this works. Can each player have their own world environment node? Probably, honestly.
-    input_movement() #At least until I want a state machine to change its behavior.
+    input_movement()
 
+    # Emit position updates
     emit_position()
+
+    # Handle screen shake
     if trauma:
         trauma = max(trauma - trauma_decay * delta, 0)
         shake()
@@ -135,10 +152,16 @@ func _unhandled_input(event: InputEvent) -> void:
      
         #event.set_as_handled
     if event is InputEventKey and event.keycode == KEY_ESCAPE:
+        follow_cam = false
         print("All focus released!")
         get_viewport().gui_release_focus()
         release_observed.emit()
-            
+        
+    if event is InputEventKey and event.keycode in [KEY_W, KEY_A, KEY_S, KEY_D]:
+        follow_cam = false
+        
+    if event is InputEventKey and event.keycode == KEY_SPACE:
+        follow_cam = true
         
     state_machine.handleInput({"event":event})
     pass
@@ -301,3 +324,6 @@ func collider_check():
                 print("Collider name:", result.collider.name)
 """
  
+func match_polar_coordinates(entity:Entity):
+    
+    pass
