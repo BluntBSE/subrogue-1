@@ -26,13 +26,20 @@ TODO:
     
         
     
-    Mass spawn of NPCs with traffic patterns
-    
     Filtering signals based on parameters
     
     -Add "MOVE" to the list of right click commands unless we can make it possible to pass
     input from the mesh that signals occupy
 
+
+-A better cursor - DONE
+-Docking at ports, getting missions
+-Signal tuning
+-Destroying enemies (done)
+-Different graphics for munitions
+-Configuring weapons
+-Being at least pinged by an enemy (can fake)
+-Dying explosively
 
     
     Debug Munition can find and hit targets.

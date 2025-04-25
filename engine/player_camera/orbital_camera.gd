@@ -27,7 +27,11 @@ var destination:Vector3:
 var db:bool = false
 var player:Player
 var active_entity:Entity
-var follow_cam:bool = true
+var follow_cam:bool = true:
+    set(value):
+        print("Custom follow cam setter emitted signal")
+        follow_cam = value
+        freelook.emit(!value)
 
 #Self
 signal camera_moved
@@ -42,6 +46,7 @@ signal close_context
 
 #VISUAL INTERACTION (selection etc.)
 signal release_observed
+signal freelook #Tell the UI to tell the player we're freelooking or not
 
 var state_machine:StateMachine
 

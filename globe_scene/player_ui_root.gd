@@ -23,16 +23,18 @@ func unpack():
     camera = player.camera  # Adjust the path to your Camera3D node
     viewport = get_viewport()  # Adjust the path to your Viewport node
     anchor = get_tree().root.find_child("GamePlanet", true, false)
-    print("unpack from UI root")
     await player.ready
     var player_entity: Entity = player.entities.find_child("PlayerEntity")
-    print("Player Entity is", player_entity)
+    
 
     #We do all signal connections here because the player is the immediate parent of this node.
     active_sonar_control.s_angle_1.connect(player_entity.sonar_node.handle_angle_1)
     active_sonar_control.s_angle_2.connect(player_entity.sonar_node.handle_angle_2)
     active_sonar_control.ping_requested.connect(player_entity.sonar_node.handle_ping_request)
     active_sonar_control.unpack()
+    
+    #Notifications and such
+    player.camera.freelook.connect(handle_free_look)
 
     volume_bar.handle_values.connect(player_entity.sonar_node.handle_volume)
     unpacked = true
@@ -84,9 +86,13 @@ func _process(delta: float) -> void:
         km = snapped(km, 1.0)
         %RulerLabel.text = str(km) + " km"
 
+func handle_free_look(state:bool):
+    print("Hello from handle freelook")
+    %FreeLookRect.visible = state
+
 
 func handle_launch(_args: Dictionary) -> void:
-    var glitch_mask: ColorRect = get_node("FilterMaskGlitch")
+    var glitch_mask: ColorRect = get_node("ScreenspaceFilters/FilterMaskGlitch")
     glitch_mask.material.set("shader_parameter/active", true)
     await get_tree().create_timer(0.8).timeout
     glitch_mask.material.set("shader_parameter/active", false)
