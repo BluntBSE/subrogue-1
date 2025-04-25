@@ -6,6 +6,8 @@ var is_multiplayer:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
+    
     #Once this enters the tree, kill the main menu UI. This should probably live elsewhere later.
     var mm = get_tree().root.find_child("MainMenu", true, false)
     if multiplayer.get_peers().size()>0:
