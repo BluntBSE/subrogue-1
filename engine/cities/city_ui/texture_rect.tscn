@@ -31,6 +31,7 @@ offset_top = 129.0
 offset_right = 433.0
 offset_bottom = 161.0
 theme = ExtResource("2_spgwn")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "Atlantic Empire"
 
@@ -71,18 +72,6 @@ theme = ExtResource("2_spgwn")
 theme_override_font_sizes/font_size = 36
 text = "NEW GIBRALTAR"
 horizontal_alignment = 1
-
-[node name="CityNameLabel2" type="Label" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 820.0
-offset_top = 496.0
-offset_right = 1258.0
-offset_bottom = 587.0
-theme = ExtResource("2_spgwn")
-theme_override_font_sizes/font_size = 30
-text = "Chiara 
-Summers"
 
 [node name="MainOptions" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
@@ -252,9 +241,9 @@ offset_bottom = 40.0
 [node name="PanelContainer" type="PanelContainer" parent="CityGreeting"]
 layout_mode = 0
 offset_left = 596.0
-offset_top = 165.0
+offset_top = 130.0
 offset_right = 1148.0
-offset_bottom = 536.0
+offset_bottom = 501.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_itjk8")
 
 [node name="TextureRect" type="TextureRect" parent="CityGreeting/PanelContainer"]
@@ -267,9 +256,9 @@ stretch_mode = 4
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 594.0
-offset_top = 567.0
+offset_top = 532.0
 offset_right = 1114.0
-offset_bottom = 807.0
+offset_bottom = 817.0
 theme = ExtResource("2_spgwn")
 text = "The docks of New Gibraltar are electrifying. Military vessels, luxury yachts, and cruise ships form an unlikely crowd as they jostle to enter the Mediterranean. Wild-eyed patriots preach a return to independence, and perfumed businesspeople in the \"defense industry\" offer drinks to every captain coming ashore.
 
@@ -286,9 +275,9 @@ offset_bottom = 40.0
 [node name="Container" type="BoxContainer" parent="ContractCloseUp"]
 layout_mode = 0
 offset_left = 828.0
-offset_top = 159.0
+offset_top = 130.0
 offset_right = 1147.0
-offset_bottom = 478.0
+offset_bottom = 449.0
 
 [node name="TextureRect" type="TextureRect" parent="ContractCloseUp/Container"]
 layout_mode = 2
@@ -341,40 +330,29 @@ text = "Accept"
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 823.0
-offset_top = 595.0
+offset_top = 566.0
 offset_right = 1153.0
-offset_bottom = 1375.0
+offset_bottom = 1346.0
 theme = ExtResource("2_spgwn")
 theme_override_font_sizes/normal_font_size = 16
 text = "Sed mattis pretium dolor. Morbi viverra, ligula in cursus varius, velit erat consectetur enim, ultricies venenatis nisi lacus nec velit. Morbi neque dolor, scelerisque a purus vestibulum, lacinia maximus libero. Aenean facilisis ligula nisl, nec rutrum augue volutpat eget. 
 
-Vivamus vestibulum, ligula scelerisque mollis suscipit, nisl nunc accumsan ipsum, vel feugiat justo orci ac enim. "
-fit_content = true
-
-[node name="CityDescription3" type="RichTextLabel" parent="ContractCloseUp"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 92.0
-offset_top = 192.0
-offset_right = 675.0
-offset_bottom = 284.0
-theme = ExtResource("2_spgwn")
-theme_override_font_sizes/normal_font_size = 16
-text = "Sed mattis pretium dolor. Morbi viverra, ligula in cursus varius, velit erat consectetur enim, ultricies venenatis nisi lacus nec velit. Morbi neque dolor, scelerisque a purus vestibulum, lacinia maximus libero. Aenean facilisis ligula nisl, nec rutrum augue volutpat eget. 
-"
+Vivamus vestibulum, ligula scelerisque mollis suscipit."
 fit_content = true
 
 [node name="CityDescription4" type="RichTextLabel" parent="ContractCloseUp"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 92.0
-offset_top = 299.0
+offset_top = 198.0
 offset_right = 675.0
-offset_bottom = 657.0
+offset_bottom = 665.0
 theme = ExtResource("2_spgwn")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "Destroy [b][color=34ddec]5 commercial vessels[/color][/b] belonging to the [b][color=6390ff]European Front[/color][/b].
+text = "Destroy [b]5 commercial vessels[/b] belonging to the [b][color=6390ff]European Front[/color][/b].
+
+Destroy [b]5 commercial vessels[/b] belonging to the [b][color=6390ff]European Front[/color][/b].
 
 The vessels must be [b]large or larger[/b]. 
 
@@ -393,3 +371,15 @@ Atlantic Empire: -10 Standing
 Chiara Summers: -5 Opinion
 "
 fit_content = true
+
+[node name="ContractNPCLabel" type="Label" parent="ContractCloseUp"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 820.0
+offset_top = 467.0
+offset_right = 1258.0
+offset_bottom = 558.0
+theme = ExtResource("2_spgwn")
+theme_override_font_sizes/font_size = 30
+text = "Chiara 
+Summers"
