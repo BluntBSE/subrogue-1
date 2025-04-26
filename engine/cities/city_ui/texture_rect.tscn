@@ -36,6 +36,7 @@ text = "Atlantic Empire"
 
 [node name="HeatLabel" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 773.0
 offset_top = 67.0
@@ -48,6 +49,7 @@ text = "Heat: 0%"
 
 [node name="AcclaimLabel" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 954.0
 offset_top = 67.0
@@ -69,6 +71,18 @@ theme = ExtResource("2_spgwn")
 theme_override_font_sizes/font_size = 36
 text = "NEW GIBRALTAR"
 horizontal_alignment = 1
+
+[node name="CityNameLabel2" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 820.0
+offset_top = 496.0
+offset_right = 1258.0
+offset_bottom = 587.0
+theme = ExtResource("2_spgwn")
+theme_override_font_sizes/font_size = 30
+text = "Chiara 
+Summers"
 
 [node name="MainOptions" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
@@ -183,6 +197,7 @@ text = "Military"
 
 [node name="ContractContacts" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 87.0
 offset_top = 216.0
@@ -229,6 +244,7 @@ text = "Opinion: 0 / 100"
 
 [node name="CityGreeting" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -259,5 +275,121 @@ text = "The docks of New Gibraltar are electrifying. Military vessels, luxury ya
 
 The on-again off-again independence of this tiny city state has attracted some of the most ambitious, wanted, and opportunistic people on this side of the Atlantic. It's an intoxicatinging mix, punctuated by constant smell of ozone in the air. Energy weapons are fired here. Often.
 
+"
+fit_content = true
+
+[node name="ContractCloseUp" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Container" type="BoxContainer" parent="ContractCloseUp"]
+layout_mode = 0
+offset_left = 828.0
+offset_top = 159.0
+offset_right = 1147.0
+offset_bottom = 478.0
+
+[node name="TextureRect" type="TextureRect" parent="ContractCloseUp/Container"]
+layout_mode = 2
+texture = ExtResource("4_71dqv")
+
+[node name="ContractActions" type="VBoxContainer" parent="ContractCloseUp"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 87.0
+offset_top = 710.0
+offset_right = 350.0
+offset_bottom = 914.0
+theme_override_constants/separation = -30
+
+[node name="TextureButton" type="TextureButton" parent="ContractCloseUp/ContractActions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_spgwn")
+texture_normal = ExtResource("4_ttruw")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="ContractCloseUp/ContractActions/TextureButton"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Back"
+
+[node name="TextureButton5" type="TextureButton" parent="ContractCloseUp/ContractActions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_spgwn")
+texture_normal = ExtResource("4_ttruw")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="ContractCloseUp/ContractActions/TextureButton5"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Accept"
+
+[node name="CityDescription2" type="RichTextLabel" parent="ContractCloseUp"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 823.0
+offset_top = 595.0
+offset_right = 1153.0
+offset_bottom = 1375.0
+theme = ExtResource("2_spgwn")
+theme_override_font_sizes/normal_font_size = 16
+text = "Sed mattis pretium dolor. Morbi viverra, ligula in cursus varius, velit erat consectetur enim, ultricies venenatis nisi lacus nec velit. Morbi neque dolor, scelerisque a purus vestibulum, lacinia maximus libero. Aenean facilisis ligula nisl, nec rutrum augue volutpat eget. 
+
+Vivamus vestibulum, ligula scelerisque mollis suscipit, nisl nunc accumsan ipsum, vel feugiat justo orci ac enim. "
+fit_content = true
+
+[node name="CityDescription3" type="RichTextLabel" parent="ContractCloseUp"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 92.0
+offset_top = 192.0
+offset_right = 675.0
+offset_bottom = 284.0
+theme = ExtResource("2_spgwn")
+theme_override_font_sizes/normal_font_size = 16
+text = "Sed mattis pretium dolor. Morbi viverra, ligula in cursus varius, velit erat consectetur enim, ultricies venenatis nisi lacus nec velit. Morbi neque dolor, scelerisque a purus vestibulum, lacinia maximus libero. Aenean facilisis ligula nisl, nec rutrum augue volutpat eget. 
+"
+fit_content = true
+
+[node name="CityDescription4" type="RichTextLabel" parent="ContractCloseUp"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 92.0
+offset_top = 299.0
+offset_right = 675.0
+offset_bottom = 657.0
+theme = ExtResource("2_spgwn")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Destroy [b][color=34ddec]5 commercial vessels[/color][/b] belonging to the [b][color=6390ff]European Front[/color][/b].
+
+The vessels must be [b]large or larger[/b]. 
+
+It does not matter if you are detected during this mission.
+
+Complete the mission within [b]20 days [/b].
+
+[b]ADVANCE[/b]: 
+$6,000,000
+
+[b]ON COMPLETION[/b]:
+$20,000,000
+
+[b]ON FAILURE[/b]:
+Atlantic Empire: -10 Standing
+Chiara Summers: -5 Opinion
 "
 fit_content = true
