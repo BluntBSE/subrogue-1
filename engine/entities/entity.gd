@@ -33,7 +33,11 @@ var height:float = GlobalConst.height; #Given that the planet has a known radius
 signal died
 var unpacked := false
 
-
+#OPTIMIZATIONS: set linear velocity only once then don't update it unless the entity has reached a node or must respond
+#Maybe height fixes and stuff occur less often if the entity is not visible to a player
+#Spawn entity at node occasionally takes a long time for som ereason
+#EntityDebugger2D also takes time durnig these stalls
+#Rads from position is a bit heavy
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -88,7 +92,7 @@ func _physics_process(delta: float) -> void:
         if controller.player.is_multiplayer_authority():
             fix_height()
             fix_rotation()
-            update_coords()
+            #update_coords()
             move_to_next()
             check_reached_waypoint()
             spotlight.look_at(self.position)
@@ -99,7 +103,7 @@ func _physics_process(delta: float) -> void:
             #Will this work on single player? I tried to make this the case, but if experiencing issues, check this
             fix_height()
             fix_rotation()
-            update_coords()
+            #update_coords()
             move_to_next()
             check_reached_waypoint()
             spotlight.look_at(self.position)           
@@ -108,6 +112,9 @@ func _physics_process(delta: float) -> void:
 
 
 func update_coords()->void:
+    #This function specifically can always go on its own thread I think. 
+    #Also tbh do we even...use this at any point? I think we could just get the coordinates whenever
+    #We actually want to interrogate them.
     var pos_dict := GlobeHelpers.rads_from_position(position)
     azimuth = pos_dict["azimuth"]
     polar = pos_dict["polar"]
