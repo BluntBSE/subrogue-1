@@ -316,6 +316,7 @@ skeleton = NodePath("../../Spotlight")
 [node name="Spotlight" type="SpotLight3D" parent="EntityRender"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.02185)
+visible = false
 light_color = Color(0.133333, 1, 1, 1)
 light_energy = 2.0
 light_cull_mask = 4293918721

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="7_nwwe3"]
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="8_fq2vg"]
 [ext_resource type="Texture2D" uid="uid://c3j3ua0ninil2" path="res://assets/UI/white_buttons/PCMainButtonNormalWhiteT02_filled.png" id="9_q7i7m"]
-[ext_resource type="PackedScene" uid="uid://b6wq3ox1h0lcj" path="res://engine/cities/city_ui/texture_rect.tscn" id="10_558vm"]
+[ext_resource type="PackedScene" uid="uid://b6wq3ox1h0lcj" path="res://engine/cities/city_ui/city_ui.tscn" id="10_558vm"]
 [ext_resource type="Script" uid="uid://b1e3glbgg7wdy" path="res://engine/player_ui/time_manager.gd" id="11_oh4je"]
 [ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="12_ljsgx"]
 [ext_resource type="Texture2D" uid="uid://edgpj510s3iu" path="res://assets/UI/blue_icons/ArrowLeftIconBlue.png" id="13_itjk8"]
@@ -753,6 +753,7 @@ offset_right = 343.0
 offset_bottom = 546.0
 
 [node name="CityUIRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -766,6 +767,7 @@ offset_bottom = 1086.0
 color = Color(0, 0, 0, 0.741176)
 
 [node name="CityUI" parent="UICanvas/PlayerUIRoot/CityUIRoot" instance=ExtResource("10_558vm")]
+visible = false
 layout_mode = 0
 offset_left = 362.0
 offset_top = 106.0
@@ -2402,7 +2404,6 @@ offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
 
 [node name="ScreenspaceFilters" type="Control" parent="UICanvas/PlayerUIRoot"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
