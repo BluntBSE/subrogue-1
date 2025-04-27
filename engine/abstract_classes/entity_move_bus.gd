@@ -56,7 +56,7 @@ func purge_old_waypoints():
         
         
 
-
+"""
 func path_between_nodes(point_a: NavNode, point_b: NavNode, network: Node3D) -> Array:
     var open_set = []
     var came_from = {}
@@ -80,6 +80,33 @@ func path_between_nodes(point_a: NavNode, point_b: NavNode, network: Node3D) -> 
                 cost_so_far[neighbor] = new_cost
                 open_set.append({"cost": new_cost, "node": neighbor})
                 came_from[neighbor] = current
+    
+    return reconstruct_path(came_from, point_a, point_b)
+"""
+
+func path_between_nodes(point_a: NavNode, point_b: NavNode, network: Node3D) -> Array:
+    var open_set = PriorityQueue.new()
+    var came_from = {}
+    var cost_so_far = {}
+    
+    # Add the starting node to the open set with a cost of 0
+    open_set.push(point_a, 0)
+    cost_so_far[point_a] = 0
+    
+    while not open_set.is_empty():
+        # Get the node with the lowest cost
+        var current = open_set.pop()
+        
+        if current == point_b:
+            break
+        
+        for neighbor in current.neighbors:
+            var new_cost = cost_so_far[current] + (current.position - neighbor.position).length()
+            
+            if not cost_so_far.has(neighbor) or new_cost < cost_so_far[neighbor]:
+                cost_so_far[neighbor] = new_cost
+                came_from[neighbor] = current
+                open_set.push(neighbor, new_cost)
     
     return reconstruct_path(came_from, point_a, point_b)
 
