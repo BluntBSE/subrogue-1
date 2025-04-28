@@ -45,7 +45,6 @@ func play_straight(sound_id:String, category:String="game", vol:float = 0.0)->vo
     queue.append({"sound_id":sound_id, "modulation":"none", "category":category, "vol": vol})
     
 func stop_sound_by_id(sound_id:String)->void:
-    print("Stop sound by ID was called with", sound_id)
     for sound:Dictionary in in_use:
         if sound["sound_id"] == sound_id:
             var player:AudioStreamPlayer = sound.player

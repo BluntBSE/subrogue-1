@@ -37,7 +37,7 @@ func add_do(command:Command)->void:
         head += 1
         just_did.emit(command)
     elif queue.size() == 0:
-        print("Added to empty queue")
+        
         queue.append(command)
         command.do()
         head = 0
@@ -52,11 +52,8 @@ func add_do(command:Command)->void:
         
 
 func undo()->void:
-    print("Undo called with", queue, "head at", head)
-    print(queue.size())
     if queue.size() > 0:
         if head>0:
-            print("Event queue bigger than 0, reverted head")
             var q_command:Command = queue[head]
             q_command.undo()
             head -= 1
@@ -64,12 +61,10 @@ func undo()->void:
         else:
             var q_command:Command = queue[head]
             q_command.undo()
-            print("Undid with a single queue")
             just_undid.emit(q_command)
             queue = []
     else:
-        print("nothing in queue")
-
+        pass
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass # Replace with function body.

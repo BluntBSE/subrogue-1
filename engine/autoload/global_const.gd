@@ -81,25 +81,17 @@ func attenuate_sound(volume: float, frequency: float, distance: float) -> float:
     var f_att_mod = frequency/base_frequency 
     var v_att_mod = volume/base_volume
     var attenuation_rate = base_attenuation_rate * f_att_mod * v_att_mod
-    #print("New attenuation rate is ", attenuation_rate)
     
-    # Calculate the total attenuation
     var total_attenuation = attenuation_rate * distance
-    #print("Total attenuation was ", total_attenuation)
     
-    # Calculate the final volume at the given distance
     var final_volume = volume + total_attenuation
     
-   # print("final volume for ", volume, " pitch ", frequency, "dist ", distance)
-    #print(final_volume)
     return final_volume
 
 
 func is_layer_player(_int:int)->bool:
     if _int > layers.PLANET:
-        print("INT WAS ", _int, "WHICH IS GREATER THAN", layers.PLANET)
         if _int < layers.FACTION_1:
-            print("INT WAS ", _int, "WHICH IS LESS THAN", layers.FACTION_1)
             return true
         else:
             return false

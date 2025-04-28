@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CityDef" load_steps=3 format=3 uid="uid://bo35w3ffcc3f1"]
+
+[ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="1_f4qqj"]
+[ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_frc4d"]
+
+[resource]
+script = ExtResource("1_f4qqj")
+city_name = "New Gibraltar"
+city_greeting = "The docks of New Gibraltar are electrifying. Military vessels, luxury yachts, and cruise ships form an unlikely crowd as they jostle to enter the Mediterranean. Wild-eyed patriots preach a return to independence, and perfumed businesspeople in the \"defense industry\" offer drinks to every captain coming ashore.
+
+The on-again off-again independence of this tiny city state has attracted some of the most ambitious, wanted, and opportunistic people on this side of the Atlantic. It's an intoxicatinging mix, punctuated by constant smell of ozone in the air. Energy weapons are fired here. Often.
+
+"
+city_portrait = ExtResource("1_frc4d")
+metadata/_custom_type_script = "uid://b8owuv8kc08ga"

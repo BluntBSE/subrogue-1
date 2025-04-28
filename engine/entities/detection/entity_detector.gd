@@ -17,18 +17,33 @@ var local_entities = []#Used for situations where we want to think about what th
 var known_signals = [] 
 var sigmap = {} # {entity rigid object as key: signalpopup} Signals match to the array below, which we for updating those independently.
 var archive_map = {}
+
+
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     if entity is Munition:
         #This means that the detector (for now) is totally subordinate to its parent.
         #Bind to the detection node of the originating entity
         detection_parent = entity.fired_from.detector
-    pass # Replace with function body.
 
+
+var poll_elapsed = 0.0
 func _process(delta: float) -> void:
     #DEBUG: RIGHT NOW ONLY PLAYERS CAN DETECT. THAT"S NOT WHAT WE WANT IN THE END.
-        if entity.is_player == true:
-         poll_entities()
+    poll_elapsed += delta
+    #PROPOSED OVERHAUL FOR WHEN WE NEED TO OPTIMIZE:
+    #You can't make signal nodes from a separate thread, but you could, once a signal is created,
+    #Have that signal update itself on a new thread. That means moving the polling logic from the detector, here,
+    #To the signalpopup, with a little duplication between them (the detector must run the check once. The sigobj must run it constantly
+    #Until we get to the trailer, though, we'll do this very ugly following:
+    if entity.is_player == true:
+        if poll_elapsed >= 0.25:
+                poll_elapsed = 0.0
+                poll_entities()
+  
 
 
 func is_already_tracked(_entity:Entity, entity_list:Array)->bool:
@@ -119,6 +134,7 @@ func poll_entities():
                     sigmap[dict.entity].disable()
                     archive_map[dict.entity] = sigmap[dict.entity]
                     sigmap.erase(dict.entity)
+ 
             # Update the signal object with the highest certainty
             if max_certainty > 0.0:
                 if !sigmap.has(dict.entity):
@@ -179,3 +195,11 @@ func handle_tracked_object_died(_entity:Entity)->void:
             tracked_entities.erase(dict)
     pass
     
+
+
+func _on_detection_area_body_exited(body: Entity) -> void:
+    for dict in tracked_entities:
+        if dict.entity == body:
+            body.died.disconnect(handle_tracked_object_died)
+            tracked_entities.erase(dict)
+    pass # Replace with function body.

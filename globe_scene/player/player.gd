@@ -44,7 +44,6 @@ func determine_spawn_point()->Node3D:
     return null
     
 func set_faction_ids():
-    print("Player set faction ID")
     #Override the faction version of this to do nothing because players are set up at the very, very, beginning by the globe scene.
     pass
 

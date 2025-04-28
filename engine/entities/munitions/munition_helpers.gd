@@ -3,7 +3,6 @@ class_name MunitionHelpers
 static func munition_by_id(id: String) -> Munition:
     var new_munition: Munition = preload("res://engine/entities/munitions/munition_entity.tscn").instantiate()
     var munitions_data = GlobalConst.munitions_lib
-    print("Loading by string, id", id)
     var munition_data = munitions_data.get(id)
     
     new_munition.id = munition_data.id
@@ -24,6 +23,5 @@ static func munition_by_id(id: String) -> Munition:
     new_munition.fuel_remaining = new_munition.fuel_max
     new_munition.current_depth = munition_data.current_depth
     
-    print("NEW MUNITION IS, ", new_munition)
     
     return new_munition

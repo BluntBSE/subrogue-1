@@ -26,7 +26,6 @@ func _process(_delta: float) -> void:
 
 
 func fix_height()->void:
-    print("Hello from city height")
     #The  entity should always be 5 above the tangential surface of the anchor.
     #If tne anchor has a radius of 100m, the entity shall sit at 100.25, but not otherwise modify its position.
     #A higher height will be more permissive when colliding with the map

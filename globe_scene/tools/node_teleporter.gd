@@ -103,10 +103,8 @@ func cast_from_camera_teleportable() -> Dictionary:
 func input_clicks():
     #print("Hovered node is ", hovered_node)
     if Input.is_action_just_pressed("editor_apply_to"):
-        print("Received editor apply to")
         
         if hovered_node != null and selected_node == null:
-            print("Setting selected node to ", hovered_node.get_parent()) #Technically we want the parent of the rigidbody we hit.
             selected_node = hovered_node.get_parent()
             
             return
@@ -114,7 +112,6 @@ func input_clicks():
         if selected_node != null:
             selected_node.position = hovering_over.position
             selected_node.do_snap()
-            print("Would be trying to teleport", selected_node.name)
             selected_node = null
             hovered_node = null
             return

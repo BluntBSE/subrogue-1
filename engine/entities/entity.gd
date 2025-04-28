@@ -31,9 +31,14 @@ var height:float = GlobalConst.height; #Given that the planet has a known radius
 @onready var sonar_node:SonarNode = %SonarNode
 @onready var notifications:Notifications = %Notifications
 signal died
+signal removed #For docking, putting into timeout, etc. Like died, but doesn't trigger death counters etc.
 var unpacked := false
 
-
+#OPTIMIZATIONS: set linear velocity only once then don't update it unless the entity has reached a node or must respond
+#Maybe height fixes and stuff occur less often if the entity is not visible to a player
+#Spawn entity at node occasionally takes a long time for som ereason
+#EntityDebugger2D also takes time durnig these stalls
+#Rads from position is a bit heavy
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -88,7 +93,7 @@ func _physics_process(delta: float) -> void:
         if controller.player.is_multiplayer_authority():
             fix_height()
             fix_rotation()
-            update_coords()
+            #update_coords()
             move_to_next()
             check_reached_waypoint()
             spotlight.look_at(self.position)
@@ -99,7 +104,7 @@ func _physics_process(delta: float) -> void:
             #Will this work on single player? I tried to make this the case, but if experiencing issues, check this
             fix_height()
             fix_rotation()
-            update_coords()
+            #update_coords()
             move_to_next()
             check_reached_waypoint()
             spotlight.look_at(self.position)           
@@ -108,6 +113,9 @@ func _physics_process(delta: float) -> void:
 
 
 func update_coords()->void:
+    #This function specifically can always go on its own thread I think. 
+    #Also tbh do we even...use this at any point? I think we could just get the coordinates whenever
+    #We actually want to interrogate them.
     var pos_dict := GlobeHelpers.rads_from_position(position)
     azimuth = pos_dict["azimuth"]
     polar = pos_dict["polar"]
@@ -228,14 +236,12 @@ func query_any_on_layer(node, layer: int) -> bool:
     
 #DEBUG INITIATLIZE MOVEMENT
 func initial_go_to_destination():
-        print("Initial path was ", move_bus.find_closest_node())
         var debug_dest = behavior.destination_node
-        print("Initial debug_dest was, ", debug_dest)
         var path = move_bus.path_between_nodes(move_bus.find_closest_node(), behavior.destination_node, get_tree().root.find_child("NavNodes", true, false))
         move_bus.waypoints_from_nodes(path)
-
+        
+#TODO: This just deletes ships that get to their goal. Eventually they might need more persistent docking or a signal emission relevant to missions.
 func check_at_destination():
-    print("Checking if we reached the destination", behavior.destination_node.name)
     # Get the world and its direct space state for physics queries
     var space_state = get_world_3d().direct_space_state
 
@@ -249,11 +255,9 @@ func check_at_destination():
     query.collide_with_areas = true
     # Perform the query
     var results = space_state.intersect_shape(query)
-    print("ALL RESULTS: ", results)
 
     # Check if any of the results are entities
     for result in results:
-        print("DESTINATION RESULT ", result)
         if result.collider == behavior.destination_node:
             queue_free()
             return true

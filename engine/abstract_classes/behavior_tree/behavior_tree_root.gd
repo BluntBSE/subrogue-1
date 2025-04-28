@@ -1,6 +1,5 @@
 @icon("res://engine/abstract_classes/behavior_tree/icons/tree.svg")
 extends BehaviorTree
-
 class_name BehaviorTreeRoot
 
 #Why?
@@ -13,7 +12,7 @@ class_name BehaviorTreeRoot
 
 func _ready():
     if self.get_child_count() != 1:
-        print("Behavior tree error: Root should only have one child")
+        #"Behavior tree error: Root should only have one child"
         disable()
         return
 

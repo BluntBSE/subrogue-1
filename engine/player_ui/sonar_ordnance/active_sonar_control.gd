@@ -21,7 +21,6 @@ func _ready() -> void:
 
 
 func unpack() -> void:
-    print("Ready from ActiveSonarControl")
     #Just to get the sonar arms in the right spot
     set_angle_1(340.0)
     set_angle_2(20.0)
@@ -41,7 +40,6 @@ func get_angle_diff(a1: float, a2: float) -> float:  #expecting degrees, not rad
 
 
 func set_angle_1(deg: float) -> void:  #Expects degree, not rad
-    print("Set angle 1 called with", deg)
     angle_1 = deg
     if angle_1 > 360.0:
         inc /= 360.0
@@ -55,7 +53,6 @@ func set_angle_1(deg: float) -> void:  #Expects degree, not rad
 
 
 func set_angle_2(deg: float) -> void:  #Expects degree, not rad
-    print("Set angle 2 called with ", deg)
     angle_2 = deg
     if angle_2 > 360.0:
         inc /= 360.0
@@ -106,7 +103,6 @@ func _on_active_sonar_knob_two_button_up() -> void:
 
 
 func _on_ping_button_button_up() -> void:
-    print("Ping button pressed!")
     ping_requested.emit(angle_1, angle_2)
     SoundManager.play("sonar_1")
     pass  # Replace with function body.
