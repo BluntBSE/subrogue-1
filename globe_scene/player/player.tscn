@@ -655,7 +655,7 @@ texture_normal = ExtResource("7_nwwe3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface/TextureButton3"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface/TextureButton3" groups=["dock_silenced_UI"]]
 layout_mode = 2
 offset_left = 21.0
 offset_top = 10.0
@@ -673,7 +673,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 2
 
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface2"]
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface2" groups=["dock_silenced_UI"]]
 clip_contents = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -702,7 +702,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 2
 
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface3"]
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface3" groups=["dock_silenced_UI"]]
 clip_contents = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -751,28 +751,6 @@ offset_left = 303.0
 offset_top = 506.0
 offset_right = 343.0
 offset_bottom = 546.0
-
-[node name="CityUIRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="UICanvas/PlayerUIRoot/CityUIRoot"]
-z_index = 800
-layout_mode = 0
-offset_right = 1932.0
-offset_bottom = 1086.0
-color = Color(0, 0, 0, 0.741176)
-
-[node name="CityUI" parent="UICanvas/PlayerUIRoot/CityUIRoot" instance=ExtResource("10_558vm")]
-visible = false
-layout_mode = 0
-offset_left = 362.0
-offset_top = 106.0
-offset_right = 1642.0
-offset_bottom = 1006.0
 
 [node name="TimeManager" type="Label" parent="UICanvas/PlayerUIRoot"]
 unique_name_in_owner = true
@@ -1203,7 +1181,7 @@ theme_override_font_sizes/font_size = 10
 text = "Crawl, Swim, Surface"
 horizontal_alignment = 1
 
-[node name="PingButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup"]
+[node name="PingButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup" groups=["dock_silenced_UI"]]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(50, 40)
@@ -1545,7 +1523,7 @@ theme_override_font_sizes/font_size = 10
 text = "Crawl, Swim, Surface"
 horizontal_alignment = 1
 
-[node name="ClearButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup"]
+[node name="ClearButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup" groups=["dock_silenced_UI"]]
 clip_contents = true
 custom_minimum_size = Vector2(50, 40)
 layout_mode = 1
@@ -1575,8 +1553,9 @@ offset_right = -26.2941
 offset_bottom = 1.0
 theme = ExtResource("8_fq2vg")
 text = "Clear"
+metadata/_edit_use_anchors_ = true
 
-[node name="UpdateButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup"]
+[node name="UpdateButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup" groups=["dock_silenced_UI"]]
 clip_contents = true
 custom_minimum_size = Vector2(50, 40)
 layout_mode = 1
@@ -1607,6 +1586,7 @@ offset_bottom = 20.0
 theme = ExtResource("8_fq2vg")
 text = "Update
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="OrdnancePanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
 anchors_preset = 0
@@ -1906,7 +1886,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "Strike Depth: C"
 
-[node name="ConfigureButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup"]
+[node name="ConfigureButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup" groups=["dock_silenced_UI"]]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(50, 40)
@@ -1927,7 +1907,7 @@ ignore_texture_size = true
 stretch_mode = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/ConfigureButton"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/ConfigureButton" groups=["dock_silenced_UI"]]
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 0.75
@@ -1937,8 +1917,9 @@ offset_right = -27.0
 offset_bottom = 1.0
 theme = ExtResource("8_fq2vg")
 text = "Configure"
+metadata/_edit_use_anchors_ = true
 
-[node name="LaunchButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup"]
+[node name="LaunchButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup" groups=["dock_silenced_UI"]]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(50, 40)
@@ -1969,6 +1950,7 @@ offset_right = -27.0
 offset_bottom = 1.0
 theme = ExtResource("8_fq2vg")
 text = "Launch"
+metadata/_edit_use_anchors_ = true
 
 [node name="SonarOrdnancePlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
 unique_name_in_owner = true
@@ -2445,6 +2427,20 @@ offset_right = 462.0
 offset_bottom = 29.0
 theme_override_fonts/font = ExtResource("29_ai432")
 text = "Free Look On - SPACE to return"
+
+[node name="CityUIRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CityUI" parent="UICanvas/PlayerUIRoot/CityUIRoot" instance=ExtResource("10_558vm")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 900.0
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="UICanvas"]
 modulate = Color(1, 1, 1, 0.4)

@@ -6,6 +6,7 @@ class_name City
 var height:float = 100.25 #We can't access GlobalConst in the editor so, 100.25
 @export var snap:bool = false
 @export var faction:Faction
+@onready var interaction:CityInteraction = %CityInteraction
 
 func _process(_delta: float) -> void:
     if snap == true:

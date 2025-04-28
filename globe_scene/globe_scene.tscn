@@ -5862,6 +5862,7 @@ script = ExtResource("20_vycny")
 
 [node name="DockingArea" type="Area3D" parent="Cities/CityNode/CityInteraction"]
 unique_name_in_owner = true
+visible = false
 collision_layer = 2
 
 [node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/CityNode/CityInteraction/DockingArea"]
@@ -5915,7 +5916,7 @@ transform = Transform3D(1, 0, -1.86265e-09, 0, 1, 2.40107e-09, 0, 2.09548e-09, 1
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/CityNode/CityInteraction/InteractionBox1"]
-transform = Transform3D(1, 4.65661e-10, -5.58794e-09, 4.65661e-10, 1, 2.40834e-09, 0, 1.69894e-08, 1, 0, 1.51657, 0.344551)
+transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
 [node name="Miami3" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]

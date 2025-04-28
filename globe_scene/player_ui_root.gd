@@ -95,11 +95,15 @@ func handle_can_dock(b:bool):
     print("Handle can dock fired")
     if b == true:
         print("b was true")
-        UIHelpers.recursively_modulate_controls(self, Color("858585"), "TextureButton")
+        UIHelpers.recursively_modulate_group(self, "dock_silenced_UI", Color("474747"))
     if b == false:
         print("b was false")
-        UIHelpers.recursively_modulate_controls(self, Color("ffffff"), "TextureButton")
-
+        UIHelpers.recursively_modulate_group(self, "dock_silenced_UI", Color("ffffff"))
+        
+func handle_opened_city(city:City):
+    #For now...
+    %CityUIRoot.visible = true
+    pass
 
 func handle_docked(b:bool):
     pass

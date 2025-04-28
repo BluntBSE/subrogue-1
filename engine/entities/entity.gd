@@ -2,6 +2,7 @@ extends RigidBody3D
 class_name Entity
 @export var is_player:bool = true
 var can_dock:bool = false
+var can_dock_at:City
 var played_by:Player
 var controlled_by #NPC Factions?
 @export var given_name:String
@@ -265,24 +266,28 @@ func check_at_destination():
     # Check if any of the results are entities
     for result in results:
         if result.collider == behavior.destination_node:
+            died.emit(self) #Obviously this is just for debug purposes, a docked signal would be better so we aren't tracking all docks as deaths
             queue_free()
             return true
     return false
 
 
-func handle_in_docking_area():
+func handle_in_docking_area(city:City):
     if can_dock == false: #This check is necessary because the 3d area you check is a spherical plane.
         #It's nontrivial to check for total "immersion" in the 3D area. This saves you a headache.
-        print(name, "in docking")
-        can_dock = true
-        can_dock_sig.emit(true)
+        if played_by != null:
+            can_dock = true
+            can_dock_at = city
+            can_dock_sig.emit(true)
+            city.interaction.opened_city.connect(played_by.UI.handle_opened_city)
 
 func handle_leave_docking_area():
     if can_dock == true:
-        print(name, "left docking")
-        can_dock = false
-        can_dock_sig.emit(false)
-        
+        if played_by != null:
+            can_dock = false
+            can_dock_sig.emit(false)
+            can_dock_at.interaction.opened_city.disconnect(played_by.UI.handle_opened_city)
+            can_dock_at = null
 
 func handle_fully_docked():
     pass
