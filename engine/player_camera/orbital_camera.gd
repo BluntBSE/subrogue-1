@@ -11,6 +11,8 @@ class_name OrbitalCamera
 @export var zoom_speed := 10.0 #Units ('meters') away from sphere
 @export var azimuth := 0.0: #Radians
     set(value):
+        var dstr0:String =  "azimuth was previously " + str(azimuth)
+        dh.dprint(db, self, dstr0)
         var dstr:String =  "azimuth is now " + str(value)
         dh.dprint(db, self, dstr)
         azimuth = value
@@ -22,16 +24,19 @@ class_name OrbitalCamera
 var destination:Vector3:
     set(value):
         var dstr:String =  "destination is now" + str(value)
-        dh.dprint(db,self, dstr)
+       # dh.dprint(db,self, dstr)
         destination = value
-var db:bool = false
+var db:bool = true
 var player:Player
 var active_entity:Entity
-var follow_cam:bool = true:
+var follow_cam:bool = false:
     set(value):
         print("Custom follow cam setter emitted signal")
         follow_cam = value
         freelook.emit(!value)
+        if value == false:
+            polar = GlobeHelpers.rads_from_position(position).polar
+            azimuth = GlobeHelpers.rads_from_position(position).azimuth
 
 #Self
 signal camera_moved
@@ -63,6 +68,7 @@ var noise_map := FastNoiseLite.new()
 
 var noise_y = 0
 var unpacked = false
+var accounted_for_freelook = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass
@@ -158,6 +164,7 @@ func _unhandled_input(event: InputEvent) -> void:
         release_observed.emit()
         
     if event is InputEventKey and event.keycode in [KEY_W, KEY_A, KEY_S, KEY_D]:
+
         follow_cam = false
         
     if event is InputEventKey and event.keycode == KEY_SPACE:
@@ -202,22 +209,19 @@ func cast_from_camera()->Dictionary:
     return hovering_over
 
 
-func move_in_orbit()->Vector3:
+func move_in_orbit() -> Vector3:
+    # Calculate the camera's position in spherical coordinates relative to the anchor
+    var x_new = anchor.position.x + (distance * cos(azimuth) * cos(polar))
+    var y_new = anchor.position.y + (distance * sin(polar))
+    var z_new = anchor.position.z + (distance * sin(azimuth) * cos(polar))
 
-    
-    #XZ is the azimuthal plane
-    #XY and ZY are polar planes
-    var x_new = anchor.position.x + ( distance * sin(azimuth) * cos(polar))
-    var y_new = anchor.position.y + (distance * sin ( polar ) )
-    var z_new = anchor.position.z + ( distance * cos (azimuth) * cos(polar) )
-    var new_dest = Vector3(x_new,y_new,z_new)
-    var relative_vector = new_dest - position
-
-    
-    return new_dest
+    # Return the new position as a Vector3
+    return Vector3(x_new, y_new, z_new)
     
     
 func input_movement():
+    #Set the polar coords ot the current position.Done to handle freelook
+
     if !get_viewport().gui_get_focus_owner() == null:
         return
     var moved:bool = false
@@ -226,13 +230,13 @@ func input_movement():
         polar += move_speed
         moved = true
     if Input.is_key_label_pressed(KEY_A):
-        azimuth -= move_speed
+        azimuth += move_speed
         moved = true
     if Input.is_key_label_pressed(KEY_S):
         polar -= move_speed
         moved = true
     if Input.is_key_label_pressed(KEY_D):
-        azimuth += move_speed
+        azimuth -= move_speed
         moved = true
     if Input.is_key_label_pressed(KEY_R):
         distance -=zoom_speed
@@ -250,8 +254,8 @@ func input_movement():
 func initialize_angles() -> void:
     #x = sin(yaw) * cos(pitch)
     #y = radius * sin(pitch) 
-    polar = asin(position.y/distance)
-    azimuth = asin(position.x/cos(polar)) #Why does this do what I want when rads from position is different?
+    polar = GlobeHelpers.rads_from_position(position).polar
+    azimuth = GlobeHelpers.rads_from_position(position).azimuth
     #z = cos(yaw) * cos(pitch)
 
 func emit_position()->void:

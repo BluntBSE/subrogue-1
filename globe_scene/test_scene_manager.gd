@@ -22,6 +22,7 @@ var spawn_check_time = 0.0
 
 
 func _process(_delta:float)->void:
+    return
     spawn_check_time += _delta
     if spawn_check_time >= 2.0:
         repopulate_entities()
