@@ -103,29 +103,24 @@ func _process(delta: float) -> void:
         
     if Engine.is_editor_hint() and not enable_debug_movement:
         return
-            
     if follow_cam and active_entity:
         # Follow the active entity
         var target_position = active_entity.global_position
-
-        # Update polar and azimuth to match the active entity
-        polar = atan2(target_position.y - anchor.position.y, distance)
-        azimuth = atan2(target_position.x - anchor.position.x, target_position.z - anchor.position.z)
+        var target_vector = (active_entity.global_position - anchor.global_position).normalized() #anchor is 0,0,0, but for completeness...
+        target_vector = target_vector * distance
 
         # Calculate the camera's position based on the active entity's polar coordinates
-        var x_new = anchor.position.x + (distance * sin(azimuth) * cos(polar))
-        var y_new = anchor.position.y + (distance * sin(polar))
-        var z_new = anchor.position.z + (distance * cos(azimuth) * cos(polar))
-        var new_position = Vector3(x_new, y_new, z_new)
+        var new_position = target_vector
 
         # Smoothly interpolate the camera's position to the new position
         position = position.lerp(new_position, 0.1)  # Adjust the interpolation factor (0.1) as needed
+        destination = position  # Keep destination synchronized with the current position
         look_at(active_entity.position)
     else:
         # Interpolate to the destination in manual mode
         position = position.lerp(destination, 0.1)
         look_at(anchor.position)
-    
+        
     # Handle hovering and input
     hovering_over = cast_from_camera()
     var dist = anchor.position - position
