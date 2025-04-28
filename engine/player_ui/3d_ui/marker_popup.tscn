@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b1jxlcc8aq8gj" path="res://assets/UI/white_buttons/PCMainButtonHighlightedWhiteT02.png" id="4_8m4rw"]
 [ext_resource type="FontFile" uid="uid://b3pxbbyvttwq8" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Rg.otf" id="5_nmu7m"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vixht"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2p1bn"]
 
 [sub_resource type="Theme" id="Theme_ipfg0"]
 Label/colors/font_color = Color(1, 1, 1, 1)
@@ -19,7 +19,7 @@ Label/constants/shadow_offset_y = 1
 Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 46
 Label/fonts/font = ExtResource("5_nmu7m")
-Label/styles/normal = SubResource("StyleBoxEmpty_vixht")
+Label/styles/normal = SubResource("StyleBoxEmpty_2p1bn")
 
 [node name="Control" type="Control"]
 layout_mode = 3
