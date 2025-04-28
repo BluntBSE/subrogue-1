@@ -1,6 +1,7 @@
 extends RigidBody3D
 class_name Entity
 @export var is_player:bool = true
+var can_dock:bool = false
 var played_by:Player
 var controlled_by #NPC Factions?
 @export var given_name:String
@@ -30,6 +31,8 @@ var height:float = GlobalConst.height; #Given that the planet has a known radius
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
 @onready var notifications:Notifications = %Notifications
+signal can_dock_sig
+signal docked
 signal died
 signal removed #For docking, putting into timeout, etc. Like died, but doesn't trigger death counters etc.
 var unpacked := false
@@ -55,6 +58,9 @@ func unpack(type_id, _faction:Faction, with_name):
     is_player = GlobalConst.is_layer_player(_faction.faction_layer)
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
         played_by = get_parent().get_parent()
+        var player_ui:PlayerUIRoot = played_by.UI
+        can_dock_sig.connect(player_ui.handle_can_dock) #Disable most hostile actions
+        docked.connect(player_ui.handle_docked) #Disable player UI for when city interface is open
         #TODO: Replace with a name chosen by player in advance, or from a list of player sub names
         given_name = NameGenerator.generate_name()
     else:
@@ -262,3 +268,24 @@ func check_at_destination():
             queue_free()
             return true
     return false
+
+
+func handle_in_docking_area():
+    if can_dock == false: #This check is necessary because the 3d area you check is a spherical plane.
+        #It's nontrivial to check for total "immersion" in the 3D area. This saves you a headache.
+        print(name, "in docking")
+        can_dock = true
+        can_dock_sig.emit(true)
+
+func handle_leave_docking_area():
+    if can_dock == true:
+        print(name, "left docking")
+        can_dock = false
+        can_dock_sig.emit(false)
+        
+
+func handle_fully_docked():
+    pass
+    
+func handle_left_docked():
+    pass

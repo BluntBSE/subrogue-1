@@ -88,6 +88,21 @@ func _physics_process(delta: float) -> void:
 func handle_free_look(state:bool):
     %FreeLookRect.visible = state
 
+#can_dock_sig.connect(player_ui.handle_can_dock) #Disable most hostile actions
+#docked.connect(player_ui.handle_docked) #Disable player UI for when city interface is open
+
+func handle_can_dock(b:bool):
+    print("Handle can dock fired")
+    if b == true:
+        print("b was true")
+        UIHelpers.recursively_modulate_controls(self, Color("858585"), "TextureButton")
+    if b == false:
+        print("b was false")
+        UIHelpers.recursively_modulate_controls(self, Color("ffffff"), "TextureButton")
+
+
+func handle_docked(b:bool):
+    pass
 
 func handle_launch(_args: Dictionary) -> void:
     var glitch_mask: ColorRect = get_node("ScreenspaceFilters/FilterMaskGlitch")
