@@ -144,31 +144,23 @@ func cast_from_camera_nav() -> Dictionary:
 
 func input_clicks():
     if Input.is_action_just_pressed("editor_apply_to"):
-        print("Received editor apply to")
         
         if hovered_node != null and selected_node == null:
-            print("Setting selected node to ", hovered_node)
             selected_node = hovered_node
             return
         
         if hovered_node != null and selected_node != null:
             #Do linking
-            print("Linking ", selected_node, " with ", hovered_node)
             selected_node.add_link(hovered_node)
             selected_node = null
             hovered_node = null
             return
         
-        print("What in the world")
         print(hovering_over)
         if hovering_over != {}:
-            print("Non null hover target, should be drawing")
             selected_node = null
             hovered_node = null
-            print("SELECTED", selected_node)
-            print("HOVERED", hovered_node)
             if Input.is_key_label_pressed(KEY_SPACE): #Auto link mode
-                print("MERP")
                 if hovering_over.collider.name == draw_on.name:
                     var click_position = hovering_over.position
                 #var click_normal = hovering_over.normal

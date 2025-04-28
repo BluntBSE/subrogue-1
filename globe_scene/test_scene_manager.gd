@@ -18,11 +18,12 @@ var military_ids
 var faction_ids = ["SaharanFreeLeague", "AtlanticEmpire", "EuropeanFront", "UnitedAmericanRepublics"]
 
 var spawn_check_time = 0.0
-func _process(_delta:float)->void:
 
+
+
+func _process(_delta:float)->void:
     spawn_check_time += _delta
     if spawn_check_time >= 2.0:
-        print("10s elapsed. Checking for opportunities to make new entities")
         repopulate_entities()
         spawn_check_time = 0.0
     pass
@@ -33,11 +34,13 @@ func repopulate_entities():
     pass
 
 
+func _physics_process(_delta:float)->void:
+    pass
+
 
 func new_commercial_entity():
     # It might be better to remove the sanity checks from this function and move them a level up. 
 
-    print("Generating new commercial entity")
 
     # Select a random appropriate id
     var id_modulo = commercial_ids.size() - 1
@@ -50,7 +53,6 @@ func new_commercial_entity():
     
     # Select a random valid navnode to spawn at
     if spawn_navnodes.size() == 0:
-        print("No valid navnodes to spawn at.")
         return
     var spawn_idx
     if spawn_navnodes.size() == 1:
@@ -67,7 +69,6 @@ func new_commercial_entity():
     
     # Select a random destination. Currently every valid spawn is a valid destination.
     if valid_destinations.size() == 0:
-        print("No valid destinations available.")
         return
     var dest_idx
     if valid_destinations.size() == 1:
@@ -87,11 +88,9 @@ func new_commercial_entity():
         f_idx = randi() % (faction_ids.size() - 1)
     var f_id = faction_ids[f_idx]
     var faction = get_tree().root.find_child("Factions", true, false).get_node(f_id)
-    print("Faction node is ", faction.name)
     
     if no_entities_near_node(spawn_at, 5.0) == false:
         # If there are entities near where we would spawn, pass this attempt.
-        print("Did not generate new entity at ", spawn_at.name, "because entities were found nearby")
         return
     
     var entity = EntityHelpers.spawn_entity_at_node(spawn_at, id, faction)
@@ -124,7 +123,6 @@ func no_entities_near_node(node: NavNode, distance: float) -> bool:
 func configure_behavior(entity:Entity, destination_id:String)->void:
     #For now, this only sets a destination for our critter
     var dest:NavNode = entity.get_tree().root.find_child(destination_id, true, false)
-    print("CONFIGURE BEHAVIOR ASSIGNED A DESTINATION NODE OF", dest, "WITH THE ID ", destination_id)
     entity.behavior.destination_node = dest
     entity.initial_go_to_destination()
     pass

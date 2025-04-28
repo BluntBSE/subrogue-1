@@ -32,7 +32,6 @@ func _unhandled_input(event:InputEvent):
     if selected == true and hovered == false: #AND THIS SIGNAL IS NOT CURRRENTLY WHAT THE PLAYERS LOOKING AT? CHRIST ALMIGHTY
         if event is InputEventMouseButton:
              if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
-                print("Wtf")
                 deselect()
     
         
@@ -42,7 +41,6 @@ func _unhandled_input(event:InputEvent):
     
 
 func update_mesh_visibilities(layer:int, val:bool):
-    print(get_parent().name, "Updated mesh visibilities to ", layer, val)
     depth_mesh.set_layer_mask_value(layer, val)
     sonar_mesh.set_layer_mask_value(layer,val)
     for child in get_children():
@@ -126,7 +124,6 @@ func scale_with_fov():
 
 func select(observer:OrbitalCamera): #Usually OrbitalCamera though
     observed_by = observer
-    print("Select triggered")
     selected = true
     released_by_observer = false
     observer.release_observed.connect(handle_release_observed)
@@ -135,12 +132,10 @@ func select(observer:OrbitalCamera): #Usually OrbitalCamera though
     was_selected.emit(entity)
 
 func deselect():
-    print("Deselect triggered")
     selected = false
     released_by_observer = true
     
 func handle_deselection():
-    print("Shouldn't see this")
     deselect()
     
 func handle_release_observed():

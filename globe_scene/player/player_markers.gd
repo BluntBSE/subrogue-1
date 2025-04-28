@@ -31,7 +31,6 @@ func clear_contexts()->void:
         marker.queue_free()           
 
 func handle_launch(_args:Dictionary)->void:
-    print("Player markers received a launch command. Closing context menus.")
     #Concerned with WHICH context menu launched, this only handles closing it.
     clear_contexts()
     pass

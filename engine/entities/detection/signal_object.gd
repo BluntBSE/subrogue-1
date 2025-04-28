@@ -39,7 +39,6 @@ func offset_self():
 func new_offset_position()->Vector3:
     #After the initial detection, this is used to determine where the signal ought to lerp to
     var km_offset = lerp(200.0,0.0,(certainty/100) )
-    #print("KM Offset calculated as ", km_offset, " with a certainty of ", certainty)
     anchor = detecting_object.anchor
     
     # Calculate a random tangential direction
@@ -80,7 +79,6 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound:Sound, _ce
         child.set_layer_mask_value(_detecting_object.faction,true)
     for child in %CertaintyRadius.get_children():
         child.set_layer_mask_value(_detecting_object.faction,true)
-    print("Unpack called with ", _detecting_object, _detected_object)
     last_sound = _sound
     certainty = _certainty
     detected_object = _detected_object
@@ -126,5 +124,4 @@ func _process(delta:float)->void:
     pass
 
 func handle_died(_body:Entity)->void:
-    print("Signal Scene is handling target died")
     queue_free()

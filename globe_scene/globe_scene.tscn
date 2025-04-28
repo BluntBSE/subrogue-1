@@ -6147,7 +6147,6 @@ texture = ExtResource("35_woink")
 
 [node name="NodeTeleporter" type="Node3D" parent="Tools"]
 script = ExtResource("17_ni20c")
-active = true
 
 [node name="GeometryDrawer" type="Node3D" parent="Tools" node_paths=PackedStringArray("draw_on")]
 script = ExtResource("11_6u1es")

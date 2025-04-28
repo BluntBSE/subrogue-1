@@ -6,7 +6,6 @@ class_name CommercialVesselType
 
 
 func _init()->void:
-    print("Hello from commercialvessel type")
     behavior_order = [
         EntityBehavior.core_behaviors.MoveToDestination,
         EntityBehavior.core_behaviors.FleeThreat, #If you want to implement bribes, they go in flee

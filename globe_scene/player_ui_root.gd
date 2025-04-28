@@ -18,7 +18,6 @@ func _ready() -> void:
 
 
 func unpack():
-    print("Called UI unpack")
     player = get_parent().get_parent()
     camera = player.camera  # Adjust the path to your Camera3D node
     viewport = get_viewport()  # Adjust the path to your Viewport node
@@ -45,7 +44,7 @@ func adjust_ruler(camera_pos: Vector3, _anchor: Vector3) -> void:
     pass
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
     if unpacked != true:
         return
 
@@ -87,7 +86,6 @@ func _process(delta: float) -> void:
         %RulerLabel.text = str(km) + " km"
 
 func handle_free_look(state:bool):
-    print("Hello from handle freelook")
     %FreeLookRect.visible = state
 
 

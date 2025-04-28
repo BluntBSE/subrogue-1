@@ -31,6 +31,7 @@ var height:float = GlobalConst.height; #Given that the planet has a known radius
 @onready var sonar_node:SonarNode = %SonarNode
 @onready var notifications:Notifications = %Notifications
 signal died
+signal removed #For docking, putting into timeout, etc. Like died, but doesn't trigger death counters etc.
 var unpacked := false
 
 #OPTIMIZATIONS: set linear velocity only once then don't update it unless the entity has reached a node or must respond
@@ -235,9 +236,7 @@ func query_any_on_layer(node, layer: int) -> bool:
     
 #DEBUG INITIATLIZE MOVEMENT
 func initial_go_to_destination():
-        print("Initial path was ", move_bus.find_closest_node())
         var debug_dest = behavior.destination_node
-        print("Initial debug_dest was, ", debug_dest)
         var path = move_bus.path_between_nodes(move_bus.find_closest_node(), behavior.destination_node, get_tree().root.find_child("NavNodes", true, false))
         move_bus.waypoints_from_nodes(path)
 
@@ -256,11 +255,9 @@ func check_at_destination():
     query.collide_with_areas = true
     # Perform the query
     var results = space_state.intersect_shape(query)
-    print("ALL RESULTS: ", results)
 
     # Check if any of the results are entities
     for result in results:
-        print("DESTINATION RESULT ", result)
         if result.collider == behavior.destination_node:
             queue_free()
             return true

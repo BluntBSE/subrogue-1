@@ -28,7 +28,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     #DEBUG: RIGHT NOW ONLY PLAYERS CAN DETECT. THAT"S NOT WHAT WE WANT IN THE END.
         if entity.is_player == true:
-         poll_entities()
+            return
+            poll_entities()
 
 
 func is_already_tracked(_entity:Entity, entity_list:Array)->bool:

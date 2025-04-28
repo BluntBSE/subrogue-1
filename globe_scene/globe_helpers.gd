@@ -213,7 +213,6 @@ static func game_s_to_kph(game_units_per_second: float) -> float:
     return kph
 
 static func generate_move_command(entity:Entity, target_position:Vector3, layer:int = 2, mask:int = 2) ->MoveCommand:
-    #print("MOVE COMMAND GENERATED FOR ENTITY: ", entity.name)
     var waypoint:Area3D = Area3D.new()
     var wp_collider := CollisionShape3D.new()
     var wp_shape := SphereShape3D.new() #default radius of 0.5. If we use tolerance, this might be what we assign it to.
@@ -252,7 +251,6 @@ static func generate_move_command(entity:Entity, target_position:Vector3, layer:
     return move_command
     
 static func offset_position_by_km(point: Vector3, direction: Vector3, km: float, anchor: Planet) -> Vector3:
-    print("Original position", point)
     var anchor_mesh: SphereMesh = anchor.mesh
     var sphere_radius = anchor_mesh.radius # This is 100 right now in game units
 
@@ -260,7 +258,6 @@ static func offset_position_by_km(point: Vector3, direction: Vector3, km: float,
     var arc_distance_game_units = km_to_arc_distance(km, anchor)
     
     var new_position = arc_distance_game_units * direction
-    print("New position ", new_position)
     
     
     return new_position

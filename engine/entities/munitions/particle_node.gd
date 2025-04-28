@@ -10,7 +10,6 @@ func _process(delta:float)->void:
         do_explode = false
 
 func explode() -> void:
-    print("Explode called")
     
     # Get the lifetimes of the particle systems
     var timeout_1 = %Slash.lifetime / 2

@@ -42,7 +42,6 @@ func _process(_delta:float):
 func update_handles()->void:
     #If only one handle is active, it MUST be handle 1.
     if handle_2 != null and handle_1 == null:
-        print("Invalid handle assignment in ", name)
         return
     #One-handle behavior
     if handle_2 == null:
@@ -89,7 +88,6 @@ func update_handles()->void:
         
 
 func _on_range_bar_control_max_pressed() -> void:
-    print("Rightmost handle should be active")
     handle_1_active = true
     pass # Replace with function body.
 

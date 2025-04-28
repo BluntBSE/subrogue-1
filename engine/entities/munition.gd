@@ -94,7 +94,6 @@ func seek_new_target_passive():
 
 
 func on_body_entered_check_for_impact(body):
-    print("Checked for impact")
     #Connected to collision area signal through editor
     #TODO: impact area should be a configurable at some point
     #Don't collide on your own faction
@@ -102,18 +101,15 @@ func on_body_entered_check_for_impact(body):
         #TODO:
         #Don't collide with other munitions unless you're supposed to (Not yet implemented)
         if impact_type == IMPACT_TYPES.ships:
-            print("Impact type is ships only")
             if !(body is Munition):
                 var event: EntityDied = EntityDied.new()
                 event.died = body
                 event.killed_by = self
-                print("Should have notified")
                 notifications.notify(event)
                 damage_target(body)
 
 
 func damage_target(target: Entity) -> void:
-    print("Target damaged")
     #TODO: Implement damage. Just kill for now.
     target.died.emit(target)
     var particles: ParticleNode = %Particles

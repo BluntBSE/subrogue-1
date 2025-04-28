@@ -34,7 +34,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func single_player_start():
     var peers = multiplayer.get_peers()
     peers.append(multiplayer.get_unique_id()) #Get peers alone doesnt return yourself
-    print("All peers for SPS, should be just us ", peers)
     for peer in peers:
         var player_obj = preload("res://globe_scene/player/player.tscn").instantiate()
         player_obj.set_multiplayer_authority(peer)
@@ -53,7 +52,6 @@ func multi_player_start():
         peers.append(peer)
     
 
-    print("All peers for MPS:", peers)
     for i in range(peers.size()):
         var peer = peers[i]
         var slot_str = "player_"+str(i+1) #Player 1 is 1, not 0.
