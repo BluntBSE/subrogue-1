@@ -409,3 +409,4 @@ script = ExtResource("29_j3cwe")
 [connection signal="mouse_entered" from="." to="EntityRender" method="_on_entity_mouse_entered"]
 [connection signal="mouse_exited" from="." to="EntityRender" method="_on_entity_mouse_exited"]
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_exited"]

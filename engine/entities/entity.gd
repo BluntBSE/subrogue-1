@@ -239,9 +239,9 @@ func initial_go_to_destination():
         var debug_dest = behavior.destination_node
         var path = move_bus.path_between_nodes(move_bus.find_closest_node(), behavior.destination_node, get_tree().root.find_child("NavNodes", true, false))
         move_bus.waypoints_from_nodes(path)
-
+        
+#TODO: This just deletes ships that get to their goal. Eventually they might need more persistent docking or a signal emission relevant to missions.
 func check_at_destination():
-    print("Checking if we reached the destination", behavior.destination_node.name)
     # Get the world and its direct space state for physics queries
     var space_state = get_world_3d().direct_space_state
 

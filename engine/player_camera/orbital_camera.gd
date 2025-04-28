@@ -164,8 +164,8 @@ func _unhandled_input(event: InputEvent) -> void:
         release_observed.emit()
         
     if event is InputEventKey and event.keycode in [KEY_W, KEY_A, KEY_S, KEY_D]:
-
-        follow_cam = false
+        if follow_cam == true:
+            follow_cam = false
         
     if event is InputEventKey and event.keycode == KEY_SPACE:
         follow_cam = true
