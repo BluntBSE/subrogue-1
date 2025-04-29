@@ -33,6 +33,7 @@ func _ready() -> void:
 var poll_elapsed = 0.0
 func _process(delta: float) -> void:
     #DEBUG: RIGHT NOW ONLY PLAYERS CAN DETECT. THAT"S NOT WHAT WE WANT IN THE END.
+    return
     poll_elapsed += delta
     #PROPOSED OVERHAUL FOR WHEN WE NEED TO OPTIMIZE:
     #You can't make signal nodes from a separate thread, but you could, once a signal is created,
@@ -144,12 +145,14 @@ func poll_entities():
                         entity.anchor.add_child(sigob)
                         sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
                         sigmap[dict.entity] = sigob
+                        SoundManager.play("signal_acquired_1")
                     else:
                         var sigob:SignalPopup = archive_map[dict.entity]
                         sigmap[dict.entity] = sigob
                         archive_map.erase(dict.entity)
                         sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
-        
+                        SoundManager.play_straight("signal_acquired_1", "game", -12.0)
+       
                 sigmap[dict.entity].certainty = max_certainty
                 #Should we be constantly updating the sound? Might as well since it's the attenuated DB right?
                 sigmap[dict.entity].sound = sound

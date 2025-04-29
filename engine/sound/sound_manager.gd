@@ -7,7 +7,7 @@ var sound_lib:SoundLib
 var in_use:Array = [] # Players in_use. Known for the purposes of stopping sounds.
 var available:Array  = []  # The available players.
 var queue:Array = []  # The queue of sounds to play.
-var music_volume = -3.0 #Expressed as DB modification. category: 'music'
+var music_volume = -28.0 #Expressed as DB modification. category: 'music'
 var ui_volume = 0.0 #Expressed as DB modification. category: 'ui'
 var game_volume = 0.0 #Expressed as DB modification. category 'game'
 
@@ -97,7 +97,6 @@ func _process(delta:float)->void:
 
 ##BUTTONS:
 func _on_node_added(node:Node) -> void:
-    print("Soundmanager responded to node added")
     if node is Button or node is TextureButton:
         # If the added node is a button we connect to its mouse_entered and pressed signals
         # and play a sound
@@ -105,7 +104,7 @@ func _on_node_added(node:Node) -> void:
         node.pressed.connect(_play_pressed)
         
 func _play_hover():
-    play("button_hover", "none", "ui", )
+    play_straight("button_hover", "ui", -8.0)
 
 func _play_pressed():
-    play("button_press", "none", "ui",)
+    play_straight("button_press", "ui")
