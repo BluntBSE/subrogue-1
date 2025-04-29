@@ -41,4 +41,4 @@ func see_everything()->void:
         camera.set_cull_mask_value(idx+1, true)
 
 func stop_spawning():
-    %TSM.spawn_more = false
+    get_tree().root.find_child("TSM", true, false).spawn_more = false

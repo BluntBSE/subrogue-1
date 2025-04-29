@@ -224,7 +224,6 @@ sdfgi_use_occlusion = true
 glow_enabled = true
 glow_normalized = true
 glow_bloom = 0.25
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 volumetric_fog_length = 10.0
 volumetric_fog_detail_spread = 1.0
@@ -6264,7 +6263,8 @@ draw_on = NodePath("../../GamePlanet/ClickableSphere")
 raycasting = false
 nav_parent = NodePath("../../NavNodes")
 
-[node name="TestSceneManager" type="Node3D" parent="."]
+[node name="TSM" type="Node3D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("23_vycny")
 
 [connection signal="input_event" from="Cities/CityNode/CityBody" to="Cities/CityNode/CityInteraction" method="_on_interaction_box_1_input_event"]
