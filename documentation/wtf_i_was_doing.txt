@@ -48,7 +48,6 @@ TODO:
     It'd be great to show a cone in front of the munition
     Set up configuration parameters
 QUEUE:
-    1. Active ping now reveals. For how long?
     
     
     The ping:

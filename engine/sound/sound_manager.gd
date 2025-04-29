@@ -27,6 +27,9 @@ func _ready()->void:
     #Title theme plays by default, so let's get it.
     play_straight("title_theme", "music")
     play_straight("title_ambience", "music")
+    
+    #Dynamic bindings
+    get_tree().node_added.connect(_on_node_added)
 
 
 func _on_stream_finished(player:AudioStreamPlayer)->void:
@@ -88,3 +91,21 @@ func _process(delta:float)->void:
             player.play()
             in_use.append({"player":available[0], "sound_id":sound_id, "category":category})
             available.pop_front()
+
+
+##RUNTIME BINDING OF SOUNDS TO UI
+
+##BUTTONS:
+func _on_node_added(node:Node) -> void:
+    print("Soundmanager responded to node added")
+    if node is Button or node is TextureButton:
+        # If the added node is a button we connect to its mouse_entered and pressed signals
+        # and play a sound
+        node.mouse_entered.connect(_play_hover)
+        node.pressed.connect(_play_pressed)
+        
+func _play_hover():
+    play("button_hover", "none", "ui", )
+
+func _play_pressed():
+    play("button_press", "none", "ui",)
