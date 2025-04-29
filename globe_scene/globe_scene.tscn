@@ -3710,12 +3710,12 @@ shape = SubResource("SphereShape3D_5v0fy")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_o22p0")
-volume_db = -12.0
+volume_db = -28.0
 autoplay = true
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_eum53")
-volume_db = -3.0
+volume_db = -28.0
 autoplay = true
 
 [node name="NavNodes" type="Node3D" parent="."]

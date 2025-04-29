@@ -7,7 +7,7 @@ var sound_lib:SoundLib
 var in_use:Array = [] # Players in_use. Known for the purposes of stopping sounds.
 var available:Array  = []  # The available players.
 var queue:Array = []  # The queue of sounds to play.
-var music_volume = -3.0 #Expressed as DB modification. category: 'music'
+var music_volume = -28.0 #Expressed as DB modification. category: 'music'
 var ui_volume = 0.0 #Expressed as DB modification. category: 'ui'
 var game_volume = 0.0 #Expressed as DB modification. category 'game'
 
@@ -27,6 +27,9 @@ func _ready()->void:
     #Title theme plays by default, so let's get it.
     play_straight("title_theme", "music")
     play_straight("title_ambience", "music")
+    
+    #Dynamic bindings
+    get_tree().node_added.connect(_on_node_added)
 
 
 func _on_stream_finished(player:AudioStreamPlayer)->void:
@@ -88,3 +91,20 @@ func _process(delta:float)->void:
             player.play()
             in_use.append({"player":available[0], "sound_id":sound_id, "category":category})
             available.pop_front()
+
+
+##RUNTIME BINDING OF SOUNDS TO UI
+
+##BUTTONS:
+func _on_node_added(node:Node) -> void:
+    if node is Button or node is TextureButton:
+        # If the added node is a button we connect to its mouse_entered and pressed signals
+        # and play a sound
+        node.mouse_entered.connect(_play_hover)
+        node.pressed.connect(_play_pressed)
+        
+func _play_hover():
+    play_straight("button_hover", "ui", -8.0)
+
+func _play_pressed():
+    play_straight("button_press", "ui")

@@ -11,3 +11,9 @@ class_name SoundLib
 @export var sonar_1: AudioStream
 @export var launch_thump_1: AudioStream
 @export var explosion_1: AudioStream
+@export var signal_acquired_1:AudioStream
+@export var signal_acquired_2:AudioStream
+@export var signal_acquired_3:AudioStream
+@export var enemy_ping_indirect_1:AudioStream
+@export var enemy_ping_indirect_2:AudioStream
+@export var enemy_ping_direct_1:AudioStream
