@@ -18,13 +18,14 @@ var military_ids
 var faction_ids = ["SaharanFreeLeague", "AtlanticEmpire", "EuropeanFront", "UnitedAmericanRepublics"]
 
 var spawn_check_time = 0.0
-
+var spawn_more = true
 
 
 func _process(_delta:float)->void:
     spawn_check_time += _delta
     if spawn_check_time >= 2.0:
-        repopulate_entities()
+        if spawn_more == true:
+            repopulate_entities()
         spawn_check_time = 0.0
     pass
 
