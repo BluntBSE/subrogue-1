@@ -26,7 +26,7 @@ var destination:Vector3:
         var dstr:String =  "destination is now" + str(value)
        # dh.dprint(db,self, dstr)
         destination = value
-var db:bool = true
+var db:bool = false
 var player:Player
 var active_entity:Entity
 var follow_cam:bool = false:

@@ -188,7 +188,7 @@ func calculate_certainty(dist: float, c100: float, cfalloff: float, min_certaint
     return certainty        
 
 func handle_tracked_object_died(_entity:Entity)->void:
-    print("Detector is handling target died")
+   # print("Detector is handling target died")
     local_entities.erase(_entity)
     for dict:Dictionary in tracked_entities:
         if dict.entity == _entity:
