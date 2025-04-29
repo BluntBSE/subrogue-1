@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bbg052bd7f8oe"
+path="res://.godot/imported/Fall (Very Low).wav-c664b9a80ca37e18eba7a68e18074032.sample"
+
+[deps]
+
+source_file="res://engine/sound/raw_assets/Falls/Fall (Very Low).wav"
+dest_files=["res://.godot/imported/Fall (Very Low).wav-c664b9a80ca37e18eba7a68e18074032.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

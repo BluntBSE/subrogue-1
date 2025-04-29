@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://pr76ba85ewhn"
+path="res://.godot/imported/UI Swoop Low .8s.wav-79fe0a796ab36abb9d2c9332cf5a2799.sample"
+
+[deps]
+
+source_file="res://engine/sound/raw_assets/UI/UI Swoop Low .8s.wav"
+dest_files=["res://.godot/imported/UI Swoop Low .8s.wav-79fe0a796ab36abb9d2c9332cf5a2799.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

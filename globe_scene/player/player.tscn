@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=68 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -43,6 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://8k5fjvye3gcg" path="res://engine/entities/detection/spiky_boy.tscn" id="39_nwwe3"]
 [ext_resource type="Texture2D" uid="uid://b6wq5dkmmxdtv" path="res://assets/UI/white_buttons/VolumeSliderKnobT03White.png" id="40_fq2vg"]
 [ext_resource type="Texture2D" uid="uid://8bqmk8uxc6mg" path="res://assets/UI/white_icons/EditIconWhite.png" id="41_q7i7m"]
+[ext_resource type="Texture2D" uid="uid://b4rvv34wjpo5j" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT02.png" id="42_oh4je"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
 shader = ExtResource("21_fwoy0")
@@ -2081,7 +2082,7 @@ offset_right = -813.388
 offset_bottom = 146.645
 scale = Vector2(1.3, 1.3)
 texture_normal = ExtResource("7_nwwe3")
-texture_pressed = ExtResource("32_4elw6")
+texture_pressed = ExtResource("42_oh4je")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -2597,7 +2598,7 @@ offset_right = -1319.04
 offset_bottom = 1421.64
 scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("7_nwwe3")
-texture_pressed = ExtResource("32_4elw6")
+texture_pressed = ExtResource("42_oh4je")
 ignore_texture_size = true
 stretch_mode = 0
 metadata/_edit_use_anchors_ = true

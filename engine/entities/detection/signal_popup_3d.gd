@@ -426,7 +426,11 @@ func positively_identify():
         #If the unidentified UI is open, this should close it and open the positive ID one.
         identified.emit(self) 
         position = detected_object.position
+        SoundManager.play("ping_contact_1", "randpitch_small", "game", -3.0)
 
+        
+    #Play the sound anyway
+    
 
 func scale_with_fov():
     # Get the camera and its FOV
