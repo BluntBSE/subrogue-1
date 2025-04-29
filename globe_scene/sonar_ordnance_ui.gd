@@ -1,9 +1,9 @@
-extends TextureRect
+extends Control
 class_name SonarOrdnanceUI
 
 var state_machine:StateMachine
 @onready var anim_player:AnimationPlayer = %SonarOrdnancePlayer
-@onready var tab_node:Control = get_child(0)
+@onready var tab_node:Control = find_child("Tabs",true, false)
 @onready var tabs:Array = tab_node.get_children()
 var active_index:int = 0 # 0 = Active Sonar, 1 = Passive Sonar, 2 = Ordnance
 var dark_2_color:Color = Color("#02282c")

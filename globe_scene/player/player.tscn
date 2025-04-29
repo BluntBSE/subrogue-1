@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=67 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -63,393 +63,330 @@ shader_parameter/between_angle_alpha = 1.0
 shader_parameter/beyond_angle_alpha = 0.2
 shader_parameter/distance_factor = 0.0
 
-[sub_resource type="Animation" id="Animation_gcn3n"]
-resource_name = "ActiveSonarIn"
-length = 0.14
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ActiveSonarPanelGroup/ActiveSonarControl:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(225, 765), Vector2(225, 235)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ActiveSonarPanelGroup/PingButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(2925, 566.667), Vector2(2928.33, 311.667)]
-}
-
-[sub_resource type="Animation" id="Animation_ysxr2"]
-resource_name = "ActiveSonarOut"
-length = 0.14
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ActiveSonarPanelGroup/ActiveSonarControl:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(225, 235), Vector2(-751.667, 235)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ActiveSonarPanelGroup/PingButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(2928.33, 311.667), Vector2(3351.67, 311.667)]
-}
-
-[sub_resource type="Animation" id="Animation_oor6e"]
-resource_name = "ActiveSonarTabToDark2"
-length = 0.14
-
-[sub_resource type="Animation" id="Animation_nbion"]
-resource_name = "OrdnanceIn"
-length = 0.14
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OrdnancePanelGroup/OrdnanceControl:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 506.667), Vector2(0, -3.33334)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OrdnancePanelGroup/ConfigureButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2811.67, 565), Vector2(2811.67, 246.667)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("OrdnancePanelGroup/LaunchButton:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2811.67, 643), Vector2(2811.67, 324.667)]
-}
-
-[sub_resource type="Animation" id="Animation_bl0gl"]
-resource_name = "OrdnanceOut"
-length = 0.14
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OrdnancePanelGroup/OrdnanceControl:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(0, -3.33334), Vector2(-945, -3.33334)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OrdnancePanelGroup/ConfigureButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(2811.67, 246.667), Vector2(3351.67, 246.667)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("OrdnancePanelGroup/LaunchButton:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(2811.67, 324.667), Vector2(3351.67, 324.667)]
-}
-
-[sub_resource type="Animation" id="Animation_labis"]
-resource_name = "PassiveSonarIn"
-length = 0.14
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PassiveSonarPanelGroup/PassiveSonarControl:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(225, 750), Vector2(225, 235)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PassiveSonarPanelGroup/ClearButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2928.33, 676.667), Vector2(2928.33, 365)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PassiveSonarPanelGroup/UpdateButton:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2928.33, 555), Vector2(2928.33, 243.333)]
-}
-
-[sub_resource type="Animation" id="Animation_gpuiy"]
-resource_name = "PassiveSonarOut"
-length = 0.14
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PassiveSonarPanelGroup/PassiveSonarControl:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(225, 235), Vector2(-746.667, 235)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PassiveSonarPanelGroup/ClearButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(2928.33, 365), Vector2(3351.67, 365)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PassiveSonarPanelGroup/UpdateButton:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(2928.33, 243.333), Vector2(3351.67, 243.333)]
-}
-
-[sub_resource type="Animation" id="Animation_pxv8h"]
+[sub_resource type="Animation" id="Animation_3sjdi"]
 length = 0.001
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ActiveSonarPanelGroup/ActiveSonarControl:position:x")
+tracks/0/path = NodePath("ActiveSonarPanelGroup:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(225, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
-tracks/1/type = "bezier"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ActiveSonarPanelGroup/ActiveSonarControl:position:y")
+tracks/1/path = NodePath("%PingButton:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(235, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1746, 174)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ActiveSonarPanelGroup/ActiveSonarControl:position")
+tracks/2/path = NodePath("PassiveSonarPanelGroup:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(225, 235)]
+"values": [Vector2(0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ActiveSonarPanelGroup/PingButton:position")
+tracks/3/path = NodePath("../Buttons/ClearButton:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2928.33, 311.667)]
+"values": [Vector2(1741, 414)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PassiveSonarPanelGroup/PassiveSonarControl:position")
+tracks/4/path = NodePath("../Buttons/UpdateButton:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(225, 750)]
+"values": [Vector2(1741, 342)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PassiveSonarPanelGroup/ClearButton:position")
+tracks/5/path = NodePath("OrdnancePanelGroup:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2928.33, 676.667)]
+"values": [Vector2(0, 0)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("PassiveSonarPanelGroup/UpdateButton:position")
+tracks/6/path = NodePath("%ConfigureButton:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(2928.33, 555)]
+"values": [Vector2(1745, 458)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("OrdnancePanelGroup/OrdnanceControl:position")
+tracks/7/path = NodePath("%LaunchButton:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 506.667)]
+"values": [Vector2(1745, 536)]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("OrdnancePanelGroup/ConfigureButton:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+
+[sub_resource type="Animation" id="Animation_itjk8"]
+resource_name = "ActiveSonarOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActiveSonarPanelGroup:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(2811.67, 565)]
+"values": [Vector2(0, 0), Vector2(-958.333, 0)]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("OrdnancePanelGroup/LaunchButton:position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Buttons/PingButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(2811.67, 643)]
+"values": [Vector2(1746, 174), Vector2(2017, 174)]
 }
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("%CityUIRoot/CityUI:position")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+
+[sub_resource type="Animation" id="Animation_7caot"]
+resource_name = "ActiveSonarIn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActiveSonarPanelGroup:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1978, 68)]
+"values": [Vector2(0, 555), Vector2(0, 1.66669)]
 }
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("../CityUIRoot/CityBG:color")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%PingButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [Vector2(1746, 340), Vector2(1746, 145)]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("../CityUIRoot/CityBG:mouse_filter")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
+
+[sub_resource type="Animation" id="Animation_dv6ba"]
+resource_name = "PassiveSonarIn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PassiveSonarPanelGroup:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -506.667)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Buttons/ClearButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1741, 414), Vector2(1741, 212)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Buttons/UpdateButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1741, 342), Vector2(1741, 140)]
+}
+
+[sub_resource type="Animation" id="Animation_250mi"]
+resource_name = "PassiveSonarOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Buttons/ClearButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1741, 212), Vector2(2013, 212)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Buttons/UpdateButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1741, 140), Vector2(2013, 140)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PassiveSonarPanelGroup:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -506.667), Vector2(-961.667, -506.667)]
+}
+
+[sub_resource type="Animation" id="Animation_wftmj"]
+resource_name = "OrdnanceIn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OrdnancePanelGroup:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -506.667)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%ConfigureButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1694, 393), Vector2(1694, 144)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%LaunchButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1694, 471), Vector2(1694, 222)]
+}
+
+[sub_resource type="Animation" id="Animation_nd8hy"]
+resource_name = "OrdnanceOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%ConfigureButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1694, 144), Vector2(2018, 144)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%LaunchButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1694, 222), Vector2(2018, 222)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OrdnancePanelGroup:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -506.667), Vector2(-990, -506.667)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_labis"]
 _data = {
-&"ActiveSonarIn": SubResource("Animation_gcn3n"),
-&"ActiveSonarOut": SubResource("Animation_ysxr2"),
-&"ActiveSonarTabToDark2": SubResource("Animation_oor6e"),
-&"OrdnanceIn": SubResource("Animation_nbion"),
-&"OrdnanceOut": SubResource("Animation_bl0gl"),
-&"PassiveSonarIn": SubResource("Animation_labis"),
-&"PassiveSonarOut": SubResource("Animation_gpuiy"),
-&"RESET": SubResource("Animation_pxv8h")
+&"ActiveSonarIn": SubResource("Animation_7caot"),
+&"ActiveSonarOut": SubResource("Animation_itjk8"),
+&"OrdnanceIn": SubResource("Animation_wftmj"),
+&"OrdnanceOut": SubResource("Animation_nd8hy"),
+&"PassiveSonarIn": SubResource("Animation_dv6ba"),
+&"PassiveSonarOut": SubResource("Animation_250mi"),
+&"RESET": SubResource("Animation_3sjdi")
 }
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nwwe3"]
@@ -651,6 +588,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [2, 0, 0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%SonarOrdnanceUI/Panel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-11, -13), Vector2(-621, -13)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%SonarOrdnanceUI/Buttons:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(514, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_ljsgx"]
 length = 0.001
@@ -701,6 +662,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%SonarOrdnanceUI/Panel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-11, -13)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%SonarOrdnanceUI/Buttons:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_itjk8"]
@@ -976,23 +961,30 @@ offset_bottom = 115.0
 text = "FPS: 60"
 fit_content = true
 
-[node name="SonarOrdnanceUI" type="TextureRect" parent="UICanvas/PlayerUIRoot"]
+[node name="SonarOrdnanceUI" type="Control" parent="UICanvas/PlayerUIRoot"]
 unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 804.0
+offset_right = 41.0
+offset_bottom = 844.0
+script = ExtResource("18_wftmj")
+
+[node name="Panel" type="TextureRect" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
 show_behind_parent = true
 z_as_relative = false
 layout_mode = 0
 offset_left = -11.0
-offset_top = 790.0
+offset_top = -13.0
 offset_right = 989.0
-offset_bottom = 1290.0
+offset_bottom = 487.0
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("17_250mi")
 expand_mode = 1
 stretch_mode = 4
 flip_h = true
-script = ExtResource("18_wftmj")
 
-[node name="Tabs" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
+[node name="Tabs" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
 z_index = -10
 z_as_relative = false
 anchors_preset = 0
@@ -1001,7 +993,7 @@ offset_top = 1.66663
 offset_right = 41.6667
 offset_bottom = 41.6666
 
-[node name="ActiveSonarTab" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Tabs"]
+[node name="ActiveSonarTab" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs"]
 self_modulate = Color(0.627451, 0.627451, 0.627451, 1)
 z_index = 2
 layout_mode = 0
@@ -1014,7 +1006,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Tabs/ActiveSonarTab"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/ActiveSonarTab"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 13.3335
@@ -1025,7 +1017,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "Active Sonar"
 
-[node name="PassiveSonarTab" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Tabs"]
+[node name="PassiveSonarTab" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs"]
 self_modulate = Color(0.0196078, 0.262745, 0.286275, 1)
 z_index = 1
 layout_mode = 0
@@ -1038,7 +1030,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Tabs/PassiveSonarTab"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/PassiveSonarTab"]
 self_modulate = Color(0.699653, 0.699653, 0.699653, 1)
 layout_mode = 0
 offset_left = 35.0
@@ -1050,7 +1042,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "Passive Sonar"
 
-[node name="OrdnanceTab" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Tabs"]
+[node name="OrdnanceTab" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs"]
 self_modulate = Color(0.00784314, 0.156863, 0.172549, 1)
 layout_mode = 0
 offset_left = 531.667
@@ -1062,7 +1054,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Tabs/OrdnanceTab"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/OrdnanceTab"]
 self_modulate = Color(0.699653, 0.699653, 0.699653, 1)
 layout_mode = 0
 offset_left = 85.0
@@ -1074,26 +1066,26 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "Ordnance"
 
-[node name="ActiveSonarPanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
+[node name="ActiveSonarPanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ActiveSonarControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup"]
+[node name="ActiveSonarControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup"]
 unique_name_in_owner = true
 z_index = 1
 anchors_preset = 0
 offset_left = 225.0
-offset_top = 765.0
+offset_top = 235.0
 offset_right = 265.0
-offset_bottom = 805.0
+offset_bottom = 275.0
 scale = Vector2(1.8, 1.8)
 script = ExtResource("20_q4mmy")
 angle_1 = 10.0
 angle_2 = 45.0
 a_diff = 35.0
 
-[node name="ActiveSonarBG" type="TextureRect" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+[node name="ActiveSonarBG" type="TextureRect" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.54902)
 material = SubResource("ShaderMaterial_n7gus")
@@ -1105,7 +1097,7 @@ offset_bottom = 612.0
 scale = Vector2(0.320004, 0.320004)
 texture = ExtResource("22_mb7nu")
 
-[node name="ActiveSonarTexture" type="TextureRect" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+[node name="ActiveSonarTexture" type="TextureRect" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_i4tgh")
 layout_mode = 0
@@ -1116,7 +1108,7 @@ offset_bottom = 626.0
 scale = Vector2(0.279999, 0.279999)
 texture = ExtResource("23_ls1g0")
 
-[node name="ActiveSonarKnobOnePivot" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+[node name="ActiveSonarKnobOnePivot" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 17.0
@@ -1125,7 +1117,7 @@ offset_right = 57.0
 offset_bottom = 50.0
 rotation = 0.174533
 
-[node name="ActiveSonarKnobOne" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot"]
+[node name="ActiveSonarKnobOne" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot"]
 layout_mode = 0
 offset_left = -21.9119
 offset_top = -118.839
@@ -1138,7 +1130,7 @@ texture_normal = ExtResource("24_bdeav")
 texture_pressed = ExtResource("25_bq63b")
 texture_hover = ExtResource("25_bq63b")
 
-[node name="ActiveSonarKnobTwoPivot" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+[node name="ActiveSonarKnobTwoPivot" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 17.0
@@ -1147,7 +1139,7 @@ offset_right = 57.0
 offset_bottom = 50.0
 rotation = 0.785398
 
-[node name="ActiveSonarKnobTwo" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot"]
+[node name="ActiveSonarKnobTwo" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot"]
 layout_mode = 0
 offset_left = -22.9642
 offset_top = -119.655
@@ -1160,7 +1152,7 @@ texture_normal = ExtResource("24_bdeav")
 texture_pressed = ExtResource("25_bq63b")
 texture_hover = ExtResource("25_bq63b")
 
-[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
 unique_name_in_owner = true
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
@@ -1182,7 +1174,7 @@ output_label = NodePath("Values")
 mult_factor = 100.0
 output_symbol = "db"
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = -21.0
@@ -1194,7 +1186,7 @@ theme_override_font_sizes/font_size = 14
 text = "Volume"
 horizontal_alignment = 1
 
-[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
 layout_mode = 0
 offset_left = 40.7407
 offset_top = 20.3704
@@ -1207,7 +1199,7 @@ theme_override_font_sizes/font_size = 10
 text = "100db"
 horizontal_alignment = 1
 
-[node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
+[node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 178.704
@@ -1221,7 +1213,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+[node name="RangeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
@@ -1242,7 +1234,7 @@ handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
 mult_factor = 1.0
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = -21.0
@@ -1254,7 +1246,7 @@ theme_override_font_sizes/font_size = 14
 text = "Profile"
 horizontal_alignment = 1
 
-[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
 layout_mode = 0
 offset_left = 40.7407
 offset_top = 20.3704
@@ -1267,7 +1259,7 @@ theme_override_font_sizes/font_size = 10
 text = "0.0 - 1.0"
 horizontal_alignment = 1
 
-[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
 layout_mode = 0
 offset_left = 178.704
 offset_top = -8.3335
@@ -1280,7 +1272,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
 layout_mode = 0
 offset_left = -4.76837e-05
 offset_top = -7.40735
@@ -1293,7 +1285,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="DepthBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl"]
+[node name="DepthBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
 layout_mode = 0
 offset_left = 148.148
 offset_top = 76.8519
@@ -1302,7 +1294,7 @@ offset_bottom = 87.8519
 nine_patch_stretch = true
 texture_under = ExtResource("27_bnsnq")
 
-[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/DepthBar"]
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/DepthBar"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = -21.0
@@ -1314,7 +1306,7 @@ theme_override_font_sizes/font_size = 14
 text = "Depth"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/DepthBar"]
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/DepthBar"]
 layout_mode = 0
 offset_left = 12.037
 offset_top = 20.3704
@@ -1327,44 +1319,12 @@ theme_override_font_sizes/font_size = 10
 text = "Crawl, Swim, Surface"
 horizontal_alignment = 1
 
-[node name="PingButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup" groups=["dock_silenced_UI"]]
-unique_name_in_owner = true
-clip_contents = true
-custom_minimum_size = Vector2(50, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 66.5347
-anchor_top = 1.68388
-anchor_right = 66.5347
-anchor_bottom = 1.68388
-offset_left = 263.612
-offset_top = 499.312
-offset_right = 365.612
-offset_bottom = 539.312
-scale = Vector2(1.7, 1.7)
-texture_normal = ExtResource("7_nwwe3")
-texture_pressed = ExtResource("32_4elw6")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/PingButton"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 0.75
-offset_left = 26.0
-offset_top = 11.0
-offset_right = -27.0
-offset_bottom = 1.0
-theme = ExtResource("8_fq2vg")
-text = "Ping"
-
-[node name="PassiveSonarPanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
+[node name="PassiveSonarPanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PassiveSonarControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup"]
+[node name="PassiveSonarControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup"]
 z_index = 1
 anchors_preset = 0
 offset_left = 225.0
@@ -1373,7 +1333,7 @@ offset_right = 265.0
 offset_bottom = 790.0
 scale = Vector2(1.8, 1.8)
 
-[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
@@ -1394,7 +1354,7 @@ output_label = NodePath("Values")
 mult_factor = 100.0
 output_symbol = "db"
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = -21.0
@@ -1406,7 +1366,7 @@ theme_override_font_sizes/font_size = 14
 text = "Volume"
 horizontal_alignment = 1
 
-[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
 layout_mode = 0
 offset_left = 40.7407
 offset_top = 20.3704
@@ -1419,7 +1379,7 @@ theme_override_font_sizes/font_size = 10
 text = "100db"
 horizontal_alignment = 1
 
-[node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+[node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
 layout_mode = 0
 offset_left = 178.704
 offset_top = -8.3335
@@ -1432,7 +1392,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="VolumeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+[node name="VolumeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
@@ -1453,7 +1413,7 @@ output_label = NodePath("Values")
 mult_factor = 100.0
 output_symbol = "db"
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
 layout_mode = 0
 offset_left = 40.7407
 offset_top = -21.0
@@ -1465,7 +1425,7 @@ theme_override_font_sizes/font_size = 14
 text = "Certainty"
 horizontal_alignment = 1
 
-[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
 layout_mode = 0
 offset_left = 40.7407
 offset_top = 20.3704
@@ -1478,7 +1438,7 @@ theme_override_font_sizes/font_size = 10
 text = "100db"
 horizontal_alignment = 1
 
-[node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
+[node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
 layout_mode = 0
 offset_left = 178.704
 offset_top = -8.3335
@@ -1491,7 +1451,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+[node name="RangeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
@@ -1512,7 +1472,7 @@ handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
 mult_factor = 1.0
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = -21.0
@@ -1524,7 +1484,7 @@ theme_override_font_sizes/font_size = 14
 text = "Profile"
 horizontal_alignment = 1
 
-[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
 layout_mode = 0
 offset_left = 40.7407
 offset_top = 20.3704
@@ -1537,7 +1497,7 @@ theme_override_font_sizes/font_size = 10
 text = "0.0 - 1.0"
 horizontal_alignment = 1
 
-[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
 layout_mode = 0
 offset_left = 178.704
 offset_top = -8.3335
@@ -1550,7 +1510,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
 layout_mode = 0
 offset_left = -4.76837e-05
 offset_top = -7.40735
@@ -1563,7 +1523,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBar3" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+[node name="RangeBar3" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
@@ -1584,7 +1544,7 @@ handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
 mult_factor = 1.0
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
 layout_mode = 0
 offset_left = 37.0371
 offset_top = -21.2962
@@ -1596,7 +1556,7 @@ theme_override_font_sizes/font_size = 14
 text = "Track Time"
 horizontal_alignment = 1
 
-[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
 layout_mode = 0
 offset_left = 40.7407
 offset_top = 20.3704
@@ -1609,7 +1569,7 @@ theme_override_font_sizes/font_size = 10
 text = "0.0 - 1.0"
 horizontal_alignment = 1
 
-[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
 layout_mode = 0
 offset_left = 178.704
 offset_top = -8.3335
@@ -1622,7 +1582,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
 layout_mode = 0
 offset_left = -4.76837e-05
 offset_top = -7.40735
@@ -1635,7 +1595,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="DepthBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl"]
+[node name="DepthBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl"]
 layout_mode = 0
 offset_left = 148.148
 offset_top = 76.8519
@@ -1644,7 +1604,7 @@ offset_bottom = 87.8519
 nine_patch_stretch = true
 texture_under = ExtResource("27_bnsnq")
 
-[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/DepthBar"]
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/DepthBar"]
 layout_mode = 0
 offset_left = 58.0
 offset_top = -21.0
@@ -1656,7 +1616,7 @@ theme_override_font_sizes/font_size = 14
 text = "Depth"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/DepthBar"]
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/DepthBar"]
 layout_mode = 0
 offset_left = 12.037
 offset_top = 20.3704
@@ -1669,83 +1629,18 @@ theme_override_font_sizes/font_size = 10
 text = "Crawl, Swim, Surface"
 horizontal_alignment = 1
 
-[node name="ClearButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup" groups=["dock_silenced_UI"]]
-clip_contents = true
-custom_minimum_size = Vector2(50, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 45.2846
-anchor_top = -13.6078
-anchor_right = 45.2846
-anchor_bottom = -13.6078
-offset_left = 1116.95
-offset_top = 1220.98
-offset_right = 1218.95
-offset_bottom = 1260.98
-scale = Vector2(1.7, 1.7)
-texture_normal = ExtResource("7_nwwe3")
-texture_pressed = ExtResource("32_4elw6")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/ClearButton"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 0.75
-offset_left = 14.7059
-offset_top = 11.0
-offset_right = -26.2941
-offset_bottom = 1.0
-theme = ExtResource("8_fq2vg")
-text = "Clear"
-metadata/_edit_use_anchors_ = true
-
-[node name="UpdateButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup" groups=["dock_silenced_UI"]]
-clip_contents = true
-custom_minimum_size = Vector2(50, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 45.2846
-anchor_top = -16.6494
-anchor_right = 45.2846
-anchor_bottom = -16.6494
-offset_left = 1116.95
-offset_top = 1220.98
-offset_right = 1218.95
-offset_bottom = 1260.98
-scale = Vector2(1.7, 1.7)
-texture_normal = ExtResource("7_nwwe3")
-texture_pressed = ExtResource("32_4elw6")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/UpdateButton"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 0.75
-offset_left = 14.7059
-offset_top = 11.0
-offset_right = -13.2941
-offset_bottom = 20.0
-theme = ExtResource("8_fq2vg")
-text = "Update
-"
-metadata/_edit_use_anchors_ = true
-
-[node name="OrdnancePanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
+[node name="OrdnancePanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="OrdnanceControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup"]
+[node name="OrdnanceControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup"]
 anchors_preset = 0
 offset_top = 506.667
 offset_right = 40.0
 offset_bottom = 546.667
 
-[node name="Ordnance" type="ScrollContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl"]
+[node name="Ordnance" type="ScrollContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl"]
 layout_direction = 3
 layout_mode = 0
 offset_left = -292.0
@@ -1755,12 +1650,12 @@ offset_bottom = 370.333
 scale = Vector2(1.3, 1.3)
 theme = ExtResource("8_fq2vg")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("8_fq2vg")
 
-[node name="MarginContainer" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 theme_override_constants/margin_left = 2
@@ -1768,7 +1663,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer"]
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
@@ -1779,7 +1674,7 @@ texture_pressed = ExtResource("9_q7i7m")
 ignore_texture_size = true
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer/TextureButton3"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer/TextureButton3"]
 layout_mode = 2
 offset_left = 23.0
 offset_top = 11.0
@@ -1789,7 +1684,7 @@ theme = ExtResource("8_fq2vg")
 text = "Sonic Chaff - 8"
 horizontal_alignment = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.4)
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
@@ -1798,7 +1693,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer2"]
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer2"]
 clip_contents = true
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
@@ -1806,7 +1701,7 @@ texture_normal = ExtResource("7_nwwe3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer2/TextureButton3"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer2/TextureButton3"]
 layout_mode = 2
 offset_left = 23.0
 offset_top = 11.0
@@ -1816,7 +1711,7 @@ theme = ExtResource("8_fq2vg")
 text = "Minesweeper - 3"
 horizontal_alignment = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 theme_override_constants/margin_left = 2
@@ -1824,7 +1719,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer3"]
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer3"]
 modulate = Color(1, 1, 1, 0.4)
 clip_contents = true
 custom_minimum_size = Vector2(250, 40)
@@ -1833,7 +1728,7 @@ texture_normal = ExtResource("7_nwwe3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer3/TextureButton3"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer3/TextureButton3"]
 layout_mode = 2
 offset_left = 23.0
 offset_top = 11.0
@@ -1843,7 +1738,7 @@ theme = ExtResource("8_fq2vg")
 text = "Phase Gate - 1"
 horizontal_alignment = 2
 
-[node name="MarginContainer4" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 theme_override_constants/margin_left = 2
@@ -1851,7 +1746,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer4"]
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer4"]
 modulate = Color(1, 1, 1, 0.4)
 clip_contents = true
 custom_minimum_size = Vector2(250, 40)
@@ -1860,7 +1755,7 @@ texture_normal = ExtResource("7_nwwe3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer4/TextureButton3"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer4/TextureButton3"]
 layout_mode = 2
 offset_left = 23.0
 offset_top = 11.0
@@ -1870,7 +1765,7 @@ theme = ExtResource("8_fq2vg")
 text = "Phase Gate - 1"
 horizontal_alignment = 2
 
-[node name="MarginContainer5" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+[node name="MarginContainer5" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 theme_override_constants/margin_left = 2
@@ -1878,7 +1773,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer5"]
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer5"]
 modulate = Color(1, 1, 1, 0.4)
 clip_contents = true
 custom_minimum_size = Vector2(250, 40)
@@ -1887,7 +1782,7 @@ texture_normal = ExtResource("7_nwwe3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer5/TextureButton3"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer5/TextureButton3"]
 layout_mode = 2
 offset_left = 23.0
 offset_top = 11.0
@@ -1897,7 +1792,7 @@ theme = ExtResource("8_fq2vg")
 text = "Phase Gate - 1"
 horizontal_alignment = 2
 
-[node name="MarginContainer6" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+[node name="MarginContainer6" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 theme_override_constants/margin_left = 2
@@ -1905,7 +1800,7 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer6"]
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer6"]
 modulate = Color(1, 1, 1, 0.4)
 clip_contents = true
 custom_minimum_size = Vector2(250, 40)
@@ -1914,7 +1809,7 @@ texture_normal = ExtResource("7_nwwe3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer6/TextureButton3"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer6/TextureButton3"]
 layout_mode = 2
 offset_left = 23.0
 offset_top = 11.0
@@ -1924,7 +1819,7 @@ theme = ExtResource("8_fq2vg")
 text = "Phase Gate - 1"
 horizontal_alignment = 2
 
-[node name="AllOrdnanceLabel" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl"]
+[node name="AllOrdnanceLabel" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl"]
 layout_mode = 0
 offset_left = 103.333
 offset_top = 66.6666
@@ -1936,7 +1831,7 @@ theme_override_font_sizes/font_size = 24
 text = "All Ordnance"
 horizontal_alignment = 1
 
-[node name="ConfigurationLabel" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl"]
+[node name="ConfigurationLabel" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl"]
 layout_mode = 0
 offset_left = 458.333
 offset_top = 70.0
@@ -1949,18 +1844,18 @@ theme_override_font_sizes/font_size = 20
 text = "Hellcat RT-2 Wireguide"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel"]
 layout_mode = 0
 offset_left = 1.66667
 offset_top = 51.6667
 offset_right = 408.667
 offset_bottom = 418.667
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -1968,7 +1863,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "Guidance: Active Sonar"
 
-[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -1976,7 +1871,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "Guidance Angle: 60"
 
-[node name="Label6" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+[node name="Label6" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -1984,7 +1879,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "Max Distance: 100km"
 
-[node name="Label10" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+[node name="Label10" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -1992,7 +1887,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "Profile: 0.5"
 
-[node name="Label12" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+[node name="Label12" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -2000,7 +1895,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "Depth: C"
 
-[node name="Label7" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+[node name="Label7" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -2008,7 +1903,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "T. Profile: 0.2 - 0.9"
 
-[node name="Label8" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+[node name="Label8" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -2016,7 +1911,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "T. Pitch: 90hz"
 
-[node name="Label9" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+[node name="Label9" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -2024,7 +1919,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "T. Speed: 20km/h"
 
-[node name="Label11" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+[node name="Label11" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -2032,61 +1927,39 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "Strike Depth: C"
 
-[node name="ConfigureButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup" groups=["dock_silenced_UI"]]
+[node name="SonarOrdnancePlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_labis")
+}
+playback_auto_capture_ease_type = 1
+
+[node name="Buttons" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LaunchButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(50, 40)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 77.2014
-anchor_top = -6.31612
-anchor_right = 78.8264
-anchor_bottom = -6.31612
+anchor_left = 50.5347
+anchor_top = -7.04112
+anchor_right = 52.1597
+anchor_bottom = -7.04112
 offset_left = -276.386
 offset_top = 817.645
 offset_right = -174.386
 offset_bottom = 857.645
-scale = Vector2(1.7, 1.7)
+scale = Vector2(1.3, 1.3)
 texture_normal = ExtResource("7_nwwe3")
 texture_pressed = ExtResource("32_4elw6")
 ignore_texture_size = true
 stretch_mode = 0
-metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/ConfigureButton" groups=["dock_silenced_UI"]]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 0.75
-offset_left = 26.0
-offset_top = 11.0
-offset_right = -27.0
-offset_bottom = 1.0
-theme = ExtResource("8_fq2vg")
-text = "Configure"
-metadata/_edit_use_anchors_ = true
-
-[node name="LaunchButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup" groups=["dock_silenced_UI"]]
-unique_name_in_owner = true
-clip_contents = true
-custom_minimum_size = Vector2(50, 40)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 77.2014
-anchor_top = -4.36612
-anchor_right = 78.8264
-anchor_bottom = -4.36612
-offset_left = -276.386
-offset_top = 817.645
-offset_right = -174.386
-offset_bottom = 857.645
-scale = Vector2(1.7, 1.7)
-texture_normal = ExtResource("7_nwwe3")
-texture_pressed = ExtResource("32_4elw6")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/OrdnancePanelGroup/LaunchButton"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/LaunchButton"]
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 0.75
@@ -2098,12 +1971,130 @@ theme = ExtResource("8_fq2vg")
 text = "Launch"
 metadata/_edit_use_anchors_ = true
 
-[node name="SonarOrdnancePlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
+[node name="ConfigureButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_labis")
-}
-playback_auto_capture_ease_type = 1
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 50.5347
+anchor_top = -8.99112
+anchor_right = 52.1597
+anchor_bottom = -8.99112
+offset_left = -276.386
+offset_top = 817.645
+offset_right = -174.386
+offset_bottom = 857.645
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/ConfigureButton" groups=["dock_silenced_UI"]]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Configure"
+
+[node name="UpdateButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 18.6178
+anchor_top = -19.3244
+anchor_right = 18.6178
+anchor_bottom = -19.3244
+offset_left = 996.286
+offset_top = 1114.98
+offset_right = 1098.29
+offset_bottom = 1154.98
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/UpdateButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 14.7059
+offset_top = 11.0
+offset_right = -13.2941
+offset_bottom = 20.0
+theme = ExtResource("8_fq2vg")
+text = "Update
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="ClearButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 18.6178
+anchor_top = -16.2828
+anchor_right = 18.6178
+anchor_bottom = -16.2828
+offset_left = 996.286
+offset_top = 1065.31
+offset_right = 1098.29
+offset_bottom = 1105.31
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/ClearButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 14.7059
+offset_top = 11.0
+offset_right = -26.2941
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Clear"
+metadata/_edit_use_anchors_ = true
+
+[node name="PingButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 66.5347
+anchor_top = 1.68388
+anchor_right = 66.5347
+anchor_bottom = 1.68388
+offset_left = -915.39
+offset_top = 106.645
+offset_right = -813.39
+offset_bottom = 146.645
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/PingButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Ping"
 
 [node name="InspectionRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
 anchors_preset = 0
@@ -2585,9 +2576,9 @@ color = Color(0, 0, 0, 0)
 
 [node name="CityUI" parent="UICanvas/PlayerUIRoot/CityUIRoot" instance=ExtResource("10_558vm")]
 layout_mode = 0
-offset_left = 1978.0
+offset_left = 1919.0
 offset_top = 68.0
-offset_right = 3258.0
+offset_right = 3199.0
 offset_bottom = 968.0
 
 [node name="UndockButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/CityUIRoot"]
@@ -2600,9 +2591,9 @@ anchor_left = 116.451
 anchor_top = -11.0911
 anchor_right = 118.076
 anchor_bottom = -11.0911
-offset_left = -1412.05
+offset_left = -1421.04
 offset_top = 1381.64
-offset_right = -1310.05
+offset_right = -1319.04
 offset_bottom = 1421.64
 scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("7_nwwe3")
@@ -2658,32 +2649,32 @@ script = ExtResource("39_7xmbg")
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Slow" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Normal" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [0]]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Fast" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [3]]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Tabs/ActiveSonarTab" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI" method="_on_active_sonar_tab_button_up"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Tabs/PassiveSonarTab" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI" method="_on_passive_sonar_tab_button_up"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Tabs/OrdnanceTab" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI" method="_on_ordnance_tab_button_up"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_one_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/PingButton" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_ping_button_button_up"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_min_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/ActiveSonarTab" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI" method="_on_active_sonar_tab_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/PassiveSonarTab" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI" method="_on_passive_sonar_tab_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/OrdnanceTab" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI" method="_on_ordnance_tab_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_one_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/PingButton" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_ping_button_button_up"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/EntityInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_entity_inspector_toggle_button_up"]
 [connection signal="text_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalIDInput" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_id_input_text_changed"]
 [connection signal="color_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer/SignalColorChanger" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_color_changer_color_changed"]
