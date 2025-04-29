@@ -33,7 +33,6 @@ func _ready() -> void:
 var poll_elapsed = 0.0
 func _process(delta: float) -> void:
     #DEBUG: RIGHT NOW ONLY PLAYERS CAN DETECT. THAT"S NOT WHAT WE WANT IN THE END.
-    return
     poll_elapsed += delta
     #PROPOSED OVERHAUL FOR WHEN WE NEED TO OPTIMIZE:
     #You can't make signal nodes from a separate thread, but you could, once a signal is created,

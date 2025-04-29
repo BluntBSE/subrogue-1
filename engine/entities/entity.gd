@@ -107,7 +107,7 @@ func _physics_process(delta: float) -> void:
     #If this is an NPC, it's the server's job to move it.
     #Execute only if we're the server
     else:
-        if multiplayer.get_unique_id() == 1 :
+       # if multiplayer.get_unique_id() == 1 :
             #Will this work on single player? I tried to make this the case, but if experiencing issues, check this
             fix_height()
             fix_rotation()

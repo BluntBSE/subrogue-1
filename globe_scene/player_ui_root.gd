@@ -45,12 +45,15 @@ func unpack():
 func adjust_ruler(camera_pos: Vector3, _anchor: Vector3) -> void:
     pass
 
+func _process(_delta:float):
+    %FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
+
 
 func _physics_process(delta: float) -> void:
+    return
     if unpacked != true:
         return
 
-    %FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
 
     #RANGEFINDING
     # Get the mouse position relative to the Control node
