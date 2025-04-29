@@ -29,7 +29,6 @@ var targeting:Node3D = null
 var escorting:Node3D = null
 var seeking:Node3D = null
 # How confident this entity is in its strength. Compared to the player's reputation, or player's capabilities
-# This determines
 var chutzpah:float = 100.0
 @onready var behavior_tree = get_child(0)
 var enabled:bool = false:

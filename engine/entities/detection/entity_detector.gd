@@ -160,7 +160,7 @@ func poll_entities():
                 if most_certain_detector != self:
                     pass
                     
-                #ACTIVE IDENTIFICATION
+                #ACTIVE IDENTIFICATION - eg swimming too close
                 # Handle visibility and identification
                 var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
                 if dist <= c100:

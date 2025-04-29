@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://jfo3qn140d11"
+path="res://.godot/imported/Fall (Med).wav-bbf0586f1f6ba1fd4ab94137c366157d.sample"
+
+[deps]
+
+source_file="res://engine/sound/raw_assets/Falls/Fall (Med).wav"
+dest_files=["res://.godot/imported/Fall (Med).wav-bbf0586f1f6ba1fd4ab94137c366157d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

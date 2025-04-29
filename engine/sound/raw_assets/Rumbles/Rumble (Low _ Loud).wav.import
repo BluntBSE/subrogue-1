@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://du7u3we6mtect"
+path="res://.godot/imported/Rumble (Low _ Loud).wav-e6a02afa431f541623fad0e3d87b40d4.sample"
+
+[deps]
+
+source_file="res://engine/sound/raw_assets/Rumbles/Rumble (Low _ Loud).wav"
+dest_files=["res://.godot/imported/Rumble (Low _ Loud).wav-e6a02afa431f541623fad0e3d87b40d4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

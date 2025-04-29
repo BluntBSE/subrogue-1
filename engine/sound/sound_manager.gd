@@ -107,4 +107,4 @@ func _play_hover():
     play_straight("button_hover", "ui", -8.0)
 
 func _play_pressed():
-    play_straight("button_press", "ui")
+    play_straight("button_press", "ui", -6.0)
