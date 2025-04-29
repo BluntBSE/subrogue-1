@@ -109,3 +109,24 @@ func _on_passive_sonar_tab_button_up() -> void:
 func _on_ordnance_tab_button_up() -> void:
     if state_machine._current_state_id != "OrdnanceOpen":
         state_machine.Change("OrdnanceOpen", {})
+
+func hide_sonar_ordnance_ui():
+    #It feels like more work to write this in each SM than interrogate directly.
+    var current_state = state_machine._current_state_id
+    if current_state == "ActiveSonarOpen":
+        %SonarOrdnancePlayer.play("ActiveSonarOut")
+    if current_state == "PassiveSonarOpen":
+        %SonarOrdnancePlayer.play("PassiveSonarOut")
+    if current_state == "OrdnanceOpen":
+        %SonarOrdnancePlayer.play("OrdnanceOut")
+
+
+func show_sonar_ordnance_ui():
+    #It feels like more work to write this in each SM than interrogate directly.
+    var current_state = state_machine._current_state_id
+    if current_state == "ActiveSonarOpen":
+        %SonarOrdnancePlayer.play("ActiveSonarIn")
+    if current_state == "PassiveSonarOpen":
+        %SonarOrdnancePlayer.play("PassiveSonarIn")
+    if current_state == "OrdnanceOpen":
+        %SonarOrdnancePlayer.play("OrdnanceIn")

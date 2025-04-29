@@ -276,10 +276,12 @@ func handle_in_docking_area(city:City):
     if can_dock == false: #This check is necessary because the 3d area you check is a spherical plane.
         #It's nontrivial to check for total "immersion" in the 3D area. This saves you a headache.
         if played_by != null:
+            print("Handle in docking area handled")
             can_dock = true
             can_dock_at = city
             can_dock_sig.emit(true)
             city.interaction.opened_city.connect(played_by.UI.handle_opened_city)
+
 
 func handle_leave_docking_area():
     if can_dock == true:

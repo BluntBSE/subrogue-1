@@ -6266,9 +6266,11 @@ nav_parent = NodePath("../../NavNodes")
 [node name="TestSceneManager" type="Node3D" parent="."]
 script = ExtResource("23_vycny")
 
+[connection signal="input_event" from="Cities/CityNode/CityBody" to="Cities/CityNode/CityInteraction" method="_on_interaction_box_1_input_event"]
 [connection signal="mouse_entered" from="Cities/CityNode/CityBody" to="Cities/CityNode/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
 [connection signal="mouse_exited" from="Cities/CityNode/CityBody" to="Cities/CityNode/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
 [connection signal="body_entered" from="Cities/CityNode/CityInteraction/DockingArea" to="Cities/CityNode/CityInteraction" method="_on_docking_area_body_entered"]
 [connection signal="body_exited" from="Cities/CityNode/CityInteraction/DockingArea" to="Cities/CityNode/CityInteraction" method="_on_docking_area_body_exited"]
+[connection signal="input_event" from="Cities/CityNode/CityInteraction/InteractionBox1" to="Cities/CityNode/CityInteraction" method="_on_interaction_box_1_input_event"]
 [connection signal="mouse_entered" from="Cities/CityNode/CityInteraction/InteractionBox1" to="Cities/CityNode/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
 [connection signal="mouse_exited" from="Cities/CityNode/CityInteraction/InteractionBox1" to="Cities/CityNode/CityInteraction" method="_on_interaction_box_1_mouse_exited"]

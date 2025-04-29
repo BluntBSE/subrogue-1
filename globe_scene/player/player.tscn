@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=68 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -403,6 +403,42 @@ tracks/9/keys = {
 "update": 0,
 "values": [Vector2(2811.67, 643)]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("%CityUIRoot/CityUI:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1978, 68)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../CityUIRoot/CityBG:color")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../CityUIRoot/CityBG:mouse_filter")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_labis"]
 _data = {
@@ -563,6 +599,115 @@ shader_parameter/scanlines_opacity = 0.0
 shader_parameter/scanlines_speed = 0.0
 shader_parameter/scanline_thickness = 0.0
 shader_parameter/scanlines_spacing = 1.16
+
+[sub_resource type="Animation" id="Animation_oh4je"]
+resource_name = "CityIn"
+length = 0.38
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CityUIRoot/CityUI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1919, 68), Vector2(378, 68)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CityUIRoot/CityBG:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.505882)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CityUIRoot/UndockButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3237, 938), Vector2(1612, 938)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%CityUIRoot/CityBG:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.38),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 0, 0]
+}
+
+[sub_resource type="Animation" id="Animation_ljsgx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CityUIRoot/CityUI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1919, 68)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CityUIRoot/CityBG:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CityUIRoot/UndockButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3237, 938)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%CityUIRoot/CityBG:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_itjk8"]
+_data = {
+&"CityIn": SubResource("Animation_oh4je"),
+&"RESET": SubResource("Animation_ljsgx")
+}
 
 [node name="player" type="Node3D"]
 script = ExtResource("1_iwyah")
@@ -832,6 +977,7 @@ text = "FPS: 60"
 fit_content = true
 
 [node name="SonarOrdnanceUI" type="TextureRect" parent="UICanvas/PlayerUIRoot"]
+unique_name_in_owner = true
 show_behind_parent = true
 z_as_relative = false
 layout_mode = 0
@@ -938,9 +1084,9 @@ unique_name_in_owner = true
 z_index = 1
 anchors_preset = 0
 offset_left = 225.0
-offset_top = 235.0
+offset_top = 765.0
 offset_right = 265.0
-offset_bottom = 275.0
+offset_bottom = 805.0
 scale = Vector2(1.8, 1.8)
 script = ExtResource("20_q4mmy")
 angle_1 = 10.0
@@ -1191,10 +1337,10 @@ anchor_left = 66.5347
 anchor_top = 1.68388
 anchor_right = 66.5347
 anchor_bottom = 1.68388
-offset_left = 266.942
-offset_top = 244.312
-offset_right = 368.942
-offset_bottom = 284.312
+offset_left = 263.612
+offset_top = 499.312
+offset_right = 365.612
+offset_bottom = 539.312
 scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("7_nwwe3")
 texture_pressed = ExtResource("32_4elw6")
@@ -2321,12 +2467,12 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="AnimationGuides" type="Control" parent="UICanvas/PlayerUIRoot"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="AnimTopLineBot" type="ColorRect" parent="UICanvas/PlayerUIRoot/AnimationGuides"]
-visible = false
 custom_minimum_size = Vector2(1, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -2341,7 +2487,6 @@ offset_bottom = 1177.96
 scale = Vector2(1.00746, 0.174442)
 
 [node name="AnimCenterline1" type="ColorRect" parent="UICanvas/PlayerUIRoot/AnimationGuides"]
-visible = false
 custom_minimum_size = Vector2(1, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -2356,7 +2501,6 @@ offset_bottom = 983.957
 scale = Vector2(1.00746, 0.174442)
 
 [node name="AnimRightLineLeft" type="ColorRect" parent="UICanvas/PlayerUIRoot/AnimationGuides"]
-visible = false
 custom_minimum_size = Vector2(1, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -2371,7 +2515,6 @@ offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
 
 [node name="AnimationLeftLineRight" type="ColorRect" parent="UICanvas/PlayerUIRoot/AnimationGuides"]
-visible = false
 custom_minimum_size = Vector2(1, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -2386,7 +2529,6 @@ offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
 
 [node name="ScreenspaceFilters" type="Control" parent="UICanvas/PlayerUIRoot"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2430,17 +2572,62 @@ text = "Free Look On - SPACE to return"
 
 [node name="CityUIRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="CityBG" type="ColorRect" parent="UICanvas/PlayerUIRoot/CityUIRoot"]
+layout_mode = 0
+offset_right = 1917.0
+offset_bottom = 1077.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
 [node name="CityUI" parent="UICanvas/PlayerUIRoot/CityUIRoot" instance=ExtResource("10_558vm")]
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 1280.0
-offset_bottom = 900.0
+offset_left = 1978.0
+offset_top = 68.0
+offset_right = 3258.0
+offset_bottom = 968.0
+
+[node name="UndockButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/CityUIRoot"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 116.451
+anchor_top = -11.0911
+anchor_right = 118.076
+anchor_bottom = -11.0911
+offset_left = -1412.05
+offset_top = 1381.64
+offset_right = -1310.05
+offset_bottom = 1421.64
+scale = Vector2(1.7, 1.7)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/UndockButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Undock"
+metadata/_edit_use_anchors_ = true
+
+[node name="UIAnimations" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_itjk8")
+}
 
 [node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="UICanvas"]
 modulate = Color(1, 1, 1, 0.4)
@@ -2501,4 +2688,5 @@ script = ExtResource("39_7xmbg")
 [connection signal="text_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalIDInput" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_id_input_text_changed"]
 [connection signal="color_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer/SignalColorChanger" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_color_changer_color_changed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/SignalInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_inspector_toggle_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/CityUIRoot/UndockButton" to="UICanvas/PlayerUIRoot" method="handle_undocked_button"]
 [connection signal="text_submitted" from="UICanvas/Console/ConsoleInput" to="UICanvas/Console/ConsoleInput" method="_on_text_submitted"]

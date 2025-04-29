@@ -7,11 +7,13 @@ var timer = 0.0
 @onready var active_sonar_control: ActiveSonarControl = find_child("ActiveSonarControl", true, false)
 @onready var volume_bar: DraggableTPB = find_child("VolumeBar", true, false)
 @onready var inspection_root:InspectionRoot = find_child("InspectionRoot", true, false)
+var docked_at:City
 var player: Player
 var camera 
 var viewport
 var anchor
 var unpacked = false
+signal undocked_from
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass
@@ -102,7 +104,19 @@ func handle_can_dock(b:bool):
         
 func handle_opened_city(city:City):
     #For now...
+    print("Handle Opened City Fired?")
     %CityUIRoot.visible = true
+    print("City In should be playing")
+    %UIAnimations.play("CityIn", -1.0, 2.0)
+    %SonarOrdnanceUI.hide_sonar_ordnance_ui()
+    docked_at = city
+    pass
+    
+func handle_undocked_button():
+    %UIAnimations.play("CityIn", -1.0, -2.0, true) #Backwards but 2x speed
+    %SonarOrdnanceUI.show_sonar_ordnance_ui()
+    undocked_from.emit(docked_at)
+    docked_at = null
     pass
 
 func handle_docked(b:bool):
