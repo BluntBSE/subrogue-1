@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6wq3ox1h0lcj"]
+[gd_scene load_steps=11 format=3 uid="uid://b6wq3ox1h0lcj"]
 
 [ext_resource type="Texture2D" uid="uid://biopgmfrbkuc7" path="res://assets/UI/blue_panels/LargeMenuBGT03.1BlueDark.png" id="1_tf3wp"]
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="2_spgwn"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="3_71dqv"]
 [ext_resource type="Texture2D" uid="uid://10iq42ux2jj" path="res://assets/UI/placeholder/chiara-summer-mO9EzDBd5nI-unsplash.png" id="4_71dqv"]
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="4_ttruw"]
+[ext_resource type="Texture2D" uid="uid://b4rvv34wjpo5j" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT02.png" id="5_7j5gr"]
 [ext_resource type="FontFile" uid="uid://bvmpsl44wcfpl" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Bd.otf" id="5_ttruw"]
+[ext_resource type="Texture2D" uid="uid://bccxsf2kortp3" path="res://engine/npcs/assets/mark_adams.png" id="8_f05r4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itjk8"]
 bg_color = Color(1, 1, 1, 1)
@@ -18,9 +20,9 @@ border_color = Color(0.203922, 0.866667, 0.92549, 1)
 
 [node name="CityUI" type="TextureRect"]
 z_index = 800
-offset_left = 365.0
+offset_left = 339.0
 offset_top = 107.0
-offset_right = 1645.0
+offset_right = 1619.0
 offset_bottom = 1007.0
 texture = ExtResource("1_tf3wp")
 script = ExtResource("2_ttruw")
@@ -28,10 +30,10 @@ script = ExtResource("2_ttruw")
 [node name="FactionLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 94.0
-offset_top = 129.0
-offset_right = 433.0
-offset_bottom = 161.0
+offset_left = 86.0
+offset_top = 137.0
+offset_right = 486.0
+offset_bottom = 169.0
 theme = ExtResource("2_spgwn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -74,7 +76,6 @@ offset_bottom = 128.0
 theme = ExtResource("2_spgwn")
 theme_override_font_sizes/font_size = 36
 text = "NEW GIBRALTAR"
-horizontal_alignment = 1
 
 [node name="MainOptions" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
@@ -89,6 +90,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("2_spgwn")
 texture_normal = ExtResource("4_ttruw")
+texture_pressed = ExtResource("5_7j5gr")
+texture_hover = ExtResource("5_7j5gr")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -106,6 +109,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("2_spgwn")
 texture_normal = ExtResource("4_ttruw")
+texture_pressed = ExtResource("5_7j5gr")
+texture_hover = ExtResource("5_7j5gr")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -118,15 +123,18 @@ offset_bottom = 46.0
 theme_override_font_sizes/font_size = 20
 text = "City Info"
 
-[node name="TextureButton2" type="TextureButton" parent="MainOptions"]
+[node name="ContractsButton" type="TextureButton" parent="MainOptions"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("2_spgwn")
 texture_normal = ExtResource("4_ttruw")
+texture_pressed = ExtResource("5_7j5gr")
+texture_hover = ExtResource("5_7j5gr")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="MainOptions/TextureButton2"]
+[node name="Label" type="Label" parent="MainOptions/ContractsButton"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 14.0
@@ -140,6 +148,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("2_spgwn")
 texture_normal = ExtResource("4_ttruw")
+texture_pressed = ExtResource("5_7j5gr")
+texture_hover = ExtResource("5_7j5gr")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -157,6 +167,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("2_spgwn")
 texture_normal = ExtResource("4_ttruw")
+texture_pressed = ExtResource("5_7j5gr")
+texture_hover = ExtResource("5_7j5gr")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -174,6 +186,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("2_spgwn")
 texture_normal = ExtResource("4_ttruw")
+texture_pressed = ExtResource("5_7j5gr")
+texture_hover = ExtResource("5_7j5gr")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -186,6 +200,35 @@ offset_bottom = 46.0
 theme_override_font_sizes/font_size = 20
 text = "Military"
 
+[node name="ContactActions" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 63.0
+offset_top = 792.0
+offset_right = 363.0
+offset_bottom = 892.0
+theme_override_constants/separation = -30
+
+[node name="BackToMain" type="TextureButton" parent="ContactActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("2_spgwn")
+texture_normal = ExtResource("4_ttruw")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="ContactActions/BackToMain"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Back"
+
 [node name="ContractContacts" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -195,11 +238,19 @@ offset_top = 216.0
 offset_right = 350.0
 offset_bottom = 416.0
 
-[node name="ContractNPCButton" type="BoxContainer" parent="ContractContacts"]
+[node name="Button" type="Button" parent="ContractContacts"]
+custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
+
+[node name="ContractNPCButton" type="BoxContainer" parent="ContractContacts/Button"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 17.0
+offset_right = 296.0
+offset_bottom = 156.0
 theme_override_constants/separation = 10
 
-[node name="TextureRect" type="TextureRect" parent="ContractContacts/ContractNPCButton"]
+[node name="TextureRect" type="TextureRect" parent="ContractContacts/Button/ContractNPCButton"]
 custom_minimum_size = Vector2(32, 128)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -207,162 +258,77 @@ texture = ExtResource("4_71dqv")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContractContacts/ContractNPCButton"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ContractContacts/Button/ContractNPCButton"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ContractContacts/ContractNPCButton/VBoxContainer"]
+[node name="Label" type="Label" parent="ContractContacts/Button/ContractNPCButton/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_ttruw")
 theme_override_font_sizes/font_size = 14
-text = "Chiara Summer"
+text = "Chiara 
+Summer"
 
-[node name="Label2" type="Label" parent="ContractContacts/ContractNPCButton/VBoxContainer"]
+[node name="Label2" type="Label" parent="ContractContacts/Button/ContractNPCButton/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.831373, 0, 0.239216, 1)
 theme_override_font_sizes/font_size = 14
-text = "AE"
+text = "Atlantic Empire"
 
-[node name="Label3" type="Label" parent="ContractContacts/ContractNPCButton/VBoxContainer"]
+[node name="Label3" type="Label" parent="ContractContacts/Button/ContractNPCButton/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Ambassador"
 
-[node name="Label4" type="Label" parent="ContractContacts/ContractNPCButton/VBoxContainer"]
+[node name="Label4" type="Label" parent="ContractContacts/Button/ContractNPCButton/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Opinion: 0 / 100"
 
-[node name="ContractNPCButton2" type="BoxContainer" parent="ContractContacts"]
+[node name="Button2" type="Button" parent="ContractContacts"]
+custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
+
+[node name="ContractNPCButton" type="BoxContainer" parent="ContractContacts/Button2"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 17.0
+offset_right = 296.0
+offset_bottom = 156.0
 theme_override_constants/separation = 10
 
-[node name="TextureRect" type="TextureRect" parent="ContractContacts/ContractNPCButton2"]
+[node name="TextureRect" type="TextureRect" parent="ContractContacts/Button2/ContractNPCButton"]
 custom_minimum_size = Vector2(32, 128)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("4_71dqv")
+texture = ExtResource("8_f05r4")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContractContacts/ContractNPCButton2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ContractContacts/Button2/ContractNPCButton"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ContractContacts/ContractNPCButton2/VBoxContainer"]
+[node name="Label" type="Label" parent="ContractContacts/Button2/ContractNPCButton/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_ttruw")
 theme_override_font_sizes/font_size = 14
-text = "Chiara Summer"
+text = "Leandro
+Gonzalez"
 
-[node name="Label2" type="Label" parent="ContractContacts/ContractNPCButton2/VBoxContainer"]
+[node name="Label2" type="Label" parent="ContractContacts/Button2/ContractNPCButton/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.96, 0.58416, 0.1248, 1)
-theme_override_font_sizes/font_size = 14
-text = "WAFL"
-
-[node name="Label3" type="Label" parent="ContractContacts/ContractNPCButton2/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Ambassador"
-
-[node name="Label4" type="Label" parent="ContractContacts/ContractNPCButton2/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Opinion: 0 / 100"
-
-[node name="ContractNPCButton3" type="BoxContainer" parent="ContractContacts"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="TextureRect" type="TextureRect" parent="ContractContacts/ContractNPCButton3"]
-custom_minimum_size = Vector2(32, 128)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("4_71dqv")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ContractContacts/ContractNPCButton3"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="ContractContacts/ContractNPCButton3/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_ttruw")
-theme_override_font_sizes/font_size = 14
-text = "Chiara Summer"
-
-[node name="Label2" type="Label" parent="ContractContacts/ContractNPCButton3/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(5.39064e-06, 0.967203, 0.00552695, 1)
+theme_override_colors/font_color = Color(0.176552, 0.528247, 0.22892, 1)
 theme_override_font_sizes/font_size = 14
 text = "PAF"
 
-[node name="Label3" type="Label" parent="ContractContacts/ContractNPCButton3/VBoxContainer"]
+[node name="Label3" type="Label" parent="ContractContacts/Button2/ContractNPCButton/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Ambassador"
+text = "Officer"
 
-[node name="Label4" type="Label" parent="ContractContacts/ContractNPCButton3/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Opinion: 0 / 100"
-
-[node name="ContractNPCButton4" type="BoxContainer" parent="ContractContacts"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="TextureRect" type="TextureRect" parent="ContractContacts/ContractNPCButton4"]
-custom_minimum_size = Vector2(32, 128)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("4_71dqv")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ContractContacts/ContractNPCButton4"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="ContractContacts/ContractNPCButton4/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_ttruw")
-theme_override_font_sizes/font_size = 14
-text = "Chiara Summer"
-
-[node name="Label2" type="Label" parent="ContractContacts/ContractNPCButton4/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.831373, 0, 0.239216, 1)
-theme_override_font_sizes/font_size = 14
-text = "AE"
-
-[node name="Label3" type="Label" parent="ContractContacts/ContractNPCButton4/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Ambassador"
-
-[node name="Label4" type="Label" parent="ContractContacts/ContractNPCButton4/VBoxContainer"]
+[node name="Label4" type="Label" parent="ContractContacts/Button2/ContractNPCButton/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Opinion: 0 / 100"
-
-[node name="ContactActions" type="VBoxContainer" parent="ContractContacts"]
-layout_mode = 2
-theme_override_constants/separation = -30
-
-[node name="TextureButton" type="TextureButton" parent="ContractContacts/ContactActions"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("2_spgwn")
-texture_normal = ExtResource("4_ttruw")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="ContractContacts/ContactActions/TextureButton"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 46.0
-theme_override_font_sizes/font_size = 20
-text = "Back"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -402,6 +368,7 @@ The on-again off-again independence of this tiny city state has attracted some o
 fit_content = true
 
 [node name="ContractCloseUp" type="Control" parent="."]
+unique_name_in_owner = true
 visible = false
 anchors_preset = 0
 offset_right = 40.0
@@ -432,6 +399,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("2_spgwn")
 texture_normal = ExtResource("4_ttruw")
+texture_pressed = ExtResource("5_7j5gr")
+texture_hover = ExtResource("5_7j5gr")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -449,6 +418,8 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("2_spgwn")
 texture_normal = ExtResource("4_ttruw")
+texture_pressed = ExtResource("5_7j5gr")
+texture_hover = ExtResource("5_7j5gr")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -470,9 +441,10 @@ offset_right = 1153.0
 offset_bottom = 1346.0
 theme = ExtResource("2_spgwn")
 theme_override_font_sizes/normal_font_size = 16
-text = "Sed mattis pretium dolor. Morbi viverra, ligula in cursus varius, velit erat consectetur enim, ultricies venenatis nisi lacus nec velit. Morbi neque dolor, scelerisque a purus vestibulum, lacinia maximus libero. Aenean facilisis ligula nisl, nec rutrum augue volutpat eget. 
+text = "Chiara ashes her cigarette off the hotel balcony while you review the plans on her phone. In this breeze, it's a miracle her fur coat stays clean.
 
-Vivamus vestibulum, ligula scelerisque mollis suscipit."
+\"The security cameras are off for exactly seven more minutes. If you have any more questions, I suggest you ask them quickly.\"
+"
 fit_content = true
 
 [node name="ContractDescription" type="RichTextLabel" parent="ContractCloseUp"]
@@ -522,15 +494,15 @@ Summers"
 [node name="MissionDetailsSubLabel" type="Label" parent="ContractCloseUp"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 94.0
+offset_left = 86.0
 offset_top = 129.0
-offset_right = 494.0
+offset_right = 486.0
 offset_bottom = 161.0
 theme = ExtResource("2_spgwn")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
-text = "Sabotage European Trade"
+text = "Sabotage American-European Trade"
 
 [node name="MissionDetailsLabel" type="Label" parent="ContractCloseUp"]
 unique_name_in_owner = true
@@ -543,3 +515,7 @@ theme = ExtResource("2_spgwn")
 theme_override_font_sizes/font_size = 36
 text = "MISSION DETAILS"
 horizontal_alignment = 1
+
+[connection signal="button_up" from="MainOptions/ContractsButton" to="." method="_on_contracts_button_button_up"]
+[connection signal="button_up" from="ContractContacts/Button" to="." method="_on_contract_npc_button_button_up"]
+[connection signal="button_up" from="ContractCloseUp/ContractActions/TextureButton5" to="." method="_on_accept_mission_trailer"]

@@ -6,10 +6,8 @@
 [resource]
 script = ExtResource("2_1spi4")
 city_name = "Miami"
-city_greeting = "MIAMI VERSION The docks of New Gibraltar are electrifying. Military vessels, luxury yachts, and cruise ships form an unlikely crowd as they jostle to enter the Mediterranean. Wild-eyed patriots preach a return to independence, and perfumed businesspeople in the \"defense industry\" offer drinks to every captain coming ashore.
+city_greeting = "Officially demilitarized by federal decree, Miami's boardwalks still shimmer with the promise of sex and violence. By day, sunburned tourists pose for photos with famous art deco skyline and shop for handmade art; by night, the city swarms mercenary crews with designer handbags who laugh in the face of the city's barely-disguised combat drones.
 
-The on-again off-again independence of this tiny city state has attracted some of the most ambitious, wanted, and opportunistic people on this side of the Atlantic. It's an intoxicatinging mix, punctuated by constant smell of ozone in the air. Energy weapons are fired here. Often.
-
-"
+While the American government has tried time and again to relocate the private naval industry far away from one of its most important tourist destinations, the industry has made it very clear: When they aren't sinking foreign ships, America's privateers expect to party."
 city_portrait = ExtResource("1_ns30a")
 metadata/_custom_type_script = "uid://b8owuv8kc08ga"

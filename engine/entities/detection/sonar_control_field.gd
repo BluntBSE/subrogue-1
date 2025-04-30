@@ -13,9 +13,14 @@ signal pinged
 func _ready() -> void:
     pass # Replace with function body.
 
+func unpack():
+    if own_entity.played_by != null:
+        var player:Player = own_entity.played_by
+        player.UI.sonar_ordnance_ui.sonar_ordnance_ui_state.connect(handle_player_ui_state)
+
 func _process(delta:float)->void:
     var mesh_1:MeshInstance3D = %SonarPulseMesh
-    var entity:Entity = get_parent()
+    var entity:Entity = own_entity
     var up = (entity.anchor.position - entity.position).normalized()
     #This, along wth the funky rotations on the mesh, are how we keep the plane from clipping into the planet.
     mesh_1.look_at(entity.anchor.position)
@@ -185,3 +190,10 @@ func normalize_angle(angle: float) -> float:
     if normalized < 0:
         normalized += 360.0
     return normalized
+
+func handle_player_ui_state(state:String):
+    print("handler got ", state)
+    if state == "ActiveSonarOpen":
+        %SonarPulseMesh.visible = true
+    else:
+        %SonarPulseMesh.visible = false

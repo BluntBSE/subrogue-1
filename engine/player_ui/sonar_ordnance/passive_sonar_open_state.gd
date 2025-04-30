@@ -11,6 +11,8 @@ func stateEnter(_args:Dictionary)->void:
     ref.anim_player.queue("PassiveSonarIn")
     ref.adjust_tab_z()
     ref.adjust_tab_colors()
+    ref.sonar_ordnance_ui_state.emit(ref.state_machine._current_state_id)
+
     pass
     
     

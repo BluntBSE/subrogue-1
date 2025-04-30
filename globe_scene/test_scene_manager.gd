@@ -15,7 +15,7 @@ var spawn_navnodes = ["NavNode_Miami", "NavNode_NewGibraltar", "NavNode_Reykjavi
 var destination_navnodes = []
 var commercial_ids = ["debug_commercial"]
 var military_ids
-var faction_ids = ["SaharanFreeLeague", "AtlanticEmpire", "EuropeanFront", "UnitedAmericanRepublics"]
+var faction_ids = ["SaharanFreeLeague", "Atlantic Empire", "EuropeanFront", "UnitedAmericanRepublics"]
 
 var spawn_check_time = 0.0
 var spawn_more = true

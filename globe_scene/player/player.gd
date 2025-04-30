@@ -22,6 +22,7 @@ func _ready() -> void:
     #Only do this if the game has not started before.
     entities.get_node("PlayerEntity").position = determine_spawn_point().position
     entities.get_node("PlayerEntity").unpack("player_sub", faction, null)
+
     camera.make_current()
     if is_multiplayer_authority():
         get_node("UICanvas").visible = true
