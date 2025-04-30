@@ -43,15 +43,20 @@ func update_private_controls(layer:int, val:bool):
     var own_layer = entity.faction.faction_layer
     if updating_for_player and layer == own_layer:
         sonar_mesh.visible = true
+        %ControlMesh1.visible = true
+        %ControlMesh2.visible = true
     else:
         sonar_mesh.visible = false
-        
+        %ControlMesh1.visible = false
+        %ControlMesh2.visible = false      
     
 
 func update_mesh_visibilities(layer:int, val:bool):
     update_private_controls(layer, val)
     depth_mesh.set_layer_mask_value(layer, val)
     sonar_mesh.set_layer_mask_value(layer,val)
+    %ControlMesh1.set_layer_mask_value(layer, val)
+    %ControlMesh2.set_layer_mask_value(layer,val)
     for child in get_children():
         if child.get("layers") != null:
             child.set_layer_mask_value(layer,val)

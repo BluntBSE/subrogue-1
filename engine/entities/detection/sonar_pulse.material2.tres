@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dtrwdbek3oy3r"]
+
+[ext_resource type="Shader" uid="uid://c2ffm8yh34ab5" path="res://engine/entities/detection/sonar_pulse_2.gdshader" id="1_cjuxi"]
+[ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="2_bdovm"]
+[ext_resource type="Shader" uid="uid://cdoiv5cq5nyvy" path="res://engine/entities/detection/sonar_targeting_no_pulse.gdshader" id="3_4fem6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50576"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_cjuxi")
+shader_parameter/disc_texture = ExtResource("2_bdovm")
+shader_parameter/start_angle = -10.0
+shader_parameter/end_angle = 10.0
+shader_parameter/frontier_head = 0.0
+shader_parameter/frontier_tail = 0.0
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_50576")
+shader = ExtResource("3_4fem6")
+shader_parameter/disc_texture = ExtResource("2_bdovm")
+shader_parameter/start_angle = 10.0
+shader_parameter/end_angle = 10.0
+shader_parameter/frontier_head = 0.0
+shader_parameter/frontier_tail = 0.0
