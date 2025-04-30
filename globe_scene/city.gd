@@ -4,6 +4,7 @@ extends Node3D
 class_name City
 @export var anchor:Planet
 var height:float = 100.25 #We can't access GlobalConst in the editor so, 100.25
+@export var city_def:CityDef
 @export var snap:bool = false
 @export var faction:Faction
 @onready var interaction:CityInteraction = %CityInteraction

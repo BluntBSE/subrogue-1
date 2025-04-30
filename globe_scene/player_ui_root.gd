@@ -4,6 +4,7 @@ class_name PlayerUIRoot
 const TIMER_LIMIT = 2.0
 var timer = 0.0
 
+@onready var sonar_ordnance_ui = %SonarOrdnanceUI
 @onready var active_sonar_control: ActiveSonarControl = find_child("ActiveSonarControl", true, false)
 @onready var volume_bar: DraggableTPB = find_child("VolumeBar", true, false)
 @onready var inspection_root:InspectionRoot = find_child("InspectionRoot", true, false)
@@ -113,6 +114,8 @@ func handle_opened_city(city:City):
     %UIAnimations.play("CityIn", -1.0, 2.0)
     %SonarOrdnanceUI.hide_sonar_ordnance_ui()
     docked_at = city
+    var city_ui:CityUI = %CityUIRoot.get_node("CityUI")
+    city_ui.unpack(city.city_def, city.faction)
     pass
     
 func handle_undocked_button():

@@ -18,7 +18,7 @@ func handle_opened_signal(sig:SignalPopup):
     if inspecting_signal:
         disconnect_unidentified(inspecting_signal)
         
-    SoundManager.play_straight("ui_swoop_1", "ui", -8.0)
+    SoundManager.play_straight("ui_swoop_1", "ui")
 
     inspecting_signal = sig
     #Close Entity inspection if it's open
@@ -44,7 +44,7 @@ func handle_openened_identified_signal(sig:SignalPopup):
     %SignalInspection.visible = false
     %EntityInspection.visible = true
     load_inspected_entity(sig.detected_object)
-    SoundManager.play_straight("ui_swoop_1", "ui", -8.0)
+    SoundManager.play_straight("ui_swoop_1", "ui")
     var player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
     player.play("slide_in")
 

@@ -7,7 +7,7 @@ var sound_lib:SoundLib
 var in_use:Array = [] # Players in_use. Known for the purposes of stopping sounds.
 var available:Array  = []  # The available players.
 var queue:Array = []  # The queue of sounds to play.
-var music_volume = -28.0 #Expressed as DB modification. category: 'music'
+var music_volume = -15.0 #Expressed as DB modification. category: 'music'
 var ui_volume = 0.0 #Expressed as DB modification. category: 'ui'
 var game_volume = 0.0 #Expressed as DB modification. category 'game'
 
@@ -104,7 +104,7 @@ func _on_node_added(node:Node) -> void:
         node.pressed.connect(_play_pressed)
         
 func _play_hover():
-    play_straight("button_hover", "ui", -8.0)
+    play_straight("button_hover", "ui", -4.0)
 
 func _play_pressed():
-    play_straight("button_press", "ui", -6.0)
+    play_straight("button_press", "ui", -4.0)

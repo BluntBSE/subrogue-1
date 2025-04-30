@@ -2599,6 +2599,7 @@ offset_bottom = 1421.64
 scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("7_nwwe3")
 texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
 ignore_texture_size = true
 stretch_mode = 0
 metadata/_edit_use_anchors_ = true

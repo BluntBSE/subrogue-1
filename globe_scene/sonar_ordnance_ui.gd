@@ -19,6 +19,7 @@ var highlight_color:Color = Color("#ffffff")
 b2b2b2 - Dark Label Modulate
 a0a0a0 - Light modulate
 """
+signal sonar_ordnance_ui_state
 
 func _ready()->void:
     state_machine = StateMachine.new()
