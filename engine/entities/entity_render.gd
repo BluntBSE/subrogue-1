@@ -13,7 +13,8 @@ var released_by_observer = true #This variable tracks whether or not the thing t
 signal was_selected
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
+    GlobeHelpers.recursively_update_visibility(self, 1, false)
+    sonar_mesh.visible = false
     pass # Replace with function body.
 
 
@@ -36,16 +37,24 @@ func _unhandled_input(event:InputEvent):
     
         
 
-
+func update_private_controls(layer:int, val:bool):
+    #Sonar controls should only be shown to players, and then only to those who own this entity.
+    var updating_for_player:bool = GlobalConst.is_layer_player(layer)
+    var own_layer = entity.faction.faction_layer
+    if updating_for_player and layer == own_layer:
+        sonar_mesh.visible = true
+    else:
+        sonar_mesh.visible = false
         
     
 
 func update_mesh_visibilities(layer:int, val:bool):
+    update_private_controls(layer, val)
     depth_mesh.set_layer_mask_value(layer, val)
     sonar_mesh.set_layer_mask_value(layer,val)
     for child in get_children():
-        child.set_layer_mask_value(layer,val)
-    pass
+        if child.get("layers") != null:
+            child.set_layer_mask_value(layer,val)
     
 
 

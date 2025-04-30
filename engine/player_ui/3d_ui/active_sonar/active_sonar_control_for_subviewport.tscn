@@ -1,0 +1,124 @@
+[gd_scene load_steps=10 format=3 uid="uid://dhp837f4rtahl"]
+
+[ext_resource type="Script" uid="uid://ragtmwm6go3b" path="res://active_sonar_control_3d.gd" id="1_r3jn7"]
+[ext_resource type="Script" uid="uid://dp4b2h8rbjnju" path="res://engine/player_ui/sonar_ordnance/active_sonar_control.gd" id="2_76oxo"]
+[ext_resource type="Shader" uid="uid://372drerjny0t" path="res://engine/player_ui/3d_ui/radial_control_fade.gdshader" id="3_q7ylm"]
+[ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="4_q25qa"]
+[ext_resource type="Texture2D" uid="uid://cp3g7kn76q3ta" path="res://assets/bluepolar3.png" id="5_4ub1a"]
+[ext_resource type="Texture2D" uid="uid://cvrep056uh18e" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04Blue.png" id="6_1d12o"]
+[ext_resource type="Texture2D" uid="uid://bdveri46dlmy4" path="res://assets/UI/white_buttons/VolumeSliderKnobT04White.png" id="7_a3e81"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spp88"]
+shader = ExtResource("3_q7ylm")
+shader_parameter/disc_texture = ExtResource("4_q25qa")
+shader_parameter/start_angle = 10.0
+shader_parameter/end_angle = 45.0
+shader_parameter/between_angle_alpha = 1.0
+shader_parameter/beyond_angle_alpha = 0.2
+shader_parameter/distance_factor = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l0h5s"]
+resource_local_to_scene = true
+shader = ExtResource("3_q7ylm")
+shader_parameter/disc_texture = ExtResource("5_4ub1a")
+shader_parameter/start_angle = 10.0
+shader_parameter/end_angle = 45.0
+shader_parameter/between_angle_alpha = 1.0
+shader_parameter/beyond_angle_alpha = 0.2
+shader_parameter/distance_factor = 0.0
+
+[node name="ActiveSonarControlForSubviewport" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r3jn7")
+
+[node name="ActiveSonarControl" type="Control" parent="."]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 225.0
+offset_top = 235.0
+offset_right = 265.0
+offset_bottom = 275.0
+scale = Vector2(1.8, 1.8)
+script = ExtResource("2_76oxo")
+angle_1 = 10.0
+angle_2 = 45.0
+a_diff = 35.0
+
+[node name="ActiveSonarBG" type="TextureRect" parent="ActiveSonarControl"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.54902)
+material = SubResource("ShaderMaterial_spp88")
+layout_mode = 0
+offset_left = -101.0
+offset_top = -108.0
+offset_right = 619.0
+offset_bottom = 612.0
+scale = Vector2(0.320004, 0.320004)
+texture = ExtResource("4_q25qa")
+
+[node name="ActiveSonarTexture" type="TextureRect" parent="ActiveSonarControl"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_l0h5s")
+layout_mode = 0
+offset_left = -86.0
+offset_top = -94.0
+offset_right = 634.0
+offset_bottom = 626.0
+scale = Vector2(0.279999, 0.279999)
+texture = ExtResource("5_4ub1a")
+
+[node name="ActiveSonarKnobOnePivot" type="Control" parent="ActiveSonarControl"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 10.0
+offset_right = 57.0
+offset_bottom = 50.0
+rotation = 0.174533
+
+[node name="ActiveSonarKnobOne" type="TextureButton" parent="ActiveSonarControl/ActiveSonarKnobOnePivot"]
+layout_mode = 0
+offset_left = -21.9119
+offset_top = -118.839
+offset_right = 78.0881
+offset_bottom = -18.8392
+scale = Vector2(0.4, 0.4)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("6_1d12o")
+texture_pressed = ExtResource("7_a3e81")
+texture_hover = ExtResource("7_a3e81")
+
+[node name="ActiveSonarKnobTwoPivot" type="Control" parent="ActiveSonarControl"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 10.0
+offset_right = 57.0
+offset_bottom = 50.0
+rotation = 0.785398
+
+[node name="ActiveSonarKnobTwo" type="TextureButton" parent="ActiveSonarControl/ActiveSonarKnobTwoPivot"]
+layout_mode = 0
+offset_left = -22.9642
+offset_top = -119.655
+offset_right = 77.0358
+offset_bottom = -19.6547
+scale = Vector2(0.4, 0.4)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("6_1d12o")
+texture_pressed = ExtResource("7_a3e81")
+texture_hover = ExtResource("7_a3e81")
+
+[connection signal="button_up" from="ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="ActiveSonarControl" method="_on_active_sonar_knob_one_button_up"]
+[connection signal="pressed" from="ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
+[connection signal="button_up" from="ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
+[connection signal="pressed" from="ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]
