@@ -1,7 +1,7 @@
 class_name GlobeHelpers
 
 
-func visualize_axis(target, axis, anchor, color):
+static func visualize_axis(target, axis, anchor, color):
     var debug_draw := ImmediateMesh.new()
     debug_draw.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -99,7 +99,28 @@ func visualize_axis(target, axis, anchor, color):
     # Add the mesh to the anchor node
     anchor.add_child(mesh)
     mesh.global_position = target.global_position
-
+    
+static func get_aligned_basis(axis:Vector3) -> Dictionary:
+    # Calculate the main orientation vectors based on the given axis
+    var forward = axis.normalized() #Facing away from the planet/anchor
+    
+    # Calculate the right vector (perpendicular to forward and global up)
+    # Following the same logic as the original function
+    var right = Vector3(0, 1, 0).cross(forward).normalized()
+    
+    # Handle case where axis might be aligned with global up
+    if right.length_squared() < 0.001:
+        right = Vector3(1, 0, 0)
+    
+    # Calculate the up vector to complete the orthogonal basis
+    var up = forward.cross(right).normalized()
+    
+    # Return the basis vectors in a dictionary
+    return {
+        "forward": forward,
+        "right": right,
+        "up": up
+    }
 
 func visualize_entity_position(entity_position, anchor, color):
     # Create a sphere mesh

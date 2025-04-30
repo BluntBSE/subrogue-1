@@ -378,14 +378,16 @@ mesh = SubResource("QuadMesh_3qnbj")
 skeleton = NodePath("../..")
 
 [node name="SonarControls3D" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker"]
+unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0201111, -0.0650034, 0.215542)
 script = ExtResource("21_3qfs3")
 hover_texture = ExtResource("22_op6l6")
 regular_texture = ExtResource("21_rjttp")
 
-[node name="ControlPivot1" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D"]
+[node name="KnobPivot1" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D"]
+unique_name_in_owner = true
 
-[node name="ControlMesh1" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot1"]
+[node name="ControlMesh1" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1"]
 unique_name_in_owner = true
 transform = Transform3D(0.999979, -0.00651415, -0.000580518, 0.00651604, 0.999973, 0.00330911, 0.000558935, -0.00331283, 0.999994, 1.49012e-08, 11.8615, 0)
 material_override = SubResource("StandardMaterial3D_3qfs3")
@@ -393,24 +395,25 @@ transparency = 0.8
 cast_shadow = 0
 mesh = SubResource("QuadMesh_op6l6")
 
-[node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot1/ControlMesh1"]
+[node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot1/ControlMesh1/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1/Area3D"]
 shape = SubResource("ConvexPolygonShape3D_3qfs3")
 
-[node name="ControlPivot2" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D"]
+[node name="KnobPivot2" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D"]
+unique_name_in_owner = true
 transform = Transform3D(0.983719, 0.179712, 0, -0.179712, 0.983719, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="ControlMesh2" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot2"]
+[node name="ControlMesh2" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2"]
 unique_name_in_owner = true
 transform = Transform3D(0.999979, -0.00651415, -0.000580518, 0.00651604, 0.999973, 0.00330911, 0.000558935, -0.00331283, 0.999994, 1.49012e-08, 11.8615, 0)
 material_override = SubResource("StandardMaterial3D_3qfs3")
 transparency = 0.2
 mesh = SubResource("QuadMesh_op6l6")
 
-[node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot2/ControlMesh2"]
+[node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot2/ControlMesh2/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2/Area3D"]
 shape = SubResource("ConvexPolygonShape3D_3qfs3")
 
 [node name="EntityEmission" type="Node3D" parent="."]
@@ -445,7 +448,7 @@ script = ExtResource("29_j3cwe")
 [connection signal="mouse_exited" from="." to="EntityRender" method="_on_entity_mouse_exited"]
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_exited"]
-[connection signal="mouse_entered" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot1/ControlMesh1/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh1_mouse_entered"]
-[connection signal="mouse_exited" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot1/ControlMesh1/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh1_mouse_exited"]
-[connection signal="mouse_entered" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot2/ControlMesh2/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh2_mouse_entered"]
-[connection signal="mouse_exited" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/ControlPivot2/ControlMesh2/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh2_mouse_exited"]
+[connection signal="mouse_entered" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh1_mouse_entered"]
+[connection signal="mouse_exited" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh1_mouse_exited"]
+[connection signal="mouse_entered" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh2_mouse_entered"]
+[connection signal="mouse_exited" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh2_mouse_exited"]

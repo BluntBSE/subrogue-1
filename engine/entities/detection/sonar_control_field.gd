@@ -17,7 +17,8 @@ func unpack():
     if own_entity.played_by != null:
         var player:Player = own_entity.played_by
         player.UI.sonar_ordnance_ui.sonar_ordnance_ui_state.connect(handle_player_ui_state)
-
+        %SonarControls3D.unpack()
+    
 func _process(delta:float)->void:
     var mesh_1:MeshInstance3D = %SonarPulseMesh
     var entity:Entity = own_entity
