@@ -17,6 +17,8 @@ var knob_1_dragged: bool = false
 var knob_2_dragged: bool = false
 var knob_1_hovered:bool = false
 var knob_2_hovered:bool = false
+var knob_1_last_dist
+var knob_2_last_dist
 var dragging:bool = false
 
 signal s_angle_1
@@ -75,6 +77,12 @@ func _on_controlmesh2_mouse_exited() -> void:
 func update_knobs() -> void:
     if knob_1_dragged:
         var knob_angle = calculate_knob_angle(mesh_1)
+        var dist = calculate_crude_distance(%SonarNode.own_entity.anchor)
+        if dist > 0.0:
+            knob_1_last_dist = dist
+            %ControlMesh1.position.y = abs(dist)
+        
+        
         if knob_angle != null:
             set_angle_1(knob_angle)
     
@@ -142,7 +150,45 @@ func calculate_knob_angle(mesh: MeshInstance3D) -> float:
     return angle
     
 
-func calculate_knob_distance(knob:MeshInstance3D):
+func calculate_crude_distance(anchor: Planet) -> float:
+    var mouse_pos = get_viewport().get_mouse_position()
+    var from = camera.project_ray_origin(mouse_pos)
+    var to = from + camera.project_ray_normal(mouse_pos) * 1000
+    
+    # Get the physics space state
+    var space_state = get_world_3d().direct_space_state
+    
+    # Set up ray query parameters
+    var ray_params = PhysicsRayQueryParameters3D.new()
+    ray_params.from = from
+    ray_params.to = to
+    ray_params.collide_with_areas = true  # Important to detect Area3D nodes
+    ray_params.collision_mask  = 1
+    # If you want to target only the ClickableSphere, you could set up collision layers
+    # ray_params.collision_mask = your_clickable_sphere_layer
+    
+    # Perform the raycast
+    var result = space_state.intersect_ray(ray_params)
+    print("RESULT WAS", result)
+    
+    # Check if the ray hit something and if it's the ClickableSphere
+    if result and "collider" in result:
+        var collider = result["collider"]
+        
+        # Check if the collider is the ClickableSphere or one of its children
+        var clickable_sphere = anchor.get_node("ClickableSphere")
+        if collider == clickable_sphere or collider.get_parent() == clickable_sphere:
+            print("Got a collision at", result["position"])
+            # Return the intersection point
+            var dist = (result["position"] - position).length()
+            print("CRUDE DISTANCE DETERMINED TO BE")
+            return dist
+            
+    print("ERROR: No valid intersection found in crude distance check")
+    return 0.0
+    
+    
+func calculate_knob_distance():
     # Cast a ray from the camera to the mouse position
     var angle
     var mouse_pos = get_viewport().get_mouse_position()
@@ -164,11 +210,15 @@ func calculate_knob_distance(knob:MeshInstance3D):
     var local_northsouth = bd.up #I think?
    # GlobeHelpers.visualize_axis(self, local_northsouth, %SonarNode.own_entity.anchor, Color("00ff00"))
     if intersection:
-        # Calculate the angle between the intersection point and the center of the sonar
-        var center = global_transform.origin
-        var to_center = (intersection - center).length()
+        print(intersection)
+        # Center of our little local plane
+        var ivector = intersection
+        ivector.x = 0.0 #Flatten to local plane
+        var center = Vector3(0.0,0.0,0.0) #mid of local plane
+        var to_center = (ivector - center).length()
          # Project this vector onto the entity's local coordinate system
         #CLAMP to max dist (currently 750 km)
+        print("Dist was perceived to be", to_center)
         return to_center
     print("Could not calculate distance for intersection in calculate knob distance")
     return 0.0
