@@ -37,6 +37,8 @@ func _ready():
 func _process(_delta:float):
     update_knobs()
 
+
+
 func _on_controlmesh1_mouse_entered() -> void:
     print("Entered")
     knob_1_hovered = true
@@ -87,16 +89,18 @@ func _input(event):
         if event.is_action_pressed("primary_action"):
             if knob_1_hovered == true:
                 knob_1_dragged = true
-                get_tree().root.set_input_as_handled()
             if knob_2_hovered == true:
                 knob_1_dragged = true
+                
         if event.is_action_released("primary_action"):
             knob_1_hovered = false
             knob_1_dragged = false
             knob_2_hovered = false
             knob_2_dragged = false
         
-        
+    if knob_1_dragged == true or knob_2_dragged == true:
+        get_viewport().set_input_as_handled()
+       
 
 func calculate_knob_angle(mesh: MeshInstance3D) -> float:
     # Cast a ray from the camera to the mouse position
