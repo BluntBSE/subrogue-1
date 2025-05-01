@@ -19,8 +19,8 @@ var knob_1_dragged: bool = false
 var knob_2_dragged: bool = false
 var knob_1_hovered:bool = false
 var knob_2_hovered:bool = false
-var knob_1_dist_lerp:float
-var knob_2_dist_lerp:float
+var knob_1_dist_lerp:float #Actually we want these to move in sync so we only use knob 1
+#var knob_2_dist_lerp:float
 var knob_1_lerp_to:Vector3
 var knob_2_lerp_to:Vector3
 var rot_1_lerp_to:Vector3
@@ -32,8 +32,35 @@ signal s_angle_2
 signal ping_requested  #Emits with angleA, angleB
 
 
-func lerp_to_it(delta:float):
-    pass
+func lerp_to_it(delta: float):
+    var position_lerp_speed = 7.0
+    var rotation_lerp_speed = 1.0
+    
+    #No extrapolations allowed. 
+    var pos_factor = min(1.0, delta * position_lerp_speed)
+    var rot_factor = min(1.0, delta * rotation_lerp_speed)
+    
+    # Lerp mesh positions
+    if knob_1_dist_lerp:
+        %ControlMesh1.position.y = lerp(%ControlMesh1.position.y,knob_1_dist_lerp, pos_factor)
+        %ControlMesh2.position.y = lerp(%ControlMesh2.position.y,knob_1_dist_lerp, pos_factor)     
+    
+    if knob_1_lerp_to:
+        %ControlMesh1.global_position = %ControlMesh1.global_position.lerp(knob_1_lerp_to, pos_factor)
+    
+    if knob_2_lerp_to:
+        %ControlMesh2.global_position = %ControlMesh2.global_position.lerp(knob_2_lerp_to, pos_factor)
+    
+    # Lerp rotations
+    if rot_1_lerp_to:
+        var current_rot = knob_pivot_1.rotation
+        var target_rot = Vector3(current_rot.x, current_rot.y, rot_1_lerp_to.z)
+        knob_pivot_1.rotation = current_rot.lerp(target_rot, rot_factor)
+    
+    if rot_2_lerp_to:
+        var current_rot = knob_pivot_2.rotation
+        var target_rot = Vector3(current_rot.x, current_rot.y, rot_2_lerp_to.z)
+        knob_pivot_2.rotation = current_rot.lerp(target_rot, rot_factor)
 
 func unpack():
     var current_viewport = get_viewport()
@@ -93,8 +120,8 @@ func update_knobs() -> void:
         var dist = calculate_crude_distance(%SonarNode.own_entity.anchor)
         if dist > 0.0:
       
-            %ControlMesh1.position.y = abs(dist)
-        
+            #%ControlMesh1.position.y = abs(dist)
+            knob_1_dist_lerp = abs(dist)
         lift_knob_from_surface(%ControlMesh1, %KnobPivot1, %SonarNode.own_entity.anchor)
         if knob_angle != null:
             set_angle_1(knob_angle)
@@ -103,8 +130,9 @@ func update_knobs() -> void:
         var knob_angle = calculate_knob_angle(mesh_2)
         var dist = calculate_crude_distance(%SonarNode.own_entity.anchor)
         if dist > 0.0:
-            %ControlMesh2.position.y = abs(dist)
-            
+            #%ControlMesh2.position.y = abs(dist)
+            #We want the range in sync so both update dist 1
+            knob_1_dist_lerp = abs(dist)
         lift_knob_from_surface(%ControlMesh2, %KnobPivot2, %SonarNode.own_entity.anchor)
         if knob_angle != null:
             set_angle_2(knob_angle)
@@ -218,7 +246,6 @@ func calculate_crude_distance(anchor: Planet) -> float:
         # Check if the collider is the ClickableSphere or one of its children
         var clickable_sphere = anchor.get_node("ClickableSphere")
         if collider == clickable_sphere or collider.get_parent() == clickable_sphere:
-            print("Got a collision at", result["position"])
             # Return the intersection point
             var dist = (result["position"] - position).length()
             var clamped = clamp(dist,0.0,13.0)
