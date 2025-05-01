@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=48 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="22_loeq3"]
 [ext_resource type="Texture2D" uid="uid://bdveri46dlmy4" path="res://assets/UI/white_buttons/VolumeSliderKnobT04White.png" id="22_op6l6"]
 [ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="23_op6l6"]
+[ext_resource type="Texture2D" uid="uid://bgjry422vvmdw" path="res://assets/UI/white_buttons/VolumeSliderKnobT05White.png" id="24_j3cwe"]
 [ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_3qfs3"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="28_op6l6"]
 [ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="29_j3cwe"]
@@ -139,8 +140,9 @@ resource_local_to_scene = true
 transparency = 4
 blend_mode = 1
 shading_mode = 0
-albedo_texture = ExtResource("21_rjttp")
+albedo_texture = ExtResource("24_j3cwe")
 disable_receive_shadows = true
+billboard_mode = 2
 
 [sub_resource type="QuadMesh" id="QuadMesh_op6l6"]
 
