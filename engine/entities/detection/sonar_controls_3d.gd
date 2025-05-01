@@ -64,6 +64,7 @@ func _on_controlmesh1_mouse_exited() -> void:
 func _on_controlmesh2_mouse_entered() -> void:
     mesh_2.material_override.albedo_texture = hover_texture
     mesh_2.transparency = hovered_transparency
+    print("knob 2 is hovered")
     knob_2_hovered = true
     SoundManager.play_straight("button_hovered", "ui")
 
@@ -80,6 +81,7 @@ func _on_controlmesh2_mouse_exited() -> void:
 
 func update_knobs() -> void:
     if knob_1_dragged:
+        print("Updaitng knob 1")
         var knob_angle = calculate_knob_angle(mesh_1)
         var dist = calculate_crude_distance(%SonarNode.own_entity.anchor)
         if dist > 0.0:
@@ -91,7 +93,14 @@ func update_knobs() -> void:
             set_angle_1(knob_angle)
     
     if knob_2_dragged:
+        print("Updating knob 2")
         var knob_angle = calculate_knob_angle(mesh_2)
+        var dist = calculate_crude_distance(%SonarNode.own_entity.anchor)
+        if dist > 0.0:
+            knob_2_last_dist = dist
+            %ControlMesh2.position.y = abs(dist)
+            
+        lift_knob_from_surface(%ControlMesh2, %KnobPivot2, %SonarNode.own_entity.anchor)
         if knob_angle != null:
             set_angle_2(knob_angle)
             
@@ -102,7 +111,7 @@ func _input(event):
             if knob_1_hovered == true:
                 knob_1_dragged = true
             if knob_2_hovered == true:
-                knob_1_dragged = true
+                knob_2_dragged = true
                 
         if event.is_action_released("primary_action"):
             knob_1_hovered = false
