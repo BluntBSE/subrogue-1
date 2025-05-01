@@ -8,6 +8,8 @@ class_name SonarControl3D
 @export var regular_texture:Texture2D
 @onready var mesh_1:MeshInstance3D = %ControlMesh1
 @onready var mesh_2:MeshInstance3D = %ControlMesh2
+@onready var dir_to_anchor
+
 var camera:Camera3D
 var base_transparency = 0.8
 var hovered_transparency = 0.0
@@ -29,7 +31,9 @@ signal ping_requested  #Emits with angleA, angleB
 func unpack():
     var current_viewport = get_viewport()
     camera = get_viewport().get_camera_3d()
-
+    #Shift tranform to a bit above the height.
+    print("Adjusted global position of the sonar node. May yet be messed up by t")
+    
 func _ready():
     mesh_1.material_override = mesh_1.material_override.duplicate()
     mesh_1.transparency = base_transparency
@@ -82,7 +86,7 @@ func update_knobs() -> void:
             knob_1_last_dist = dist
             %ControlMesh1.position.y = abs(dist)
         
-        
+        lift_knob_from_surface(%ControlMesh1, %KnobPivot1, %SonarNode.own_entity.anchor)
         if knob_angle != null:
             set_angle_1(knob_angle)
     
@@ -109,6 +113,27 @@ func _input(event):
     if knob_1_dragged == true or knob_2_dragged == true:
         get_viewport().set_input_as_handled()
        
+
+func lift_knob_from_surface(knob: Node3D, pivot: Node3D, anchor: Planet):
+    var max_lift = 1.0  # When maximally far away from the pivot, lift up this much from the anchor's surface.
+    var max_dist = 750
+    var away_from_planet = (knob.global_position - anchor.global_position).normalized()  # direction
+    var dist_from_pivot = (knob.global_position - pivot.global_position).length()
+    
+    # Calculate interpolation factor (0 to 1) based on distance
+    var interpolation_factor = clamp(dist_from_pivot / max_dist, 0.0, 1.0)
+    
+    # Interpolate lift amount between 0.1 and max_lift
+    var lift_amount = 0.1 + (max_lift - 0.1) * interpolation_factor
+    
+    # Calculate how far the pivot is from the anchor's center
+    var pivot_to_anchor_dist = (pivot.global_position - anchor.global_position).length()
+    
+    # Calculate the new position with the lift applied
+    var new_pos = anchor.global_position + away_from_planet * (pivot_to_anchor_dist + lift_amount)
+    
+    # Set the knob's position
+    knob.global_position = new_pos
 
 func calculate_knob_angle(mesh: MeshInstance3D) -> float:
     # Cast a ray from the camera to the mouse position
@@ -151,6 +176,8 @@ func calculate_knob_angle(mesh: MeshInstance3D) -> float:
     
 
 func calculate_crude_distance(anchor: Planet) -> float:
+    dir_to_anchor = (%SonarNode.own_entity.anchor.global_position - position).normalized()
+
     var mouse_pos = get_viewport().get_mouse_position()
     var from = camera.project_ray_origin(mouse_pos)
     var to = from + camera.project_ray_normal(mouse_pos) * 1000
@@ -169,7 +196,6 @@ func calculate_crude_distance(anchor: Planet) -> float:
     
     # Perform the raycast
     var result = space_state.intersect_ray(ray_params)
-    print("RESULT WAS", result)
     
     # Check if the ray hit something and if it's the ClickableSphere
     if result and "collider" in result:
@@ -181,10 +207,8 @@ func calculate_crude_distance(anchor: Planet) -> float:
             print("Got a collision at", result["position"])
             # Return the intersection point
             var dist = (result["position"] - position).length()
-            print("CRUDE DISTANCE DETERMINED TO BE")
             return dist
             
-    print("ERROR: No valid intersection found in crude distance check")
     return 0.0
     
     

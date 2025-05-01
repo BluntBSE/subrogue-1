@@ -364,6 +364,7 @@ update_rotation = false
 update_scale = false
 
 [node name="RemoteTransform3D_controls" type="RemoteTransform3D" parent="EntityRender/SonarNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0368243)
 remote_path = NodePath("../TransformBreaker/SonarControls3D")
 update_rotation = false
 update_scale = false
@@ -379,7 +380,7 @@ skeleton = NodePath("../..")
 
 [node name="SonarControls3D" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker"]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0201111, -0.0650034, 0.215542)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0201111, -0.0650034, 0.252366)
 script = ExtResource("21_3qfs3")
 hover_texture = ExtResource("22_op6l6")
 regular_texture = ExtResource("21_rjttp")
