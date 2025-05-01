@@ -33,6 +33,7 @@ signal ping_requested  #Emits with angleA, angleB
 
 
 func lerp_to_it(delta: float):
+    
     var position_lerp_speed = 7.0
     var rotation_lerp_speed = 10.0
     
@@ -75,14 +76,16 @@ func _ready():
     mesh_2.transparency = base_transparency
 
 func _process(_delta:float):
+    
     update_knobs()
     lerp_to_it(_delta)
     lift_knob_from_surface(%ControlMesh1, %KnobPivot1, %SonarNode.own_entity.anchor)
     lift_knob_from_surface(%ControlMesh2, %KnobPivot2, %SonarNode.own_entity.anchor)
-
+    look_at(%SonarNode.own_entity.anchor.position)
 
 
 func _on_controlmesh1_mouse_entered() -> void:
+    
     print("Entered")
     knob_1_hovered = true
     mesh_1.material_override.albedo_texture = hover_texture
@@ -113,6 +116,7 @@ func _on_controlmesh2_mouse_exited() -> void:
     knob_2_hovered = false
     mesh_2.material_override.albedo_texture = regular_texture
     mesh_2.transparency = base_transparency
+    
     pass # Replace with function body.
 
 
@@ -170,12 +174,13 @@ func lift_knob_from_surface(knob: Node3D, pivot: Node3D, anchor: Planet):
     
     # Calculate how far the pivot is from the anchor's center
     var pivot_to_anchor_dist = (pivot.global_position - anchor.global_position).length()
-    
     # Calculate the new position with the lift applied
     var new_pos = anchor.global_position + away_from_planet * (pivot_to_anchor_dist + lift_amount)
     
     # Set the knob's position
     knob.global_position = new_pos
+    
+
 
 func calculate_knob_angle(mesh: MeshInstance3D) -> float:
     # Cast a ray from the camera to the mouse position
