@@ -19,14 +19,21 @@ var knob_1_dragged: bool = false
 var knob_2_dragged: bool = false
 var knob_1_hovered:bool = false
 var knob_2_hovered:bool = false
-var knob_1_last_dist
-var knob_2_last_dist
+var knob_1_dist_lerp:float
+var knob_2_dist_lerp:float
+var knob_1_lerp_to:Vector3
+var knob_2_lerp_to:Vector3
+var rot_1_lerp_to:Vector3
+var rot_2_lerp_to:Vector3
 var dragging:bool = false
 
 signal s_angle_1
 signal s_angle_2
 signal ping_requested  #Emits with angleA, angleB
 
+
+func lerp_to_it(delta:float):
+    pass
 
 func unpack():
     var current_viewport = get_viewport()
@@ -42,6 +49,7 @@ func _ready():
 
 func _process(_delta:float):
     update_knobs()
+    lerp_to_it(_delta)
 
 
 
@@ -81,11 +89,10 @@ func _on_controlmesh2_mouse_exited() -> void:
 
 func update_knobs() -> void:
     if knob_1_dragged:
-        print("Updaitng knob 1")
         var knob_angle = calculate_knob_angle(mesh_1)
         var dist = calculate_crude_distance(%SonarNode.own_entity.anchor)
         if dist > 0.0:
-            knob_1_last_dist = dist
+      
             %ControlMesh1.position.y = abs(dist)
         
         lift_knob_from_surface(%ControlMesh1, %KnobPivot1, %SonarNode.own_entity.anchor)
@@ -93,11 +100,9 @@ func update_knobs() -> void:
             set_angle_1(knob_angle)
     
     if knob_2_dragged:
-        print("Updating knob 2")
         var knob_angle = calculate_knob_angle(mesh_2)
         var dist = calculate_crude_distance(%SonarNode.own_entity.anchor)
         if dist > 0.0:
-            knob_2_last_dist = dist
             %ControlMesh2.position.y = abs(dist)
             
         lift_knob_from_surface(%ControlMesh2, %KnobPivot2, %SonarNode.own_entity.anchor)
@@ -216,7 +221,9 @@ func calculate_crude_distance(anchor: Planet) -> float:
             print("Got a collision at", result["position"])
             # Return the intersection point
             var dist = (result["position"] - position).length()
-            return dist
+            var clamped = clamp(dist,0.0,13.0)
+            print ("clamped distance at ", clamped)
+            return clamp(dist,0.0,13.0)
             
     return 0.0
     
