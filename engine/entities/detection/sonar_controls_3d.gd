@@ -23,8 +23,8 @@ var knob_1_dist_lerp:float #Actually we want these to move in sync so we only us
 #var knob_2_dist_lerp:float
 var knob_1_lerp_to:Vector3
 var knob_2_lerp_to:Vector3
-var rot_1_lerp_to:Vector3
-var rot_2_lerp_to:Vector3
+var rot_1_lerp_to:float
+var rot_2_lerp_to:float
 var dragging:bool = false
 
 signal s_angle_1
@@ -34,7 +34,7 @@ signal ping_requested  #Emits with angleA, angleB
 
 func lerp_to_it(delta: float):
     var position_lerp_speed = 7.0
-    var rotation_lerp_speed = 1.0
+    var rotation_lerp_speed = 10.0
     
     #No extrapolations allowed. 
     var pos_factor = min(1.0, delta * position_lerp_speed)
@@ -54,13 +54,13 @@ func lerp_to_it(delta: float):
     # Lerp rotations
     if rot_1_lerp_to:
         var current_rot = knob_pivot_1.rotation
-        var target_rot = Vector3(current_rot.x, current_rot.y, rot_1_lerp_to.z)
-        knob_pivot_1.rotation = current_rot.lerp(target_rot, rot_factor)
+        var target_z_rot = rot_1_lerp_to
+        knob_pivot_1.rotation.z = lerp(current_rot.z,target_z_rot, rot_factor)
     
     if rot_2_lerp_to:
         var current_rot = knob_pivot_2.rotation
-        var target_rot = Vector3(current_rot.x, current_rot.y, rot_2_lerp_to.z)
-        knob_pivot_2.rotation = current_rot.lerp(target_rot, rot_factor)
+        var target_z_rot = rot_2_lerp_to
+        knob_pivot_2.rotation.z = lerp(current_rot.z,target_z_rot, rot_factor)
 
 func unpack():
     var current_viewport = get_viewport()
@@ -77,6 +77,8 @@ func _ready():
 func _process(_delta:float):
     update_knobs()
     lerp_to_it(_delta)
+    lift_knob_from_surface(%ControlMesh1, %KnobPivot1, %SonarNode.own_entity.anchor)
+    lift_knob_from_surface(%ControlMesh2, %KnobPivot2, %SonarNode.own_entity.anchor)
 
 
 
@@ -122,7 +124,6 @@ func update_knobs() -> void:
       
             #%ControlMesh1.position.y = abs(dist)
             knob_1_dist_lerp = abs(dist)
-        lift_knob_from_surface(%ControlMesh1, %KnobPivot1, %SonarNode.own_entity.anchor)
         if knob_angle != null:
             set_angle_1(knob_angle)
     
@@ -133,7 +134,6 @@ func update_knobs() -> void:
             #%ControlMesh2.position.y = abs(dist)
             #We want the range in sync so both update dist 1
             knob_1_dist_lerp = abs(dist)
-        lift_knob_from_surface(%ControlMesh2, %KnobPivot2, %SonarNode.own_entity.anchor)
         if knob_angle != null:
             set_angle_2(knob_angle)
             
@@ -300,8 +300,8 @@ func set_angle_1(deg: float) -> void:
     
     # Update the 3D pivot rotation
     if knob_pivot_1:
-        knob_pivot_1.rotation.z = deg_to_rad(angle_1)
-    
+        #knob_pivot_1.rotation.z = deg_to_rad(angle_1)
+        rot_1_lerp_to = deg_to_rad(angle_1)
     s_angle_1.emit(angle_1)
 
 func set_angle_2(deg: float) -> void:
@@ -313,7 +313,8 @@ func set_angle_2(deg: float) -> void:
     
     # Update the 3D pivot rotation
     if knob_pivot_2:
-        knob_pivot_2.rotation.z = deg_to_rad(angle_2)
+        #knob_pivot_2.rotation.z = deg_to_rad(angle_2)
+        rot_2_lerp_to = deg_to_rad(angle_2)
     
     s_angle_2.emit(angle_2)
 
