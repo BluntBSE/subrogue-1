@@ -25,7 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="22_loeq3"]
 [ext_resource type="Texture2D" uid="uid://bdveri46dlmy4" path="res://assets/UI/white_buttons/VolumeSliderKnobT04White.png" id="22_op6l6"]
 [ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="23_op6l6"]
-[ext_resource type="Texture2D" uid="uid://bgjry422vvmdw" path="res://assets/UI/white_buttons/VolumeSliderKnobT05White.png" id="24_j3cwe"]
 [ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_3qfs3"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="28_op6l6"]
 [ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="29_j3cwe"]
@@ -138,16 +137,24 @@ size = Vector2(25, 25)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qfs3"]
 resource_local_to_scene = true
 transparency = 4
-blend_mode = 1
-shading_mode = 0
-albedo_texture = ExtResource("24_j3cwe")
+diffuse_mode = 3
+specular_mode = 1
+disable_fog = true
+albedo_color = Color(0, 1, 1, 1)
+emission = Color(0.0901961, 0.454902, 0.513726, 1)
+emission_energy_multiplier = 0.0
 disable_receive_shadows = true
-billboard_mode = 2
 
-[sub_resource type="QuadMesh" id="QuadMesh_op6l6"]
+[sub_resource type="SphereMesh" id="SphereMesh_hyfub"]
+radius = 0.25
+height = 0.5
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3qfs3"]
 points = PackedVector3Array(-0.507937, -0.507937, -0.00793651, 0.507937, 0.507937, 0.00793651, 0.507937, 0.507937, -0.00793651, -0.507937, 0.507937, 0.00793651, 0.507937, -0.507937, 0.00793651, 0.507937, -0.507937, -0.00793651, -0.507937, 0.507937, -0.00793651, -0.507937, -0.507937, 0.00793651)
+
+[sub_resource type="TorusMesh" id="TorusMesh_op6l6"]
+inner_radius = 0.15
+outer_radius = 0.3
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hyfub"]
 
@@ -396,7 +403,7 @@ transform = Transform3D(0.999979, -0.00651415, -0.000580518, 0.00651604, 0.99997
 material_override = SubResource("StandardMaterial3D_3qfs3")
 transparency = 0.8
 cast_shadow = 0
-mesh = SubResource("QuadMesh_op6l6")
+mesh = SubResource("SphereMesh_hyfub")
 
 [node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1"]
 
@@ -409,10 +416,10 @@ transform = Transform3D(0.983719, 0.179712, 0, -0.179712, 0.983719, 0, 0, 0, 1, 
 
 [node name="ControlMesh2" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49012e-08, 11.8615, 0)
+transform = Transform3D(0.970725, 0.160247, 0.178924, 0.160248, 0.122827, -0.979405, -0.178924, 0.979405, 0.0935522, -5.96046e-08, 11.8615, 0)
 material_override = SubResource("StandardMaterial3D_3qfs3")
 transparency = 0.2
-mesh = SubResource("QuadMesh_op6l6")
+mesh = SubResource("TorusMesh_op6l6")
 
 [node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
 

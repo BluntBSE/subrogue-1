@@ -88,7 +88,7 @@ func _on_controlmesh1_mouse_entered() -> void:
     
     print("Entered")
     knob_1_hovered = true
-    mesh_1.material_override.albedo_texture = hover_texture
+    #mesh_1.material_override.albedo_texture = hover_texture
     mesh_1.transparency = hovered_transparency #Note that this is not the material override .transparency property, which sets whether transparency is even legal at all
     SoundManager.play_straight("button_hovered", "ui")
     pass # Replace with function body.
@@ -96,13 +96,13 @@ func _on_controlmesh1_mouse_entered() -> void:
 
 func _on_controlmesh1_mouse_exited() -> void:
     knob_1_hovered = false
-    mesh_1.material_override.albedo_texture = regular_texture
+    #mesh_1.material_override.albedo_texture = regular_texture
     mesh_1.transparency = base_transparency
     pass # Replace with function body.
 
 
 func _on_controlmesh2_mouse_entered() -> void:
-    mesh_2.material_override.albedo_texture = hover_texture
+    #mesh_2.material_override.albedo_texture = hover_texture
     mesh_2.transparency = hovered_transparency
     print("knob 2 is hovered")
     knob_2_hovered = true
@@ -114,7 +114,7 @@ func _on_controlmesh2_mouse_entered() -> void:
 func _on_controlmesh2_mouse_exited() -> void:
     #Careful about input triggering a mouse exit.
     knob_2_hovered = false
-    mesh_2.material_override.albedo_texture = regular_texture
+    #mesh_2.material_override.albedo_texture = regular_texture
     mesh_2.transparency = base_transparency
     
     pass # Replace with function body.
