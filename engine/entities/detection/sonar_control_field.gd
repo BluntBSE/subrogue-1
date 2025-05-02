@@ -1,12 +1,14 @@
 extends Node3D
 class_name SonarNode
 @export var pulse:bool = false
-@onready var own_entity:Entity = get_parent()
+@onready var own_entity:Entity = get_parent().get_parent()
+@onready var controls:SonarControl3D = get_node("TransformBreaker/SonarControls3D")
 var angle_1
 var angle_2
 var volume
 var dist #May be modified based on volume.
 var max_dist = 800.0 #In km. This is what the sonar is set to in the UI. It's about 750 KM. We add 50km of buffer to just compensate for any arc shenanigans.
+
 signal pinged
 
 # Called when the node enters the scene tree for the first time.
@@ -17,7 +19,8 @@ func unpack():
     if own_entity.played_by != null:
         var player:Player = own_entity.played_by
         player.UI.sonar_ordnance_ui.sonar_ordnance_ui_state.connect(handle_player_ui_state)
-
+        %SonarControls3D.unpack()
+    
 func _process(delta:float)->void:
     var mesh_1:MeshInstance3D = %SonarPulseMesh
     var entity:Entity = own_entity
@@ -25,7 +28,7 @@ func _process(delta:float)->void:
     #This, along wth the funky rotations on the mesh, are how we keep the plane from clipping into the planet.
     mesh_1.look_at(entity.anchor.position)
     mesh_1.rotation.z += deg_to_rad(90.0)
-
+    
     if pulse == true:
 
         pulse = false
@@ -83,15 +86,31 @@ func _on_entity_reached(entity:Entity):
             
         pass
     
-func handle_angle_1(angle):
-    print("Handle angle 1 received ", angle)
+func handle_angle_1_2d(angle):
     #BG
     %SonarPulseMesh.material_override.set_shader_parameter("start_angle", angle)
     #Foreground
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("start_angle", angle)
     angle_1 = angle
 
-func handle_angle_2(angle):
+
+func handle_angle_2_2d(angle):
+    %SonarPulseMesh.material_override.set_shader_parameter("end_angle", angle)
+    #Foreground
+    %SonarPulseMesh.material_override.next_pass.set_shader_parameter("end_angle", angle)
+    angle_2 = angle
+        
+
+func handle_angle_1_3d(angle):
+
+    #BG
+    %SonarPulseMesh.material_override.set_shader_parameter("start_angle", angle)
+    #Foreground
+    %SonarPulseMesh.material_override.next_pass.set_shader_parameter("start_angle", angle)
+    angle_1 = angle
+
+func handle_angle_2_3d(angle):
+
     %SonarPulseMesh.material_override.set_shader_parameter("end_angle", angle)
     #Foreground
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("end_angle", angle)
@@ -99,11 +118,17 @@ func handle_angle_2(angle):
     pass    
 
 func handle_volume(dict:Dictionary):
+    print("Handle volume got ", dict)
     volume = dict.max
     var effective_range = volume * max_dist
-    print("Effective ping range", effective_range)
     %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", dict.max)
- 
+
+func handle_distance_volume(dist:float): #Received as game units
+    #When the user is setting volume visually, we extrapolate from the distance into voume
+    var arbitrary_vector = position * dist
+    var game_dist_max = GlobeHelpers.km_to_arc_distance(max_dist, own_entity.anchor)
+    volume  = dist / game_dist_max
+    %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", volume)
     
     
 func handle_ping_request(_angle_1, _angle_2)->void:
@@ -134,10 +159,10 @@ func get_entities_between_angle(entity_list: Array): #Array of dictionaries. You
         local_eastwest = axis_to_planet.cross(Vector3(1, 0, 0)).normalized()
 
     var local_northsouth: Vector3 = axis_to_planet.cross(local_eastwest.normalized())
-    #visualize_axis(axis_to_planet, own_entity.anchor, Color("ff00ff"))
-    #visualize_axis(global_up, own_entity.anchor, Color("ffffff"))
-    #visualize_axis(local_eastwest, own_entity.anchor, Color("00ff00"))
-    #visualize_axis(local_northsouth, own_entity.anchor, Color("ff0000"))
+    #GlobeHelpers.visualize_axis(self, axis_to_planet, own_entity.anchor, Color("ff00ff"))
+    #GlobeHelpers.visualize_axis(self, global_up, own_entity.anchor, Color("ffffff"))
+   # GlobeHelpers.visualize_axis(self,local_eastwest, own_entity.anchor, Color("00ff00"))
+    #GlobeHelpers.visualize_axis(self, local_northsouth, own_entity.anchor, Color("ff0000"))
     for obj in %EntityDetector.tracked_entities: 
         var entity: Entity = obj.entity
 
@@ -197,3 +222,4 @@ func handle_player_ui_state(state:String):
         %SonarPulseMesh.visible = true
     else:
         %SonarPulseMesh.visible = false
+        

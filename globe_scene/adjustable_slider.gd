@@ -16,6 +16,8 @@ var handle_2_active:bool = false
 var base_max:float = 1.0
 var base_min:float = 0.0
 
+var externally_overriden:bool = false #Turns to "true" when an otuside force acts on this.
+
 signal handle_values #{"min":0.0, "max":1.0}
 
 func log_values(vals:Dictionary):
@@ -84,8 +86,8 @@ func update_handles()->void:
             pass
             
             
-            
-        
+
+#TODO: Add an external adjust values thing here. 
 
 func _on_range_bar_control_max_pressed() -> void:
     handle_1_active = true

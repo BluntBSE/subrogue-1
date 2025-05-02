@@ -6,6 +6,10 @@ class_name ActiveSonarControl
 @export var angle_2 = 20.0
 @export var a_diff: float
 @onready var ping_button = %PingButton
+@onready var volume_bar:DraggableTPB = %VolumeBar
+var sonar_node:SonarNode
+
+
 var knob_1_active: bool = false
 var knob_2_active: bool = false
 
@@ -42,7 +46,8 @@ func get_angle_diff(a1: float, a2: float) -> float:  #expecting degrees, not rad
 func set_angle_1(deg: float) -> void:  #Expects degree, not rad
     angle_1 = deg
     if angle_1 > 360.0:
-        inc /= 360.0
+        pass
+        #inc /= 360.0 I dont think we need this.
     if angle_1 < 0:
         angle_1 += 360
 
@@ -55,7 +60,8 @@ func set_angle_1(deg: float) -> void:  #Expects degree, not rad
 func set_angle_2(deg: float) -> void:  #Expects degree, not rad
     angle_2 = deg
     if angle_2 > 360.0:
-        inc /= 360.0
+        pass
+        #inc /= 360.0
     if angle_2 < 0:
         angle_2 += 360
 
@@ -106,3 +112,35 @@ func _on_ping_button_button_up() -> void:
     ping_requested.emit(angle_1, angle_2)
     SoundManager.play("sonar_1")
     pass  # Replace with function body.
+
+func handle_external_angle_2(angle:float): #Given in degrees
+    #Same as set angle 2 but without the emit
+    angle_2 = angle
+    if angle_2 > 360.0:
+        pass
+        #inc /= 360.0
+    if angle_2 < 0:
+        angle_2 += 360
+
+    %ActiveSonarKnobTwoPivot.rotation = deg_to_rad(angle_2)
+    %ActiveSonarTexture.material.set_shader_parameter("end_angle", angle_2)
+    %ActiveSonarBG.material.set_shader_parameter("end_angle", angle_2)
+    
+func handle_external_angle_1(angle:float): #Given in degrees
+    #Same as set angle 1 without the emit, and with a sanity check
+    angle_1 = angle
+    if angle_1 > 360.0:
+        pass
+        #inc /= 360.0 I dont think we need this.
+    if angle_1 < 0:
+        angle_1 += 360
+
+    %ActiveSonarKnobOnePivot.rotation = deg_to_rad(angle_1)
+    %ActiveSonarTexture.material.set_shader_parameter("start_angle", angle_1)
+    %ActiveSonarBG.material.set_shader_parameter("start_angle", angle_1)
+
+
+func handle_external_volume(vol:float):
+    print("HEV RECEIVED ", vol)
+    volume_bar.value = clamp(vol, 0.0, 1.0)
+    pass

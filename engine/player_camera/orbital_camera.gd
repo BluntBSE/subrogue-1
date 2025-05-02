@@ -300,33 +300,7 @@ func select_entity(_entity:Entity):
             print("Attempting to select ", _entity.name)
             _entity.render.select(self)
 
-"""
-func collider_check():
-    #print("Running collider pre check")
-    if Input.is_action_just_pressed("primary_action"):  # Detect left mouse click
-        print("Running collider check!")
-        var camera = get_viewport().get_camera_3d()
-        if camera:
-            # Get the mouse position in the viewport
-            var mouse_position = get_viewport().get_mouse_position()
 
-            # Cast a ray from the camera to the mouse position
-            var from = camera.project_ray_origin(mouse_position)
-            var to = from + camera.project_ray_normal(mouse_position) * 1000  # Extend the ray far enough
-
-            # Perform the raycast
-            var space_state = get_world_3d().direct_space_state
-            var ray_params = PhysicsRayQueryParameters3D.new()
-            ray_params.from = from
-            ray_params.to = to
-
-            var result = space_state.intersect_ray(ray_params)
-
-            # Check if a collider was hit
-            if result and result.has("collider"):
-                print("BOOP!")
-                print("Collider name:", result.collider.name)
-"""
  
 func match_polar_coordinates(entity:Entity):
     
