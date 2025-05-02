@@ -118,7 +118,6 @@ func handle_angle_2_3d(angle):
     pass    
 
 func handle_volume(dict:Dictionary):
-    print("Handle volume got ", dict)
     volume = dict.max
     var effective_range = volume * max_dist
     %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", dict.max)

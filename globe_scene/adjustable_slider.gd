@@ -31,7 +31,7 @@ func update_output(vals:Dictionary)->void:
         output_label.text = str( ceil(snapped(vals.min * mult_factor,0.1) )+ output_symbol + " - " + str(snapped(vals.max * mult_factor,0.1)))
 
 func _ready()->void:
-    handle_values.connect(log_values)
+    #handle_values.connect(log_values)
     handle_values.connect(update_output)
 
 

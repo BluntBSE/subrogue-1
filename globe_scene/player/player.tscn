@@ -2523,7 +2523,6 @@ offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
 
 [node name="ScreenspaceFilters" type="Control" parent="UICanvas/PlayerUIRoot"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2567,7 +2566,6 @@ text = "Free Look On - SPACE to return"
 
 [node name="CityUIRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
