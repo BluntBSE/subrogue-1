@@ -413,9 +413,16 @@ func normalize_angle(angle: float) -> float:
         normalized += 360.0
     return normalized
 
-func handle_external_volume(vol:float): #0.0 to 1.0
-    var new_dist = max_dist * vol
-    knob_1_dist_lerp = new_dist
+func handle_external_volume(dict:Dictionary): #{min:#,max:#} #We only care about max, but TPBs emit both values. Values are between 0.0 and 1.0
+    if dict.max >= 1.0:
+        knob_1_dist_lerp = max_dist
+        return
+    var new_dist = max_dist * dict.max
+    var diff = knob_1_dist_lerp - new_dist
+    #I just absolutely don't feel like doing state logic when im not sure if the 2D half of the UI is going to stay
+    #THis is because of the updating 2d->updating3d loop that would otherwise occur with lerp
+    if diff > 0.3 or diff < -0.3:
+        knob_1_dist_lerp = new_dist
 
 func handle_external_angle_1(angle:float):
     pass

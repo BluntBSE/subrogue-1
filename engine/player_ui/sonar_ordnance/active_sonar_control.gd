@@ -141,6 +141,6 @@ func handle_external_angle_1(angle:float): #Given in degrees
 
 
 func handle_external_volume(vol:float):
-    print("HEV RECEIVED ", vol)
-    volume_bar.value = clamp(vol, 0.0, 1.0)
+ 
+    %VolumeBar.set_max_value(vol)
     pass
