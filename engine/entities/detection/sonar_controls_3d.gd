@@ -114,9 +114,13 @@ func _process(_delta:float):
         look_at(%SonarNode.own_entity.anchor.position)
         s_angle_1.emit(calculate_knob_angle_signal(%ControlMesh1))
         s_angle_2.emit(calculate_knob_angle_signal(%ControlMesh2))
-        k_dist_1.emit(knob_1_dist_lerp) #Remember, we only use one distance.
+        k_dist_1.emit(calculate_knob_distance_signal(%ControlMesh1)) #Remember, we only use one distance.
         #print("Emitted a dist lerp of", knob_1_dist_lerp)
 
+
+func calculate_knob_distance_signal(mesh:MeshInstance3D):
+    var dist = (mesh.global_position - %SonarNode.own_entity.global_position).length()
+    return dist
 
 func _on_controlmesh1_mouse_entered() -> void:
     
