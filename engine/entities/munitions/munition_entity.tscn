@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=56 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
@@ -31,6 +31,10 @@
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="29_v6ety"]
 [ext_resource type="PackedScene" uid="uid://d1ad5q0tg3jb4" path="res://particle_node.tscn" id="30_541b3"]
 [ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="31_vepk6"]
+[ext_resource type="Script" uid="uid://ult62dixyg4g" path="res://engine/entities/detection/sonar_controls_3d.gd" id="32_j5udo"]
+[ext_resource type="Texture2D" uid="uid://bdveri46dlmy4" path="res://assets/UI/white_buttons/VolumeSliderKnobT04White.png" id="33_sarf3"]
+[ext_resource type="Texture2D" uid="uid://cvrep056uh18e" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04Blue.png" id="34_xyjcy"]
+[ext_resource type="Material" uid="uid://de23e4h2ah40y" path="res://engine/entities/detection/3d_ui_handle.material" id="35_ghaal"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
 
@@ -91,54 +95,10 @@ size = Vector2(5, 5)
 
 [sub_resource type="Animation" id="Animation_ox0k3"]
 length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_head")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_tail")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
 
 [sub_resource type="Animation" id="Animation_cnygr"]
 resource_name = "sonar_pulse_1"
 length = 2.0
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_head")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.266667, 1.4, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.366667, 2)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_tail")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.075, -0.25, 0, 0.25, 0, 0.95, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.366667, 2)
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_icumr"]
 _data = {
@@ -149,6 +109,13 @@ _data = {
 [sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]
 lightmap_size_hint = Vector2i(27, 27)
 size = Vector2(25, 25)
+
+[sub_resource type="TorusMesh" id="TorusMesh_j5udo"]
+inner_radius = 0.15
+outer_radius = 0.3
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sarf3"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v6ety"]
 radius = 0.862371
@@ -372,6 +339,95 @@ visible = false
 light_color = Color(0.928687, 0.35569, 0.750399, 1)
 omni_range = 4.65
 
+[node name="SonarNode" type="Node3D" parent="EntityRender"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
+script = ExtResource("10_x632v")
+
+[node name="SonarPulseMesh2" type="MeshInstance3D" parent="EntityRender/SonarNode"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97706, 0, 0.467125)
+visible = false
+material_override = SubResource("ShaderMaterial_6y0a6")
+mesh = SubResource("QuadMesh_l7f70")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EntityRender/SonarNode"]
+libraries = {
+&"": SubResource("AnimationLibrary_icumr")
+}
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="EntityRender/SonarNode"]
+remote_path = NodePath("../TransformBreaker/SonarPulseMesh")
+update_rotation = false
+
+[node name="TransformBreaker" type="Node" parent="EntityRender/SonarNode"]
+
+[node name="SonarPulseMesh" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker"]
+unique_name_in_owner = true
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, -0.0201111, -0.0650034, 0.215542)
+layers = 524288
+material_override = ExtResource("27_qfdwo")
+mesh = SubResource("QuadMesh_3qnbj")
+skeleton = NodePath("../..")
+
+[node name="SonarControls3D" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0201111, -0.0650034, 0.252366)
+script = ExtResource("32_j5udo")
+hover_texture = ExtResource("33_sarf3")
+regular_texture = ExtResource("34_xyjcy")
+
+[node name="KnobPivot1" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D"]
+unique_name_in_owner = true
+
+[node name="ControlMesh1" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1"]
+unique_name_in_owner = true
+transform = Transform3D(0.98511, 0.171929, -3.87372e-08, -3.46786e-08, -2.66098e-08, -1, -0.171929, 0.985109, -2.02513e-08, 1.49012e-08, 11.8615, 0)
+material_override = ExtResource("35_ghaal")
+cast_shadow = 0
+mesh = SubResource("TorusMesh_j5udo")
+
+[node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1/Area3D"]
+transform = Transform3D(1, 2.98023e-08, 3.55271e-15, 0, 1, -3.55271e-15, 0, 0, 1, 0, 1.49012e-08, 0.166925)
+shape = SubResource("ConcavePolygonShape3D_sarf3")
+
+[node name="ControlMesh1second" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 1.49012e-08, 0, 0, 1, -1.77636e-15, 0, 8.88178e-16, 1, 1.49012e-08, 1.49012e-08, 0.456102)
+material_override = ExtResource("35_ghaal")
+cast_shadow = 0
+mesh = SubResource("TorusMesh_j5udo")
+skeleton = NodePath("../..")
+
+[node name="KnobPivot2" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D"]
+unique_name_in_owner = true
+transform = Transform3D(0.983719, 0.179712, 0, -0.179712, 0.983719, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ControlMesh2" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2"]
+unique_name_in_owner = true
+transform = Transform3D(0.98511, 0.171929, -3.87372e-08, -3.46786e-08, -2.66098e-08, -1, -0.171929, 0.985109, -2.02513e-08, -5.96046e-08, 11.8615, 0)
+material_override = ExtResource("35_ghaal")
+transparency = 0.2
+mesh = SubResource("TorusMesh_j5udo")
+
+[node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2/Area3D"]
+transform = Transform3D(1, 2.98023e-08, 3.55271e-15, 0, 1, -3.55271e-15, 0, 0, 1, 0, 1.49012e-08, 0.166925)
+shape = SubResource("ConcavePolygonShape3D_sarf3")
+
+[node name="ControlMesh2second" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.47035e-08, 1.18966e-09, 1.49012e-08, 1, -1.09052e-08, 1.40779e-09, -9.88006e-09, 1, 0.0082581, -0.0452029, 0.489026)
+material_override = ExtResource("35_ghaal")
+transparency = 0.2
+mesh = SubResource("TorusMesh_j5udo")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
+
 [node name="EntityEmission" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("20_p1ne5")
@@ -389,37 +445,6 @@ script = ExtResource("7_frljg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 remote_path = NodePath("../EntityDebug")
 update_rotation = false
-
-[node name="SonarNode" type="Node3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
-script = ExtResource("10_x632v")
-
-[node name="SonarPulseMesh2" type="MeshInstance3D" parent="SonarNode"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97706, 0, 0.467125)
-visible = false
-material_override = SubResource("ShaderMaterial_6y0a6")
-mesh = SubResource("QuadMesh_l7f70")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SonarNode"]
-libraries = {
-&"": SubResource("AnimationLibrary_icumr")
-}
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="SonarNode"]
-remote_path = NodePath("../../TransformBreaker/SonarPulseMesh")
-update_rotation = false
-
-[node name="TransformBreaker" type="Node" parent="."]
-
-[node name="SonarPulseMesh" type="MeshInstance3D" parent="TransformBreaker"]
-unique_name_in_owner = true
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, -0.0201111, -0.0650034, 0.215542)
-layers = 524288
-material_override = ExtResource("27_qfdwo")
-mesh = SubResource("QuadMesh_3qnbj")
-skeleton = NodePath("../../SonarNode")
 
 [node name="TrackingConeMesh" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
@@ -448,4 +473,8 @@ replication_config = SubResource("SceneReplicationConfig_541b3")
 script = ExtResource("31_vepk6")
 
 [connection signal="body_entered" from="EntityDetector/DetectionArea" to="EntityDetector" method="_on_detection_area_body_entered"]
+[connection signal="mouse_entered" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh1_mouse_entered"]
+[connection signal="mouse_exited" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh1_mouse_exited"]
+[connection signal="mouse_entered" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh2_mouse_entered"]
+[connection signal="mouse_exited" from="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2/Area3D" to="EntityRender/SonarNode/TransformBreaker/SonarControls3D" method="_on_controlmesh2_mouse_exited"]
 [connection signal="body_entered" from="ImpactArea" to="." method="on_body_entered_check_for_impact"]
