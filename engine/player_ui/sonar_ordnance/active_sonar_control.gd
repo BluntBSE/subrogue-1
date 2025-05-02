@@ -115,8 +115,6 @@ func _on_ping_button_button_up() -> void:
 
 func handle_external_angle_2(angle:float): #Given in degrees
     #Same as set angle 2 but without the emit
-    if sonar_node.last_updated_by == sonar_node.updated_by.control:
-        return
     angle_2 = angle
     if angle_2 > 360.0:
         pass
@@ -130,8 +128,6 @@ func handle_external_angle_2(angle:float): #Given in degrees
     
 func handle_external_angle_1(angle:float): #Given in degrees
     #Same as set angle 1 without the emit, and with a sanity check
-    if sonar_node.last_updated_by == sonar_node.updated_by.control:
-        return
     angle_1 = angle
     if angle_1 > 360.0:
         pass
@@ -145,5 +141,6 @@ func handle_external_angle_1(angle:float): #Given in degrees
 
 
 func handle_external_volume(vol:float):
+    print("HEV RECEIVED ", vol)
     volume_bar.value = clamp(vol, 0.0, 1.0)
     pass

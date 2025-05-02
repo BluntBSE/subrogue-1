@@ -33,6 +33,7 @@ var unpacked:bool = false
 signal s_angle_1
 signal s_angle_2
 signal k_dist_1
+signal k_vol_1
 signal updated_by_3d
 
 
@@ -95,14 +96,16 @@ func lerp_to_it(delta: float):
 func unpack():
     var current_viewport = get_viewport()
     camera = get_viewport().get_camera_3d()
-    updated_by_3d.connect(%SonarNode.handle_updated_by_3d)
     s_angle_1.connect(%SonarNode.handle_angle_1_3d)
     s_angle_2.connect(%SonarNode.handle_angle_2_3d)
     s_angle_1.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_angle_1)
     s_angle_2.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_angle_2)
 
     k_dist_1.connect(%SonarNode.handle_distance_volume)
-    k_dist_1.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_volume)
+    k_vol_1.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_volume)
+    set_angle_1(20.0)
+    set_angle_2(340.0)
+    
     unpacked = true
 func _ready():
     #mesh_1.material_override = mesh_1.material_override.duplicate()
@@ -122,6 +125,7 @@ func _process(_delta:float):
         s_angle_1.emit(calculate_knob_angle_signal(%ControlMesh1))
         s_angle_2.emit(calculate_knob_angle_signal(%ControlMesh2))
         k_dist_1.emit(calculate_knob_distance_signal(%ControlMesh1)) #Remember, we only use one distance.
+        k_vol_1.emit(calculate_knob_distance_signal(%ControlMesh1)/max_dist)
         #print("Emitted a dist lerp of", knob_1_dist_lerp)
 
 
