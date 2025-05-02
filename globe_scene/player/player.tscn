@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=70 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -44,6 +44,8 @@
 [ext_resource type="Texture2D" uid="uid://b6wq5dkmmxdtv" path="res://assets/UI/white_buttons/VolumeSliderKnobT03White.png" id="40_fq2vg"]
 [ext_resource type="Texture2D" uid="uid://8bqmk8uxc6mg" path="res://assets/UI/white_icons/EditIconWhite.png" id="41_q7i7m"]
 [ext_resource type="Texture2D" uid="uid://b4rvv34wjpo5j" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT02.png" id="42_oh4je"]
+[ext_resource type="Texture2D" uid="uid://biopgmfrbkuc7" path="res://assets/UI/blue_panels/LargeMenuBGT03.1BlueDark.png" id="43_itjk8"]
+[ext_resource type="Script" uid="uid://43gtibk0e5a4" path="res://engine/cities/city_ui/city_ui.gd" id="43_ljsgx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
 shader = ExtResource("21_fwoy0")
@@ -2299,6 +2301,7 @@ texture_hover = ExtResource("40_fq2vg")
 
 [node name="SignalInspection" type="Control" parent="UICanvas/PlayerUIRoot/InspectionRoot"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2113.0
@@ -2578,6 +2581,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
 [node name="CityUI" parent="UICanvas/PlayerUIRoot/CityUIRoot" instance=ExtResource("10_558vm")]
+visible = false
 layout_mode = 0
 offset_left = 1919.0
 offset_top = 68.0
@@ -2624,10 +2628,221 @@ libraries = {
 &"": SubResource("AnimationLibrary_itjk8")
 }
 
-[node name="VolumeSliderKnobT03Blue" type="Sprite2D" parent="UICanvas"]
+[node name="SelfMenuRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VesselUIRoot" type="TextureRect" parent="UICanvas/PlayerUIRoot/SelfMenuRoot"]
+z_index = 1
+offset_left = 351.0
+offset_top = 104.0
+offset_right = 1594.0
+offset_bottom = 978.0
+texture = ExtResource("43_itjk8")
+expand_mode = 1
+script = ExtResource("43_ljsgx")
+
+[node name="TextureRect" type="TextureRect" parent="UICanvas/PlayerUIRoot/SelfMenuRoot"]
+z_index = 2
+layout_mode = 0
+offset_left = 1491.0
+offset_top = 104.0
+offset_right = 1909.0
+offset_bottom = 1104.0
+texture = ExtResource("35_smroy")
+expand_mode = 5
+flip_v = true
+
+[node name="ShipPreview" type="TextureRect" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 591.0
+offset_top = 59.0
+offset_right = 847.0
+offset_bottom = 315.0
+texture = SubResource("ViewportTexture_nwwe3")
+stretch_mode = 3
+
+[node name="SubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/ShipPreview"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_scale = 2.0
+texture_mipmap_bias = -0.109
+anisotropic_filtering_level = 0
+fsr_sharpness = 2.0
+canvas_item_default_texture_filter = 0
+size = Vector2i(256, 256)
+
+[node name="Ship3DRoot" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/ShipPreview/SubViewport" instance=ExtResource("36_q7i7m")]
+
+[node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+layout_mode = 0
+offset_left = 591.0
+offset_top = 56.0
+offset_right = 842.0
+offset_bottom = 79.0
+theme = ExtResource("8_fq2vg")
+theme_override_font_sizes/font_size = 16
+text = "HMS Golden Horizon"
+
+[node name="EntityFaction" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+layout_mode = 0
+offset_left = 590.0
+offset_top = 19.0
+offset_right = 810.0
+offset_bottom = 42.0
+theme = ExtResource("8_fq2vg")
+theme_override_font_sizes/font_size = 16
+text = "Atlantic Empire"
+
+[node name="EntityClass" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+layout_mode = 0
+offset_left = 602.0
+offset_top = 248.0
+offset_right = 839.0
+offset_bottom = 271.0
+theme = ExtResource("8_fq2vg")
+theme_override_font_sizes/font_size = 16
+text = "Perseus Freighter"
+
+[node name="MainOptions" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+unique_name_in_owner = true
+offset_left = 87.0
+offset_top = 112.0
+offset_right = 350.0
+offset_bottom = 732.0
+
+[node name="TextureButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Vessel"
+
+[node name="TextureButton2" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton2"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Cargo"
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton3"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Crew"
+
+[node name="TextureButton4" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton4"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Diplomacy"
+
+[node name="TextureButton5" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton5"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Diplomacy"
+
+[node name="TextureButton6" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton6"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Log"
+
+[node name="EntityInspectorToggle" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot"]
 modulate = Color(1, 1, 1, 0.4)
-position = Vector2(1927, 492)
-texture = ExtResource("33_abu4l")
+layout_mode = 0
+offset_left = 1462.0
+offset_top = 440.0
+offset_right = 1562.0
+offset_bottom = 540.0
+texture_normal = ExtResource("33_abu4l")
+texture_hover = ExtResource("40_fq2vg")
 
 [node name="SettingsIconFilledBlue" type="Sprite2D" parent="UICanvas"]
 position = Vector2(1876, 36)
@@ -2684,4 +2899,5 @@ script = ExtResource("39_7xmbg")
 [connection signal="color_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer/SignalColorChanger" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_color_changer_color_changed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/SignalInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_inspector_toggle_button_up"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/CityUIRoot/UndockButton" to="UICanvas/PlayerUIRoot" method="handle_undocked_button"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SelfMenuRoot/EntityInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_entity_inspector_toggle_button_up"]
 [connection signal="text_submitted" from="UICanvas/Console/ConsoleInput" to="UICanvas/Console/ConsoleInput" method="_on_text_submitted"]
