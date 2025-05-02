@@ -6,6 +6,9 @@ class_name ActiveSonarControl
 @export var angle_2 = 20.0
 @export var a_diff: float
 @onready var ping_button = %PingButton
+@onready var volume_bar:DraggableTPB = %VolumeBar
+
+
 var knob_1_active: bool = false
 var knob_2_active: bool = false
 
@@ -114,3 +117,9 @@ func handle_external_angle_2(angle:float): #Given in degrees
     
 func handle_external_angle_1(angle:float): #Given in degrees
     set_angle_1(angle)
+
+
+func handle_external_volume(vol:float):
+    print("Handle external volume received: ", vol)
+    volume_bar.value = clamp(vol, 0.0, 1.0)
+    pass

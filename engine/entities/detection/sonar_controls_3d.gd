@@ -11,8 +11,8 @@ class_name SonarControl3D
 @onready var dir_to_anchor
 
 var camera:Camera3D
-var base_transparency = 0.8
-var hovered_transparency = 0.0
+var base_transparency = 0.9
+var hovered_transparency = 0.3
 @onready var knob_pivot_1:Node3D = %KnobPivot1
 @onready var knob_pivot_2:Node3D = %KnobPivot2
 var knob_1_dragged: bool = false
@@ -27,12 +27,12 @@ var rot_1_lerp_to:float
 var rot_2_lerp_to:float
 var dragging:bool = false
 
+var max_dist:float = 13.0 #In game space units
 
 var unpacked:bool = false
 signal s_angle_1
 signal s_angle_2
 signal k_dist_1
-signal ping_requested  #Emits with angleA, angleB
 
 
 func lerp_to_it(delta: float):
@@ -100,13 +100,15 @@ func unpack():
     s_angle_2.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_angle_2)
 
     k_dist_1.connect(%SonarNode.handle_distance_volume)
-    
+    k_dist_1.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_volume)
     unpacked = true
 func _ready():
-    mesh_1.material_override = mesh_1.material_override.duplicate()
+    #mesh_1.material_override = mesh_1.material_override.duplicate()
     mesh_1.transparency = base_transparency
-    mesh_2.material_override = mesh_2.material_override.duplicate()
+    %ControlMesh1second.transparency = base_transparency
+    #mesh_2.material_override = mesh_2.material_override.duplicate()
     mesh_2.transparency = base_transparency
+    %ControlMesh2second.transparency = base_transparency
 
 func _process(_delta:float):
     if unpacked == true:
@@ -131,6 +133,7 @@ func _on_controlmesh1_mouse_entered() -> void:
     knob_1_hovered = true
     #mesh_1.material_override.albedo_texture = hover_texture
     mesh_1.transparency = hovered_transparency #Note that this is not the material override .transparency property, which sets whether transparency is even legal at all
+    %ControlMesh1second.transparency = hovered_transparency
     SoundManager.play_straight("button_hovered", "ui")
     pass # Replace with function body.
 
@@ -139,13 +142,15 @@ func _on_controlmesh1_mouse_exited() -> void:
     knob_1_hovered = false
     #mesh_1.material_override.albedo_texture = regular_texture
     mesh_1.transparency = base_transparency
+    %ControlMesh1second.transparency = base_transparency
     pass # Replace with function body.
 
 
 func _on_controlmesh2_mouse_entered() -> void:
     #mesh_2.material_override.albedo_texture = hover_texture
     mesh_2.transparency = hovered_transparency
-    print("knob 2 is hovered")
+    %ControlMesh2second.transparency = hovered_transparency
+
     knob_2_hovered = true
     SoundManager.play_straight("button_hovered", "ui")
 
@@ -157,7 +162,7 @@ func _on_controlmesh2_mouse_exited() -> void:
     knob_2_hovered = false
     #mesh_2.material_override.albedo_texture = regular_texture
     mesh_2.transparency = base_transparency
-    
+    %ControlMesh2second.transparency = base_transparency   
     pass # Replace with function body.
 
 
@@ -324,9 +329,9 @@ func calculate_crude_distance(anchor: Planet) -> float:
         if collider == clickable_sphere or collider.get_parent() == clickable_sphere:
             # Return the intersection point
             var dist = (result["position"] - position).length()
-            var clamped = clamp(dist,0.0,13.0)
+            var clamped = clamp(dist,0.0,max_dist)
             print ("clamped distance at ", clamped)
-            return clamp(dist,0.0,13.0)
+            return clamp(dist,0.0,max_dist)
             
     return 0.0
     
@@ -399,3 +404,7 @@ func normalize_angle(angle: float) -> float:
     if normalized < 0:
         normalized += 360.0
     return normalized
+
+func handle_external_volume(vol:float): #0.0 to 1.0
+    var new_dist = max_dist * vol
+    knob_1_dist_lerp = new_dist

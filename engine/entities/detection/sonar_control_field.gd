@@ -2,6 +2,7 @@ extends Node3D
 class_name SonarNode
 @export var pulse:bool = false
 @onready var own_entity:Entity = get_parent().get_parent()
+@onready var controls:SonarControl3D = get_node("TransformBreaker/SonarControls3D")
 var angle_1
 var angle_2
 var volume
