@@ -96,6 +96,9 @@ func unpack():
     camera = get_viewport().get_camera_3d()
     s_angle_1.connect(%SonarNode.handle_angle_1)
     s_angle_2.connect(%SonarNode.handle_angle_2)
+    s_angle_1.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_angle_1)
+    s_angle_2.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_angle_2)
+
     k_dist_1.connect(%SonarNode.handle_distance_volume)
     
     unpacked = true

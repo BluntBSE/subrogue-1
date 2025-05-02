@@ -203,3 +203,4 @@ func handle_player_ui_state(state:String):
         %SonarPulseMesh.visible = true
     else:
         %SonarPulseMesh.visible = false
+        

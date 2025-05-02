@@ -108,3 +108,9 @@ func _on_ping_button_button_up() -> void:
     ping_requested.emit(angle_1, angle_2)
     SoundManager.play("sonar_1")
     pass  # Replace with function body.
+
+func handle_external_angle_2(angle:float): #Given in degrees
+    set_angle_2(angle)
+    
+func handle_external_angle_1(angle:float): #Given in degrees
+    set_angle_1(angle)
