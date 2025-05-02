@@ -33,6 +33,7 @@ var unpacked:bool = false
 signal s_angle_1
 signal s_angle_2
 signal k_dist_1
+signal updated_by_3d
 
 
 func lerp_to_it(delta: float):
@@ -94,8 +95,9 @@ func lerp_to_it(delta: float):
 func unpack():
     var current_viewport = get_viewport()
     camera = get_viewport().get_camera_3d()
-    s_angle_1.connect(%SonarNode.handle_angle_1)
-    s_angle_2.connect(%SonarNode.handle_angle_2)
+    updated_by_3d.connect(%SonarNode.handle_updated_by_3d)
+    s_angle_1.connect(%SonarNode.handle_angle_1_3d)
+    s_angle_2.connect(%SonarNode.handle_angle_2_3d)
     s_angle_1.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_angle_1)
     s_angle_2.connect(%SonarNode.own_entity.played_by.UI.active_sonar_control.handle_external_angle_2)
 
@@ -193,9 +195,11 @@ func _input(event):
         if event.is_action_pressed("primary_action"):
             if knob_1_hovered == true:
                 knob_1_dragged = true
+                updated_by_3d.emit()
             if knob_2_hovered == true:
                 knob_2_dragged = true
-                
+                updated_by_3d.emit()
+                                
         if event.is_action_released("primary_action"):
             knob_1_hovered = false
             knob_1_dragged = false
@@ -408,3 +412,6 @@ func normalize_angle(angle: float) -> float:
 func handle_external_volume(vol:float): #0.0 to 1.0
     var new_dist = max_dist * vol
     knob_1_dist_lerp = new_dist
+
+func handle_external_angle_1(angle:float):
+    pass

@@ -8,6 +8,8 @@ var angle_2
 var volume
 var dist #May be modified based on volume.
 var max_dist = 800.0 #In km. This is what the sonar is set to in the UI. It's about 750 KM. We add 50km of buffer to just compensate for any arc shenanigans.
+enum updated_by {threed, control}
+var last_updated_by = updated_by.threed
 signal pinged
 
 # Called when the node enters the scene tree for the first time.
@@ -27,7 +29,8 @@ func _process(delta:float)->void:
     #This, along wth the funky rotations on the mesh, are how we keep the plane from clipping into the planet.
     mesh_1.look_at(entity.anchor.position)
     mesh_1.rotation.z += deg_to_rad(90.0)
-
+    
+    print("updated by: ", last_updated_by)
     if pulse == true:
 
         pulse = false
@@ -85,14 +88,35 @@ func _on_entity_reached(entity:Entity):
             
         pass
     
-func handle_angle_1(angle):
+func handle_angle_1_2d(angle):
+    #BG
+    %SonarPulseMesh.material_override.set_shader_parameter("start_angle", angle)
+    #Foreground
+    %SonarPulseMesh.material_override.next_pass.set_shader_parameter("start_angle", angle)
+    angle_1 = angle
+    print("JUST SET LAST UPDATED BY TO : ", updated_by.control )
+    last_updated_by = updated_by.control
+
+func handle_angle_2_2d(angle):
+    %SonarPulseMesh.material_override.set_shader_parameter("end_angle", angle)
+    #Foreground
+    %SonarPulseMesh.material_override.next_pass.set_shader_parameter("end_angle", angle)
+    angle_2 = angle
+    last_updated_by = updated_by.control
+        
+
+func handle_angle_1_3d(angle):
+    if last_updated_by == updated_by.control:
+        return
     #BG
     %SonarPulseMesh.material_override.set_shader_parameter("start_angle", angle)
     #Foreground
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("start_angle", angle)
     angle_1 = angle
 
-func handle_angle_2(angle):
+func handle_angle_2_3d(angle):
+    if last_updated_by == updated_by.control:
+        return
     %SonarPulseMesh.material_override.set_shader_parameter("end_angle", angle)
     #Foreground
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("end_angle", angle)
@@ -205,3 +229,6 @@ func handle_player_ui_state(state:String):
     else:
         %SonarPulseMesh.visible = false
         
+func handle_updated_by_3d():
+    print("Updated by 3d set to 3d")
+    last_updated_by = updated_by.threed

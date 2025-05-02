@@ -1111,6 +1111,7 @@ texture = ExtResource("23_ls1g0")
 
 [node name="ActiveSonarKnobOnePivot" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_left = 17.0
 offset_top = 10.0
@@ -1133,6 +1134,7 @@ texture_hover = ExtResource("25_bq63b")
 
 [node name="ActiveSonarKnobTwoPivot" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_left = 17.0
 offset_top = 10.0
