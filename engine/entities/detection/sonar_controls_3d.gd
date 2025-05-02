@@ -27,6 +27,8 @@ var rot_1_lerp_to:float
 var rot_2_lerp_to:float
 var dragging:bool = false
 
+
+var unpacked:bool = false
 signal s_angle_1
 signal s_angle_2
 signal ping_requested  #Emits with angleA, angleB
@@ -68,7 +70,7 @@ func unpack():
     camera = get_viewport().get_camera_3d()
     #Shift tranform to a bit above the height.
     print("Adjusted global position of the sonar node. May yet be messed up by t")
-    
+    unpacked = true
 func _ready():
     mesh_1.material_override = mesh_1.material_override.duplicate()
     mesh_1.transparency = base_transparency
@@ -76,12 +78,14 @@ func _ready():
     mesh_2.transparency = base_transparency
 
 func _process(_delta:float):
-    
-    update_knobs()
-    lerp_to_it(_delta)
-    lift_knob_from_surface(%ControlMesh1, %KnobPivot1, %SonarNode.own_entity.anchor)
-    lift_knob_from_surface(%ControlMesh2, %KnobPivot2, %SonarNode.own_entity.anchor)
-    look_at(%SonarNode.own_entity.anchor.position)
+    if unpacked == true:
+        update_knobs()
+        lerp_to_it(_delta)
+        lift_knob_from_surface(%ControlMesh1, %KnobPivot1, %SonarNode.own_entity.anchor)
+        lift_knob_from_surface(%ControlMesh2, %KnobPivot2, %SonarNode.own_entity.anchor)
+        look_at(%SonarNode.own_entity.anchor.position)
+        s_angle_1.emit(calculate_knob_angle_signal(%ControlMesh1))
+        s_angle_2.emit(calculate_knob_angle_signal(%ControlMesh2))
 
 
 func _on_controlmesh1_mouse_entered() -> void:
@@ -181,6 +185,19 @@ func lift_knob_from_surface(knob: Node3D, pivot: Node3D, anchor: Planet):
     knob.global_position = new_pos
     
 
+
+func calculate_knob_angle_signal(mesh:MeshInstance3D)->float:
+    #Because we are lerping the movement in 3D space, we want anything that follows
+    #From this interaction to also be lerped.
+    #This means emitting this signal quite often.
+    var entity:Entity = %SonarNode.own_entity
+    var entity_planet_axis:Vector3 = (entity.global_position - entity.anchor.global_position).normalized()
+    var entity_basis:Dictionary = GlobeHelpers.get_aligned_basis(entity_planet_axis)
+    var to_entity:Vector3 = (entity.global_position - mesh.global_position).normalized()
+    var local_northsouth:Vector3 = entity_basis.up
+    var angle = to_entity.angle_to(local_northsouth)
+    return rad_to_deg(angle)
+    
 
 func calculate_knob_angle(mesh: MeshInstance3D) -> float:
     # Cast a ray from the camera to the mouse position

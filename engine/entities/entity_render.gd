@@ -57,6 +57,8 @@ func update_mesh_visibilities(layer:int, val:bool):
     sonar_mesh.set_layer_mask_value(layer,val)
     %ControlMesh1.set_layer_mask_value(layer, val)
     %ControlMesh2.set_layer_mask_value(layer,val)
+    %ControlMesh1second.set_layer_mask_value(layer,val)
+    %ControlMesh2second.set_layer_mask_value(layer,val)
     for child in get_children():
         if child.get("layers") != null:
             child.set_layer_mask_value(layer,val)

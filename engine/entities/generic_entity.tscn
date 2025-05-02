@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=47 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="22_loeq3"]
 [ext_resource type="Texture2D" uid="uid://bdveri46dlmy4" path="res://assets/UI/white_buttons/VolumeSliderKnobT04White.png" id="22_op6l6"]
 [ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="23_op6l6"]
+[ext_resource type="Material" uid="uid://de23e4h2ah40y" path="res://engine/entities/detection/3d_ui_handle.material" id="24_j3cwe"]
 [ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_3qfs3"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="28_op6l6"]
 [ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="29_j3cwe"]
@@ -134,27 +135,12 @@ _data = {
 lightmap_size_hint = Vector2i(27, 27)
 size = Vector2(25, 25)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qfs3"]
-resource_local_to_scene = true
-transparency = 4
-diffuse_mode = 3
-specular_mode = 1
-disable_fog = true
-albedo_color = Color(0, 1, 1, 1)
-emission = Color(0.0901961, 0.454902, 0.513726, 1)
-emission_energy_multiplier = 0.0
-disable_receive_shadows = true
-
-[sub_resource type="SphereMesh" id="SphereMesh_hyfub"]
-radius = 0.25
-height = 0.5
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3qfs3"]
-points = PackedVector3Array(-0.507937, -0.507937, -0.00793651, 0.507937, 0.507937, 0.00793651, 0.507937, 0.507937, -0.00793651, -0.507937, 0.507937, 0.00793651, 0.507937, -0.507937, 0.00793651, 0.507937, -0.507937, -0.00793651, -0.507937, 0.507937, -0.00793651, -0.507937, -0.507937, 0.00793651)
-
 [sub_resource type="TorusMesh" id="TorusMesh_op6l6"]
 inner_radius = 0.15
 outer_radius = 0.3
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3qfs3"]
+points = PackedVector3Array(-0.507937, -0.507937, -0.00793651, 0.507937, 0.507937, 0.00793651, 0.507937, 0.507937, -0.00793651, -0.507937, 0.507937, 0.00793651, 0.507937, -0.507937, 0.00793651, 0.507937, -0.507937, -0.00793651, -0.507937, 0.507937, -0.00793651, -0.507937, -0.507937, 0.00793651)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hyfub"]
 
@@ -399,16 +385,22 @@ unique_name_in_owner = true
 
 [node name="ControlMesh1" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1"]
 unique_name_in_owner = true
-transform = Transform3D(0.999979, -0.00651415, -0.000580518, 0.00651604, 0.999973, 0.00330911, 0.000558935, -0.00331283, 0.999994, 1.49012e-08, 11.8615, 0)
-material_override = SubResource("StandardMaterial3D_3qfs3")
-transparency = 0.8
+transform = Transform3D(0.98511, 0.171929, -3.87372e-08, -3.46786e-08, -2.66098e-08, -1, -0.171929, 0.985109, -2.02513e-08, 1.49012e-08, 11.8615, 0)
+material_override = ExtResource("24_j3cwe")
 cast_shadow = 0
-mesh = SubResource("SphereMesh_hyfub")
+mesh = SubResource("TorusMesh_op6l6")
 
 [node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1/Area3D"]
 shape = SubResource("ConvexPolygonShape3D_3qfs3")
+
+[node name="ControlMesh1second" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1"]
+unique_name_in_owner = true
+transform = Transform3D(0.98511, 0.171929, -3.87372e-08, -3.46786e-08, -2.66098e-08, -1, -0.171929, 0.985109, -2.02513e-08, 2.98023e-08, 11.4054, 0)
+material_override = ExtResource("24_j3cwe")
+cast_shadow = 0
+mesh = SubResource("TorusMesh_op6l6")
 
 [node name="KnobPivot2" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D"]
 unique_name_in_owner = true
@@ -416,8 +408,8 @@ transform = Transform3D(0.983719, 0.179712, 0, -0.179712, 0.983719, 0, 0, 0, 1, 
 
 [node name="ControlMesh2" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2"]
 unique_name_in_owner = true
-transform = Transform3D(0.970725, 0.160247, 0.178924, 0.160248, 0.122827, -0.979405, -0.178924, 0.979405, 0.0935522, -5.96046e-08, 11.8615, 0)
-material_override = SubResource("StandardMaterial3D_3qfs3")
+transform = Transform3D(0.98511, 0.171929, -3.87372e-08, -3.46786e-08, -2.66098e-08, -1, -0.171929, 0.985109, -2.02513e-08, -5.96046e-08, 11.8615, 0)
+material_override = ExtResource("24_j3cwe")
 transparency = 0.2
 mesh = SubResource("TorusMesh_op6l6")
 
@@ -425,6 +417,16 @@ mesh = SubResource("TorusMesh_op6l6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2/Area3D"]
 shape = SubResource("ConvexPolygonShape3D_3qfs3")
+
+[node name="ControlMesh2second" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.47035e-08, 1.18966e-09, 1.49012e-08, 1, -1.09052e-08, 1.40779e-09, -9.88006e-09, 1, 0.0082581, -0.0452029, 0.489026)
+material_override = ExtResource("24_j3cwe")
+transparency = 0.2
+mesh = SubResource("TorusMesh_op6l6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
 
 [node name="EntityEmission" type="Node3D" parent="."]
 unique_name_in_owner = true
