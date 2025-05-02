@@ -31,6 +31,7 @@ var dragging:bool = false
 var unpacked:bool = false
 signal s_angle_1
 signal s_angle_2
+signal k_dist_1
 signal ping_requested  #Emits with angleA, angleB
 
 
@@ -55,21 +56,48 @@ func lerp_to_it(delta: float):
         %ControlMesh2.global_position = %ControlMesh2.global_position.lerp(knob_2_lerp_to, pos_factor)
     
     # Lerp rotations
+    # Wraparound around 360 degrees properly.
     if rot_1_lerp_to:
-        var current_rot = knob_pivot_1.rotation
-        var target_z_rot = rot_1_lerp_to
-        knob_pivot_1.rotation.z = lerp(current_rot.z,target_z_rot, rot_factor)
+        var current_rot_z = fmod(knob_pivot_1.rotation.z, TAU)  # Normalize to 0-2PI
+        if current_rot_z < 0:
+            current_rot_z += TAU
+        
+        var target_rot_z = rot_1_lerp_to
+        
+        # Find the shortest angle distance
+        var diff = fmod(target_rot_z - current_rot_z, TAU)
+        if diff < -PI:
+            diff += TAU
+        elif diff > PI:
+            diff -= TAU
+        
+        # Apply the lerp using the shortest path
+        knob_pivot_1.rotation.z = current_rot_z + diff * rot_factor
     
     if rot_2_lerp_to:
-        var current_rot = knob_pivot_2.rotation
-        var target_z_rot = rot_2_lerp_to
-        knob_pivot_2.rotation.z = lerp(current_rot.z,target_z_rot, rot_factor)
+        var current_rot_z = fmod(knob_pivot_2.rotation.z, TAU)  # Normalize to 0-2PI
+        if current_rot_z < 0:
+            current_rot_z += TAU
+        
+        var target_rot_z = rot_2_lerp_to
+        
+        # Find the shortest angle distance
+        var diff = fmod(target_rot_z - current_rot_z, TAU)
+        if diff < -PI:
+            diff += TAU
+        elif diff > PI:
+            diff -= TAU
+        
+        # Apply the lerp using the shortest path
+        knob_pivot_2.rotation.z = current_rot_z + diff * rot_factor
 
 func unpack():
     var current_viewport = get_viewport()
     camera = get_viewport().get_camera_3d()
-    #Shift tranform to a bit above the height.
-    print("Adjusted global position of the sonar node. May yet be messed up by t")
+    s_angle_1.connect(%SonarNode.handle_angle_1)
+    s_angle_2.connect(%SonarNode.handle_angle_2)
+    k_dist_1.connect(%SonarNode.handle_distance_volume)
+    
     unpacked = true
 func _ready():
     mesh_1.material_override = mesh_1.material_override.duplicate()
@@ -86,6 +114,8 @@ func _process(_delta:float):
         look_at(%SonarNode.own_entity.anchor.position)
         s_angle_1.emit(calculate_knob_angle_signal(%ControlMesh1))
         s_angle_2.emit(calculate_knob_angle_signal(%ControlMesh2))
+        k_dist_1.emit(knob_1_dist_lerp) #Remember, we only use one distance.
+        #print("Emitted a dist lerp of", knob_1_dist_lerp)
 
 
 func _on_controlmesh1_mouse_entered() -> void:
@@ -195,8 +225,25 @@ func calculate_knob_angle_signal(mesh:MeshInstance3D)->float:
     var entity_basis:Dictionary = GlobeHelpers.get_aligned_basis(entity_planet_axis)
     var to_entity:Vector3 = (entity.global_position - mesh.global_position).normalized()
     var local_northsouth:Vector3 = entity_basis.up
-    var angle = to_entity.angle_to(local_northsouth)
-    return rad_to_deg(angle)
+    var local_eastwest:Vector3 = entity_basis.right
+    var relative_position = mesh.global_position - entity.anchor.global_position
+    
+    #var angle = to_entity.angle_to(local_northsouth) - We need a signed angle, so a simple angle_to won't suffice.
+    #signed angles come from angle = atan2(determinant, dotproduct)
+    var entity_position_on_local_plane = Vector3(
+        relative_position.dot(local_eastwest),
+        relative_position.dot(local_northsouth),
+        0  # Ignore the axis_to_planet component for the 2D plane
+    )
+
+    # Calculate the angle relative to the northsouth axis (clockwise adjustment)
+    var local_angle = rad_to_deg(atan2(
+        entity_position_on_local_plane.x,  
+        entity_position_on_local_plane.y 
+    ))
+    
+    local_angle = normalize_angle(local_angle)
+    return local_angle
     
 
 func calculate_knob_angle(mesh: MeshInstance3D) -> float:
@@ -324,7 +371,6 @@ func set_angle_1(deg: float) -> void:
     if knob_pivot_1:
         #knob_pivot_1.rotation.z = deg_to_rad(angle_1)
         rot_1_lerp_to = deg_to_rad(angle_1)
-    s_angle_1.emit(angle_1)
 
 func set_angle_2(deg: float) -> void:
     angle_2 = deg
@@ -338,7 +384,6 @@ func set_angle_2(deg: float) -> void:
         #knob_pivot_2.rotation.z = deg_to_rad(angle_2)
         rot_2_lerp_to = deg_to_rad(angle_2)
     
-    s_angle_2.emit(angle_2)
 
 
 func normalize_angle(angle: float) -> float:

@@ -85,7 +85,6 @@ func _on_entity_reached(entity:Entity):
         pass
     
 func handle_angle_1(angle):
-    print("Handle angle 1 received ", angle)
     #BG
     %SonarPulseMesh.material_override.set_shader_parameter("start_angle", angle)
     #Foreground
@@ -100,11 +99,17 @@ func handle_angle_2(angle):
     pass    
 
 func handle_volume(dict:Dictionary):
+    print("Handle volume got ", dict)
     volume = dict.max
     var effective_range = volume * max_dist
-    print("Effective ping range", effective_range)
     %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", dict.max)
- 
+
+func handle_distance_volume(dist:float): #Received as game units
+    #When the user is setting volume visually, we extrapolate from the distance into voume
+    var arbitrary_vector = position * dist
+    var game_dist_max = GlobeHelpers.km_to_arc_distance(max_dist, own_entity.anchor)
+    volume  = dist / game_dist_max
+    %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", volume)
     
     
 func handle_ping_request(_angle_1, _angle_2)->void:

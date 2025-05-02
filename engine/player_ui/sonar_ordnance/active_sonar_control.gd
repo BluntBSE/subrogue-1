@@ -42,7 +42,8 @@ func get_angle_diff(a1: float, a2: float) -> float:  #expecting degrees, not rad
 func set_angle_1(deg: float) -> void:  #Expects degree, not rad
     angle_1 = deg
     if angle_1 > 360.0:
-        inc /= 360.0
+        pass
+        #inc /= 360.0 I dont think we need this.
     if angle_1 < 0:
         angle_1 += 360
 
@@ -55,7 +56,8 @@ func set_angle_1(deg: float) -> void:  #Expects degree, not rad
 func set_angle_2(deg: float) -> void:  #Expects degree, not rad
     angle_2 = deg
     if angle_2 > 360.0:
-        inc /= 360.0
+        pass
+        #inc /= 360.0
     if angle_2 < 0:
         angle_2 += 360
 
