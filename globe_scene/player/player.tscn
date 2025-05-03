@@ -3058,7 +3058,7 @@ default_color = Color(0.203922, 0.866667, 0.92549, 1)
 
 [node name="Line2D2" type="Line2D" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/VesselUIRoot/UpgradeDescription/Line2D"]
 position = Vector2(0, -183)
-points = PackedVector2Array(-24, -6, -112, 256)
+points = PackedVector2Array(-26, -7, -112, 259)
 width = 2.0
 default_color = Color(0.203922, 0.866667, 0.92549, 1)
 
