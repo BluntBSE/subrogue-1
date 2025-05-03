@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://crkmkkyeq5q0k"]
+
+[ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="1_6jcr7"]
+[ext_resource type="Script" uid="uid://p08apea2vdae" path="res://engine/player_ui/3d_ui/active_sonar/generic_ping.gd" id="1_pb5mw"]
+[ext_resource type="Shader" uid="uid://dcopcc20fbxi7" path="res://shaders/sonar_pulse_3.gdshader" id="3_vawk8"]
+[ext_resource type="Texture2D" uid="uid://ccfgbc8l0cp42" path="res://assets/UI/white_icons/white_circle_filled.png" id="4_3nrkc"]
+[ext_resource type="Shader" uid="uid://cdoiv5cq5nyvy" path="res://engine/entities/detection/sonar_targeting_no_pulse.gdshader" id="5_3nrkc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50576"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_vawk8")
+shader_parameter/disc_texture = ExtResource("4_3nrkc")
+shader_parameter/start_angle = -10.0
+shader_parameter/end_angle = 10.0
+shader_parameter/frontier_head = 0.0
+shader_parameter/frontier_tail = 0.0
+shader_parameter/modulate = Color(0.938731, 0.412607, 0.358472, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mycq4"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_50576")
+shader = ExtResource("5_3nrkc")
+shader_parameter/disc_texture = ExtResource("4_3nrkc")
+shader_parameter/start_angle = 10.0
+shader_parameter/end_angle = 10.0
+shader_parameter/frontier_head = 0.0
+shader_parameter/frontier_tail = 0.0
+shader_parameter/modulate = Color(1, 0.14902, 0.0941176, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_pb5mw"]
+lightmap_size_hint = Vector2i(27, 27)
+size = Vector2(25, 25)
+
+[node name="GenericPing" type="Node3D"]
+script = ExtResource("1_pb5mw")
+material_1 = ExtResource("1_6jcr7")
+material_2 = SubResource("ShaderMaterial_50576")
+
+[node name="SonarPulseMesh" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
+material_override = SubResource("ShaderMaterial_mycq4")
+mesh = SubResource("QuadMesh_pb5mw")
+skeleton = NodePath("../..")
