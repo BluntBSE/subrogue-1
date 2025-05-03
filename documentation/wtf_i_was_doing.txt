@@ -23,7 +23,15 @@ IF NEEDED TO IMPROVE PERFORMANCE: All that ping polling and stuff could be on di
 
 TODO:
 
-    
+    COUNTERPING-
+    Given a position on the world...
+    -MAYBE: offset it
+    -Create a mesh with the sonar pulse shaders on it.
+    -Get the angle to the player
+    -Set the beginning/end angles to +/- 20 degrees of player angle
+    -Pulse it, with the frontier tail at a minimum of 20, going up. A cropped frontier tail gives the impression of being far away
+    -Play sounds
+    -Aberrate/redden the player's screen
         
     
     Filtering signals based on parameters

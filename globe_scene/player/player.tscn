@@ -2633,12 +2633,14 @@ libraries = {
 }
 
 [node name="SelfMenuRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="VesselUIRoot" type="TextureRect" parent="UICanvas/PlayerUIRoot/SelfMenuRoot"]
 z_index = 2
+layout_mode = 0
 offset_left = 380.0
 offset_top = 98.0
 offset_right = 1623.0
@@ -2671,6 +2673,7 @@ size = Vector2i(800, 400)
 [node name="Node3D" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/VesselUIRoot/VesselPreview/SubViewport" instance=ExtResource("44_itjk8")]
 
 [node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/VesselUIRoot"]
+layout_mode = 0
 offset_left = 94.0
 offset_top = 74.0
 offset_right = 456.0
@@ -2681,6 +2684,7 @@ text = "HMS Silent Night"
 
 [node name="EditButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/VesselUIRoot/EntityName"]
 modulate = Color(1, 1, 1, 0.243137)
+layout_mode = 0
 offset_left = 369.0
 offset_right = 405.0
 offset_bottom = 36.0
@@ -2689,6 +2693,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="ConfigurationLabel" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/VesselUIRoot"]
+layout_mode = 0
 offset_left = 94.0
 offset_top = 129.0
 offset_right = 477.0
@@ -2876,6 +2881,7 @@ offset_right = 664.938
 offset_bottom = 818.28
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/VesselUIRoot"]
+layout_mode = 0
 offset_left = 909.0
 offset_top = 126.0
 offset_right = 1129.0
@@ -2965,6 +2971,7 @@ text = "Radar Jammers"
 horizontal_alignment = 2
 
 [node name="Label10" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/VesselUIRoot"]
+layout_mode = 0
 offset_left = 981.0
 offset_top = 79.0
 offset_right = 1120.0
@@ -3004,6 +3011,7 @@ color = Color(0.00392157, 0.0509804, 0.0588235, 1)
 
 [node name="Label10" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/VesselUIRoot/UpgradeDescription/ColorRect2"]
 modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 0
 offset_left = 17.0
 offset_top = 15.0
 offset_right = 195.0
@@ -3044,6 +3052,7 @@ horizontal_alignment = 1
 justification_flags = 162
 
 [node name="DescDivider" type="ColorRect" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/VesselUIRoot/UpgradeDescription/ColorRect2"]
+layout_mode = 0
 offset_left = 42.0
 offset_top = 153.0
 offset_right = 177.0
@@ -3137,6 +3146,7 @@ text = "Perseus Freighter"
 
 [node name="MainOptions" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 87.0
 offset_top = 112.0
 offset_right = 350.0

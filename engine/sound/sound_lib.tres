@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SoundLib" load_steps=14 format=3 uid="uid://530rapawcb1y"]
+[gd_resource type="Resource" script_class="SoundLib" load_steps=15 format=3 uid="uid://530rapawcb1y"]
 
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="1_8y6jw"]
 [ext_resource type="Script" uid="uid://d1aoxaxdw5q04" path="res://engine/sound/sound_lib.gd" id="1_c1pf3"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://c6uvjsy85740k" path="res://engine/sound/raw_assets/UI/UI Hover Mid.wav" id="1_xlud6"]
 [ext_resource type="AudioStream" uid="uid://dgl3boybfpbb2" path="res://assets/royalty_free_music/dark-dub-techno-somewhere-we-got-lost-no-copyright-music-144827.mp3" id="2_3ge5n"]
 [ext_resource type="AudioStream" uid="uid://cp803w28w274u" path="res://engine/sound/raw_assets/UI/UI Click Short_bip.wav" id="2_y1o0m"]
+[ext_resource type="AudioStream" uid="uid://bgbvebom5qvw5" path="res://engine/sound/raw_assets/hostile_ping_1.wav" id="3_i2sbo"]
 [ext_resource type="AudioStream" uid="uid://dk0sutdsb2hub" path="res://assets/sounds/massive-thump-116359.mp3" id="3_wahxe"]
 [ext_resource type="AudioStream" uid="uid://bokxaayttenuv" path="res://engine/sound/cropped_sonar.wav" id="4_w7qhd"]
 [ext_resource type="AudioStream" uid="uid://cx7tm5t34m8qj" path="res://title_screen/assets/034850_short-wave-radio-noise-4-73951.mp3" id="4_wn42p"]
@@ -28,3 +29,4 @@ launch_thump_1 = ExtResource("3_wahxe")
 explosion_1 = ExtResource("1_l0hu1")
 signal_acquired_1 = ExtResource("7_ffrrv")
 ping_contact_1 = ExtResource("7_2f80b")
+enemy_ping_direct_1 = ExtResource("3_i2sbo")

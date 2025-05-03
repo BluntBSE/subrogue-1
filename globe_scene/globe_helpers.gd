@@ -117,6 +117,42 @@ static func get_aligned_basis(axis:Vector3) -> Dictionary:
         "up": up #USually local northsouth 
     }
 
+static func normalize_angle(angle: float) -> float:
+    # Normalize the angle to the range [0, 360)
+    var normalized = fmod(angle, 360.0)
+    if normalized < 0:
+        normalized += 360.0
+    return normalized
+    
+static func get_local_angle_between(to:Vector3, from:Vector3, axis:Vector3):
+    var relative_position = to - from #Expecting global positions, basically
+    var local_basis:Dictionary = get_aligned_basis(axis)
+    #Generally speaking, entities use look_at() to keep facing the planet. This puts their forward axis in the updown direction.
+    #The user will perceive northsouth as 'up'.
+    var local_northsouth = local_basis.up
+    var local_eastwest = local_basis["right"]
+    var local_updown = local_basis["forward"]
+    
+    #var angle = to_entity.angle_to(local_northsouth) - We need a signed angle, so a simple angle_to won't suffice.
+    #signed angles come from angle = atan2(determinant, dotproduct)
+    var entity_position_on_local_plane = Vector3(
+        relative_position.dot(local_eastwest),
+        relative_position.dot(local_northsouth),
+        0  # Ignore the axis_to_planet component for the 2D plane
+    )
+
+    # Calculate the angle relative to the northsouth axis (clockwise adjustment)
+    var local_angle = rad_to_deg(atan2(
+        entity_position_on_local_plane.x,  
+        entity_position_on_local_plane.y 
+    ))
+    
+    local_angle = normalize_angle(local_angle)
+    
+    print("Global angle calculator got: ", local_angle)
+    return local_angle
+
+
 func visualize_entity_position(entity_position, anchor, color):
     # Create a sphere mesh
     var sphere_mesh := SphereMesh.new()
