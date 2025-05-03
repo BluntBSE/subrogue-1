@@ -1,6 +1,10 @@
 extends Node3D
 class_name RenderEffects
 
+var test
+var fixed_position_effects = []
+
+
 #COUNTERPING
 #This fires when a player entity is successfully pinged by another entity in the world
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -23,12 +27,15 @@ func generate_ping_mesh():
 
 func send_counterping_from(pos:Vector3, to:Vector3, axis:Vector3, width:float = 40.0):
     var mesh:GenericPing = generate_ping_mesh()
-    get_tree().root.add_child(mesh)
-    print("but pos was ", pos)
+    add_child(mesh)
     mesh.global_position = pos
     mesh.look_at(axis)
-    
+    mesh.top_level = true
+    mesh.track_target = self
+    #mesh.follow_target = self
+   # mesh.initial_offset = (pos - global_position)
     mesh.ping(pos, to, axis)
+    mesh.finished.connect(func():mesh.queue_free())
     #await finished then cleanup
 
 

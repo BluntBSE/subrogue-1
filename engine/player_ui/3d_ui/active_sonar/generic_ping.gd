@@ -2,11 +2,14 @@ extends Node3D
 class_name GenericPing
 #used when we want to create pinglike visual effects that aren't necessarily part of the active sonar ping
 #that players use
+var initial_offset
 @export var material_1:ShaderMaterial
 @export var material_2:ShaderMaterial
 @export var cone_width:float = 40.0 #degrees
 #Used to control other interactions we want tied to this if we expand it.
 #For now, sounds are goinmg straight into send_pulse() since its only used for enemies
+var track_target:Node3D
+var follow_target:Node3D
 signal shadow_cast
 signal shadow_finished
 signal fill_cast
@@ -25,8 +28,12 @@ var angle_to:float: #Degrees
         %SonarPulseMesh.material_override.next_pass.set_shader_parameter("end_angle", offset_up)
 
 
- 
-       
+
+func _process(_delta:float)->void:
+    if track_target:
+        angle_to = aim_ping_at(global_position, track_target.global_position, global_position) #We can use our position as the axis because the planet is 0,0,0
+    if follow_target:
+        position  = follow_target.global_position + initial_offset
 
 func send_pulse():
     #At the moment the only use case we have for the generic pings is hostile pings, which must first project their material

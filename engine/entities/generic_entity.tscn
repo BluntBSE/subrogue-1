@@ -459,6 +459,7 @@ update_rotation = false
 update_scale = false
 
 [node name="TransformBreaker" type="Node" parent="EntityRender/SonarNode"]
+unique_name_in_owner = true
 
 [node name="SonarPulseMesh" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker"]
 unique_name_in_owner = true
@@ -524,9 +525,14 @@ mesh = SubResource("TorusMesh_op6l6")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
+transform = Transform3D(-0.171929, -0.177036, -0.969071, 0.98511, -0.0308977, -0.16913, -1.30385e-08, -0.98372, 0.179712, 0.229596, 0.0604862, 11.7522)
 
 [node name="RenderEffects" type="Node3D" parent="EntityRender"]
 script = ExtResource("25_hyfub")
+
+[node name="EffectsTransform3D" type="RemoteTransform3D" parent="EntityRender/RenderEffects"]
+unique_name_in_owner = true
+update_rotation = false
 
 [node name="EntityEmission" type="Node3D" parent="."]
 unique_name_in_owner = true

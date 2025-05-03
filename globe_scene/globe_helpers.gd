@@ -149,7 +149,6 @@ static func get_local_angle_between(to:Vector3, from:Vector3, axis:Vector3):
     
     local_angle = normalize_angle(local_angle)
     
-    print("Global angle calculator got: ", local_angle)
     return local_angle
 
 
