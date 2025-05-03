@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5s0kctkca0e8"]
+
+[ext_resource type="Shader" uid="uid://cxcpch6650t4q" path="res://title_screen/wireframe_sub_space_2.gdshader" id="1_dekq0"]
+[ext_resource type="ArrayMesh" uid="uid://78fpva77dmbk" path="res://assets/3d/astute_submarine.obj" id="2_y234a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dm1tv"]
+render_priority = 0
+shader = ExtResource("1_dekq0")
+shader_parameter/albedo = Color(0, 0.772549, 0.756863, 1)
+shader_parameter/outline_width = 3.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="AstuteSubmarine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.403598, -1.19209e-07, -0.250736)
+material_override = SubResource("ShaderMaterial_dm1tv")
+mesh = ExtResource("2_y234a")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0744566, 0, 0.997224, 0, 1, 0, -0.997224, 0, 0.0744566, 5.62762, 0, 1.40392)
