@@ -219,6 +219,8 @@ func handle_player_ui_state(state:String):
     print("handler got ", state)
     if state == "ActiveSonarOpen":
         %SonarPulseMesh.visible = true
+        %SonarControls3D.visible = true
     else:
         %SonarPulseMesh.visible = false
+        %SonarControls3D.visible = false
         

@@ -29,6 +29,8 @@ func _process(_delta:float)->void:
         spawn_check_time = 0.0
     pass
 
+
+
 func repopulate_entities():
     if commercial_entities.size()<num_commercial_entities:
         new_commercial_entity()

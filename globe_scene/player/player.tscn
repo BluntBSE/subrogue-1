@@ -2585,7 +2585,6 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
 [node name="CityUI" parent="UICanvas/PlayerUIRoot/CityUIRoot" instance=ExtResource("10_558vm")]
-visible = false
 layout_mode = 0
 offset_left = 1919.0
 offset_top = 68.0
