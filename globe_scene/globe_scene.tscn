@@ -3575,7 +3575,6 @@ environment = SubResource("Environment_13rd1")
 unique_name_in_owner = true
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="Players"]
-_spawnable_scenes = PackedStringArray("uid://oafvbh26aglu")
 spawn_path = NodePath("..")
 
 [node name="Factions" type="Node3D" parent="."]
@@ -3603,6 +3602,7 @@ _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l
 spawn_path = NodePath("..")
 
 [node name="Atlantic Empire" type="Node3D" parent="Factions"]
+unique_name_in_owner = true
 script = ExtResource("33_x8218")
 faction_color = Color(0.832526, 2.575e-05, 0.23787, 1)
 
@@ -3614,6 +3614,7 @@ _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l
 spawn_path = NodePath("..")
 
 [node name="Cascadia" type="Node3D" parent="Factions"]
+unique_name_in_owner = true
 script = ExtResource("33_x8218")
 faction_color = Color(0.826088, 1, 0.80839, 1)
 
