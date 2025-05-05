@@ -1,0 +1,2 @@
+extends GenericState
+class_name OnlySelfState

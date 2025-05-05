@@ -1,7 +1,7 @@
 extends Node2D
 #Accessed as SoundManager through autoload. Else, class_name SoundManager
 
-var num_players:int = 32 #Only play 8 sounds at once. May need to go higher.
+var num_players:int = 32
 var bus:String = "master"
 var sound_lib:SoundLib
 var in_use:Array = [] # Players in_use. Known for the purposes of stopping sounds.
@@ -64,10 +64,7 @@ func stop_sound_by_id(sound_id:String)->void:
             available.append(player)
 
 
-func _process(_delta:float)->void:
-    print("AVAILABLE ", available.size())
-    print("IN USE ", in_use.size())
-    
+func _process(_delta:float)->void: 
     # Play a queued sound if any players are available.
     if not queue.is_empty() and not available.is_empty():
         var sound_command:Dictionary = queue.pop_front()
