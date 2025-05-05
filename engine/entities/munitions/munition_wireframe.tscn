@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3wuwitgb0udr"]
+
+[ext_resource type="Shader" uid="uid://cxcpch6650t4q" path="res://title_screen/wireframe_sub_space_2.gdshader" id="1_hxaqd"]
+[ext_resource type="ArrayMesh" uid="uid://bmokecanjbloq" path="res://assets/3d/MK-48 ADCAP Torpedo_2.8.0_Blend.obj" id="2_hxaqd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqaom"]
+render_priority = 0
+shader = ExtResource("1_hxaqd")
+shader_parameter/albedo = Color(0.00937086, 0.824356, 0.685051, 1)
+shader_parameter/outline_width = 3.0
+
+[node name="MunitionWireframe" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.953832, 0, -0.30034, 0, 1, 0, 0.30034, 0, 0.953832, -3.12858, 0.381714, 3.88072)
+
+[node name="Mk-48AdcapTorpedo2_8_0Blend" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.34881, 0, 0, 0, 1.34881, 0, 0, 0, 1, 0.786074, -0.0743275, 0.25447)
+material_override = SubResource("ShaderMaterial_xqaom")
+mesh = ExtResource("2_hxaqd")
