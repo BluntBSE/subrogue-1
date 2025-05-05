@@ -3486,6 +3486,30 @@ size = Vector2i(800, 400)
 
 [node name="MunitionWireframe" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VesselPreview/SubViewport" instance=ExtResource("47_dv6ba")]
 
+[node name="ConfigurationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VesselPreview"]
+offset_left = 396.0
+offset_top = 139.0
+offset_right = 779.0
+offset_bottom = 169.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("49_nd8hy")
+text = "Type: Sonar Torpedo"
+horizontal_alignment = 2
+
+[node name="ConfigurationLabel2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VesselPreview"]
+offset_left = 393.0
+offset_top = 168.0
+offset_right = 776.0
+offset_bottom = 198.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("49_nd8hy")
+text = "4 Loaded"
+horizontal_alignment = 2
+
 [node name="ConfigurationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
 layout_mode = 0
 offset_left = 101.0
