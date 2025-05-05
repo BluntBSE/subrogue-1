@@ -14,10 +14,9 @@ var camera
 var viewport
 var anchor
 var unpacked = false
+var state_machine := StateMachine.new()
 signal undocked_from
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-    pass
 
 
 func unpack():
@@ -35,12 +34,17 @@ func unpack():
     active_sonar_control.ping_requested.connect(player_entity.sonar_node.handle_ping_request)
     active_sonar_control.unpack()
     
+    #SELF MENU
+    get_node("SelfMenuRoot").toggle_self_menu.connect(handle_self_menu_toggle)
+    
+    
+    
     #Notifications and such
     player.camera.freelook.connect(handle_free_look)
 
     volume_bar.handle_values.connect(player_entity.sonar_node.handle_volume)
     volume_bar.handle_values.connect(player_entity.sonar_node.controls.handle_external_volume)
-
+    
     unpacked = true
 
     pass  # Replace with function body.
@@ -130,6 +134,12 @@ func handle_undocked_button():
 func handle_docked(b:bool):
     pass
 
+func handle_self_menu_toggle(open:bool):
+    if open == true:
+        %UIAnimations.play("SelfIn")
+    else:
+        %UIAnimations.play_backwards("SelfIn")
+
 func handle_launch(_args: Dictionary) -> void:
     var glitch_mask: ColorRect = get_node("ScreenspaceFilters/FilterMaskGlitch")
     glitch_mask.material.set("shader_parameter/active", true)
@@ -168,3 +178,8 @@ func handle_impact_1() -> void:
     # Deactivate the shader effect
     vhs_mask.material.set("shader_parameter/active", false)
     
+func _on_self_menu_toggle_button_up() -> void:
+    pass # Replace with function body.
+
+func open_exclusively(menu:Control):
+    pass

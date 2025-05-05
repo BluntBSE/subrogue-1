@@ -530,10 +530,6 @@ transform = Transform3D(-0.171929, -0.177036, -0.969071, 0.98511, -0.0308977, -0
 [node name="RenderEffects" type="Node3D" parent="EntityRender"]
 script = ExtResource("25_hyfub")
 
-[node name="EffectsTransform3D" type="RemoteTransform3D" parent="EntityRender/RenderEffects"]
-unique_name_in_owner = true
-update_rotation = false
-
 [node name="EntityEmission" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("20_0c68s")

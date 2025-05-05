@@ -3400,7 +3400,6 @@ mesh = SubResource("SphereMesh_wog1n")
 script = ExtResource("2_0c888")
 
 [node name="ClickableSphere" type="Area3D" parent="GamePlanet"]
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GamePlanet/ClickableSphere"]
 shape = SubResource("SphereShape3D_wv2ic")
