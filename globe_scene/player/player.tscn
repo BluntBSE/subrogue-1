@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=81 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -49,6 +49,8 @@
 [ext_resource type="PackedScene" uid="uid://b5s0kctkca0e8" path="res://engine/entities/3d_scenes/player_sub_for_vessel.tscn" id="44_itjk8"]
 [ext_resource type="Texture2D" uid="uid://yq3xci18jw7q" path="res://assets/UI/white_circle.png" id="45_3sjdi"]
 [ext_resource type="PackedScene" uid="uid://c3wuwitgb0udr" path="res://engine/entities/munitions/munition_wireframe.tscn" id="47_dv6ba"]
+[ext_resource type="Theme" uid="uid://b2nowvgu1l6bg" path="res://engine/player_ui/2d_ui/weapon_config_ui.tres" id="48_wftmj"]
+[ext_resource type="FontFile" uid="uid://spqucyqiejci" path="res://assets/UI/fonts/NK57/NK57 Monospace No Rg.otf" id="49_nd8hy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
 shader = ExtResource("21_fwoy0")
@@ -3461,10 +3463,10 @@ expand_mode = 1
 [node name="VesselPreview" type="TextureRect" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
 texture_filter = 4
 layout_mode = 0
-offset_left = -142.0
-offset_top = 49.0
-offset_right = 882.0
-offset_bottom = 561.0
+offset_left = 272.0
+offset_top = 79.0
+offset_right = 1296.0
+offset_bottom = 591.0
 texture = SubResource("ViewportTexture_250mi")
 expand_mode = 1
 stretch_mode = 3
@@ -3486,34 +3488,64 @@ size = Vector2i(800, 400)
 
 [node name="ConfigurationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
 layout_mode = 0
-offset_left = 83.0
-offset_top = 100.0
-offset_right = 466.0
-offset_bottom = 130.0
+offset_left = 101.0
+offset_top = 123.0
+offset_right = 484.0
+offset_bottom = 153.0
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "Manta Torpedo"
 
+[node name="ConfigurationLabel2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+modulate = Color(1, 1, 1, 0.380392)
+layout_mode = 0
+offset_left = 384.0
+offset_top = 123.0
+offset_right = 767.0
+offset_bottom = 153.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Hellcat RT-2 Wireguide"
+
+[node name="ConfigurationLabel3" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+modulate = Color(1, 1, 1, 0.380392)
+layout_mode = 0
+offset_left = 811.0
+offset_top = 123.0
+offset_right = 1020.0
+offset_bottom = 153.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Phase Gate"
+
 [node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
 layout_mode = 0
-offset_left = 81.0
-offset_top = 47.0
-offset_right = 443.0
-offset_bottom = 79.0
+offset_left = 99.0
+offset_top = 70.0
+offset_right = 461.0
+offset_bottom = 102.0
 theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 26
 text = "Configuration"
 
 [node name="RangeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
 material = ExtResource("26_g8nhr")
+instance_shader_parameters/left_percent = 0.0
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
-offset_left = 112.0
-offset_top = 617.0
-offset_right = 317.0
-offset_bottom = 628.0
+offset_left = 97.0
+offset_top = 437.0
+offset_right = 393.0
+offset_bottom = 448.0
+min_value = 10.0
+max_value = 60.0
+value = 10.0
 nine_patch_stretch = true
 texture_under = ExtResource("27_bnsnq")
 texture_progress_offset = Vector2(-20, 0)
@@ -3528,36 +3560,32 @@ mult_factor = 1.0
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
 layout_mode = 0
-offset_left = 12.0
-offset_top = -34.0
-offset_right = 183.0
-offset_bottom = -15.0
-theme = ExtResource("8_fq2vg")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("29_ai432")
-theme_override_font_sizes/font_size = 12
-text = "Target Profile"
-horizontal_alignment = 1
+offset_left = -1.0
+offset_top = -65.0
+offset_right = 208.0
+offset_bottom = -42.0
+theme = ExtResource("48_wftmj")
+text = "Target Profile:"
 
 [node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
 layout_mode = 0
-offset_left = 40.7407
-offset_top = 20.3704
-offset_right = 162.741
-offset_bottom = 40.3704
+offset_left = -9.99999
+offset_top = 25.0
+offset_right = 303.0
+offset_bottom = 45.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("29_ai432")
-theme_override_font_sizes/font_size = 10
-text = "0.0 - 1.0"
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "0.2 - 0.5"
 horizontal_alignment = 1
 
 [node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
 layout_mode = 0
-offset_left = 178.704
-offset_top = -8.3335
-offset_right = 278.704
-offset_bottom = 91.6665
+offset_left = 269.0
+offset_top = -7.3335
+offset_right = 369.0
+offset_bottom = 92.6665
 scale = Vector2(0.25, 0.25)
 action_mode = 0
 keep_pressed_outside = true
@@ -3578,58 +3606,73 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBar4" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = -69.0
+offset_right = 292.0
+offset_bottom = -41.0
+theme = ExtResource("48_wftmj")
+text = "0.5"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 197.0
+offset_bottom = -8.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Minimum Deviation: 0.2"
+
+[node name="RangeBar4" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
 material = ExtResource("26_g8nhr")
+instance_shader_parameters/left_percent = 0.0
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
-offset_left = 383.0
-offset_top = 617.0
-offset_right = 588.0
-offset_bottom = 628.0
+offset_left = 97.0
+offset_top = 284.0
+offset_right = 393.0
+offset_bottom = 295.0
+min_value = 10.0
+max_value = 60.0
+value = 10.0
 nine_patch_stretch = true
 texture_under = ExtResource("27_bnsnq")
 texture_progress_offset = Vector2(-20, 0)
 tint_under = Color(1, 1, 1, 0.996078)
 tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0, 0, 1)
-script = ExtResource("28_0638s")
-handle_1 = NodePath("RangeBarControlMax")
-handle_2 = NodePath("RangeBarControlMin")
-output_label = NodePath("Values")
-mult_factor = 1.0
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
-offset_left = 12.0
-offset_top = -34.0
-offset_right = 183.0
-offset_bottom = -15.0
-theme = ExtResource("8_fq2vg")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("29_ai432")
-theme_override_font_sizes/font_size = 12
-text = "Target Profile"
-horizontal_alignment = 1
+offset_left = -1.0
+offset_top = -65.0
+offset_right = 208.0
+offset_bottom = -42.0
+theme = ExtResource("48_wftmj")
+text = "Target Volume"
 
 [node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
-offset_left = 40.7407
-offset_top = 20.3704
-offset_right = 162.741
-offset_bottom = 40.3704
+offset_left = -9.99999
+offset_top = 25.0
+offset_right = 303.0
+offset_bottom = 45.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("29_ai432")
-theme_override_font_sizes/font_size = 10
-text = "0.0 - 1.0"
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "88db - 92db"
 horizontal_alignment = 1
 
 [node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
-offset_left = 178.704
-offset_top = -8.3335
-offset_right = 278.704
-offset_bottom = 91.6665
+offset_left = 269.0
+offset_top = -7.3335
+offset_right = 369.0
+offset_bottom = 92.6665
 scale = Vector2(0.25, 0.25)
 action_mode = 0
 keep_pressed_outside = true
@@ -3650,57 +3693,72 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBar3" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = -69.0
+offset_right = 292.0
+offset_bottom = -41.0
+theme = ExtResource("48_wftmj")
+text = "90db"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 197.0
+offset_bottom = -8.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Minimum Deviation: 4db"
+
+[node name="RangeBar3" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
-offset_left = 112.0
-offset_top = 729.0
-offset_right = 317.0
-offset_bottom = 740.0
+offset_left = 97.0
+offset_top = 583.0
+offset_right = 393.0
+offset_bottom = 594.0
+min_value = 10.0
+max_value = 60.0
+value = 10.0
 nine_patch_stretch = true
 texture_under = ExtResource("27_bnsnq")
 texture_progress_offset = Vector2(-20, 0)
 tint_under = Color(1, 1, 1, 0.996078)
 tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0, 0, 1)
-script = ExtResource("28_0638s")
-handle_1 = NodePath("RangeBarControlMax")
-handle_2 = NodePath("RangeBarControlMin")
-output_label = NodePath("Values")
-mult_factor = 1.0
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
 layout_mode = 0
-offset_left = 12.0
-offset_top = -32.0
-offset_right = 183.0
-offset_bottom = -13.0
-theme = ExtResource("8_fq2vg")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 12
-text = "Target Volume"
-horizontal_alignment = 1
+offset_left = -1.0
+offset_top = -65.0
+offset_right = 208.0
+offset_bottom = -42.0
+theme = ExtResource("48_wftmj")
+text = "Target Pitch:"
 
 [node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
 layout_mode = 0
-offset_left = 40.7407
-offset_top = 20.3704
-offset_right = 162.741
-offset_bottom = 40.3704
+offset_left = -9.99999
+offset_top = 25.0
+offset_right = 303.0
+offset_bottom = 45.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("29_ai432")
-theme_override_font_sizes/font_size = 10
-text = "0.0 - 1.0"
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "53hz - 63hz"
 horizontal_alignment = 1
 
 [node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
 layout_mode = 0
-offset_left = 178.704
-offset_top = -8.3335
-offset_right = 278.704
-offset_bottom = 91.6665
+offset_left = 269.0
+offset_top = -7.3335
+offset_right = 369.0
+offset_bottom = 92.6665
 scale = Vector2(0.25, 0.25)
 action_mode = 0
 keep_pressed_outside = true
@@ -3721,6 +3779,276 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
+[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = -69.0
+offset_right = 292.0
+offset_bottom = -41.0
+theme = ExtResource("48_wftmj")
+text = "60hz"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 197.0
+offset_bottom = -8.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Minimum Deviation: 6hz"
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+offset_left = 93.0
+offset_top = 674.0
+offset_right = 302.0
+offset_bottom = 697.0
+theme = ExtResource("48_wftmj")
+text = "Target Depths"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label"]
+offset_left = 2.0
+offset_top = 30.0
+offset_right = 197.0
+offset_bottom = 53.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Minimum Deviation: 1"
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+offset_left = 1.0
+offset_top = 113.0
+offset_right = 52.0
+offset_bottom = 128.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Crawl"
+
+[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+offset_top = 87.0
+offset_right = 51.0
+offset_bottom = 102.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Swim"
+
+[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label"]
+offset_top = 61.0
+offset_right = 57.0
+offset_bottom = 76.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Surface"
+
+[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+offset_left = 490.0
+offset_top = 523.0
+offset_right = 699.0
+offset_bottom = 546.0
+theme = ExtResource("48_wftmj")
+text = "Behaviour"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4"]
+layout_mode = 0
+offset_top = 68.0
+offset_right = 171.0
+offset_bottom = 221.0
+theme = ExtResource("48_wftmj")
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Wireguide"
+
+[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Never switch targets"
+
+[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Detonate at max range"
+
+[node name="Label6" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Travel at: Swim"
+
+[node name="Label7" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Travel at: Crawl"
+
+[node name="Label8" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Travel at: Surface"
+
+[node name="Label9" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Detonate if jammed"
+
+[node name="Label10" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Accelerate on target"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4"]
+offset_left = 1.0
+offset_top = 31.0
+offset_right = 123.0
+offset_bottom = 46.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Select Multiple"
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+offset_left = 718.0
+offset_top = 520.0
+offset_right = 927.0
+offset_bottom = 543.0
+theme = ExtResource("48_wftmj")
+text = "Max Travel:"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label3"]
+offset_left = 2.0
+offset_top = 34.0
+offset_right = 197.0
+offset_bottom = 57.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Max range: 1000km"
+
+[node name="LineEdit2" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label3"]
+offset_left = 191.0
+offset_top = -4.0
+offset_right = 317.0
+offset_bottom = 24.0
+theme = ExtResource("48_wftmj")
+text = "1000km"
+
+[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+offset_left = 718.0
+offset_top = 614.0
+offset_right = 927.0
+offset_bottom = 637.0
+theme = ExtResource("48_wftmj")
+text = "Max Speed:"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label5"]
+offset_left = -1.0
+offset_top = 34.0
+offset_right = 194.0
+offset_bottom = 57.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Top speed: 100km/h"
+
+[node name="LineEdit2" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label5"]
+offset_left = 191.0
+offset_top = -4.0
+offset_right = 317.0
+offset_bottom = 24.0
+theme = ExtResource("48_wftmj")
+text = "100km/h"
+
+[node name="UndockButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 117.284
+anchor_top = -10.2135
+anchor_right = 118.934
+anchor_bottom = -10.2135
+offset_left = -144749.0
+offset_top = 9693.62
+offset_right = -146654.0
+offset_bottom = 9733.62
+scale = Vector2(0.94, 0.94)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Apply"
+metadata/_edit_use_anchors_ = true
+
+[node name="UndockButton2" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 117.284
+anchor_top = -10.2776
+anchor_right = 118.934
+anchor_bottom = -10.2776
+offset_left = -144749.0
+offset_top = 9693.62
+offset_right = -146654.0
+offset_bottom = 9733.62
+scale = Vector2(0.94, 0.94)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton2"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Cancel"
+metadata/_edit_use_anchors_ = true
+
 [node name="SettingsIconFilledBlue" type="Sprite2D" parent="UICanvas"]
 position = Vector2(1876, 36)
 scale = Vector2(0.21625, 0.21625)
@@ -3740,10 +4068,6 @@ offset_right = 456.0
 offset_bottom = 82.0
 placeholder_text = "Welcome to the cheatzone"
 script = ExtResource("39_7xmbg")
-
-[node name="ColorRect" type="ColorRect" parent="UICanvas"]
-offset_right = 960.0
-offset_bottom = 40.0
 
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/VerySlow" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Slow" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
@@ -3794,4 +4118,6 @@ offset_bottom = 40.0
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_min_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton" to="UICanvas/PlayerUIRoot" method="handle_undocked_button"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton2" to="UICanvas/PlayerUIRoot" method="handle_undocked_button"]
 [connection signal="text_submitted" from="UICanvas/Console/ConsoleInput" to="UICanvas/Console/ConsoleInput" method="_on_text_submitted"]
