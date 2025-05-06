@@ -13,6 +13,8 @@ func _ready():
     state_machine.Add("closed", ClosedSelfState.new(self, {}))
     state_machine.Add("onlyself", OnlySelfState.new(self, {}))
     state_machine.Add("vessel", VesselState.new(self, {}))
+    state_machine.Change("onlyself", {})
+    #player.play_backwards("vessel_in") #Idk why :(
 
 func _on_self_menu_toggle_button_button_up() -> void:
     toggle_open()

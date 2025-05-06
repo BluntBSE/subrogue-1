@@ -698,7 +698,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SelfMenuRoot/TextureRect:position")
+tracks/6/path = NodePath("SelfMenuRoot/SelfMenu:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -714,7 +714,7 @@ length = 0.19
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SelfMenuRoot/TextureRect:position")
+tracks/0/path = NodePath("SelfMenuRoot/SelfMenu:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -3204,7 +3204,7 @@ offset_bottom = 105.0
 texture = ExtResource("45_3sjdi")
 expand_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="UICanvas/PlayerUIRoot/SelfMenuRoot"]
+[node name="SelfMenu" type="TextureRect" parent="UICanvas/PlayerUIRoot/SelfMenuRoot"]
 visible = false
 z_index = 2
 layout_mode = 0
@@ -3216,7 +3216,7 @@ texture = ExtResource("35_smroy")
 expand_mode = 5
 flip_v = true
 
-[node name="ShipPreview" type="TextureRect" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+[node name="ShipPreview" type="TextureRect" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 591.0
@@ -3226,7 +3226,7 @@ offset_bottom = 315.0
 texture = SubResource("ViewportTexture_nwwe3")
 stretch_mode = 3
 
-[node name="SubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/ShipPreview"]
+[node name="SubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/ShipPreview"]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
@@ -3237,9 +3237,9 @@ fsr_sharpness = 2.0
 canvas_item_default_texture_filter = 0
 size = Vector2i(256, 256)
 
-[node name="Ship3DRoot" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/ShipPreview/SubViewport" instance=ExtResource("36_q7i7m")]
+[node name="Ship3DRoot" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/ShipPreview/SubViewport" instance=ExtResource("36_q7i7m")]
 
-[node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+[node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu"]
 layout_mode = 0
 offset_left = 591.0
 offset_top = 56.0
@@ -3249,7 +3249,7 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 16
 text = "HMS Golden Horizon"
 
-[node name="EntityFaction" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+[node name="EntityFaction" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu"]
 layout_mode = 0
 offset_left = 590.0
 offset_top = 19.0
@@ -3259,7 +3259,7 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 16
 text = "Atlantic Empire"
 
-[node name="EntityClass" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+[node name="EntityClass" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu"]
 layout_mode = 0
 offset_left = 602.0
 offset_top = 248.0
@@ -3269,7 +3269,7 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 16
 text = "Perseus Freighter"
 
-[node name="MainOptions" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+[node name="MainOptions" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 87.0
@@ -3277,7 +3277,7 @@ offset_top = 119.0
 offset_right = 350.0
 offset_bottom = 843.0
 
-[node name="TextureButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+[node name="TextureButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -3288,7 +3288,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions/TextureButton"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 14.0
@@ -3297,7 +3297,7 @@ offset_bottom = 46.0
 theme_override_font_sizes/font_size = 20
 text = "Vessel"
 
-[node name="TextureButton2" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+[node name="TextureButton2" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -3308,7 +3308,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton2"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions/TextureButton2"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 14.0
@@ -3317,7 +3317,7 @@ offset_bottom = 46.0
 theme_override_font_sizes/font_size = 20
 text = "Cargo"
 
-[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -3328,7 +3328,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton3"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions/TextureButton3"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 14.0
@@ -3337,7 +3337,7 @@ offset_bottom = 46.0
 theme_override_font_sizes/font_size = 20
 text = "Crew"
 
-[node name="TextureButton4" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+[node name="TextureButton4" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -3348,7 +3348,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton4"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions/TextureButton4"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 14.0
@@ -3357,7 +3357,7 @@ offset_bottom = 46.0
 theme_override_font_sizes/font_size = 20
 text = "Detection"
 
-[node name="TextureButton5" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+[node name="TextureButton5" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -3368,7 +3368,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton5"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions/TextureButton5"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 14.0
@@ -3377,7 +3377,7 @@ offset_bottom = 46.0
 theme_override_font_sizes/font_size = 20
 text = "Diplomacy"
 
-[node name="TextureButton6" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+[node name="TextureButton6" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -3388,7 +3388,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton6"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions/TextureButton6"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 14.0
@@ -3397,7 +3397,7 @@ offset_bottom = 46.0
 theme_override_font_sizes/font_size = 20
 text = "Log"
 
-[node name="TextureButton7" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions"]
+[node name="TextureButton7" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme = ExtResource("8_fq2vg")
@@ -3408,7 +3408,7 @@ ignore_texture_size = true
 stretch_mode = 4
 flip_h = true
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton7"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions/TextureButton7"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 14.0
@@ -3417,7 +3417,7 @@ offset_bottom = 46.0
 theme_override_font_sizes/font_size = 20
 text = "Special"
 
-[node name="SelfMenuToggleButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect"]
+[node name="SelfMenuToggleButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.4)
 z_index = 3
@@ -3446,6 +3446,7 @@ libraries = {
 }
 
 [node name="MunitionConfigRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -4128,8 +4129,8 @@ script = ExtResource("39_7xmbg")
 [connection signal="color_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer/SignalColorChanger" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_color_changer_color_changed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/SignalInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_inspector_toggle_button_up"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/CityUIRoot/UndockButton" to="UICanvas/PlayerUIRoot" method="handle_undocked_button"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/MainOptions/TextureButton" to="UICanvas/PlayerUIRoot/SelfMenuRoot" method="_on_vessel_button_button_up"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SelfMenuRoot/TextureRect/SelfMenuToggleButton" to="UICanvas/PlayerUIRoot/SelfMenuRoot" method="_on_self_menu_toggle_button_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/MainOptions/TextureButton" to="UICanvas/PlayerUIRoot/SelfMenuRoot" method="_on_vessel_button_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SelfMenuRoot/SelfMenu/SelfMenuToggleButton" to="UICanvas/PlayerUIRoot/SelfMenuRoot" method="_on_self_menu_toggle_button_button_up"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2" method="_on_range_bar_control_max_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2" method="_on_range_bar_control_min_button_up"]
