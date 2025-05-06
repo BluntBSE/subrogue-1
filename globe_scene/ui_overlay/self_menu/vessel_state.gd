@@ -6,7 +6,7 @@ var player:AnimationPlayer
 
 
 func stateEnter(args:Dictionary):
-    print("Playing vessel_in, which is NOT what we want.")
+    print("Entered vessel state")
     ref = _reference
     player = _reference.player
     player.play("vessel_in")

@@ -14,7 +14,11 @@ func _ready():
     state_machine.Add("onlyself", OnlySelfState.new(self, {}))
     state_machine.Add("vessel", VesselState.new(self, {}))
     state_machine.Change("onlyself", {})
-    #player.play_backwards("vessel_in") #Idk why :(
+    
+    #Should probably just merge this with the child scene after con
+    var VSB:TextureButton = find_child("VesselButton", true, false)
+    VSB.button_up.connect(_on_vessel_button_button_up)
+    
 
 func _on_self_menu_toggle_button_button_up() -> void:
     toggle_open()
