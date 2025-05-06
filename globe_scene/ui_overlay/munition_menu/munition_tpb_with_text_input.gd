@@ -313,7 +313,7 @@ func _on_line_edit_text_changed(new_text: String) -> void:
         slider_value = clamp(slider_value, 0.0, 1.0)
         
         # Update the slider without triggering recursive updates
-        externally_overriden = true
+       # externally_overriden = true
         
         # Update the appropriate slider value (max for single handle, both for dual handle)
         if handle_2 == null:
