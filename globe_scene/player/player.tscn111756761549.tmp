@@ -1190,7 +1190,6 @@ handle_1 = NodePath("VolumeBarMax")
 output_label = NodePath("Values")
 mult_factor = 100.0
 output_symbol = "db"
-minimum_deviation = null
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
 layout_mode = 0
@@ -1251,7 +1250,6 @@ handle_1 = NodePath("RangeBarControlMax")
 handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
 mult_factor = 1.0
-minimum_deviation = null
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
 layout_mode = 0
@@ -1372,7 +1370,6 @@ handle_1 = NodePath("VolumeBarMax")
 output_label = NodePath("Values")
 mult_factor = 100.0
 output_symbol = "db"
-minimum_deviation = null
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
 layout_mode = 0
@@ -1432,7 +1429,6 @@ handle_1 = NodePath("VolumeBarMax")
 output_label = NodePath("Values")
 mult_factor = 100.0
 output_symbol = "db"
-minimum_deviation = null
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
 layout_mode = 0
@@ -1492,7 +1488,6 @@ handle_1 = NodePath("RangeBarControlMax")
 handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
 mult_factor = 1.0
-minimum_deviation = null
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
 layout_mode = 0
@@ -1565,7 +1560,6 @@ handle_1 = NodePath("RangeBarControlMax")
 handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
 mult_factor = 1.0
-minimum_deviation = null
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
 layout_mode = 0
@@ -2788,7 +2782,6 @@ handle_1 = NodePath("RangeBarControlMax")
 handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
 mult_factor = 1.0
-minimum_deviation = null
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
 layout_mode = 0
@@ -2858,7 +2851,7 @@ theme_override_fonts/font = ExtResource("49_nd8hy")
 theme_override_font_sizes/font_size = 12
 text = "Minimum Deviation: 0.2"
 
-[node name="RangeBar4" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label", "deviation_label", "typed_input")]
+[node name="RangeBar4" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/left_percent = 0.0
 instance_shader_parameters/right_percent = 1.0
@@ -2881,10 +2874,6 @@ script = ExtResource("47_250mi")
 handle_1 = NodePath("RangeBarControlMax")
 handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
-deviation_label = NodePath("DeviationLabel")
-typed_input = NodePath("LineEdit")
-mult_factor = 100.0
-output_symbol = "db"
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
@@ -2943,7 +2932,7 @@ offset_bottom = -41.0
 theme = ExtResource("48_wftmj")
 text = "90db"
 
-[node name="DeviationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = -31.0
@@ -3369,8 +3358,6 @@ script = ExtResource("39_7xmbg")
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4" method="_on_range_bar_control_min_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4" method="_on_range_bar_control_min_pressed"]
-[connection signal="text_changed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4" method="_on_line_edit_text_changed"]
-[connection signal="text_submitted" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4" method="_on_line_edit_text_submitted"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_max_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_min_button_up"]
