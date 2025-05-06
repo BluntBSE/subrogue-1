@@ -13,7 +13,8 @@ func _ready():
     state_machine.Add("closed", ClosedSelfState.new(self, {}))
     state_machine.Add("onlyself", OnlySelfState.new(self, {}))
     state_machine.Add("vessel", VesselState.new(self, {}))
-    state_machine.Change("onlyself", {})
+    #Is it okay to have a null state at the start? It causes no problems yet, but might be worth keeping track of.
+
     
     #Should probably just merge this with the child scene after con
     var VSB:TextureButton = find_child("VesselButton", true, false)
@@ -23,7 +24,7 @@ func _ready():
 func _on_self_menu_toggle_button_button_up() -> void:
     toggle_open()
     if open == true:
-        state_machine.Change("onlyself", {})
+        state_machine.Change("onlyself", {"animation_required": true})
     else:
         state_machine.Change("closed", {})
 
@@ -31,12 +32,13 @@ func _on_vessel_button_button_up() -> void:
     if state_machine._current_state_id != "vessel":
         state_machine.Change("vessel", {})
     else:
-        state_machine.Change("onlyself", {})
+        state_machine.Change("onlyself", {"animation_required":false})
         
 
     pass # Replace with function body.
 
 func toggle_open():
+    print("Toggle open opened")
     open = !open
     print("toggle open emitting ", open)
     toggle_self_menu.emit(open)

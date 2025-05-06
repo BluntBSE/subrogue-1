@@ -35,9 +35,7 @@ func unpack():
     active_sonar_control.unpack()
     
     #SELF MENU
-    var SMR:SelfMenuRoot = get_node("SelfMenuRoot")
-    get_node("SelfMenuRoot/SelfMenu/SelfMenuToggleButton").button_up.connect(SMR._on_self_menu_toggle_button_button_up)
-    print("Connection made")
+
     get_node("SelfMenuRoot").toggle_self_menu.connect(handle_self_menu_toggle)
     
     
