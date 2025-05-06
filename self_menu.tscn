@@ -1,0 +1,795 @@
+[gd_scene load_steps=19 format=3 uid="uid://csfjdwitc70eg"]
+
+[ext_resource type="Script" uid="uid://dkdtioo68samc" path="res://globe_scene/ui_overlay/self_menu/self_menu_root.gd" id="1_4j64i"]
+[ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="1_ete1d"]
+[ext_resource type="PackedScene" uid="uid://bfgnhjrv8rjgx" path="res://engine/entities/3d_scenes/commercial_freighter_1.tscn" id="2_ymyu0"]
+[ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="3_pxug6"]
+[ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="4_s145t"]
+[ext_resource type="Texture2D" uid="uid://b4rvv34wjpo5j" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT02.png" id="5_udmqu"]
+[ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="6_4j64i"]
+[ext_resource type="Texture2D" uid="uid://b6wq5dkmmxdtv" path="res://assets/UI/white_buttons/VolumeSliderKnobT03White.png" id="7_y15eo"]
+[ext_resource type="Texture2D" uid="uid://biopgmfrbkuc7" path="res://assets/UI/blue_panels/LargeMenuBGT03.1BlueDark.png" id="8_udmqu"]
+[ext_resource type="PackedScene" uid="uid://b5s0kctkca0e8" path="res://engine/entities/3d_scenes/player_sub_for_vessel.tscn" id="9_4j64i"]
+[ext_resource type="Texture2D" uid="uid://8bqmk8uxc6mg" path="res://assets/UI/white_icons/EditIconWhite.png" id="10_y15eo"]
+[ext_resource type="Texture2D" uid="uid://yq3xci18jw7q" path="res://assets/UI/white_circle.png" id="11_uaeko"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nwwe3"]
+viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4j64i"]
+viewport_path = NodePath("VesselUIRoot/VesselPreview/SubViewport")
+
+[sub_resource type="Animation" id="Animation_fwoy0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelfUIBG:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SelfUIBG:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VesselUIRoot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1921, 98)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SelfMenu:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1906, 98)]
+}
+
+[sub_resource type="Animation" id="Animation_q4mmy"]
+resource_name = "vessel_in"
+length = 0.38
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelfUIBG:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.000143354),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SelfUIBG:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.01, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.603922)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VesselUIRoot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1921, 98), Vector2(374, 99)]
+}
+
+[sub_resource type="Animation" id="Animation_4j64i"]
+resource_name = "self_in"
+length = 0.19
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelfMenu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1906, 98), Vector2(1516, 98)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb7nu"]
+_data = {
+&"RESET": SubResource("Animation_fwoy0"),
+&"self_in": SubResource("Animation_4j64i"),
+&"vessel_in": SubResource("Animation_q4mmy")
+}
+
+[node name="SelfMenuRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_4j64i")
+
+[node name="SelfMenu" type="TextureRect" parent="."]
+z_index = 4
+offset_left = 1906.0
+offset_top = 98.0
+offset_right = 2324.0
+offset_bottom = 1098.0
+texture = ExtResource("1_ete1d")
+expand_mode = 5
+flip_v = true
+
+[node name="ShipPreview" type="TextureRect" parent="SelfMenu"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 591.0
+offset_top = 59.0
+offset_right = 847.0
+offset_bottom = 315.0
+texture = SubResource("ViewportTexture_nwwe3")
+stretch_mode = 3
+
+[node name="SubViewport" type="SubViewport" parent="SelfMenu/ShipPreview"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_scale = 2.0
+texture_mipmap_bias = -0.109
+anisotropic_filtering_level = 0
+fsr_sharpness = 2.0
+canvas_item_default_texture_filter = 0
+size = Vector2i(256, 256)
+
+[node name="Ship3DRoot" parent="SelfMenu/ShipPreview/SubViewport" instance=ExtResource("2_ymyu0")]
+
+[node name="MainOptions" type="VBoxContainer" parent="SelfMenu"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 87.0
+offset_top = 119.0
+offset_right = 350.0
+offset_bottom = 843.0
+
+[node name="VesselButton" type="TextureButton" parent="SelfMenu/MainOptions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+texture_normal = ExtResource("4_s145t")
+texture_pressed = ExtResource("5_udmqu")
+texture_hover = ExtResource("5_udmqu")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="SelfMenu/MainOptions/VesselButton"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Vessel"
+
+[node name="TextureButton2" type="TextureButton" parent="SelfMenu/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+texture_normal = ExtResource("4_s145t")
+texture_pressed = ExtResource("5_udmqu")
+texture_hover = ExtResource("5_udmqu")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="SelfMenu/MainOptions/TextureButton2"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Cargo"
+
+[node name="TextureButton3" type="TextureButton" parent="SelfMenu/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+texture_normal = ExtResource("4_s145t")
+texture_pressed = ExtResource("5_udmqu")
+texture_hover = ExtResource("5_udmqu")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="SelfMenu/MainOptions/TextureButton3"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Crew"
+
+[node name="TextureButton4" type="TextureButton" parent="SelfMenu/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+texture_normal = ExtResource("4_s145t")
+texture_pressed = ExtResource("5_udmqu")
+texture_hover = ExtResource("5_udmqu")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="SelfMenu/MainOptions/TextureButton4"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Detection"
+
+[node name="TextureButton5" type="TextureButton" parent="SelfMenu/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+texture_normal = ExtResource("4_s145t")
+texture_pressed = ExtResource("5_udmqu")
+texture_hover = ExtResource("5_udmqu")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="SelfMenu/MainOptions/TextureButton5"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Diplomacy"
+
+[node name="TextureButton6" type="TextureButton" parent="SelfMenu/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+texture_normal = ExtResource("4_s145t")
+texture_pressed = ExtResource("5_udmqu")
+texture_hover = ExtResource("5_udmqu")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="SelfMenu/MainOptions/TextureButton6"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Log"
+
+[node name="TextureButton7" type="TextureButton" parent="SelfMenu/MainOptions"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+texture_normal = ExtResource("4_s145t")
+texture_pressed = ExtResource("5_udmqu")
+texture_hover = ExtResource("5_udmqu")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="SelfMenu/MainOptions/TextureButton7"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 20
+text = "Special"
+
+[node name="SelfMenuToggleButton" type="TextureButton" parent="SelfMenu"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.4)
+z_index = 3
+layout_mode = 0
+offset_left = -33.0
+offset_top = 342.0
+offset_right = 67.0
+offset_bottom = 442.0
+texture_normal = ExtResource("6_4j64i")
+texture_hover = ExtResource("7_y15eo")
+
+[node name="VesselUIRoot" type="TextureRect" parent="."]
+z_index = 3
+offset_left = 1921.0
+offset_top = 98.0
+offset_right = 3164.0
+offset_bottom = 972.0
+texture = ExtResource("8_udmqu")
+expand_mode = 1
+
+[node name="VesselPreview" type="TextureRect" parent="VesselUIRoot"]
+z_index = 3
+texture_filter = 1
+layout_mode = 0
+offset_left = -131.0
+offset_top = 169.0
+offset_right = 893.0
+offset_bottom = 681.0
+mouse_filter = 2
+texture = SubResource("ViewportTexture_4j64i")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="SubViewport" type="SubViewport" parent="VesselUIRoot/VesselPreview"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_scale = 2.0
+texture_mipmap_bias = -0.109
+anisotropic_filtering_level = 0
+fsr_sharpness = 2.0
+canvas_item_default_texture_filter = 0
+size = Vector2i(800, 400)
+
+[node name="Node3D" parent="VesselUIRoot/VesselPreview/SubViewport" instance=ExtResource("9_4j64i")]
+
+[node name="EntityName" type="Label" parent="VesselUIRoot"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 74.0
+offset_right = 456.0
+offset_bottom = 106.0
+theme = ExtResource("3_pxug6")
+theme_override_font_sizes/font_size = 26
+text = "HMS Silent Night"
+
+[node name="EditButton" type="TextureButton" parent="VesselUIRoot/EntityName"]
+modulate = Color(1, 1, 1, 0.243137)
+layout_mode = 0
+offset_left = 369.0
+offset_right = 405.0
+offset_bottom = 36.0
+texture_normal = ExtResource("10_y15eo")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ConfigurationLabel" type="Label" parent="VesselUIRoot"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 129.0
+offset_right = 477.0
+offset_bottom = 159.0
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Cygwin Class"
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="VesselUIRoot"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 616.0
+offset_right = 329.0
+offset_bottom = 939.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VesselUIRoot/ScrollContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label10" type="Label" parent="VesselUIRoot/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "ACOUSTICS"
+
+[node name="Label4" type="Label" parent="VesselUIRoot/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Profile: 0.8"
+
+[node name="Label5" type="Label" parent="VesselUIRoot/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Min Volume: 90db"
+
+[node name="Label6" type="Label" parent="VesselUIRoot/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Pitch: 60hz"
+
+[node name="Label7" type="Label" parent="VesselUIRoot/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Ping Volume: 220db"
+
+[node name="Label8" type="Label" parent="VesselUIRoot/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Sensitivity: 15db"
+
+[node name="Label9" type="Label" parent="VesselUIRoot/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Size: 10,000m3"
+
+[node name="ScrollContainer3" type="ScrollContainer" parent="VesselUIRoot"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 616.0
+offset_right = 605.0
+offset_bottom = 939.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VesselUIRoot/ScrollContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label10" type="Label" parent="VesselUIRoot/ScrollContainer3/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "LOGISTICS"
+
+[node name="Label4" type="Label" parent="VesselUIRoot/ScrollContainer3/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Cargo: 1,000m3"
+
+[node name="Label5" type="Label" parent="VesselUIRoot/ScrollContainer3/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Crew: 200"
+
+[node name="Label6" type="Label" parent="VesselUIRoot/ScrollContainer3/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Speed: 60kp/h"
+
+[node name="Label7" type="Label" parent="VesselUIRoot/ScrollContainer3/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Max Dive: 6 Months"
+
+[node name="Label8" type="Label" parent="VesselUIRoot/ScrollContainer3/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Salvage: No"
+
+[node name="ScrollContainer4" type="ScrollContainer" parent="VesselUIRoot"]
+layout_mode = 0
+offset_left = 634.0
+offset_top = 616.0
+offset_right = 869.0
+offset_bottom = 939.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VesselUIRoot/ScrollContainer4"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label10" type="Label" parent="VesselUIRoot/ScrollContainer4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "DEFENSE"
+
+[node name="Label4" type="Label" parent="VesselUIRoot/ScrollContainer4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Munition Slots: 3"
+
+[node name="Label5" type="Label" parent="VesselUIRoot/ScrollContainer4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Sonar Jammers: No"
+
+[node name="Label6" type="Label" parent="VesselUIRoot/ScrollContainer4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Radar Jammers: Yes"
+
+[node name="Control" type="HBoxContainer" parent="VesselUIRoot"]
+layout_mode = 0
+offset_left = 624.938
+offset_top = 778.28
+offset_right = 664.938
+offset_bottom = 818.28
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VesselUIRoot"]
+layout_mode = 0
+offset_left = 909.0
+offset_top = 126.0
+offset_right = 1129.0
+offset_bottom = 341.0
+theme_override_constants/separation = 10
+
+[node name="Label4" type="Label" parent="VesselUIRoot/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Quantum Uplink"
+horizontal_alignment = 2
+
+[node name="Label10" type="Label" parent="VesselUIRoot/VBoxContainer"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Deepwater Reactor"
+horizontal_alignment = 2
+
+[node name="Label7" type="Label" parent="VesselUIRoot/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Crawl Skids"
+horizontal_alignment = 2
+
+[node name="Label5" type="Label" parent="VesselUIRoot/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Spa Modules"
+horizontal_alignment = 2
+
+[node name="Label8" type="Label" parent="VesselUIRoot/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Tidal Generator"
+horizontal_alignment = 2
+
+[node name="Label11" type="Label" parent="VesselUIRoot/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Sonar Jammers"
+horizontal_alignment = 2
+
+[node name="Label6" type="Label" parent="VesselUIRoot/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Sensitivity III"
+horizontal_alignment = 2
+
+[node name="Label9" type="Label" parent="VesselUIRoot/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Expanded Cargo II"
+horizontal_alignment = 2
+
+[node name="Label12" type="Label" parent="VesselUIRoot/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Radar Jammers"
+horizontal_alignment = 2
+
+[node name="Label10" type="Label" parent="VesselUIRoot"]
+layout_mode = 0
+offset_left = 981.0
+offset_top = 79.0
+offset_right = 1120.0
+offset_bottom = 104.0
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "UPGRADES"
+horizontal_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="VesselUIRoot/Label10"]
+layout_mode = 0
+offset_top = 26.0
+offset_right = 135.0
+offset_bottom = 27.0
+
+[node name="UpgradeDescription" type="ColorRect" parent="VesselUIRoot"]
+layout_mode = 0
+offset_left = 911.0
+offset_top = 385.0
+offset_right = 1127.0
+offset_bottom = 826.0
+color = Color(0.203922, 0.866667, 0.92549, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="VesselUIRoot/UpgradeDescription"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.993
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = -0.03302
+grow_horizontal = 2
+color = Color(0.00392157, 0.0509804, 0.0588235, 1)
+
+[node name="Label10" type="Label" parent="VesselUIRoot/UpgradeDescription/ColorRect2"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 195.0
+offset_bottom = 30.0
+theme = ExtResource("3_pxug6")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Deepwater Reactor"
+horizontal_alignment = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VesselUIRoot/UpgradeDescription/ColorRect2"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 48.0
+offset_right = 197.0
+offset_bottom = 144.0
+theme = ExtResource("3_pxug6")
+theme_override_font_sizes/normal_font_size = 14
+text = "While the vessel is at CRAWL depth and STATIONARY, dive time does not decrease."
+horizontal_alignment = 1
+justification_flags = 162
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VesselUIRoot/UpgradeDescription/ColorRect2"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 179.0
+offset_right = 202.0
+offset_bottom = 402.0
+theme = ExtResource("3_pxug6")
+theme_override_font_sizes/normal_font_size = 12
+text = "By filtering nutrients and raw minerals fromt he ocean floor, the deepwater reactor can synthesize a variety of basic materials, including edible matter.
+
+Cafeterias on ships fitted with a deepwater reactor experience 20% less traffic.
+"
+fit_content = true
+horizontal_alignment = 1
+justification_flags = 162
+
+[node name="DescDivider" type="ColorRect" parent="VesselUIRoot/UpgradeDescription/ColorRect2"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 153.0
+offset_right = 177.0
+offset_bottom = 154.0
+color = Color(0.203922, 0.866667, 0.92549, 1)
+
+[node name="Line2D" type="Line2D" parent="VesselUIRoot/UpgradeDescription"]
+position = Vector2(62, -37)
+points = PackedVector2Array(-62, 478, -111, 76, -374, 73)
+width = 2.0
+default_color = Color(0.203922, 0.866667, 0.92549, 1)
+
+[node name="Line2D2" type="Line2D" parent="VesselUIRoot/UpgradeDescription/Line2D"]
+position = Vector2(0, -183)
+points = PackedVector2Array(-26, -7, -112, 259)
+width = 2.0
+default_color = Color(0.203922, 0.866667, 0.92549, 1)
+
+[node name="TextureRect" type="TextureRect" parent="VesselUIRoot/UpgradeDescription/Line2D"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+offset_left = -425.0
+offset_top = 48.0
+offset_right = -368.0
+offset_bottom = 105.0
+texture = ExtResource("11_uaeko")
+expand_mode = 1
+
+[node name="SelfUIBG" type="ColorRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+offset_right = 1915.0
+offset_bottom = 1085.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SelfMenuAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_mb7nu")
+}
+
+[connection signal="button_up" from="SelfMenu/SelfMenuToggleButton" to="." method="_on_self_menu_toggle_button_button_up"]
