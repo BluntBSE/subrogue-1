@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=76 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -694,93 +694,16 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MunitionConfigRoot/MunitionConfigUI:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1941, 98)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("%ScreenDarkFilter:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("%ScreenDarkFilter:modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_mb7nu"]
 resource_name = "SelfIn"
 length = 0.19
 
-[sub_resource type="Animation" id="Animation_q4mmy"]
-resource_name = "munitions_in"
-length = 0.19
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MunitionConfigRoot/MunitionConfigUI:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.19),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1941, 98), Vector2(346, 98)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%ScreenDarkFilter:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("%ScreenDarkFilter:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.19),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.607843)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_itjk8"]
 _data = {
 &"CityIn": SubResource("Animation_oh4je"),
 &"RESET": SubResource("Animation_ljsgx"),
-&"SelfIn": SubResource("Animation_mb7nu"),
-&"munitions_in": SubResource("Animation_q4mmy")
+&"SelfIn": SubResource("Animation_mb7nu")
 }
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_250mi"]
@@ -838,6 +761,14 @@ script = ExtResource("5_3h4iq")
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+
+[node name="OnLoadFilter" type="ColorRect" parent="UICanvas"]
+unique_name_in_owner = true
+visible = false
+offset_right = 1922.0
+offset_bottom = 1070.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="PlayerUIRoot" type="Control" parent="UICanvas"]
 unique_name_in_owner = true
@@ -1721,6 +1652,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="OrdnanceControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup"]
+visible = false
 anchors_preset = 0
 offset_top = 506.667
 offset_right = 40.0
@@ -1767,7 +1699,7 @@ offset_top = 11.0
 offset_right = 230.0
 offset_bottom = 31.0
 theme = ExtResource("8_fq2vg")
-text = "Manta Torpedo - 4"
+text = "Sonic Chaff - 8"
 horizontal_alignment = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
@@ -2607,12 +2539,12 @@ offset_bottom = 5595.96
 scale = Vector2(1.00746, 0.174442)
 
 [node name="ScreenspaceFilters" type="Control" parent="UICanvas/PlayerUIRoot"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="FilterMaskGlitch" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
-visible = false
 material = SubResource("ShaderMaterial_jitlb")
 layout_mode = 0
 offset_right = 1922.0
@@ -2621,7 +2553,6 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="VHSScreenShader" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
-visible = false
 z_index = 1
 texture_filter = 1
 material = SubResource("ShaderMaterial_7xmbg")
@@ -2630,16 +2561,6 @@ offset_right = 1958.0
 offset_bottom = 1076.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
-
-[node name="ScreenDarkFilter" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
-unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0)
-top_level = true
-layout_mode = 0
-offset_right = 1922.0
-offset_bottom = 1118.0
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
 
 [node name="FreeLookRect" type="ColorRect" parent="UICanvas/PlayerUIRoot"]
 unique_name_in_owner = true
@@ -2730,9 +2651,9 @@ offset_bottom = 40.0
 [node name="MunitionConfigUI" type="TextureRect" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot"]
 z_index = 2
 layout_mode = 0
-offset_left = 1941.0
+offset_left = 296.0
 offset_top = 98.0
-offset_right = 3184.0
+offset_right = 1539.0
 offset_bottom = 972.0
 texture = ExtResource("43_itjk8")
 expand_mode = 1
@@ -2837,7 +2758,100 @@ theme = ExtResource("8_fq2vg")
 theme_override_font_sizes/font_size = 26
 text = "Configuration"
 
-[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label", "deviation_label", "typed_input", "unit_label")]
+[node name="RangeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/left_percent = 0.0
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 97.0
+offset_top = 437.0
+offset_right = 393.0
+offset_bottom = 448.0
+min_value = 10.0
+max_value = 60.0
+value = 10.0
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("28_0638s")
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+output_label = NodePath("Values")
+mult_factor = 1.0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -65.0
+offset_right = 208.0
+offset_bottom = -42.0
+theme = ExtResource("48_wftmj")
+text = "Target Profile:"
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
+layout_mode = 0
+offset_left = -9.99999
+offset_top = 25.0
+offset_right = 303.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "0.2 - 0.5"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = -7.3335
+offset_right = 369.0
+offset_bottom = 92.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = -69.0
+offset_right = 292.0
+offset_bottom = -41.0
+theme = ExtResource("48_wftmj")
+text = "0.5"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 197.0
+offset_bottom = -8.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Minimum Deviation: 0.2"
+
+[node name="RangeBar4" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/left_percent = 0.0
 instance_shader_parameters/right_percent = 1.0
@@ -2857,18 +2871,11 @@ tint_under = Color(1, 1, 1, 0.996078)
 tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0, 0, 1)
 script = ExtResource("47_250mi")
-num_handles = 2
 handle_1 = NodePath("RangeBarControlMax")
 handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
-deviation_label = NodePath("DeviationLabel")
-typed_input = NodePath("LineEdit")
-mult_factor = 100.0
-output_symbol = "db"
-unit_label = NodePath("UnitLabel")
-minimum_deviation = 0.04
 
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
 offset_left = -1.0
 offset_top = -65.0
@@ -2877,7 +2884,7 @@ offset_bottom = -42.0
 theme = ExtResource("48_wftmj")
 text = "Target Volume"
 
-[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
 offset_left = -9.99999
 offset_top = 25.0
@@ -2890,7 +2897,7 @@ theme_override_font_sizes/font_size = 12
 text = "88db - 92db"
 horizontal_alignment = 1
 
-[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
 offset_left = 269.0
 offset_top = -7.3335
@@ -2903,7 +2910,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
 offset_left = -4.76837e-05
 offset_top = -7.40735
@@ -2916,17 +2923,16 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
-offset_left = 207.0
+offset_left = 230.0
 offset_top = -69.0
-offset_right = 281.0
+offset_right = 292.0
 offset_bottom = -41.0
 theme = ExtResource("48_wftmj")
-text = "90"
-alignment = 1
+text = "90db"
 
-[node name="DeviationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = -31.0
@@ -2935,18 +2941,94 @@ offset_bottom = -8.0
 theme = ExtResource("48_wftmj")
 theme_override_fonts/font = ExtResource("49_nd8hy")
 theme_override_font_sizes/font_size = 12
-text = "Minimum deviation: 4.0db"
+text = "Minimum Deviation: 4db"
 
-[node name="UnitLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+[node name="RangeBar3" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
 layout_mode = 0
-offset_left = 285.0
-offset_top = -59.0
-offset_right = 302.0
-offset_bottom = -44.0
+offset_left = 97.0
+offset_top = 583.0
+offset_right = 393.0
+offset_bottom = 594.0
+min_value = 10.0
+max_value = 60.0
+value = 10.0
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -65.0
+offset_right = 208.0
+offset_bottom = -42.0
+theme = ExtResource("48_wftmj")
+text = "Target Pitch:"
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
+layout_mode = 0
+offset_left = -9.99999
+offset_top = 25.0
+offset_right = 303.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "53hz - 63hz"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = -7.3335
+offset_right = 369.0
+offset_bottom = 92.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = -69.0
+offset_right = 292.0
+offset_bottom = -41.0
+theme = ExtResource("48_wftmj")
+text = "60hz"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 197.0
+offset_bottom = -8.0
 theme = ExtResource("48_wftmj")
 theme_override_fonts/font = ExtResource("49_nd8hy")
 theme_override_font_sizes/font_size = 12
-text = "db"
+text = "Minimum Deviation: 6hz"
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
 layout_mode = 0
@@ -3211,226 +3293,6 @@ theme = ExtResource("8_fq2vg")
 text = "Cancel"
 metadata/_edit_use_anchors_ = true
 
-[node name="ProfileBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label", "deviation_label", "typed_input", "unit_label")]
-material = ExtResource("26_g8nhr")
-instance_shader_parameters/left_percent = 0.0
-instance_shader_parameters/right_percent = 1.0
-instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
-layout_mode = 0
-offset_left = 97.0
-offset_top = 433.0
-offset_right = 393.0
-offset_bottom = 444.0
-min_value = 10.0
-max_value = 60.0
-value = 10.0
-nine_patch_stretch = true
-texture_under = ExtResource("27_bnsnq")
-texture_progress_offset = Vector2(-20, 0)
-tint_under = Color(1, 1, 1, 0.996078)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0, 0, 0, 1)
-script = ExtResource("47_250mi")
-num_handles = 2
-handle_1 = NodePath("RangeBarControlMax")
-handle_2 = NodePath("RangeBarControlMin")
-output_label = NodePath("Values")
-deviation_label = NodePath("DeviationLabel")
-typed_input = NodePath("LineEdit")
-mult_factor = 1.0
-unit_label = NodePath("UnitLabel")
-minimum_deviation = 0.04
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = -65.0
-offset_right = 208.0
-offset_bottom = -42.0
-theme = ExtResource("48_wftmj")
-text = "Target Profile"
-
-[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
-layout_mode = 0
-offset_left = -9.99999
-offset_top = 25.0
-offset_right = 303.0
-offset_bottom = 45.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("49_nd8hy")
-theme_override_font_sizes/font_size = 12
-text = "88db - 92db"
-horizontal_alignment = 1
-
-[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
-layout_mode = 0
-offset_left = 269.0
-offset_top = -7.3335
-offset_right = 369.0
-offset_bottom = 92.6665
-scale = Vector2(0.25, 0.25)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("30_thmph")
-texture_pressed = ExtResource("31_sljp2")
-texture_hover = ExtResource("31_sljp2")
-
-[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
-layout_mode = 0
-offset_left = -4.76837e-05
-offset_top = -7.40735
-offset_right = 99.9999
-offset_bottom = 92.5927
-scale = Vector2(0.25, 0.25)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("30_thmph")
-texture_pressed = ExtResource("31_sljp2")
-texture_hover = ExtResource("31_sljp2")
-
-[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
-layout_mode = 0
-offset_left = 207.0
-offset_top = -69.0
-offset_right = 281.0
-offset_bottom = -41.0
-theme = ExtResource("48_wftmj")
-text = "1.0"
-alignment = 1
-
-[node name="DeviationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = -31.0
-offset_right = 197.0
-offset_bottom = -8.0
-theme = ExtResource("48_wftmj")
-theme_override_fonts/font = ExtResource("49_nd8hy")
-theme_override_font_sizes/font_size = 12
-text = "Minimum deviation: 0.04"
-
-[node name="UnitLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
-layout_mode = 0
-offset_left = 285.0
-offset_top = -59.0
-offset_right = 302.0
-offset_bottom = -44.0
-theme = ExtResource("48_wftmj")
-theme_override_fonts/font = ExtResource("49_nd8hy")
-theme_override_font_sizes/font_size = 12
-
-[node name="ProfileBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label", "deviation_label", "typed_input", "unit_label")]
-material = ExtResource("26_g8nhr")
-instance_shader_parameters/left_percent = 0.0
-instance_shader_parameters/right_percent = 1.0
-instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
-layout_mode = 0
-offset_left = 97.0
-offset_top = 589.0
-offset_right = 393.0
-offset_bottom = 600.0
-min_value = 10.0
-max_value = 60.0
-value = 10.0
-nine_patch_stretch = true
-texture_under = ExtResource("27_bnsnq")
-texture_progress_offset = Vector2(-20, 0)
-tint_under = Color(1, 1, 1, 0.996078)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0, 0, 0, 1)
-script = ExtResource("47_250mi")
-num_handles = 2
-handle_1 = NodePath("RangeBarControlMax")
-handle_2 = NodePath("RangeBarControlMin")
-output_label = NodePath("Values")
-deviation_label = NodePath("DeviationLabel")
-typed_input = NodePath("LineEdit")
-mult_factor = 100.0
-output_symbol = "hz"
-unit_label = NodePath("UnitLabel")
-minimum_deviation = 0.04
-
-[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = -65.0
-offset_right = 208.0
-offset_bottom = -42.0
-theme = ExtResource("48_wftmj")
-text = "Target Pitch"
-
-[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
-layout_mode = 0
-offset_left = -9.99999
-offset_top = 25.0
-offset_right = 303.0
-offset_bottom = 45.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("49_nd8hy")
-theme_override_font_sizes/font_size = 12
-text = "88db - 92db"
-horizontal_alignment = 1
-
-[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
-layout_mode = 0
-offset_left = 269.0
-offset_top = -7.3335
-offset_right = 369.0
-offset_bottom = 92.6665
-scale = Vector2(0.25, 0.25)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("30_thmph")
-texture_pressed = ExtResource("31_sljp2")
-texture_hover = ExtResource("31_sljp2")
-
-[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
-layout_mode = 0
-offset_left = -4.76837e-05
-offset_top = -7.40735
-offset_right = 99.9999
-offset_bottom = 92.5927
-scale = Vector2(0.25, 0.25)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("30_thmph")
-texture_pressed = ExtResource("31_sljp2")
-texture_hover = ExtResource("31_sljp2")
-
-[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
-layout_mode = 0
-offset_left = 207.0
-offset_top = -69.0
-offset_right = 281.0
-offset_bottom = -41.0
-theme = ExtResource("48_wftmj")
-text = "60"
-alignment = 1
-
-[node name="DeviationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = -31.0
-offset_right = 197.0
-offset_bottom = -8.0
-theme = ExtResource("48_wftmj")
-theme_override_fonts/font = ExtResource("49_nd8hy")
-theme_override_font_sizes/font_size = 12
-text = "Minimum deviation: 4.0hz"
-
-[node name="UnitLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
-layout_mode = 0
-offset_left = 285.0
-offset_top = -59.0
-offset_right = 302.0
-offset_bottom = -44.0
-theme = ExtResource("48_wftmj")
-theme_override_fonts/font = ExtResource("49_nd8hy")
-theme_override_font_sizes/font_size = 12
-text = "hz"
-
 [node name="SelfMenuRoot" parent="UICanvas/PlayerUIRoot" instance=ExtResource("47_nd8hy")]
 
 [node name="SettingsIconFilledBlue" type="Sprite2D" parent="UICanvas"]
@@ -3482,30 +3344,24 @@ script = ExtResource("39_7xmbg")
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/ConfigureButton" to="UICanvas/PlayerUIRoot" method="_on_configure_button_button_up"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/PingButton" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_ping_button_button_up"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/EntityInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_entity_inspector_toggle_button_up"]
 [connection signal="text_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalIDInput" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_id_input_text_changed"]
 [connection signal="color_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer/SignalColorChanger" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_color_changer_color_changed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/SignalInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_inspector_toggle_button_up"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/CityUIRoot/UndockButton" to="UICanvas/PlayerUIRoot" method="handle_undocked_button"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_range_bar_control_min_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_range_bar_control_min_pressed"]
-[connection signal="text_changed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_line_edit_text_changed"]
-[connection signal="text_submitted" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_line_edit_text_submitted"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton" to="UICanvas/PlayerUIRoot" method="_on_configure_button_button_up"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_range_bar_control_min_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_range_bar_control_min_pressed"]
-[connection signal="text_changed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_line_edit_text_changed"]
-[connection signal="text_submitted" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_line_edit_text_submitted"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_range_bar_control_max_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_range_bar_control_min_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_range_bar_control_min_pressed"]
-[connection signal="text_changed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_line_edit_text_changed"]
-[connection signal="text_submitted" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_line_edit_text_submitted"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar2" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar3" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton" to="UICanvas/PlayerUIRoot" method="handle_undocked_button"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton2" to="UICanvas/PlayerUIRoot" method="handle_undocked_button"]
 [connection signal="text_submitted" from="UICanvas/Console/ConsoleInput" to="UICanvas/Console/ConsoleInput" method="_on_text_submitted"]

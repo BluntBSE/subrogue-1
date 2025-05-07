@@ -7,8 +7,13 @@ class_name DraggableTPB
 @export var handle_1: Node
 @export var handle_2: Node
 @export var output_label:Label
+
+
+
 @export var mult_factor:float
 @export var output_symbol:String
+@export var minimum_deviation:float # like base min and base max, this is 0.0 to 1.0 then multiplied by the factor.
+
 
 var handle_1_active:bool = false
 var handle_2_active:bool = false
@@ -28,7 +33,7 @@ func update_output(vals:Dictionary)->void:
     if handle_2 == null:
         output_label.text = str(ceil(snapped(vals.max * mult_factor,0.1) )) + output_symbol
     else:
-        output_label.text = str( ceil(snapped(vals.min * mult_factor,0.1) ))+ output_symbol + " - " + str(snapped(vals.max * mult_factor,0.1))
+        output_label.text = str( snapped(vals.min * mult_factor,0.1) )+ output_symbol + " - " + str(snapped(vals.max * mult_factor,0.1))
 
 func _ready()->void:
     #handle_values.connect(log_values)
