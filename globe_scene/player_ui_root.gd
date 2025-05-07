@@ -185,3 +185,14 @@ func _on_self_menu_toggle_button_up() -> void:
 
 func open_exclusively(menu:Control):
     pass
+
+
+var munitions_opened = false
+
+func _on_configure_button_button_up() -> void:
+    munitions_opened = !munitions_opened
+    if munitions_opened == true:
+        %UIAnimations.play("munitions_in")
+    else:
+        %UIAnimations.play_backwards("munitions_in")
+    pass # Replace with function body.

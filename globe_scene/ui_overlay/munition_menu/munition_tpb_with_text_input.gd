@@ -12,6 +12,7 @@ class_name MTPBWithText #Munition Texture Progress Bar With Text
 @export var typed_input:LineEdit
 @export var mult_factor:float
 @export var output_symbol:String
+@export var unit_label:Label
 @export var minimum_deviation:float #0.0 to 1.0
 var handle_1_active:bool = false
 var handle_2_active:bool = false
@@ -45,7 +46,8 @@ func set_text_when_handles_moved(vals:Dictionary)->void:
 func unpack(_minimum_deviation:float):
     minimum_deviation = _minimum_deviation
     deviation_label.text = "Minimum deviation: " + str(snapped(minimum_deviation * mult_factor, 0.001)) + output_symbol
-    
+    #This may need to be paramaterized at some point
+    unit_label.text = output_symbol
 
 
 func log_values(vals:Dictionary):
@@ -56,7 +58,7 @@ func update_output(vals:Dictionary)->void:
     if handle_2 == null:
         output_label.text = str(ceil(snapped(vals.max * mult_factor,0.1) )) + output_symbol
     else:
-        output_label.text = str(snapped(vals.min * mult_factor,0.1) )+ output_symbol + " - " + str(snapped(vals.max * mult_factor,0.1))
+        output_label.text = str(snapped(vals.min * mult_factor,0.1) )+ output_symbol + " - " + str(snapped(vals.max * mult_factor,0.1)) + output_symbol
 
 
 
