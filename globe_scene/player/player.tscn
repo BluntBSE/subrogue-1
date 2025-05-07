@@ -2936,12 +2936,13 @@ texture_hover = ExtResource("31_sljp2")
 
 [node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
-offset_left = 230.0
+offset_left = 207.0
 offset_top = -69.0
-offset_right = 292.0
+offset_right = 281.0
 offset_bottom = -41.0
 theme = ExtResource("48_wftmj")
-text = "90db"
+text = "90"
+alignment = 1
 
 [node name="DeviationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
 layout_mode = 0
@@ -2953,6 +2954,16 @@ theme = ExtResource("48_wftmj")
 theme_override_fonts/font = ExtResource("49_nd8hy")
 theme_override_font_sizes/font_size = 12
 text = "Minimum Deviation: 4db"
+
+[node name="SymbolLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/RangeBar4"]
+offset_left = 285.0
+offset_top = -59.0
+offset_right = 302.0
+offset_bottom = -44.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "db"
 
 [node name="RangeBar3" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
 material = ExtResource("26_g8nhr")

@@ -276,9 +276,6 @@ func set_min_value(_value: float) -> void:
 
 
     
-func set_handles_when_text_set():
-    pass
-
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
     pass # Replace with function body.
@@ -303,7 +300,7 @@ func _on_line_edit_text_changed(new_text: String) -> void:
     
     if result and result.get_string() == new_text:
         # Valid number, save it as the last valid value
-        line_edit_last_value = new_text
+        line_edit_last_value = new_text + output_symbol
         
         # Try to convert the text to a float
         var value = float(new_text)
@@ -331,8 +328,6 @@ func _on_line_edit_text_changed(new_text: String) -> void:
         # Invalid input, revert to last valid value
         # Note: we need to defer this to avoid recursion issues
         if line_edit_last_value != null:
-            # We call set_deferred on the LineEdit to restore the text
-            # assuming the sender is a LineEdit control
             var line_edit = get_viewport().gui_get_focus_owner()
             if line_edit and line_edit is LineEdit:
                 line_edit.call_deferred("set_text", line_edit_last_value)
