@@ -2717,6 +2717,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="PanicRoot" type="Control" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
