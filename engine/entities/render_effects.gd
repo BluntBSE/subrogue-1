@@ -24,6 +24,11 @@ func generate_ping_mesh():
     var mesh:GenericPing = preload("res://engine/player_ui/3d_ui/active_sonar/generic_ping.tscn").instantiate()
     #TODO: Any unpack/color setting, etc.
     return mesh
+    
+
+func generate_warning_mesh():
+    var mesh = preload("res://engine/player_ui/3d_ui/warning_node.tscn").instantiate()
+    return mesh
 
 func send_counterping_from(pos:Vector3, to:Vector3, axis:Vector3, width:float = 40.0):
     var mesh:GenericPing = generate_ping_mesh()
@@ -35,7 +40,16 @@ func send_counterping_from(pos:Vector3, to:Vector3, axis:Vector3, width:float = 
     #mesh.follow_target = self
    # mesh.initial_offset = (pos - global_position)
     mesh.ping(pos, to, axis)
+    
+    var warning:WarningNode = generate_warning_mesh()
+    add_child(warning)
+    warning.global_position = pos
+    warning.look_at(axis)
+    warning.top_level = true
+    
+    
     mesh.finished.connect(func():mesh.queue_free())
+   # mesh.finished.connect(func():warning.queue_free())
     #await finished then cleanup
 
 

@@ -6,6 +6,7 @@ var initial_offset
 @export var material_1:ShaderMaterial
 @export var material_2:ShaderMaterial
 @export var cone_width:float = 40.0 #degrees
+@export var tail:float = 0.13 #20%. Cone has a sharp taper at 0.0
 #Used to control other interactions we want tied to this if we expand it.
 #For now, sounds are goinmg straight into send_pulse() since its only used for enemies
 var track_target:Node3D
@@ -42,14 +43,14 @@ func send_pulse():
     var tween_time = 2.0
     SoundManager.play_straight("enemy_ping_direct_1")
     %SonarPulseMesh.material_override.set_shader_parameter("frontier_head", 0.0)
-    %SonarPulseMesh.material_override.set_shader_parameter("frontier_tail", 0.0)
+    %SonarPulseMesh.material_override.set_shader_parameter("frontier_tail", tail)
     var tween:Tween = get_tree().create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EaseType.EASE_OUT)
     tween.tween_property(%SonarPulseMesh, "material_override:shader_parameter/frontier_head", 1.0, tween_time).from_current()
     await tween.finished
     print("Shadow cast")
     #PROJECT FILL
     %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_head", 0.0)
-    %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_tail", 0.0)
+    %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_tail", tail)
     var maximum = %SonarPulseMesh.material_override.get_shader_parameter("frontier_head") #How far the shadow got cast out
     var tween_2:Tween = get_tree().create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EaseType.EASE_OUT)
     tween_2.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_head", maximum, 1.0).from_current()
@@ -69,7 +70,7 @@ func aim_ping_at(from:Vector3, to:Vector3, from_axis:Vector3)->float:
     var angle = GlobeHelpers.get_local_angle_between(to, from, from_axis) 
     return angle
     
-func ping(from:Vector3, to:Vector3, from_axis:Vector3, width:float = 40.0):
+func ping(from:Vector3, to:Vector3, from_axis:Vector3, width:float = 40.0, tail:float = 0.1):
     angle_to = aim_ping_at(from, to, from_axis)
     #adjust_volume()
     send_pulse()
