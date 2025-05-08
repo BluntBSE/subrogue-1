@@ -5,7 +5,6 @@
 [resource]
 script = ExtResource("1_dgi73")
 id = "player_sub"
-display_name = "Moondance"
 display_class = "Player Sub"
 category = "player_sub"
 base_hull = 1
@@ -16,10 +15,11 @@ munition_size = 0
 utility_slots = 0
 utility_size = 0
 upgrade_slots = 0
-base_max_speed = 150
+base_max_speed = 70
 base_profile = 0.1
 base_pitch = 90.0
 base_volume = 110.0
+size = 0.0
 vol_speed_factor = 1.0
 depths = [null, null]
 current_depth = 0

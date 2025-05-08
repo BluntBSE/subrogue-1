@@ -3,20 +3,20 @@
 [ext_resource type="Script" uid="uid://bvdy134j6801h" path="res://engine/entities/detection/signal_popup_3d.gd" id="1_xcvil"]
 [ext_resource type="PackedScene" uid="uid://yfg73ny7omnl" path="res://engine/entities/detection/signal_scene2control.tscn" id="3_fg65r"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_8dkyw"]
+[sub_resource type="QuadMesh" id="QuadMesh_v7ra4"]
 size = Vector2(4, 4)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2il6d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_3us8q"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_clhrm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_v2b8x"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8alx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtv0r"]
 resource_local_to_scene = true
 blend_mode = 1
 shading_mode = 0
-albedo_texture = SubResource("ViewportTexture_2il6d")
-detail_mask = SubResource("ViewportTexture_clhrm")
+albedo_texture = SubResource("ViewportTexture_3us8q")
+detail_mask = SubResource("ViewportTexture_v2b8x")
 billboard_keep_scale = true
 grow_amount = 1.438
 
@@ -31,8 +31,8 @@ node_area = NodePath("MeshInstance3D/Area3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-mesh = SubResource("QuadMesh_8dkyw")
-surface_material_override/0 = SubResource("StandardMaterial3D_p8alx")
+mesh = SubResource("QuadMesh_v7ra4")
+surface_material_override/0 = SubResource("StandardMaterial3D_rtv0r")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D"]
 unique_name_in_owner = true

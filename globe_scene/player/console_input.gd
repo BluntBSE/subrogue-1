@@ -31,6 +31,10 @@ func _on_text_submitted(new_text: String) -> void:
         see_everything()
     if new_text == "nomore":
         stop_spawning()
+    if new_text == "panic":
+        get_tree().root.find_child("PanicRoot", true, false).set_process(true)
+        get_tree().root.find_child("PanicRoot", true, false).visible = true
+        get_tree().root.find_child("PanicFilter", true, false).material.set("shader_parameter/active", true)
     pass # Replace with function body.
 
 

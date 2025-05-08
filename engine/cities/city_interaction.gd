@@ -2,8 +2,17 @@ extends Node3D
 class_name CityInteraction
 
 var world_hovered:bool = false
+@onready var city:City = get_parent()
 signal opened_city
 
+#Move this to render
+func _ready():
+    var faction_color:Color = city.faction.faction_color
+    city.get_node("CityRender/CityNameLabel").modulate = Color("ffffff")
+    city.get_node("CityRender/CityNameLabel").outline_modulate = faction_color
+    city.get_node("CityRender/CityDot").modulate = faction_color
+    city.get_node("CityRender/CityRing").modulate = faction_color   
+    
 
 func _on_docking_area_body_entered(body: Entity) -> void:
     body.handle_in_docking_area(get_parent())    
@@ -16,19 +25,23 @@ func _on_docking_area_body_entered(body: Entity) -> void:
 
 func _on_interaction_box_1_mouse_entered() -> void:
     world_hovered = true
-    %CityNameLabel.modulate = Color("ffffff")
-    %CityDot.modulate = Color("ffffff")
-    %CityRing.modulate = Color("ffffff")
+    city.get_node("CityRender/CityNameLabel").modulate = Color("ffffff")
+    city.get_node("CityRender/CityDot").modulate = Color("ffffff")
+    city.get_node("CityRender/CityRing").modulate = Color("ffffff")
+    city.get_node("CityRender/CityNameLabel").outline_modulate = Color("ffffff")
+
     pass # Replace with function body.
 
 
 func _on_interaction_box_1_mouse_exited() -> void:
     #Left clicking triggers a mouse exit, ugh.
     world_hovered = false
-    var faction_color:Color = %CityNode.faction.faction_color
-    %CityNameLabel.modulate = Color("ffffff")
-    %CityDot.modulate = faction_color
-    %CityRing.modulate = faction_color
+    var faction_color:Color = city.faction.faction_color
+    city.get_node("CityRender/CityNameLabel").modulate = Color("ffffff")
+    city.get_node("CityRender/CityDot").modulate = faction_color
+    city.get_node("CityRender/CityRing").modulate = faction_color
+    city.get_node("CityRender/CityNameLabel").outline_modulate = faction_color
+
     #Enable player navigating onto the labels they should be able to click on.
 
     pass # Replace with function body.

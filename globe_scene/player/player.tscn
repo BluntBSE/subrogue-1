@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://chk248t7rdjuy"]
+[gd_scene load_steps=78 format=3 uid="uid://chk248t7rdjuy"]
 
 [ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
 [ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
@@ -37,12 +37,12 @@
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_lu2fn"]
 [ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="35_smroy"]
 [ext_resource type="PackedScene" uid="uid://bfgnhjrv8rjgx" path="res://engine/entities/3d_scenes/commercial_freighter_1.tscn" id="36_q7i7m"]
-[ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="37_3h4iq"]
 [ext_resource type="Shader" uid="uid://c4ixw7o0cka8i" path="res://title_screen/vcr.gdshader" id="38_3h4iq"]
 [ext_resource type="Script" uid="uid://d1otdxkyfls70" path="res://globe_scene/player/console_input.gd" id="39_7xmbg"]
 [ext_resource type="PackedScene" uid="uid://8k5fjvye3gcg" path="res://engine/entities/detection/spiky_boy.tscn" id="39_nwwe3"]
 [ext_resource type="Texture2D" uid="uid://b6wq5dkmmxdtv" path="res://assets/UI/white_buttons/VolumeSliderKnobT03White.png" id="40_fq2vg"]
 [ext_resource type="Texture2D" uid="uid://8bqmk8uxc6mg" path="res://assets/UI/white_icons/EditIconWhite.png" id="41_q7i7m"]
+[ext_resource type="Script" uid="uid://b6fh05n0720ca" path="res://globe_scene/player/panic_root.gd" id="42_250mi"]
 [ext_resource type="Texture2D" uid="uid://b4rvv34wjpo5j" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT02.png" id="42_oh4je"]
 [ext_resource type="Texture2D" uid="uid://biopgmfrbkuc7" path="res://assets/UI/blue_panels/LargeMenuBGT03.1BlueDark.png" id="43_itjk8"]
 [ext_resource type="Script" uid="uid://b4ekaalf4awas" path="res://globe_scene/ui_overlay/munition_menu/munition_tpb_with_text_input.gd" id="47_250mi"]
@@ -516,14 +516,98 @@ _data = {
 &"slide_in": SubResource("Animation_nwwe3")
 }
 
+[sub_resource type="Shader" id="Shader_dv6ba"]
+code = "shader_type canvas_item;
+uniform int octave_count: hint_range(1, 20) = 10;
+uniform float amp_start: hint_range(0.0, 10.0, 0.1) = 0.5;
+uniform float amp_coeff: hint_range(0.0, 10.0, 0.1) = 0.5;
+uniform float freq_coeff: hint_range(0.0, 10.0, 0.1) = 2.0;
+uniform float shift_coeff: hint_range(0.0, 10.0, 0.1) = 1.0;
+uniform float speed: hint_range(0.0, 10.0, 0.01) = 0.5;
+uniform float red_stain_min: hint_range(0.0, 1.0, 0.01) = 0.0; // Minimum red stain
+uniform float red_stain_max: hint_range(0.0, 1.0, 0.01) = 0.3; // Maximum red stain
+uniform float pulse_speed: hint_range(0.1, 10.0, 0.1) = 2.0; // Controls pulse frequency (1/0.5 = 2Hz)
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, repeat_disable, filter_nearest;
+uniform bool active = false;
+//uniform sampler2D sprite_texture : source_color, filter_nearest; // set this in editor
+
+vec2 hash22(vec2 uv){
+    uv = vec2(
+        dot(
+            uv, vec2(127.1,311.7)
+        ),
+        dot(uv, vec2(269.5,183.3))
+    );
+    return 2.0 * fract(sin(uv) * 43758.5453123) - 1.0;
+}
+
+float noise(vec2 uv) {
+    vec2 iuv = floor(uv);
+    vec2 fuv = fract(uv);
+    vec2 blur = smoothstep(0.0, 1.0, fuv);
+    return mix(mix(dot(hash22(iuv + vec2(0.0,0.0)), fuv - vec2(0.0,0.0)),
+           dot(hash22(iuv + vec2(1.0,0.0)), fuv - vec2(1.0,0.0)),
+           blur.x),
+           mix(dot(hash22(iuv + vec2(0.0,1.0)), fuv - vec2(0.0,1.0)),
+           dot(hash22(iuv + vec2(1.0,1.0)), fuv - vec2(1.0,1.0)),
+           blur.x), blur.y) + 0.5;
+}
+
+float fbm(vec2 uv, int octaves) {
+    float value = 0.0;
+    float amplitude = amp_start;
+    for (int i = 0; i < octaves; i++) {
+        value += amplitude * noise(uv);
+        uv *= freq_coeff;
+        amplitude *= amp_coeff;
+    }
+    return value;
+}
+
+void vertex() {
+}
+
+void fragment() {
+    if (active == true) {
+        vec2 uv = UV;
+        float time = TIME * speed;
+        float shift = fbm(vec2(time), octave_count) * shift_coeff * 0.01;
+        float red = texture(SCREEN_TEXTURE, vec2(uv.x + shift, uv.y)).r;
+        float green = texture(SCREEN_TEXTURE, vec2(uv.x - shift, uv.y)).g;
+        float blue = texture(SCREEN_TEXTURE, vec2(uv.x, uv.y)).b;
+        
+        // Calculate pulsing red stain intensity using a sine wave
+        // sin() outputs -1 to 1, so we adjust to 0 to 1 range with (sin + 1) / 2
+        float pulse = (sin(TIME * pulse_speed * PI) + 1.0) / 2.0;
+        
+        // Interpolate between min and max red stain values
+        float current_stain = mix(red_stain_min, red_stain_max, pulse);
+        
+        // Apply red stain with pulsing intensity
+        red = min(red + current_stain, 1.0);
+        green = green * (1.0 - current_stain * 0.5);
+        blue = blue * (1.0 - current_stain * 0.5);
+        
+        COLOR = vec4(red, green, blue, 1.0);
+    }
+}
+
+//void light() {
+    // Called for every pixel for every light affecting the CanvasItem.
+    // Uncomment to replace the default light processing function with this one.
+//}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jitlb"]
-shader = ExtResource("37_3h4iq")
+shader = SubResource("Shader_dv6ba")
 shader_parameter/octave_count = 10
 shader_parameter/amp_start = 0.5
 shader_parameter/amp_coeff = 0.5
 shader_parameter/freq_coeff = 2.0
 shader_parameter/shift_coeff = 1.0
 shader_parameter/speed = 0.5
+shader_parameter/red_stain_min = 0.0
+shader_parameter/red_stain_max = 0.12
+shader_parameter/pulse_speed = 2.0
 shader_parameter/active = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7xmbg"]
@@ -1419,7 +1503,7 @@ offset_right = 265.0
 offset_bottom = 790.0
 scale = Vector2(1.8, 1.8)
 
-[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
@@ -1436,6 +1520,7 @@ tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0, 0, 1)
 script = ExtResource("28_0638s")
 handle_1 = NodePath("VolumeBarMax")
+handle_2 = NodePath("VolumeBarMin")
 output_label = NodePath("Values")
 mult_factor = 100.0
 output_symbol = "db"
@@ -1478,6 +1563,19 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
+[node name="VolumeBarMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 0.925888
+offset_top = -8.3335
+offset_right = 100.926
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
 [node name="VolumeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
@@ -1497,18 +1595,18 @@ script = ExtResource("28_0638s")
 handle_1 = NodePath("VolumeBarMax")
 output_label = NodePath("Values")
 mult_factor = 100.0
-output_symbol = "db"
+output_symbol = "%"
 
 [node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
 layout_mode = 0
-offset_left = 40.7407
+offset_left = 27.7777
 offset_top = -21.0
-offset_right = 150.741
+offset_right = 186.778
 offset_bottom = -1.99999
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
-text = "Certainty"
+text = "Min Certainty"
 horizontal_alignment = 1
 
 [node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
@@ -1521,7 +1619,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("29_ai432")
 theme_override_font_sizes/font_size = 10
-text = "100db"
+text = "100%"
 horizontal_alignment = 1
 
 [node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
@@ -1609,7 +1707,7 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBar3" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+[node name="RangeBar3" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
 material = ExtResource("26_g8nhr")
 instance_shader_parameters/right_percent = 1.0
 instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
@@ -1626,7 +1724,6 @@ tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0, 0, 1)
 script = ExtResource("28_0638s")
 handle_1 = NodePath("RangeBarControlMax")
-handle_2 = NodePath("RangeBarControlMin")
 output_label = NodePath("Values")
 mult_factor = 1.0
 
@@ -1652,7 +1749,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("29_ai432")
 theme_override_font_sizes/font_size = 10
-text = "0.0 - 1.0"
+text = "10s"
 horizontal_alignment = 1
 
 [node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
@@ -1668,51 +1765,30 @@ texture_normal = ExtResource("30_thmph")
 texture_pressed = ExtResource("31_sljp2")
 texture_hover = ExtResource("31_sljp2")
 
-[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl"]
 layout_mode = 0
-offset_left = -4.76837e-05
-offset_top = -7.40735
-offset_right = 99.9999
-offset_bottom = 92.5927
-scale = Vector2(0.25, 0.25)
-action_mode = 0
-keep_pressed_outside = true
-texture_normal = ExtResource("30_thmph")
-texture_pressed = ExtResource("31_sljp2")
-texture_hover = ExtResource("31_sljp2")
-
-[node name="DepthBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl"]
-layout_mode = 0
-offset_left = 148.148
-offset_top = 76.8519
-offset_right = 353.148
-offset_bottom = 87.8519
-nine_patch_stretch = true
-texture_under = ExtResource("27_bnsnq")
-
-[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/DepthBar"]
-layout_mode = 0
-offset_left = 58.0
-offset_top = -21.0
-offset_right = 139.0
-offset_bottom = -1.99999
+offset_left = 209.852
+offset_top = 50.9261
+offset_right = 290.852
+offset_bottom = 69.9261
 theme = ExtResource("8_fq2vg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "Depth"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/DepthBar"]
+[node name="Label3" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl"]
 layout_mode = 0
-offset_left = 12.037
-offset_top = 20.3704
-offset_right = 186.037
-offset_bottom = 40.3704
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+offset_left = 130.556
+offset_top = 86.1112
+offset_right = 378.556
+offset_bottom = 106.111
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("29_ai432")
-theme_override_font_sizes/font_size = 10
-text = "Crawl, Swim, Surface"
+theme_override_fonts/normal_font = ExtResource("49_nd8hy")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[color=00d0ca]Crawl Swim[/color] Surface"
+fit_content = true
 horizontal_alignment = 1
 
 [node name="OrdnancePanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
@@ -2612,7 +2688,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="FilterMaskGlitch" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
-visible = false
 material = SubResource("ShaderMaterial_jitlb")
 layout_mode = 0
 offset_right = 1922.0
@@ -2621,7 +2696,6 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="VHSScreenShader" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
-visible = false
 z_index = 1
 texture_filter = 1
 material = SubResource("ShaderMaterial_7xmbg")
@@ -2640,6 +2714,60 @@ offset_right = 1922.0
 offset_bottom = 1118.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="PanicRoot" type="Control" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("42_250mi")
+
+[node name="WarningContainer" type="HBoxContainer" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -379.0
+offset_top = 99.0
+offset_right = 2452.0
+offset_bottom = 152.0
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot/WarningContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+text = "WARNING: CAPSIZE IMMINENT. DOCK WITHIN 06:55:58"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot/WarningContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+text = "WARNING: CAPSIZE IMMINENT. DOCK WITHIN 06:55:58"
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot/WarningContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+text = "WARNING: CAPSIZE IMMINENT. DOCK WITHIN 06:55:58"
+
+[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot/WarningContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+text = "WARNING: CAPSIZE IMMINENT. DOCK WITHIN 06:55:58"
+
+[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot/WarningContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+text = "WARNING: CAPSIZE IMMINENT. DOCK WITHIN 06:55:58"
+
+[node name="PanicFilter" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot"]
+material = SubResource("ShaderMaterial_jitlb")
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1076.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [node name="FreeLookRect" type="ColorRect" parent="UICanvas/PlayerUIRoot"]
 unique_name_in_owner = true
@@ -3472,6 +3600,8 @@ script = ExtResource("39_7xmbg")
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
@@ -3480,8 +3610,6 @@ script = ExtResource("39_7xmbg")
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_button_up"]
 [connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
-[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_button_up"]
-[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_min_pressed"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/ConfigureButton" to="UICanvas/PlayerUIRoot" method="_on_configure_button_button_up"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/PingButton" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_ping_button_button_up"]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/EntityInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_entity_inspector_toggle_button_up"]
