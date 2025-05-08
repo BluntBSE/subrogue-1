@@ -6,7 +6,7 @@ class_name ActiveSonarControl
 @export var angle_2 = 20.0
 @export var a_diff: float
 @onready var ping_button = %PingButton
-@onready var volume_bar:DraggableTPB = %VolumeBar
+@onready var volume_bar: = %VolumeBar
 var sonar_node:SonarNode
 
 

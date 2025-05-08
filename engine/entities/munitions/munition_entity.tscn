@@ -25,7 +25,6 @@
 [ext_resource type="Script" uid="uid://ir7kbv6gtrd4" path="res://engine/entities/entity_render.gd" id="16_cukoj"]
 [ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="17_o16hn"]
 [ext_resource type="Texture2D" uid="uid://dp8he1xlfl6bv" path="res://assets/UI/white_circle_2.png" id="18_2vr8v"]
-[ext_resource type="Texture2D" uid="uid://bsoi58tm3jjyk" path="res://assets/UI/white_icons/white_triangle_filled_2.png" id="19_rgexo"]
 [ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_p1ne5"]
 [ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_qfdwo"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="29_v6ety"]
@@ -63,10 +62,13 @@ emission_energy_multiplier = 6.0
 [sub_resource type="QuadMesh" id="QuadMesh_v1582"]
 size = Vector2(2, 2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ju4"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oimx8"]
+load_path = "res://.godot/imported/munition_surface_4.png-a78bbe0f26a27f59e6cc85efdd06928b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5udo"]
 transparency = 1
 albedo_color = Color(0, 0.681901, 0.656941, 1)
-albedo_texture = ExtResource("19_rgexo")
+albedo_texture = SubResource("CompressedTexture2D_oimx8")
 emission = Color(0.0999336, 0.760538, 0.826485, 1)
 emission_energy_multiplier = 0.4
 subsurf_scatter_strength = 0.6
@@ -91,7 +93,7 @@ shader_parameter/texture_metallic = ExtResource("13_mpd0o")
 [sub_resource type="QuadMesh" id="QuadMesh_l7f70"]
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(27, 27)
-size = Vector2(5, 5)
+size = Vector2(10, 10)
 
 [sub_resource type="Animation" id="Animation_ox0k3"]
 length = 0.001
@@ -313,6 +315,7 @@ skeleton = NodePath("../../RangeSpot")
 
 [node name="HighlightMesh" type="MeshInstance3D" parent="EntityRender"]
 unique_name_in_owner = true
+visible = false
 layers = 2
 material_override = SubResource("StandardMaterial3D_ls7x1")
 transparency = 0.99
@@ -323,7 +326,7 @@ skeleton = NodePath("../..")
 unique_name_in_owner = true
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 layers = 524290
-material_override = SubResource("StandardMaterial3D_x4ju4")
+material_override = SubResource("StandardMaterial3D_j5udo")
 mesh = SubResource("QuadMesh_v1582")
 skeleton = NodePath("../..")
 

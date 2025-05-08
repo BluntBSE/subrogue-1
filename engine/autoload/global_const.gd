@@ -38,8 +38,6 @@ var layer_faction_6:int = 16
 var layer_faction_7:int = 17
 var minor_factions:int = 18
 
-
-
 enum layers {
     UNUSED, #Because cull masks, for whatever reason, are 1-indexed
     PLANET, #Render anything like nuclear warheads that everyone can see straight to the planet layer
