@@ -386,16 +386,13 @@ func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Ve
 
 
 func _on_area_3d_mouse_entered() -> void:
-    var hover_modulator = find_child("HoverModulator", true, false)
-    hover_modulator.modulate = Color("00aea8")
+    %SignalControlScene.modulate = Color("00aea8")
     hover_scaling = true
-    print("I belong to ", detecting_object.given_name, "am I an npc?", belongs_to_npc)
     pass # Replace with function body.
 
 
 func _on_area_3d_mouse_exited() -> void:
-    var hover_modulator = find_child("HoverModulator", true, false)
-    hover_modulator.modulate = Color("ffffff")
+    modulate_by_certainty()
     hover_scaling = false
     
     pass # Replace with function body.
