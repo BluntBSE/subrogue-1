@@ -32,6 +32,7 @@ func unpack(_player:Player, node_a, node_b, _anchor):
     player = _player
     originating_entities = [player.entities.get_node("PlayerEntity")] #For now, the player only has the one entity the whole game.
     %DistDisplay.text = str(get_distance_in_km()) + " km"   
+    name = "ContextMarker for" + str([player.entities.get_node("PlayerEntity").name])
 
 func _ready():
     initial_position = position

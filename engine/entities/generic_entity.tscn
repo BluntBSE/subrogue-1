@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=52 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -22,9 +22,7 @@
 [ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_0c68s"]
 [ext_resource type="Shader" uid="uid://dcopcc20fbxi7" path="res://shaders/sonar_pulse_3.gdshader" id="20_hyfub"]
 [ext_resource type="Script" uid="uid://ult62dixyg4g" path="res://engine/entities/detection/sonar_controls_3d.gd" id="21_3qfs3"]
-[ext_resource type="Script" uid="uid://dc4ctyqdd1ybr" path="res://engine/entities/entity_debug.gd" id="21_7if8f"]
 [ext_resource type="Texture2D" uid="uid://cvrep056uh18e" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04Blue.png" id="21_rjttp"]
-[ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="22_loeq3"]
 [ext_resource type="Texture2D" uid="uid://bdveri46dlmy4" path="res://assets/UI/white_buttons/VolumeSliderKnobT04White.png" id="22_op6l6"]
 [ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="23_op6l6"]
 [ext_resource type="Material" uid="uid://de23e4h2ah40y" path="res://engine/entities/detection/3d_ui_handle.material" id="24_j3cwe"]
@@ -535,18 +533,8 @@ script = ExtResource("25_hyfub")
 unique_name_in_owner = true
 script = ExtResource("20_0c68s")
 
-[node name="EntityDebug" type="Node3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-top_level = true
-visible = false
-script = ExtResource("21_7if8f")
-
-[node name="ContextMarker" parent="EntityDebug" instance=ExtResource("22_loeq3")]
-
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-remote_path = NodePath("../EntityDebug")
 update_rotation = false
 
 [node name="Notifications" type="Node" parent="."]

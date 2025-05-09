@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://clbwgosi7mkey"]
+[gd_scene load_steps=17 format=3 uid="uid://clbwgosi7mkey"]
 
 [ext_resource type="Script" uid="uid://dotn55r8pvoob" path="res://engine/player_ui/3d_ui/ui_quad.gd" id="1_7o2e5"]
 [ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="2_a1ct5"]
@@ -7,24 +7,25 @@
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="5_4vk0a"]
 [ext_resource type="Script" uid="uid://dkjvk1iyomojp" path="res://engine/player_ui/3d_ui/context_line.gd" id="6_ox8sv"]
 [ext_resource type="Script" uid="uid://dflmlcor5j3yp" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="7_jitiw"]
-[ext_resource type="Material" uid="uid://42x084ogj248" path="res://engine/player_ui/3d_ui/context_line.material" id="8_0jeaf"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_8dkyw"]
 size = Vector2(4, 5)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2il6d"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("ContextLine/SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_clhrm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8alx"]
 resource_local_to_scene = true
 blend_mode = 1
+depth_draw_mode = 2
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_2il6d")
 detail_mask = SubResource("ViewportTexture_clhrm")
 billboard_keep_scale = true
 grow_amount = 1.438
+proximity_fade_distance = 0.01
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_d61o8"]
 data = PackedVector3Array(2, -2.5, 0, -2, -2.5, 0, 2, 2.5, 0, -2, -2.5, 0, -2, 2.5, 0, 2, 2.5, 0)
@@ -37,10 +38,132 @@ shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_intensity = 5.0
 
 [sub_resource type="Curve3D" id="Curve3D_k0k1k"]
+closed = true
+
+[sub_resource type="Shader" id="Shader_057qh"]
+code = "shader_type spatial;
+render_mode skip_vertex_transform;
+render_mode unshaded;//depth_draw_always;
+//render_mode alpha_to_coverage_and_one;
+
+#include \"res://addons/godot-polyliner/shaders/include/polyliner_inc.gdshaderinc\"
+
+uniform float line_width = 0.03;
+uniform sampler2D width_curve : source_color;
+uniform bool tangent_facing = false;
+uniform bool rounded = false;
+uniform bool tube_normal = true;
+uniform float alpha_override = 1.0;
+
+uniform bool uv_matches_width = true;
+uniform vec2 tex_scale = vec2(1.0,1.0);
+
+varying float is_end;
+void vertex(){
+	VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX,1.0)).xyz;
+
+	NORMAL = mat3(MODELVIEW_MATRIX) * NORMAL;
+	TANGENT = mat3(MODELVIEW_MATRIX) * TANGENT;
+	BINORMAL = mat3(MODELVIEW_MATRIX) * BINORMAL;
+
+	quick_line(line_width, rounded);
+
+	if (uv_matches_width) { UV.x /= line_width; }
+
+
+	UV.x = 1.0-UV.x;
+
+	float line_length = UV2.x;
+	UV2 = UV;
+	UV2.x *= line_length;
+
+	// correct the texture coordinates at the rounded ends
+	// TODO: doesn't take angle of the rounded end into account at all
+	if (rounded) {
+		// the world may never know
+		// why 1.414 is the exact value which fixes the texcoords
+		const float SQ2 = sqrt(2.0);
+		float uv_correct = -is_end;
+
+		if (uv_matches_width) { uv_correct *= line_width*SQ2; }
+		else { uv_correct *= line_width/abs(tex_scale.x); }
+//		if (abs(is_end) > 0.001) {
+//			float i = acos(dot(TANGENT,normalize(cross(NORMAL,normalize(VERTEX)))));
+//			float xe = 1.0/(i*0.5+0.5);
+//			uv_correct *= xe*abs(tex_scale.x);
+//		}
+		UV.x += uv_correct;
+		UV2.x += uv_correct;
+	}
+
+	// godot seems to reapply the modelview transform later
+	// we have no choice but to do the inverse transform
+	// af1d81d fixes this
+	TANGENT =  TANGENT * mat3(MODELVIEW_MATRIX);
+	BINORMAL = BINORMAL * mat3(MODELVIEW_MATRIX);
+}
+
+uniform sampler2D texture_alb : hint_default_white, source_color;
+uniform sampler2D texture_rgh : hint_default_white;
+uniform bool tex_stretch = true;
+
+uniform vec4 color : source_color = vec4(vec3(1.0),1.0);
+uniform float metallic  : hint_range(0.0,1.0,0.005) = 0.0;
+uniform float specular  : hint_range(0.0,1.0,0.005) = 0.5;
+uniform float roughness : hint_range(0.0,1.0,0.005) = 0.5;
+
+void fragment() {
+	if (!FRONT_FACING) { NORMAL = -NORMAL; }
+
+	if (tube_normal && !tangent_facing) {
+		NORMAL_MAP = getLineTubeNormal(UV,is_end,rounded);
+	}
+
+	if (rounded && abs(is_end) > 0.0001) {
+		// pure heuristics
+		float softner = magic_aa(6000.0,VERTEX,VIEWPORT_SIZE);
+		softner *= (1.0/line_width) * (min(abs(is_end)*2.0,1.0));
+		ALPHA *= smoothstep(1.0,1.0+softner,getDistToLineCenter(UV,is_end));
+	}
+
+	vec2 uv_alb = UV2;
+	if (tex_stretch) {
+		uv_alb = UV;
+	}
+	uv_alb *= tex_scale;
+	uv_alb = uv_alb.yx; // more intuitive
+
+	vec4 alb_sample = texture(texture_alb,uv_alb.yx);
+	vec4 rgh_sample = texture(texture_rgh,uv_alb.yx);
+
+	ALBEDO = alb_sample.rgb * alb_sample.a * color.rgb;
+	SPECULAR = specular;
+	ROUGHNESS = roughness * rgh_sample.r;
+	METALLIC = metallic;
+    ALPHA = alpha_override;
+
+	//ALPHA_SCISSOR_THRESHOLD = 0.001; // comment out for alpha blending
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xogg"]
+render_priority = 0
+shader = SubResource("Shader_057qh")
+shader_parameter/line_width = 0.03
+shader_parameter/tangent_facing = false
+shader_parameter/rounded = false
+shader_parameter/tube_normal = true
+shader_parameter/alpha_override = 1.0
+shader_parameter/uv_matches_width = true
+shader_parameter/tex_scale = Vector2(1, 1)
+shader_parameter/tex_stretch = true
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/roughness = 0.5
 
 [node name="ContextMarker" type="Node3D" node_paths=PackedStringArray("node_viewport", "node_quad", "node_area")]
 script = ExtResource("1_7o2e5")
-node_viewport = NodePath("SubViewport")
+node_viewport = NodePath("ContextLine/SubViewport")
 node_quad = NodePath("MeshInstance3D")
 node_area = NodePath("MeshInstance3D/Area3D")
 
@@ -66,14 +189,6 @@ text = "3000.00km"
 font = ExtResource("2_a1ct5")
 font_size = 64
 
-[node name="SubViewport" type="SubViewport" parent="."]
-unique_name_in_owner = true
-transparent_bg = true
-size = Vector2i(400, 500)
-
-[node name="MarkerPopup" parent="SubViewport" instance=ExtResource("3_shufu")]
-unique_name_in_owner = true
-
 [node name="MarkSprite" type="Sprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -95,4 +210,12 @@ script = ExtResource("6_ox8sv")
 unique_name_in_owner = true
 curve = SubResource("Curve3D_k0k1k")
 script = ExtResource("7_jitiw")
-material = ExtResource("8_0jeaf")
+material = SubResource("ShaderMaterial_5xogg")
+
+[node name="SubViewport" type="SubViewport" parent="ContextLine"]
+unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(400, 500)
+
+[node name="MarkerPopup" parent="ContextLine/SubViewport" instance=ExtResource("3_shufu")]
+unique_name_in_owner = true
