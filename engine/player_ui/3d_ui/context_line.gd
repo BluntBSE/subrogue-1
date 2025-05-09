@@ -16,7 +16,7 @@ func unpack(_node_a, _node_b, _anchor):
     
 
 func update_line3d(_node_a:Node3D, _node_b:Node3D, _anchor):
-    line.material = load("res://engine/player_ui/3d_ui/context_line.material")
+    line.material = load("res://engine/player_ui/3d_ui/context_line_2.material")
     
 
     var curve: Curve3D = Curve3D.new()
@@ -28,9 +28,10 @@ func update_line3d(_node_a:Node3D, _node_b:Node3D, _anchor):
     var end_point: Vector3 = dir * length
     var mid_point: Vector3 = dir * (length / 2.0)
     
+    
     # Calculate the direction away from the anchor
     var up_dir: Vector3 = (mid_point + node_a.position - anchor.position).normalized()
-    
+
     # Lift the midpoint
     var lift: float = 0.15 * length #TODO: Recalculate based on distance.
     mid_point += up_dir * lift
@@ -40,13 +41,7 @@ func update_line3d(_node_a:Node3D, _node_b:Node3D, _anchor):
     var mid_tangent: Vector3 = (end_point - start_point) * 0.25
     var end_tangent: Vector3 = (end_point - mid_point) * 0.5
    
-    
-    # Add points to the curve with tangents - In the abstract, if you want the path to sit on the ground, do this.
-    #curve.add_point(start_point, Vector3(), start_tangent) # idx 0
-    #curve.add_point(mid_point, -mid_tangent, mid_tangent)
-    #curve.add_point(end_point, -end_tangent, Vector3())
-    
-    
+     
     curve.add_point(start_point, Vector3(), start_tangent) # idx 0
     curve.add_point(mid_point, -mid_tangent, mid_tangent)
     curve.add_point(end_point, -end_tangent, Vector3())
