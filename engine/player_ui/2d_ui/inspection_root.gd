@@ -74,7 +74,7 @@ func _on_signal_inspector_toggle_button_up() -> void:
 
 func handle_SI_stream(dict:Dictionary):#{"volume":x, "certainty":x, "pitch":x, "entity": x}
     %SignalPitch.text = "Pitch: " + str(dict.pitch)
-    %SignalCertainty.text = "Certainty: "+str(dict.certainty)
+    %SignalCertainty.text = "Certainty: "+str(snapped(dict.certainty, 0.1))
     var _entity:Entity = dict.entity
     randomize()
     %SignalSize.text = "Size: " + str(SignalHelpers.get_uncertain_size(dict.entity.atts.size, dict.certainty))

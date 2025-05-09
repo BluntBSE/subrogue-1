@@ -28,6 +28,8 @@ func _ready() -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
     if is_multiplayer_authority():
         if event is InputEventKey and event.is_released() and event.keycode == KEY_E:
+            if get_viewport().gui_get_focus_owner() != null:
+                return
             SoundManager.play("sonar_1")
             ping_requested.emit(angle_1, angle_2)
 
