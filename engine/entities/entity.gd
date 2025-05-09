@@ -27,7 +27,6 @@ var height:float = GlobalConst.height; #Given that the planet has a known radius
 @onready var behavior:EntityBehavior = %EntityBehavior
 @onready var emission:EntityEmission = %EntityEmission
 @onready var render:EntityRender = %EntityRender
-@onready var debug:EntityDebug = %EntityDebug
 @onready var detector:EntityDetector = %EntityDetector
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
