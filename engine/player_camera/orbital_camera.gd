@@ -164,10 +164,14 @@ func _unhandled_input(event: InputEvent) -> void:
         release_observed.emit()
         
     if event is InputEventKey and event.keycode in [KEY_W, KEY_A, KEY_S, KEY_D]:
+        if get_viewport().gui_get_focus_owner() != null:
+            return
         if follow_cam == true:
             follow_cam = false
         
     if event is InputEventKey and event.keycode == KEY_SPACE:
+        if get_viewport().gui_get_focus_owner() != null:
+            return
         follow_cam = true
         
     state_machine.handleInput({"event":event})
