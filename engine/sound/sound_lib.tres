@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SoundLib" load_steps=15 format=3 uid="uid://530rapawcb1y"]
+[gd_resource type="Resource" script_class="SoundLib" load_steps=16 format=3 uid="uid://530rapawcb1y"]
 
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="1_8y6jw"]
 [ext_resource type="Script" uid="uid://d1aoxaxdw5q04" path="res://engine/sound/sound_lib.gd" id="1_c1pf3"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dyb82kmlta3fk" path="res://title_screen/assets/deep-in-the-ocean-116172.mp3" id="5_rrkwm"]
 [ext_resource type="AudioStream" uid="uid://pr7e3i74ec5p" path="res://assets/sounds/ping_contact_2.mp3" id="7_2f80b"]
 [ext_resource type="AudioStream" uid="uid://boiyvobipb4ic" path="res://engine/sound/raw_assets/click-buttons-ui-menu-sounds-effects-button-13-205396.mp3" id="7_ffrrv"]
+[ext_resource type="AudioStream" uid="uid://wai6hngib3vj" path="res://engine/sound/raw_assets/damagedsound1.wav" id="7_wnbay"]
 [ext_resource type="AudioStream" uid="uid://be6l42hpol77u" path="res://engine/sound/raw_assets/UI/UI Swell Low.wav" id="12_y1o0m"]
 
 [resource]
@@ -30,3 +31,4 @@ explosion_1 = ExtResource("1_l0hu1")
 signal_acquired_1 = ExtResource("7_ffrrv")
 ping_contact_1 = ExtResource("7_2f80b")
 enemy_ping_direct_1 = ExtResource("3_i2sbo")
+get_wrecked_1 = ExtResource("7_wnbay")

@@ -276,19 +276,24 @@ func handle_in_docking_area(city:City):
     if can_dock == false: #This check is necessary because the 3d area you check is a spherical plane.
         #It's nontrivial to check for total "immersion" in the 3D area. This saves you a headache.
         if played_by != null:
-            print("Handle in docking area handled")
+            #<Node3D#131969584653>
+            #<Node3D#132439346727>
             can_dock = true
             can_dock_at = city
             can_dock_sig.emit(true)
-            city.interaction.opened_city.connect(played_by.UI.handle_opened_city)
 
+            city.interaction.connect("opened_city", played_by.UI.test_method)
+            city.interaction.opened_city.connect(played_by.UI.test_method)       
+            city.interaction.opened_city.connect(played_by.UI.handle_opened_city)
+            city.interaction.opened_city.emit(city)
+            print(city.interaction.get_signal_connection_list("opened_city"))
 
 func handle_leave_docking_area():
     if can_dock == true:
         if played_by != null:
             can_dock = false
             can_dock_sig.emit(false)
-            can_dock_at.interaction.opened_city.disconnect(played_by.UI.handle_opened_city)
+            #can_dock_at.interaction.opened_city.disconnect(played_by.UI.handle_opened_city)
             can_dock_at = null
 
 func handle_fully_docked():

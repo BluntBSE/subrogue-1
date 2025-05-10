@@ -67,7 +67,6 @@ func _on_interaction_box_1_input_event(camera: Node, event: InputEvent, event_po
     if event is InputEventMouseButton:
         event as InputEventMouseButton
         if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
-            
             opened_city.emit(get_parent())
             SoundManager.play_straight("ui_swoop_1", "ui")
     pass # Replace with function body.

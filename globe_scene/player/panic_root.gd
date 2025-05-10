@@ -55,7 +55,7 @@ func update_warning_text():
     var seconds = int(time_left) % 60
     
     var time_string = "%02d:%02d:%02d" % [hours, minutes, seconds]
-    var warning_string = "WARNING. CAPSIZE IMMINENT. DOCK WITHIN " + time_string
+    var warning_string = "WARNING: REACTOR FAILURE. DOCK WITHIN " + time_string
     
     # Update all labels in the warning container
     for child in %WarningContainer.get_children():

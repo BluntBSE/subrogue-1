@@ -112,8 +112,13 @@ func handle_can_dock(b:bool):
     if b == false:
         print("b was false")
         UIHelpers.recursively_modulate_group(self, "dock_silenced_UI", Color("ffffff"))
-        
+    
+    
+func test_method(city:City):
+    print("Test method here! Got", city)
+    
 func handle_opened_city(city:City):
+
     #For now...
     print("Handle Opened City Fired?")
     %CityUIRoot.visible = true

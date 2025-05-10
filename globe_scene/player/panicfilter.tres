@@ -1,0 +1,95 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dddb6ysw0a8l5"]
+
+[sub_resource type="Shader" id="Shader_dv6ba"]
+code = "shader_type canvas_item;
+uniform int octave_count: hint_range(1, 20) = 10;
+uniform float amp_start: hint_range(0.0, 10.0, 0.1) = 0.5;
+uniform float amp_coeff: hint_range(0.0, 10.0, 0.1) = 0.5;
+uniform float freq_coeff: hint_range(0.0, 10.0, 0.1) = 2.0;
+uniform float shift_coeff: hint_range(0.0, 10.0, 0.1) = 1.0;
+uniform float speed: hint_range(0.0, 10.0, 0.01) = 0.5;
+uniform float red_stain_min: hint_range(0.0, 1.0, 0.01) = 0.0; // Minimum red stain
+uniform float red_stain_max: hint_range(0.0, 1.0, 0.01) = 0.3; // Maximum red stain
+uniform float pulse_speed: hint_range(0.1, 10.0, 0.1) = 2.0; // Controls pulse frequency (1/0.5 = 2Hz)
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, repeat_disable, filter_nearest;
+uniform bool active = false;
+//uniform sampler2D sprite_texture : source_color, filter_nearest; // set this in editor
+
+vec2 hash22(vec2 uv){
+    uv = vec2(
+        dot(
+            uv, vec2(127.1,311.7)
+        ),
+        dot(uv, vec2(269.5,183.3))
+    );
+    return 2.0 * fract(sin(uv) * 43758.5453123) - 1.0;
+}
+
+float noise(vec2 uv) {
+    vec2 iuv = floor(uv);
+    vec2 fuv = fract(uv);
+    vec2 blur = smoothstep(0.0, 1.0, fuv);
+    return mix(mix(dot(hash22(iuv + vec2(0.0,0.0)), fuv - vec2(0.0,0.0)),
+           dot(hash22(iuv + vec2(1.0,0.0)), fuv - vec2(1.0,0.0)),
+           blur.x),
+           mix(dot(hash22(iuv + vec2(0.0,1.0)), fuv - vec2(0.0,1.0)),
+           dot(hash22(iuv + vec2(1.0,1.0)), fuv - vec2(1.0,1.0)),
+           blur.x), blur.y) + 0.5;
+}
+
+float fbm(vec2 uv, int octaves) {
+    float value = 0.0;
+    float amplitude = amp_start;
+    for (int i = 0; i < octaves; i++) {
+        value += amplitude * noise(uv);
+        uv *= freq_coeff;
+        amplitude *= amp_coeff;
+    }
+    return value;
+}
+
+void vertex() {
+}
+
+void fragment() {
+    if (active == true) {
+        vec2 uv = UV;
+        float time = TIME * speed;
+        float shift = fbm(vec2(time), octave_count) * shift_coeff * 0.01;
+        float red = texture(SCREEN_TEXTURE, vec2(uv.x + shift, uv.y)).r;
+        float green = texture(SCREEN_TEXTURE, vec2(uv.x - shift, uv.y)).g;
+        float blue = texture(SCREEN_TEXTURE, vec2(uv.x, uv.y)).b;
+        
+        // Calculate pulsing red stain intensity using a sine wave
+        // sin() outputs -1 to 1, so we adjust to 0 to 1 range with (sin + 1) / 2
+        float pulse = (sin(TIME * pulse_speed * PI) + 1.0) / 2.0;
+        
+        // Interpolate between min and max red stain values
+        float current_stain = mix(red_stain_min, red_stain_max, pulse);
+        
+        // Apply red stain with pulsing intensity
+        red = min(red + current_stain, 1.0);
+        green = green * (1.0 - current_stain * 0.5);
+        blue = blue * (1.0 - current_stain * 0.5);
+        
+        COLOR = vec4(red, green, blue, 1.0);
+    }
+}
+
+//void light() {
+    // Called for every pixel for every light affecting the CanvasItem.
+    // Uncomment to replace the default light processing function with this one.
+//}"
+
+[resource]
+shader = SubResource("Shader_dv6ba")
+shader_parameter/octave_count = 10
+shader_parameter/amp_start = 0.5
+shader_parameter/amp_coeff = 0.5
+shader_parameter/freq_coeff = 2.0
+shader_parameter/shift_coeff = 1.0
+shader_parameter/speed = 0.5
+shader_parameter/red_stain_min = 0.0
+shader_parameter/red_stain_max = 0.12
+shader_parameter/pulse_speed = 2.0
+shader_parameter/active = true
