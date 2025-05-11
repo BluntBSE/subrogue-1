@@ -113,8 +113,12 @@ func handle_hovered_upgrade(label:SelfInspectUpgradeLabel):
     if label != last_rendered_upgrade:
         if last_rendered_upgrade:
             last_rendered_upgrade.modulate = Color("ffffff")
-        erase_lines()  # This now clears both active and completed lines
+        erase_lines() 
         last_rendered_upgrade = label
+    
+    %UGDisplayNameLabel.text = label.upgrade.display_name
+    %UGEffectText.text = label.upgrade.effect_text
+    %UGFlavorText.text = label.upgrade.flavor_text
     
     var target_slot
     if label.upgrade.slot == "rear":
@@ -153,6 +157,5 @@ func slot_circle_sweep_in(slot:Control):
     tween.set_ease(Tween.EASE_IN)
     tween.set_trans(Tween.TRANS_LINEAR)
     
-    # For regular materials:
     tween.tween_method(func(val): circle.set_instance_shader_parameter("end_angle", val), 0.01, 359.9, 0.19)
     

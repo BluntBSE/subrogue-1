@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_ve7lg")
-id = ""
-display_name = "Quantum Uplink"
+id = "crawl_skids"
+display_name = "Crawl Skids"
 slot = "front"
-effect_text = "You are no longer revealed when HAILING other vessels."
-flavor_text = "A quantum uplink streams messages to a rented server in orbit. This server is then used to make calls on the client's behalf."
+effect_text = "The movement penalty when at CRAWL depth is reduced by half."
+flavor_text = "Crawl skids are metal runners that provide a buffer against the sea floor. This simple upgrade allows captains to glide along the bottom without damaging their hull."
 metadata/_custom_type_script = "uid://4haf3rffhmm7"

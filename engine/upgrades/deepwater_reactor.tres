@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_bodw4")
-id = ""
-display_name = ""
+id = "deepwater_reactor"
+display_name = "Deepwater Reactor"
 slot = "tower"
 effect_text = "While the vessel is at CRAWL depth and STATIONARY, dive time does not decrease."
 flavor_text = "By filtering nutrients and raw minerals fromt he ocean floor, the deepwater reactor can synthesize a variety of basic materials, including edible matter.

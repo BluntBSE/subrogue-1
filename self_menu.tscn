@@ -691,6 +691,7 @@ color = Color(1, 0, 1, 0)
 [node name="Circle" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals/SlotRear"]
 modulate = Color(0.203922, 0.866667, 0.92549, 1)
 material = SubResource("ShaderMaterial_swfl1")
+layout_mode = 0
 offset_left = -26.0
 offset_top = -26.0
 offset_right = 31.0
@@ -710,6 +711,7 @@ color = Color(1, 0, 1, 0)
 [node name="Circle" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals/SlotFront"]
 modulate = Color(0.203922, 0.866667, 0.92549, 1)
 material = SubResource("ShaderMaterial_swfl1")
+layout_mode = 0
 offset_left = -26.0
 offset_top = -26.0
 offset_right = 31.0
@@ -729,6 +731,7 @@ color = Color(1, 0, 1, 0)
 [node name="Circle" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals/SlotTower"]
 modulate = Color(0.203922, 0.866667, 0.92549, 1)
 material = SubResource("ShaderMaterial_swfl1")
+layout_mode = 0
 offset_left = -26.0
 offset_top = -26.0
 offset_right = 31.0
@@ -870,7 +873,8 @@ offset_bottom = -0.03302
 grow_horizontal = 2
 color = Color(0.00392157, 0.0509804, 0.0588235, 1)
 
-[node name="DisplayNameLabel" type="Label" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription/UpgradeDescBG"]
+[node name="UGDisplayNameLabel" type="Label" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription/UpgradeDescBG"]
+unique_name_in_owner = true
 modulate = Color(0.203922, 0.866667, 0.92549, 1)
 layout_mode = 0
 offset_left = 17.0
@@ -882,9 +886,10 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Deepwater Reactor"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
-[node name="EffectText" type="RichTextLabel" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription/UpgradeDescBG"]
+[node name="UGEffectText" type="RichTextLabel" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription/UpgradeDescBG"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 12.0
 offset_top = 48.0
@@ -896,12 +901,13 @@ text = "While the vessel is at CRAWL depth and STATIONARY, dive time does not de
 horizontal_alignment = 1
 justification_flags = 162
 
-[node name="FlavorText" type="RichTextLabel" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription/UpgradeDescBG"]
+[node name="UGFlavorText" type="RichTextLabel" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription/UpgradeDescBG"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 15.0
+offset_left = 23.0
 offset_top = 179.0
 offset_right = 202.0
-offset_bottom = 402.0
+offset_bottom = 404.0
 theme = ExtResource("3_pxug6")
 theme_override_font_sizes/normal_font_size = 12
 text = "By filtering nutrients and raw minerals fromt he ocean floor, the deepwater reactor can synthesize a variety of basic materials, including edible matter.
@@ -909,7 +915,6 @@ text = "By filtering nutrients and raw minerals fromt he ocean floor, the deepwa
 Cafeterias on ships fitted with a deepwater reactor experience 20% less traffic.
 "
 fit_content = true
-horizontal_alignment = 1
 justification_flags = 162
 
 [node name="DescDivider" type="ColorRect" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription/UpgradeDescBG"]

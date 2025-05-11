@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_heuei")
-id = ""
+id = "quantum_uplink"
 display_name = "Quantum Uplink"
 slot = "rear"
 effect_text = "You are no longer revealed when HAILING other vessels."
