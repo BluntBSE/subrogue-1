@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="UpgradeLib" load_steps=2 format=3 uid="uid://c6g7nr7mqc5t1"]
+
+[ext_resource type="Script" uid="uid://dk54fi86554fd" path="res://engine/upgrades/upgrade_lib.gd" id="1_juic5"]
+
+[resource]
+script = ExtResource("1_juic5")
+metadata/_custom_type_script = "uid://dk54fi86554fd"

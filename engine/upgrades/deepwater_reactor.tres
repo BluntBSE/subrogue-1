@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://dgo0q5b6rjgoa"]
+
+[ext_resource type="Script" uid="uid://4haf3rffhmm7" path="res://engine/upgrades/upgrade.gd" id="1_bodw4"]
+
+[resource]
+script = ExtResource("1_bodw4")
+id = ""
+display_name = ""
+effect_text = "While the vessel is at CRAWL depth and STATIONARY, dive time does not decrease."
+flavor_text = "By filtering nutrients and raw minerals fromt he ocean floor, the deepwater reactor can synthesize a variety of basic materials, including edible matter.
+"
+metadata/_custom_type_script = "uid://4haf3rffhmm7"
