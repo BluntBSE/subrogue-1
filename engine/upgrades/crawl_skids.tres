@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://bsw2cadwllxwr"]
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://bn5ha4pfg8ygp"]
 
-[ext_resource type="Script" uid="uid://4haf3rffhmm7" path="res://engine/upgrades/upgrade.gd" id="1_heuei"]
+[ext_resource type="Script" uid="uid://4haf3rffhmm7" path="res://engine/upgrades/upgrade.gd" id="1_ve7lg"]
 
 [resource]
-script = ExtResource("1_heuei")
+script = ExtResource("1_ve7lg")
 id = ""
 display_name = "Quantum Uplink"
-slot = "rear"
+slot = "front"
 effect_text = "You are no longer revealed when HAILING other vessels."
 flavor_text = "A quantum uplink streams messages to a rented server in orbit. This server is then used to make calls on the client's behalf."
 metadata/_custom_type_script = "uid://4haf3rffhmm7"

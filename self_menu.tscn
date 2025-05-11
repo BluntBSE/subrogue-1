@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://csfjdwitc70eg"]
+[gd_scene load_steps=26 format=3 uid="uid://csfjdwitc70eg"]
 
 [ext_resource type="Script" uid="uid://dkdtioo68samc" path="res://globe_scene/ui_overlay/self_menu/self_menu_root.gd" id="1_4j64i"]
 [ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="1_ete1d"]
@@ -16,12 +16,78 @@
 [ext_resource type="Script" uid="uid://dg6nnbxkricwh" path="res://engine/player_ui/2d_ui/self_inspection_upgrade.gd" id="12_y15eo"]
 [ext_resource type="Resource" uid="uid://bsw2cadwllxwr" path="res://engine/upgrades/quantum_uplink.tres" id="14_xfi5a"]
 [ext_resource type="Resource" uid="uid://dgo0q5b6rjgoa" path="res://engine/upgrades/deepwater_reactor.tres" id="15_1a771"]
+[ext_resource type="Resource" uid="uid://bn5ha4pfg8ygp" path="res://engine/upgrades/crawl_skids.tres" id="17_swfl1"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nwwe3"]
 viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_4j64i"]
 viewport_path = NodePath("VesselUIRoot/VesselPreview/SubViewport")
+
+[sub_resource type="Shader" id="Shader_1a771"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform sampler2D disc_texture;
+uniform float start_angle : hint_range(0.0, 360.0); // Start angle in degrees
+instance uniform float end_angle : hint_range(0.0, 360.0);   // End angle in degrees
+uniform float frontier_head : hint_range(0.0, 1.0) = 1.0; // Outer radius (normalized)
+uniform float frontier_tail : hint_range(0.0, 1.0) = 0.5; // Inner radius (normalized)
+uniform bool fade_with_distance = true;
+uniform float dist_fade_factor : hint_range (0.0,1.0) = 0.5;
+uniform vec3 modulate: source_color;
+
+void fragment() {
+    // Get the texture color
+    vec4 tex_color = texture(disc_texture, UV);
+    vec2 cPos = UV * 2.0 - vec2(1.0); // Convert UV to range [-1, 1]
+    float cdist = length(cPos);       // Distance from the center
+    float fade = 1.0 - (cdist * dist_fade_factor );         // Fading effect based on distance
+
+    // Calculate the angle of the current fragment in degrees
+    float angle = degrees(atan(cPos.y, cPos.x));
+    if (angle < 0.0) {
+        angle += 360.0; // Ensure angle is in the range [0, 360]
+    }
+
+    // Check if the angle is within the specified range
+    bool within_angle_range = false;
+    if (start_angle < end_angle) {
+        within_angle_range = angle >= start_angle && angle <= end_angle;
+    } else {
+        within_angle_range = angle >= start_angle || angle <= end_angle;
+    }
+
+    // Check if the distance is within the frontier limits
+    bool within_frontier_limits = cdist >= frontier_tail && cdist <= frontier_head;
+
+    // Determine the alpha value
+    float alpha; // Base alpha with fade effect
+    if (fade_with_distance == true){
+       alpha = tex_color.a * fade;
+    };
+    if (fade_with_distance == false){
+        alpha = tex_color.a;
+    };
+    if (!within_angle_range || !within_frontier_limits) {
+        alpha = 0.0; // Hide if outside angle or distance range
+    }
+
+    // Set the final color
+    COLOR.rgb = tex_color.rgb * modulate;
+    COLOR.a = alpha;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_swfl1"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1a771")
+shader_parameter/disc_texture = ExtResource("11_uaeko")
+shader_parameter/start_angle = 0.0
+shader_parameter/frontier_head = 1.0
+shader_parameter/frontier_tail = 0.5
+shader_parameter/fade_with_distance = false
+shader_parameter/dist_fade_factor = 0.5
+shader_parameter/modulate = Color(0.203922, 0.866667, 0.92549, 1)
 
 [sub_resource type="Animation" id="Animation_fwoy0"]
 length = 0.001
@@ -596,16 +662,16 @@ offset_bottom = 40.0
 
 [node name="LineJoint1" type="ColorRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_left = 864.0
 offset_top = 422.0
 offset_right = 904.0
 offset_bottom = 462.0
-color = Color(1, 0, 1, 1)
+color = Color(1, 0, 1, 0)
 
 [node name="DescriptionBL" type="ColorRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 911.0
 offset_top = 825.0
@@ -620,10 +686,11 @@ offset_left = 577.0
 offset_top = 422.0
 offset_right = 617.0
 offset_bottom = 462.0
-color = Color(1, 0, 1, 1)
+color = Color(1, 0, 1, 0)
 
 [node name="Circle" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals/SlotRear"]
 modulate = Color(0.203922, 0.866667, 0.92549, 1)
+material = SubResource("ShaderMaterial_swfl1")
 offset_left = -26.0
 offset_top = -26.0
 offset_right = 31.0
@@ -634,18 +701,19 @@ expand_mode = 1
 [node name="SlotFront" type="ColorRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 244.0
-offset_top = 422.0
-offset_right = 284.0
-offset_bottom = 462.0
-color = Color(1, 0, 1, 1)
+offset_left = 175.0
+offset_top = 438.0
+offset_right = 215.0
+offset_bottom = 478.0
+color = Color(1, 0, 1, 0)
 
 [node name="Circle" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals/SlotFront"]
 modulate = Color(0.203922, 0.866667, 0.92549, 1)
+material = SubResource("ShaderMaterial_swfl1")
 offset_left = -26.0
-offset_top = -23.0
+offset_top = -26.0
 offset_right = 31.0
-offset_bottom = 34.0
+offset_bottom = 31.0
 texture = ExtResource("11_uaeko")
 expand_mode = 1
 
@@ -656,14 +724,15 @@ offset_left = 350.0
 offset_top = 337.0
 offset_right = 390.0
 offset_bottom = 377.0
-color = Color(1, 0, 1, 1)
+color = Color(1, 0, 1, 0)
 
 [node name="Circle" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals/SlotTower"]
 modulate = Color(0.203922, 0.866667, 0.92549, 1)
+material = SubResource("ShaderMaterial_swfl1")
 offset_left = -26.0
-offset_top = -23.0
+offset_top = -26.0
 offset_right = 31.0
-offset_bottom = 34.0
+offset_bottom = 31.0
 texture = ExtResource("11_uaeko")
 expand_mode = 1
 
@@ -701,13 +770,18 @@ inspection_root = NodePath("../../../..")
 upgrade_root = NodePath("../..")
 upgrade = ExtResource("15_1a771")
 
-[node name="Label7" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
+[node name="DeepwaterReactor2" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades" node_paths=PackedStringArray("inspection_root", "upgrade_root")]
 layout_mode = 2
+mouse_filter = 0
 theme = ExtResource("3_pxug6")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Crawl Skids"
+script = ExtResource("12_y15eo")
+inspection_root = NodePath("../../../..")
+upgrade_root = NodePath("../..")
+upgrade = ExtResource("17_swfl1")
 
 [node name="Label5" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
 layout_mode = 2

@@ -8,8 +8,12 @@ var down_offset = 4.0
 var _active_line_tweens = {}
 var active_tween_count = 0
 var _completed_lines = {}  # Store completed line data
+var slots = []
 
 func _ready():
+    slots.append(%SlotRear)
+    slots.append(%SlotTower)
+    slots.append(%SlotFront)
     render_upgrade()
 
 func render_upgrade():
@@ -84,9 +88,9 @@ func _draw():
         draw_line(data.point_a, data.point_b, data.color, 2.0)
     
     # Debug: Draw joint position
-    if %LineJoint1:
-        var joint_local_pos = make_canvas_position_local(%LineJoint1.global_position)
-        draw_circle(joint_local_pos, 2.0, Color.RED)
+    #if %LineJoint1:
+       # var joint_local_pos = make_canvas_position_local(%LineJoint1.global_position)
+        #draw_circle(joint_local_pos, 2.0, Color.RED)
 
 func erase_lines():
     # Clear both active and completed lines
@@ -97,6 +101,10 @@ func erase_lines():
     _active_line_tweens.clear()
     _completed_lines.clear()
     active_tween_count = 0
+    #Reset slot circles
+    for slot in slots:
+        var circle:TextureRect = slot.get_node("Circle")
+        circle.set_instance_shader_parameter("end_angle", 0.01)
 
 func handle_hovered_upgrade(label:SelfInspectUpgradeLabel):
     print("Hovered over upgrade: ", label.name)
@@ -108,8 +116,19 @@ func handle_hovered_upgrade(label:SelfInspectUpgradeLabel):
         erase_lines()  # This now clears both active and completed lines
         last_rendered_upgrade = label
     
+    var target_slot
+    if label.upgrade.slot == "rear":
+        target_slot = %SlotRear
+    if label.upgrade.slot == "front":
+        target_slot = %SlotFront
+    if label.upgrade.slot == "tower":
+        target_slot = %SlotTower
+    
+             
     # Calculate joint position once
-    var joint_pos = make_canvas_position_local(%LineJoint1.global_position)
+    var reference_x = make_canvas_position_local(%LineJoint1.global_position).x
+    var reference_y = make_canvas_position_local(target_slot.global_position).y
+    var joint_pos = Vector2(reference_x, reference_y)
     
     # First line
     var origin = make_canvas_position_local(label.global_position) - Vector2(left_offset, -down_offset)
@@ -123,5 +142,17 @@ func handle_hovered_upgrade(label:SelfInspectUpgradeLabel):
     await tween_a.finished
     await tween_b.finished
     
-    var destination_2 = make_canvas_position_local(%SlotRear.global_position)
+    var destination_2 = make_canvas_position_local(target_slot.global_position)
     var tween_c = draw_growing_line(joint_pos, destination_2, Color("34ddec"), 0.19)
+    slot_circle_sweep_in(target_slot)
+
+
+func slot_circle_sweep_in(slot:Control):
+    var circle = slot.get_node("Circle")
+    var tween = get_tree().create_tween()
+    tween.set_ease(Tween.EASE_IN)
+    tween.set_trans(Tween.TRANS_LINEAR)
+    
+    # For regular materials:
+    tween.tween_method(func(val): circle.set_instance_shader_parameter("end_angle", val), 0.01, 359.9, 0.19)
+    
