@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://csfjdwitc70eg"]
+[gd_scene load_steps=23 format=3 uid="uid://csfjdwitc70eg"]
 
 [ext_resource type="Script" uid="uid://dkdtioo68samc" path="res://globe_scene/ui_overlay/self_menu/self_menu_root.gd" id="1_4j64i"]
 [ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="1_ete1d"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://yq3xci18jw7q" path="res://assets/UI/white_circle.png" id="11_uaeko"]
 [ext_resource type="Script" uid="uid://bcdttqp1qd7d5" path="res://engine/player_ui/2d_ui/self_inspection_upgrade_root.gd" id="12_uaeko"]
 [ext_resource type="Script" uid="uid://dg6nnbxkricwh" path="res://engine/player_ui/2d_ui/self_inspection_upgrade.gd" id="12_y15eo"]
+[ext_resource type="Resource" uid="uid://bsw2cadwllxwr" path="res://engine/upgrades/quantum_uplink.tres" id="14_xfi5a"]
+[ext_resource type="Resource" uid="uid://dgo0q5b6rjgoa" path="res://engine/upgrades/deepwater_reactor.tres" id="15_1a771"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nwwe3"]
 viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport")
@@ -593,6 +595,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="LineJoint1" type="ColorRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 864.0
 offset_top = 422.0
@@ -600,7 +604,17 @@ offset_right = 904.0
 offset_bottom = 462.0
 color = Color(1, 0, 1, 1)
 
+[node name="DescriptionBL" type="ColorRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 911.0
+offset_top = 825.0
+offset_right = 951.0
+offset_bottom = 865.0
+color = Color(1, 0, 1, 1)
+
 [node name="SlotRear" type="ColorRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 577.0
 offset_top = 422.0
@@ -608,7 +622,17 @@ offset_right = 617.0
 offset_bottom = 462.0
 color = Color(1, 0, 1, 1)
 
+[node name="Circle" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals/SlotRear"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 31.0
+offset_bottom = 31.0
+texture = ExtResource("11_uaeko")
+expand_mode = 1
+
 [node name="SlotFront" type="ColorRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 244.0
 offset_top = 422.0
@@ -616,34 +640,66 @@ offset_right = 284.0
 offset_bottom = 462.0
 color = Color(1, 0, 1, 1)
 
+[node name="Circle" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals/SlotFront"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+offset_left = -26.0
+offset_top = -23.0
+offset_right = 31.0
+offset_bottom = 34.0
+texture = ExtResource("11_uaeko")
+expand_mode = 1
+
+[node name="SlotTower" type="ColorRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 350.0
+offset_top = 337.0
+offset_right = 390.0
+offset_bottom = 377.0
+color = Color(1, 0, 1, 1)
+
+[node name="Circle" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeVisuals/SlotTower"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+offset_left = -26.0
+offset_top = -23.0
+offset_right = 31.0
+offset_bottom = 34.0
+texture = ExtResource("11_uaeko")
+expand_mode = 1
+
 [node name="ActiveUpgrades" type="VBoxContainer" parent="VesselUIRoot/UpgradeRoot"]
 layout_mode = 0
-offset_left = 909.0
+offset_left = 919.0
 offset_top = 126.0
-offset_right = 1129.0
+offset_right = 1097.0
 offset_bottom = 341.0
 theme_override_constants/separation = 10
 
-[node name="Label4" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades" node_paths=PackedStringArray("inspection_root")]
+[node name="QuantumUplink" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades" node_paths=PackedStringArray("inspection_root", "upgrade_root")]
 layout_mode = 2
+mouse_filter = 0
 theme = ExtResource("3_pxug6")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Quantum Uplink"
-horizontal_alignment = 2
 script = ExtResource("12_y15eo")
 inspection_root = NodePath("../../../..")
+upgrade_root = NodePath("../..")
+upgrade = ExtResource("14_xfi5a")
 
-[node name="Label10" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
-modulate = Color(0.203922, 0.866667, 0.92549, 1)
+[node name="DeepwaterReactor" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades" node_paths=PackedStringArray("inspection_root", "upgrade_root")]
 layout_mode = 2
+mouse_filter = 0
 theme = ExtResource("3_pxug6")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Deepwater Reactor"
-horizontal_alignment = 2
+script = ExtResource("12_y15eo")
+inspection_root = NodePath("../../../..")
+upgrade_root = NodePath("../..")
+upgrade = ExtResource("15_1a771")
 
 [node name="Label7" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
 layout_mode = 2
@@ -652,7 +708,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Crawl Skids"
-horizontal_alignment = 2
 
 [node name="Label5" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
 layout_mode = 2
@@ -661,7 +716,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Spa Modules"
-horizontal_alignment = 2
 
 [node name="Label8" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
 layout_mode = 2
@@ -670,7 +724,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Tidal Generator"
-horizontal_alignment = 2
 
 [node name="Label11" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
 layout_mode = 2
@@ -679,7 +732,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Sonar Jammers"
-horizontal_alignment = 2
 
 [node name="Label6" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
 layout_mode = 2
@@ -688,7 +740,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Sensitivity III"
-horizontal_alignment = 2
 
 [node name="Label9" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
 layout_mode = 2
@@ -697,7 +748,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Expanded Cargo II"
-horizontal_alignment = 2
 
 [node name="Label12" type="Label" parent="VesselUIRoot/UpgradeRoot/ActiveUpgrades"]
 layout_mode = 2
@@ -706,13 +756,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "Radar Jammers"
-horizontal_alignment = 2
 
 [node name="UpgradeLabel" type="Label" parent="VesselUIRoot/UpgradeRoot"]
 layout_mode = 0
-offset_left = 981.0
+offset_left = 920.0
 offset_top = 79.0
-offset_right = 1120.0
+offset_right = 1059.0
 offset_bottom = 104.0
 theme = ExtResource("3_pxug6")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -797,27 +846,6 @@ offset_right = 177.0
 offset_bottom = 154.0
 color = Color(0.203922, 0.866667, 0.92549, 1)
 
-[node name="Line2D" type="Line2D" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription"]
-position = Vector2(62, -37)
-points = PackedVector2Array(-62, 478, -111, 76, -374, 73)
-width = 2.0
-default_color = Color(0.203922, 0.866667, 0.92549, 1)
-
-[node name="Line2D2" type="Line2D" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription/Line2D"]
-position = Vector2(0, -183)
-points = PackedVector2Array(-26, -7, -112, 259)
-width = 2.0
-default_color = Color(0.203922, 0.866667, 0.92549, 1)
-
-[node name="TextureRect" type="TextureRect" parent="VesselUIRoot/UpgradeRoot/UpgradeDescription/Line2D"]
-modulate = Color(0.203922, 0.866667, 0.92549, 1)
-offset_left = -425.0
-offset_top = 48.0
-offset_right = -368.0
-offset_bottom = 105.0
-texture = ExtResource("11_uaeko")
-expand_mode = 1
-
 [node name="SelfUIBG" type="ColorRect" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0)
@@ -835,4 +863,3 @@ libraries = {
 }
 
 [connection signal="button_up" from="SelfMenu/SelfMenuToggleButton" to="." method="_on_self_menu_toggle_button_button_up"]
-[connection signal="mouse_entered" from="VesselUIRoot/UpgradeRoot/ActiveUpgrades/Label4" to="VesselUIRoot/UpgradeRoot/ActiveUpgrades/Label4" method="_on_mouse_entered"]
