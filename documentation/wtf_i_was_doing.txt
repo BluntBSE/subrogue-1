@@ -21,54 +21,8 @@ IDK YET: How long does positive ID last? - Give sonar signal objects a lifespan 
 IF NEEDED TO IMPROVE PERFORMANCE: Maybe only turn on NPC "Brains" if a player wanders within some large distance. Kind of like an AI 'chunking' that way. 
 IF NEEDED TO IMPROVE PERFORMANCE: All that ping polling and stuff could be on different threads. NPCs and players could use separate threads. Don't need to track OTHER player's signals either.
 
-TODO:
 
-    COUNTERPING-
-    Given a position on the world...
-    -MAYBE: offset it
-    -Create a mesh with the sonar pulse shaders on it.
-    -Get the angle to the player
-    -Set the beginning/end angles to +/- 20 degrees of player angle
-    -Pulse it, with the frontier tail at a minimum of 20, going up. A cropped frontier tail gives the impression of being far away
-    -Play sounds
-    -Aberrate/redden the player's screen
-        
-    
-    Filtering signals based on parameters
-    
-    -Add "MOVE" to the list of right click commands unless we can make it possible to pass
-    input from the mesh that signals occupy
-
-
--A better cursor - DONE
--Docking at ports, getting missions
--Signal tuning
--Destroying enemies (done)
--Different graphics for munitions
--Configuring weapons
--Being at least pinged by an enemy (can fake)
--Dying explosively
-
-    
-    Debug Munition can find and hit targets.
-    -Do depth, profile checks to track.
-    -Do depth, profile checks to hit.
-    It'd be great to show a cone in front of the munition
-    Set up configuration parameters
-QUEUE:
-    
-    
-    The ping:
-    
-    Detection:
-        Any new contacts are added immediately
-        Contacts have a central handle. They have a radius around them based on the current uncertainty.
-        They spawn at a random offset, then *keep that offset and continue moving with the velocity of the entity they are bound to*
-        
-        After that, a pretty long (6s?) poll between updates.
-        Players have a button or slider that can manually poll or increase poll rate.
-
-
+TODO: ENTITY BEHAVIOR. 
 
 
 IDEAS:

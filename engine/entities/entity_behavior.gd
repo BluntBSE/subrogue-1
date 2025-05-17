@@ -33,7 +33,7 @@ var chutzpah:float = 100.0
 @onready var behavior_tree = get_child(0)
 var enabled:bool = false:
     set(value):
-        print("Attempting to set the child behavior tree to  ", value)
+        #print("Attempting to set the child behavior tree to  ", value)
         enabled = value
         behavior_tree.enabled = value
 

@@ -42,3 +42,4 @@ func toggle_open():
     open = !open
     print("toggle open emitting ", open)
     toggle_self_menu.emit(open)
+    
