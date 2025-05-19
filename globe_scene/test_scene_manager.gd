@@ -95,7 +95,7 @@ func new_commercial_entity():
     if no_entities_near_node(spawn_at, 5.0) == false:
         # If there are entities near where we would spawn, pass this attempt.
         return
-    
+    #Consider, refactor this into a call_deferred situation?
     var entity = EntityHelpers.spawn_entity_at_node(spawn_at, id, faction)
     configure_behavior(entity, dest)
     return entity
