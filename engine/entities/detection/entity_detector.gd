@@ -34,6 +34,7 @@ var poll_elapsed = 0.0
 var poll_active = false
 var poll_frequency
 func unpack(_entity:Entity):
+    print("Unpack called with ", _entity.name)
     entity = _entity
     if entity.is_player == true:
         poll_active = true

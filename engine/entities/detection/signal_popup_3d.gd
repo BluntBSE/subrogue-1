@@ -423,7 +423,7 @@ func positively_identify():
         #If the unidentified UI is open, this should close it and open the positive ID one.
         identified.emit(self) 
         position = detected_object.position
-        if detecting_object.is_player and detected_object.get_multiplayer_authority() == get_multiplayer_authority():
+        if detecting_object.is_player and detected_object.get_multiplayer_authority() == get_multiplayer_authority() and detecting_object is not Munition: #This munition check will have to go later, but I didn't like torpedos producnig the positive identification sound
             SoundManager.play("ping_contact_1", "randpitch_small", "game", -3.0)
 
         

@@ -32,17 +32,23 @@ func _process(_delta:float)->void:
 
 
 func repopulate_entities():
+    print("Num active commercial entities: ", commercial_entities.size())
     if commercial_entities.size()<num_commercial_entities:
         var entity = new_commercial_entity()
-        commercial_entities.append(entity)
+        if entity: #new commercial entity returns nil if it couldnt spawn successfully
+            commercial_entities.append(entity)
+            entity.died.connect(handle_entity_died)
     pass
 
+func handle_entity_died(entity:Entity):
+    print("An erasure occurred")
+    commercial_entities.erase(entity)
 
 func _physics_process(_delta:float)->void:
     pass
 
 
-func new_commercial_entity():
+func new_commercial_entity()->Entity:
     # It might be better to remove the sanity checks from this function and move them a level up. 
 
 

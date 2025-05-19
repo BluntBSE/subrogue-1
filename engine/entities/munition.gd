@@ -27,6 +27,7 @@ enum IMPACT_TYPES { munitions, ships, both }
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    %EntityDetector.unpack(self)
     unpacked = true
     #TODO: Played_by is just...whatever for now! It should be set by the base class, not this. 
     played_by = get_parent().get_parent()
