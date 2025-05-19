@@ -15,3 +15,4 @@ var utilities:Array
 var munitions:Array
 var depths:Array
 var debuffs:Array
+var profile:float

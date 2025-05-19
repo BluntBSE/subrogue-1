@@ -33,7 +33,6 @@ var chutzpah:float = 100.0
 @onready var behavior_tree = get_child(0)
 var enabled:bool = false:
     set(value):
-        print("Attempting to set the child behavior tree to  ", value)
         enabled = value
         behavior_tree.enabled = value
 
@@ -48,3 +47,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
     pass
+
+func enable():
+    behavior_tree.enable()
+    
+func disable():
+    behavior_tree.disable()

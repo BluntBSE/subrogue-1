@@ -212,6 +212,7 @@ func apply_entity_type(type:EntityType):
     atts.class_display_name = type.display_class
     atts.type = type
     atts.size = type.size
+    atts.profile = type.base_profile
     atts.current_hull = type.base_hull
     atts.current_pitch = type.base_pitch
     atts.current_depth = type.depths[0]

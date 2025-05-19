@@ -134,5 +134,6 @@ func configure_behavior(entity:Entity, destination_id:String)->void:
     var dest:NavNode = entity.get_tree().root.find_child(destination_id, true, false)
     entity.behavior.destination_node = dest
     entity.initial_go_to_destination()
+    entity.behavior.enable()
     pass
     
