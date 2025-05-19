@@ -5,7 +5,7 @@ class_name TSM #TestSceneManager
 #1 - Keeps a fixed number of NPCs circulating in the world
 #2 - Provides some special debug buttons to trigger effects on demand
 
-var num_commercial_entities = 50
+var num_commercial_entities = 1
 var num_military_entities = 10
 var commercial_entities = []
 var military_entities = []
@@ -32,7 +32,6 @@ func _process(_delta:float)->void:
 
 
 func repopulate_entities():
-    print("Num active commercial entities: ", commercial_entities.size())
     if commercial_entities.size()<num_commercial_entities:
         var entity = new_commercial_entity()
         if entity: #new commercial entity returns nil if it couldnt spawn successfully

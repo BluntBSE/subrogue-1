@@ -24,10 +24,7 @@ var archive_map = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    if entity is Munition:
-        #This means that the detector (for now) is totally subordinate to its parent.
-        #Bind to the detection node of the originating entity
-        detection_parent = entity.fired_from.detector
+    pass
 
 
 var poll_elapsed = 0.0
@@ -42,8 +39,12 @@ func unpack(_entity:Entity):
     else:
         #Just for testing slowdown
         poll_active = true
-        poll_frequency = 0.25       
-
+        poll_frequency = 0.25      
+        
+    if entity is Munition:
+        #This means that the detector (for now) is totally subordinate to its parent.
+        #Bind to the detection node of the originating entity
+        detection_parent = entity.fired_from.detector
     
     pass
 func _process(delta: float) -> void:
@@ -81,7 +82,6 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
             
         if detection_parent == null:
             #If this is a vessel, not a munition or sub entity, tracked items are associated with the vessel directly
-                    
             if tracked == false:
                 var track_obj = {"entity":body, "tracked_by":[self]}
                 tracked_entities.append(track_obj)
@@ -101,6 +101,7 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
                     local_entities.append(body)
                     
             #See if the parent is already seeing this
+
             tracked = is_already_tracked(body, detection_parent.tracked_entities)
                     
             if tracked == false:
