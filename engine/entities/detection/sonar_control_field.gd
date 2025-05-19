@@ -80,7 +80,6 @@ func _on_entity_reached(entity:Entity):
             if sig.positively_identified == true:
                 #Ping contact is also part of positive identification generally, but it's more satisfying to hear it again
                 #Even if you already know the ID of what you hit
-                pass
                 SoundManager.play("ping_contact_1")
             sig.positively_identify()
             

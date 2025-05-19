@@ -2,7 +2,7 @@ extends Node3D
 class_name EntityDetector
 
 #Passive detection stats
-@onready var entity:Entity = get_parent()
+var entity:Entity
 @onready var detection_area = %DetectionArea
 var detection_parent:EntityDetector = null #Used for ordnance that updates detection for its parent.
 var sensitivity:float = 5.0 #Expressed as minimum DB to hear
@@ -31,6 +31,20 @@ func _ready() -> void:
 
 
 var poll_elapsed = 0.0
+var poll_active = false
+var poll_frequency
+func unpack(_entity:Entity):
+    entity = _entity
+    if entity.is_player == true:
+        poll_active = true
+        poll_frequency = 0.25
+    else:
+        #Just for testing slowdown
+        poll_active = true
+        poll_frequency = 0.25       
+
+    
+    pass
 func _process(delta: float) -> void:
     #DEBUG: RIGHT NOW ONLY PLAYERS CAN DETECT. THAT"S NOT WHAT WE WANT IN THE END.
     poll_elapsed += delta
@@ -39,8 +53,8 @@ func _process(delta: float) -> void:
     #Have that signal update itself on a new thread. That means moving the polling logic from the detector, here,
     #To the signalpopup, with a little duplication between them (the detector must run the check once. The sigobj must run it constantly
     #Until we get to the trailer, though, we'll do this very ugly following:
-    if entity.is_player == true:
-        if poll_elapsed >= 0.25:
+    if poll_active == true:
+        if poll_elapsed >= poll_frequency:
                 poll_elapsed = 0.0
                 poll_entities()
   
@@ -144,14 +158,16 @@ func poll_entities():
                         entity.anchor.add_child(sigob)
                         sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
                         sigmap[dict.entity] = sigob
-                        SoundManager.play("signal_acquired_1")
+                        if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
+                            SoundManager.play("signal_acquired_1")
                     else:
                         var sigob:SignalPopup = archive_map[dict.entity]
                         sigmap[dict.entity] = sigob
                         archive_map.erase(dict.entity)
                         sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
-                        SoundManager.play_straight("signal_acquired_1", "game", -12.0)
-       
+                        if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
+                            SoundManager.play("signal_acquired_1")
+        
                 sigmap[dict.entity].certainty = max_certainty
                 #Should we be constantly updating the sound? Might as well since it's the attenuated DB right?
                 sigmap[dict.entity].sound = sound

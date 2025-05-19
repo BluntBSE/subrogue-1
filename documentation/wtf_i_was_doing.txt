@@ -24,6 +24,9 @@ IF NEEDED TO IMPROVE PERFORMANCE: All that ping polling and stuff could be on di
 TODO:
 
 Ok, here's the final TODO:
+    Make the detection noises player only oops.
+    Do not change the colors on signals when detected by an NPC
+    
     
     FOR SPAWN: 
     See if we can make the unpacking a call deferred

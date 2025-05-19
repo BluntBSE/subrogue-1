@@ -90,6 +90,7 @@ func unpack(type_id, _faction:Faction, with_name):
         #DEBUG: We've temporarily turned their sad brains off because they're expensive
         #behavior.enabled = true
     sonar_node.unpack()
+    %EntityDetector.unpack(self)
     unpacked = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

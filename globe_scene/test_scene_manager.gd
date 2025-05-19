@@ -33,7 +33,8 @@ func _process(_delta:float)->void:
 
 func repopulate_entities():
     if commercial_entities.size()<num_commercial_entities:
-        new_commercial_entity()
+        var entity = new_commercial_entity()
+        commercial_entities.append(entity)
     pass
 
 

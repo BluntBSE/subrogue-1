@@ -423,7 +423,8 @@ func positively_identify():
         #If the unidentified UI is open, this should close it and open the positive ID one.
         identified.emit(self) 
         position = detected_object.position
-        SoundManager.play("ping_contact_1", "randpitch_small", "game", -3.0)
+        if detecting_object.is_player and detected_object.get_multiplayer_authority() == get_multiplayer_authority():
+            SoundManager.play("ping_contact_1", "randpitch_small", "game", -3.0)
 
         
     #Play the sound anyway
