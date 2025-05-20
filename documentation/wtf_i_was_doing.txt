@@ -21,6 +21,8 @@ IDK YET: How long does positive ID last? - Give sonar signal objects a lifespan 
 IF NEEDED TO IMPROVE PERFORMANCE: Maybe only turn on NPC "Brains" if a player wanders within some large distance. Kind of like an AI 'chunking' that way. 
 IF NEEDED TO IMPROVE PERFORMANCE: All that ping polling and stuff could be on different threads. NPCs and players could use separate threads. Don't need to track OTHER player's signals either.
 
+!!!!YOUR WHOLE NAVIGATION SYSTEM ADDS NODES TO THE TREE. THAT IS PROBABLY PRETTY EXPENSIVE IN A BEHAVIOR TREE!!!!!
+
 TODO:
 
 Ok, here's the final TODO:

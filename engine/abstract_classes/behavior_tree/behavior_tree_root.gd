@@ -35,5 +35,8 @@ func enable():
 func disable():
     self.enabled = false
     
-    
+
+#BLACKBOARD VARIABLES TO KEEP TRACK OF
+#"recently_fled":bool
+
     
