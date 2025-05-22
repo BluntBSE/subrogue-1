@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://babvvyn22pxel"]
+[gd_scene load_steps=40 format=3 uid="uid://biqwf4rm1lnuf"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_mep48"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_0mgdd"]
@@ -75,7 +75,7 @@ size = Vector2(2.2, 2.2)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hyfub"]
 
-[node name="Entity" type="RigidBody3D"]
+[node name="Entity2" type="RigidBody3D"]
 collision_layer = 3
 collision_mask = 524288
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
