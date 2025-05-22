@@ -23,6 +23,10 @@ IF NEEDED TO IMPROVE PERFORMANCE: All that ping polling and stuff could be on di
 
 !!!!YOUR WHOLE NAVIGATION SYSTEM ADDS NODES TO THE TREE. THAT IS PROBABLY PRETTY EXPENSIVE IN A BEHAVIOR TREE!!!!!
 
+BUG
+NOT QUITE A BUG BUT: Adding and removing nodes is super expensive, and both munition pathfinding and mouse movement do this every frame.
+
+
 TODO:
 
 Ok, here's the final TODO:

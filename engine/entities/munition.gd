@@ -64,7 +64,7 @@ func _process(delta: float) -> void:
             #I dont actually know why the move_towards approach didnt work.
 
             var move_command = GlobeHelpers.generate_move_command(self, target_entity.position)
-            controller.order_move.emit(move_command)
+            controller.order_move.emit(move_command) #TODO IMPORTANT: Creating new waypoints every 60th of a second is not needed. Move the existing waypoint.
 
 
 func seek_new_target_passive():

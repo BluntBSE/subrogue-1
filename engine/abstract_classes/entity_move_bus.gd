@@ -15,7 +15,7 @@ func _ready()->void:
 func handle_order_move(command:MoveCommand)->void:
     #Make sure the move command is for this entity.
     if command.entity == entity:
-        queue = []
+        purge_waypoints()
         add(command)
         command.finished.connect(handle_finished)
 
@@ -47,6 +47,7 @@ func purge_old_waypoints():
     # For allowing the active move command to be continually updated with mouse position
     # Erase for every member of the queue that is not at queue[0]
     #Im sure I had a good reason for not just making the queue = []...
+    
     while queue.size() > 1:
         var command: MoveCommand = queue[0]
         var callable: Callable = Callable(command.waypoint, "queue_free")
@@ -54,7 +55,15 @@ func purge_old_waypoints():
         queue.erase(command)
         command.queue_free()
         
-        
+
+func purge_waypoints():
+    print("Hello p urge")
+    for command in queue:
+        var callable: Callable = Callable(command.waypoint, "queue_free")
+        callable.call_deferred()
+        queue.erase(command)
+        command.queue_free()
+    queue = []
         
 
 """
@@ -148,7 +157,8 @@ func find_closest_node()->NavNode:
 
 
 func order_destination_path():
-    purge_old_waypoints()
+    print("Hello from order_destination_path")
+    purge_waypoints()
     var destination = entity.behavior.destination_node
     var path = path_between_nodes(find_closest_node(), destination, get_tree().root.find_child("NavNodes", true, false))
     waypoints_from_nodes(path) 
