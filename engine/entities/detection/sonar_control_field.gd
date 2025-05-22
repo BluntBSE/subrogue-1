@@ -41,14 +41,9 @@ func _process(delta:float)->void:
     pass
 
 func set_custom_instance_shader_param(value:Variant, target:GeometryInstance3D, param_name:String):
-    print("Hello from custom instance shader param")
-    target.set_instance_shader_parameter(param_name, value)
-    print("HEAD")
-    print(target.get_instance_shader_parameter("frontier_head"))
-    print("TAIL")
-    print(target.get_instance_shader_parameter("frontier_tail"))
-    
-    pass
+    print("Out of curiosity: ", target.get_instance_shader_parameter("frontier_head"))
+    target.set_instance_shader_parameter(param_name, value)   
+    print("Set ", param_name, " to  ", value) 
 
 func send_pulse():
     #VISUAL ANIMATION
@@ -137,11 +132,13 @@ func handle_angle_2_3d(angle):
     pass    
 
 func handle_volume(dict:Dictionary):
+    print("Handle volume called")
     volume = dict.max
     var effective_range = volume * max_dist
     %SonarPulseMesh.set_instance_shader_parameter("frontier_head", dict.max)
 
 func handle_distance_volume(dist:float): #Received as game units
+    print("Handle distance volume called")
     #When the user is setting volume visually, we extrapolate from the distance into voume
     var arbitrary_vector = position * dist
     var game_dist_max = GlobeHelpers.km_to_arc_distance(max_dist, own_entity.anchor)

@@ -145,7 +145,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("26_3qnbj")
 shader_parameter/disc_texture = SubResource("CompressedTexture2D_5l3g8")
-shader_parameter/modulaten = Color(0, 1, 0, 1)
+shader_parameter/modulaten = Color(0.962418, 0.150376, 0.511024, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dqq6t"]
 load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
@@ -156,7 +156,7 @@ render_priority = 0
 next_pass = SubResource("ShaderMaterial_dwxad")
 shader = ExtResource("20_hyfub")
 shader_parameter/disc_texture = SubResource("CompressedTexture2D_dqq6t")
-shader_parameter/modulate = Color(0.494118, 0.160784, 0.866667, 1)
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]
 lightmap_size_hint = Vector2i(27, 27)
