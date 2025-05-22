@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="23_op6l6"]
 [ext_resource type="Material" uid="uid://de23e4h2ah40y" path="res://engine/entities/detection/3d_ui_handle.material" id="24_j3cwe"]
 [ext_resource type="Script" uid="uid://c5sxeqam8fb71" path="res://engine/entities/render_effects.gd" id="25_hyfub"]
+[ext_resource type="Shader" uid="uid://dd1ef31b6ibxr" path="res://engine/entities/behavior/conditions/sonar_pulse_3_np.gdshader" id="26_3qnbj"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="28_op6l6"]
 [ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="29_j3cwe"]
 
@@ -142,77 +143,9 @@ load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dwxad"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("20_hyfub")
+shader = ExtResource("26_3qnbj")
 shader_parameter/disc_texture = SubResource("CompressedTexture2D_5l3g8")
-shader_parameter/start_angle = -10.0
-shader_parameter/end_angle = 10.0
-shader_parameter/frontier_head = 0.0
-shader_parameter/frontier_tail = 0.0
-shader_parameter/modulate = Color(0.493312, 1, 0.866464, 1)
-
-[sub_resource type="Shader" id="Shader_23k6d"]
-resource_local_to_scene = true
-code = "shader_type spatial;
-uniform sampler2D disc_texture;
-uniform float start_angle; // 0 - 360
-uniform float end_angle; // 0 - 360
-uniform float frontier_head; // 0 - 1.0 (We tried 0.5. It's 1.0. Somewhat surprised
-uniform float frontier_tail;
-uniform vec3 modulate : source_color = vec3(1.0, 1.0, 1.0); // Default to white (no tint)
-
-void vertex() {
-    // Called for every vertex the material is visible on.
-}
-
-void fragment() {
-    // Called for every pixel the material is visible on.
-    // Apply modulate to the texture color
-    ALBEDO = texture(disc_texture, UV).rgb * modulate;
-    
-    vec2 cPos = -1.0 + 2.0 * UV;
-    float cdist = length(cPos);
-    float fade = 1.0 - cdist;
-    ALPHA *= fade;
-
-    // Calculate the angle of a given in degrees relative to the center
-    float angle = degrees(atan(cPos.y, cPos.x));
-    if (angle < 0.0) {
-        angle += 360.0;
-    }
-
-    // Check if the angle is within the specified range
-    bool within_angle_range = false;
-    if (start_angle < end_angle) {
-        within_angle_range = angle >= start_angle && angle <= end_angle;
-    } else {
-        within_angle_range = angle >= start_angle || angle <= end_angle;
-    }
-
-    bool within_frontier_limits=false;
-    if (cdist < frontier_head){
-        if (cdist>frontier_tail){
-            ALPHA = ALPHA;
-        }
-    }
-
-    if (cdist>frontier_head){
-        ALPHA = 0.0;
-    }
-    if (cdist<frontier_tail){
-        ALPHA = 0.0;
-    }
-
-    if (within_angle_range) {
-        ALPHA = ALPHA*0.025;
-    } else {
-        ALPHA = 0.0;
-    }
-}
-
-//void light() {
-    // Called for every pixel for every light affecting the material.
-    // Uncomment to replace the default light processing function with this one.
-//}"
+shader_parameter/modulaten = Color(0, 1, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dqq6t"]
 load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
@@ -221,13 +154,9 @@ load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f
 resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_dwxad")
-shader = SubResource("Shader_23k6d")
+shader = ExtResource("20_hyfub")
 shader_parameter/disc_texture = SubResource("CompressedTexture2D_dqq6t")
-shader_parameter/start_angle = 10.0
-shader_parameter/end_angle = 10.0
-shader_parameter/frontier_head = 0.0
-shader_parameter/frontier_tail = 0.0
-shader_parameter/modulate = Color(0.494118, 1, 0.866667, 1)
+shader_parameter/modulate = Color(0.494118, 0.160784, 0.866667, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]
 lightmap_size_hint = Vector2i(27, 27)

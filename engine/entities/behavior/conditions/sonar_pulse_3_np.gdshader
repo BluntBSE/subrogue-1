@@ -1,11 +1,11 @@
 shader_type spatial;
 
 uniform sampler2D disc_texture;
-instance uniform float start_angle: instance_index(5); // 0 - 360
-instance uniform float end_angle; // 0 - 360
-instance uniform float frontier_head; // 0 - 1.0 (We tried 0.5. It's 1.0. Somewhat surprised
-instance uniform float frontier_tail;
-uniform vec3 modulate: source_color;
+instance uniform float start_anglen: instance_index(5); // 0 - 360
+instance uniform float end_anglen; // 0 - 360
+instance uniform float frontier_headn; // 0 - 1.0 (We tried 0.5. It's 1.0. Somewhat surprised
+instance uniform float frontier_tailn;
+uniform vec3 modulaten: source_color;
 
 void vertex() {
     // Called for every vertex the material is visible on.
@@ -16,7 +16,7 @@ void fragment() {
     vec4 tex_color = texture(disc_texture, UV);
 
     // Apply modulate color to the texture
-    ALBEDO = tex_color.rgb * modulate;
+    ALBEDO = tex_color.rgb * modulaten;
 
     vec2 cPos = -1.0 + 2.0 * UV;
     float cdist = length(cPos);
@@ -31,23 +31,23 @@ void fragment() {
 
     // Check if the angle is within the specified range
     bool within_angle_range = false;
-    if (start_angle < end_angle) {
-        within_angle_range = angle >= start_angle && angle <= end_angle;
+    if (start_anglen < end_anglen) {
+        within_angle_range = angle >= start_anglen && angle <= end_anglen;
     } else {
-        within_angle_range = angle >= start_angle || angle <= end_angle;
+        within_angle_range = angle >= start_anglen || angle <= end_anglen;
     }
 
     bool within_frontier_limits=false;
-    if (cdist < frontier_head){
-        if (cdist>frontier_tail){
+    if (cdist < frontier_headn){
+        if (cdist>frontier_tailn){
             ALPHA = ALPHA;
         }
     }
 
-    if (cdist>frontier_head){
+    if (cdist>frontier_headn){
         ALPHA = 0.0;
     }
-    if (cdist<frontier_tail){
+    if (cdist<frontier_tailn){
         ALPHA = 0.0;
     }
 
