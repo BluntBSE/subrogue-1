@@ -5,7 +5,6 @@ class_name InverterDecorator
 
 
 func tick(action, blackboard):
-    print("Flee inverter tick")
     for c in get_children():
         var response = c.tick(action, blackboard)
 

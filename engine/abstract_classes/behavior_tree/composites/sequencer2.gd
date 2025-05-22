@@ -7,9 +7,10 @@ class_name Sequencer2
 
 func tick(actor, blackboard):
     for c in get_children():
-        var response = c.tick(actor, blackboard)
+        if c is not NoteLeaf:
+            var response = c.tick(actor, blackboard)
 
-        if response != SUCCESS:
-            return response
+            if response != SUCCESS:
+                return response
 
     return SUCCESS

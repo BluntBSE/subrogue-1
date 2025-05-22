@@ -245,9 +245,8 @@ func query_any_on_layer(node, layer: int) -> bool:
     
 #DEBUG INITIATLIZE MOVEMENT
 func initial_go_to_destination():
-        var debug_dest = behavior.destination_node
-        var path = move_bus.path_between_nodes(move_bus.find_closest_node(), behavior.destination_node, get_tree().root.find_child("NavNodes", true, false))
-        move_bus.waypoints_from_nodes(path)
+        pass
+        #move_bus.order_destination_path()
         
 #TODO: This just deletes ships that get to their goal. Eventually they might need more persistent docking or a signal emission relevant to missions.
 func check_at_destination():

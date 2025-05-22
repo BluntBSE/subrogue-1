@@ -2,8 +2,8 @@ extends ConditionLeaf
 
 
 func tick(actor:Entity, blackboard:BlackBoard):
-    if actor.move_bus.queue.size() > 0:
-        return SUCCESS #Does NOT have destination.
-    
+    print("Hello from has dest")
+    if actor.behavior.destination_node:
+        return SUCCESS
     else:
         return FAILURE

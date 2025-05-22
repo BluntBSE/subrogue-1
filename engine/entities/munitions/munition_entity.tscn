@@ -8,7 +8,7 @@
 [ext_resource type="Material" uid="uid://glbx5xt4bbb" path="res://engine/entities/munitions/munition_tracking_cone.material" id="6_5spmm"]
 [ext_resource type="Script" uid="uid://bmkiinkj6uae8" path="res://engine/abstract_classes/behavior_tree/composites/sequencer2.gd" id="6_541b3"]
 [ext_resource type="Script" uid="uid://dc4ctyqdd1ybr" path="res://engine/entities/entity_debug.gd" id="7_frljg"]
-[ext_resource type="Script" uid="uid://g8onn4f6wfa1" path="res://engine/entities/behavior/conditions/has_destination.gd" id="7_vepk6"]
+[ext_resource type="Script" uid="uid://3nxghnrjlm51" path="res://engine/entities/behavior/conditions/nav_near_destination.gd" id="7_oimx8"]
 [ext_resource type="PackedScene" uid="uid://dagwxo37idw0u" path="res://engine/player_ui/3d_ui/entity_debugger/entity_debugger_3d.tscn" id="8_nwqbh"]
 [ext_resource type="Script" uid="uid://c82icdgng3ns0" path="res://engine/entities/behavior/conditions/not_threatened.gd" id="8_vi68k"]
 [ext_resource type="Script" uid="uid://b3kuk6f6y1nqk" path="res://engine/entities/behavior/actions/keep_moving.gd" id="9_d6txb"]
@@ -166,7 +166,7 @@ script = ExtResource("6_541b3")
 script = ExtResource("6_541b3")
 
 [node name="HasDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/MoveSequencer"]
-script = ExtResource("7_vepk6")
+script = ExtResource("7_oimx8")
 
 [node name="NotThreatened" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/MoveSequencer"]
 script = ExtResource("8_vi68k")

@@ -5,7 +5,7 @@ func tick(actor:Entity, blackboard:BlackBoard):
     if fled == null:
         blackboard.bbset("recently_fled", false)
     if fled == false:
-        return FAILURE
+        return SUCCESS #As in, "this is the leaf we want to stay on."
     else:
         print("Flee existing tick")
-        return SUCCESS
+        return FAILURE #Move on from this leaf down the tree.

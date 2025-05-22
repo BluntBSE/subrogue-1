@@ -9,9 +9,10 @@ class_name SelectorComposite
 
 func tick(actor, blackboard):
     for c in get_children():
-        var response = c.tick(actor,blackboard)
-         
-        if response != FAILURE:
-            return response
+        if c is not NoteLeaf:
+            var response = c.tick(actor,blackboard)
+            
+            if response != FAILURE:
+                return response
             
     return FAILURE
