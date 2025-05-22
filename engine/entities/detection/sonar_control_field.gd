@@ -31,8 +31,8 @@ func _process(delta:float)->void:
     mesh_1.look_at(entity.anchor.position)
     mesh_1.rotation.z += deg_to_rad(90.0)
     
-    set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_head")
-    set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_headn")
+    #set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_head")
+    set_custom_instance_shader_param(1.0, %SonarPulseMesh, "frontier_headn")
 
     
     if pulse == true:
@@ -41,9 +41,8 @@ func _process(delta:float)->void:
     pass
 
 func set_custom_instance_shader_param(value:Variant, target:GeometryInstance3D, param_name:String):
-    print("Out of curiosity: ", target.get_instance_shader_parameter("frontier_head"))
     target.set_instance_shader_parameter(param_name, value)   
-    print("Set ", param_name, " to  ", value) 
+
 
 func send_pulse():
     #VISUAL ANIMATION
@@ -104,30 +103,31 @@ func handle_angle_1_2d(angle):
     #BG
     %SonarPulseMesh.set_instance_shader_parameter("start_angle", angle)
     #Foreground
-    %SonarPulseMesh.set_instance_shader_parameter("start_angle", angle)
+    %SonarPulseMesh.set_instance_shader_parameter("start_anglen", angle)
     angle_1 = angle
 
 
 func handle_angle_2_2d(angle):
     %SonarPulseMesh.set_instance_shader_parameter("end_angle", angle)
     #Foreground
-    %SonarPulseMesh.set_instance_shader_parameter("end_angle", angle)
+    %SonarPulseMesh.set_instance_shader_parameter("end_anglen", angle)
     angle_2 = angle
         
 
 func handle_angle_1_3d(angle):
+    print("Handle angle 1 called")
 
     #BG
     %SonarPulseMesh.set_instance_shader_parameter("start_angle", angle)
     #Foreground
-    %SonarPulseMesh.set_instance_shader_parameter("start_angle", angle)
+    %SonarPulseMesh.set_instance_shader_parameter("start_anglen", angle)
     angle_1 = angle
 
 func handle_angle_2_3d(angle):
 
     %SonarPulseMesh.set_instance_shader_parameter("end_angle", angle)
     #Foreground
-    %SonarPulseMesh.set_instance_shader_parameter("end_angle", angle)
+    %SonarPulseMesh.set_instance_shader_parameter("end_anglen", angle)
     angle_2 = angle
     pass    
 

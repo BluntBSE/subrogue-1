@@ -141,7 +141,6 @@ _data = {
 load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dwxad"]
-resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("26_3qnbj")
 shader_parameter/disc_texture = SubResource("CompressedTexture2D_5l3g8")
@@ -151,7 +150,6 @@ shader_parameter/modulaten = Color(0.962418, 0.150376, 0.511024, 1)
 load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3qnbj"]
-resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_dwxad")
 shader = ExtResource("20_hyfub")

@@ -124,7 +124,7 @@ func _process(_delta:float):
         look_at(%SonarNode.own_entity.anchor.position)
         s_angle_1.emit(calculate_knob_angle_signal(%ControlMesh1))
         s_angle_2.emit(calculate_knob_angle_signal(%ControlMesh2))
-        k_dist_1.emit(calculate_knob_distance_signal(%ControlMesh1)) #Remember, we only use one distance.
+        #k_dist_1.emit(calculate_knob_distance_signal(%ControlMesh1)) #Remember, we only use one distance.
         k_vol_1.emit(calculate_knob_distance_signal(%ControlMesh1)/max_dist)
         #print("Emitted a dist lerp of", knob_1_dist_lerp)
 
@@ -180,6 +180,8 @@ func update_knobs() -> void:
       
             #%ControlMesh1.position.y = abs(dist)
             knob_1_dist_lerp = abs(dist)
+            print("Wut")
+            k_dist_1.emit(calculate_knob_distance_signal(%ControlMesh1))
         if knob_angle != null:
             set_angle_1(knob_angle)
     
@@ -338,7 +340,7 @@ func calculate_crude_distance(anchor: Planet) -> float:
             # Return the intersection point
             var dist = (result["position"] - position).length()
             var clamped = clamp(dist,0.0,max_dist)
-            print ("clamped distance at ", clamped)
+            #print ("clamped distance at ", clamped)
             return clamp(dist,0.0,max_dist)
             
     return 0.0
