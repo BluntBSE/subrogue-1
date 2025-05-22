@@ -116,14 +116,14 @@ func _ready():
     %ControlMesh2second.transparency = base_transparency
 
 func _process(_delta:float):
-    if unpacked == true:
+    if unpacked == true: #Probably dont need to unpack if not a player. I don't think we do, even.
         update_knobs()
         lerp_to_it(_delta)
         lift_knob_from_surface(%ControlMesh1, %KnobPivot1, %SonarNode.own_entity.anchor)
         lift_knob_from_surface(%ControlMesh2, %KnobPivot2, %SonarNode.own_entity.anchor)
         look_at(%SonarNode.own_entity.anchor.position)
 
-        #k_dist_1.emit(calculate_knob_distance_signal(%ControlMesh1)) #Remember, we only use one distance.
+        k_dist_1.emit(calculate_knob_distance_signal(%ControlMesh1)) #Remember, we only use one distance.
         k_vol_1.emit(calculate_knob_distance_signal(%ControlMesh1)/max_dist)
         #print("Emitted a dist lerp of", knob_1_dist_lerp)
 
@@ -179,12 +179,15 @@ func update_knobs() -> void:
       
             #%ControlMesh1.position.y = abs(dist)
             knob_1_dist_lerp = abs(dist)
-            k_dist_1.emit(calculate_knob_distance_signal(%ControlMesh1))
+            #k_dist_1.emit(calculate_knob_distance_signal(%ControlMesh1))
         if knob_angle != null:
             set_angle_1(knob_angle)
             print("Setting angle 1 to ", calculate_knob_angle_signal(%ControlMesh1))
+            #This is some dark sorcery, idk. If we make signal 2 emit before signal 1, everything is fucked.
+            #I'd love to understand why, but I don't. 
+            
             s_angle_1.emit(calculate_knob_angle_signal(%ControlMesh1))    
-    
+            s_angle_2.emit(calculate_knob_angle_signal(%ControlMesh2))
     if knob_2_dragged:
         var knob_angle = calculate_knob_angle(mesh_2)
         var dist = calculate_crude_distance(%SonarNode.own_entity.anchor)
@@ -194,6 +197,9 @@ func update_knobs() -> void:
             knob_1_dist_lerp = abs(dist)
         if knob_angle != null:
             set_angle_2(knob_angle)
+            #This is some dark sorcery, idk. If we make signal 2 emit before signal 1, everything is fucked.
+            #I'd love to understand why, but I don't. 
+            s_angle_1.emit(calculate_knob_angle_signal(%ControlMesh1))    
             s_angle_2.emit(calculate_knob_angle_signal(%ControlMesh2))
          
 func _input(event):

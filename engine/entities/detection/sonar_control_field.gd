@@ -31,10 +31,11 @@ func _process(delta:float)->void:
     mesh_1.look_at(entity.anchor.position)
     mesh_1.rotation.z += deg_to_rad(90.0)
     
-    #set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_head")
-    #set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_headn")
-    print("During process- start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
-          " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
+    #set_custom_instance_shader_param(0.5, %SonarPulseMesh, "frontier_head")
+    set_custom_instance_shader_param(0.3, %SonarPulseMesh, "frontier_headn")
+    set_custom_instance_shader_param(0.1, %SonarPulseMesh, "frontier_tailn")
+ #   print("During process- start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
+  #        " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
     
     if pulse == true:
 
@@ -142,6 +143,9 @@ func handle_angle_1_3d(angle):
     print("After setting - start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
           " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
 
+    print("After setting - start_angleN: ", %SonarPulseMesh.get_instance_shader_parameter("start_anglen"), 
+          " end_angleN: ", %SonarPulseMesh.get_instance_shader_parameter("end_anglen"))
+
 func handle_angle_2_3d(angle):
     print("Handle angle 2 called with ", angle, "end_angle")
     
@@ -164,6 +168,8 @@ func handle_angle_2_3d(angle):
     print("After setting - start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
           " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
 
+    print("After setting - start_angleN: ", %SonarPulseMesh.get_instance_shader_parameter("start_anglen"), 
+          " end_angleN: ", %SonarPulseMesh.get_instance_shader_parameter("end_anglen"))
 func handle_volume(dict:Dictionary):
     print("Handle volume called")
     volume = dict.max
@@ -171,7 +177,7 @@ func handle_volume(dict:Dictionary):
     %SonarPulseMesh.set_instance_shader_parameter("frontier_head", dict.max)
 
 func handle_distance_volume(dist:float): #Received as game units
-    print("Handle distance volume called")
+    #print("Handle distance volume called") - We currently have this on every frame...ew.
     #When the user is setting volume visually, we extrapolate from the distance into voume
     var arbitrary_vector = position * dist
     var game_dist_max = GlobeHelpers.km_to_arc_distance(max_dist, own_entity.anchor)
