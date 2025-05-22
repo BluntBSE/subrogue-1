@@ -33,7 +33,8 @@ func _process(delta:float)->void:
     
     #set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_head")
     #set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_headn")
-
+    print("During process- start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
+          " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
     
     if pulse == true:
 
@@ -121,20 +122,47 @@ func handle_angle_2_2d(angle):
 
 func handle_angle_1_3d(angle):
     print("Handle angle 1 called with ", angle, "start angle")
-    print("Validating end angle while we're here: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
-    #BG
+    
+    # Normalize the angle first
+    angle = normalize_angle(angle)
+    
+    # Get current end angle value
+    var current_end_angle = %SonarPulseMesh.get_instance_shader_parameter("end_angle")
+    current_end_angle = normalize_angle(current_end_angle)
+    print("Current end angle: ", current_end_angle)
+    
+    # Update shader parameters
     %SonarPulseMesh.set_instance_shader_parameter("start_angle", angle)
-    #Foreground
     %SonarPulseMesh.set_instance_shader_parameter("start_anglen", angle)
+    
+    # Store the value after setting shader parameter
     angle_1 = angle
+    
+    # Verify parameters after setting
+    print("After setting - start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
+          " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
 
 func handle_angle_2_3d(angle):
     print("Handle angle 2 called with ", angle, "end_angle")
+    
+    # Normalize the angle first
+    angle = normalize_angle(angle)
+    
+    # Get current start angle value
+    var current_start_angle = %SonarPulseMesh.get_instance_shader_parameter("start_angle")
+    current_start_angle = normalize_angle(current_start_angle)
+    print("Current start angle: ", current_start_angle)
+    
+    # Update shader parameters
     %SonarPulseMesh.set_instance_shader_parameter("end_angle", angle)
-    #Foreground
     %SonarPulseMesh.set_instance_shader_parameter("end_anglen", angle)
+    
+    # Store the value after setting shader parameter
     angle_2 = angle
-    pass    
+    
+    # Verify parameters after setting
+    print("After setting - start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
+          " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
 
 func handle_volume(dict:Dictionary):
     print("Handle volume called")
