@@ -1,7 +1,7 @@
 shader_type spatial;
 
 uniform sampler2D disc_texture;
-instance uniform float start_anglen: instance_index(5); // 0 - 360
+instance uniform float start_anglen; // 0 - 360
 instance uniform float end_anglen; // 0 - 360
 instance uniform float frontier_headn; // 0 - 1.0 (We tried 0.5. It's 1.0. Somewhat surprised
 instance uniform float frontier_tailn;
