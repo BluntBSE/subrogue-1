@@ -60,168 +60,136 @@ func _process(delta: float) -> void:
                 poll_elapsed = 0.0
                 poll_entities()
   
-
-
 func is_already_tracked(_entity:Entity, entity_list:Array)->bool:
-    var is_tracked = false
     for track_obj:Dictionary in entity_list:
         if track_obj.entity == _entity:
-            is_tracked = true
-    return is_tracked
+            return true
+    return false
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
     if body is Entity and body != entity:
         body = body as Entity
-        #Check if body is already tracked
-        #Don't track things belonging to your own faction, you already know where they are.
         if body.faction == entity.faction:
             return
-        #'Tracked' represents only the fact that body can be polled for whether or not it is visible.
         var tracked:bool = is_already_tracked(body, tracked_entities)
-        
-            
         if detection_parent == null:
-            #If this is a vessel, not a munition or sub entity, tracked items are associated with the vessel directly
-            if tracked == false:
-                var track_obj = {"entity":body, "tracked_by":[self]}
-                tracked_entities.append(track_obj)
-                body.died.connect(handle_tracked_object_died)
-            if tracked == true: #Check to see if this entity is tracking it. It might be tracked only by a subentity
-               var tracked_by_this = false
-               for track_obj in tracked_entities:
-                    if track_obj.entity == body:
-                        if !track_obj.tracked_by.has(self): 
-                            track_obj.tracked_by.append(self)
-                            
-        if detection_parent:
-            #Local tracking of munition's contacts, not shared with parent but used in homing calculations.
-            #Essentially a local-only tracked_entities.
-            if body not in local_entities:
-                if body.faction != entity.faction:
-                    local_entities.append(body)
-                    
-            #See if the parent is already seeing this
+            _track_entity_on_vessel(body, tracked)
+        else:
+            _track_entity_on_munition(body)
+    pass
 
-            tracked = is_already_tracked(body, detection_parent.tracked_entities)
-                    
-            if tracked == false:
-                var track_obj = {"entity":body, "tracked_by":[self]}
-                detection_parent.tracked_entities.append(track_obj)
-                body.died.connect(detection_parent.handle_tracked_object_died)
+func _track_entity_on_vessel(body: Entity, tracked: bool) -> void:
+    if not tracked:
+        var track_obj = {"entity":body, "tracked_by":[self]}
+        tracked_entities.append(track_obj)
+        body.died.connect(handle_tracked_object_died)
+    else:
+        for track_obj in tracked_entities:
+            if track_obj.entity == body and not track_obj.tracked_by.has(self):
+                track_obj.tracked_by.append(self)
 
+func _track_entity_on_munition(body: Entity) -> void:
+    if body not in local_entities and body.faction != entity.faction:
+        local_entities.append(body)
+    var tracked = is_already_tracked(body, detection_parent.tracked_entities)
+    if not tracked:
+        var track_obj = {"entity":body, "tracked_by":[self]}
+        detection_parent.tracked_entities.append(track_obj)
+        body.died.connect(detection_parent.handle_tracked_object_died)
 
-            
 func poll_entities():
-    # Every few seconds, calculate the sound that would reach this node, the listener, based on the body's emitter
-    if detection_parent == null: # Child detectors don't do their own polling; they leave it to their parents
+    if detection_parent == null:
         for dict: Dictionary in tracked_entities:
-            #If the entity no longer exists because it died or docked, discard it.
             if dict.entity == null:
                 tracked_entities.erase(dict)
                 continue
-            var max_certainty = 0.0
-            var most_certain_detector = null
-            var emission: EntityEmission = dict.entity.emission
-            var sound = Sound.new(dict.entity, dict.entity.emission.volume, dict.entity.emission.pitch, dict.entity.emission.profile)
+            _poll_single_entity(dict)
 
-            # Iterate through all detectors in `tracked_by`
-            for detector in dict.tracked_by:
-                # Check sound for this detector
-                if detector == null:
-                    dict.tracked_by.erase(detector)
-                    continue
-                    
-                var dist = GlobeHelpers.arc_to_km(detector.entity.position, dict.entity.position, detector.entity.anchor)
-                var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
+func _poll_single_entity(dict: Dictionary) -> void:
+    var max_certainty = 0.0
+    var most_certain_detector = null
+    var emission: EntityEmission = dict.entity.emission
+    var sound = Sound.new(dict.entity, dict.entity.emission.volume, dict.entity.emission.pitch, dict.entity.emission.profile)
+    for detector in dict.tracked_by:
+        if detector == null:
+            dict.tracked_by.erase(detector)
+            continue
+        var dist = GlobeHelpers.arc_to_km(detector.entity.position, dict.entity.position, detector.entity.anchor)
+        var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
+        if final_db >= sensitivity:
+            var certainty = calculate_certainty(dist, c100, cfalloff, min_certainty)
+            if certainty > max_certainty:
+                max_certainty = certainty
+                most_certain_detector = detector
+    _handle_signal_popup(dict, max_certainty, most_certain_detector, sound)
 
-                if final_db >= sensitivity:
-                    # Calculate certainty using the new function
-                    var certainty = calculate_certainty(dist, c100, cfalloff, min_certainty)
+func _handle_signal_popup(dict: Dictionary, max_certainty: float, most_certain_detector, sound) -> void:
+    if max_certainty <= 0.0:
+        _archive_signal(dict)
+    else:
+        _update_or_create_signal(dict, most_certain_detector, sound, max_certainty)
+        _handle_visibility_and_identification(dict, most_certain_detector)
 
-                    # Track the detector with the highest certainty
-                    if certainty > max_certainty:
-                        max_certainty = certainty
-                        most_certain_detector = detector
+func _archive_signal(dict: Dictionary) -> void:
+    if sigmap.has(dict.entity):
+        var sigob:SignalPopup = sigmap[dict.entity]
+        sigmap[dict.entity].disable()
+        archive_map[dict.entity] = sigmap[dict.entity]
+        sigmap.erase(dict.entity)
 
-            if max_certainty  <= 0.0:
-                #Can't hear it. If you previously saw it, put it in the archive
-                if sigmap.has(dict.entity):
-                    var sigob:SignalPopup = sigmap[dict.entity]
-                    sigmap[dict.entity].disable()
-                    archive_map[dict.entity] = sigmap[dict.entity]
-                    sigmap.erase(dict.entity)
- 
-            # Update the signal object with the highest certainty
-            if max_certainty > 0.0:
-                if !sigmap.has(dict.entity):
-                    if !archive_map.has(dict.entity):
-                        #This signal has never been tracked before
-                        var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
-                        entity.anchor.add_child(sigob)
-                        sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
-                        sigmap[dict.entity] = sigob
-                        if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
-                            SoundManager.play("signal_acquired_1")
-                    else:
-                        var sigob:SignalPopup = archive_map[dict.entity]
-                        sigmap[dict.entity] = sigob
-                        archive_map.erase(dict.entity)
-                        sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
-                        if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
-                            SoundManager.play("signal_acquired_1")
-        
-                sigmap[dict.entity].certainty = max_certainty
-                #Should we be constantly updating the sound? Might as well since it's the attenuated DB right?
-                sigmap[dict.entity].sound = sound
+func _update_or_create_signal(dict: Dictionary, most_certain_detector, sound, max_certainty: float) -> void:
+    if !sigmap.has(dict.entity):
+        if !archive_map.has(dict.entity):
+            var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
+            entity.anchor.add_child(sigob)
+            sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
+            sigmap[dict.entity] = sigob
+            if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
+                SoundManager.play("signal_acquired_1")
+        else:
+            var sigob:SignalPopup = archive_map[dict.entity]
+            sigmap[dict.entity] = sigob
+            archive_map.erase(dict.entity)
+            sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
+            if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
+                SoundManager.play("signal_acquired_1")
+    sigmap[dict.entity].certainty = max_certainty
+    sigmap[dict.entity].sound = sound
 
-                # If the most certain detector is not `self`, call `turn_red()`
-                if most_certain_detector != self:
-                    pass
-                    
-                #ACTIVE IDENTIFICATION - eg swimming too close
-                # Handle visibility and identification
-                var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
-                if dist <= c100:
-                    if entity.is_player == true and entity.get_multiplayer_authority() == get_multiplayer_authority():
-                        dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, true)
-                    sigmap[dict.entity].positively_identify()
-                    sigmap[dict.entity].visible = false
-                elif dist > c100 + 50.0:
-                    if sigmap[dict.entity].visible == false:
-                        sigmap[dict.entity].visible = true
-                    if entity.is_player == true and entity.get_multiplayer_authority() == get_multiplayer_authority():
-                        dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, false)
- 
+func _handle_visibility_and_identification(dict: Dictionary, most_certain_detector) -> void:
+    var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
+    if dist <= c100:
+        if entity.is_player == true and entity.get_multiplayer_authority() == get_multiplayer_authority():
+            dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, true)
+        sigmap[dict.entity].positively_identify()
+        sigmap[dict.entity].visible = false
+    elif dist > c100 + 50.0:
+        if sigmap[dict.entity].visible == false:
+            sigmap[dict.entity].visible = true
+        if entity.is_player == true and entity.get_multiplayer_authority() == get_multiplayer_authority():
+            dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, false)
 
-  
 func calculate_certainty(dist: float, c100: float, cfalloff: float, min_certainty: float) -> float:
-    # Calculate certainty based on distance
     var certainty: float
     var from_c100 = (dist - c100)
     if from_c100 > 0:
         certainty = 100 - (cfalloff * from_c100)
     else:
         certainty = 100.0
-
-    # Ensure minimum certainty
     if certainty < min_certainty:
         certainty = min_certainty
-
     return certainty        
 
 func handle_tracked_object_died(_entity:Entity)->void:
-   # print("Detector is handling target died")
     local_entities.erase(_entity)
     for dict:Dictionary in tracked_entities:
         if dict.entity == _entity:
             tracked_entities.erase(dict)
     pass
-    
-
 
 func _on_detection_area_body_exited(body: Entity) -> void:
     for dict in tracked_entities:
         if dict.entity == body:
             body.died.disconnect(handle_tracked_object_died)
             tracked_entities.erase(dict)
-    pass # Replace with function body.
+    pass
