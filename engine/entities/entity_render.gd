@@ -3,6 +3,7 @@ class_name EntityRender
 var default_color:Color
 @onready var depth_mesh:MeshInstance3D = %DepthMesh
 @onready var sonar_mesh:MeshInstance3D = %SonarPulseMesh
+@onready var sonar_mesh_2:MeshInstance3D = %SonarPulseMeshNP
 @onready var entity:Entity = get_parent()
 var scaling = false
 var selected = false
@@ -15,6 +16,7 @@ signal was_selected
 func _ready() -> void:
     GlobeHelpers.recursively_update_visibility(self, 1, false)
     sonar_mesh.visible = false
+    sonar_mesh_2.visible = false
     pass # Replace with function body.
 
 
@@ -44,6 +46,7 @@ func update_private_controls(layer:int, val:bool):
         var own_layer = entity.faction.faction_layer
         if updating_for_player and layer == own_layer:
             sonar_mesh.visible = true
+            sonar_mesh_2.visible = true
             %ControlMesh1.visible = true
             %ControlMesh2.visible = true
             %ControlMesh1.set_layer_mask_value(layer, val)
@@ -52,6 +55,7 @@ func update_private_controls(layer:int, val:bool):
             %ControlMesh2second.set_layer_mask_value(layer,val)
         else:
             sonar_mesh.visible = false
+            sonar_mesh_2.visible = false
             %ControlMesh1.visible = false
             %ControlMesh2.visible = false      
     
@@ -60,6 +64,7 @@ func update_mesh_visibilities(layer:int, val:bool):
     update_private_controls(layer, val)
     depth_mesh.set_layer_mask_value(layer, val)
     sonar_mesh.set_layer_mask_value(layer,val)
+    sonar_mesh_2.set_layer_mask_value(layer,val)
 
     for child in get_children():
         if child.get("layers") != null:

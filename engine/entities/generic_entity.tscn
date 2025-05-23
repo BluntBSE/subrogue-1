@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=55 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -136,102 +136,23 @@ _data = {
 &"sonar_pulse_1": SubResource("Animation_cnygr")
 }
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5l3g8"]
-load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwxad"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("20_hyfub")
-shader_parameter/disc_texture = SubResource("CompressedTexture2D_5l3g8")
-shader_parameter/start_angle = -10.0
-shader_parameter/end_angle = 10.0
-shader_parameter/frontier_head = 0.0
-shader_parameter/frontier_tail = 0.0
-shader_parameter/modulate = Color(0.493312, 1, 0.866464, 1)
-
-[sub_resource type="Shader" id="Shader_23k6d"]
-resource_local_to_scene = true
-code = "shader_type spatial;
-uniform sampler2D disc_texture;
-uniform float start_angle; // 0 - 360
-uniform float end_angle; // 0 - 360
-uniform float frontier_head; // 0 - 1.0 (We tried 0.5. It's 1.0. Somewhat surprised
-uniform float frontier_tail;
-uniform vec3 modulate : source_color = vec3(1.0, 1.0, 1.0); // Default to white (no tint)
-
-void vertex() {
-    // Called for every vertex the material is visible on.
-}
-
-void fragment() {
-    // Called for every pixel the material is visible on.
-    // Apply modulate to the texture color
-    ALBEDO = texture(disc_texture, UV).rgb * modulate;
-    
-    vec2 cPos = -1.0 + 2.0 * UV;
-    float cdist = length(cPos);
-    float fade = 1.0 - cdist;
-    ALPHA *= fade;
-
-    // Calculate the angle of a given in degrees relative to the center
-    float angle = degrees(atan(cPos.y, cPos.x));
-    if (angle < 0.0) {
-        angle += 360.0;
-    }
-
-    // Check if the angle is within the specified range
-    bool within_angle_range = false;
-    if (start_angle < end_angle) {
-        within_angle_range = angle >= start_angle && angle <= end_angle;
-    } else {
-        within_angle_range = angle >= start_angle || angle <= end_angle;
-    }
-
-    bool within_frontier_limits=false;
-    if (cdist < frontier_head){
-        if (cdist>frontier_tail){
-            ALPHA = ALPHA;
-        }
-    }
-
-    if (cdist>frontier_head){
-        ALPHA = 0.0;
-    }
-    if (cdist<frontier_tail){
-        ALPHA = 0.0;
-    }
-
-    if (within_angle_range) {
-        ALPHA = ALPHA*0.025;
-    } else {
-        ALPHA = 0.0;
-    }
-}
-
-//void light() {
-    // Called for every pixel for every light affecting the material.
-    // Uncomment to replace the default light processing function with this one.
-//}"
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dqq6t"]
 load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3qnbj"]
-resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_dwxad")
-shader = SubResource("Shader_23k6d")
+shader = ExtResource("20_hyfub")
 shader_parameter/disc_texture = SubResource("CompressedTexture2D_dqq6t")
-shader_parameter/start_angle = 10.0
-shader_parameter/end_angle = 10.0
-shader_parameter/frontier_head = 0.0
-shader_parameter/frontier_tail = 0.0
-shader_parameter/modulate = Color(0.494118, 1, 0.866667, 1)
+shader_parameter/modulate_sample = Color(0, 1, 0.941176, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]
 lightmap_size_hint = Vector2i(27, 27)
 size = Vector2(25, 25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6y0a6"]
+render_priority = 0
+shader = ExtResource("20_hyfub")
+shader_parameter/modulate_sample = Color(1, 0, 0, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_op6l6"]
 inner_radius = 0.15
@@ -487,6 +408,11 @@ remote_path = NodePath("../TransformBreaker/SonarPulseMesh")
 update_rotation = false
 update_scale = false
 
+[node name="RemoteTransform3D2" type="RemoteTransform3D" parent="EntityRender/SonarNode"]
+remote_path = NodePath("../TransformBreaker/SonarPulseMeshNP")
+update_rotation = false
+update_scale = false
+
 [node name="RemoteTransform3D_controls" type="RemoteTransform3D" parent="EntityRender/SonarNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0368243)
 remote_path = NodePath("../TransformBreaker/SonarControls3D")
@@ -500,8 +426,17 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
 material_override = SubResource("ShaderMaterial_3qnbj")
+transparency = 0.75
 mesh = SubResource("QuadMesh_3qnbj")
 skeleton = NodePath("../..")
+
+[node name="SonarPulseMeshNP" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
+sorting_offset = 1.0
+mesh = SubResource("QuadMesh_3qnbj")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_6y0a6")
 
 [node name="SonarControls3D" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker"]
 unique_name_in_owner = true

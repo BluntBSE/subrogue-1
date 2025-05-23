@@ -25,6 +25,7 @@ IF NEEDED TO IMPROVE PERFORMANCE: All that ping polling and stuff could be on di
 
 BUG
 NOT QUITE A BUG BUT: Adding and removing nodes is super expensive, and both munition pathfinding and mouse movement do this every frame.
+NOT QUITE A BUG BUT: SonarPulseMesh is the culprit, defer its material duplication to unpack. --- Try instance uniforms again
 
 
 TODO:

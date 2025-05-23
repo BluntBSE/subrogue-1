@@ -1,11 +1,13 @@
 shader_type spatial;
 
 uniform sampler2D disc_texture;
-uniform float start_angle; // 0 - 360
-uniform float end_angle; // 0 - 360
-uniform float frontier_head; // 0 - 1.0 (We tried 0.5. It's 1.0. Somewhat surprised
-uniform float frontier_tail;
-uniform vec3 modulate: source_color;
+instance uniform float translucence: hint_range(0.0, 1.0, 0.01) = 0.1;
+instance uniform float start_angle; // 0 - 360
+instance uniform float end_angle; // 0 - 360
+instance uniform float frontier_head; // 0 - 1.0 (We tried 0.5. It's 1.0. Somewhat surprised
+instance uniform float frontier_tail;
+instance uniform vec3 modulate;
+uniform vec3 modulate_sample: source_color;
 
 void vertex() {
     // Called for every vertex the material is visible on.
@@ -21,7 +23,7 @@ void fragment() {
     vec2 cPos = -1.0 + 2.0 * UV;
     float cdist = length(cPos);
     float fade = 1.0 - cdist;
-    ALPHA = tex_color.a * fade;
+    ALPHA = tex_color.a * fade * translucence;
 
     // Calculate the angle of a given in degrees relative to the center
     float angle = degrees(atan(cPos.y, cPos.x));

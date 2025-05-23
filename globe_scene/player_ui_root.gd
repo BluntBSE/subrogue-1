@@ -43,7 +43,7 @@ func unpack():
     #Notifications and such
     player.camera.freelook.connect(handle_free_look)
 
-    volume_bar.handle_values.connect(player_entity.sonar_node.handle_volume)
+    #volume_bar.handle_values.connect(player_entity.sonar_node.handle_volume)
     volume_bar.handle_values.connect(player_entity.sonar_node.controls.handle_external_volume)
     
     unpacked = true
