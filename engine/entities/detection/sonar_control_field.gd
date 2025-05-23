@@ -3,6 +3,8 @@ class_name SonarNode
 @export var pulse:bool = false
 @onready var own_entity:Entity = get_parent().get_parent()
 @onready var controls:SonarControl3D = get_node("TransformBreaker/SonarControls3D")
+var mesh_1:MeshInstance3D
+var mesh_2:MeshInstance3D
 var angle_1
 var angle_2
 var volume
@@ -13,8 +15,21 @@ signal pinged
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_headn")
-    set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_tailn")
+    #Why do we use two meshes with two slightly different shaders, you ask?
+    #Godot doesn't support instance parameters on next_pass drawing. As a result, we have put two meshes in the same location
+    #And manipulated their draw order
+    #This also means several variables have to be set in advance for player pings at least
+    
+    mesh_1 = %SonarPulseMesh
+    mesh_2= %SonarPulseMeshNP
+    set_custom_instance_shader_param(Color("00d6f0"), %SonarPulseMesh, "modulate")
+    set_custom_instance_shader_param(Color("00fff0"), %SonarPulseMeshNP, "modulate")
+
+    set_custom_instance_shader_param(0.02, %SonarPulseMesh, "translucence")
+    set_custom_instance_shader_param(0.3, %SonarPulseMeshNP, "translucence")
+    
+    set_custom_instance_shader_param(0.3, %SonarPulseMeshNP, "frontier_head")
+    set_custom_instance_shader_param(0.0, %SonarPulseMeshNP, "frontier_tail")
     pass # Replace with function body.
 
 func unpack():
@@ -24,16 +39,14 @@ func unpack():
         %SonarControls3D.unpack()
     
 func _process(delta:float)->void:
-    var mesh_1:MeshInstance3D = %SonarPulseMesh
+
     var entity:Entity = own_entity
     var up = (entity.anchor.position - entity.position).normalized()
     #This, along wth the funky rotations on the mesh, are how we keep the plane from clipping into the planet.
     mesh_1.look_at(entity.anchor.position)
     mesh_1.rotation.z += deg_to_rad(90.0)
-    
-    #set_custom_instance_shader_param(0.5, %SonarPulseMesh, "frontier_head")
-    set_custom_instance_shader_param(0.3, %SonarPulseMesh, "frontier_headn")
-    set_custom_instance_shader_param(0.1, %SonarPulseMesh, "frontier_tailn")
+    mesh_2.look_at(entity.anchor.position)
+    mesh_2.rotation.z += deg_to_rad(90.0)    
  #   print("During process- start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
   #        " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
     
@@ -52,16 +65,16 @@ func send_pulse():
     #VISUAL ANIMATION
     #%SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_head", 0.0)
    # %SonarPulseMesh.material_override.next_pass.set_shader_parameter("frontier_tail", 0.0)
-    set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_headn")
-    set_custom_instance_shader_param(0.0, %SonarPulseMesh, "frontier_tailn") #n for "next pass".
+    set_custom_instance_shader_param(0.0, %SonarPulseMeshNP, "frontier_head")
+    set_custom_instance_shader_param(0.0, %SonarPulseMeshNP, "frontier_tail") #np for "next pass".
 
     var maximum = %SonarPulseMesh.get_instance_shader_parameter("frontier_head")
     var tween:Tween = get_tree().create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EaseType.EASE_OUT)
-    var mt = tween.tween_method(set_custom_instance_shader_param.bind(%SonarPulseMesh, "frontier_headn"), 0.0, maximum, 1.0)
+    var mt = tween.tween_method(set_custom_instance_shader_param.bind(%SonarPulseMeshNP, "frontier_head"), 0.0, maximum, 1.0)
     #tween.tween_property(%SonarPulseMesh, "instance_shader_parameter:frontier_head", maximum, 1.0).from_current()
     
     tween.set_trans(Tween.TRANS_CIRC)
-    var mt_2 = tween.tween_method(set_custom_instance_shader_param.bind(%SonarPulseMesh, "frontier_tailn"), 0.0, maximum, 1.0)
+    var mt_2 = tween.tween_method(set_custom_instance_shader_param.bind(%SonarPulseMeshNP, "frontier_tail"), 0.0, maximum, 1.0)
 
     #tween.tween_property(%SonarPulseMesh, "material_override:next_pass:shader_parameter/frontier_tail", maximum, 0.5).from_current()
     #WHO DID YOU PING?
@@ -110,14 +123,14 @@ func handle_angle_1_2d(angle):
     #BG
     %SonarPulseMesh.set_instance_shader_parameter("start_angle", angle)
     #Foreground
-    %SonarPulseMesh.set_instance_shader_parameter("start_anglen", angle)
+    %SonarPulseMeshNP.set_instance_shader_parameter("start_angle", angle)
     angle_1 = angle
 
 
 func handle_angle_2_2d(angle):
     %SonarPulseMesh.set_instance_shader_parameter("end_angle", angle)
     #Foreground
-    %SonarPulseMesh.set_instance_shader_parameter("end_anglen", angle)
+    %SonarPulseMeshNP.set_instance_shader_parameter("end_angle", angle)
     angle_2 = angle
         
 
@@ -134,17 +147,11 @@ func handle_angle_1_3d(angle):
     
     # Update shader parameters
     %SonarPulseMesh.set_instance_shader_parameter("start_angle", angle)
-    %SonarPulseMesh.set_instance_shader_parameter("start_anglen", angle)
+    %SonarPulseMeshNP.set_instance_shader_parameter("start_angle", angle)
     
     # Store the value after setting shader parameter
     angle_1 = angle
     
-    # Verify parameters after setting
-    print("After setting - start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
-          " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
-
-    print("After setting - start_angleN: ", %SonarPulseMesh.get_instance_shader_parameter("start_anglen"), 
-          " end_angleN: ", %SonarPulseMesh.get_instance_shader_parameter("end_anglen"))
 
 func handle_angle_2_3d(angle):
     print("Handle angle 2 called with ", angle, "end_angle")
@@ -155,21 +162,15 @@ func handle_angle_2_3d(angle):
     # Get current start angle value
     var current_start_angle = %SonarPulseMesh.get_instance_shader_parameter("start_angle")
     current_start_angle = normalize_angle(current_start_angle)
-    print("Current start angle: ", current_start_angle)
     
     # Update shader parameters
     %SonarPulseMesh.set_instance_shader_parameter("end_angle", angle)
-    %SonarPulseMesh.set_instance_shader_parameter("end_anglen", angle)
+    %SonarPulseMeshNP.set_instance_shader_parameter("end_angle", angle)
     
     # Store the value after setting shader parameter
     angle_2 = angle
     
-    # Verify parameters after setting
-    print("After setting - start_angle: ", %SonarPulseMesh.get_instance_shader_parameter("start_angle"), 
-          " end_angle: ", %SonarPulseMesh.get_instance_shader_parameter("end_angle"))
 
-    print("After setting - start_angleN: ", %SonarPulseMesh.get_instance_shader_parameter("start_anglen"), 
-          " end_angleN: ", %SonarPulseMesh.get_instance_shader_parameter("end_anglen"))
 func handle_volume(dict:Dictionary):
     print("Handle volume called")
     volume = dict.max
