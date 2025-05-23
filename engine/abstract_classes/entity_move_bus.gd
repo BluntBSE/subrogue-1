@@ -57,7 +57,6 @@ func purge_old_waypoints():
         
 
 func purge_waypoints():
-    print("Hello p urge")
     for command in queue:
         var callable: Callable = Callable(command.waypoint, "queue_free")
         callable.call_deferred()

@@ -13,7 +13,7 @@ var controlled_by #NPC Factions?
 var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
 @onready var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
-@export var speed = GlobeHelpers.kph_to_game_s(240.0) #Debug - hyperfast
+@export var speed = GlobeHelpers.kph_to_game_s(240.0) #Debug - hyperfast #TODO: This is fucked now that we dont use physics
 @export var max_speed = GlobeHelpers.kph_to_game_s(240.0)
 @export var base_color:Color
 @export var spot_color:Color
@@ -36,6 +36,8 @@ signal docked
 signal died
 signal removed #For docking, putting into timeout, etc. Like died, but doesn't trigger death counters etc.
 var unpacked := false
+var look_tweener:Tween
+
 
 #OPTIMIZATIONS: set linear velocity only once then don't update it unless the entity has reached a node or must respond
 #Maybe height fixes and stuff occur less often if the entity is not visible to a player
@@ -45,7 +47,8 @@ var unpacked := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    freeze = true
+
+    #freeze = true
     if Engine.is_editor_hint():
         recursively_update_debug_layers(self, true)
         set_physics_process(false)
@@ -163,10 +166,12 @@ func move_towards(pos: Vector3) -> void:
     tangential_direction = tangential_direction.normalized()
     
     # Calculate the tangential movement vector with the desired speed
-    var vector = tangential_direction * speed * GlobalConst.time_scale
-        
+    #var vector = tangential_direction * speed * GlobalConst.time_scale
+    var movement = tangential_direction * speed# * GlobalConst.time_scale    
+   # print("Speed was ", speed)   
     # Set linear velocity - we're not dealing with acceleration right now.
-    linear_velocity = vector
+    #print("movemtn was ", movement)
+    position += movement
     #apply_central_force(vector)
     
     # Update the heading sprite to face the right direction
@@ -178,18 +183,27 @@ func move_towards(pos: Vector3) -> void:
     
     if direction != center_to_position:
         if position != anchor.position:
-          
+            
             if !is_zero_approx(direction.cross(center_to_position).length()):
-                look_at(direction, center_to_position, false)
 
-    #adjust heading sprite rotation to match, assuming Vector3(0,1,0) is the angle to compare to.
+                var current_facing = position + transform.basis.z
+                var target_facing = position - direction
+                
 
-    
-    
-    #heading_sprite.rotation.z = angle
+                #Making a new tweener every time seems possibly bad. But also might be trivial?
+                if look_tweener and look_tweener.is_running():
+                    look_tweener.kill()
+                look_tweener = create_tween()
+                look_tweener.tween_method(
+                    func(target): look_at(target, center_to_position, true),
+                    current_facing,
+                    target_facing,
+                    0.3
+                )
+
     
 func check_reached_waypoint()->void:
-    if move_bus.queue.size() < 1:
+    if move_bus.queue.size() <= 1:
         if behavior.destination_node:
             check_at_destination()
         return
@@ -251,6 +265,7 @@ func initial_go_to_destination():
         
 #TODO: This just deletes ships that get to their goal. Eventually they might need more persistent docking or a signal emission relevant to missions.
 func check_at_destination():
+    
     # Get the world and its direct space state for physics queries
     var space_state = get_world_3d().direct_space_state
 
