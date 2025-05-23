@@ -45,6 +45,7 @@ var unpacked := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    freeze = true
     if Engine.is_editor_hint():
         recursively_update_debug_layers(self, true)
         set_physics_process(false)

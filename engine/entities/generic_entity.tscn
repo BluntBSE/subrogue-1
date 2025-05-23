@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=57 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -136,11 +136,23 @@ _data = {
 &"sonar_pulse_1": SubResource("Animation_cnygr")
 }
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5l3g8"]
+load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwxad"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("20_hyfub")
+shader_parameter/disc_texture = SubResource("CompressedTexture2D_5l3g8")
+shader_parameter/modulate_sample = Color(0, 0, 0, 1)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dqq6t"]
 load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3qnbj"]
+resource_local_to_scene = true
 render_priority = 0
+next_pass = SubResource("ShaderMaterial_dwxad")
 shader = ExtResource("20_hyfub")
 shader_parameter/disc_texture = SubResource("CompressedTexture2D_dqq6t")
 shader_parameter/modulate_sample = Color(0, 1, 0.941176, 1)
