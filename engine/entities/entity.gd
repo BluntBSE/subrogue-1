@@ -147,6 +147,7 @@ func fix_rotation() -> void:
    
 
 func move_to_next()->void:
+   # print("Hello from MTN")
     if move_bus.queue.size() < 1:
         return
     if move_bus.queue.size() > 0:
@@ -156,7 +157,7 @@ func move_to_next()->void:
         move_towards(dest.position)
 
 func move_towards(pos: Vector3) -> void:
-    
+    print("Hello move towards")
     var direction = (pos - position).normalized()
     # Calculate the vector from the center of the sphere to the current position
     var center_to_position = (position - anchor.position).normalized()
@@ -191,6 +192,7 @@ func move_towards(pos: Vector3) -> void:
                 
 
                 #Making a new tweener every time seems possibly bad. But also might be trivial?
+                #Nah it's bad. You'll see why.
                 if look_tweener and look_tweener.is_running():
                     look_tweener.kill()
                 look_tweener = create_tween()
@@ -203,19 +205,22 @@ func move_towards(pos: Vector3) -> void:
 
     
 func check_reached_waypoint()->void:
-    if move_bus.queue.size() <= 1:
-        if behavior.destination_node:
+    #Prepare to check for docking
+    if behavior.destination_node:
+        if move_bus.queue.size() <= 1:
             check_at_destination()
-        return
-    var cmd:MoveCommand = move_bus.queue[0]
-    var wp:Area3D = cmd.waypoint
-    var nav:Area3D = get_node("NavArea")
-    var overlaps = nav.get_overlapping_areas()
-    if cmd.waypoint in overlaps:
-        linear_velocity = Vector3(0.0,0.0,0.0)
-        angular_velocity = Vector3(0.0,0.0,0.0)
-        cmd.is_finished()
-        %HeadingSprite.visible = false
+            
+    if move_bus.queue.size() > 0:
+        print("Checking if im at the waypoint")
+        var cmd:MoveCommand = move_bus.queue[0]
+        var wp:Area3D = cmd.waypoint
+        var nav:Area3D = get_node("NavArea")
+        var overlaps = nav.get_overlapping_areas()
+        print("OVERLAPS WERE: ", overlaps)
+        if cmd.waypoint in overlaps:
+
+            cmd.is_finished()
+            %HeadingSprite.visible = false
         
         
 func apply_entity_type(type:EntityType):
