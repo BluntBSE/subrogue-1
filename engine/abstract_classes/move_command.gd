@@ -8,7 +8,7 @@ var end_azimuth:float
 var end_polar:float
 var tolerance:float
 var height:float #consider making a global constant. It's 5.0 everywhere.
-var waypoint:Area3D #Entity checks if the waypoint is very near to declare a move finished.
+var waypoint:Vector3 #Entity checks if the waypoint is very near to declare a move finished.
 
 func do()->void:
     #Pure virtual

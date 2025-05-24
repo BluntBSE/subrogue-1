@@ -196,7 +196,10 @@ static func fix_height(entity:Node3D, anchor:Node3D)->Vector3:
     var desired_position:Vector3 = anchor.position + (direction * GlobalConst.height)
     return desired_position
     
-    
+static func fix_height_vector(vec:Vector3, anchor:Node3D)->Vector3:
+    var direction:Vector3 = (vec - anchor.position).normalized()    
+    var desired_position:Vector3 = anchor.position + (direction * GlobalConst.height)
+    return desired_position
     
 static func arc_to_km(point_a:Vector3, point_b:Vector3, anchor:Planet) -> float:
     var anchor_mesh:SphereMesh = anchor.mesh
@@ -265,19 +268,12 @@ static func game_s_to_kph(game_units_per_second: float) -> float:
 
 static func generate_move_command(entity:Entity, target_position:Vector3, layer:int = 2, mask:int = 2) ->MoveCommand:
     print("Generate move command ifred for ", entity.atts.display_name)
-    var waypoint:Area3D = Area3D.new()
-    var wp_collider := CollisionShape3D.new()
-    var wp_shape := SphereShape3D.new() #default radius of 0.5. If we use tolerance, this might be what we assign it to.
-    #Consider making these waypoints a child of the player's abstract node.
-    wp_collider.shape = wp_shape
-    waypoint.collision_layer = 2
-    waypoint.collision_mask = 2
-    waypoint.name = "NAV_WAYPOINT_FOR_" + str(entity.name)
-    waypoint.add_child(wp_collider)
-    entity.anchor.add_child(waypoint)
+    var waypoint:Vector3 #global position we're going towards
 
-    waypoint.position = target_position
-    waypoint.position = GlobeHelpers.fix_height(waypoint, entity.anchor)
+
+
+    waypoint = GlobeHelpers.fix_height_vector(target_position, entity.anchor)
+
     
     var move_command := MoveCommand.new()
     move_command.entity = entity
