@@ -153,9 +153,9 @@ func move_to_next()->void:
         return
     if move_bus.queue.size() > 0:
         #print("Queue size has elements on", name)
-        var dest:Area3D = move_bus.queue[0].waypoint
+        var dest:Vector3 = move_bus.queue[0].waypoint
 
-        move_towards(dest.position)
+        move_towards(dest)
 
 func move_towards(pos: Vector3) -> void:
     var direction = (pos - position).normalized()
@@ -200,11 +200,8 @@ func check_reached_waypoint()->void:
             
     if move_bus.queue.size() > 0:
         var cmd:MoveCommand = move_bus.queue[0]
-        var wp:Area3D = cmd.waypoint
-        var nav:Area3D = get_node("NavArea")
-        var overlaps = nav.get_overlapping_areas()
-        if cmd.waypoint in overlaps:
-
+        var wp:Vector3 = cmd.waypoint
+        if is_zero_approx((wp - global_position).length()):
             cmd.is_finished()
             %HeadingSprite.visible = false
         

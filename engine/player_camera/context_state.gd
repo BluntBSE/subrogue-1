@@ -35,18 +35,9 @@ func input_clicks(event:InputEvent):
                 var click_azimuth = GlobeHelpers.rads_from_position(click_position).azimuth
                 var click_polar = GlobeHelpers.rads_from_position(click_position).polar
                 #Create a 3D area to check for collision with to determine if a movement is finished.
-                var waypoint:Area3D = Area3D.new()
-                var wp_collider := CollisionShape3D.new()
-                var wp_shape := SphereShape3D.new() #default radius of 0.5. If we use tolerance, this might be what we assign it to.
-                #Consider making these waypoints a child of the player's abstract node.
-                wp_collider.shape = wp_shape
-                waypoint.collision_layer = 2
-                waypoint.collision_mask = 2
-                waypoint.add_child(wp_collider)
-                ref.anchor.add_child(waypoint)
-            
-                waypoint.position = click_position
-                waypoint.position = GlobeHelpers.fix_height(waypoint, ref.anchor)
+                var waypoint:Vector3 = GlobeHelpers.fix_height_vector(click_position, ref.hovering_over.collider)
+              
+
                 
                 var move_command := MoveCommand.new()
                 move_command.start_azimuth = ref.active_entity.azimuth

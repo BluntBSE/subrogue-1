@@ -33,7 +33,7 @@ func add(command:Command)->void:
 
 
 func handle_finished(command:MoveCommand):
-    command.waypoint.queue_free()
+    #command.waypoint.queue_free()
     queue.erase(command)
     command.queue_free()
 
@@ -50,16 +50,16 @@ func purge_old_waypoints():
     
     while queue.size() > 1:
         var command: MoveCommand = queue[0]
-        var callable: Callable = Callable(command.waypoint, "queue_free")
-        callable.call_deferred()
+        #var callable: Callable = Callable(command.waypoint, "queue_free")
+       # callable.call_deferred()
         queue.erase(command)
         command.queue_free()
         
 
 func purge_waypoints():
     for command in queue:
-        var callable: Callable = Callable(command.waypoint, "queue_free")
-        callable.call_deferred()
+       # var callable: Callable = Callable(command.waypoint, "queue_free")
+        #callable.call_deferred()
         queue.erase(command)
         command.queue_free()
     queue = []
