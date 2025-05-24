@@ -201,7 +201,10 @@ func check_reached_waypoint()->void:
     if move_bus.queue.size() > 0:
         var cmd:MoveCommand = move_bus.queue[0]
         var wp:Vector3 = cmd.waypoint
-        if is_zero_approx((wp - global_position).length()):
+        var direction = (wp - global_position).normalized()
+        var movement = direction * speed # * timescale
+        var dist = (wp - global_position).length()
+        if dist <= movement.length():
             cmd.is_finished()
             %HeadingSprite.visible = false
         
