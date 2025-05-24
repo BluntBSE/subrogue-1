@@ -17,13 +17,14 @@ var local_entities = []#Used for situations where we want to think about what th
 var known_signals = [] 
 var sigmap = {} # {entity rigid object as key: signalpopup} Signals match to the array below, which we for updating those independently.
 var archive_map = {}
-
+var popup_pool:SignalPopupPool
 
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    popup_pool = get_tree().root.find_child("SignalPopups", true, false)
     pass
 
 
@@ -152,6 +153,12 @@ func DETECTOR_archive_signal(dict: Dictionary) -> void:
         sigob.disable()
         archive_map[dict.entity] = sigob
         sigmap.erase(dict.entity)
+
+func DETECTOR_popup_from_pool(pool:SignalPopupPool):
+    var popup:SignalPopup = pool.serve()
+    return popup
+        
+        
         
 func DETECTOR_instantiate_signal():
     var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
@@ -165,7 +172,8 @@ func DETECTOR_update_or_create_signal(dict: Dictionary, most_certain_detector, s
     if !sigmap.has(dict.entity):
         if !archive_map.has(dict.entity):
             #var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
-            var sigob = DETECTOR_instantiate_signal()
+            #var sigob = DETECTOR_instantiate_signal()
+            var sigob = DETECTOR_popup_from_pool(popup_pool)
             #entity.anchor.add_child(sigob)
             sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
             sigmap[dict.entity] = sigob
