@@ -32,7 +32,7 @@ func _enter_tree():
     # Connect the editor's input events to this script
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
     if not Engine.is_editor_hint():
         return
 
