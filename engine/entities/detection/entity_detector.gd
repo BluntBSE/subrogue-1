@@ -157,7 +157,7 @@ func DETECTOR_update_or_create_signal(dict: Dictionary, most_certain_detector, s
     if !sigmap.has(dict.entity):
         if !archive_map.has(dict.entity):
             var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
-            entity.anchor.add_child(sigob)
+            #entity.anchor.add_child(sigob)
             sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
             sigmap[dict.entity] = sigob
             DETECTOR_maybe_play_acquire_sound()

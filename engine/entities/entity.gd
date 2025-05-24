@@ -48,7 +48,7 @@ var look_tweener:Tween
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
-    #freeze = true
+    freeze = true
     if Engine.is_editor_hint():
         recursively_update_debug_layers(self, true)
         set_physics_process(false)
@@ -58,6 +58,7 @@ func _ready() -> void:
     pass # Replace with function body.
 
 func unpack(type_id, _faction:Faction, with_name):
+    
     faction = _faction
     is_player = GlobalConst.is_layer_player(_faction.faction_layer)
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
@@ -157,7 +158,6 @@ func move_to_next()->void:
         move_towards(dest.position)
 
 func move_towards(pos: Vector3) -> void:
-    print("Hello move towards")
     var direction = (pos - position).normalized()
     # Calculate the vector from the center of the sphere to the current position
     var center_to_position = (position - anchor.position).normalized()
@@ -185,24 +185,12 @@ func move_towards(pos: Vector3) -> void:
     if direction != center_to_position:
         if position != anchor.position:
             
-            if !is_zero_approx(direction.cross(center_to_position).length()):
+            if !is_zero_approx(direction.cross(center_to_position).length()): #I had a reason for this. But I don't remember it anymore.
 
                 var current_facing = position + transform.basis.z
                 var target_facing = position - direction
-                
-
-                #Making a new tweener every time seems possibly bad. But also might be trivial?
-                #Nah it's bad. You'll see why.
-                if look_tweener and look_tweener.is_running():
-                    look_tweener.kill()
-                look_tweener = create_tween()
-                look_tweener.tween_method(
-                    func(target): look_at(target, center_to_position, true),
-                    current_facing,
-                    target_facing,
-                    0.3
-                )
-
+                var local_angle = GlobeHelpers.get_local_angle_between(pos, global_position, center_to_position)
+                rotation.z = -deg_to_rad(local_angle)
     
 func check_reached_waypoint()->void:
     #Prepare to check for docking
@@ -211,12 +199,10 @@ func check_reached_waypoint()->void:
             check_at_destination()
             
     if move_bus.queue.size() > 0:
-        print("Checking if im at the waypoint")
         var cmd:MoveCommand = move_bus.queue[0]
         var wp:Area3D = cmd.waypoint
         var nav:Area3D = get_node("NavArea")
         var overlaps = nav.get_overlapping_areas()
-        print("OVERLAPS WERE: ", overlaps)
         if cmd.waypoint in overlaps:
 
             cmd.is_finished()

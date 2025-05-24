@@ -126,7 +126,7 @@ static func normalize_angle(angle: float) -> float:
     
 static func get_local_angle_between(to:Vector3, from:Vector3, axis:Vector3):
     var relative_position = to - from #Expecting global positions, basically
-    var local_basis:Dictionary = get_aligned_basis(axis)
+    var local_basis:Dictionary = get_aligned_basis(axis) #Usually dir to planet
     #Generally speaking, entities use look_at() to keep facing the planet. This puts their forward axis in the updown direction.
     #The user will perceive northsouth as 'up'.
     var local_northsouth = local_basis.up
