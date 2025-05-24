@@ -13,7 +13,7 @@ var controlled_by #NPC Factions?
 var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
 @onready var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
-@export var speed = GlobeHelpers.kph_to_game_s(240.0) #Debug - hyperfast
+@export var speed = GlobeHelpers.kph_to_game_s(240.0) #Debug - hyperfast #TODO: This is fucked now that we dont use physics
 @export var max_speed = GlobeHelpers.kph_to_game_s(240.0)
 @export var base_color:Color
 @export var spot_color:Color
@@ -36,6 +36,8 @@ signal docked
 signal died
 signal removed #For docking, putting into timeout, etc. Like died, but doesn't trigger death counters etc.
 var unpacked := false
+var look_tweener:Tween
+
 
 #OPTIMIZATIONS: set linear velocity only once then don't update it unless the entity has reached a node or must respond
 #Maybe height fixes and stuff occur less often if the entity is not visible to a player
@@ -45,6 +47,8 @@ var unpacked := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
+    freeze = true
     if Engine.is_editor_hint():
         recursively_update_debug_layers(self, true)
         set_physics_process(false)
@@ -54,6 +58,7 @@ func _ready() -> void:
     pass # Replace with function body.
 
 func unpack(type_id, _faction:Faction, with_name):
+    
     faction = _faction
     is_player = GlobalConst.is_layer_player(_faction.faction_layer)
     if is_player == true: #Eh. This should be a specific value, not a bool, for multiplayer
@@ -143,6 +148,7 @@ func fix_rotation() -> void:
    
 
 func move_to_next()->void:
+   # print("Hello from MTN")
     if move_bus.queue.size() < 1:
         return
     if move_bus.queue.size() > 0:
@@ -152,7 +158,6 @@ func move_to_next()->void:
         move_towards(dest.position)
 
 func move_towards(pos: Vector3) -> void:
-    
     var direction = (pos - position).normalized()
     # Calculate the vector from the center of the sphere to the current position
     var center_to_position = (position - anchor.position).normalized()
@@ -162,10 +167,12 @@ func move_towards(pos: Vector3) -> void:
     tangential_direction = tangential_direction.normalized()
     
     # Calculate the tangential movement vector with the desired speed
-    var vector = tangential_direction * speed * GlobalConst.time_scale
-        
+    #var vector = tangential_direction * speed * GlobalConst.time_scale
+    var movement = tangential_direction * speed# * GlobalConst.time_scale    
+   # print("Speed was ", speed)   
     # Set linear velocity - we're not dealing with acceleration right now.
-    linear_velocity = vector
+    #print("movemtn was ", movement)
+    position += movement
     #apply_central_force(vector)
     
     # Update the heading sprite to face the right direction
@@ -177,30 +184,29 @@ func move_towards(pos: Vector3) -> void:
     
     if direction != center_to_position:
         if position != anchor.position:
-          
-            if !is_zero_approx(direction.cross(center_to_position).length()):
-                look_at(direction, center_to_position, false)
+            
+            if !is_zero_approx(direction.cross(center_to_position).length()): #I had a reason for this. But I don't remember it anymore.
 
-    #adjust heading sprite rotation to match, assuming Vector3(0,1,0) is the angle to compare to.
-
-    
-    
-    #heading_sprite.rotation.z = angle
+                var current_facing = position + transform.basis.z
+                var target_facing = position - direction
+                var local_angle = GlobeHelpers.get_local_angle_between(pos, global_position, center_to_position)
+                rotation.z = -deg_to_rad(local_angle)
     
 func check_reached_waypoint()->void:
-    if move_bus.queue.size() < 1:
-        if behavior.destination_node:
+    #Prepare to check for docking
+    if behavior.destination_node:
+        if move_bus.queue.size() <= 1:
             check_at_destination()
-        return
-    var cmd:MoveCommand = move_bus.queue[0]
-    var wp:Area3D = cmd.waypoint
-    var nav:Area3D = get_node("NavArea")
-    var overlaps = nav.get_overlapping_areas()
-    if cmd.waypoint in overlaps:
-        linear_velocity = Vector3(0.0,0.0,0.0)
-        angular_velocity = Vector3(0.0,0.0,0.0)
-        cmd.is_finished()
-        %HeadingSprite.visible = false
+            
+    if move_bus.queue.size() > 0:
+        var cmd:MoveCommand = move_bus.queue[0]
+        var wp:Area3D = cmd.waypoint
+        var nav:Area3D = get_node("NavArea")
+        var overlaps = nav.get_overlapping_areas()
+        if cmd.waypoint in overlaps:
+
+            cmd.is_finished()
+            %HeadingSprite.visible = false
         
         
 func apply_entity_type(type:EntityType):
@@ -250,6 +256,7 @@ func initial_go_to_destination():
         
 #TODO: This just deletes ships that get to their goal. Eventually they might need more persistent docking or a signal emission relevant to missions.
 func check_at_destination():
+    
     # Get the world and its direct space state for physics queries
     var space_state = get_world_3d().direct_space_state
 

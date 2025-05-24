@@ -30,6 +30,7 @@ func _ready() -> void:
 var poll_elapsed = 0.0
 var poll_active = false
 var poll_frequency
+
 func unpack(_entity:Entity):
     print("Unpack called with ", _entity.name)
     entity = _entity
@@ -47,6 +48,7 @@ func unpack(_entity:Entity):
         detection_parent = entity.fired_from.detector
     
     pass
+    
 func _process(delta: float) -> void:
     #DEBUG: RIGHT NOW ONLY PLAYERS CAN DETECT. THAT"S NOT WHAT WE WANT IN THE END.
     poll_elapsed += delta
@@ -112,87 +114,80 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
 
             
 func poll_entities():
-    # Every few seconds, calculate the sound that would reach this node, the listener, based on the body's emitter
-    if detection_parent == null: # Child detectors don't do their own polling; they leave it to their parents
+    if detection_parent == null:
         for dict: Dictionary in tracked_entities:
-            #If the entity no longer exists because it died or docked, discard it.
             if dict.entity == null:
                 tracked_entities.erase(dict)
                 continue
-            var max_certainty = 0.0
-            var most_certain_detector = null
-            var emission: EntityEmission = dict.entity.emission
-            var sound = Sound.new(dict.entity, dict.entity.emission.volume, dict.entity.emission.pitch, dict.entity.emission.profile)
+            DETECTOR_poll_single_entity(dict)
 
-            # Iterate through all detectors in `tracked_by`
-            for detector in dict.tracked_by:
-                # Check sound for this detector
-                if detector == null:
-                    dict.tracked_by.erase(detector)
-                    continue
-                    
-                var dist = GlobeHelpers.arc_to_km(detector.entity.position, dict.entity.position, detector.entity.anchor)
-                var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
+func DETECTOR_poll_single_entity(dict: Dictionary) -> void:
+    var max_certainty = 0.0
+    var most_certain_detector = null
+    var emission: EntityEmission = dict.entity.emission
+    var sound = Sound.new(dict.entity, dict.entity.emission.volume, dict.entity.emission.pitch, dict.entity.emission.profile)
 
-                if final_db >= sensitivity:
-                    # Calculate certainty using the new function
-                    var certainty = calculate_certainty(dist, c100, cfalloff, min_certainty)
+    for detector in dict.tracked_by:
+        if detector == null:
+            dict.tracked_by.erase(detector)
+            continue
+        var dist = GlobeHelpers.arc_to_km(detector.entity.position, dict.entity.position, detector.entity.anchor)
+        var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
+        if final_db >= sensitivity:
+            var certainty = calculate_certainty(dist, c100, cfalloff, min_certainty)
+            if certainty > max_certainty:
+                max_certainty = certainty
+                most_certain_detector = detector
 
-                    # Track the detector with the highest certainty
-                    if certainty > max_certainty:
-                        max_certainty = certainty
-                        most_certain_detector = detector
+    if max_certainty <= 0.0:
+        DETECTOR_archive_signal(dict)
+    else:
+        DETECTOR_update_or_create_signal(dict, most_certain_detector, sound, max_certainty)
+        DETECTOR_update_signal_properties(dict, sound, max_certainty)
+        DETECTOR_handle_identification(dict, most_certain_detector)
 
-            if max_certainty  <= 0.0:
-                #Can't hear it. If you previously saw it, put it in the archive
-                if sigmap.has(dict.entity):
-                    var sigob:SignalPopup = sigmap[dict.entity]
-                    sigmap[dict.entity].disable()
-                    archive_map[dict.entity] = sigmap[dict.entity]
-                    sigmap.erase(dict.entity)
- 
-            # Update the signal object with the highest certainty
-            if max_certainty > 0.0:
-                if !sigmap.has(dict.entity):
-                    if !archive_map.has(dict.entity):
-                        #This signal has never been tracked before
-                        var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
-                        entity.anchor.add_child(sigob)
-                        sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
-                        sigmap[dict.entity] = sigob
-                        if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
-                            SoundManager.play("signal_acquired_1")
-                    else:
-                        var sigob:SignalPopup = archive_map[dict.entity]
-                        sigmap[dict.entity] = sigob
-                        archive_map.erase(dict.entity)
-                        sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
-                        if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
-                            SoundManager.play("signal_acquired_1")
-        
-                sigmap[dict.entity].certainty = max_certainty
-                #Should we be constantly updating the sound? Might as well since it's the attenuated DB right?
-                sigmap[dict.entity].sound = sound
+func DETECTOR_archive_signal(dict: Dictionary) -> void:
+    if sigmap.has(dict.entity):
+        var sigob: SignalPopup = sigmap[dict.entity]
+        sigob.disable()
+        archive_map[dict.entity] = sigob
+        sigmap.erase(dict.entity)
 
-                # If the most certain detector is not `self`, call `turn_red()`
-                if most_certain_detector != self:
-                    pass
-                    
-                #ACTIVE IDENTIFICATION - eg swimming too close
-                # Handle visibility and identification
-                var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
-                if dist <= c100:
-                    if entity.is_player == true and entity.get_multiplayer_authority() == get_multiplayer_authority():
-                        dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, true)
-                    sigmap[dict.entity].positively_identify()
-                    sigmap[dict.entity].visible = false
-                elif dist > c100 + 50.0:
-                    if sigmap[dict.entity].visible == false:
-                        sigmap[dict.entity].visible = true
-                    if entity.is_player == true and entity.get_multiplayer_authority() == get_multiplayer_authority():
-                        dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, false)
- 
+func DETECTOR_update_or_create_signal(dict: Dictionary, most_certain_detector, sound, max_certainty: float) -> void:
+    if !sigmap.has(dict.entity):
+        if !archive_map.has(dict.entity):
+            var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
+            #entity.anchor.add_child(sigob)
+            sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
+            sigmap[dict.entity] = sigob
+            DETECTOR_maybe_play_acquire_sound()
+        else:
+            var sigob: SignalPopup = archive_map[dict.entity]
+            sigmap[dict.entity] = sigob
+            archive_map.erase(dict.entity)
+            sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
+            DETECTOR_maybe_play_acquire_sound()
 
+func DETECTOR_update_signal_properties(dict: Dictionary, sound, max_certainty: float) -> void:
+    sigmap[dict.entity].certainty = max_certainty
+    sigmap[dict.entity].sound = sound
+
+func DETECTOR_handle_identification(dict: Dictionary, most_certain_detector) -> void:
+    var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
+    if dist <= c100:
+        if entity.is_player and entity.get_multiplayer_authority() == get_multiplayer_authority():
+            dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, true)
+        sigmap[dict.entity].positively_identify()
+        sigmap[dict.entity].visible = false
+    elif dist > c100 + 50.0:
+        if sigmap[dict.entity].visible == false:
+            sigmap[dict.entity].visible = true
+        if entity.is_player and entity.get_multiplayer_authority() == get_multiplayer_authority():
+            dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, false)
+
+func DETECTOR_maybe_play_acquire_sound():
+    if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
+        SoundManager.play("signal_acquired_1")
   
 func calculate_certainty(dist: float, c100: float, cfalloff: float, min_certainty: float) -> float:
     # Calculate certainty based on distance
