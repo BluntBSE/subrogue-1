@@ -152,11 +152,20 @@ func DETECTOR_archive_signal(dict: Dictionary) -> void:
         sigob.disable()
         archive_map[dict.entity] = sigob
         sigmap.erase(dict.entity)
+        
+func DETECTOR_instantiate_signal():
+    var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
+    return sigob
+
+func DETECTOR_erase_signal(entity):
+    archive_map.erase(entity)
+
 
 func DETECTOR_update_or_create_signal(dict: Dictionary, most_certain_detector, sound, max_certainty: float) -> void:
     if !sigmap.has(dict.entity):
         if !archive_map.has(dict.entity):
-            var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
+            #var sigob: SignalPopup = preload("res://engine/entities/detection/signal_popup_3d.tscn").instantiate()
+            var sigob = DETECTOR_instantiate_signal()
             #entity.anchor.add_child(sigob)
             sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
             sigmap[dict.entity] = sigob
@@ -164,7 +173,8 @@ func DETECTOR_update_or_create_signal(dict: Dictionary, most_certain_detector, s
         else:
             var sigob: SignalPopup = archive_map[dict.entity]
             sigmap[dict.entity] = sigob
-            archive_map.erase(dict.entity)
+            DETECTOR_erase_signal(dict.entity)
+            #archive_map.erase(dict.entity)
             sigob.unpack(most_certain_detector.entity, dict.entity, sound, max_certainty)
             DETECTOR_maybe_play_acquire_sound()
 
