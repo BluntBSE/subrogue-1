@@ -113,7 +113,9 @@ secondary_action={
 
 [physics]
 
+3d/run_on_separate_thread=true
 common/max_physics_steps_per_frame=4
+3d/physics_engine="GodotPhysics3D"
 jolt_physics_3d/simulation/velocity_steps=2
 jolt_physics_3d/simulation/position_steps=1
 jolt_physics_3d/motion_queries/recovery_iterations=2
