@@ -78,10 +78,17 @@ signal closed
 signal stream
 signal stream_color
 
+signal needs_pooling
+
 func disable():
     %Area3D.input_ray_pickable = false
     visible = false
     set_process(false)
+
+func enable():
+    %Area3D.input_ray_pickable = true
+    visible = true
+    set_process(true)
 
 func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certainty):
     if _detecting_object.is_player == false:
@@ -123,7 +130,7 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     update_threshold = calculate_update_threshold()
     GlobeHelpers.recursively_update_visibility(self, 1, false)
     GlobeHelpers.recursively_update_visibility(self, detecting_object.faction.faction_layer, true)
-    set_process(true)
+    enable()
     needs_update = false
     unpacked = true
     
@@ -343,13 +350,15 @@ func update_if_needed() -> void:
 
     
 func handle_detected_object_died(_entity:Entity):
-    queue_free()
-    pass
+    needs_pooling.emit(self)
+    disable()
+
 
 func handle_detecting_object_died(_entity:Entity):
     #Actually maybe it's notj ust a queue_free here because there may be other objects detecting the same object, and we need
     #To reassign
-    queue_free()
+    needs_pooling.emit(self)
+    disable()
     #This will also involve updating last_detected_position if necessary, maybe handled by "do_update"
     pass
 
