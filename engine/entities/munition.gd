@@ -38,11 +38,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-var interval = 0.0
+var target_interval = 0.0
 
 
 func _process(delta: float) -> void:
-    interval += delta
+    target_interval += delta
     var mesh_1: MeshInstance3D = %TrackingConeMesh
     var entity: Munition = self
     var up = (entity.anchor.position - entity.position).normalized()
@@ -51,8 +51,8 @@ func _process(delta: float) -> void:
     mesh_1.rotation.z += deg_to_rad(90.0)
     mesh_1.rotation.z += rotation.z
 
-    if interval > 0.25:
-        interval = 0.0
+    if target_interval > 0.25:
+        target_interval = 0.0
         target_entity = seek_new_target_passive()
         #Generating a new move command every frame might be excessive. But maybe it's fine?
         #Probably I should put some kind of delta that scales based on how far away we are.

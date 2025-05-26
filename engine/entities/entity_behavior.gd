@@ -9,16 +9,11 @@ a given behavior profile.
 """
 
         
-enum core_behaviors {MoveToDestination, Patrol, EscortTarget, FleeThreat, FindTarget, HailTarget, SeekDestroy, SeekHail, FleeSpecific, FindWrecks, SalvageWreck, SalvageSpecific, STOP}
 #NAVIGATING
-#The range at which a move order will be considered complete
-#var move_tolerance:float = 1.0
-#Use position when entities are moving towards specific entities (e.g: towards the player)
-var destination_position:Vector3
 #Use node when entities are moving to a known place in the world
 var destination_node:NavNode
-
-var every_x_frames = 1 # 60 /12 = 5 times per second. More than enough for AI
+var entity:Entity
+var every_x_frames = 12 # 60 /12 = 5 times per second. More than enough for AI
 
 
 #TARGETING
@@ -37,11 +32,12 @@ var enabled:bool = false:
         enabled = value
         behavior_tree.enabled = value
 
-var profile = null #BehaviorProfile controls the order of the nodes.
+var behavior_profile = null #BehaviorProfile controls the order of the nodes.
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    entity = get_parent()
     pass # Replace with function body.
 
 
@@ -50,7 +46,37 @@ func _process(delta: float) -> void:
     pass
 
 func enable():
+    print("Hello from enable!")
     behavior_tree.enable()
+    if not behavior_profile:
+        print("I did not have a profile")
+        apply_behavior_type(entity.atts.type.behavior_type)
     
 func disable():
     behavior_tree.disable()
+
+
+func apply_behavior_type(type:BehaviorType):
+    print("Hello from apply behavior type")
+    behavior_profile = type
+    print("Type applied was: ", type)
+    var core_behaviors = %MainSelector.get_children()
+    print("WTF? ", type.behavior_dict)
+    var keys = type.behavior_dict.keys()
+    print("Core behaviors: ")
+    print(core_behaviors)
+    
+    print("Keys:")
+    print(keys)
+    for behavior:Node in core_behaviors:
+        if behavior.name not in keys:
+            print("Checking for ", behavior.name, " in ", keys)
+            behavior.queue_free()
+    
+    for branch in keys:
+        for behavior:Node in core_behaviors:
+            if branch == behavior.name:
+                %MainSelector.move_child(behavior, type.behavior_dict[branch])
+    #Do we need any kind of fallback or handling of unused branches? Frankly you could probably delete them.
+    #Let's do that. We now delete at the top of this function.
+        pass

@@ -129,9 +129,9 @@ func no_entities_near_node(node: NavNode, distance: float) -> bool:
 
 func configure_behavior(entity:Entity, destination_id:String)->void:
     #For now, this only sets a destination for our critter
+    print("Hello from configure behavior")
     var dest:NavNode = entity.get_tree().root.find_child(destination_id, true, false)
     entity.behavior.destination_node = dest
-    entity.initial_go_to_destination()
     entity.behavior.enable()
     pass
     

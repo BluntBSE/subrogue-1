@@ -249,10 +249,7 @@ func query_any_on_layer(node, layer: int) -> bool:
             return true
     return false  # No match found
     
-#DEBUG INITIATLIZE MOVEMENT
-func initial_go_to_destination():
-        pass
-        #move_bus.order_destination_path()
+
         
 #TODO: This just deletes ships that get to their goal. Eventually they might need more persistent docking or a signal emission relevant to missions.
 func check_at_destination():

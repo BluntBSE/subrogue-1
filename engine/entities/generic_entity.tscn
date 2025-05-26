@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=58 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://btfo4hwoiyn01" path="res://engine/entities/detection/entity_detector.gd" id="15_gt6ce"]
 [ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="17_op6l6"]
 [ext_resource type="Texture2D" uid="uid://dp2rl27aa2lgl" path="res://assets/UI/white_icons/white_filled_triangle.png" id="18_5l3g8"]
+[ext_resource type="Script" uid="uid://6tigw2euote6" path="res://engine/entities/entity_munitions.gd" id="19_3qnbj"]
 [ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_0c68s"]
 [ext_resource type="Shader" uid="uid://dcopcc20fbxi7" path="res://shaders/sonar_pulse_3.gdshader" id="20_hyfub"]
 [ext_resource type="Script" uid="uid://ult62dixyg4g" path="res://engine/entities/detection/sonar_controls_3d.gd" id="21_3qfs3"]
@@ -207,125 +208,118 @@ script = ExtResource("3_37f8c")
 [node name="BehaviorTreeRoot" type="Node" parent="EntityBehavior"]
 script = ExtResource("3_m7cwq")
 
-[node name="SelectorComposite" type="Node" parent="EntityBehavior/BehaviorTreeRoot"]
+[node name="MainSelector" type="Node" parent="EntityBehavior/BehaviorTreeRoot"]
+unique_name_in_owner = true
 script = ExtResource("4_s3opb")
 
-[node name="Flee" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="Flee" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("4_s3opb")
 metadata/_custom_type_script = "uid://bl3j2m7vxf2bc"
 
-[node name="NoteLeaf" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee"]
+[node name="NoteLeaf" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]
 script = ExtResource("6_dqq6t")
 notes = "blackboard variables:
 \"recently_fled\":bool
 \"needs_reset\":bool"
 metadata/_custom_type_script = "uid://c2ckn3j2txow5"
 
-[node name="FleeExisting" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee"]
+[node name="AttackTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]
 script = ExtResource("6_6tq8k")
 
-[node name="RecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeExisting"]
+[node name="FleeExisting" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]
+script = ExtResource("6_6tq8k")
+
+[node name="RecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/FleeExisting"]
 script = ExtResource("9_23k6d")
 metadata/_custom_type_script = "uid://dk82cqfncxi8f"
 
-[node name="UpdateRecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeExisting"]
+[node name="UpdateRecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/FleeExisting"]
 script = ExtResource("7_23k6d")
 metadata/_custom_type_script = "uid://0g03hqhrhuvh"
 
-[node name="FleeNewThreat" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee"]
+[node name="FleeNewThreat" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]
 script = ExtResource("6_6tq8k")
 
-[node name="ThreatSignalsNearby" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeNewThreat"]
+[node name="ThreatSignalsNearby" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/FleeNewThreat"]
 script = ExtResource("7_hyfub")
 metadata/_custom_type_script = "uid://dk82cqfncxi8f"
 
-[node name="InverterDecorator" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeNewThreat"]
+[node name="InverterDecorator" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/FleeNewThreat"]
 script = ExtResource("8_dwxad")
 metadata/_custom_type_script = "uid://hgbluutp3dhv"
 
-[node name="RecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeNewThreat/InverterDecorator"]
+[node name="RecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/FleeNewThreat/InverterDecorator"]
 script = ExtResource("9_23k6d")
 metadata/_custom_type_script = "uid://dk82cqfncxi8f"
 
-[node name="FleeAway" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeNewThreat"]
+[node name="FleeAway" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/FleeNewThreat"]
 script = ExtResource("12_akn2h")
 
-[node name="StopFleeing" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee"]
-script = ExtResource("6_6tq8k")
-
-[node name="UpdateRecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/StopFleeing"]
-script = ExtResource("7_23k6d")
-metadata/_custom_type_script = "uid://0g03hqhrhuvh"
-
-[node name="RecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/StopFleeing"]
-script = ExtResource("9_23k6d")
-metadata/_custom_type_script = "uid://dk82cqfncxi8f"
-
-[node name="MoveToDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="MoveToDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("4_s3opb")
 
-[node name="KeepMoving" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination"]
+[node name="KeepMoving" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/MoveToDestination"]
 script = ExtResource("6_6tq8k")
 
-[node name="HasDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/KeepMoving"]
+[node name="HasDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/MoveToDestination/KeepMoving"]
 script = ExtResource("7_mgjn4")
 
-[node name="NavNearDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/KeepMoving"]
+[node name="NavNearDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/MoveToDestination/KeepMoving"]
 script = ExtResource("14_3qnbj")
 
-[node name="KeepMoving" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/KeepMoving"]
+[node name="KeepMoving" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/MoveToDestination/KeepMoving"]
 script = ExtResource("9_sd8qi")
 
-[node name="AssignNewDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination"]
+[node name="AssignNewDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/MoveToDestination"]
 script = ExtResource("6_6tq8k")
 
-[node name="HasDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/AssignNewDestination"]
+[node name="HasDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/MoveToDestination/AssignNewDestination"]
 script = ExtResource("7_mgjn4")
 
-[node name="AssignNewDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/MoveToDestination/AssignNewDestination"]
+[node name="AssignNewDestination" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/MoveToDestination/AssignNewDestination"]
 script = ExtResource("14_dqq6t")
 metadata/_custom_type_script = "uid://0g03hqhrhuvh"
 
-[node name="Patrol" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="Patrol" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="EscortTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="EscortTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="FindTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="FindTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="HailTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="HailTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="AttackTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="SeekDestroy" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="SeekDestroy" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="SeekHail" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="SeekHail" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="FleeSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="FleeSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="FindWrecks" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="FindWrecks" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="SalvageWreck" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="SalvageWreck" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="SalvageSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
 
-[node name="SalvageSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
-script = ExtResource("6_6tq8k")
-
-[node name="STOP-AlwaysSucceed" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite"]
+[node name="STOP-AlwaysSucceed" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("9_3cqk4")
 
-[node name="ActionLeaf" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/STOP-AlwaysSucceed"]
+[node name="ActionLeaf" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/STOP-AlwaysSucceed"]
 script = ExtResource("8_hntc2")
 
 [node name="EntityCargo" type="Node" parent="."]
+
+[node name="EntityMunitions" type="Node" parent="."]
+script = ExtResource("19_3qnbj")
 
 [node name="EntityAttributes" type="Node" parent="."]
 unique_name_in_owner = true

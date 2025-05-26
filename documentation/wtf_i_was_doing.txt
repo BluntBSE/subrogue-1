@@ -30,18 +30,16 @@ NOT QUITE A BUG BUT: SonarPulseMesh is the culprit, defer its material duplicati
 
 TODO:
 
-Ok, here's the final TODO:
-    Do not change the colors on signals when detected by an NPC
-    
-    
-    FOR SPAWN: 
-    See if we can make the unpacking a call deferred
-    THEN we can try pooling if required
-    Each Faction owner is going to require its own entity pool for instantiation
-    
-    FOR AI:
-    Make behavior trees start with a "should I even have my AI on" switch
-    
+-Make munition homing a function of a behavior tree instead of hard coding
+-Make it actually cost a munition to fire one, exhaust it on use
+-Make enemies fire munitions with this pattern. Madlad pattern is fine for now.
+
+For munition behavior:
+    Create a behaviorprofile class that orders branches
+    How? Each behaviorprofile has a dict. The keys match to Node names, the values to their desired index.
+    Anything not in the behaviorprofile dict goes to the end of the tree, perhaps below a fallback node that always goes after the defined behaviors
+    I guess that means we probably don't need the core behaviors enum
+
     
     
 

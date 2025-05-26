@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BehaviorType" load_steps=2 format=3 uid="uid://bsjwhg61011rn"]
+
+[ext_resource type="Script" uid="uid://dw5cleiwyjil" path="res://engine/entities/behavior/behavior_types/behavior_type.gd" id="1_nwknv"]
+
+[resource]
+script = ExtResource("1_nwknv")
+behavior_dict = {
+"MoveToDestination": 0
+}
+metadata/_custom_type_script = "uid://dw5cleiwyjil"

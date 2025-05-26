@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="EntityType" load_steps=2 format=3 uid="uid://dcpa4ui8otfyx"]
+[gd_resource type="Resource" script_class="EntityType" load_steps=3 format=3 uid="uid://dcpa4ui8otfyx"]
 
+[ext_resource type="Resource" uid="uid://bsjwhg61011rn" path="res://engine/entities/behavior/behavior_types/lobotomized.tres" id="1_ldwdn"]
 [ext_resource type="Script" uid="uid://c7ymqn6mo5dye" path="res://engine/entities/types/entity_type.gd" id="1_vdh0r"]
 
 [resource]
 script = ExtResource("1_vdh0r")
 id = "commercial_freighter_1"
-display_name = "Hanka Freighter"
 display_class = "Commercial Freighter"
 category = "commercial"
 base_hull = 1
@@ -24,4 +24,5 @@ size = 300000.0
 vol_speed_factor = 1.0
 depths = [null, null]
 current_depth = 0
+behavior_type = ExtResource("1_ldwdn")
 base_cost = 0
