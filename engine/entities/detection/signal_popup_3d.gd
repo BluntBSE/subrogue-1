@@ -69,7 +69,7 @@ var originating_entities:Array #For now this is exclusively the one entity under
 var player:Node3D
 var over_entity:Node3D #If the player dropped this over an entity, it must track the entity and also allow hailing
 #var line_to #Possibly give this node ownerhsip over the line
-
+var every_x_frames = 12.0 #Divide by this many frames. At 60fps, 12 should give us 6 frames per second.
 #SIGNALS
 signal unidentified_opened
 signal identified
@@ -78,17 +78,10 @@ signal closed
 signal stream
 signal stream_color
 
-signal needs_pooling
-
 func disable():
     %Area3D.input_ray_pickable = false
     visible = false
     set_process(false)
-
-func enable():
-    %Area3D.input_ray_pickable = true
-    visible = true
-    set_process(true)
 
 func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certainty):
     if _detecting_object.is_player == false:
@@ -130,7 +123,7 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     update_threshold = calculate_update_threshold()
     GlobeHelpers.recursively_update_visibility(self, 1, false)
     GlobeHelpers.recursively_update_visibility(self, detecting_object.faction.faction_layer, true)
-    enable()
+    set_process(true)
     needs_update = false
     unpacked = true
     
@@ -167,23 +160,24 @@ func match_detected_velocity():
     if detected_object:  # Ensure the detected object exists
         # Get the detected object's velocity
         target_position += detected_object.linear_velocity/60
-     
-func _process(_delta):
-    #print("Wtf")
-    # Update the target position to the detected object's position with the precomputed offset
-    position = lerp(position, target_position, _delta)
-    # Move to target position
-    if hover_scaling == false:
-        scale_with_camera_distance()
-    else:
-        scale_with_fov()
-    rotate_area_to_anchor()
-    check_update_necessary()
-    update_if_needed()
-    
-    if last_velocity:
-        position += last_velocity / 60
 
+var throttle_accum:float
+func _process(_delta):
+    if visible:
+        position = lerp(position, target_position, _delta)
+        if hover_scaling == false:
+            scale_with_camera_distance()
+        else:
+            scale_with_fov()
+        rotate_area_to_anchor()
+        check_update_necessary()
+    throttle_accum += _delta
+    if throttle_accum >= every_x_frames:
+        throttle_accum = 0.0
+        update_if_needed()
+
+        if last_velocity:
+            position += last_velocity / 60
 
 
 
@@ -350,15 +344,13 @@ func update_if_needed() -> void:
 
     
 func handle_detected_object_died(_entity:Entity):
-    needs_pooling.emit(self)
-    disable()
-
+    queue_free()
+    pass
 
 func handle_detecting_object_died(_entity:Entity):
     #Actually maybe it's notj ust a queue_free here because there may be other objects detecting the same object, and we need
     #To reassign
-    needs_pooling.emit(self)
-    disable()
+    queue_free()
     #This will also involve updating last_detected_position if necessary, maybe handled by "do_update"
     pass
 

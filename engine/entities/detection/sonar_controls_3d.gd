@@ -115,7 +115,7 @@ func _ready():
     mesh_2.transparency = base_transparency
     %ControlMesh2second.transparency = base_transparency
 
-func _process(_delta:float):
+func _physics_process(_delta:float):
     if unpacked == true: #Probably dont need to unpack if not a player. I don't think we do, even.
         update_knobs()
         lerp_to_it(_delta)

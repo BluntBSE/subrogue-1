@@ -52,6 +52,7 @@ height = 6.0
 [sub_resource type="SphereMesh" id="SphereMesh_pcy2y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4ju4"]
+resource_local_to_scene = true
 transparency = 1
 albedo_texture = ExtResource("18_5l3g8")
 emission = Color(0.0999336, 0.760538, 0.826485, 1)
@@ -138,20 +139,22 @@ _data = {
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5l3g8"]
 load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwxad"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqq6t"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("20_hyfub")
 shader_parameter/disc_texture = SubResource("CompressedTexture2D_5l3g8")
 shader_parameter/modulate_sample = Color(0, 0, 0, 1)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dqq6t"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3qnbj"]
 load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3qnbj"]
+resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_dwxad")
+next_pass = SubResource("ShaderMaterial_dqq6t")
 shader = ExtResource("20_hyfub")
-shader_parameter/disc_texture = SubResource("CompressedTexture2D_dqq6t")
+shader_parameter/disc_texture = SubResource("CompressedTexture2D_3qnbj")
 shader_parameter/modulate_sample = Color(0, 1, 0.941176, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]

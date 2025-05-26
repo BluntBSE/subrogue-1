@@ -168,7 +168,7 @@ func move_towards(pos: Vector3) -> void:
     
     # Calculate the tangential movement vector with the desired speed
     #var vector = tangential_direction * speed * GlobalConst.time_scale
-    var movement = tangential_direction * speed# * GlobalConst.time_scale    
+    var movement = tangential_direction * speed * GlobalConst.time_scale    
    # print("Speed was ", speed)   
     # Set linear velocity - we're not dealing with acceleration right now.
     #print("movemtn was ", movement)

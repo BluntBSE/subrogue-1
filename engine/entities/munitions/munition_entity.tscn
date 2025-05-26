@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=57 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
@@ -15,18 +15,15 @@
 [ext_resource type="Script" uid="uid://btfo4hwoiyn01" path="res://engine/entities/detection/entity_detector.gd" id="9_oc7iw"]
 [ext_resource type="Script" uid="uid://0g03hqhrhuvh" path="res://engine/abstract_classes/behavior_tree/leaves/action_leaf.gd" id="10_oimx8"]
 [ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="10_x632v"]
-[ext_resource type="Shader" uid="uid://dc2pip1y3et5g" path="res://engine/entities/detection/sonarpulsemesh.gdshader" id="11_dnksr"]
 [ext_resource type="Script" uid="uid://dk82cqfncxi8f" path="res://engine/abstract_classes/behavior_tree/leaves/condition_leaf.gd" id="11_j5udo"]
 [ext_resource type="Script" uid="uid://8epfeqalkoqe" path="res://engine/entities/behavior/actions/flee_away.gd" id="12_sarf3"]
-[ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="12_x5ny6"]
-[ext_resource type="Texture2D" uid="uid://b0ien5rugpxsy" path="res://assets/polarpng.png" id="13_mpd0o"]
 [ext_resource type="Script" uid="uid://cki53fpug8114" path="res://engine/abstract_classes/behavior_tree/decorators/succeeder.gd" id="13_xyjcy"]
 [ext_resource type="Script" uid="uid://b0rx04rp06hig" path="res://engine/entities/entity_attributes.gd" id="14_ghaal"]
 [ext_resource type="Script" uid="uid://ir7kbv6gtrd4" path="res://engine/entities/entity_render.gd" id="16_cukoj"]
 [ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="17_o16hn"]
 [ext_resource type="Texture2D" uid="uid://dp8he1xlfl6bv" path="res://assets/UI/white_circle_2.png" id="18_2vr8v"]
 [ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_p1ne5"]
-[ext_resource type="Material" uid="uid://bl72mcva5adk6" path="res://engine/entities/detection/sonar_pulse.material" id="27_qfdwo"]
+[ext_resource type="Shader" uid="uid://dcopcc20fbxi7" path="res://shaders/sonar_pulse_3.gdshader" id="27_vepk6"]
 [ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="29_v6ety"]
 [ext_resource type="PackedScene" uid="uid://d1ad5q0tg3jb4" path="res://particle_node.tscn" id="30_541b3"]
 [ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="31_vepk6"]
@@ -83,24 +80,56 @@ albedo = Color(0, 0.818736, 0.815349, 1)
 height_falloff = 2.0
 edge_fade = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6y0a6"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("11_dnksr")
-shader_parameter/texture_albedo = ExtResource("12_x5ny6")
-shader_parameter/texture_metallic = ExtResource("13_mpd0o")
-
-[sub_resource type="QuadMesh" id="QuadMesh_l7f70"]
-resource_local_to_scene = true
-lightmap_size_hint = Vector2i(27, 27)
-size = Vector2(10, 10)
-
 [sub_resource type="Animation" id="Animation_ox0k3"]
 length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_tail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_cnygr"]
 resource_name = "sonar_pulse_1"
 length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.266667, 1.4, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.366667, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TransformBreaker/SonarPulseMesh:material_override:shader_parameter/frontier_tail")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.075, -0.25, 0, 0.25, 0, 0.95, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.366667, 2)
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_icumr"]
 _data = {
@@ -108,16 +137,47 @@ _data = {
 &"sonar_pulse_1": SubResource("Animation_cnygr")
 }
 
-[sub_resource type="QuadMesh" id="QuadMesh_3qnbj"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vi68k"]
+load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dwxad"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("27_vepk6")
+shader_parameter/disc_texture = SubResource("CompressedTexture2D_vi68k")
+shader_parameter/modulate_sample = Color(0, 0, 0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dqq6t"]
+load_path = "res://.godot/imported/white_circle_filled.png-1378d4b25785bd67bc56f5c166989435.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d6txb"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_dwxad")
+shader = ExtResource("27_vepk6")
+shader_parameter/disc_texture = SubResource("CompressedTexture2D_dqq6t")
+shader_parameter/modulate_sample = Color(0, 1, 0.941176, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_oimx8"]
 lightmap_size_hint = Vector2i(27, 27)
 size = Vector2(25, 25)
 
-[sub_resource type="TorusMesh" id="TorusMesh_j5udo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5udo"]
+render_priority = 0
+shader = ExtResource("27_vepk6")
+shader_parameter/modulate_sample = Color(1, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_sarf3"]
 inner_radius = 0.15
 outer_radius = 0.3
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sarf3"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xyjcy"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_l7f70"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(27, 27)
+size = Vector2(10, 10)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v6ety"]
 radius = 0.862371
@@ -347,13 +407,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
 script = ExtResource("10_x632v")
 
-[node name="SonarPulseMesh2" type="MeshInstance3D" parent="EntityRender/SonarNode"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97706, 0, 0.467125)
-visible = false
-material_override = SubResource("ShaderMaterial_6y0a6")
-mesh = SubResource("QuadMesh_l7f70")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EntityRender/SonarNode"]
 libraries = {
 &"": SubResource("AnimationLibrary_icumr")
@@ -362,16 +415,37 @@ libraries = {
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="EntityRender/SonarNode"]
 remote_path = NodePath("../TransformBreaker/SonarPulseMesh")
 update_rotation = false
+update_scale = false
+
+[node name="RemoteTransform3D2" type="RemoteTransform3D" parent="EntityRender/SonarNode"]
+remote_path = NodePath("../TransformBreaker/SonarPulseMeshNP")
+update_rotation = false
+update_scale = false
+
+[node name="RemoteTransform3D_controls" type="RemoteTransform3D" parent="EntityRender/SonarNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0368243)
+remote_path = NodePath("../TransformBreaker/SonarControls3D")
+update_rotation = false
+update_scale = false
 
 [node name="TransformBreaker" type="Node" parent="EntityRender/SonarNode"]
+unique_name_in_owner = true
 
 [node name="SonarPulseMesh" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker"]
 unique_name_in_owner = true
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, -3.59989e-21, 4.37114e-08, 1, -4.37114e-08, -0.0201111, -0.0650034, 0.215542)
-layers = 524288
-material_override = ExtResource("27_qfdwo")
-mesh = SubResource("QuadMesh_3qnbj")
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
+material_override = SubResource("ShaderMaterial_d6txb")
+transparency = 0.75
+mesh = SubResource("QuadMesh_oimx8")
 skeleton = NodePath("../..")
+
+[node name="SonarPulseMeshNP" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0201111, -0.0650034, 0.215542)
+sorting_offset = 1.0
+mesh = SubResource("QuadMesh_oimx8")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_j5udo")
 
 [node name="SonarControls3D" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker"]
 unique_name_in_owner = true
@@ -385,23 +459,23 @@ unique_name_in_owner = true
 
 [node name="ControlMesh1" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1"]
 unique_name_in_owner = true
-transform = Transform3D(0.98511, 0.171929, -3.87372e-08, -3.46786e-08, -2.66098e-08, -1, -0.171929, 0.985109, -2.02513e-08, 1.49012e-08, 11.8615, 0)
+transform = Transform3D(0.492555, 0.0859644, -3.75762e-09, 0, -2.18557e-08, -0.5, -0.0859644, 0.492555, -2.15302e-08, 1.49012e-08, 11.8615, 0)
 material_override = ExtResource("35_ghaal")
 cast_shadow = 0
-mesh = SubResource("TorusMesh_j5udo")
+mesh = SubResource("TorusMesh_sarf3")
 
 [node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1/Area3D"]
 transform = Transform3D(1, 2.98023e-08, 3.55271e-15, 0, 1, -3.55271e-15, 0, 0, 1, 0, 1.49012e-08, 0.166925)
-shape = SubResource("ConcavePolygonShape3D_sarf3")
+shape = SubResource("ConcavePolygonShape3D_xyjcy")
 
 [node name="ControlMesh1second" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot1/ControlMesh1"]
 unique_name_in_owner = true
 transform = Transform3D(1, 1.49012e-08, 0, 0, 1, -1.77636e-15, 0, 8.88178e-16, 1, 1.49012e-08, 1.49012e-08, 0.456102)
 material_override = ExtResource("35_ghaal")
 cast_shadow = 0
-mesh = SubResource("TorusMesh_j5udo")
+mesh = SubResource("TorusMesh_sarf3")
 skeleton = NodePath("../..")
 
 [node name="KnobPivot2" type="Node3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D"]
@@ -410,26 +484,27 @@ transform = Transform3D(0.983719, 0.179712, 0, -0.179712, 0.983719, 0, 0, 0, 1, 
 
 [node name="ControlMesh2" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2"]
 unique_name_in_owner = true
-transform = Transform3D(0.98511, 0.171929, -3.87372e-08, -3.46786e-08, -2.66098e-08, -1, -0.171929, 0.985109, -2.02513e-08, -5.96046e-08, 11.8615, 0)
+transform = Transform3D(0.492555, 0.0859644, -3.75762e-09, 0, -2.18557e-08, -0.5, -0.0859644, 0.492555, -2.15302e-08, -5.96046e-08, 11.8615, 0)
 material_override = ExtResource("35_ghaal")
 transparency = 0.2
-mesh = SubResource("TorusMesh_j5udo")
+mesh = SubResource("TorusMesh_sarf3")
 
 [node name="Area3D" type="Area3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2/Area3D"]
 transform = Transform3D(1, 2.98023e-08, 3.55271e-15, 0, 1, -3.55271e-15, 0, 0, 1, 0, 1.49012e-08, 0.166925)
-shape = SubResource("ConcavePolygonShape3D_sarf3")
+shape = SubResource("ConcavePolygonShape3D_xyjcy")
 
 [node name="ControlMesh2second" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
 unique_name_in_owner = true
 transform = Transform3D(1, 4.47035e-08, 1.18966e-09, 1.49012e-08, 1, -1.09052e-08, 1.40779e-09, -9.88006e-09, 1, 0.0082581, -0.0452029, 0.489026)
 material_override = ExtResource("35_ghaal")
 transparency = 0.2
-mesh = SubResource("TorusMesh_j5udo")
+mesh = SubResource("TorusMesh_sarf3")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="EntityRender/SonarNode/TransformBreaker/SonarControls3D/KnobPivot2/ControlMesh2"]
+transform = Transform3D(-0.171929, -0.177036, -0.969071, 0.98511, -0.0308977, -0.16913, -1.30385e-08, -0.98372, 0.179712, 0.229596, 0.0604862, 11.7522)
 
 [node name="EntityEmission" type="Node3D" parent="."]
 unique_name_in_owner = true
