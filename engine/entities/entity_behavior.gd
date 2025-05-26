@@ -12,12 +12,13 @@ a given behavior profile.
 enum core_behaviors {MoveToDestination, Patrol, EscortTarget, FleeThreat, FindTarget, HailTarget, SeekDestroy, SeekHail, FleeSpecific, FindWrecks, SalvageWreck, SalvageSpecific, STOP}
 #NAVIGATING
 #The range at which a move order will be considered complete
-var move_tolerance:float = 1.0
+#var move_tolerance:float = 1.0
 #Use position when entities are moving towards specific entities (e.g: towards the player)
 var destination_position:Vector3
 #Use node when entities are moving to a known place in the world
 var destination_node:NavNode
 
+var every_x_frames = 1 # 60 /12 = 5 times per second. More than enough for AI
 
 
 #TARGETING

@@ -16,16 +16,19 @@ func _ready():
         disable()
         return
 
-
+var accum:float = 0.0
 func _process(delta:float):
+    accum += delta
+    if accum >= get_parent().every_x_frames:
+        accum = 0.0
     #I chose process instead of physics process because I lowered my physics frames a *lot*
     #Possibly we can throttle how often this runs to improve performance if needed
-    if not enabled:
-        return
-    blackboard.bbset("delta", delta)
-    var entity = get_parent().get_parent()
-    self.get_child(0).tick(entity, blackboard)    #??? I think this means "Make the immediately following composite accept the parent of this node as the thing to which tick is applied
-    #Translates to:
+        if not enabled:
+            return
+        blackboard.bbset("delta", delta)
+        var entity = get_parent().get_parent()
+        self.get_child(0).tick(entity, blackboard)    #??? I think this means "Make the immediately following composite accept the parent of this node as the thing to which tick is applied
+        #Translates to:
     #selectorcomposite.tick(agent, blackboard)
     #In other words, the node to which this tree is appended is the "actor" for all children.
     #This node always expects to be part of a tree that looks like Entity->EntityBehavior->BehaviorTreeRoot(this node)

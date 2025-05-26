@@ -127,13 +127,13 @@ func _process(delta: float) -> void:
 func use_time_enum() -> void:
     match current_scale_enum:
         TIME_SCALES.fast:
-            time_scale = 180.0
+            time_scale = 3.0
         TIME_SCALES.normal:
-            time_scale = 60.0
-        TIME_SCALES.slow:
-            time_scale = 10.0
-        TIME_SCALES.very_slow:
             time_scale = 1.0
+        TIME_SCALES.slow:
+            time_scale = .16
+        TIME_SCALES.very_slow:
+            time_scale = .016
 
 func handle_set_time_scale(scale_enum: int) -> void:
     current_scale_enum = scale_enum
