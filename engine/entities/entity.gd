@@ -204,7 +204,7 @@ func check_reached_waypoint()->void:
         var direction = (wp - global_position).normalized()
         var movement = direction * speed # * timescale
         var dist = (wp - global_position).length()
-        if dist <= movement.length():
+        if dist <= movement.length() + 0.1:
             cmd.is_finished()
             %HeadingSprite.visible = false
         

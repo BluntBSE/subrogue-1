@@ -221,6 +221,17 @@ notes = "blackboard variables:
 \"needs_reset\":bool"
 metadata/_custom_type_script = "uid://c2ckn3j2txow5"
 
+[node name="FleeExisting" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee"]
+script = ExtResource("6_6tq8k")
+
+[node name="RecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeExisting"]
+script = ExtResource("9_23k6d")
+metadata/_custom_type_script = "uid://dk82cqfncxi8f"
+
+[node name="UpdateRecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeExisting"]
+script = ExtResource("7_23k6d")
+metadata/_custom_type_script = "uid://0g03hqhrhuvh"
+
 [node name="FleeNewThreat" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee"]
 script = ExtResource("6_6tq8k")
 
@@ -238,17 +249,6 @@ metadata/_custom_type_script = "uid://dk82cqfncxi8f"
 
 [node name="FleeAway" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeNewThreat"]
 script = ExtResource("12_akn2h")
-
-[node name="FleeExisting" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee"]
-script = ExtResource("6_6tq8k")
-
-[node name="UpdateRecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeExisting"]
-script = ExtResource("7_23k6d")
-metadata/_custom_type_script = "uid://0g03hqhrhuvh"
-
-[node name="RecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee/FleeExisting"]
-script = ExtResource("9_23k6d")
-metadata/_custom_type_script = "uid://dk82cqfncxi8f"
 
 [node name="StopFleeing" type="Node" parent="EntityBehavior/BehaviorTreeRoot/SelectorComposite/Flee"]
 script = ExtResource("6_6tq8k")
