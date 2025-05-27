@@ -23,7 +23,7 @@ var height:float = GlobalConst.height; #Given that the planet has a known radius
 @export var scale_factor:float = 1.0
 @export var faction:Faction
 @export var can_move := true
-@onready var atts:EntityAtts = %EntityAttributes
+@export var atts:EntityAtts
 @onready var behavior:EntityBehavior = %EntityBehavior
 @onready var emission:EntityEmission = %EntityEmission
 @onready var render:EntityRender = %EntityRender

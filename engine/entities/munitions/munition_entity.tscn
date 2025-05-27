@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://qfiyabbs8j2l"]
+[gd_scene load_steps=59 format=3 uid="uid://qfiyabbs8j2l"]
 
 [ext_resource type="Script" uid="uid://4i8a8kaxvpbo" path="res://engine/entities/munition.gd" id="1_8j1xm"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_i7nli"]
@@ -18,7 +18,9 @@
 [ext_resource type="Script" uid="uid://dk82cqfncxi8f" path="res://engine/abstract_classes/behavior_tree/leaves/condition_leaf.gd" id="11_j5udo"]
 [ext_resource type="Script" uid="uid://8epfeqalkoqe" path="res://engine/entities/behavior/actions/flee_away.gd" id="12_sarf3"]
 [ext_resource type="Script" uid="uid://cki53fpug8114" path="res://engine/abstract_classes/behavior_tree/decorators/succeeder.gd" id="13_xyjcy"]
+[ext_resource type="Script" uid="uid://e4oxg44mgcj1" path="res://engine/entities/behavior/conditions/signal_within_angle.gd" id="14_d6txb"]
 [ext_resource type="Script" uid="uid://b0rx04rp06hig" path="res://engine/entities/entity_attributes.gd" id="14_ghaal"]
+[ext_resource type="Script" uid="uid://clkbbkhu75hrv" path="res://engine/entities/behavior/actions/homing_movement.gd" id="15_oimx8"]
 [ext_resource type="Script" uid="uid://ir7kbv6gtrd4" path="res://engine/entities/entity_render.gd" id="16_cukoj"]
 [ext_resource type="Texture2D" uid="uid://crqjoqrvax88f" path="res://assets/UI/blue_icons/ArrowUpIconBlue.png" id="17_o16hn"]
 [ext_resource type="Texture2D" uid="uid://dp8he1xlfl6bv" path="res://assets/UI/white_circle_2.png" id="18_2vr8v"]
@@ -187,13 +189,14 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="MunitionEntity" type="RigidBody3D"]
+[node name="MunitionEntity" type="RigidBody3D" node_paths=PackedStringArray("atts")]
 collision_layer = 2
 collision_mask = 524288
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
 continuous_cd = true
 contact_monitor = true
 script = ExtResource("1_8j1xm")
+atts = NodePath("EntityAttributes")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_gqccf")
@@ -297,6 +300,17 @@ script = ExtResource("6_541b3")
 
 [node name="SalvageSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_541b3")
+
+[node name="BasicHoming" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
+script = ExtResource("6_541b3")
+
+[node name="SignalWithinAngle" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/BasicHoming"]
+script = ExtResource("14_d6txb")
+metadata/_custom_type_script = "uid://dk82cqfncxi8f"
+
+[node name="HomingMovement" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/BasicHoming"]
+script = ExtResource("15_oimx8")
+metadata/_custom_type_script = "uid://0g03hqhrhuvh"
 
 [node name="STOP-AlwaysSucceed" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("13_xyjcy")

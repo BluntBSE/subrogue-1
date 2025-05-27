@@ -1,8 +1,7 @@
-extends Resource
+extends EntityType
 class_name MunitionDef
 
 
-@export var id: String
 @export var display_name: String
 ## enum GUIDANCE {active, passive, wire, dumb, radar, actipass }
 @export var guidance_type: int # accepts GUIDANCE enums
@@ -14,7 +13,6 @@ class_name MunitionDef
 
 @export var impact_type:int 
 ## enum DEPTH {swim, crawl, surface}
-@export var current_depth: int # accepts DEPTH enums
 ## enum DEPTH {swim, crawl, surface}
 @export var target_depths: Array[int] # accepts DEPTH enums
 @export var target_pos: Vector3

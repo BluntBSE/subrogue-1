@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MunitionDef" load_steps=2 format=3 uid="uid://c2tt1184lqmkn"]
+[gd_resource type="Resource" script_class="MunitionDef" load_steps=3 format=3 uid="uid://c2tt1184lqmkn"]
 
+[ext_resource type="Resource" uid="uid://oosdv7dimcoa" path="res://engine/entities/behavior/behavior_types/basic_homing.tres" id="1_6eqm8"]
 [ext_resource type="Script" uid="uid://bf45y24rvoq1o" path="res://engine/entities/munitions/munition_def.gd" id="1_fgqn7"]
 
 [resource]
 script = ExtResource("1_fgqn7")
-id = "manta_torpedo"
 display_name = "Manta Torpedo"
 guidance_type = 1
 impact_radius = 1.0
@@ -12,8 +12,28 @@ fuel_remaining = 100.0
 fuel_max = 0.0
 fuel_burn = 10.0
 impact_type = 1
-current_depth = 0
 target_depths = Array[int]([])
 target_pos = Vector3(0, 0, 0)
 max_speed = 100.0
 trauma = 2.0
+id = "manta_torpedo"
+display_class = ""
+category = ""
+base_hull = 0
+base_cargo = 0
+munition_types = 0
+munition_slots = 0
+munition_size = 0
+utility_slots = 0
+utility_size = 0
+upgrade_slots = 0
+base_max_speed = 0
+base_profile = 0.0
+base_pitch = 0.0
+base_volume = 0.0
+size = 0.0
+vol_speed_factor = 0.0
+depths = []
+current_depth = 0
+behavior_type = ExtResource("1_6eqm8")
+base_cost = 0

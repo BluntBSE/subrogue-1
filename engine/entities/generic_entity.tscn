@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=60 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -22,8 +22,10 @@
 [ext_resource type="Script" uid="uid://3nxghnrjlm51" path="res://engine/entities/behavior/conditions/nav_near_destination.gd" id="14_3qnbj"]
 [ext_resource type="Script" uid="uid://chu8ujksgake0" path="res://engine/entities/behavior/leaves/assign_new_destination.gd" id="14_dqq6t"]
 [ext_resource type="Script" uid="uid://btfo4hwoiyn01" path="res://engine/entities/detection/entity_detector.gd" id="15_gt6ce"]
+[ext_resource type="Script" uid="uid://e4oxg44mgcj1" path="res://engine/entities/behavior/conditions/signal_within_angle.gd" id="17_l7f70"]
 [ext_resource type="Texture2D" uid="uid://0drtvxk5rlkx" path="res://assets/UI/white_icons/ArrowUpIconWhite.png" id="17_op6l6"]
 [ext_resource type="Texture2D" uid="uid://dp2rl27aa2lgl" path="res://assets/UI/white_icons/white_filled_triangle.png" id="18_5l3g8"]
+[ext_resource type="Script" uid="uid://clkbbkhu75hrv" path="res://engine/entities/behavior/actions/homing_movement.gd" id="18_bubkb"]
 [ext_resource type="Script" uid="uid://6tigw2euote6" path="res://engine/entities/entity_munitions.gd" id="19_3qnbj"]
 [ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_0c68s"]
 [ext_resource type="Shader" uid="uid://dcopcc20fbxi7" path="res://shaders/sonar_pulse_3.gdshader" id="20_hyfub"]
@@ -176,7 +178,7 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hyfub"]
 
-[node name="Entity" type="RigidBody3D"]
+[node name="Entity" type="RigidBody3D" node_paths=PackedStringArray("atts")]
 collision_layer = 3
 collision_mask = 524288
 physics_material_override = SubResource("PhysicsMaterial_8wa36")
@@ -186,6 +188,7 @@ script = ExtResource("1_du6w5")
 base_color = Color(0.913867, 0.546384, 0.919942, 1)
 scale_factor = 0.0
 can_move = false
+atts = NodePath("EntityAttributes")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_3qfs3")
@@ -306,6 +309,17 @@ script = ExtResource("6_6tq8k")
 
 [node name="SalvageWreck" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
+
+[node name="BasicHoming" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
+script = ExtResource("6_6tq8k")
+
+[node name="SignalWithinAngle" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/BasicHoming"]
+script = ExtResource("17_l7f70")
+metadata/_custom_type_script = "uid://dk82cqfncxi8f"
+
+[node name="HomingMovement" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/BasicHoming"]
+script = ExtResource("18_bubkb")
+metadata/_custom_type_script = "uid://0g03hqhrhuvh"
 
 [node name="SalvageSpecific" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")

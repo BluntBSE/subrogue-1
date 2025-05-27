@@ -33,6 +33,7 @@ func _ready() -> void:
     played_by = get_parent().get_parent()
     faction = fired_from.faction
     render.update_mesh_visibilities(faction.faction_layer, true)
+    behavior.enable()
 
     pass  # Replace with function body.
 
@@ -64,7 +65,7 @@ func _process(delta: float) -> void:
             #I dont actually know why the move_towards approach didnt work.
 
             var move_command = GlobeHelpers.generate_move_command(self, target_entity.position)
-            controller.order_move.emit(move_command) #TODO IMPORTANT: Creating new waypoints every 60th of a second is not needed. Move the existing waypoint.
+            controller.order_move.emit(move_command)
 
 
 func seek_new_target_passive():
@@ -128,7 +129,7 @@ func damage_target(target: Entity) -> void:
     #TODO: Kill any related signal object on the parent
     pass
 
-
+#I thought about making this a static function, but we need quite a few things intrinsic to the entity
 func is_within_angle(target: Node3D, angle: float) -> bool:
     # If the provided angle is 40, this function checks if a target
     # is within the Detection Area and within 20 degrees clockwise and 20 degrees counterclockwise
