@@ -10,6 +10,7 @@ var controlled_by #NPC Factions?
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
+
 var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
 @onready var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
@@ -23,11 +24,12 @@ var height:float = GlobalConst.height; #Given that the planet has a known radius
 @export var scale_factor:float = 1.0
 @export var faction:Faction
 @export var can_move := true
-@onready var atts:EntityAtts = %EntityAttributes
+@export var atts:EntityAtts
 @onready var behavior:EntityBehavior = %EntityBehavior
 @onready var emission:EntityEmission = %EntityEmission
 @onready var render:EntityRender = %EntityRender
 @onready var detector:EntityDetector = %EntityDetector
+@onready var munitions:EntityMunitions = %EntityMunitions
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
 @onready var notifications:Notifications = %Notifications
@@ -204,7 +206,7 @@ func check_reached_waypoint()->void:
         var direction = (wp - global_position).normalized()
         var movement = direction * speed # * timescale
         var dist = (wp - global_position).length()
-        if dist <= movement.length():
+        if dist <= movement.length() + 0.1:
             cmd.is_finished()
             %HeadingSprite.visible = false
         
@@ -249,10 +251,7 @@ func query_any_on_layer(node, layer: int) -> bool:
             return true
     return false  # No match found
     
-#DEBUG INITIATLIZE MOVEMENT
-func initial_go_to_destination():
-        pass
-        #move_bus.order_destination_path()
+
         
 #TODO: This just deletes ships that get to their goal. Eventually they might need more persistent docking or a signal emission relevant to missions.
 func check_at_destination():

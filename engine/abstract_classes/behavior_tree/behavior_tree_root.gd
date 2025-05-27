@@ -16,16 +16,15 @@ func _ready():
         disable()
         return
 
-var accum:float = 0.0
-func _process(delta:float):
-    accum += delta
-    if accum >= get_parent().every_x_frames:
-        accum = 0.0
+var frames:float = 0.0
+func _process(_delta:float):
+    frames += 1.0 #NOT delta because we're counting frames. Frames are once per process.
+    if frames >= get_parent().every_x_frames:
+        frames = 0.0
     #I chose process instead of physics process because I lowered my physics frames a *lot*
     #Possibly we can throttle how often this runs to improve performance if needed
         if not enabled:
             return
-        blackboard.bbset("delta", delta)
         var entity = get_parent().get_parent()
         self.get_child(0).tick(entity, blackboard)    #??? I think this means "Make the immediately following composite accept the parent of this node as the thing to which tick is applied
         #Translates to:

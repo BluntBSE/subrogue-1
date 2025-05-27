@@ -4,7 +4,8 @@ static func munition_by_id(id: String) -> Munition:
     var new_munition: Munition = preload("res://engine/entities/munitions/munition_entity.tscn").instantiate()
     var munitions_data = GlobalConst.munitions_lib
     var munition_data = munitions_data.get(id)
-    
+    #Moving everything into 'atts' like regular entities might be better for us.
+    new_munition.atts.type = munition_data
     new_munition.id = munition_data.id
     new_munition.display_name = munition_data.display_name
     new_munition.guidance_type = munition_data.guidance_type

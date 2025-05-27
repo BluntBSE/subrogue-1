@@ -26,7 +26,7 @@ func _on_text_submitted(new_text: String) -> void:
     var gr:GameRoot = get_tree().root.find_child("GameRoot", true, false)
     if new_text == "new target":
          var test_node = get_tree().root.find_child("test_node", true, false)
-         spawn_entity_at_node(test_node, "debug_commercial", gr.factions.faction_1)       
+         spawn_entity_at_node(test_node, "commercial_freighter_1", gr.factions.faction_1)       
     if new_text == "i see everything":
         see_everything()
     if new_text == "nomore":

@@ -33,16 +33,17 @@ func _ready() -> void:
     played_by = get_parent().get_parent()
     faction = fired_from.faction
     render.update_mesh_visibilities(faction.faction_layer, true)
+    behavior.enable()
 
     pass  # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-var interval = 0.0
+var target_interval = 0.0
 
 
 func _process(delta: float) -> void:
-    interval += delta
+    target_interval += delta
     var mesh_1: MeshInstance3D = %TrackingConeMesh
     var entity: Munition = self
     var up = (entity.anchor.position - entity.position).normalized()
@@ -51,8 +52,8 @@ func _process(delta: float) -> void:
     mesh_1.rotation.z += deg_to_rad(90.0)
     mesh_1.rotation.z += rotation.z
 
-    if interval > 0.25:
-        interval = 0.0
+    if target_interval > 0.25:
+        target_interval = 0.0
         target_entity = seek_new_target_passive()
         #Generating a new move command every frame might be excessive. But maybe it's fine?
         #Probably I should put some kind of delta that scales based on how far away we are.
@@ -64,7 +65,7 @@ func _process(delta: float) -> void:
             #I dont actually know why the move_towards approach didnt work.
 
             var move_command = GlobeHelpers.generate_move_command(self, target_entity.position)
-            controller.order_move.emit(move_command) #TODO IMPORTANT: Creating new waypoints every 60th of a second is not needed. Move the existing waypoint.
+            controller.order_move.emit(move_command)
 
 
 func seek_new_target_passive():
@@ -128,7 +129,7 @@ func damage_target(target: Entity) -> void:
     #TODO: Kill any related signal object on the parent
     pass
 
-
+#I thought about making this a static function, but we need quite a few things intrinsic to the entity
 func is_within_angle(target: Node3D, angle: float) -> bool:
     # If the provided angle is 40, this function checks if a target
     # is within the Detection Area and within 20 degrees clockwise and 20 degrees counterclockwise

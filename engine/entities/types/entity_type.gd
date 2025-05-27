@@ -30,5 +30,8 @@ enum munitition_types {torpedoes, missiles, all}
 @export var depths:Array #accepts enums
 @export var current_depth:int
 
+#AI
+@export var behavior_type:BehaviorType
+
 #META
 @export var base_cost:int

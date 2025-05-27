@@ -8,12 +8,14 @@ signal pressed_hail
 signal pressed_ping
 
 func unpack(_player:Player, _context:ContextMarker)->void:
+    context = _context
+    print("CONTEXT WAS ", context)
+
     pressed_launch.connect(_player.markers.handle_launch)
     pressed_launch.connect(_player.camera.add_trauma)
     pressed_launch.connect(_player.UI.handle_launch)
-    pressed_launch.connect(_player.entities.launch_munition)
     pressed_launch.connect(_player.camera.handle_launch)
-    context = _context
+
     pass
 
 # Called when the node enters the scene tree for the first time.
@@ -26,9 +28,19 @@ func _process(delta: float) -> void:
     pass
 
 func pressed_launch_button()->void:
-    var debug_munition:Munition = MunitionHelpers.munition_by_id("manta_torpedo")
-    #Requires muniition, start, end.
     #For now, there is only the one originating entity.
-    var args = {"munition": debug_munition, "originating_entity":context.originating_entities[0], "start_position": context.originating_entities[0].position, "target_position": context.position, "trauma":0.5}
+    var active_entity:Entity = context.originating_entities[0]
+    pressed_launch.connect(active_entity.munitions.launch_munition)
+
+    var active_munition:String = active_entity.munitions.active_munition
+    if !active_munition:
+        print("NO VALID MUNIITION")
+        return
+    var loaded_munition:Munition = MunitionHelpers.munition_by_id(active_munition)
+    #Requires muniition, start, end.
+    var args = {"munition": loaded_munition, "originating_entity":context.originating_entities[0], "start_position": context.originating_entities[0].position, "target_position": context.position, "trauma":0.5}
     pressed_launch.emit(args) #Should there a custom signal type?A Launchcommmand?
     SoundManager.play("launch_thump_1", "randpitch_small", "game", 6.0)
+
+func munitions_remaining(id:String):
+    pass

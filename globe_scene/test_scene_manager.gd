@@ -5,7 +5,7 @@ class_name TSM #TestSceneManager
 #1 - Keeps a fixed number of NPCs circulating in the world
 #2 - Provides some special debug buttons to trigger effects on demand
 
-var num_commercial_entities = 50
+var num_commercial_entities = 2
 var num_military_entities = 10
 var commercial_entities = []
 var military_entities = []
@@ -13,7 +13,7 @@ var military_entities = []
 #Random draws will come from this list
 var spawn_navnodes = ["NavNode_Miami", "NavNode_NewGibraltar", "NavNode_Reykjavik", "NavNode_Georgetown", "NavNode_Dakhla", "NavNode_Dakar", "NavNode_Cork", "NavNode_StPierre", "NavNode_NewYork"] #No difference between these two right now
 var destination_navnodes = []
-var commercial_ids = ["debug_commercial"]
+var commercial_ids = ["commercial_freighter_1"]
 var military_ids
 var faction_ids = ["SaharanFreeLeague", "Atlantic Empire", "EuropeanFront", "UnitedAmericanRepublics"]
 
@@ -129,9 +129,9 @@ func no_entities_near_node(node: NavNode, distance: float) -> bool:
 
 func configure_behavior(entity:Entity, destination_id:String)->void:
     #For now, this only sets a destination for our critter
+    print("Hello from configure behavior")
     var dest:NavNode = entity.get_tree().root.find_child(destination_id, true, false)
     entity.behavior.destination_node = dest
-    entity.initial_go_to_destination()
     entity.behavior.enable()
     pass
     

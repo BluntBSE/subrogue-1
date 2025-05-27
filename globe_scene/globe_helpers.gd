@@ -267,7 +267,6 @@ static func game_s_to_kph(game_units_per_second: float) -> float:
     return kph
 
 static func generate_move_command(entity:Entity, target_position:Vector3, layer:int = 2, mask:int = 2) ->MoveCommand:
-    print("Generate move command ifred for ", entity.atts.display_name)
     var waypoint:Vector3 #global position we're going towards
 
 

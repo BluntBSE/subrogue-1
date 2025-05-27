@@ -1,11 +1,13 @@
 extends ConditionLeaf
 
 func tick(actor:Entity, blackboard:BlackBoard):
+    print("Hello from flee check")
     var fled = blackboard.bbget("recently_fled")
     if fled == null:
         blackboard.bbset("recently_fled", false)
     if fled == false:
-        return FAILURE #As in, "this is the leaf we want to stay on."
+        print("WAT")
+        return FAILURE
     else:
-        print("Flee existing tick")
-        return SUCCESS #Move on from this leaf down the tree.
+        print("YES")
+        return SUCCESS
