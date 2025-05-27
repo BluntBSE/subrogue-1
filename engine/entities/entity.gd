@@ -10,6 +10,7 @@ var controlled_by #NPC Factions?
 @onready var anchor:Planet = get_tree().root.find_child("GamePlanet", true, false)
 @export var azimuth:float
 @export var polar:float
+
 var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
 @onready var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
@@ -28,6 +29,7 @@ var height:float = GlobalConst.height; #Given that the planet has a known radius
 @onready var emission:EntityEmission = %EntityEmission
 @onready var render:EntityRender = %EntityRender
 @onready var detector:EntityDetector = %EntityDetector
+@onready var munitions:EntityMunitions = %EntityMunitions
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
 @onready var notifications:Notifications = %Notifications

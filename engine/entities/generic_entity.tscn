@@ -333,6 +333,7 @@ script = ExtResource("6_6tq8k")
 [node name="EntityCargo" type="Node" parent="."]
 
 [node name="EntityMunitions" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("19_3qnbj")
 
 [node name="EntityAttributes" type="Node" parent="."]
