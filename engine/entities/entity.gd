@@ -174,6 +174,10 @@ func move_towards(pos: Vector3) -> void:
    # print("Speed was ", speed)   
     # Set linear velocity - we're not dealing with acceleration right now.
     #print("movemtn was ", movement)
+    var would_move_to = position+movement
+    if !can_move_to(would_move_to):
+        return
+    
     position += movement
     #apply_central_force(vector)
     
@@ -193,6 +197,23 @@ func move_towards(pos: Vector3) -> void:
                 var target_facing = position - direction
                 var local_angle = GlobeHelpers.get_local_angle_between(pos, global_position, center_to_position)
                 rotation.z = -deg_to_rad(local_angle)
+
+
+
+
+func can_move_to(target_position: Vector3) -> bool:
+
+    var space_state = get_world_3d().direct_space_state
+    var _transform = Transform3D(Basis(), target_position)
+    var params : = PhysicsShapeQueryParameters3D.new()
+    var mask = 1 << 19
+    params.transform = _transform
+    params.collision_mask = mask
+    params.shape = get_node("CollisionShape3D").shape
+    params.margin = 0.0
+    var result = space_state.intersect_shape(params)
+    print("RESULT WAS:  ", result)
+    return result.size() == 0
     
 func check_reached_waypoint()->void:
     #Prepare to check for docking
