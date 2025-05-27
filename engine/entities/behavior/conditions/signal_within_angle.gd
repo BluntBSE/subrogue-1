@@ -33,6 +33,6 @@ func tick(actor:Entity, blackboard:BlackBoard):
     if target == null:
         blackboard.bbset("homing_to", null)
         return FAILURE
-    if target == true:
+    if target:
         blackboard.bbset("homing_to", target)
         return SUCCESS
