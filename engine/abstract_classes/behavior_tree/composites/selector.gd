@@ -8,11 +8,13 @@ class_name SelectorComposite
 
 
 func tick(actor, blackboard):
+    print("Hello from tick for ", self.name)
     for c in get_children():
         if c is not NoteLeaf:
             var response = c.tick(actor,blackboard)
             
             if response != FAILURE:
+                print("Success in selector", self.name)
                 return response
-            
+    print("Failure in selector", self.name)
     return FAILURE

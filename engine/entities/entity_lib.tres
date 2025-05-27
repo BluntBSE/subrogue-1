@@ -6,5 +6,5 @@
 
 [resource]
 script = ExtResource("1_22d0a")
-debug_commercial = ExtResource("1_et3xr")
+commercial_freighter_1 = ExtResource("1_et3xr")
 player_sub = ExtResource("2_et3xr")

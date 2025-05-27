@@ -226,9 +226,6 @@ notes = "blackboard variables:
 \"needs_reset\":bool"
 metadata/_custom_type_script = "uid://c2ckn3j2txow5"
 
-[node name="AttackTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]
-script = ExtResource("6_6tq8k")
-
 [node name="FleeExisting" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]
 script = ExtResource("6_6tq8k")
 
@@ -329,6 +326,9 @@ script = ExtResource("9_3cqk4")
 
 [node name="ActionLeaf" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/STOP-AlwaysSucceed"]
 script = ExtResource("8_hntc2")
+
+[node name="AttackTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot"]
+script = ExtResource("6_6tq8k")
 
 [node name="EntityCargo" type="Node" parent="."]
 
