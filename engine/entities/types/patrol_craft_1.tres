@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EntityType" load_steps=4 format=3 uid="uid://c1fb8muwlrdr5"]
+
+[ext_resource type="Resource" uid="uid://ct2thqa6f8emo" path="res://engine/entities/behavior/behavior_types/basic_commercial.tres" id="1_5utd6"]
+[ext_resource type="Script" uid="uid://c7ymqn6mo5dye" path="res://engine/entities/types/entity_type.gd" id="2_5da04"]
+[ext_resource type="PackedScene" uid="uid://fx6i0vmroknk" path="res://engine/entities/3d_scenes/patrol_craft_1.tscn" id="2_8pta8"]
+
+[resource]
+script = ExtResource("2_5da04")
+id = "patrol_craft_1"
+display_class = "Patrol Craft"
+category = "military"
+base_hull = 1
+base_cargo = 3
+munition_types = 0
+munition_slots = 0
+munition_size = 0
+utility_slots = 0
+utility_size = 0
+upgrade_slots = 0
+inspection_scene = ExtResource("2_8pta8")
+base_max_speed = 50
+base_profile = 0.7
+base_pitch = 90.0
+base_volume = 110.0
+size = 6000.0
+vol_speed_factor = 1.0
+depths = [null, null]
+current_depth = 0
+behavior_type = ExtResource("1_5utd6")
+base_cost = 0

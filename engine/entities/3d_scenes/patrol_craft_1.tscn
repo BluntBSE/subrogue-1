@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfgnhjrv8rjgx"]
+[gd_scene load_steps=9 format=3 uid="uid://fx6i0vmroknk"]
 
-[ext_resource type="Shader" uid="uid://bjysmg5kwy2ke" path="res://title_screen/wireframe_sub_space.gdshader" id="1_208rp"]
-[ext_resource type="Script" uid="uid://6cm48bx7cewb" path="res://engine/entities/3d_scenes/3d_inspection_scene.gd" id="1_pwxti"]
-[ext_resource type="ArrayMesh" uid="uid://dkb6osgay2qlt" path="res://assets/3d/cargo_ship_1.obj" id="2_pwxti"]
+[ext_resource type="Script" uid="uid://6cm48bx7cewb" path="res://engine/entities/3d_scenes/3d_inspection_scene.gd" id="1_2n0pk"]
+[ext_resource type="Shader" uid="uid://bjysmg5kwy2ke" path="res://title_screen/wireframe_sub_space.gdshader" id="1_ertf7"]
+[ext_resource type="ArrayMesh" uid="uid://bsckshy78e4m1" path="res://assets/3d/boat_obj.obj" id="2_ertf7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_smroy"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("1_208rp")
+shader = ExtResource("1_ertf7")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/outline_width = 3.0
 
@@ -131,21 +131,21 @@ _data = {
 }
 
 [node name="Ship3DRoot" type="Node3D"]
-script = ExtResource("1_pwxti")
-id = "commercial_freighter_1"
+script = ExtResource("1_2n0pk")
+id = "patrol_craft_1"
 
-[node name="CargoShip1" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+[node name="MeshInstance" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0, 229.883)
 material_override = SubResource("ShaderMaterial_smroy")
-mesh = ExtResource("2_pwxti")
+mesh = ExtResource("2_ertf7")
 skeleton = NodePath("../../..")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-0.0727333, 0, 0.997351, 0, 1, 0, -0.997351, 0, -0.0727333, 101.845, 39.1139, -4.7975)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 25.9601, 81.0845, -17.84)
 fov = 80.0
-far = 200.0
+far = 300.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraPivot"]
 libraries = {

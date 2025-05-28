@@ -399,7 +399,7 @@ _data = {
 }
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nwwe3"]
-viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport")
+viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/ShipPreviewSubViewport")
 
 [sub_resource type="Animation" id="Animation_558vm"]
 length = 0.001
@@ -2184,7 +2184,6 @@ script = ExtResource("34_558vm")
 
 [node name="EntityInspection" type="Control" parent="UICanvas/PlayerUIRoot/InspectionRoot"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2113.0
@@ -2213,7 +2212,8 @@ offset_bottom = 357.0
 texture = SubResource("ViewportTexture_nwwe3")
 stretch_mode = 3
 
-[node name="SubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview"]
+[node name="ShipPreviewSubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview"]
+unique_name_in_owner = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
@@ -2224,7 +2224,7 @@ fsr_sharpness = 2.0
 canvas_item_default_texture_filter = 0
 size = Vector2i(256, 256)
 
-[node name="Ship3DRoot" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/SubViewport" instance=ExtResource("36_q7i7m")]
+[node name="Ship3DRoot" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/ShipPreviewSubViewport" instance=ExtResource("36_q7i7m")]
 unique_name_in_owner = true
 
 [node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
