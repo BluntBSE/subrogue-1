@@ -48,6 +48,7 @@ func repopulate_entities():
 func handle_entity_died(entity:Entity):
     print("An erasure occurred")
     commercial_entities.erase(entity)
+    military_entities.erase(entity)
 
 
 

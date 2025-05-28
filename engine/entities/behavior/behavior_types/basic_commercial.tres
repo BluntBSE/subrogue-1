@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_yd1sp")
 behavior_dict = {
+"Flee": 0,
 "MoveToDestination": 1
 }
 metadata/_custom_type_script = "uid://dw5cleiwyjil"
