@@ -325,7 +325,7 @@ var last_update_time: float = 0.0  # Time of the last update
 var update_interval: float = 0.5  # Minimum interval between updates (in seconds)
 func update_if_needed() -> void:
     var current_time = Time.get_ticks_msec() * 1000  # Get the current time in seconds
-    if needs_update and (current_time - last_update_time >= update_interval):
+    if needs_update and (current_time - last_update_time >= update_interval) and detected_object and detecting_object:
         last_detected_position = detected_object.global_position
         last_detector_position = detecting_object.global_position
         update_threshold = calculate_update_threshold()
