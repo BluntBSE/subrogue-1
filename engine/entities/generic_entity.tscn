@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
+[ext_resource type="Shape3D" uid="uid://c5qns0rgy0acb" path="res://engine/entities/test.shape" id="2_bubkb"]
 [ext_resource type="Script" uid="uid://b0rx04rp06hig" path="res://engine/entities/entity_attributes.gd" id="3_3n25e"]
 [ext_resource type="Script" uid="uid://c3uhvqictxnmv" path="res://engine/entities/entity_behavior.gd" id="3_37f8c"]
 [ext_resource type="Script" uid="uid://dub08cmps46gn" path="res://engine/abstract_classes/behavior_tree/behavior_tree_root.gd" id="3_m7cwq"]
@@ -39,8 +40,6 @@
 [ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="29_j3cwe"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_3qfs3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e0wf7"]
 radius = 1.0
@@ -191,7 +190,7 @@ can_move = false
 atts = NodePath("EntityAttributes")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_3qfs3")
+shape = ExtResource("2_bubkb")
 
 [node name="NavArea" type="Area3D" parent="."]
 collision_layer = 2

@@ -161,38 +161,61 @@ func move_to_next()->void:
 
 func move_towards(pos: Vector3) -> void:
     var direction = (pos - position).normalized()
-    # Calculate the vector from the center of the sphere to the current position
     var center_to_position = (position - anchor.position).normalized()
-    
-    # Project the direction vector onto the tangent plane
     var tangential_direction = direction - center_to_position * direction.dot(center_to_position)
     tangential_direction = tangential_direction.normalized()
-    
-    # Calculate the tangential movement vector with the desired speed
-    #var vector = tangential_direction * speed * GlobalConst.time_scale
-    var movement = tangential_direction * speed * GlobalConst.time_scale    
-   # print("Speed was ", speed)   
-    # Set linear velocity - we're not dealing with acceleration right now.
-    #print("movemtn was ", movement)
+    var movement = tangential_direction * speed * GlobalConst.time_scale
+    var would_move_to = position + movement
+
+    if !can_move_to(would_move_to):
+        # Try both tangents
+        var slide1 = get_perpendicular_vector(tangential_direction, center_to_position)
+        var slide2 = -slide1
+        var slide_move1 = slide1 * speed * GlobalConst.time_scale
+        var slide_move2 = slide2 * speed * GlobalConst.time_scale
+
+        if can_move_to(position + slide_move1):
+            movement = slide_move1
+        elif can_move_to(position + slide_move2):
+            movement = slide_move2
+        else:
+            # Back off slightly and add a small random nudge
+            var away = (position - would_move_to).normalized()
+            var nudge = Vector3(randf() - 0.5, randf() - 0.5, randf() - 0.5).normalized() * 0.1
+            movement = away * speed * 0.5 * GlobalConst.time_scale + nudge
+
     position += movement
-    #apply_central_force(vector)
-    
+
     # Update the heading sprite to face the right direction
     var heading_sprite: Sprite3D = %HeadingSprite
     heading_sprite.visible = true
-    
-    # Rotate the whole sprite and heading sprite towards the target
-    
-    
-    if direction != center_to_position:
-        if position != anchor.position:
-            
-            if !is_zero_approx(direction.cross(center_to_position).length()): #I had a reason for this. But I don't remember it anymore.
 
-                var current_facing = position + transform.basis.z
-                var target_facing = position - direction
-                var local_angle = GlobeHelpers.get_local_angle_between(pos, global_position, center_to_position)
-                rotation.z = -deg_to_rad(local_angle)
+    # Rotate the whole sprite and heading sprite towards the target
+    if direction != center_to_position and position != anchor.position:
+        if !is_zero_approx(direction.cross(center_to_position).length()):
+            var current_facing = position + transform.basis.z
+            var target_facing = position - direction
+            var local_angle = GlobeHelpers.get_local_angle_between(pos, global_position, center_to_position)
+            rotation.z = -deg_to_rad(local_angle)
+
+func get_perpendicular_vector(move_vec: Vector3, up: Vector3) -> Vector3:
+    var perp = up.cross(move_vec).normalized()
+    # Choose the tangent closest to the original direction
+    if perp.dot(move_vec) < 0:
+        perp = -perp
+    return perp
+
+func can_move_to(target_position: Vector3) -> bool:
+    var space_state = get_world_3d().direct_space_state
+    var _transform = Transform3D(Basis(), target_position)
+    var params := PhysicsShapeQueryParameters3D.new()
+    var mask = 1 << 19
+    params.transform = _transform
+    params.collision_mask = mask
+    params.shape = get_node("CollisionShape3D").shape
+    params.margin = 0.0
+    var result = space_state.intersect_shape(params)
+    return result.size() == 0
     
 func check_reached_waypoint()->void:
     #Prepare to check for docking
