@@ -176,7 +176,8 @@ func move_towards(pos: Vector3) -> void:
     #print("movemtn was ", movement)
     var would_move_to = position+movement
     if !can_move_to(would_move_to):
-        return
+        var slide_vector = get_slide_vector(would_move_to)
+        movement = slide_vector * speed * GlobalConst.time_scale
     
     position += movement
     #apply_central_force(vector)
@@ -200,6 +201,23 @@ func move_towards(pos: Vector3) -> void:
 
 
 
+func get_slide_vector(target_position:Vector3)->Vector3:
+    var space_state = get_world_3d().direct_space_state
+    var _transform = Transform3D(Basis(), target_position)
+    var params : = PhysicsShapeQueryParameters3D.new()
+    var mask = 1 << 19
+    params.transform = _transform
+    params.collision_mask = mask
+    params.shape = get_node("CollisionShape3D").shape
+    params.margin = 0.0
+    var result = space_state.intersect_shape(params)  
+    var rid = result[0].rid
+    print("rid was ", rid)
+    var space_state_2 = PhysicsServer3D.body_get_direct_state(rid)
+    print('ss2 was ', space_state_2)
+    var normal = space_state_2.get_contact_local_normal(0)
+    print("Normal was determined to be ", normal)
+    return normal
 
 func can_move_to(target_position: Vector3) -> bool:
 
