@@ -14,7 +14,6 @@ func tick(actor:Entity, blackboard:BlackBoard):
                 if dist < 12.0: #TODO: Probably need to make a variable
                     #Right now we don't reason about what's most dangerous, we just flee from the first eligible
                     blackboard.bbset("fleeing_sig", sig) #Signals are hidden, not eliminated during C100, so I think this covers C100 and positive ID
-                    print("THREAT DETECTED")
                     return SUCCESS
                     
     else:

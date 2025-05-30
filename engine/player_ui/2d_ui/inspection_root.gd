@@ -7,11 +7,13 @@ class_name InspectionRoot
 #Bigger file, but easier debugging I think?
 var inspecting_signal:SignalPopup
 var inspecting_entity:Entity #Positively ID'd
+var active_inspection_color:Color
 signal closed_unidentified
 signal closed_identified
 signal edited_signal_name
 signal edited_signal_type
 signal edited_color
+
 
 #Unidentified open
 func handle_opened_signal(sig:SignalPopup):
@@ -92,6 +94,8 @@ func _on_signal_color_changer_color_changed(color: Color) -> void:
     pass # Replace with function body.
 
 func handle_color_stream(color:Color)->void:
+    active_inspection_color = color
+    print("Active inspection color set to ", active_inspection_color)
     #We do this as opposed to updating directly from the color picker because there might be events that cause signal objects to change their own color
     #And we want to update the player accordingly
     #E.G: Faction identification, if not perfect identification.
@@ -100,6 +104,10 @@ func handle_color_stream(color:Color)->void:
     spike_mesh.material_override.set("shader_parameter/color", shader_color)
     %SignalColorChanger.modulate = color
     #Positively identified:
+    update_ship_colors(color)
+    
+func update_ship_colors(color:Color):
+    var shader_color = Vector3(color.r,color.g,color.b)
     var ship_mesh:MeshInstance3D = find_child("Ship3DRoot", true, false).get_child(0)#The first child of this root should always be a ship mesh.
     #Probably we'll switch out scenes for every ship type and attach them directly to Ship3D root.
     #These scenes will be defined on the entity resource itself
@@ -107,7 +115,6 @@ func handle_color_stream(color:Color)->void:
     %EntityName.add_theme_color_override("font_outline_color", color)
     %EntityFaction.add_theme_color_override("font_outline_color", color)
     %EntityClass.add_theme_color_override("font_outline_color", color)
-
 
 func _on_entity_inspector_toggle_button_up() -> void:
     var player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
@@ -129,6 +136,14 @@ func load_inspected_entity(entity:Entity):
     %EntityProfile.text = "Profile: " + str(entity.emission.profile)
     %EntityVolume.text = "Volume: " + str(entity.emission.volume)
     %EntityDepth.text = "Depth: " + str(entity.atts.current_depth)
+    var inspection_scene:InspectionScene3D = %ShipPreviewSubViewport.get_child(0)
+    print("Current inspection scene has ID of: ", inspection_scene.id)
+    print("ENTITY id is ", entity.atts.type.id)
+    if inspection_scene.id != entity.atts.type.id:
+        var new_scene = entity.atts.type.inspection_scene.instantiate()
+        inspection_scene.free()
+        %ShipPreviewSubViewport.add_child(new_scene)
+        update_ship_colors(active_inspection_color)
     #closed_identified.connect(entity.render.handle_release_observed)
     
 

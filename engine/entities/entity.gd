@@ -12,6 +12,7 @@ var controlled_by #NPC Factions?
 @export var polar:float
 
 var height:float = GlobalConst.height; #Given that the planet has a known radius of 100. Height of 0.25
+var current_movement_vector:Vector3 #Updated when the entity does move_to().
 @onready var move_tolerance = 0.0
 @onready var move_bus:EntityMoveBus = get_node("EntityMoveBus")
 @export var speed = GlobeHelpers.kph_to_game_s(240.0) #Debug - hyperfast #TODO: This is fucked now that we dont use physics
@@ -164,6 +165,7 @@ func move_towards(pos: Vector3) -> void:
     var center_to_position = (position - anchor.position).normalized()
     var tangential_direction = direction - center_to_position * direction.dot(center_to_position)
     tangential_direction = tangential_direction.normalized()
+    current_movement_vector = tangential_direction
     var movement = tangential_direction * speed * GlobalConst.time_scale
     var would_move_to = position + movement
 

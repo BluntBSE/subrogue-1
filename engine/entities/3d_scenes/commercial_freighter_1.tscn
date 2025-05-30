@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfgnhjrv8rjgx"]
+[gd_scene load_steps=9 format=3 uid="uid://bfgnhjrv8rjgx"]
 
 [ext_resource type="Shader" uid="uid://bjysmg5kwy2ke" path="res://title_screen/wireframe_sub_space.gdshader" id="1_208rp"]
+[ext_resource type="Script" uid="uid://6cm48bx7cewb" path="res://engine/entities/3d_scenes/3d_inspection_scene.gd" id="1_pwxti"]
 [ext_resource type="ArrayMesh" uid="uid://dkb6osgay2qlt" path="res://assets/3d/cargo_ship_1.obj" id="2_pwxti"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_smroy"]
@@ -130,6 +131,8 @@ _data = {
 }
 
 [node name="Ship3DRoot" type="Node3D"]
+script = ExtResource("1_pwxti")
+id = "commercial_freighter_1"
 
 [node name="CargoShip1" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

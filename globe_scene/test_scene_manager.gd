@@ -5,8 +5,8 @@ class_name TSM #TestSceneManager
 #1 - Keeps a fixed number of NPCs circulating in the world
 #2 - Provides some special debug buttons to trigger effects on demand
 
-var num_commercial_entities = 50
-var num_military_entities = 10
+var num_commercial_entities = 1
+var num_military_entities = 0
 var commercial_entities = []
 var military_entities = []
 
@@ -14,7 +14,7 @@ var military_entities = []
 var spawn_navnodes = ["NavNode_Miami", "NavNode_NewGibraltar", "NavNode_Reykjavik", "NavNode_Georgetown", "NavNode_Dakhla", "NavNode_Dakar", "NavNode_Cork", "NavNode_StPierre", "NavNode_NewYork"] #No difference between these two right now
 var destination_navnodes = []
 var commercial_ids = ["commercial_freighter_1"]
-var military_ids
+var military_ids = ["patrol_craft_1"]
 var faction_ids = ["SaharanFreeLeague", "Atlantic Empire", "EuropeanFront", "UnitedAmericanRepublics"]
 
 var spawn_check_time = 0.0
@@ -37,11 +37,16 @@ func repopulate_entities():
         if entity: #new commercial entity returns nil if it couldnt spawn successfully
             commercial_entities.append(entity)
             entity.died.connect(handle_entity_died)
+    if military_entities.size()<num_military_entities:
+        var entity = new_military_entity() #Maybe this should be entity_from_list(military, tier)
+        if entity:
+            military_entities.append(entity)
+            entity.died.connect(handle_entity_died)
     pass
 
 func handle_entity_died(entity:Entity):
-    print("An erasure occurred")
     commercial_entities.erase(entity)
+    military_entities.erase(entity)
 
 
 
@@ -103,6 +108,68 @@ func new_commercial_entity()->Entity:
     var entity = EntityHelpers.spawn_entity_at_node(spawn_at, id, faction)
     configure_behavior(entity, dest)
     return entity
+
+
+func new_military_entity()->Entity:
+    # It might be better to remove the sanity checks from this function and move them a level up. 
+
+
+    # Select a random appropriate id
+    var id_modulo = military_ids.size() - 1
+    var id_idx
+    if id_modulo == 0: 
+        id_idx = 0
+    else:
+        id_idx = randi() % (military_ids.size() - 1)
+    var id = military_ids[id_idx]
+    
+    # Select a random valid navnode to spawn at
+    if spawn_navnodes.size() == 0:
+        return
+    var spawn_idx
+    if spawn_navnodes.size() == 1:
+        spawn_idx = 0
+    else:
+        spawn_idx = randi() % (spawn_navnodes.size() - 1)
+    var spawn_id = spawn_navnodes[spawn_idx]
+    var spawn_at:NavNode = get_tree().root.find_child(spawn_id, true, false)
+
+    
+    # Remove its spawn from the list of valid destinations, that'd be silly.
+    var valid_destinations = spawn_navnodes.duplicate()
+    valid_destinations.erase(spawn_at)
+    
+    # Select a random destination. Currently every valid spawn is a valid destination.
+    if valid_destinations.size() == 0:
+        return
+    var dest_idx
+    if valid_destinations.size() == 1:
+        dest_idx = 0
+    else:
+        dest_idx = randi() % (valid_destinations.size() - 1)
+    var dest = valid_destinations[dest_idx]
+    
+    # Maps are political. Select a random faction.
+    if faction_ids.size() == 0:
+        print("No factions available.")
+        return
+    var f_idx
+    if faction_ids.size() == 1:
+        f_idx = 0
+    else:
+        f_idx = randi() % (faction_ids.size() - 1)
+    var f_id = faction_ids[f_idx]
+    var faction = get_tree().root.find_child("Factions", true, false).get_node(f_id)
+    
+    if no_entities_near_node(spawn_at, 5.0) == false:
+        # If there are entities near where we would spawn, pass this attempt.
+        return
+    #Consider, refactor this into a call_deferred situation?
+    var entity = EntityHelpers.spawn_entity_at_node(spawn_at, id, faction)
+    configure_behavior(entity, dest)
+    return entity
+
+
 
 
 func no_entities_near_node(node: NavNode, distance: float) -> bool:

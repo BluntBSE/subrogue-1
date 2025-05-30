@@ -61,16 +61,12 @@ func apply_behavior_type(type:BehaviorType):
     behavior_profile = type
     print("Type applied was: ", type)
     var core_behaviors = %MainSelector.get_children()
-    print("WTF? ", type.behavior_dict)
     var keys = type.behavior_dict.keys()
-    print("Core behaviors: ")
     print(core_behaviors)
     
-    print("Keys:")
     print(keys)
     for behavior:Node in core_behaviors:
         if behavior.name not in keys:
-            print("Checking for ", behavior.name, " in ", keys)
             behavior.queue_free()
     
     for branch in keys:

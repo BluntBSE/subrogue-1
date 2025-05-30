@@ -17,6 +17,7 @@ enum munitition_types {torpedoes, missiles, all}
 @export var upgrade_slots:int
 #VISUALS
 @export var sprite:Texture2D
+@export var inspection_scene:PackedScene
 #@export var model
 #NAVIGATION
 @export var base_max_speed:int
