@@ -10,14 +10,12 @@ var positively_identified:bool = false
 var signal_id
 var color:Color = Color("ffffff"):
     set(value):
-        print("Custom color setter called  with", value)
         color = value
         stream_color.emit(value)   
         find_child("FactionModulator", true, false).modulate = color
 var faction #For visibility?
 var detecting_object:Entity
 var display_name:String
-var time_ago:float #Last time this signal was updated
 var detected_object:Entity
 var certainty:float = 50.0:
     set(value):
@@ -97,9 +95,9 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
         
   
     detecting_object = _detecting_object
-    position = _detected_object.position
-    initial_position = position
-    target_position = position
+    offset = calculate_offset()
+    position = _detected_object.position + offset
+    target_position = _detected_object.position + offset
     anchor = detecting_object.anchor
     sound = _sound
     detected_object = _detected_object
@@ -116,21 +114,18 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
             identified_opened.connect(player.UI.inspection_root.handle_openened_identified_signal)
             identified.connect(player.UI.inspection_root.handle_identified_signal)
             stream_color.connect(player.UI.inspection_root.handle_color_stream)
-            last_sampled_position = _detected_object.global_position
-            last_sampled_time = Time.get_ticks_msec() / 1000.0
             #sampled_velocity = Vector3.ZERO        
         #Signals
         #TODO: If they're already connected, don't do it again.
         detected_object.died.connect(handle_detected_object_died)
         detecting_object.died.connect(handle_detecting_object_died)
     # Calculate the offset once and store it
-    offset = calculate_offset()
     #How far must the entities travel before updating again?
     update_threshold = calculate_update_threshold()
     GlobeHelpers.recursively_update_visibility(self, 1, false)
     GlobeHelpers.recursively_update_visibility(self, detecting_object.faction.faction_layer, true)
     set_process(true)
-    needs_update = false
+    needs_update = true
     unpacked = true
     
 
@@ -166,11 +161,12 @@ func calculate_offset() -> Vector3:
 func tween_to_new():
     if detected_object and tweening == true:
         var tween = get_tree().create_tween()
-        var new_position = detected_object.global_position + offset
+
 
         tween.set_parallel(true)
-        tween.tween_property(self, "position", new_position, 2.0).from_current()
+        tween.tween_property(self, "position", target_position, 0.5)
         await tween.finished
+        offset = position - detected_object.global_position
         tweening = false
   
 
@@ -181,16 +177,15 @@ func match_detected_velocity():
 
 var throttle_accum:float
 func _process(_delta):
-    match_detected_velocity()
+    rotate_area_to_anchor()
     tween_to_new()
-    if visible:
-        position = lerp(position, target_position, _delta)
-        if hover_scaling == false:
-            scale_with_camera_distance()
-        else:
-            scale_with_fov()
-        rotate_area_to_anchor()
-        check_update_necessary()
+    match_detected_velocity()
+
+    if hover_scaling == false:
+        scale_with_camera_distance()
+    else:
+        scale_with_fov()
+    check_update_necessary() #Avoid teleporting signals you're mousing over by putting in the 'else'
     throttle_accum += 1.0
     if throttle_accum >= every_x_frames:
         throttle_accum = 0.0
@@ -308,21 +303,30 @@ func calculate_update_threshold()->float:
     #How far can the distance between the entities change before an update is necessary?
     #Let's say at certainty 20, you must have 500km of change. At certainty 99, you must travel only 50km
     var factor = inverse_lerp(10.0, 100.0, certainty)
-    var threshold = lerp(300.0, 25.0, factor)
+    var threshold = lerp(100.0, 25.0, factor)
     return threshold
 
-
+var detecting_last_position
+var detected_last_position
+var diff_total_km
 func check_update_necessary()->void:
     #If either entity has died, this is not necessary.
     if detected_object == null or detecting_object == null:
         return
-    var last_dist_km = GlobeHelpers.arc_to_km(last_detected_position, last_detector_position, anchor)
-    var cur_dist_km = GlobeHelpers.arc_to_km(detected_object.global_position, detecting_object.global_position, anchor)
-    var dist_diff = abs(last_dist_km - cur_dist_km)
-    #print("dist diff: ", dist_diff, " vs ", update_threshold)
-    if dist_diff > update_threshold:
-        needs_update = true
-
+    
+    if detecting_last_position == null:
+        detecting_last_position = detecting_object.global_position
+        detected_last_position = detected_object.global_position      
+    
+    if detecting_last_position and detected_last_position:
+        var detected_diff = GlobeHelpers.arc_to_km(detected_object.global_position, detected_last_position, anchor)
+        var detecting_diff = GlobeHelpers.arc_to_km(detecting_object.global_position, detecting_last_position, anchor)
+        diff_total_km = abs(detected_diff) + abs(detecting_diff) #Drifting on part of either the listener or the listened will triger update
+        #This prevents a lack of update from occurring from both entities moving in the same direction
+        if diff_total_km > update_threshold:
+            needs_update = true    
+            detecting_last_position = detecting_object.global_position
+            detected_last_position = detected_object.global_position
 
 var last_update_time: float = 0.0  # Time of the last update
 var update_interval: float = 0.5  # Minimum interval between updates (in seconds)
@@ -337,6 +341,7 @@ func update_if_needed() -> void:
         # Move to a new random offset based on certainty
         offset = calculate_offset()
         needs_update = false
+        tweening = true
         target_position = detected_object.position + offset
 
         # Update the last update time
@@ -416,7 +421,6 @@ func positively_identify():
     if positively_identified == false:
         positively_identified = true   
         color = detected_object.faction.faction_color
-        print("PI set color to ", color) #For some reason, putting stream_color in the setter didn't seem 100% reliable
         stream_color.emit(color)
         var id_label:RichTextLabel = find_child("SignalID", true, false)
         var class_label:RichTextLabel = find_child("SignalClass", true, false)
