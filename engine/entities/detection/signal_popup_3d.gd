@@ -99,7 +99,7 @@ func unpack(_detecting_object: Entity, _detected_object: Entity, _sound, _certai
     GlobeHelpers.recursively_update_visibility(self, 1, false)
     GlobeHelpers.recursively_update_visibility(self, detecting_object.faction.faction_layer, true)
     set_process(true)
-    needs_update = true
+    needs_update = false
     unpacked = true
     visible = true
     modulate_by_certainty()
@@ -124,13 +124,14 @@ func calculate_offset() -> Vector3:
     return tangential_direction * offset_distance
 
 func tween_to_new():
-    if detected_object and tweening:
-        var tween = get_tree().create_tween()
-        tween.set_parallel(true)
-        tween.tween_property(self, "position", target_position, 1.0)
-        await tween.finished
-        offset = position - detected_object.global_position
-        tweening = false
+    if detected_object:
+        if tweening:
+            var tween = get_tree().create_tween()
+            tween.set_parallel(true)
+            tween.tween_property(self, "position", target_position, 1.0)
+            await tween.finished
+            offset = position - detected_object.global_position
+            tweening = false
 
 func match_detected_velocity():
     if detected_object and not tweening:

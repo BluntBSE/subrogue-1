@@ -76,11 +76,11 @@ func seek_new_target_passive():
         #See if the target is within range and can be picked up at all.
         var within = is_within_angle(_entity, 40.0)
         if within:
-            var emission: EntityEmission = _entity.emission
-            var sound = Sound.new(_entity, emission.volume, emission.pitch, emission.profile)
-            var dist = GlobeHelpers.arc_to_km(position, _entity.position, anchor)
-            var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
-            if final_db > detector.sensitivity:
+            var _emission: EntityEmission = _entity.emission
+            var _sound = Sound.new(_entity, emission.volume, emission.pitch, emission.profile)
+            var _dist = GlobeHelpers.arc_to_km(position, _entity.position, anchor)
+            var _final_db = GlobalConst.attenuate_sound(_sound.volume, _sound.pitch, _dist)
+            if _final_db > detector.sensitivity:
                 valid_targets.append(_entity)
 
     var closest_target: Entity  #We currently calculate certainty as a function of distance, so "closest" is fine here.
@@ -113,8 +113,12 @@ func on_body_entered_check_for_impact(body):
 
 func damage_target(target: Entity) -> void:
     #TODO: Implement damage. Just kill for now.
+    print("DAMAGE TARGET CALLED AGASINT ", target.given_name)
     target.died.emit(target)
-    var particles: ParticleNode = %Particles
+    #NOTE: Did you get a weird bug here? Consider what happens if you manage to hit two colliders at once.
+    #This shouldn't happen, but I did encounter a bug I had a hard time explaining
+    var particles: ParticleNode = %Particles 
+    #NOTE: Did you get a weird bug here? Consider what happens if you manage to hit two colliders at once.
     remove_child(particles)
     anchor.add_child(particles)
     particles.global_position = target.global_position
