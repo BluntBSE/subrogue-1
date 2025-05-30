@@ -62,8 +62,10 @@ var update_threshold:float #Distance in game KM that either entity must be cross
 var last_detector_position:Vector3
 var last_detected_position:Vector3
 var offset:Vector3
-var last_velocity:Vector3
+var last_sampled_position:Vector3 #A replacement for velocity, this is used to check which direction an entity is moving
 
+var last_sampled_time: float = 0.0
+var sampled_velocity: Vector3 = Vector3.ZERO
 #CONTEXT ARGS
 var originating_entities:Array #For now this is exclusively the one entity under the player's control.
 var player:Node3D
@@ -71,6 +73,7 @@ var over_entity:Node3D #If the player dropped this over an entity, it must track
 #var line_to #Possibly give this node ownerhsip over the line
 var every_x_frames = 12.0 #Divide by this many frames. At 60fps, 12 should give us 6 frames per second.
 #SIGNALS
+var tweening:bool = false
 signal unidentified_opened
 signal identified
 signal identified_opened
@@ -100,6 +103,7 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
     anchor = detecting_object.anchor
     sound = _sound
     detected_object = _detected_object
+
     #Signal connections only need to be done once ever, even if we call unpack again later
     if unpacked == false:
         if detecting_object.is_player:
@@ -112,7 +116,9 @@ func unpack(_detecting_object:Entity, _detected_object:Entity, _sound, _certaint
             identified_opened.connect(player.UI.inspection_root.handle_openened_identified_signal)
             identified.connect(player.UI.inspection_root.handle_identified_signal)
             stream_color.connect(player.UI.inspection_root.handle_color_stream)
-        
+            last_sampled_position = _detected_object.global_position
+            last_sampled_time = Time.get_ticks_msec() / 1000.0
+            #sampled_velocity = Vector3.ZERO        
         #Signals
         #TODO: If they're already connected, don't do it again.
         detected_object.died.connect(handle_detected_object_died)
@@ -154,15 +160,29 @@ func calculate_offset() -> Vector3:
 
     # Calculate the offset position
     var offset_distance = GlobeHelpers.km_to_arc_distance(km_offset, anchor)
+    tweening = true
     return tangential_direction * offset_distance
     
+func tween_to_new():
+    if detected_object and tweening == true:
+        var tween = get_tree().create_tween()
+        var new_position = detected_object.global_position + offset
+
+        tween.set_parallel(true)
+        tween.tween_property(self, "position", new_position, 2.0).from_current()
+        await tween.finished
+        tweening = false
+  
+
 func match_detected_velocity():
-    if detected_object:  # Ensure the detected object exists
-        # Get the detected object's velocity
-        target_position += detected_object.linear_velocity/60
+    if detected_object and tweening == false:
+        global_position = detected_object.global_position + offset
+            
 
 var throttle_accum:float
 func _process(_delta):
+    match_detected_velocity()
+    tween_to_new()
     if visible:
         position = lerp(position, target_position, _delta)
         if hover_scaling == false:
@@ -171,13 +191,12 @@ func _process(_delta):
             scale_with_fov()
         rotate_area_to_anchor()
         check_update_necessary()
-    throttle_accum += _delta
+    throttle_accum += 1.0
     if throttle_accum >= every_x_frames:
         throttle_accum = 0.0
         update_if_needed()
-
-        if last_velocity:
-            position += last_velocity / 60
+        
+        
 
 
 
@@ -233,23 +252,7 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
         # Finally, we convert the position to the following range: 0 -> viewport.size
         event_pos2D.x *= node_viewport.size.x
         event_pos2D.y *= node_viewport.size.y
-        # We need to do these conversions so the event's position is in the viewport's coordinate system.
-        """
-        This didn't work so well. If you find the clickable area is too big, why not create a more precise shape in the 
-        Control itself, and check if you're inside that instead of querying transparency?
-        Code remains for reference, though.
-        
-        # Check if the pixel at event_pos2D is transparent
-        var viewport_texture: ViewportTexture = node_viewport.get_texture()
-        if viewport_texture:
-            var image: Image = node_viewport.get_texture().get_image()
-            var pixel_color: Color = image.get_pixelv(event_pos2D)
 
-            if pixel_color.a == 0.0:
-                # The pixel is fully transparent, forward the input to the game world
-                get_viewport().push_input(event)
-                return
-        """
     elif last_event_pos2D != null:
         # Fall back to the last known event position.
         event_pos2D = last_event_pos2D
@@ -323,6 +326,7 @@ func check_update_necessary()->void:
 
 var last_update_time: float = 0.0  # Time of the last update
 var update_interval: float = 0.5  # Minimum interval between updates (in seconds)
+
 func update_if_needed() -> void:
     var current_time = Time.get_ticks_msec() * 1000  # Get the current time in seconds
     if needs_update and (current_time - last_update_time >= update_interval) and detected_object and detecting_object:
@@ -337,7 +341,6 @@ func update_if_needed() -> void:
 
         # Update the last update time
         last_update_time = current_time
-        last_velocity = detected_object.linear_velocity
         modulate_by_certainty()
         #Stream qualities that might appear to change over time.
         stream.emit({"volume":sound.volume, "pitch":sound.pitch, "certainty":certainty, "entity": detected_object})

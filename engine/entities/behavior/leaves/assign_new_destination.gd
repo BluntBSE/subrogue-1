@@ -2,7 +2,6 @@ extends ActionLeaf
 
 func tick(actor:Entity, blackboard:BlackBoard):
     actor.move_bus.order_destination_path()
-    print("ASSIGNED A BRAND NEW PATH!")
     if actor.move_bus.queue.size() > 0:
         return SUCCESS
     else:

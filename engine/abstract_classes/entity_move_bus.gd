@@ -156,7 +156,6 @@ func find_closest_node()->NavNode:
 
 
 func order_destination_path():
-    print("Hello from order_destination_path")
     purge_waypoints()
     var destination = entity.behavior.destination_node
     var path = path_between_nodes(find_closest_node(), destination, get_tree().root.find_child("NavNodes", true, false))
