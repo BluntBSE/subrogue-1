@@ -24,6 +24,7 @@ grow_amount = 1.438
 data = PackedVector3Array(2, -2, 0, -2, -2, 0, 2, 2, 0, -2, -2, 0, -2, 2, 0, 2, 2, 0)
 
 [node name="SignalPopup" type="Node3D" node_paths=PackedStringArray("node_viewport", "node_quad", "node_area")]
+visible = false
 script = ExtResource("1_xcvil")
 node_viewport = NodePath("SubViewport")
 node_quad = NodePath("MeshInstance3D")
