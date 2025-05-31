@@ -5520,12 +5520,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.5, 0, -5)
 [node name="Cities" type="Node3D" parent="."]
 script = ExtResource("15_s8hjj")
 
-[node name="Georgetown" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="Georgetown" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.387094, 0.139799, 0.911379, 3.72529e-09, 0.988439, -0.151619, -0.92204, -0.058691, -0.382618, 91.3659, -15.1999, -38.3575)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("16_5ijs5")
+faction = NodePath("../../Factions/PanAmericanFederation")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Georgetown"]
 unique_name_in_owner = true
@@ -5632,12 +5633,13 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Miami" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="Miami" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.020001, -0.221501, 0.974953, 0, 0.97515, 0.221545, -0.9998, 0.00443112, -0.0195039, 97.7392, 22.2099, -1.95527)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("19_xkbba")
+faction = NodePath("../../Factions/AtlanticEmpire")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Miami"]
 collision_layer = 262144
@@ -5735,12 +5737,13 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Fortaleza" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="Fortaleza" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.657359, 0.261926, 0.706592, 1.49012e-08, 0.937651, -0.347576, -0.753578, -0.228483, -0.616372, 70.836, -34.8446, -61.7915)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_reg1r")
+faction = NodePath("../../Factions/PanAmericanFederation")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Fortaleza"]
 collision_layer = 262144
@@ -5838,12 +5841,13 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Dakhar" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="Dakhar" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.885147, -0.00258968, 0.465302, 0, 0.999984, 0.00556548, -0.46531, 0.00492628, -0.885132, 46.6466, 0.55794, -88.7347)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("26_jutbg")
+faction = NodePath("../../Factions/SaharanFreeLeague")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Dakhar"]
 collision_layer = 262144
@@ -5941,12 +5945,13 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Dakhla2" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="Dakhla2" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.898555, -0.081611, 0.431204, -7.45058e-09, 0.982557, 0.185961, -0.43886, 0.167096, -0.88288, 43.2283, 18.6426, -88.5089)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_rr0nb")
+faction = NodePath("../../Factions/SaharanFreeLeague")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Dakhla2"]
 collision_layer = 262144
@@ -6044,12 +6049,13 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Cork" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="Cork" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.947453, -0.215292, 0.236604, -1.49012e-08, 0.739634, 0.673008, -0.319895, 0.637645, -0.700767, 23.7196, 67.4692, -70.252)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_wxv4n")
+faction = NodePath("../../Factions/EuropeanFront")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Cork"]
 collision_layer = 262144
@@ -6147,12 +6153,13 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="NewGibraltar" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="NewGibraltar" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.957819, -0.118708, 0.261708, 7.45058e-09, 0.910694, 0.41308, -0.287373, 0.395656, -0.872278, 26.2363, 41.4113, -87.4461)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("25_xs330")
+faction = NodePath("../../Factions/EuropeanFront")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/NewGibraltar"]
 collision_layer = 262144
@@ -6250,12 +6257,13 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Reykjavik" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="Reykjavik" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.84083, -0.448054, 0.303731, 0, 0.561115, 0.827736, -0.5413, 0.695987, -0.471801, 30.4491, 82.9807, -47.2981)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_d3h56")
+faction = NodePath("../../Factions/EuropeanFront")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Reykjavik"]
 collision_layer = 262144
@@ -6354,12 +6362,13 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="StPierre" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="StPierre" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.410344, -0.543412, 0.732338, -1.49012e-08, 0.803065, 0.59589, -0.911931, 0.244521, -0.329532, 73.417, 59.7381, -33.0357)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_nshcp")
+faction = NodePath("../../Factions/AtlanticEmpire")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/StPierre"]
 collision_layer = 262144
@@ -6457,12 +6466,13 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="NewYork" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="NewYork" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
 unique_name_in_owner = true
 transform = Transform3D(-0.161783, -0.486781, 0.85841, 0, 0.869871, 0.493279, -0.986826, 0.0798045, -0.14073, 86.0557, 49.4513, -14.1083)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_iv5cb")
+faction = NodePath("../../Factions/AtlanticEmpire")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/NewYork"]
 collision_layer = 262144

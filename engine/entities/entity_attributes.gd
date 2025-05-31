@@ -1,7 +1,7 @@
 extends Node
 class_name EntityAtts
 
-var type:EntityType
+@export var type:EntityType
 var display_name:String
 var class_display_name:String
 var size:float

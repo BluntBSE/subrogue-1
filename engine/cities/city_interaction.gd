@@ -7,7 +7,7 @@ signal opened_city
 
 #Move this to render
 func unpack(faction:Faction):
-    print("UNPACK GOT", faction)
+    print("UNPACK GOT", faction.name, "FOR CITY, ", city.name)
 
     
     

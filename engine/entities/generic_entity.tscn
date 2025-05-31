@@ -240,25 +240,6 @@ metadata/_custom_type_script = "uid://dk82cqfncxi8f"
 script = ExtResource("7_23k6d")
 metadata/_custom_type_script = "uid://0g03hqhrhuvh"
 
-[node name="ShootNearestUnknown" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]
-script = ExtResource("6_6tq8k")
-
-[node name="ThreatSignalsNearby" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/ShootNearestUnknown"]
-script = ExtResource("7_hyfub")
-metadata/_custom_type_script = "uid://dk82cqfncxi8f"
-
-[node name="HasActiveMunition" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/ShootNearestUnknown"]
-script = ExtResource("12_g8cci")
-metadata/_custom_type_script = "uid://dk82cqfncxi8f"
-
-[node name="NoLaunchedMunitions" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/ShootNearestUnknown"]
-script = ExtResource("12_8ohyu")
-metadata/_custom_type_script = "uid://dk82cqfncxi8f"
-
-[node name="LaunchMunition" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/ShootNearestUnknown"]
-script = ExtResource("13_g8cci")
-metadata/_custom_type_script = "uid://0g03hqhrhuvh"
-
 [node name="FleeNewThreat" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]
 script = ExtResource("6_6tq8k")
 
@@ -349,8 +330,24 @@ script = ExtResource("9_3cqk4")
 [node name="ActionLeaf" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/STOP-AlwaysSucceed"]
 script = ExtResource("8_hntc2")
 
-[node name="AttackTarget" type="Node" parent="EntityBehavior/BehaviorTreeRoot"]
+[node name="ShootNearestUnknown" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector"]
 script = ExtResource("6_6tq8k")
+
+[node name="ThreatSignalsNearby" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/ShootNearestUnknown"]
+script = ExtResource("7_hyfub")
+metadata/_custom_type_script = "uid://dk82cqfncxi8f"
+
+[node name="HasActiveMunition" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/ShootNearestUnknown"]
+script = ExtResource("12_g8cci")
+metadata/_custom_type_script = "uid://dk82cqfncxi8f"
+
+[node name="NoLaunchedMunitions" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/ShootNearestUnknown"]
+script = ExtResource("12_8ohyu")
+metadata/_custom_type_script = "uid://dk82cqfncxi8f"
+
+[node name="LaunchMunition" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/ShootNearestUnknown"]
+script = ExtResource("13_g8cci")
+metadata/_custom_type_script = "uid://0g03hqhrhuvh"
 
 [node name="EntityCargo" type="Node" parent="."]
 

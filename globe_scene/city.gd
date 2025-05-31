@@ -30,8 +30,9 @@ func _process(_delta: float) -> void:
 
 func _ready():
     var faction_to_find = city_def.default_faction_id
-    var faction = get_tree().root.find_child("Factions", true, false).get_node(faction_to_find)
-
+    faction = get_tree().root.find_child("Factions", true, false).get_node(faction_to_find)
+    print("Hello from ", name, " my faction is ", faction.name)
+    
     interaction.unpack(faction)
 
 

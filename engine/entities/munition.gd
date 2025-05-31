@@ -117,6 +117,8 @@ func damage_target(target: Entity) -> void:
     #NOTE: Did you get a weird bug here? Consider what happens if you manage to hit two colliders at once.
     remove_child(particles)
     anchor.add_child(particles)
+    #NOTE: Did you get a weird bug here? Consider what happens if you manage to hit two colliders at once.
+
     particles.global_position = target.global_position
     particles.global_basis = global_basis
     particles.rotation.z += deg_to_rad(180)
