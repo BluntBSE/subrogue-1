@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://ccpokifvegaoy"]
+[gd_scene load_steps=63 format=3 uid="uid://ccpokifvegaoy"]
 
 [ext_resource type="Script" uid="uid://c20p7y6s86el3" path="res://engine/entities/entity.gd" id="1_du6w5"]
 [ext_resource type="Script" uid="uid://cvjjqhnynvn7m" path="res://engine/abstract_classes/entity_move_bus.gd" id="2_7fq8g"]
@@ -19,7 +19,10 @@
 [ext_resource type="Script" uid="uid://dujaksl8s0rra" path="res://engine/entities/behavior/conditions/recently_fled.gd" id="9_23k6d"]
 [ext_resource type="Texture2D" uid="uid://bsoi58tm3jjyk" path="res://assets/UI/white_icons/white_triangle_filled_2.png" id="9_oaqcn"]
 [ext_resource type="Script" uid="uid://b3kuk6f6y1nqk" path="res://engine/entities/behavior/actions/keep_moving.gd" id="9_sd8qi"]
+[ext_resource type="Script" uid="uid://bmr80ues5pl4q" path="res://engine/entities/behavior/conditions/no_launched_munitions.gd" id="12_8ohyu"]
 [ext_resource type="Script" uid="uid://8epfeqalkoqe" path="res://engine/entities/behavior/actions/flee_away.gd" id="12_akn2h"]
+[ext_resource type="Script" uid="uid://duwu7e8kh605g" path="res://engine/entities/behavior/conditions/has_active_munition.gd" id="12_g8cci"]
+[ext_resource type="Script" uid="uid://dl6xh5mpcsjea" path="res://engine/entities/behavior/actions/launch_munition.gd" id="13_g8cci"]
 [ext_resource type="Script" uid="uid://3nxghnrjlm51" path="res://engine/entities/behavior/conditions/nav_near_destination.gd" id="14_3qnbj"]
 [ext_resource type="Script" uid="uid://chu8ujksgake0" path="res://engine/entities/behavior/leaves/assign_new_destination.gd" id="14_dqq6t"]
 [ext_resource type="Script" uid="uid://btfo4hwoiyn01" path="res://engine/entities/detection/entity_detector.gd" id="15_gt6ce"]
@@ -234,6 +237,25 @@ metadata/_custom_type_script = "uid://dk82cqfncxi8f"
 
 [node name="UpdateRecentlyFled" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/FleeExisting"]
 script = ExtResource("7_23k6d")
+metadata/_custom_type_script = "uid://0g03hqhrhuvh"
+
+[node name="ShootNearestUnknown" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]
+script = ExtResource("6_6tq8k")
+
+[node name="ThreatSignalsNearby" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/ShootNearestUnknown"]
+script = ExtResource("7_hyfub")
+metadata/_custom_type_script = "uid://dk82cqfncxi8f"
+
+[node name="HasActiveMunition" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/ShootNearestUnknown"]
+script = ExtResource("12_g8cci")
+metadata/_custom_type_script = "uid://dk82cqfncxi8f"
+
+[node name="NoLaunchedMunitions" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/ShootNearestUnknown"]
+script = ExtResource("12_8ohyu")
+metadata/_custom_type_script = "uid://dk82cqfncxi8f"
+
+[node name="LaunchMunition" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee/ShootNearestUnknown"]
+script = ExtResource("13_g8cci")
 metadata/_custom_type_script = "uid://0g03hqhrhuvh"
 
 [node name="FleeNewThreat" type="Node" parent="EntityBehavior/BehaviorTreeRoot/MainSelector/Flee"]

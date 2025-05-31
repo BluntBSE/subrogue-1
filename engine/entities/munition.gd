@@ -30,7 +30,6 @@ func _ready() -> void:
     %EntityDetector.unpack(self)
     unpacked = true
     #TODO: Played_by is just...whatever for now! It should be set by the base class, not this. 
-    played_by = get_parent().get_parent()
     faction = fired_from.faction
     render.update_mesh_visibilities(faction.faction_layer, true)
     behavior.enable()
@@ -126,7 +125,9 @@ func damage_target(target: Entity) -> void:
     particles.rotation.z += deg_to_rad(180)
     
     particles.explode()
-    played_by.UI.handle_impact_1()
+    if played_by:
+        played_by.UI.handle_impact_1()
+        #TODO: Probably need a like "detonated" signal of some flavor.
     target.queue_free()
     queue_free()
 

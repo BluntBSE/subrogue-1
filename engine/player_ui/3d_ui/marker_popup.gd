@@ -36,11 +36,15 @@ func pressed_launch_button()->void:
     if !active_munition:
         print("NO VALID MUNIITION")
         return
-    var loaded_munition:Munition = MunitionHelpers.munition_by_id(active_munition)
+    
+    if active_entity.munitions.loaded_munitions[active_munition] < 1:
+        print("ACTIVE MUNITION IS EXPENDED")
+        return
+        
+  
     #Requires muniition, start, end.
-    var args = {"munition": loaded_munition, "originating_entity":context.originating_entities[0], "start_position": context.originating_entities[0].position, "target_position": context.position, "trauma":0.5}
+    var args = {"munition": active_munition, "originating_entity":context.originating_entities[0], "start_position": context.originating_entities[0].position, "target_position": context.position, "trauma":0.5}
     pressed_launch.emit(args) #Should there a custom signal type?A Launchcommmand?
-    SoundManager.play("launch_thump_1", "randpitch_small", "game", 6.0)
 
 func munitions_remaining(id:String):
     pass
