@@ -1,4 +1,4 @@
-[gd_scene load_steps=544 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=543 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://c7feimtf0jnd2" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="Script" uid="uid://b1m1p2n51hjao" path="res://globe_scene/city.gd" id="14_8vb4v"]
 [ext_resource type="Script" uid="uid://cr6nogotcq8vy" path="res://globe_scene/city_manager.gd" id="15_s8hjj"]
+[ext_resource type="Resource" uid="uid://k1b1xakpiy2m" path="res://engine/cities/city_defs/georgetown.tres" id="16_5ijs5"]
 [ext_resource type="AudioStream" uid="uid://c4pqqqemfw30i" path="res://assets/royalty_free_music/dark-ambient-126122.mp3" id="16_o22p0"]
 [ext_resource type="AudioStream" uid="uid://dkulpl5rov4lu" path="res://assets/royalty_free_music/10-minutes-submarine-underwater-ambient-sound-155046.mp3" id="17_eum53"]
 [ext_resource type="Script" uid="uid://cxnd8ugn2eha1" path="res://globe_scene/tools/node_teleporter.gd" id="17_ni20c"]
@@ -24,14 +25,15 @@
 [ext_resource type="Resource" uid="uid://dipu21v1whu3n" path="res://engine/cities/city_defs/reykjavik.tres" id="24_d3h56"]
 [ext_resource type="Resource" uid="uid://cnjm0npjxk8wj" path="res://engine/cities/city_defs/newyorkcity.tres" id="24_iv5cb"]
 [ext_resource type="Resource" uid="uid://b0pievdgsi4xr" path="res://engine/cities/city_defs/st_pierre.tres" id="24_nshcp"]
+[ext_resource type="Resource" uid="uid://ewd6uqti7hab" path="res://engine/cities/city_defs/fortaleza.tres" id="24_reg1r"]
 [ext_resource type="Resource" uid="uid://d3eg4wugplqos" path="res://engine/cities/city_defs/dakhla.tres" id="24_rr0nb"]
 [ext_resource type="Resource" uid="uid://b2v4r6rmciqa4" path="res://engine/cities/city_defs/cork.tres" id="24_wxv4n"]
 [ext_resource type="Resource" uid="uid://bo35w3ffcc3f1" path="res://engine/cities/city_defs/new_gibraltar.tres" id="25_xs330"]
+[ext_resource type="Resource" uid="uid://bw16sohl2yggd" path="res://engine/cities/city_defs/dakhar.tres" id="26_jutbg"]
 [ext_resource type="Script" uid="uid://c38086lu12raa" path="res://globe_scene/sig_popup_pool.gd" id="29_c10kb"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="34_f1l1f"]
 [ext_resource type="Script" uid="uid://dac1cpfprokkh" path="res://engine/abstract_classes/entity_controller.gd" id="34_n1474"]
 [ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="35_m4noy"]
-[ext_resource type="Texture2D" uid="uid://o4wfqpapu8p2" path="res://assets/UI/red_test.png" id="35_woink"]
 [ext_resource type="Script" uid="uid://bxkngpvs1vlr5" path="res://engine/navigation/nav_node_drawer.gd" id="36_4wwom"]
 [ext_resource type="PackedScene" uid="uid://m4t2hh3hak6e" path="res://engine/navigation/nav_node.tscn" id="36_nkwg1"]
 [ext_resource type="Script" uid="uid://dpqmish1shthn" path="res://globe_scene/nav_nodes.gd" id="37_ue64j"]
@@ -3351,25 +3353,6 @@ Label/styles/normal = SubResource("StyleBoxEmpty_vixht")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wfyhd"]
 data = PackedVector3Array(2, -0.5, 0, -2, -0.5, 0, 2, 0.5, 0, -2, -0.5, 0, -2, 0.5, 0, 2, 0.5, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ho0hv"]
-transparency = 4
-blend_mode = 1
-shading_mode = 0
-albedo_color = Color(1, 0, 1, 1)
-albedo_texture = ExtResource("34_f1l1f")
-
-[sub_resource type="SphereMesh" id="SphereMesh_rcc5k"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slecc"]
-transparency = 1
-blend_mode = 1
-albedo_texture = ExtResource("35_woink")
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 0.0
-anisotropy = 0.56
-disable_receive_shadows = true
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_8w7ix"]
 _surfaces = [{
 "aabb": AABB(91.2029, -13.7359, -12.6692, 23.8225, 17.3545, 25.6912),
@@ -5542,7 +5525,7 @@ unique_name_in_owner = true
 transform = Transform3D(-0.387094, 0.139799, 0.911379, 3.72529e-09, 0.988439, -0.151619, -0.92204, -0.058691, -0.382618, 91.3659, -15.1999, -38.3575)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
-city_def = ExtResource("19_xkbba")
+city_def = ExtResource("16_5ijs5")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Georgetown"]
 unique_name_in_owner = true
@@ -5757,7 +5740,7 @@ unique_name_in_owner = true
 transform = Transform3D(-0.657359, 0.261926, 0.706592, 1.49012e-08, 0.937651, -0.347576, -0.753578, -0.228483, -0.616372, 70.836, -34.8446, -61.7915)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
-city_def = ExtResource("19_xkbba")
+city_def = ExtResource("24_reg1r")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Fortaleza"]
 collision_layer = 262144
@@ -5855,80 +5838,80 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Dakhla" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+[node name="Dakhar" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-0.885147, -0.00258968, 0.465302, 0, 0.999984, 0.00556548, -0.46531, 0.00492628, -0.885132, 46.6466, 0.55794, -88.7347)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
-city_def = ExtResource("24_rr0nb")
+city_def = ExtResource("26_jutbg")
 
-[node name="CityBody" type="RigidBody3D" parent="Cities/Dakhla"]
+[node name="CityBody" type="RigidBody3D" parent="Cities/Dakhar"]
 collision_layer = 262144
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Dakhla/CityBody"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Dakhar/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_6oioa")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Dakhla/CityBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Dakhar/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_ni20c")
 
-[node name="CityRender" type="Node3D" parent="Cities/Dakhla"]
+[node name="CityRender" type="Node3D" parent="Cities/Dakhar"]
 
-[node name="CityDot" type="Sprite3D" parent="Cities/Dakhla/CityRender"]
+[node name="CityDot" type="Sprite3D" parent="Cities/Dakhar/CityRender"]
 transform = Transform3D(-4.47035e-08, 0, -1, 2.59024e-09, 1, 0, 1, 2.09548e-09, -4.47035e-08, -0.0727158, -1.92784e-07, 0)
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("34_f1l1f")
 
-[node name="CityNameLabel" type="Label3D" parent="Cities/Dakhla/CityRender"]
+[node name="CityNameLabel" type="Label3D" parent="Cities/Dakhar/CityRender"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0.237328, 1.50652, 0.458885)
 alpha_cut = 1
 outline_modulate = Color(1, 0, 0, 1)
-text = "Dakhla"
+text = "Dakhar"
 font = ExtResource("35_m4noy")
 font_size = 160
 outline_size = 20
 
-[node name="CityRing" type="Sprite3D" parent="Cities/Dakhla/CityRender"]
+[node name="CityRing" type="Sprite3D" parent="Cities/Dakhar/CityRender"]
 transform = Transform3D(-1.3411e-07, 0, -3, 7.77072e-09, 3, 0, 3, 6.28643e-09, -1.3411e-07, 0.13311, 1.56835e-06, 0)
 transparency = 0.8
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("19_s8hjj")
 
-[node name="CityInteraction" type="Node3D" parent="Cities/Dakhla"]
+[node name="CityInteraction" type="Node3D" parent="Cities/Dakhar"]
 script = ExtResource("20_vycny")
 
-[node name="DockingArea" type="Area3D" parent="Cities/Dakhla/CityInteraction"]
+[node name="DockingArea" type="Area3D" parent="Cities/Dakhar/CityInteraction"]
 visible = false
 collision_layer = 2
 
-[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/Dakhla/CityInteraction/DockingArea"]
+[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/Dakhar/CityInteraction/DockingArea"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_s8hjj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Dakhla/CityInteraction/DockingArea"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Dakhar/CityInteraction/DockingArea"]
 visible = false
 mesh = SubResource("SphereMesh_wfyhd")
 
-[node name="DockingPopup" type="MeshInstance3D" parent="Cities/Dakhla/CityInteraction"]
+[node name="DockingPopup" type="MeshInstance3D" parent="Cities/Dakhar/CityInteraction"]
 transform = Transform3D(1, -4.65661e-10, -3.35276e-08, 2.32831e-09, 1, 2.53203e-09, 3.72529e-09, 1.21188e-07, 1, 6.14794, 1.9034, 0.635849)
 visible = false
 material_override = SubResource("StandardMaterial3D_nshcp")
 mesh = SubResource("QuadMesh_d3h56")
 
-[node name="SubViewport" type="SubViewport" parent="Cities/Dakhla/CityInteraction/DockingPopup"]
+[node name="SubViewport" type="SubViewport" parent="Cities/Dakhar/CityInteraction/DockingPopup"]
 transparent_bg = true
 
-[node name="Control" type="Control" parent="Cities/Dakhla/CityInteraction/DockingPopup/SubViewport"]
+[node name="Control" type="Control" parent="Cities/Dakhar/CityInteraction/DockingPopup/SubViewport"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PingButton" type="TextureButton" parent="Cities/Dakhla/CityInteraction/DockingPopup/SubViewport/Control"]
+[node name="PingButton" type="TextureButton" parent="Cities/Dakhar/CityInteraction/DockingPopup/SubViewport/Control"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 51.0
@@ -5940,7 +5923,7 @@ texture_hover = ExtResource("22_xkbba")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Cities/Dakhla/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
+[node name="Label" type="Label" parent="Cities/Dakhar/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
 layout_mode = 0
 offset_left = -8.0
 offset_top = 33.0
@@ -5950,11 +5933,114 @@ theme = SubResource("Theme_wxv4n")
 text = "Dock"
 horizontal_alignment = 1
 
-[node name="InteractionBox1" type="Area3D" parent="Cities/Dakhla/CityInteraction"]
+[node name="InteractionBox1" type="Area3D" parent="Cities/Dakhar/CityInteraction"]
 transform = Transform3D(1, 0, -1.86265e-09, 0, 1, 2.40107e-09, 0, 2.09548e-09, 1, 0, 0, 0)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Dakhla/CityInteraction/InteractionBox1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Dakhar/CityInteraction/InteractionBox1"]
+transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
+shape = SubResource("ConcavePolygonShape3D_wfyhd")
+
+[node name="Dakhla2" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
+unique_name_in_owner = true
+transform = Transform3D(-0.898555, -0.081611, 0.431204, -7.45058e-09, 0.982557, 0.185961, -0.43886, 0.167096, -0.88288, 43.2283, 18.6426, -88.5089)
+script = ExtResource("14_8vb4v")
+anchor = NodePath("../../GamePlanet")
+city_def = ExtResource("24_rr0nb")
+
+[node name="CityBody" type="RigidBody3D" parent="Cities/Dakhla2"]
+collision_layer = 262144
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Dakhla2/CityBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_6oioa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Dakhla2/CityBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_ni20c")
+
+[node name="CityRender" type="Node3D" parent="Cities/Dakhla2"]
+
+[node name="CityDot" type="Sprite3D" parent="Cities/Dakhla2/CityRender"]
+transform = Transform3D(-4.47035e-08, 0, -1, 2.59024e-09, 1, 0, 1, 2.09548e-09, -4.47035e-08, -0.0727158, -1.92784e-07, 0)
+modulate = Color(0.831373, 0, 0.239216, 1)
+axis = 0
+texture = ExtResource("34_f1l1f")
+
+[node name="CityNameLabel" type="Label3D" parent="Cities/Dakhla2/CityRender"]
+transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0.237328, 1.50652, 0.458885)
+alpha_cut = 1
+outline_modulate = Color(1, 0, 0, 1)
+text = "Dakhla"
+font = ExtResource("35_m4noy")
+font_size = 160
+outline_size = 20
+
+[node name="CityRing" type="Sprite3D" parent="Cities/Dakhla2/CityRender"]
+transform = Transform3D(-1.3411e-07, 0, -3, 7.77072e-09, 3, 0, 3, 6.28643e-09, -1.3411e-07, 0.13311, 1.56835e-06, 0)
+transparency = 0.8
+modulate = Color(0.831373, 0, 0.239216, 1)
+axis = 0
+texture = ExtResource("19_s8hjj")
+
+[node name="CityInteraction" type="Node3D" parent="Cities/Dakhla2"]
+script = ExtResource("20_vycny")
+
+[node name="DockingArea" type="Area3D" parent="Cities/Dakhla2/CityInteraction"]
+visible = false
+collision_layer = 2
+
+[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/Dakhla2/CityInteraction/DockingArea"]
+transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_s8hjj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Dakhla2/CityInteraction/DockingArea"]
+visible = false
+mesh = SubResource("SphereMesh_wfyhd")
+
+[node name="DockingPopup" type="MeshInstance3D" parent="Cities/Dakhla2/CityInteraction"]
+transform = Transform3D(1, -4.65661e-10, -3.35276e-08, 2.32831e-09, 1, 2.53203e-09, 3.72529e-09, 1.21188e-07, 1, 6.14794, 1.9034, 0.635849)
+visible = false
+material_override = SubResource("StandardMaterial3D_nshcp")
+mesh = SubResource("QuadMesh_d3h56")
+
+[node name="SubViewport" type="SubViewport" parent="Cities/Dakhla2/CityInteraction/DockingPopup"]
+transparent_bg = true
+
+[node name="Control" type="Control" parent="Cities/Dakhla2/CityInteraction/DockingPopup/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PingButton" type="TextureButton" parent="Cities/Dakhla2/CityInteraction/DockingPopup/SubViewport/Control"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 51.0
+offset_right = 319.0
+offset_bottom = 183.0
+texture_normal = ExtResource("21_wfyhd")
+texture_pressed = ExtResource("21_wfyhd")
+texture_hover = ExtResource("22_xkbba")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Cities/Dakhla2/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 33.0
+offset_right = 292.0
+offset_bottom = 127.0
+theme = SubResource("Theme_wxv4n")
+text = "Dock"
+horizontal_alignment = 1
+
+[node name="InteractionBox1" type="Area3D" parent="Cities/Dakhla2/CityInteraction"]
+transform = Transform3D(1, 0, -1.86265e-09, 0, 1, 2.40107e-09, 0, 2.09548e-09, 1, 0, 0, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Dakhla2/CityInteraction/InteractionBox1"]
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
@@ -6474,63 +6560,10 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Miami7" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
-transform = Transform3D(-0.933889, 0.0569101, 0.353004, 3.72529e-09, 0.987253, -0.159161, -0.357562, -0.148639, -0.921983, 35.3887, -15.9559, -92.429)
-script = ExtResource("14_8vb4v")
-anchor = NodePath("../../GamePlanet")
-
-[node name="RigidBody3D" type="RigidBody3D" parent="Cities/Miami7"]
-collision_layer = 262144
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Miami7/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
-visible = false
-mesh = SubResource("SphereMesh_6oioa")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Miami7/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_ni20c")
-
-[node name="Sprite3D" type="Sprite3D" parent="Cities/Miami7"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0727158, 0, 0)
-material_override = SubResource("StandardMaterial3D_ho0hv")
-axis = 0
-texture = ExtResource("34_f1l1f")
-
-[node name="DockingSpot" type="SpotLight3D" parent="Cities/Miami7"]
-transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
-visible = false
-light_cull_mask = 4294443009
-shadow_enabled = true
-spot_range = 16.407
-spot_attenuation = -5.66
-spot_angle = 43.28
-
-[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Cities/Miami7/DockingSpot"]
-transform = Transform3D(1, 2.35071e-10, -4.65661e-09, -2.91034e-10, 1, -3.72522e-08, -4.65661e-09, 1.49032e-08, 1, -0.00889826, 0.0111237, -0.764389)
-layers = 524288
-transparency = 1.0
-mesh = SubResource("SphereMesh_rcc5k")
-
-[node name="Label3D" type="Label3D" parent="Cities/Miami7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246742, 1.61078, -8.88178e-16)
-alpha_cut = 1
-modulate = Color(1, 0, 1, 1)
-text = "Monrovia
-"
-font = ExtResource("35_m4noy")
-font_size = 160
-
-[node name="Sprite3D2" type="Sprite3D" parent="Cities/Miami7"]
-transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0.13311, 0, 0)
-material_override = SubResource("StandardMaterial3D_slecc")
-transparency = 0.99
-axis = 0
-texture = ExtResource("35_woink")
-
 [node name="Tools" type="Node3D" parent="."]
 
 [node name="NodeTeleporter" type="Node3D" parent="Tools"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.62939e-06, -7.62939e-06, 7.62939e-06)
 script = ExtResource("17_ni20c")
 active = true
 
@@ -6587,14 +6620,22 @@ script = ExtResource("29_c10kb")
 [connection signal="input_event" from="Cities/Fortaleza/CityInteraction/InteractionBox1" to="Cities/Fortaleza/CityInteraction" method="_on_interaction_box_1_input_event"]
 [connection signal="mouse_entered" from="Cities/Fortaleza/CityInteraction/InteractionBox1" to="Cities/Fortaleza/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
 [connection signal="mouse_exited" from="Cities/Fortaleza/CityInteraction/InteractionBox1" to="Cities/Fortaleza/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="input_event" from="Cities/Dakhla/CityBody" to="Cities/Dakhla/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/Dakhla/CityBody" to="Cities/Dakhla/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/Dakhla/CityBody" to="Cities/Dakhla/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="body_entered" from="Cities/Dakhla/CityInteraction/DockingArea" to="Cities/Dakhla/CityInteraction" method="_on_docking_area_body_entered"]
-[connection signal="body_exited" from="Cities/Dakhla/CityInteraction/DockingArea" to="Cities/Dakhla/CityInteraction" method="_on_docking_area_body_exited"]
-[connection signal="input_event" from="Cities/Dakhla/CityInteraction/InteractionBox1" to="Cities/Dakhla/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/Dakhla/CityInteraction/InteractionBox1" to="Cities/Dakhla/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/Dakhla/CityInteraction/InteractionBox1" to="Cities/Dakhla/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="input_event" from="Cities/Dakhar/CityBody" to="Cities/Dakhar/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/Dakhar/CityBody" to="Cities/Dakhar/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/Dakhar/CityBody" to="Cities/Dakhar/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="body_entered" from="Cities/Dakhar/CityInteraction/DockingArea" to="Cities/Dakhar/CityInteraction" method="_on_docking_area_body_entered"]
+[connection signal="body_exited" from="Cities/Dakhar/CityInteraction/DockingArea" to="Cities/Dakhar/CityInteraction" method="_on_docking_area_body_exited"]
+[connection signal="input_event" from="Cities/Dakhar/CityInteraction/InteractionBox1" to="Cities/Dakhar/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/Dakhar/CityInteraction/InteractionBox1" to="Cities/Dakhar/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/Dakhar/CityInteraction/InteractionBox1" to="Cities/Dakhar/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="input_event" from="Cities/Dakhla2/CityBody" to="Cities/Dakhla2/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/Dakhla2/CityBody" to="Cities/Dakhla2/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/Dakhla2/CityBody" to="Cities/Dakhla2/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="body_entered" from="Cities/Dakhla2/CityInteraction/DockingArea" to="Cities/Dakhla2/CityInteraction" method="_on_docking_area_body_entered"]
+[connection signal="body_exited" from="Cities/Dakhla2/CityInteraction/DockingArea" to="Cities/Dakhla2/CityInteraction" method="_on_docking_area_body_exited"]
+[connection signal="input_event" from="Cities/Dakhla2/CityInteraction/InteractionBox1" to="Cities/Dakhla2/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/Dakhla2/CityInteraction/InteractionBox1" to="Cities/Dakhla2/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/Dakhla2/CityInteraction/InteractionBox1" to="Cities/Dakhla2/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
 [connection signal="input_event" from="Cities/Cork/CityBody" to="Cities/Cork/CityInteraction" method="_on_interaction_box_1_input_event"]
 [connection signal="mouse_entered" from="Cities/Cork/CityBody" to="Cities/Cork/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
 [connection signal="mouse_exited" from="Cities/Cork/CityBody" to="Cities/Cork/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
