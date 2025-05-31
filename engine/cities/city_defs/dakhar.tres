@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CityDef" load_steps=4 format=3 uid="uid://bw16sohl2yggd"]
+
+[ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_pmb3c"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npc.gd" id="2_0y6q7"]
+[ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="3_hilgi"]
+
+[resource]
+script = ExtResource("3_hilgi")
+city_name = "Dakhar"
+default_faction_id = "SaharanFreeLeague"
+city_greeting = "In Dakhar, the old colonial facades are draped in LED banners and augmented reality graffiti. The city’s sprawling markets are a riot of color and code, where hackers sell cracked AIs alongside fresh mangoes. At night, the rhythm of drums mixes with the thrum of hydrofoil taxis skimming the waves. The government’s grip is loose, and every faction—from pan-African idealists to European data pirates—jockeys for influence in the city’s labyrinthine alleys and sun-bleached plazas."
+city_portrait = ExtResource("1_pmb3c")
+npcs = Array[ExtResource("2_0y6q7")]([])
+metadata/_custom_type_script = "uid://b8owuv8kc08ga"

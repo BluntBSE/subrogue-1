@@ -1,4 +1,4 @@
-[gd_scene load_steps=539 format=4 uid="uid://bnygsufjcl2ql"]
+[gd_scene load_steps=544 format=4 uid="uid://bnygsufjcl2ql"]
 
 [ext_resource type="Material" uid="uid://c0oh0tqawpdmg" path="res://globe_scene/water_material.tres" id="1_jtrqq"]
 [ext_resource type="Script" uid="uid://6fl4gk8wyii5" path="res://globe_scene/globe_scene.gd" id="1_msvd6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bn7mt5j4ydu5a" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
+[ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/debug_faction.gd" id="8_c10kb"]
 [ext_resource type="Script" uid="uid://c7feimtf0jnd2" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="Script" uid="uid://b1m1p2n51hjao" path="res://globe_scene/city.gd" id="14_8vb4v"]
 [ext_resource type="Script" uid="uid://cr6nogotcq8vy" path="res://globe_scene/city_manager.gd" id="15_s8hjj"]
@@ -20,8 +21,13 @@
 [ext_resource type="Texture2D" uid="uid://b1jxlcc8aq8gj" path="res://assets/UI/white_buttons/PCMainButtonHighlightedWhiteT02.png" id="22_xkbba"]
 [ext_resource type="FontFile" uid="uid://b3pxbbyvttwq8" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Rg.otf" id="23_c10kb"]
 [ext_resource type="Script" uid="uid://cwqqx4w1bdk1n" path="res://globe_scene/test_scene_manager.gd" id="23_vycny"]
+[ext_resource type="Resource" uid="uid://dipu21v1whu3n" path="res://engine/cities/city_defs/reykjavik.tres" id="24_d3h56"]
+[ext_resource type="Resource" uid="uid://cnjm0npjxk8wj" path="res://engine/cities/city_defs/newyorkcity.tres" id="24_iv5cb"]
+[ext_resource type="Resource" uid="uid://b0pievdgsi4xr" path="res://engine/cities/city_defs/st_pierre.tres" id="24_nshcp"]
+[ext_resource type="Resource" uid="uid://d3eg4wugplqos" path="res://engine/cities/city_defs/dakhla.tres" id="24_rr0nb"]
+[ext_resource type="Resource" uid="uid://b2v4r6rmciqa4" path="res://engine/cities/city_defs/cork.tres" id="24_wxv4n"]
+[ext_resource type="Resource" uid="uid://bo35w3ffcc3f1" path="res://engine/cities/city_defs/new_gibraltar.tres" id="25_xs330"]
 [ext_resource type="Script" uid="uid://c38086lu12raa" path="res://globe_scene/sig_popup_pool.gd" id="29_c10kb"]
-[ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/debug_faction.gd" id="33_x8218"]
 [ext_resource type="Texture2D" uid="uid://b6ncl0upg0ika" path="res://assets/UI/entity_dot.png" id="34_f1l1f"]
 [ext_resource type="Script" uid="uid://dac1cpfprokkh" path="res://engine/abstract_classes/entity_controller.gd" id="34_n1474"]
 [ext_resource type="FontFile" uid="uid://dhw4qr8qmca1u" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Eb.otf" id="35_m4noy"]
@@ -230,8 +236,6 @@ volumetric_fog_density = 0.0
 volumetric_fog_length = 10.0
 volumetric_fog_detail_spread = 1.0
 volumetric_fog_ambient_inject = 1.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_5v0fy"]
 
 [sub_resource type="Curve3D" id="Curve3D_ywo8f"]
 _data = {
@@ -3580,8 +3584,8 @@ spawn_path = NodePath("..")
 [node name="Factions" type="Node3D" parent="."]
 
 [node name="SaharanFreeLeague" type="Node3D" parent="Factions"]
-script = ExtResource("33_x8218")
-faction_color = Color(0.952483, 0.882639, 0, 1)
+script = ExtResource("8_c10kb")
+faction_color = Color(0.298039, 0.956863, 1, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/SaharanFreeLeague"]
 script = ExtResource("34_n1474")
@@ -3591,8 +3595,8 @@ _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l
 spawn_path = NodePath("..")
 
 [node name="PanAmericanFederation" type="Node3D" parent="Factions"]
-script = ExtResource("33_x8218")
-faction_color = Color(0, 0.973479, 3.85046e-06, 1)
+script = ExtResource("8_c10kb")
+faction_color = Color(0.989394, 0.644815, 7.70092e-07, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/PanAmericanFederation"]
 script = ExtResource("34_n1474")
@@ -3601,22 +3605,22 @@ script = ExtResource("34_n1474")
 _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
 spawn_path = NodePath("..")
 
-[node name="Atlantic Empire" type="Node3D" parent="Factions"]
+[node name="AtlanticEmpire" type="Node3D" parent="Factions"]
 unique_name_in_owner = true
-script = ExtResource("33_x8218")
-faction_color = Color(0.832526, 2.575e-05, 0.23787, 1)
+script = ExtResource("8_c10kb")
+faction_color = Color(0.901961, 0, 0, 1)
 
-[node name="FactionEntities" type="Node3D" parent="Factions/Atlantic Empire"]
+[node name="FactionEntities" type="Node3D" parent="Factions/AtlanticEmpire"]
 script = ExtResource("34_n1474")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/Atlantic Empire/FactionEntities"]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/AtlanticEmpire/FactionEntities"]
 _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
 spawn_path = NodePath("..")
 
 [node name="Cascadia" type="Node3D" parent="Factions"]
 unique_name_in_owner = true
-script = ExtResource("33_x8218")
-faction_color = Color(0.826088, 1, 0.80839, 1)
+script = ExtResource("8_c10kb")
+faction_color = Color(0, 0.72549, 0, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/Cascadia"]
 script = ExtResource("34_n1474")
@@ -3626,8 +3630,8 @@ _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l
 spawn_path = NodePath("..")
 
 [node name="EuropeanFront" type="Node3D" parent="Factions"]
-script = ExtResource("33_x8218")
-faction_color = Color(0.389947, 0.563454, 1, 1)
+script = ExtResource("8_c10kb")
+faction_color = Color(0, 0.52549, 0.682353, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/EuropeanFront"]
 script = ExtResource("34_n1474")
@@ -3637,8 +3641,7 @@ _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l
 spawn_path = NodePath("..")
 
 [node name="Austro-PacificUnion" type="Node3D" parent="Factions"]
-script = ExtResource("33_x8218")
-faction_color = Color(0, 0.819608, 0, 1)
+script = ExtResource("8_c10kb")
 
 [node name="FactionEntities" type="Node3D" parent="Factions/Austro-PacificUnion"]
 script = ExtResource("34_n1474")
@@ -3646,68 +3649,6 @@ script = ExtResource("34_n1474")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/Austro-PacificUnion/FactionEntities"]
 _spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
 spawn_path = NodePath("..")
-
-[node name="KJCAlliance" type="Node3D" parent="Factions"]
-script = ExtResource("33_x8218")
-faction_color = Color(0, 0.819608, 0, 1)
-
-[node name="FactionEntities" type="Node3D" parent="Factions/KJCAlliance"]
-script = ExtResource("34_n1474")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/KJCAlliance/FactionEntities"]
-_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
-spawn_path = NodePath("..")
-
-[node name="ArabLeague" type="Node3D" parent="Factions"]
-script = ExtResource("33_x8218")
-faction_color = Color(0, 0.819608, 0, 1)
-
-[node name="FactionEntities" type="Node3D" parent="Factions/ArabLeague"]
-script = ExtResource("34_n1474")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/ArabLeague/FactionEntities"]
-_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
-spawn_path = NodePath("..")
-
-[node name="IndianEmpire" type="Node3D" parent="Factions"]
-script = ExtResource("33_x8218")
-faction_color = Color(0, 0.819608, 0, 1)
-
-[node name="FactionEntities" type="Node3D" parent="Factions/IndianEmpire"]
-script = ExtResource("34_n1474")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/IndianEmpire/FactionEntities"]
-_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
-spawn_path = NodePath("..")
-
-[node name="SubSaharanCompact" type="Node3D" parent="Factions"]
-script = ExtResource("33_x8218")
-faction_color = Color(0, 0.819608, 0, 1)
-
-[node name="FactionEntities" type="Node3D" parent="Factions/SubSaharanCompact"]
-script = ExtResource("34_n1474")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/SubSaharanCompact/FactionEntities"]
-_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
-spawn_path = NodePath("..")
-
-[node name="UnitedSlavicStates" type="Node3D" parent="Factions"]
-script = ExtResource("33_x8218")
-faction_color = Color(0, 0.819608, 0, 1)
-
-[node name="FactionEntities" type="Node3D" parent="Factions/UnitedSlavicStates"]
-script = ExtResource("34_n1474")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Factions/UnitedSlavicStates/FactionEntities"]
-_spawnable_scenes = PackedStringArray("uid://bnygsufjcl2ql", "uid://qfiyabbs8j2l")
-spawn_path = NodePath("..")
-
-[node name="Area3D" type="Area3D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("SphereShape3D_5v0fy")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_o22p0")
@@ -5596,13 +5537,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.5, 0, -5)
 [node name="Cities" type="Node3D" parent="."]
 script = ExtResource("15_s8hjj")
 
-[node name="Georgetown" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
+[node name="Georgetown" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-0.387094, 0.139799, 0.911379, 3.72529e-09, 0.988439, -0.151619, -0.92204, -0.058691, -0.382618, 91.3659, -15.1999, -38.3575)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("19_xkbba")
-faction = NodePath("../../Factions/PanAmericanFederation")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Georgetown"]
 unique_name_in_owner = true
@@ -5709,13 +5649,12 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Miami" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
+[node name="Miami" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-0.020001, -0.221501, 0.974953, 0, 0.97515, 0.221545, -0.9998, 0.00443112, -0.0195039, 97.7392, 22.2099, -1.95527)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("19_xkbba")
-faction = NodePath("../../Factions/Atlantic Empire")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Miami"]
 collision_layer = 262144
@@ -5813,13 +5752,12 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Fortaleza" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
+[node name="Fortaleza" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-0.657359, 0.261926, 0.706592, 1.49012e-08, 0.937651, -0.347576, -0.753578, -0.228483, -0.616372, 70.836, -34.8446, -61.7915)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("19_xkbba")
-faction = NodePath("../../Factions/Atlantic Empire")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Fortaleza"]
 collision_layer = 262144
@@ -5917,13 +5855,12 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Dakhla" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
+[node name="Dakhla" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
-transform = Transform3D(-0.90108, -0.0806124, 0.426093, 0, 0.98257, 0.185891, -0.433652, 0.167503, -0.885373, 42.7159, 18.6357, -88.7588)
+transform = Transform3D(-0.885147, -0.00258968, 0.465302, 0, 0.999984, 0.00556548, -0.46531, 0.00492628, -0.885132, 46.6466, 0.55794, -88.7347)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
-city_def = ExtResource("19_xkbba")
-faction = NodePath("../../Factions/SaharanFreeLeague")
+city_def = ExtResource("24_rr0nb")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Dakhla"]
 collision_layer = 262144
@@ -6021,35 +5958,34 @@ collision_layer = 2
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="NewGibraltar2" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
+[node name="Cork" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-0.947453, -0.215292, 0.236604, -1.49012e-08, 0.739634, 0.673008, -0.319895, 0.637645, -0.700767, 23.7196, 67.4692, -70.252)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
-city_def = ExtResource("19_xkbba")
-faction = NodePath("../../Factions/EuropeanFront")
+city_def = ExtResource("24_wxv4n")
 
-[node name="CityBody" type="RigidBody3D" parent="Cities/NewGibraltar2"]
+[node name="CityBody" type="RigidBody3D" parent="Cities/Cork"]
 collision_layer = 262144
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/NewGibraltar2/CityBody"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Cork/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_6oioa")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/NewGibraltar2/CityBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Cork/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_ni20c")
 
-[node name="CityRender" type="Node3D" parent="Cities/NewGibraltar2"]
+[node name="CityRender" type="Node3D" parent="Cities/Cork"]
 
-[node name="CityDot" type="Sprite3D" parent="Cities/NewGibraltar2/CityRender"]
+[node name="CityDot" type="Sprite3D" parent="Cities/Cork/CityRender"]
 transform = Transform3D(-4.47035e-08, 0, -1, 2.59024e-09, 1, 0, 1, 2.09548e-09, -4.47035e-08, -0.0727158, -1.92784e-07, 0)
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("34_f1l1f")
 
-[node name="CityNameLabel" type="Label3D" parent="Cities/NewGibraltar2/CityRender"]
+[node name="CityNameLabel" type="Label3D" parent="Cities/Cork/CityRender"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0.237328, 1.50652, 0.458885)
 alpha_cut = 1
 outline_modulate = Color(1, 0, 0, 1)
@@ -6058,44 +5994,44 @@ font = ExtResource("35_m4noy")
 font_size = 160
 outline_size = 20
 
-[node name="CityRing" type="Sprite3D" parent="Cities/NewGibraltar2/CityRender"]
+[node name="CityRing" type="Sprite3D" parent="Cities/Cork/CityRender"]
 transform = Transform3D(-1.3411e-07, 0, -3, 7.77072e-09, 3, 0, 3, 6.28643e-09, -1.3411e-07, 0.13311, 1.56835e-06, 0)
 transparency = 0.8
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("19_s8hjj")
 
-[node name="CityInteraction" type="Node3D" parent="Cities/NewGibraltar2"]
+[node name="CityInteraction" type="Node3D" parent="Cities/Cork"]
 script = ExtResource("20_vycny")
 
-[node name="DockingArea" type="Area3D" parent="Cities/NewGibraltar2/CityInteraction"]
+[node name="DockingArea" type="Area3D" parent="Cities/Cork/CityInteraction"]
 visible = false
 collision_layer = 2
 
-[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/NewGibraltar2/CityInteraction/DockingArea"]
+[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/Cork/CityInteraction/DockingArea"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_s8hjj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/NewGibraltar2/CityInteraction/DockingArea"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Cork/CityInteraction/DockingArea"]
 visible = false
 mesh = SubResource("SphereMesh_wfyhd")
 
-[node name="DockingPopup" type="MeshInstance3D" parent="Cities/NewGibraltar2/CityInteraction"]
+[node name="DockingPopup" type="MeshInstance3D" parent="Cities/Cork/CityInteraction"]
 transform = Transform3D(1, -4.65661e-10, -3.35276e-08, 2.32831e-09, 1, 2.53203e-09, 3.72529e-09, 1.21188e-07, 1, 6.14794, 1.9034, 0.635849)
 visible = false
 material_override = SubResource("StandardMaterial3D_nshcp")
 mesh = SubResource("QuadMesh_d3h56")
 
-[node name="SubViewport" type="SubViewport" parent="Cities/NewGibraltar2/CityInteraction/DockingPopup"]
+[node name="SubViewport" type="SubViewport" parent="Cities/Cork/CityInteraction/DockingPopup"]
 transparent_bg = true
 
-[node name="Control" type="Control" parent="Cities/NewGibraltar2/CityInteraction/DockingPopup/SubViewport"]
+[node name="Control" type="Control" parent="Cities/Cork/CityInteraction/DockingPopup/SubViewport"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PingButton" type="TextureButton" parent="Cities/NewGibraltar2/CityInteraction/DockingPopup/SubViewport/Control"]
+[node name="PingButton" type="TextureButton" parent="Cities/Cork/CityInteraction/DockingPopup/SubViewport/Control"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 51.0
@@ -6107,7 +6043,7 @@ texture_hover = ExtResource("22_xkbba")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Cities/NewGibraltar2/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
+[node name="Label" type="Label" parent="Cities/Cork/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
 layout_mode = 0
 offset_left = -8.0
 offset_top = 33.0
@@ -6117,43 +6053,42 @@ theme = SubResource("Theme_wxv4n")
 text = "Dock"
 horizontal_alignment = 1
 
-[node name="InteractionBox1" type="Area3D" parent="Cities/NewGibraltar2/CityInteraction"]
+[node name="InteractionBox1" type="Area3D" parent="Cities/Cork/CityInteraction"]
 transform = Transform3D(1, 0, -1.86265e-09, 0, 1, 2.40107e-09, 0, 2.09548e-09, 1, 0, 0, 0)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/NewGibraltar2/CityInteraction/InteractionBox1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Cork/CityInteraction/InteractionBox1"]
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="NewGibraltar3" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
+[node name="NewGibraltar" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-0.957819, -0.118708, 0.261708, 7.45058e-09, 0.910694, 0.41308, -0.287373, 0.395656, -0.872278, 26.2363, 41.4113, -87.4461)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
-city_def = ExtResource("19_xkbba")
-faction = NodePath("../../Factions/EuropeanFront")
+city_def = ExtResource("25_xs330")
 
-[node name="CityBody" type="RigidBody3D" parent="Cities/NewGibraltar3"]
+[node name="CityBody" type="RigidBody3D" parent="Cities/NewGibraltar"]
 collision_layer = 262144
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/NewGibraltar3/CityBody"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/NewGibraltar/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_6oioa")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/NewGibraltar3/CityBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/NewGibraltar/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_ni20c")
 
-[node name="CityRender" type="Node3D" parent="Cities/NewGibraltar3"]
+[node name="CityRender" type="Node3D" parent="Cities/NewGibraltar"]
 
-[node name="CityDot" type="Sprite3D" parent="Cities/NewGibraltar3/CityRender"]
+[node name="CityDot" type="Sprite3D" parent="Cities/NewGibraltar/CityRender"]
 transform = Transform3D(-4.47035e-08, 0, -1, 2.59024e-09, 1, 0, 1, 2.09548e-09, -4.47035e-08, -0.0727158, -1.92784e-07, 0)
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("34_f1l1f")
 
-[node name="CityNameLabel" type="Label3D" parent="Cities/NewGibraltar3/CityRender"]
+[node name="CityNameLabel" type="Label3D" parent="Cities/NewGibraltar/CityRender"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0.237328, 1.50652, 0.458885)
 alpha_cut = 1
 outline_modulate = Color(1, 0, 0, 1)
@@ -6162,44 +6097,44 @@ font = ExtResource("35_m4noy")
 font_size = 160
 outline_size = 20
 
-[node name="CityRing" type="Sprite3D" parent="Cities/NewGibraltar3/CityRender"]
+[node name="CityRing" type="Sprite3D" parent="Cities/NewGibraltar/CityRender"]
 transform = Transform3D(-1.3411e-07, 0, -3, 7.77072e-09, 3, 0, 3, 6.28643e-09, -1.3411e-07, 0.13311, 1.56835e-06, 0)
 transparency = 0.8
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("19_s8hjj")
 
-[node name="CityInteraction" type="Node3D" parent="Cities/NewGibraltar3"]
+[node name="CityInteraction" type="Node3D" parent="Cities/NewGibraltar"]
 script = ExtResource("20_vycny")
 
-[node name="DockingArea" type="Area3D" parent="Cities/NewGibraltar3/CityInteraction"]
+[node name="DockingArea" type="Area3D" parent="Cities/NewGibraltar/CityInteraction"]
 visible = false
 collision_layer = 2
 
-[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/NewGibraltar3/CityInteraction/DockingArea"]
+[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/NewGibraltar/CityInteraction/DockingArea"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_s8hjj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/NewGibraltar3/CityInteraction/DockingArea"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/NewGibraltar/CityInteraction/DockingArea"]
 visible = false
 mesh = SubResource("SphereMesh_wfyhd")
 
-[node name="DockingPopup" type="MeshInstance3D" parent="Cities/NewGibraltar3/CityInteraction"]
+[node name="DockingPopup" type="MeshInstance3D" parent="Cities/NewGibraltar/CityInteraction"]
 transform = Transform3D(1, -4.65661e-10, -3.35276e-08, 2.32831e-09, 1, 2.53203e-09, 3.72529e-09, 1.21188e-07, 1, 6.14794, 1.9034, 0.635849)
 visible = false
 material_override = SubResource("StandardMaterial3D_nshcp")
 mesh = SubResource("QuadMesh_d3h56")
 
-[node name="SubViewport" type="SubViewport" parent="Cities/NewGibraltar3/CityInteraction/DockingPopup"]
+[node name="SubViewport" type="SubViewport" parent="Cities/NewGibraltar/CityInteraction/DockingPopup"]
 transparent_bg = true
 
-[node name="Control" type="Control" parent="Cities/NewGibraltar3/CityInteraction/DockingPopup/SubViewport"]
+[node name="Control" type="Control" parent="Cities/NewGibraltar/CityInteraction/DockingPopup/SubViewport"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PingButton" type="TextureButton" parent="Cities/NewGibraltar3/CityInteraction/DockingPopup/SubViewport/Control"]
+[node name="PingButton" type="TextureButton" parent="Cities/NewGibraltar/CityInteraction/DockingPopup/SubViewport/Control"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 51.0
@@ -6211,7 +6146,7 @@ texture_hover = ExtResource("22_xkbba")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Cities/NewGibraltar3/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
+[node name="Label" type="Label" parent="Cities/NewGibraltar/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
 layout_mode = 0
 offset_left = -8.0
 offset_top = 33.0
@@ -6221,43 +6156,42 @@ theme = SubResource("Theme_wxv4n")
 text = "Dock"
 horizontal_alignment = 1
 
-[node name="InteractionBox1" type="Area3D" parent="Cities/NewGibraltar3/CityInteraction"]
+[node name="InteractionBox1" type="Area3D" parent="Cities/NewGibraltar/CityInteraction"]
 transform = Transform3D(1, 0, -1.86265e-09, 0, 1, 2.40107e-09, 0, 2.09548e-09, 1, 0, 0, 0)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/NewGibraltar3/CityInteraction/InteractionBox1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/NewGibraltar/CityInteraction/InteractionBox1"]
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="Reykjavik2" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
+[node name="Reykjavik" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-0.84083, -0.448054, 0.303731, 0, 0.561115, 0.827736, -0.5413, 0.695987, -0.471801, 30.4491, 82.9807, -47.2981)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
-city_def = ExtResource("19_xkbba")
-faction = NodePath("../../Factions/Atlantic Empire")
+city_def = ExtResource("24_d3h56")
 
-[node name="CityBody" type="RigidBody3D" parent="Cities/Reykjavik2"]
+[node name="CityBody" type="RigidBody3D" parent="Cities/Reykjavik"]
 collision_layer = 262144
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Reykjavik2/CityBody"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Reykjavik/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_6oioa")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Reykjavik2/CityBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Reykjavik/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_ni20c")
 
-[node name="CityRender" type="Node3D" parent="Cities/Reykjavik2"]
+[node name="CityRender" type="Node3D" parent="Cities/Reykjavik"]
 
-[node name="CityDot" type="Sprite3D" parent="Cities/Reykjavik2/CityRender"]
+[node name="CityDot" type="Sprite3D" parent="Cities/Reykjavik/CityRender"]
 transform = Transform3D(-4.47035e-08, 0, -1, 2.59024e-09, 1, 0, 1, 2.09548e-09, -4.47035e-08, -0.0727158, -1.92784e-07, 0)
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("34_f1l1f")
 
-[node name="CityNameLabel" type="Label3D" parent="Cities/Reykjavik2/CityRender"]
+[node name="CityNameLabel" type="Label3D" parent="Cities/Reykjavik/CityRender"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0.237328, 1.50652, 0.458885)
 alpha_cut = 1
 outline_modulate = Color(1, 0, 0, 1)
@@ -6267,44 +6201,44 @@ font = ExtResource("35_m4noy")
 font_size = 160
 outline_size = 20
 
-[node name="CityRing" type="Sprite3D" parent="Cities/Reykjavik2/CityRender"]
+[node name="CityRing" type="Sprite3D" parent="Cities/Reykjavik/CityRender"]
 transform = Transform3D(-1.3411e-07, 0, -3, 7.77072e-09, 3, 0, 3, 6.28643e-09, -1.3411e-07, 0.13311, 1.56835e-06, 0)
 transparency = 0.8
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("19_s8hjj")
 
-[node name="CityInteraction" type="Node3D" parent="Cities/Reykjavik2"]
+[node name="CityInteraction" type="Node3D" parent="Cities/Reykjavik"]
 script = ExtResource("20_vycny")
 
-[node name="DockingArea" type="Area3D" parent="Cities/Reykjavik2/CityInteraction"]
+[node name="DockingArea" type="Area3D" parent="Cities/Reykjavik/CityInteraction"]
 visible = false
 collision_layer = 2
 
-[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/Reykjavik2/CityInteraction/DockingArea"]
+[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/Reykjavik/CityInteraction/DockingArea"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_s8hjj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Reykjavik2/CityInteraction/DockingArea"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Reykjavik/CityInteraction/DockingArea"]
 visible = false
 mesh = SubResource("SphereMesh_wfyhd")
 
-[node name="DockingPopup" type="MeshInstance3D" parent="Cities/Reykjavik2/CityInteraction"]
+[node name="DockingPopup" type="MeshInstance3D" parent="Cities/Reykjavik/CityInteraction"]
 transform = Transform3D(1, -4.65661e-10, -3.35276e-08, 2.32831e-09, 1, 2.53203e-09, 3.72529e-09, 1.21188e-07, 1, 6.14794, 1.9034, 0.635849)
 visible = false
 material_override = SubResource("StandardMaterial3D_nshcp")
 mesh = SubResource("QuadMesh_d3h56")
 
-[node name="SubViewport" type="SubViewport" parent="Cities/Reykjavik2/CityInteraction/DockingPopup"]
+[node name="SubViewport" type="SubViewport" parent="Cities/Reykjavik/CityInteraction/DockingPopup"]
 transparent_bg = true
 
-[node name="Control" type="Control" parent="Cities/Reykjavik2/CityInteraction/DockingPopup/SubViewport"]
+[node name="Control" type="Control" parent="Cities/Reykjavik/CityInteraction/DockingPopup/SubViewport"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PingButton" type="TextureButton" parent="Cities/Reykjavik2/CityInteraction/DockingPopup/SubViewport/Control"]
+[node name="PingButton" type="TextureButton" parent="Cities/Reykjavik/CityInteraction/DockingPopup/SubViewport/Control"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 51.0
@@ -6316,7 +6250,7 @@ texture_hover = ExtResource("22_xkbba")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Cities/Reykjavik2/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
+[node name="Label" type="Label" parent="Cities/Reykjavik/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
 layout_mode = 0
 offset_left = -8.0
 offset_top = 33.0
@@ -6326,43 +6260,42 @@ theme = SubResource("Theme_wxv4n")
 text = "Dock"
 horizontal_alignment = 1
 
-[node name="InteractionBox1" type="Area3D" parent="Cities/Reykjavik2/CityInteraction"]
+[node name="InteractionBox1" type="Area3D" parent="Cities/Reykjavik/CityInteraction"]
 transform = Transform3D(1, 0, -1.86265e-09, 0, 1, 2.40107e-09, 0, 2.09548e-09, 1, 0, 0, 0)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Reykjavik2/CityInteraction/InteractionBox1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Reykjavik/CityInteraction/InteractionBox1"]
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="StPierre2" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
+[node name="StPierre" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-0.410344, -0.543412, 0.732338, -1.49012e-08, 0.803065, 0.59589, -0.911931, 0.244521, -0.329532, 73.417, 59.7381, -33.0357)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
-city_def = ExtResource("19_xkbba")
-faction = NodePath("../../Factions/Atlantic Empire")
+city_def = ExtResource("24_nshcp")
 
-[node name="CityBody" type="RigidBody3D" parent="Cities/StPierre2"]
+[node name="CityBody" type="RigidBody3D" parent="Cities/StPierre"]
 collision_layer = 262144
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/StPierre2/CityBody"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/StPierre/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_6oioa")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/StPierre2/CityBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/StPierre/CityBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_ni20c")
 
-[node name="CityRender" type="Node3D" parent="Cities/StPierre2"]
+[node name="CityRender" type="Node3D" parent="Cities/StPierre"]
 
-[node name="CityDot" type="Sprite3D" parent="Cities/StPierre2/CityRender"]
+[node name="CityDot" type="Sprite3D" parent="Cities/StPierre/CityRender"]
 transform = Transform3D(-4.47035e-08, 0, -1, 2.59024e-09, 1, 0, 1, 2.09548e-09, -4.47035e-08, -0.0727158, -1.92784e-07, 0)
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("34_f1l1f")
 
-[node name="CityNameLabel" type="Label3D" parent="Cities/StPierre2/CityRender"]
+[node name="CityNameLabel" type="Label3D" parent="Cities/StPierre/CityRender"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0.237328, 1.50652, 0.458885)
 alpha_cut = 1
 outline_modulate = Color(1, 0, 0, 1)
@@ -6371,44 +6304,44 @@ font = ExtResource("35_m4noy")
 font_size = 160
 outline_size = 20
 
-[node name="CityRing" type="Sprite3D" parent="Cities/StPierre2/CityRender"]
+[node name="CityRing" type="Sprite3D" parent="Cities/StPierre/CityRender"]
 transform = Transform3D(-1.3411e-07, 0, -3, 7.77072e-09, 3, 0, 3, 6.28643e-09, -1.3411e-07, 0.13311, 1.56835e-06, 0)
 transparency = 0.8
 modulate = Color(0.831373, 0, 0.239216, 1)
 axis = 0
 texture = ExtResource("19_s8hjj")
 
-[node name="CityInteraction" type="Node3D" parent="Cities/StPierre2"]
+[node name="CityInteraction" type="Node3D" parent="Cities/StPierre"]
 script = ExtResource("20_vycny")
 
-[node name="DockingArea" type="Area3D" parent="Cities/StPierre2/CityInteraction"]
+[node name="DockingArea" type="Area3D" parent="Cities/StPierre/CityInteraction"]
 visible = false
 collision_layer = 2
 
-[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/StPierre2/CityInteraction/DockingArea"]
+[node name="DockingDetectorShape" type="CollisionShape3D" parent="Cities/StPierre/CityInteraction/DockingArea"]
 transform = Transform3D(1, 0, -3.72529e-09, 0, 1, 2.40107e-09, 0, 1.69894e-08, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_s8hjj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/StPierre2/CityInteraction/DockingArea"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/StPierre/CityInteraction/DockingArea"]
 visible = false
 mesh = SubResource("SphereMesh_wfyhd")
 
-[node name="DockingPopup" type="MeshInstance3D" parent="Cities/StPierre2/CityInteraction"]
+[node name="DockingPopup" type="MeshInstance3D" parent="Cities/StPierre/CityInteraction"]
 transform = Transform3D(1, -4.65661e-10, -3.35276e-08, 2.32831e-09, 1, 2.53203e-09, 3.72529e-09, 1.21188e-07, 1, 6.14794, 1.9034, 0.635849)
 visible = false
 material_override = SubResource("StandardMaterial3D_nshcp")
 mesh = SubResource("QuadMesh_d3h56")
 
-[node name="SubViewport" type="SubViewport" parent="Cities/StPierre2/CityInteraction/DockingPopup"]
+[node name="SubViewport" type="SubViewport" parent="Cities/StPierre/CityInteraction/DockingPopup"]
 transparent_bg = true
 
-[node name="Control" type="Control" parent="Cities/StPierre2/CityInteraction/DockingPopup/SubViewport"]
+[node name="Control" type="Control" parent="Cities/StPierre/CityInteraction/DockingPopup/SubViewport"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PingButton" type="TextureButton" parent="Cities/StPierre2/CityInteraction/DockingPopup/SubViewport/Control"]
+[node name="PingButton" type="TextureButton" parent="Cities/StPierre/CityInteraction/DockingPopup/SubViewport/Control"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 51.0
@@ -6420,7 +6353,7 @@ texture_hover = ExtResource("22_xkbba")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Cities/StPierre2/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
+[node name="Label" type="Label" parent="Cities/StPierre/CityInteraction/DockingPopup/SubViewport/Control/PingButton"]
 layout_mode = 0
 offset_left = -8.0
 offset_top = 33.0
@@ -6430,21 +6363,20 @@ theme = SubResource("Theme_wxv4n")
 text = "Dock"
 horizontal_alignment = 1
 
-[node name="InteractionBox1" type="Area3D" parent="Cities/StPierre2/CityInteraction"]
+[node name="InteractionBox1" type="Area3D" parent="Cities/StPierre/CityInteraction"]
 transform = Transform3D(1, 0, -1.86265e-09, 0, 1, 2.40107e-09, 0, 2.09548e-09, 1, 0, 0, 0)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/StPierre2/CityInteraction/InteractionBox1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/StPierre/CityInteraction/InteractionBox1"]
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
 
-[node name="NewYork" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor", "faction")]
+[node name="NewYork" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 unique_name_in_owner = true
 transform = Transform3D(-0.161783, -0.486781, 0.85841, 0, 0.869871, 0.493279, -0.986826, 0.0798045, -0.14073, 86.0557, 49.4513, -14.1083)
 script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
-city_def = ExtResource("19_xkbba")
-faction = NodePath("../../Factions/Atlantic Empire")
+city_def = ExtResource("24_iv5cb")
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/NewYork"]
 collision_layer = 262144
@@ -6541,59 +6473,6 @@ collision_layer = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/NewYork/CityInteraction/InteractionBox1"]
 transform = Transform3D(1, 9.31323e-10, -7.45058e-09, 4.65661e-10, 1, -1.24783e-08, 0, 3.18905e-08, 1, -0.00288093, 1.48466, 0.484985)
 shape = SubResource("ConcavePolygonShape3D_wfyhd")
-
-[node name="Miami6" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
-transform = Transform3D(-0.887026, -0.00339665, 0.461706, 2.32831e-10, 0.999973, 0.00735651, -0.461719, 0.00652543, -0.887, 46.2861, 0.737492, -88.922)
-script = ExtResource("14_8vb4v")
-anchor = NodePath("../../GamePlanet")
-
-[node name="RigidBody3D" type="RigidBody3D" parent="Cities/Miami6"]
-collision_layer = 262144
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cities/Miami6/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
-visible = false
-mesh = SubResource("SphereMesh_6oioa")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cities/Miami6/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.342644, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_ni20c")
-
-[node name="Sprite3D" type="Sprite3D" parent="Cities/Miami6"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0727158, 0, 0)
-material_override = SubResource("StandardMaterial3D_ho0hv")
-axis = 0
-texture = ExtResource("34_f1l1f")
-
-[node name="DockingSpot" type="SpotLight3D" parent="Cities/Miami6"]
-transform = Transform3D(0.0116088, -0.074474, 0.997155, 0.00086696, 0.997223, 0.074469, -0.999932, 1.08158e-10, 0.0116411, 1.63377, 0, 0)
-visible = false
-light_cull_mask = 4294443009
-shadow_enabled = true
-spot_range = 16.407
-spot_attenuation = -5.66
-spot_angle = 43.28
-
-[node name="DockingSpotOccluder" type="MeshInstance3D" parent="Cities/Miami6/DockingSpot"]
-transform = Transform3D(1, 2.35071e-10, -4.65661e-09, -2.91034e-10, 1, -3.72522e-08, -4.65661e-09, 1.49032e-08, 1, -0.00889826, 0.0111237, -0.764389)
-layers = 524288
-transparency = 1.0
-mesh = SubResource("SphereMesh_rcc5k")
-
-[node name="Label3D" type="Label3D" parent="Cities/Miami6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246742, 1.61078, -8.88178e-16)
-alpha_cut = 1
-modulate = Color(1, 0, 1, 1)
-text = "Dakar"
-font = ExtResource("35_m4noy")
-font_size = 160
-
-[node name="Sprite3D2" type="Sprite3D" parent="Cities/Miami6"]
-transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0.13311, 0, 0)
-material_override = SubResource("StandardMaterial3D_slecc")
-transparency = 0.99
-axis = 0
-texture = ExtResource("35_woink")
 
 [node name="Miami7" type="Node3D" parent="Cities" node_paths=PackedStringArray("anchor")]
 transform = Transform3D(-0.933889, 0.0569101, 0.353004, 3.72529e-09, 0.987253, -0.159161, -0.357562, -0.148639, -0.921983, 35.3887, -15.9559, -92.429)
@@ -6716,38 +6595,38 @@ script = ExtResource("29_c10kb")
 [connection signal="input_event" from="Cities/Dakhla/CityInteraction/InteractionBox1" to="Cities/Dakhla/CityInteraction" method="_on_interaction_box_1_input_event"]
 [connection signal="mouse_entered" from="Cities/Dakhla/CityInteraction/InteractionBox1" to="Cities/Dakhla/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
 [connection signal="mouse_exited" from="Cities/Dakhla/CityInteraction/InteractionBox1" to="Cities/Dakhla/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="input_event" from="Cities/NewGibraltar2/CityBody" to="Cities/NewGibraltar2/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/NewGibraltar2/CityBody" to="Cities/NewGibraltar2/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/NewGibraltar2/CityBody" to="Cities/NewGibraltar2/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="body_entered" from="Cities/NewGibraltar2/CityInteraction/DockingArea" to="Cities/NewGibraltar2/CityInteraction" method="_on_docking_area_body_entered"]
-[connection signal="body_exited" from="Cities/NewGibraltar2/CityInteraction/DockingArea" to="Cities/NewGibraltar2/CityInteraction" method="_on_docking_area_body_exited"]
-[connection signal="input_event" from="Cities/NewGibraltar2/CityInteraction/InteractionBox1" to="Cities/NewGibraltar2/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/NewGibraltar2/CityInteraction/InteractionBox1" to="Cities/NewGibraltar2/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/NewGibraltar2/CityInteraction/InteractionBox1" to="Cities/NewGibraltar2/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="input_event" from="Cities/NewGibraltar3/CityBody" to="Cities/NewGibraltar3/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/NewGibraltar3/CityBody" to="Cities/NewGibraltar3/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/NewGibraltar3/CityBody" to="Cities/NewGibraltar3/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="body_entered" from="Cities/NewGibraltar3/CityInteraction/DockingArea" to="Cities/NewGibraltar3/CityInteraction" method="_on_docking_area_body_entered"]
-[connection signal="body_exited" from="Cities/NewGibraltar3/CityInteraction/DockingArea" to="Cities/NewGibraltar3/CityInteraction" method="_on_docking_area_body_exited"]
-[connection signal="input_event" from="Cities/NewGibraltar3/CityInteraction/InteractionBox1" to="Cities/NewGibraltar3/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/NewGibraltar3/CityInteraction/InteractionBox1" to="Cities/NewGibraltar3/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/NewGibraltar3/CityInteraction/InteractionBox1" to="Cities/NewGibraltar3/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="input_event" from="Cities/Reykjavik2/CityBody" to="Cities/Reykjavik2/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/Reykjavik2/CityBody" to="Cities/Reykjavik2/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/Reykjavik2/CityBody" to="Cities/Reykjavik2/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="body_entered" from="Cities/Reykjavik2/CityInteraction/DockingArea" to="Cities/Reykjavik2/CityInteraction" method="_on_docking_area_body_entered"]
-[connection signal="body_exited" from="Cities/Reykjavik2/CityInteraction/DockingArea" to="Cities/Reykjavik2/CityInteraction" method="_on_docking_area_body_exited"]
-[connection signal="input_event" from="Cities/Reykjavik2/CityInteraction/InteractionBox1" to="Cities/Reykjavik2/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/Reykjavik2/CityInteraction/InteractionBox1" to="Cities/Reykjavik2/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/Reykjavik2/CityInteraction/InteractionBox1" to="Cities/Reykjavik2/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="input_event" from="Cities/StPierre2/CityBody" to="Cities/StPierre2/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/StPierre2/CityBody" to="Cities/StPierre2/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/StPierre2/CityBody" to="Cities/StPierre2/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
-[connection signal="body_entered" from="Cities/StPierre2/CityInteraction/DockingArea" to="Cities/StPierre2/CityInteraction" method="_on_docking_area_body_entered"]
-[connection signal="body_exited" from="Cities/StPierre2/CityInteraction/DockingArea" to="Cities/StPierre2/CityInteraction" method="_on_docking_area_body_exited"]
-[connection signal="input_event" from="Cities/StPierre2/CityInteraction/InteractionBox1" to="Cities/StPierre2/CityInteraction" method="_on_interaction_box_1_input_event"]
-[connection signal="mouse_entered" from="Cities/StPierre2/CityInteraction/InteractionBox1" to="Cities/StPierre2/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
-[connection signal="mouse_exited" from="Cities/StPierre2/CityInteraction/InteractionBox1" to="Cities/StPierre2/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="input_event" from="Cities/Cork/CityBody" to="Cities/Cork/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/Cork/CityBody" to="Cities/Cork/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/Cork/CityBody" to="Cities/Cork/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="body_entered" from="Cities/Cork/CityInteraction/DockingArea" to="Cities/Cork/CityInteraction" method="_on_docking_area_body_entered"]
+[connection signal="body_exited" from="Cities/Cork/CityInteraction/DockingArea" to="Cities/Cork/CityInteraction" method="_on_docking_area_body_exited"]
+[connection signal="input_event" from="Cities/Cork/CityInteraction/InteractionBox1" to="Cities/Cork/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/Cork/CityInteraction/InteractionBox1" to="Cities/Cork/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/Cork/CityInteraction/InteractionBox1" to="Cities/Cork/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="input_event" from="Cities/NewGibraltar/CityBody" to="Cities/NewGibraltar/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/NewGibraltar/CityBody" to="Cities/NewGibraltar/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/NewGibraltar/CityBody" to="Cities/NewGibraltar/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="body_entered" from="Cities/NewGibraltar/CityInteraction/DockingArea" to="Cities/NewGibraltar/CityInteraction" method="_on_docking_area_body_entered"]
+[connection signal="body_exited" from="Cities/NewGibraltar/CityInteraction/DockingArea" to="Cities/NewGibraltar/CityInteraction" method="_on_docking_area_body_exited"]
+[connection signal="input_event" from="Cities/NewGibraltar/CityInteraction/InteractionBox1" to="Cities/NewGibraltar/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/NewGibraltar/CityInteraction/InteractionBox1" to="Cities/NewGibraltar/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/NewGibraltar/CityInteraction/InteractionBox1" to="Cities/NewGibraltar/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="input_event" from="Cities/Reykjavik/CityBody" to="Cities/Reykjavik/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/Reykjavik/CityBody" to="Cities/Reykjavik/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/Reykjavik/CityBody" to="Cities/Reykjavik/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="body_entered" from="Cities/Reykjavik/CityInteraction/DockingArea" to="Cities/Reykjavik/CityInteraction" method="_on_docking_area_body_entered"]
+[connection signal="body_exited" from="Cities/Reykjavik/CityInteraction/DockingArea" to="Cities/Reykjavik/CityInteraction" method="_on_docking_area_body_exited"]
+[connection signal="input_event" from="Cities/Reykjavik/CityInteraction/InteractionBox1" to="Cities/Reykjavik/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/Reykjavik/CityInteraction/InteractionBox1" to="Cities/Reykjavik/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/Reykjavik/CityInteraction/InteractionBox1" to="Cities/Reykjavik/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="input_event" from="Cities/StPierre/CityBody" to="Cities/StPierre/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/StPierre/CityBody" to="Cities/StPierre/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/StPierre/CityBody" to="Cities/StPierre/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
+[connection signal="body_entered" from="Cities/StPierre/CityInteraction/DockingArea" to="Cities/StPierre/CityInteraction" method="_on_docking_area_body_entered"]
+[connection signal="body_exited" from="Cities/StPierre/CityInteraction/DockingArea" to="Cities/StPierre/CityInteraction" method="_on_docking_area_body_exited"]
+[connection signal="input_event" from="Cities/StPierre/CityInteraction/InteractionBox1" to="Cities/StPierre/CityInteraction" method="_on_interaction_box_1_input_event"]
+[connection signal="mouse_entered" from="Cities/StPierre/CityInteraction/InteractionBox1" to="Cities/StPierre/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
+[connection signal="mouse_exited" from="Cities/StPierre/CityInteraction/InteractionBox1" to="Cities/StPierre/CityInteraction" method="_on_interaction_box_1_mouse_exited"]
 [connection signal="input_event" from="Cities/NewYork/CityBody" to="Cities/NewYork/CityInteraction" method="_on_interaction_box_1_input_event"]
 [connection signal="mouse_entered" from="Cities/NewYork/CityBody" to="Cities/NewYork/CityInteraction" method="_on_interaction_box_1_mouse_entered"]
 [connection signal="mouse_exited" from="Cities/NewYork/CityBody" to="Cities/NewYork/CityInteraction" method="_on_interaction_box_1_mouse_exited"]

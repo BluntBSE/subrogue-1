@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CityDef" load_steps=5 format=3 uid="uid://cnjm0npjxk8wj"]
+
+[ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_kej3e"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npc.gd" id="2_px3ct"]
+[ext_resource type="Resource" uid="uid://bxtkhju4oso7y" path="res://engine/cities/city_npc/chiara_summers.tres" id="3_odemo"]
+[ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="4_v5vsm"]
+
+[resource]
+script = ExtResource("4_v5vsm")
+city_name = "Jew York"
+default_faction_id = "AtlanticEmpire"
+city_greeting = "The skyline is a jagged forest of glass and steel, each tower pulsing with data and ambition. In the shadow of the old Empire State, Wall Street’s quantum traders and Brooklyn’s synthwave artists compete for bandwidth and attention. The subways are alive with graffiti and guerrilla AR ads, while above, surveillance blimps drift between skyscrapers. In New York, fortunes are made in seconds, and secrets are traded for the right price—if you can survive the city’s relentless, electric heartbeat."
+city_portrait = ExtResource("1_kej3e")
+npcs = Array[ExtResource("2_px3ct")]([ExtResource("3_odemo")])
+metadata/_custom_type_script = "uid://b8owuv8kc08ga"

@@ -54,7 +54,8 @@ func build_random_quest_basis()->void:
     #self.for_NPC = args.NPC
     #Names actually belong on build_random_quest_specifics 
     self.state = STATES.available #Upon construction, random quests are available. This might eventually change to make them locked if requirements aren't met.
-    
+    #self.time_limit
+    #
 func determine_for_faction()->Faction:
     
     var faction_ids = GlobalConst.faction_ids

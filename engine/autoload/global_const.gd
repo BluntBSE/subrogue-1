@@ -62,7 +62,7 @@ enum layers {
 }
 
 
-var faction_ids = ["SaharanFreeLeague", "Atlantic Empire", "EuropeanFront", "UnitedAmericanRepublics"]
+var faction_ids = ["SaharanFreeLeague", "AtlanticEmpire", "EuropeanFront", "UnitedAmericanRepublics"]
 
 #Acoustic modeling is complex, so we're cheating
 #For game reasons, we've decided that a 90db sound at 90hz is audible up to 500km away.

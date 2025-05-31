@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CityDef" load_steps=5 format=3 uid="uid://dipu21v1whu3n"]
+
+[ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_o0564"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npc.gd" id="2_g6g2x"]
+[ext_resource type="Resource" uid="uid://bxtkhju4oso7y" path="res://engine/cities/city_npc/chiara_summers.tres" id="3_7a8yp"]
+[ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="4_mddex"]
+
+[resource]
+script = ExtResource("4_mddex")
+city_name = "Reykjavik"
+default_faction_id = "EuropeanFront"
+city_greeting = "Reykjavik glows beneath the aurora, its geothermal towers and algae farms a testament to Icelandic ingenuity. The city’s hackers and climate scientists mingle in geothermal spas, plotting the next big breakthrough—or the next big heist. Drones deliver fresh-caught fish to glass-walled restaurants, while beneath the surface, encrypted data vaults hum with secrets. Reykjavik is a haven for the world’s digital exiles, a place where the cold is sharp, the coffee is strong, and the future is always just a little bit brighter—or darker—than it seems."
+city_portrait = ExtResource("1_o0564")
+npcs = Array[ExtResource("2_g6g2x")]([ExtResource("3_7a8yp")])
+metadata/_custom_type_script = "uid://b8owuv8kc08ga"

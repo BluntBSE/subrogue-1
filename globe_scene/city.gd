@@ -28,6 +28,13 @@ func _process(_delta: float) -> void:
         fix_height()
 
 
+func _ready():
+    var faction_to_find = city_def.default_faction_id
+    var faction = get_tree().root.find_child("Factions", true, false).get_node(faction_to_find)
+
+    interaction.unpack(faction)
+
+
 func fix_height()->void:
     #The  entity should always be 5 above the tangential surface of the anchor.
     #If tne anchor has a radius of 100m, the entity shall sit at 100.25, but not otherwise modify its position.

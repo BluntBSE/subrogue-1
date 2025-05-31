@@ -6,8 +6,12 @@ var world_hovered:bool = false
 signal opened_city
 
 #Move this to render
-func _ready():
-    var faction_color:Color = city.faction.faction_color
+func unpack(faction:Faction):
+    print("UNPACK GOT", faction)
+
+    
+    
+    var faction_color:Color = faction.faction_color
     city.get_node("CityRender/CityNameLabel").modulate = Color("ffffff")
     city.get_node("CityRender/CityNameLabel").outline_modulate = faction_color
     city.get_node("CityRender/CityDot").modulate = faction_color

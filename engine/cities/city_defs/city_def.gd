@@ -2,6 +2,7 @@ extends Resource
 class_name CityDef
 
 @export var city_name:String
-#Faction ownership is determined by the tree, not the.
+@export var default_faction_id:String
 @export_multiline var city_greeting:String
 @export var city_portrait:Texture2D
+@export var npcs:Array[CityNPC] #If NPCs eventually move, we might need to revisit this and make NPCs exist as nodes. But for now, this is fine.
