@@ -29,10 +29,22 @@ NOT QUITE A BUG BUT: SonarPulseMesh is the culprit, defer its material duplicati
 
 
 TODO:
-
--Make munition homing a function of a behavior tree instead of hard coding
--Make it actually cost a munition to fire one, exhaust it on use
--Make enemies fire munitions with this pattern. Madlad pattern is fine for now.
+in no particular order:
+    Quest system
+    Munitions can't hit docked people
+    
+    Implement a hail workflow
+        -Probably just telling the player to back off if spotted
+        -Make factions that don't hate eachother swim on by
+        
+    Make hostilities only occur between two factions that hate each other
+    
+    Get a mission to destroy ships of a type
+    Get a you died screen going
+    
+    Update munition UI for player to reflect what they actually have?
+    Update munition AI to not try to shoot if you're out of amom
+    Fix the runaway time (3s is possibly too long. Move to nearby node might be better than flee 'away''
 
 For munition behavior:
     Create a behaviorprofile class that orders branches

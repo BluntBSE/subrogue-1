@@ -1,6 +1,6 @@
 extends RigidBody3D
 class_name Entity
-@export var is_player:bool = true
+@export var is_player:bool = false
 var can_dock:bool = false
 var can_dock_at:City
 var played_by:Player

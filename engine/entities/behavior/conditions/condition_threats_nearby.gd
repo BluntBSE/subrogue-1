@@ -13,7 +13,7 @@ func tick(actor:Entity, blackboard:BlackBoard):
                 var dist = (signals[sig].global_position - actor.global_position).length()
                 if dist < 12.0: #TODO: Probably need to make a variable
                     #Right now we don't reason about what's most dangerous, we just flee from the first eligible
-                    blackboard.bbset("fleeing_sig", sig) #Signals are hidden, not eliminated during C100, so I think this covers C100 and positive ID
+                    blackboard.bbset("threat_sig", sig) #Signals are hidden, not eliminated during C100, so I think this covers C100 and positive ID
                     return SUCCESS
                     
     else:

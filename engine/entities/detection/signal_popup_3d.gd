@@ -130,7 +130,8 @@ func tween_to_new():
             tween.set_parallel(true)
             tween.tween_property(self, "position", target_position, 1.0)
             await tween.finished
-            offset = position - detected_object.global_position
+            if detected_object: #Can be freed during the tween, so we check again
+                offset = position - detected_object.global_position
             tweening = false
 
 func match_detected_velocity():
