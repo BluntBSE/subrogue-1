@@ -1,5 +1,5 @@
 extends Node
-class_name EventBus
+class_name CommandBus
 
 #Not a ring buffer. 
 #It can be traversed to provide undo effects.

@@ -1,4 +1,4 @@
-extends EventBus
+extends CommandBus
 class_name EntityMoveBus
 #Yuck
 @onready var entity:Entity = get_parent()

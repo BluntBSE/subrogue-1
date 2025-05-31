@@ -39,7 +39,6 @@
 [ext_resource type="Script" uid="uid://djww6yjgdvcf8" path="res://engine/entities/detection/sonar_control_field.gd" id="23_op6l6"]
 [ext_resource type="Material" uid="uid://de23e4h2ah40y" path="res://engine/entities/detection/3d_ui_handle.material" id="24_j3cwe"]
 [ext_resource type="Script" uid="uid://c5sxeqam8fb71" path="res://engine/entities/render_effects.gd" id="25_hyfub"]
-[ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="28_op6l6"]
 [ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="29_j3cwe"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8wa36"]
@@ -177,6 +176,8 @@ outer_radius = 0.3
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j3cwe"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="GDScript" id="GDScript_8ohyu"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hyfub"]
 
@@ -552,7 +553,7 @@ update_rotation = false
 
 [node name="Notifications" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("28_op6l6")
+script = SubResource("GDScript_8ohyu")
 
 [node name="EntitySynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hyfub")

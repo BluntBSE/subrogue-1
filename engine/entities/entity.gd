@@ -33,7 +33,6 @@ var current_movement_vector:Vector3 #Updated when the entity does move_to().
 @onready var munitions:EntityMunitions = %EntityMunitions
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
-@onready var notifications:Notifications = %Notifications
 signal can_dock_sig
 signal docked
 signal died

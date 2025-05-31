@@ -23,6 +23,8 @@ SceneChangeLoader="*res://engine/autoload/scene_change_loader.gd"
 SoundManager="*res://engine/sound/sound_manager.gd"
 SteamManager="*res://engine/networking/steam/steam_manager.gd"
 NetworkManager="*res://engine/networking/network_manager.gd"
+QuestChannel="*res://engine/abstract_classes/quests/quest_channel.gd"
+Events="*res://engine/events/events.gd"
 
 [debug]
 

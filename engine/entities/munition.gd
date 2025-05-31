@@ -103,10 +103,7 @@ func on_body_entered_check_for_impact(body):
         #Don't collide with other munitions unless you're supposed to (Not yet implemented)
         if impact_type == IMPACT_TYPES.ships:
             if !(body is Munition):
-                var event: EntityDied = EntityDied.new()
-                event.died = body
-                event.killed_by = self
-                notifications.notify(event)
+                #Do event here
                 damage_target(body)
 
 

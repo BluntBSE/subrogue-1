@@ -3498,8 +3498,6 @@ offset_bottom = 82.0
 placeholder_text = "Welcome to the cheatzone"
 script = ExtResource("39_7xmbg")
 
-[node name="PlayerQuests" type="Node" parent="."]
-
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/VerySlow" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Slow" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
 [connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Normal" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [0]]
