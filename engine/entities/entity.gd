@@ -320,9 +320,7 @@ func handle_in_docking_area(city:City):
             print("Player")
             can_dock_at.interaction.opened_city.disconnect(played_by.UI.handle_opened_city)
 
-            city.interaction.opened_city.connect(played_by.UI.test_method)       
             city.interaction.opened_city.connect(played_by.UI.handle_opened_city)
-            city.interaction.opened_city.emit(city)
 
 func handle_leave_docking_area():
     if can_dock == true:
