@@ -1,7 +1,7 @@
 extends TextureRect
 class_name CityUI
 
-var active_city:CityDef
+var active_city:City
 var state_machine:StateMachine
 
 #STATES == city_main, #viewing_contracts, #contract_closeup
@@ -11,12 +11,12 @@ func _ready():
     state_machine.Add("CityMain", CityMainState.new(self,{})) #This one might actually take args, even. Won't that be novel.
     state_machine.Add("ViewingContracts", ViewingContractsState.new(self,{}))
     state_machine.Add("ContractCloseup", ContractCloseupState.new(self,{}))
-    state_machine.Change("Hidden", {})
+    #state_machine.Change("Hidden", {})
     
 #You ABSOLUTELY need to replace this with a state machine once the trailer is done.
 
-func unpack(_city:CityDef, _for_faction:Faction = null):
-    active_city = _city
+func unpack(_city:City, _for_faction:Faction = null):
+    active_city = _city #We would need the actual city if we wanted to move.
     state_machine.Change("CityMain", {"active_city":active_city})
 
 

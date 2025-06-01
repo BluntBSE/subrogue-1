@@ -30,7 +30,10 @@ NOT QUITE A BUG BUT: SonarPulseMesh is the culprit, defer its material duplicati
 
 QUESTS:
     
-    
+START June 01 2025
+-Regroup city UI
+-Add city UI states
+-Debug City click not working any more
 
 
 TODO:

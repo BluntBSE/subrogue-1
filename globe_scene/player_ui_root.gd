@@ -120,11 +120,11 @@ func handle_opened_city(city:City):
     print("Handle Opened City Fired?")
     %CityUIRoot.visible = true
     print("City In should be playing")
-    %UIAnimations.play("CityIn", -1.0, 2.0)
+    %UIAnimations.play("CityIn", -1.0, 2.0)#
     %SonarOrdnanceUI.hide_sonar_ordnance_ui()
     docked_at = city
     var city_ui:CityUI = %CityUIRoot.get_node("CityUI")
-    city_ui.unpack(city.city_def, city.faction)
+    city_ui.unpack(city, city.faction)
     pass
     
 func handle_undocked_button():

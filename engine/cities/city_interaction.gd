@@ -19,6 +19,7 @@ func unpack(faction:Faction):
     
 
 func _on_docking_area_body_entered(body: Entity) -> void:
+    print("Hello from docking body area entered for ", get_parent().name)
     body.handle_in_docking_area(get_parent())    
     if body.played_by != null:
         var interaction_area_1:Area3D = get_node("InteractionBox1")
@@ -71,6 +72,8 @@ func _on_interaction_box_1_input_event(camera: Node, event: InputEvent, event_po
     if event is InputEventMouseButton:
         event as InputEventMouseButton
         if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+            print("Hello from IBOX 1 event on ", city.name)
+
             opened_city.emit(get_parent())
             SoundManager.play_straight("ui_swoop_1", "ui")
     pass # Replace with function body.

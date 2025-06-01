@@ -100,7 +100,11 @@ func unpack(type_id, _faction:Faction, with_name):
     %EntityDetector.unpack(self)
     unpacked = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta:float):
+    freeze = false
+
 func _physics_process(delta: float) -> void:
+    
     if unpacked != true:
         return
     #Because clients sync their own information, only run this stuff if it belongs to you.
@@ -304,6 +308,7 @@ func check_at_destination():
 
 
 func handle_in_docking_area(city:City):
+    print("Hello from handle in docking area for ", city.name)
     if can_dock == false: #This check is necessary because the 3d area you check is a spherical plane.
         #It's nontrivial to check for total "immersion" in the 3D area. This saves you a headache.
         if played_by != null:
@@ -312,12 +317,12 @@ func handle_in_docking_area(city:City):
             can_dock = true
             can_dock_at = city
             can_dock_sig.emit(true)
+            print("Player")
+            can_dock_at.interaction.opened_city.disconnect(played_by.UI.handle_opened_city)
 
-            city.interaction.connect("opened_city", played_by.UI.test_method)
             city.interaction.opened_city.connect(played_by.UI.test_method)       
             city.interaction.opened_city.connect(played_by.UI.handle_opened_city)
             city.interaction.opened_city.emit(city)
-            print(city.interaction.get_signal_connection_list("opened_city"))
 
 func handle_leave_docking_area():
     if can_dock == true:
