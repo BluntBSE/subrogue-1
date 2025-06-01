@@ -115,11 +115,7 @@ func handle_can_dock(b:bool):
     
     
 func handle_opened_city(city:City):
-
-    #For now...
-    print("Handle Opened City Fired?")
     %CityUIRoot.visible = true
-    print("City In should be playing")
     %UIAnimations.play("CityIn", -1.0, 2.0)#
     %SonarOrdnanceUI.hide_sonar_ordnance_ui()
     docked_at = city

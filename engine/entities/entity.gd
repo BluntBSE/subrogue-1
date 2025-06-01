@@ -308,7 +308,6 @@ func check_at_destination():
 
 
 func handle_in_docking_area(city:City):
-    print("Hello from handle in docking area for ", city.name)
     if can_dock == false: #This check is necessary because the 3d area you check is a spherical plane.
         #It's nontrivial to check for total "immersion" in the 3D area. This saves you a headache.
         if played_by != null:
@@ -317,9 +316,7 @@ func handle_in_docking_area(city:City):
             can_dock = true
             can_dock_at = city
             can_dock_sig.emit(true)
-            print("Player")
             can_dock_at.interaction.opened_city.disconnect(played_by.UI.handle_opened_city)
-
             city.interaction.opened_city.connect(played_by.UI.handle_opened_city)
 
 func handle_leave_docking_area():

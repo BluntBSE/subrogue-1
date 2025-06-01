@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bn7mt5j4ydu5a" path="res://debug_node.gd" id="4_lsblq"]
 [ext_resource type="Sky" uid="uid://c5qe02a2kqqb" path="res://shaders/sky.tres" id="5_braji"]
 [ext_resource type="Texture2D" uid="uid://dumryou711ko6" path="res://assets/UI/collision_mask.png" id="8_6dvw2"]
-[ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/debug_faction.gd" id="8_c10kb"]
+[ext_resource type="Script" uid="uid://b55cstaofgtem" path="res://globe_scene/faction.gd" id="8_c10kb"]
 [ext_resource type="Script" uid="uid://c7feimtf0jnd2" path="res://tools/geometry_drawer.gd" id="11_6u1es"]
 [ext_resource type="Script" uid="uid://b1m1p2n51hjao" path="res://globe_scene/city.gd" id="14_8vb4v"]
 [ext_resource type="Script" uid="uid://cr6nogotcq8vy" path="res://globe_scene/city_manager.gd" id="15_s8hjj"]
@@ -3568,7 +3568,8 @@ spawn_path = NodePath("..")
 
 [node name="SaharanFreeLeague" type="Node3D" parent="Factions"]
 script = ExtResource("8_c10kb")
-faction_color = Color(0.298039, 0.956863, 1, 1)
+display_name = "Saharan Free League"
+faction_color = Color(0.337616, 0.689471, 1.92523e-07, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/SaharanFreeLeague"]
 script = ExtResource("34_n1474")
@@ -3579,6 +3580,7 @@ spawn_path = NodePath("..")
 
 [node name="PanAmericanFederation" type="Node3D" parent="Factions"]
 script = ExtResource("8_c10kb")
+display_name = "Pan American Federation"
 faction_color = Color(0.989394, 0.644815, 7.70092e-07, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/PanAmericanFederation"]
@@ -3591,6 +3593,7 @@ spawn_path = NodePath("..")
 [node name="AtlanticEmpire" type="Node3D" parent="Factions"]
 unique_name_in_owner = true
 script = ExtResource("8_c10kb")
+display_name = "Atlantic Empire"
 faction_color = Color(0.901961, 0, 0, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/AtlanticEmpire"]
@@ -3603,7 +3606,8 @@ spawn_path = NodePath("..")
 [node name="Cascadia" type="Node3D" parent="Factions"]
 unique_name_in_owner = true
 script = ExtResource("8_c10kb")
-faction_color = Color(0, 0.72549, 0, 1)
+display_name = "Cascadia"
+faction_color = Color(0.93738, 0.23625, 0.870955, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/Cascadia"]
 script = ExtResource("34_n1474")
@@ -3614,7 +3618,8 @@ spawn_path = NodePath("..")
 
 [node name="EuropeanFront" type="Node3D" parent="Factions"]
 script = ExtResource("8_c10kb")
-faction_color = Color(0, 0.52549, 0.682353, 1)
+display_name = "European Front"
+faction_color = Color(0.277343, 0.463503, 0.822343, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/EuropeanFront"]
 script = ExtResource("34_n1474")
@@ -3625,6 +3630,8 @@ spawn_path = NodePath("..")
 
 [node name="Austro-PacificUnion" type="Node3D" parent="Factions"]
 script = ExtResource("8_c10kb")
+display_name = "Austro-Pacific Union"
+faction_color = Color(0.907491, 0.360905, 3.85046e-07, 1)
 
 [node name="FactionEntities" type="Node3D" parent="Factions/Austro-PacificUnion"]
 script = ExtResource("34_n1474")

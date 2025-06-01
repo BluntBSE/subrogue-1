@@ -7,7 +7,7 @@ var state_machine:StateMachine
 #STATES == city_main, #viewing_contracts, #contract_closeup
 func _ready():
     state_machine = StateMachine.new()
-    state_machine.Add("Hidden", CityUIHiddenState.new(self,{}))
+    #state_machine.Add("Hidden", CityUIHiddenState.new(self,{})) #Probably enough to be governed by CityUIRoot, which belongs to PlayerUIRoot
     state_machine.Add("CityMain", CityMainState.new(self,{})) #This one might actually take args, even. Won't that be novel.
     state_machine.Add("ViewingContracts", ViewingContractsState.new(self,{}))
     state_machine.Add("ContractCloseup", ContractCloseupState.new(self,{}))
