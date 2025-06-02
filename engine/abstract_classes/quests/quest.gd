@@ -47,10 +47,12 @@ func retire():
 
 
 
-func build_random_quest_basis()->void:
+func build_random_quest_basis(_npc:CityNPC)->void:
+    self.name = "Quest for "+_npc.display_name
+    self.for_NPC = _npc
     #For faction determinant
     self.for_faction = determine_for_faction() #Probably will accept NPC's faction at some point.
-    #self.for_NPC = args.NPC
+
     #Names actually belong on build_random_quest_specifics 
     self.state = STATES.available #Upon construction, random quests are available. This might eventually change to make them locked if requirements aren't met.
     #self.time_limit

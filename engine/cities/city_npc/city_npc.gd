@@ -17,6 +17,13 @@ func unpack(_def:CityNPCDef):
     vignettes = def.vignettes
     faction = def.faction
     #TODO: quests 
+    #If no quests?
+    var quest = generate_quest_for_npc()
+    quests.append(quest)
 
-func generate_quest_for_npc():
-    pass
+func generate_quest_for_npc()->Quest:
+    var quest := MurderTypeQuest.new() #TODO: Make this N of a set
+    add_child(quest)
+    quest.build_random_quest_basis(self)
+    quest.build_random_quest_specifics()
+    return quest

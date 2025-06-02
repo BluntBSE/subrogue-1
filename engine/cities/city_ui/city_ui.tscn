@@ -143,6 +143,7 @@ text = "Opinion: 0 / 100"
 
 [node name="ContractCloseUp" parent="." instance=ExtResource("8_7esse")]
 unique_name_in_owner = true
+visible = false
 
 [node name="CityMain" type="Control" parent="."]
 unique_name_in_owner = true

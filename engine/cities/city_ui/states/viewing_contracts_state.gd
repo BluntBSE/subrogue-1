@@ -31,6 +31,7 @@ func render_npc(npc:CityNPC, at:Control):
 
    
 func handle_npc_button_up(quest:Quest):
+    print("NPC BUTTON UP, with quest: ", quest)
     _ref.state_machine.Change("ContractCloseup", {"quest":quest})
     pass
 

@@ -6,7 +6,7 @@ var num_to_destroy = 5
 var target_parameters:MurderQuestParams #TODO: Later, add...given size, etc.
 
 class MurderQuestParams:
-    var faction:Faction
+    var target_faction:Faction
     var category:String
     #Size...
     #Carrying...
@@ -30,6 +30,7 @@ func build_random_quest_specifics():
     var params := MurderQuestParams.new()
     #exclude quest giver faction as a target option
     var valid_factions:Array = exclude_citynpc_faction(for_NPC)
+    valid_factions.erase(self.for_faction) #To prevent Saharan Free League from asking you to shoot SFL ships...Unless?
     var target_faction_id = valid_factions.pick_random()
     var target_faction = get_tree().root.find_child(target_faction_id,true,false)
     

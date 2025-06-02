@@ -46,10 +46,11 @@ func _ready():
     for npcdef:CityNPCDef in city_def.default_npcs:
         print("BLARP!")
         var npc := CityNPC.new()
+        npc_node.add_child(npc)
         print("NPC?", npc)
         npc.unpack(npcdef)
         npcs.append(npc)
-        npc_node.add_child(npc)
+
         npc.name = npcdef.display_name
 
         
