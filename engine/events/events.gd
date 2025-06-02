@@ -4,7 +4,7 @@ var COMBAT = Combat.new()
 
 
 class Quests:
-    signal activated_quest #{"for":player, "quest":quest"}
+    signal enabled_quest #{"for":player, "quest":quest"}
     signal completed_quest
     signal canceled_quest
     signal failed_quest

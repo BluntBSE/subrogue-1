@@ -30,7 +30,7 @@ func enable(player:Player):
     print(name, ": bound entity killed events")
     assigned_to = player
     Events.COMBAT.entity_killed_by.connect(try_complete)
-    quest_enabled.emit(self)
+    Events.QUESTS.activated_quest.emit({"for":assigned_to, "quest":self})
 
 # Example: add multiple conditions in quest setup
 func build_random_quest_specifics():
