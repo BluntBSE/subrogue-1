@@ -55,6 +55,11 @@ func build_random_quest_basis()->void:
     self.state = STATES.available #Upon construction, random quests are available. This might eventually change to make them locked if requirements aren't met.
     #self.time_limit
     #
+    
+func build_random_quest_specifics():
+    #Pure virtual
+    pass   
+
 func determine_for_faction()->Faction:
     
     var faction_ids = GlobalConst.faction_ids

@@ -25,9 +25,14 @@ func render_npc(npc:CityNPC, at:Control):
     var npc_button:ContractNPCButton = preload("res://engine/cities/city_npc/contract_npc_button.tscn").instantiate()
     at.add_child(npc_button)
     npc_button.unpack(npc)
+    #For now, NPCs only generate one quest apiece loaded upon ready.
+    
+    npc_button.button_up.connect(handle_npc_button_up.bind(npc.quests[0]))
 
    
-    
+func handle_npc_button_up(quest:Quest):
+    _ref.state_machine.Change("ContractCloseup", {"quest":quest})
+    pass
 
 func stateExit() -> void:
     #Play animation player because the only way to exit the hidden state is when you

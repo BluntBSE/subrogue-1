@@ -4,11 +4,11 @@
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="2_spgwn"]
 [ext_resource type="Script" uid="uid://43gtibk0e5a4" path="res://engine/cities/city_ui/city_ui.gd" id="2_ttruw"]
 [ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="3_71dqv"]
-[ext_resource type="Texture2D" uid="uid://10iq42ux2jj" path="res://assets/UI/placeholder/chiara-summer-mO9EzDBd5nI-unsplash.png" id="4_71dqv"]
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="4_ttruw"]
 [ext_resource type="PackedScene" uid="uid://cvqcua7xfmh" path="res://engine/cities/city_npc/contract_npc_button.tscn" id="5_7esse"]
 [ext_resource type="Texture2D" uid="uid://b4rvv34wjpo5j" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT02.png" id="5_7j5gr"]
 [ext_resource type="FontFile" uid="uid://bvmpsl44wcfpl" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Bd.otf" id="5_ttruw"]
+[ext_resource type="PackedScene" uid="uid://cyrwmuqqkdb2c" path="res://engine/cities/city_ui/contract_close_up.tscn" id="8_7esse"]
 [ext_resource type="Texture2D" uid="uid://bccxsf2kortp3" path="res://engine/npcs/assets/mark_adams.png" id="8_f05r4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itjk8"]
@@ -141,154 +141,8 @@ text = "Opinion: 0 / 100"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="ContractCloseUp" type="Control" parent="."]
+[node name="ContractCloseUp" parent="." instance=ExtResource("8_7esse")]
 unique_name_in_owner = true
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Container" type="BoxContainer" parent="ContractCloseUp"]
-layout_mode = 0
-offset_left = 828.0
-offset_top = 130.0
-offset_right = 1147.0
-offset_bottom = 449.0
-
-[node name="TextureRect" type="TextureRect" parent="ContractCloseUp/Container"]
-layout_mode = 2
-texture = ExtResource("4_71dqv")
-
-[node name="ContractActions" type="VBoxContainer" parent="ContractCloseUp"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 87.0
-offset_top = 710.0
-offset_right = 350.0
-offset_bottom = 914.0
-theme_override_constants/separation = -30
-
-[node name="TextureButton" type="TextureButton" parent="ContractCloseUp/ContractActions"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("2_spgwn")
-texture_normal = ExtResource("4_ttruw")
-texture_pressed = ExtResource("5_7j5gr")
-texture_hover = ExtResource("5_7j5gr")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="ContractCloseUp/ContractActions/TextureButton"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 46.0
-theme_override_font_sizes/font_size = 20
-text = "Back"
-
-[node name="TextureButton5" type="TextureButton" parent="ContractCloseUp/ContractActions"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme = ExtResource("2_spgwn")
-texture_normal = ExtResource("4_ttruw")
-texture_pressed = ExtResource("5_7j5gr")
-texture_hover = ExtResource("5_7j5gr")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="ContractCloseUp/ContractActions/TextureButton5"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 46.0
-theme_override_font_sizes/font_size = 20
-text = "Accept"
-
-[node name="NPCDescription" type="RichTextLabel" parent="ContractCloseUp"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 823.0
-offset_top = 566.0
-offset_right = 1153.0
-offset_bottom = 1346.0
-theme = ExtResource("2_spgwn")
-theme_override_font_sizes/normal_font_size = 16
-text = "Chiara ashes her cigarette off the hotel balcony while you review the plans on her phone. In this breeze, it's a miracle her fur coat stays clean.
-
-\"The security cameras are off for exactly seven more minutes. If you have any more questions, I suggest you ask them quickly.\"
-"
-fit_content = true
-
-[node name="ContractDescription" type="RichTextLabel" parent="ContractCloseUp"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 92.0
-offset_top = 198.0
-offset_right = 675.0
-offset_bottom = 665.0
-theme = ExtResource("2_spgwn")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "Destroy [b]5 commercial vessels[/b] belonging to the [b][color=ffbb00]PAF[/color][/b].
-
-Destroy [b]5 commercial vessels[/b] belonging to the [b][color=6390ff]European Front[/color][/b].
-
-The vessels must be [b]large or larger[/b]. 
-
-It does not matter if you are detected during this mission.
-
-Complete the mission within [b]20 days [/b].
-
-[b]ADVANCE[/b]: 
-$6,000,000
-
-[b]ON COMPLETION[/b]:
-$20,000,000
-
-[b]ON FAILURE[/b]:
-[b][color=d4003d]Atlantic Empire:[/color][/b] -10 Standing
-[b]Chiara Summers:[/b] -5 Opinion
-"
-fit_content = true
-
-[node name="ContractNPCLabel" type="Label" parent="ContractCloseUp"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 820.0
-offset_top = 467.0
-offset_right = 1258.0
-offset_bottom = 558.0
-theme = ExtResource("2_spgwn")
-theme_override_font_sizes/font_size = 30
-text = "Chiara 
-Summers"
-
-[node name="MissionDetailsSubLabel" type="Label" parent="ContractCloseUp"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 86.0
-offset_top = 129.0
-offset_right = 486.0
-offset_bottom = 161.0
-theme = ExtResource("2_spgwn")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Sabotage American-European Trade"
-
-[node name="MissionDetailsLabel" type="Label" parent="ContractCloseUp"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 86.0
-offset_top = 69.0
-offset_right = 555.0
-offset_bottom = 128.0
-theme = ExtResource("2_spgwn")
-theme_override_font_sizes/font_size = 36
-text = "MISSION DETAILS"
-horizontal_alignment = 1
 
 [node name="CityMain" type="Control" parent="."]
 unique_name_in_owner = true
@@ -454,5 +308,4 @@ The on-again off-again independence of this tiny city state has attracted some o
 "
 fit_content = true
 
-[connection signal="button_up" from="ContractCloseUp/ContractActions/TextureButton5" to="." method="_on_accept_mission_trailer"]
 [connection signal="button_up" from="CityMain/MainOptions/ContractsButton" to="." method="_on_contracts_button_button_up"]
