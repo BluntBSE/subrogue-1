@@ -127,6 +127,10 @@ func damage_target(target: Entity) -> void:
     if played_by:
         played_by.UI.handle_impact_1()
         #TODO: Probably need a like "detonated" signal of some flavor.
+    var death_event = Events.COMBAT.entity_killed_by_object.new()
+    death_event.killed = target
+    death_event.killed_by = fired_from #Idk yet if this should be fired_from or 'self'
+    Events.COMBAT.entity_killed_by.emit(death_event)
     target.queue_free()
     queue_free()
 

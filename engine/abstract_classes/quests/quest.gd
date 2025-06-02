@@ -4,7 +4,7 @@ class_name Quest
 
 enum STATES {available, active, completed, canceled}
 
-#var assigned_to:Player #? Players? Is this even appropriate? I don't think I really want joint missions though since there's ultimately one on top.
+var assigned_to:Player #? Players? Is this even appropriate? I don't think I really want joint missions though since there's ultimately one on top.
 var for_faction:Faction
 var for_NPC
 #var unique_id - Nodes have an RID, right? We might not need unique_ids as a separate variable.
@@ -18,13 +18,27 @@ var rewards #Faction favor, money, supplies, weapons, MAYBE crew.
 #It feels like a lot but honestly I think I will do FavorReward, MoneyReward, SupplyReward, etc. classes
 #So that a give_rewards() function can match against the classes in the Array.
 
+#I think self can be the bind for all of these
+signal quest_complete
+signal quest_failed
+signal quest_enabled
 
-func enable():
+
+# Abstract base class for quest conditions
+class QuestCondition:
+    func is_satisfied(entity: Entity) -> bool:
+        return false
+
+func enable(player:Player):
+    
+    #Bind to whatever the listener is. Probably that needs to be an argument on this function.
+    #This might be virtual at this level since the events quests listen to will change.
     pass
 
 func complete():
-    
+    print("Quest ", name, "completed! Rewards should be given")
     #Give rewards
+    quest_complete.emit(self)
     pass
 
 func abandon():
@@ -50,6 +64,7 @@ func retire():
 func build_random_quest_basis(_npc:CityNPC)->void:
     self.name = "Quest for "+_npc.display_name
     self.for_NPC = _npc
+    self.display_name = "Debug example quest name!"
     #For faction determinant
     self.for_faction = determine_for_faction() #Probably will accept NPC's faction at some point.
 
