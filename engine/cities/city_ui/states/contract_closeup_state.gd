@@ -22,8 +22,7 @@ func stateEnter(_args: Dictionary) -> void:
     
 
 func render_quest(_quest:Quest):
-    _ref.get_tree().root.find_child("MissionDetailsSubLabel",true,false).text = quest.display_name
-   
+    _ref.get_tree().root.find_child("ContractCloseUp",true,false).unpack(_quest)   
     pass    
     
 

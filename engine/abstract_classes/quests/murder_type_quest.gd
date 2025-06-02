@@ -1,8 +1,7 @@
 extends Quest
 class_name MurderTypeQuest
 
-# Each quest has a list of conditions
-var conditions: Array[QuestCondition] = []
+
 
 
 
@@ -61,7 +60,9 @@ func create_hunt_condition():
     var valid_factions:Array = exclude_citynpc_faction(for_NPC)
     valid_factions.erase(self.for_faction) #To prevent Saharan Free League from asking you to shoot SFL ships...Unless?
     var target_faction_id = valid_factions.pick_random()
+    print("SEEKING TARGET FACTION ID ", target_faction_id)
     var target_faction = get_tree().root.find_child(target_faction_id,true,false)
+    print("TARGET FACTION NODE ", target_faction)
     hunt.target_faction = target_faction
     hunt.category = "commercial" #TODO: Make dynamic
     hunt.required_count = 5

@@ -23,7 +23,8 @@ signal quest_complete
 signal quest_failed
 signal quest_enabled
 
-
+# Each quest has a list of conditions
+var conditions: Array[QuestCondition] = []
 # Abstract base class for quest conditions
 class QuestCondition:
     func is_satisfied(entity: Entity) -> bool:
