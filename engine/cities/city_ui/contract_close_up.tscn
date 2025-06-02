@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyrwmuqqkdb2c"]
+[gd_scene load_steps=6 format=3 uid="uid://cyrwmuqqkdb2c"]
 
+[ext_resource type="Script" uid="uid://bepkyug81u3lk" path="res://engine/cities/city_ui/contract_close_up.gd" id="1_hfq2i"]
 [ext_resource type="Texture2D" uid="uid://10iq42ux2jj" path="res://assets/UI/placeholder/chiara-summer-mO9EzDBd5nI-unsplash.png" id="1_t5rs2"]
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="2_hfq2i"]
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="3_t5jg8"]
@@ -10,6 +11,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_hfq2i")
 
 [node name="Container" type="BoxContainer" parent="."]
 layout_mode = 0
@@ -87,9 +89,9 @@ fit_content = true
 [node name="ContractDescription" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 92.0
+offset_left = -668.0
 offset_top = 198.0
-offset_right = 675.0
+offset_right = -85.0
 offset_bottom = 665.0
 theme = ExtResource("2_hfq2i")
 theme_override_font_sizes/normal_font_size = 16
@@ -152,3 +154,116 @@ theme = ExtResource("2_hfq2i")
 theme_override_font_sizes/font_size = 36
 text = "MISSION DETAILS"
 horizontal_alignment = 1
+
+[node name="MissionGoals" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 0
+offset_left = 89.0
+offset_top = 201.0
+offset_right = 689.0
+offset_bottom = 410.0
+theme_override_constants/separation = 15
+
+[node name="Goal1" type="RichTextLabel" parent="MissionGoals"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Destroy [b]5 commercial vessels[/b] belonging to the [b][color=ffbb00]PAF[/color][/b]."
+fit_content = true
+
+[node name="Goal2" type="RichTextLabel" parent="MissionGoals"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Destroy [b]5 commercial vessels[/b] belonging to the [b][color=ffbb00]PAF[/color][/b]."
+fit_content = true
+
+[node name="Goal3" type="RichTextLabel" parent="MissionGoals"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "The vessels must be [b]large or larger[/b]."
+fit_content = true
+
+[node name="Goal4" type="RichTextLabel" parent="MissionGoals"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "It does not matter if you are detected during this mission."
+fit_content = true
+
+[node name="Goal5" type="RichTextLabel" parent="MissionGoals"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Complete the mission within [b]20 days[/b]"
+fit_content = true
+
+[node name="MissionRewards" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 0
+offset_left = 89.0
+offset_top = 444.0
+offset_right = 689.0
+offset_bottom = 657.0
+theme_override_constants/separation = 15
+
+[node name="Reward1" type="RichTextLabel" parent="MissionRewards"]
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]ADVANCE[/b]: $6,000,000"
+fit_content = true
+
+[node name="Reward2" type="RichTextLabel" parent="MissionRewards"]
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]ON COMPLETION[/b]: $20,000,000"
+fit_content = true
+
+[node name="Reward3" type="RichTextLabel" parent="MissionRewards"]
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]ON COMPLETION[/b]: Atlantic Empire +10"
+fit_content = true
+
+[node name="Reward4" type="RichTextLabel" parent="MissionRewards"]
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]ON COMPLETION[/b]: Chiara Summers +2"
+fit_content = true
+
+[node name="Reward5" type="RichTextLabel" parent="MissionRewards"]
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]ON FAILURE[/b]: Lose opinion"
+fit_content = true
+
+[node name="Reward6" type="RichTextLabel" parent="MissionRewards"]
+layout_mode = 2
+theme = ExtResource("2_hfq2i")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]ON FAILURE[/b]: -30,000,000"
+fit_content = true
