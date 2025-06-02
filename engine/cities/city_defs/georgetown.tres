@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CityDef" load_steps=4 format=3 uid="uid://k1b1xakpiy2m"]
 
 [ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_kx5u4"]
-[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npc.gd" id="2_8ow28"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npcdef.gd" id="2_8ow28"]
 [ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="3_m0a71"]
 
 [resource]

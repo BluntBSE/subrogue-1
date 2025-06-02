@@ -21,15 +21,13 @@ func unpack(_city:City, _for_faction:Faction = null):
 
 
 func show_contract_options():
-    %MainOptions.visible = false
-    %ContractContacts.visible = true
-    %ContactActions.visible = false
+    state_machine.Change("ViewingContracts", {"npcs":active_city.npcs})
     
 
 
 func _on_contracts_button_button_up() -> void:
+    print("ACTIVE CITY NPCS: ", active_city.npcs)
     show_contract_options()
-    pass # Replace with function body.
 
 
 func _on_contract_npc_button_button_up() -> void:
@@ -38,7 +36,6 @@ func _on_contract_npc_button_button_up() -> void:
     %CityGreeting.visible = false
     %CityNameLabel.visible = false
     %FactionLabel.visible = false
-    pass # Replace with function body.
 
 
 func _on_accept_mission_trailer() -> void:

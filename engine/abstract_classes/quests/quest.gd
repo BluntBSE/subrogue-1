@@ -43,9 +43,8 @@ func retire():
 #Call a function that exists across all specific types of quest (smuggle, murder)
 #quest.build_random_quest_specifics
 
-#To avoid an expensive reparenting (even though it's PROBABLY fine...), let's actually spawn these
-#Available quests directly on the player and queue_free() them if they're not accepted
-#This allows us to keep them in sync in an MP context just by spawning them or not.
+#There's actually no issues with keeping a quest parented to the NPC that grants it. The journal can be populated with references to these.
+
 
 
 func build_random_quest_basis()->void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6wq3ox1h0lcj"]
+[gd_scene load_steps=12 format=3 uid="uid://b6wq3ox1h0lcj"]
 
 [ext_resource type="Texture2D" uid="uid://biopgmfrbkuc7" path="res://assets/UI/blue_panels/LargeMenuBGT03.1BlueDark.png" id="1_tf3wp"]
 [ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="2_spgwn"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="3_71dqv"]
 [ext_resource type="Texture2D" uid="uid://10iq42ux2jj" path="res://assets/UI/placeholder/chiara-summer-mO9EzDBd5nI-unsplash.png" id="4_71dqv"]
 [ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="4_ttruw"]
+[ext_resource type="PackedScene" uid="uid://cvqcua7xfmh" path="res://engine/cities/city_npc/contract_npc_button.tscn" id="5_7esse"]
 [ext_resource type="Texture2D" uid="uid://b4rvv34wjpo5j" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT02.png" id="5_7j5gr"]
 [ext_resource type="FontFile" uid="uid://bvmpsl44wcfpl" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Bd.otf" id="5_ttruw"]
 [ext_resource type="Texture2D" uid="uid://bccxsf2kortp3" path="res://engine/npcs/assets/mark_adams.png" id="8_f05r4"]
@@ -82,57 +83,15 @@ text = "Back"
 
 [node name="ContractContacts" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 87.0
 offset_top = 216.0
 offset_right = 350.0
 offset_bottom = 416.0
 
-[node name="ContractNPCButton" type="Button" parent="ContractContacts"]
-custom_minimum_size = Vector2(300, 150)
+[node name="ContractNPCButton" parent="ContractContacts" instance=ExtResource("5_7esse")]
 layout_mode = 2
-
-[node name="BoxContainer" type="BoxContainer" parent="ContractContacts/ContractNPCButton"]
-layout_mode = 2
-offset_left = 10.0
-offset_top = 17.0
-offset_right = 296.0
-offset_bottom = 156.0
-theme_override_constants/separation = 10
-
-[node name="NPCPortrait" type="TextureRect" parent="ContractContacts/ContractNPCButton/BoxContainer"]
-custom_minimum_size = Vector2(32, 128)
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("4_71dqv")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ContractContacts/ContractNPCButton/BoxContainer"]
-layout_mode = 2
-
-[node name="NPCName" type="Label" parent="ContractContacts/ContractNPCButton/BoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_ttruw")
-theme_override_font_sizes/font_size = 14
-text = "Chiara 
-Summer"
-
-[node name="NPCFaction" type="Label" parent="ContractContacts/ContractNPCButton/BoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.831373, 0, 0.239216, 1)
-theme_override_font_sizes/font_size = 14
-text = "Atlantic Empire"
-
-[node name="NPCJob" type="Label" parent="ContractContacts/ContractNPCButton/BoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Ambassador"
-
-[node name="NPCOpinion" type="Label" parent="ContractContacts/ContractNPCButton/BoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Opinion: 0 / 100"
 
 [node name="Button2" type="Button" parent="ContractContacts"]
 custom_minimum_size = Vector2(300, 150)
@@ -495,6 +454,5 @@ The on-again off-again independence of this tiny city state has attracted some o
 "
 fit_content = true
 
-[connection signal="button_up" from="ContractContacts/ContractNPCButton" to="." method="_on_contract_npc_button_button_up"]
 [connection signal="button_up" from="ContractCloseUp/ContractActions/TextureButton5" to="." method="_on_accept_mission_trailer"]
 [connection signal="button_up" from="CityMain/MainOptions/ContractsButton" to="." method="_on_contracts_button_button_up"]

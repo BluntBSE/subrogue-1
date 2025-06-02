@@ -10,15 +10,22 @@ func stateHandleInput(_args:Dictionary) -> void :
     
 func stateEnter(_args: Dictionary) -> void:
     var npcs:Array[CityNPC] = _args.npcs
+    _ref = _reference
     #Finding child isn't great practice but the UI is totally in the air, sue me.
     _ref.find_child("MainOptions", true, false).visible = false
     _ref.find_child("ContractContacts", true, false).visible = true
+    var contracts_vbox:VBoxContainer = _ref.find_child("ContractContacts",true,false)
+    for child in contracts_vbox.get_children():
+        child.queue_free()
+        
     for npc:CityNPC in npcs:
-        render_npc(npc)
+        render_npc(npc, contracts_vbox)
     
-func render_npc(npc:CityNPC):
-    
-    pass 
+func render_npc(npc:CityNPC, at:Control):
+    var npc_button:ContractNPCButton = preload("res://engine/cities/city_npc/contract_npc_button.tscn").instantiate()
+    at.add_child(npc_button)
+    npc_button.unpack(npc)
+
    
     
 

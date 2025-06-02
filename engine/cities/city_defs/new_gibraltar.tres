@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="1_f4qqj"]
 [ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_frc4d"]
-[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npc.gd" id="2_nblvp"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npcdef.gd" id="2_nblvp"]
 
 [resource]
 script = ExtResource("1_f4qqj")

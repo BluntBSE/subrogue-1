@@ -5534,6 +5534,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("16_5ijs5")
 faction = NodePath("../../Factions/PanAmericanFederation")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Georgetown"]
 unique_name_in_owner = true
@@ -5647,6 +5648,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("19_xkbba")
 faction = NodePath("../../Factions/AtlanticEmpire")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Miami"]
 collision_layer = 262144
@@ -5752,6 +5754,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_reg1r")
 faction = NodePath("../../Factions/PanAmericanFederation")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Fortaleza"]
 collision_layer = 262144
@@ -5856,6 +5859,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("26_jutbg")
 faction = NodePath("../../Factions/SaharanFreeLeague")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Dakhar"]
 collision_layer = 262144
@@ -5960,6 +5964,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_rr0nb")
 faction = NodePath("../../Factions/SaharanFreeLeague")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Dakhla2"]
 collision_layer = 262144
@@ -6064,6 +6069,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_wxv4n")
 faction = NodePath("../../Factions/EuropeanFront")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Cork"]
 collision_layer = 262144
@@ -6168,6 +6174,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("25_xs330")
 faction = NodePath("../../Factions/EuropeanFront")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/NewGibraltar"]
 collision_layer = 262144
@@ -6272,6 +6279,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_d3h56")
 faction = NodePath("../../Factions/EuropeanFront")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/Reykjavik"]
 collision_layer = 262144
@@ -6377,6 +6385,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_nshcp")
 faction = NodePath("../../Factions/AtlanticEmpire")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/StPierre"]
 collision_layer = 262144
@@ -6481,6 +6490,7 @@ script = ExtResource("14_8vb4v")
 anchor = NodePath("../../GamePlanet")
 city_def = ExtResource("24_iv5cb")
 faction = NodePath("../../Factions/AtlanticEmpire")
+instanced_npcs = null
 
 [node name="CityBody" type="RigidBody3D" parent="Cities/NewYork"]
 collision_layer = 262144
