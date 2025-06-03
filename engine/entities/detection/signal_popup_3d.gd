@@ -89,7 +89,7 @@ func unpack(_detecting_object: Entity, _detected_object: Entity, _sound, _certai
             id_label.text = signal_id
             player = detecting_object.played_by
             unidentified_opened.connect(player.UI.inspection_root.handle_opened_signal)
-            identified_opened.connect(player.UI.inspection_root.handle_openened_identified_signal)
+            identified_opened.connect(player.UI.inspection_root.handle_opened_identified_signal)
             identified.connect(player.UI.inspection_root.handle_identified_signal)
             stream_color.connect(player.UI.inspection_root.handle_color_stream)
         detected_object.died.connect(handle_detected_object_died)
