@@ -28,6 +28,14 @@ NOT QUITE A BUG BUT: Adding and removing nodes is super expensive, and both muni
 NOT QUITE A BUG BUT: SonarPulseMesh is the culprit, defer its material duplication to unpack. --- Try instance uniforms again
 
 
+QUESTS:
+    
+START June 01 2025
+-Regroup city UI
+-Add city UI states
+-Debug City click not working any more
+
+
 TODO:
 in no particular order:
     Quest system

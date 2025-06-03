@@ -5,8 +5,8 @@ class_name TSM #TestSceneManager
 #1 - Keeps a fixed number of NPCs circulating in the world
 #2 - Provides some special debug buttons to trigger effects on demand
 
-var num_commercial_entities = 30
-var num_military_entities = 10
+var num_commercial_entities = 20
+var num_military_entities = 0
 var commercial_entities = []
 var military_entities = []
 
@@ -15,7 +15,7 @@ var spawn_navnodes = ["NavNode_Miami", "NavNode_NewGibraltar", "NavNode_Reykjavi
 var destination_navnodes = []
 var commercial_ids = ["commercial_freighter_1"]
 var military_ids = ["patrol_craft_1"]
-var faction_ids = ["SaharanFreeLeague", "Atlantic Empire", "EuropeanFront", "UnitedAmericanRepublics"]
+var faction_ids = ["SaharanFreeLeague", "AtlanticEmpire", "EuropeanFront", "UnitedAmericanRepublics"]
 
 var spawn_check_time = 0.0
 var spawn_more = true

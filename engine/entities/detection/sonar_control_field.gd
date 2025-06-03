@@ -216,7 +216,7 @@ func get_entities_between_angle(entity_list: Array): #Array of dictionaries. You
     var local_northsouth: Vector3 = axis_to_planet.cross(local_eastwest.normalized())
     #GlobeHelpers.visualize_axis(self, axis_to_planet, own_entity.anchor, Color("ff00ff"))
     #GlobeHelpers.visualize_axis(self, global_up, own_entity.anchor, Color("ffffff"))
-   # GlobeHelpers.visualize_axis(self,local_eastwest, own_entity.anchor, Color("00ff00"))
+    #GlobeHelpers.visualize_axis(self,local_eastwest, own_entity.anchor, Color("00ff00"))
     #GlobeHelpers.visualize_axis(self, local_northsouth, own_entity.anchor, Color("ff0000"))
     for obj in %EntityDetector.tracked_entities: 
         var entity: Entity = obj.entity

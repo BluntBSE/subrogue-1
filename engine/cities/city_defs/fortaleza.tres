@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CityDef" load_steps=4 format=3 uid="uid://ewd6uqti7hab"]
+
+[ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_v0cr6"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npcdef.gd" id="2_b6yba"]
+[ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="4_dy233"]
+
+[resource]
+script = ExtResource("4_dy233")
+city_name = "Fortaleza"
+default_faction_id = "PanAmericanFederation"
+city_greeting = "Fortaleza’s beaches are lined with solar towers and open-air VR arcades, where locals and tourists alike chase both sun and simulation. The city’s favelas are wired with mesh networks, their residents as likely to be coders as capoeiristas. At night, the boardwalks come alive with samba, street food, and the glow of crypto markets projected onto the surf. Fortaleza is a city of contrasts—where the future is built on sand, and every sunrise brings a new hustle."
+city_portrait = ExtResource("1_v0cr6")
+default_npcs = Array[ExtResource("2_b6yba")]([])
+metadata/_custom_type_script = "uid://b8owuv8kc08ga"

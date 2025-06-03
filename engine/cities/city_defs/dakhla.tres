@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CityDef" load_steps=4 format=3 uid="uid://d3eg4wugplqos"]
+
+[ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_n4fw6"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npcdef.gd" id="2_vnehi"]
+[ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="3_wpu55"]
+
+[resource]
+script = ExtResource("3_wpu55")
+city_name = "Dakhla"
+default_faction_id = "SaharanFreeLeague"
+city_greeting = "Dakhla’s wind farms and solar arrays stretch to the horizon, powering both the city’s eco-utopian dreams and its shadowy underbelly. Kite surfers and digital nomads crowd the beaches by day, but after sunset, the city’s glass towers flicker with encrypted transmissions and the scent of grilled fish mingles with ozone from clandestine energy trades. Here, environmentalists and mercenaries rub shoulders in rooftop bars, and the line between green tech and gray-market arms deals is as thin as the desert air."
+city_portrait = ExtResource("1_n4fw6")
+npcs = Array[ExtResource("2_vnehi")]([])
+metadata/_custom_type_script = "uid://b8owuv8kc08ga"

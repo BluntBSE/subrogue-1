@@ -26,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://dp8he1xlfl6bv" path="res://assets/UI/white_circle_2.png" id="18_2vr8v"]
 [ext_resource type="Script" uid="uid://b5nar15kq5bgk" path="res://engine/entities/detection/entity_emission.gd" id="20_p1ne5"]
 [ext_resource type="Shader" uid="uid://dcopcc20fbxi7" path="res://shaders/sonar_pulse_3.gdshader" id="27_vepk6"]
-[ext_resource type="Script" uid="uid://xv4x52mtfmfk" path="res://engine/notifications.gd" id="29_v6ety"]
 [ext_resource type="PackedScene" uid="uid://d1ad5q0tg3jb4" path="res://particle_node.tscn" id="30_541b3"]
 [ext_resource type="Script" uid="uid://bghndro27gihn" path="res://engine/entities/entity_synchronizer.gd" id="31_vepk6"]
 [ext_resource type="Script" uid="uid://ult62dixyg4g" path="res://engine/entities/detection/sonar_controls_3d.gd" id="32_j5udo"]
@@ -183,6 +182,8 @@ size = Vector2(10, 10)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v6ety"]
 radius = 0.862371
+
+[sub_resource type="GDScript" id="GDScript_8ohyu"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_541b3"]
 properties/0/path = NodePath(".:position")
@@ -555,7 +556,7 @@ shape = SubResource("SphereShape3D_v6ety")
 
 [node name="Notifications" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("29_v6ety")
+script = SubResource("GDScript_8ohyu")
 
 [node name="Particles" parent="." instance=ExtResource("30_541b3")]
 unique_name_in_owner = true

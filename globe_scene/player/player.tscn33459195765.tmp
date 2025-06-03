@@ -1,0 +1,3556 @@
+[gd_scene load_steps=79 format=3 uid="uid://chk248t7rdjuy"]
+
+[ext_resource type="Script" uid="uid://c7xw7gvak0wfs" path="res://globe_scene/player/player.gd" id="1_iwyah"]
+[ext_resource type="Script" uid="uid://du5ees71sdcs6" path="res://engine/player_camera/orbital_camera.gd" id="2_gsh8h"]
+[ext_resource type="Script" uid="uid://df4qigb0veuou" path="res://globe_scene/player/player_entities.gd" id="3_og8ew"]
+[ext_resource type="PackedScene" uid="uid://ccpokifvegaoy" path="res://engine/entities/generic_entity.tscn" id="4_smroy"]
+[ext_resource type="Script" uid="uid://ddutyndli6okj" path="res://globe_scene/player/player_markers.gd" id="5_3h4iq"]
+[ext_resource type="Script" uid="uid://bmp2rptgbgioi" path="res://globe_scene/player_ui_root.gd" id="6_7xmbg"]
+[ext_resource type="Texture2D" uid="uid://blf4ar2y0dvxq" path="res://assets/UI/blue_buttons/PCMainButtonNormalBlueT02_filled.png" id="7_nwwe3"]
+[ext_resource type="Theme" uid="uid://tl4owy3ebao7" path="res://engine/player_ui/player_ui_theme.tres" id="8_fq2vg"]
+[ext_resource type="Texture2D" uid="uid://c3j3ua0ninil2" path="res://assets/UI/white_buttons/PCMainButtonNormalWhiteT02_filled.png" id="9_q7i7m"]
+[ext_resource type="PackedScene" uid="uid://b6wq3ox1h0lcj" path="res://engine/cities/city_ui/city_ui.tscn" id="10_558vm"]
+[ext_resource type="Script" uid="uid://b1e3glbgg7wdy" path="res://engine/player_ui/time_manager.gd" id="11_oh4je"]
+[ext_resource type="Texture2D" uid="uid://xjjvprg60fxf" path="res://assets/UI/blue_icons/BackIconBlue.png" id="12_ljsgx"]
+[ext_resource type="Texture2D" uid="uid://edgpj510s3iu" path="res://assets/UI/blue_icons/ArrowLeftIconBlue.png" id="13_itjk8"]
+[ext_resource type="Texture2D" uid="uid://b35duoo481ffc" path="res://assets/UI/blue_icons/PauseIconBlue.png" id="14_3sjdi"]
+[ext_resource type="Texture2D" uid="uid://drx46y536lmy6" path="res://assets/UI/blue_icons/ArrowRightIconBlue.png" id="15_7caot"]
+[ext_resource type="Texture2D" uid="uid://b1xemghegym28" path="res://assets/UI/blue_icons/FrontIconBlue.png" id="16_dv6ba"]
+[ext_resource type="Texture2D" uid="uid://bevlrjvu4mfk4" path="res://assets/UI/blue_panels/MediumMenuBGT01.3BlueDark.png" id="17_250mi"]
+[ext_resource type="Script" uid="uid://bqsigf0r1pck1" path="res://globe_scene/sonar_ordnance_ui.gd" id="18_wftmj"]
+[ext_resource type="Texture2D" uid="uid://dqk5oe22ki3q5" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT04.png" id="19_nd8hy"]
+[ext_resource type="Script" uid="uid://dp4b2h8rbjnju" path="res://engine/player_ui/sonar_ordnance/active_sonar_control.gd" id="20_q4mmy"]
+[ext_resource type="Shader" uid="uid://372drerjny0t" path="res://engine/player_ui/3d_ui/radial_control_fade.gdshader" id="21_fwoy0"]
+[ext_resource type="Texture2D" uid="uid://cj21hnvierxk6" path="res://assets/UI/sonar_control/sonar_disc.png" id="22_mb7nu"]
+[ext_resource type="Texture2D" uid="uid://cp3g7kn76q3ta" path="res://assets/bluepolar3.png" id="23_ls1g0"]
+[ext_resource type="Texture2D" uid="uid://cvrep056uh18e" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04Blue.png" id="24_bdeav"]
+[ext_resource type="Texture2D" uid="uid://bdveri46dlmy4" path="res://assets/UI/white_buttons/VolumeSliderKnobT04White.png" id="25_bq63b"]
+[ext_resource type="Material" uid="uid://dqq4y57jw3d0n" path="res://globe_scene/player/draggableTPB.tres" id="26_g8nhr"]
+[ext_resource type="Texture2D" uid="uid://cgujj1t61jgne" path="res://assets/UI/blue_buttons/LoadingBarFullT03Blue.png" id="27_bnsnq"]
+[ext_resource type="Script" uid="uid://13s6hk60uute" path="res://globe_scene/adjustable_slider.gd" id="28_0638s"]
+[ext_resource type="FontFile" uid="uid://bvmpsl44wcfpl" path="res://assets/UI/fonts/NK57/NK57 Monospace Ex Bd.otf" id="29_ai432"]
+[ext_resource type="Texture2D" uid="uid://du17cbk1h66aq" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04Blue_horizontal.png" id="30_thmph"]
+[ext_resource type="Texture2D" uid="uid://cgd8r3p0kth43" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04White_horizontal.png" id="31_sljp2"]
+[ext_resource type="Texture2D" uid="uid://b4da1i6v747wi" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT01.png" id="32_4elw6"]
+[ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="33_abu4l"]
+[ext_resource type="Script" uid="uid://dxfcu2yvec3m6" path="res://engine/player_ui/2d_ui/inspection_root.gd" id="34_558vm"]
+[ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_lu2fn"]
+[ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="35_smroy"]
+[ext_resource type="PackedScene" uid="uid://bfgnhjrv8rjgx" path="res://engine/entities/3d_scenes/commercial_freighter_1.tscn" id="36_q7i7m"]
+[ext_resource type="Shader" uid="uid://c4ixw7o0cka8i" path="res://title_screen/vcr.gdshader" id="38_3h4iq"]
+[ext_resource type="Script" uid="uid://d1otdxkyfls70" path="res://globe_scene/player/console_input.gd" id="39_7xmbg"]
+[ext_resource type="PackedScene" uid="uid://8k5fjvye3gcg" path="res://engine/entities/detection/spiky_boy.tscn" id="39_nwwe3"]
+[ext_resource type="Texture2D" uid="uid://b6wq5dkmmxdtv" path="res://assets/UI/white_buttons/VolumeSliderKnobT03White.png" id="40_fq2vg"]
+[ext_resource type="Texture2D" uid="uid://8bqmk8uxc6mg" path="res://assets/UI/white_icons/EditIconWhite.png" id="41_q7i7m"]
+[ext_resource type="Shader" uid="uid://xw17ft50xhgt" path="res://shaders/glitch_practice/glitch_1_screenspace.gdshader" id="41_wftmj"]
+[ext_resource type="Script" uid="uid://b6fh05n0720ca" path="res://globe_scene/player/panic_root.gd" id="42_250mi"]
+[ext_resource type="Texture2D" uid="uid://b4rvv34wjpo5j" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT02.png" id="42_oh4je"]
+[ext_resource type="Texture2D" uid="uid://biopgmfrbkuc7" path="res://assets/UI/blue_panels/LargeMenuBGT03.1BlueDark.png" id="43_itjk8"]
+[ext_resource type="Material" uid="uid://dddb6ysw0a8l5" path="res://globe_scene/player/panicfilter.tres" id="44_nd8hy"]
+[ext_resource type="Script" uid="uid://b4ekaalf4awas" path="res://globe_scene/ui_overlay/munition_menu/munition_tpb_with_text_input.gd" id="47_250mi"]
+[ext_resource type="PackedScene" uid="uid://c3wuwitgb0udr" path="res://engine/entities/munitions/munition_wireframe.tscn" id="47_dv6ba"]
+[ext_resource type="PackedScene" uid="uid://csfjdwitc70eg" path="res://self_menu.tscn" id="47_nd8hy"]
+[ext_resource type="Theme" uid="uid://b2nowvgu1l6bg" path="res://engine/player_ui/2d_ui/weapon_config_ui.tres" id="48_wftmj"]
+[ext_resource type="FontFile" uid="uid://spqucyqiejci" path="res://assets/UI/fonts/NK57/NK57 Monospace No Rg.otf" id="49_nd8hy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7gus"]
+shader = ExtResource("21_fwoy0")
+shader_parameter/disc_texture = ExtResource("22_mb7nu")
+shader_parameter/start_angle = 10.0
+shader_parameter/end_angle = 45.0
+shader_parameter/between_angle_alpha = 1.0
+shader_parameter/beyond_angle_alpha = 0.2
+shader_parameter/distance_factor = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4tgh"]
+resource_local_to_scene = true
+shader = ExtResource("21_fwoy0")
+shader_parameter/disc_texture = ExtResource("23_ls1g0")
+shader_parameter/start_angle = 10.0
+shader_parameter/end_angle = 45.0
+shader_parameter/between_angle_alpha = 1.0
+shader_parameter/beyond_angle_alpha = 0.2
+shader_parameter/distance_factor = 0.0
+
+[sub_resource type="Animation" id="Animation_7caot"]
+resource_name = "ActiveSonarIn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActiveSonarPanelGroup:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 555), Vector2(0, 1.66669)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%PingButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1746, 340), Vector2(1746, 145)]
+}
+
+[sub_resource type="Animation" id="Animation_itjk8"]
+resource_name = "ActiveSonarOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActiveSonarPanelGroup:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-958.333, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Buttons/PingButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1746, 174), Vector2(2017, 174)]
+}
+
+[sub_resource type="Animation" id="Animation_wftmj"]
+resource_name = "OrdnanceIn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OrdnancePanelGroup:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -506.667)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%ConfigureButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1694, 393), Vector2(1694, 144)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%LaunchButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1694, 471), Vector2(1694, 222)]
+}
+
+[sub_resource type="Animation" id="Animation_nd8hy"]
+resource_name = "OrdnanceOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%ConfigureButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1694, 144), Vector2(2018, 144)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%LaunchButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1694, 222), Vector2(2018, 222)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OrdnancePanelGroup:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -506.667), Vector2(-990, -506.667)]
+}
+
+[sub_resource type="Animation" id="Animation_dv6ba"]
+resource_name = "PassiveSonarIn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PassiveSonarPanelGroup:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -506.667)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Buttons/ClearButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1741, 414), Vector2(1741, 212)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Buttons/UpdateButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1741, 342), Vector2(1741, 140)]
+}
+
+[sub_resource type="Animation" id="Animation_250mi"]
+resource_name = "PassiveSonarOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Buttons/ClearButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1741, 212), Vector2(2013, 212)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Buttons/UpdateButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1741, 140), Vector2(2013, 140)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PassiveSonarPanelGroup:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -506.667), Vector2(-961.667, -506.667)]
+}
+
+[sub_resource type="Animation" id="Animation_3sjdi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActiveSonarPanelGroup:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%PingButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1746, 174)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PassiveSonarPanelGroup:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Buttons/ClearButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1741, 414)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Buttons/UpdateButton:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1741, 342)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OrdnancePanelGroup:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%ConfigureButton:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1745, 458)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%LaunchButton:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1745, 536)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_labis"]
+_data = {
+&"ActiveSonarIn": SubResource("Animation_7caot"),
+&"ActiveSonarOut": SubResource("Animation_itjk8"),
+&"OrdnanceIn": SubResource("Animation_wftmj"),
+&"OrdnanceOut": SubResource("Animation_nd8hy"),
+&"PassiveSonarIn": SubResource("Animation_dv6ba"),
+&"PassiveSonarOut": SubResource("Animation_250mi"),
+&"RESET": SubResource("Animation_3sjdi")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nwwe3"]
+viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/ShipPreviewSubViewport")
+
+[sub_resource type="Animation" id="Animation_558vm"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2113, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(483, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_q7i7m"]
+resource_name = "slide_in"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2113, -0.15, 0, 0.15, 0, 1720, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(483, -0.15, 0, 0.15, 0, 483, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oh4je"]
+_data = {
+&"RESET": SubResource("Animation_558vm"),
+&"slide_in": SubResource("Animation_q7i7m")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fq2vg"]
+viewport_path = NodePath("UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalPreview/SubViewport")
+
+[sub_resource type="Animation" id="Animation_fq2vg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2113, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(483, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_nwwe3"]
+resource_name = "slide_in"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2113, -0.25, 0, 0.25, 0, 1720, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(483, -0.25, 0, 0.25, 0, 483, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q7i7m"]
+_data = {
+&"RESET": SubResource("Animation_fq2vg"),
+&"slide_in": SubResource("Animation_nwwe3")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4mmy"]
+shader = ExtResource("41_wftmj")
+shader_parameter/octave_count = 10
+shader_parameter/amp_start = 0.5
+shader_parameter/amp_coeff = 0.5
+shader_parameter/freq_coeff = 2.0
+shader_parameter/shift_coeff = 1.0
+shader_parameter/speed = 0.5
+shader_parameter/active = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xmbg"]
+shader = ExtResource("38_3h4iq")
+shader_parameter/active = true
+shader_parameter/opacity = 0.0
+shader_parameter/curvature = 0.0
+shader_parameter/skip = 0.0
+shader_parameter/image_flicker = 1.0
+shader_parameter/use_noise = true
+shader_parameter/vignette_flicker_speed = 2.0
+shader_parameter/vignette_strength = 0.75
+shader_parameter/small_scanlines_speed = 3.5
+shader_parameter/small_scanlines_proximity = 0.73
+shader_parameter/small_scanlines_opacity = 0.71
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_speed = 0.0
+shader_parameter/scanline_thickness = 0.0
+shader_parameter/scanlines_spacing = 1.16
+
+[sub_resource type="Animation" id="Animation_oh4je"]
+resource_name = "CityIn"
+length = 0.38
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CityUIRoot/CityUI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1919, 68), Vector2(378, 68)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CityUIRoot/CityBG:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.505882)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CityUIRoot/UndockButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3237, 938), Vector2(1612, 938)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%CityUIRoot/CityBG:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.38),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 0, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%SonarOrdnanceUI/Panel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-11, -13), Vector2(-621, -13)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%SonarOrdnanceUI/Buttons:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(514, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ljsgx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CityUIRoot/CityUI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1919, 68)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CityUIRoot/CityBG:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CityUIRoot/UndockButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3237, 938)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%CityUIRoot/CityBG:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%SonarOrdnanceUI/Panel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-11, -13)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%SonarOrdnanceUI/Buttons:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MunitionConfigRoot/MunitionConfigUI:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1941, 98)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%ScreenDarkFilter:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%ScreenDarkFilter:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mb7nu"]
+resource_name = "SelfIn"
+length = 0.19
+
+[sub_resource type="Animation" id="Animation_q4mmy"]
+resource_name = "munitions_in"
+length = 0.19
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MunitionConfigRoot/MunitionConfigUI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1941, 98), Vector2(346, 98)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%ScreenDarkFilter:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%ScreenDarkFilter:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.19),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.607843)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_itjk8"]
+_data = {
+&"CityIn": SubResource("Animation_oh4je"),
+&"RESET": SubResource("Animation_ljsgx"),
+&"SelfIn": SubResource("Animation_mb7nu"),
+&"munitions_in": SubResource("Animation_q4mmy")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_250mi"]
+viewport_path = NodePath("UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VesselPreview/SubViewport")
+
+[node name="player" type="Node3D"]
+script = ExtResource("1_iwyah")
+
+[node name="PlayerCommandBus" type="Node3D" parent="."]
+
+[node name="PlayerCameras" type="Node3D" parent="."]
+
+[node name="OrbitalCamera" type="Camera3D" parent="PlayerCameras"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 218.407, 0, 0)
+cull_mask = 524289
+current = true
+fov = 15.5
+near = 0.21
+far = 500.0
+script = ExtResource("2_gsh8h")
+distance = 218.0
+azimuth = 1.5708
+max_offset = Vector2(1, 1)
+max_roll = 0.025
+
+[node name="OmniLight3D" type="OmniLight3D" parent="PlayerCameras/OrbitalCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4831, 0, 0)
+light_energy = 300.0
+light_indirect_energy = 10.667
+light_volumetric_fog_energy = 1.88
+light_size = 0.859
+light_specular = 0.0
+omni_range = 600.0
+
+[node name="PlayerEntities" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_og8ew")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="PlayerEntities"]
+_spawnable_scenes = PackedStringArray("uid://qfiyabbs8j2l", "uid://ccpokifvegaoy")
+spawn_path = NodePath("..")
+
+[node name="PlayerEntity" parent="PlayerEntities" instance=ExtResource("4_smroy")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+base_color = Color(0, 0.69121, 0.737599, 1)
+spot_color = Color(0.509286, 0.509286, 0.509286, 1)
+scale_factor = 1.0
+can_move = true
+
+[node name="PlayerMarkers" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_3h4iq")
+
+[node name="UICanvas" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="PlayerUIRoot" type="Control" parent="UICanvas"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_7xmbg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvas/PlayerUIRoot"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = -50
+
+[node name="Surface" type="MarginContainer" parent="UICanvas/PlayerUIRoot/HBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+texture_normal = ExtResource("7_nwwe3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface/TextureButton3" groups=["dock_silenced_UI"]]
+layout_mode = 2
+offset_left = 21.0
+offset_top = 10.0
+offset_right = 119.0
+offset_bottom = 30.0
+theme = ExtResource("8_fq2vg")
+text = "Surface"
+horizontal_alignment = 1
+
+[node name="Surface2" type="MarginContainer" parent="UICanvas/PlayerUIRoot/HBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface2" groups=["dock_silenced_UI"]]
+clip_contents = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("9_q7i7m")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface2/TextureButton3"]
+layout_mode = 2
+offset_left = 21.0
+offset_top = 10.0
+offset_right = 119.0
+offset_bottom = 30.0
+theme = ExtResource("8_fq2vg")
+text = "Swim"
+horizontal_alignment = 1
+
+[node name="Surface3" type="MarginContainer" parent="UICanvas/PlayerUIRoot/HBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface3" groups=["dock_silenced_UI"]]
+clip_contents = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+texture_normal = ExtResource("7_nwwe3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/HBoxContainer/Surface3/TextureButton3"]
+layout_mode = 2
+offset_left = 21.0
+offset_top = 10.0
+offset_right = 119.0
+offset_bottom = 30.0
+theme = ExtResource("8_fq2vg")
+text = "Crawl"
+horizontal_alignment = 1
+
+[node name="RulerLine" type="Line2D" parent="UICanvas/PlayerUIRoot"]
+position = Vector2(791, 14)
+points = PackedVector2Array(-3, 0, 305, 0)
+width = 3.0
+default_color = Color(0.203922, 0.866667, 0.92549, 1)
+
+[node name="RulerLabel" type="Label" parent="UICanvas/PlayerUIRoot/RulerLine"]
+unique_name_in_owner = true
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+offset_left = 130.0
+offset_top = 10.0
+offset_right = 187.0
+offset_bottom = 33.0
+text = "750 km"
+metadata/_edit_use_anchors_ = true
+
+[node name="RangeFinder1" type="ColorRect" parent="UICanvas/PlayerUIRoot/RulerLine"]
+unique_name_in_owner = true
+visible = false
+offset_left = -5.0
+offset_top = 506.0
+offset_right = 35.0
+offset_bottom = 546.0
+
+[node name="RangeFinder2" type="ColorRect" parent="UICanvas/PlayerUIRoot/RulerLine"]
+unique_name_in_owner = true
+visible = false
+offset_left = 303.0
+offset_top = 506.0
+offset_right = 343.0
+offset_bottom = 546.0
+
+[node name="TimeManager" type="Label" parent="UICanvas/PlayerUIRoot"]
+unique_name_in_owner = true
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+z_index = 1000
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -4.375
+anchor_top = -0.175
+anchor_right = -0.875
+anchor_bottom = -0.05
+offset_left = 1627.0
+offset_top = 24.0
+offset_right = 1711.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 20
+text = "2010-00-00 |24H 00Min"
+script = ExtResource("11_oh4je")
+metadata/_edit_use_anchors_ = true
+
+[node name="VerySlow" type="TextureButton" parent="UICanvas/PlayerUIRoot/TimeManager"]
+layout_mode = 0
+offset_left = -49.0
+offset_top = 3.0
+offset_right = -25.0
+offset_bottom = 27.0
+texture_normal = ExtResource("12_ljsgx")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Slow" type="TextureButton" parent="UICanvas/PlayerUIRoot/TimeManager"]
+layout_mode = 0
+offset_left = -30.0
+offset_top = 3.0
+offset_right = -6.0
+offset_bottom = 27.0
+texture_normal = ExtResource("13_itjk8")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Pause" type="TextureButton" parent="UICanvas/PlayerUIRoot/TimeManager"]
+layout_mode = 0
+offset_left = -73.0
+offset_top = 4.0
+offset_right = -49.0
+offset_bottom = 28.0
+texture_normal = ExtResource("14_3sjdi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Normal" type="TextureButton" parent="UICanvas/PlayerUIRoot/TimeManager"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 3.0
+offset_right = 254.0
+offset_bottom = 27.0
+texture_normal = ExtResource("15_7caot")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Fast" type="TextureButton" parent="UICanvas/PlayerUIRoot/TimeManager"]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 3.0
+offset_right = 275.0
+offset_bottom = 27.0
+texture_normal = ExtResource("16_dv6ba")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="FPSCounter" type="RichTextLabel" parent="UICanvas/PlayerUIRoot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1848.0
+offset_top = 69.0
+offset_right = 1913.0
+offset_bottom = 115.0
+text = "FPS: 60"
+fit_content = true
+
+[node name="SonarOrdnanceUI" type="Control" parent="UICanvas/PlayerUIRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 804.0
+offset_right = 41.0
+offset_bottom = 844.0
+script = ExtResource("18_wftmj")
+
+[node name="Panel" type="TextureRect" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
+show_behind_parent = true
+z_as_relative = false
+layout_mode = 0
+offset_left = -11.0
+offset_top = -13.0
+offset_right = 989.0
+offset_bottom = 487.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("17_250mi")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="Tabs" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
+z_index = -10
+z_as_relative = false
+anchors_preset = 0
+offset_left = 1.66667
+offset_top = 1.66663
+offset_right = 41.6667
+offset_bottom = 41.6666
+
+[node name="ActiveSonarTab" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs"]
+self_modulate = Color(0.627451, 0.627451, 0.627451, 1)
+z_index = 2
+layout_mode = 0
+offset_left = 11.3333
+offset_top = -29.6665
+offset_right = 340.333
+offset_bottom = 36.3335
+texture_normal = ExtResource("19_nd8hy")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/ActiveSonarTab"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 13.3335
+offset_right = 290.0
+offset_bottom = 43.3335
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Active Sonar"
+
+[node name="PassiveSonarTab" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs"]
+self_modulate = Color(0.0196078, 0.262745, 0.286275, 1)
+z_index = 1
+layout_mode = 0
+offset_left = 295.0
+offset_top = -29.6665
+offset_right = 627.0
+offset_bottom = 36.3335
+texture_normal = ExtResource("19_nd8hy")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/PassiveSonarTab"]
+self_modulate = Color(0.699653, 0.699653, 0.699653, 1)
+layout_mode = 0
+offset_left = 35.0
+offset_top = 13.3334
+offset_right = 306.0
+offset_bottom = 43.3334
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Passive Sonar"
+
+[node name="OrdnanceTab" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs"]
+self_modulate = Color(0.00784314, 0.156863, 0.172549, 1)
+layout_mode = 0
+offset_left = 531.667
+offset_top = -29.6665
+offset_right = 863.667
+offset_bottom = 36.3335
+texture_normal = ExtResource("19_nd8hy")
+ignore_texture_size = true
+stretch_mode = 4
+flip_h = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/OrdnanceTab"]
+self_modulate = Color(0.699653, 0.699653, 0.699653, 1)
+layout_mode = 0
+offset_left = 85.0
+offset_top = 13.3334
+offset_right = 252.0
+offset_bottom = 43.3334
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Ordnance"
+
+[node name="ActiveSonarPanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ActiveSonarControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup"]
+unique_name_in_owner = true
+z_index = 1
+anchors_preset = 0
+offset_left = 225.0
+offset_top = 235.0
+offset_right = 265.0
+offset_bottom = 275.0
+scale = Vector2(1.8, 1.8)
+script = ExtResource("20_q4mmy")
+angle_1 = 10.0
+angle_2 = 45.0
+a_diff = 35.0
+
+[node name="ActiveSonarBG" type="TextureRect" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.54902)
+material = SubResource("ShaderMaterial_n7gus")
+layout_mode = 0
+offset_left = -101.0
+offset_top = -108.0
+offset_right = 619.0
+offset_bottom = 612.0
+scale = Vector2(0.320004, 0.320004)
+texture = ExtResource("22_mb7nu")
+
+[node name="ActiveSonarTexture" type="TextureRect" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_i4tgh")
+layout_mode = 0
+offset_left = -86.0
+offset_top = -94.0
+offset_right = 634.0
+offset_bottom = 626.0
+scale = Vector2(0.279999, 0.279999)
+texture = ExtResource("23_ls1g0")
+
+[node name="ActiveSonarKnobOnePivot" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 10.0
+offset_right = 57.0
+offset_bottom = 50.0
+rotation = 0.174533
+
+[node name="ActiveSonarKnobOne" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot"]
+layout_mode = 0
+offset_left = -21.9119
+offset_top = -118.839
+offset_right = 78.0881
+offset_bottom = -18.8392
+scale = Vector2(0.4, 0.4)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("24_bdeav")
+texture_pressed = ExtResource("25_bq63b")
+texture_hover = ExtResource("25_bq63b")
+
+[node name="ActiveSonarKnobTwoPivot" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 10.0
+offset_right = 57.0
+offset_bottom = 50.0
+rotation = 0.785398
+
+[node name="ActiveSonarKnobTwo" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot"]
+layout_mode = 0
+offset_left = -22.9642
+offset_top = -119.655
+offset_right = 77.0358
+offset_bottom = -19.6547
+scale = Vector2(0.4, 0.4)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("24_bdeav")
+texture_pressed = ExtResource("25_bq63b")
+texture_hover = ExtResource("25_bq63b")
+
+[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+unique_name_in_owner = true
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 150.926
+offset_top = -80.5556
+offset_right = 355.926
+offset_bottom = -69.5556
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("28_0638s")
+handle_1 = NodePath("VolumeBarMax")
+output_label = NodePath("Values")
+mult_factor = 100.0
+output_symbol = "db"
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 10
+text = "100db"
+horizontal_alignment = 1
+
+[node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 150.926
+offset_top = -6.48148
+offset_right = 355.926
+offset_bottom = 4.51852
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("28_0638s")
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+output_label = NodePath("Values")
+mult_factor = 1.0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Profile"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 10
+text = "0.0 - 1.0"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="DepthBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl"]
+layout_mode = 0
+offset_left = 148.148
+offset_top = 76.8519
+offset_right = 353.148
+offset_bottom = 87.8519
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/DepthBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Depth"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/DepthBar"]
+layout_mode = 0
+offset_left = 12.037
+offset_top = 20.3704
+offset_right = 186.037
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 10
+text = "Crawl, Swim, Surface"
+horizontal_alignment = 1
+
+[node name="PassiveSonarPanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PassiveSonarControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup"]
+z_index = 1
+anchors_preset = 0
+offset_left = 225.0
+offset_top = 750.0
+offset_right = 265.0
+offset_bottom = 790.0
+scale = Vector2(1.8, 1.8)
+
+[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 150.926
+offset_top = -80.5556
+offset_right = 355.926
+offset_bottom = -69.5556
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("28_0638s")
+handle_1 = NodePath("VolumeBarMax")
+handle_2 = NodePath("VolumeBarMin")
+output_label = NodePath("Values")
+mult_factor = 100.0
+output_symbol = "db"
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 10
+text = "100db"
+horizontal_alignment = 1
+
+[node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="VolumeBarMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar"]
+layout_mode = 0
+offset_left = 0.925888
+offset_top = -8.3335
+offset_right = 100.926
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="VolumeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = -75.9259
+offset_top = -80.5556
+offset_right = 129.074
+offset_bottom = -69.5556
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("28_0638s")
+handle_1 = NodePath("VolumeBarMax")
+output_label = NodePath("Values")
+mult_factor = 100.0
+output_symbol = "%"
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
+layout_mode = 0
+offset_left = 27.7777
+offset_top = -21.0
+offset_right = 186.778
+offset_bottom = -1.99999
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Min Certainty"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 10
+text = "100%"
+horizontal_alignment = 1
+
+[node name="VolumeBarMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "handle_2", "output_label")]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 150.926
+offset_top = -6.48148
+offset_right = 355.926
+offset_bottom = 4.51852
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("28_0638s")
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+output_label = NodePath("Values")
+mult_factor = 1.0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = -21.0
+offset_right = 139.0
+offset_bottom = -1.99999
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Profile"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 10
+text = "0.0 - 1.0"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBar3" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl" node_paths=PackedStringArray("handle_1", "output_label")]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = -72.2222
+offset_top = -6.48148
+offset_right = 132.778
+offset_bottom = 4.51852
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("28_0638s")
+handle_1 = NodePath("RangeBarControlMax")
+output_label = NodePath("Values")
+mult_factor = 1.0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+layout_mode = 0
+offset_left = 37.0371
+offset_top = -21.2962
+offset_right = 159.037
+offset_bottom = -2.29624
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Track Time"
+horizontal_alignment = 1
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+layout_mode = 0
+offset_left = 40.7407
+offset_top = 20.3704
+offset_right = 162.741
+offset_bottom = 40.3704
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 10
+text = "10s"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3"]
+layout_mode = 0
+offset_left = 178.704
+offset_top = -8.3335
+offset_right = 278.704
+offset_bottom = 91.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl"]
+layout_mode = 0
+offset_left = 209.852
+offset_top = 50.9261
+offset_right = 290.852
+offset_bottom = 69.9261
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Depth"
+horizontal_alignment = 1
+
+[node name="Label3" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl"]
+layout_mode = 0
+offset_left = 130.556
+offset_top = 86.1112
+offset_right = 378.556
+offset_bottom = 106.111
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/normal_font = ExtResource("49_nd8hy")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[color=00d0ca]Crawl Swim[/color] Surface"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="OrdnancePanelGroup" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="OrdnanceControl" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup"]
+anchors_preset = 0
+offset_top = 506.667
+offset_right = 40.0
+offset_bottom = 546.667
+
+[node name="Ordnance" type="ScrollContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl"]
+layout_direction = 3
+layout_mode = 0
+offset_left = -292.0
+offset_top = 118.333
+offset_right = -32.0
+offset_bottom = 370.333
+scale = Vector2(1.3, 1.3)
+theme = ExtResource("8_fq2vg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("8_fq2vg")
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("9_q7i7m")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer/TextureButton3"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 230.0
+offset_bottom = 31.0
+theme = ExtResource("8_fq2vg")
+text = "Manta Torpedo - 4"
+horizontal_alignment = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.4)
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer2"]
+clip_contents = true
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+texture_normal = ExtResource("7_nwwe3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer2/TextureButton3"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 230.0
+offset_bottom = 31.0
+theme = ExtResource("8_fq2vg")
+text = "Minesweeper - 3"
+horizontal_alignment = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer3"]
+modulate = Color(1, 1, 1, 0.4)
+clip_contents = true
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+texture_normal = ExtResource("7_nwwe3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer3/TextureButton3"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 230.0
+offset_bottom = 31.0
+theme = ExtResource("8_fq2vg")
+text = "Phase Gate - 1"
+horizontal_alignment = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer4"]
+modulate = Color(1, 1, 1, 0.4)
+clip_contents = true
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+texture_normal = ExtResource("7_nwwe3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer4/TextureButton3"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 230.0
+offset_bottom = 31.0
+theme = ExtResource("8_fq2vg")
+text = "Phase Gate - 1"
+horizontal_alignment = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer5"]
+modulate = Color(1, 1, 1, 0.4)
+clip_contents = true
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+texture_normal = ExtResource("7_nwwe3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer5/TextureButton3"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 230.0
+offset_bottom = 31.0
+theme = ExtResource("8_fq2vg")
+text = "Phase Gate - 1"
+horizontal_alignment = 2
+
+[node name="MarginContainer6" type="MarginContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureButton3" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer6"]
+modulate = Color(1, 1, 1, 0.4)
+clip_contents = true
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+texture_normal = ExtResource("7_nwwe3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/Ordnance/VBoxContainer/MarginContainer6/TextureButton3"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 11.0
+offset_right = 230.0
+offset_bottom = 31.0
+theme = ExtResource("8_fq2vg")
+text = "Phase Gate - 1"
+horizontal_alignment = 2
+
+[node name="AllOrdnanceLabel" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl"]
+layout_mode = 0
+offset_left = 103.333
+offset_top = 66.6666
+offset_right = 353.333
+offset_bottom = 96.6666
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "All Ordnance"
+horizontal_alignment = 1
+
+[node name="ConfigurationLabel" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl"]
+layout_mode = 0
+offset_left = 458.333
+offset_top = 70.0
+offset_right = 841.333
+offset_bottom = 100.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Hellcat RT-2 Wireguide"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel"]
+layout_mode = 0
+offset_left = 1.66667
+offset_top = 51.6667
+offset_right = 408.667
+offset_bottom = 418.667
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Guidance: Active Sonar"
+
+[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Guidance Angle: 60"
+
+[node name="Label6" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Max Distance: 100km"
+
+[node name="Label10" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Profile: 0.5"
+
+[node name="Label12" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Depth: C"
+
+[node name="Label7" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "T. Profile: 0.2 - 0.9"
+
+[node name="Label8" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "T. Pitch: 90hz"
+
+[node name="Label9" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "T. Speed: 20km/h"
+
+[node name="Label11" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/OrdnancePanelGroup/OrdnanceControl/ConfigurationLabel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Strike Depth: C"
+
+[node name="SonarOrdnancePlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_labis")
+}
+playback_auto_capture_ease_type = 1
+
+[node name="Buttons" type="Control" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LaunchButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 50.5347
+anchor_top = -7.04112
+anchor_right = 52.1597
+anchor_bottom = -7.04112
+offset_left = -276.388
+offset_top = 817.645
+offset_right = -174.388
+offset_bottom = 857.645
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/LaunchButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Launch"
+metadata/_edit_use_anchors_ = true
+
+[node name="ConfigureButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 50.5347
+anchor_top = -8.99112
+anchor_right = 52.1597
+anchor_bottom = -8.99112
+offset_left = -276.388
+offset_top = 817.645
+offset_right = -174.388
+offset_bottom = 857.645
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/ConfigureButton" groups=["dock_silenced_UI"]]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Configure"
+
+[node name="UpdateButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 18.6178
+anchor_top = -19.3244
+anchor_right = 18.6178
+anchor_bottom = -19.3244
+offset_left = 996.288
+offset_top = 1114.98
+offset_right = 1098.29
+offset_bottom = 1154.98
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/UpdateButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 14.7059
+offset_top = 11.0
+offset_right = -13.2941
+offset_bottom = 20.0
+theme = ExtResource("8_fq2vg")
+text = "Update
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="ClearButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 18.6178
+anchor_top = -16.2828
+anchor_right = 18.6178
+anchor_bottom = -16.2828
+offset_left = 996.288
+offset_top = 1065.31
+offset_right = 1098.29
+offset_bottom = 1105.31
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("32_4elw6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/ClearButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 14.7059
+offset_top = 11.0
+offset_right = -26.2941
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Clear"
+metadata/_edit_use_anchors_ = true
+
+[node name="PingButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons" groups=["dock_silenced_UI"]]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 66.5347
+anchor_top = 1.68388
+anchor_right = 66.5347
+anchor_bottom = 1.68388
+offset_left = -915.388
+offset_top = 106.645
+offset_right = -813.388
+offset_bottom = 146.645
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/PingButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Ping"
+
+[node name="InspectionRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("34_558vm")
+
+[node name="EntityInspection" type="Control" parent="UICanvas/PlayerUIRoot/InspectionRoot"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2113.0
+offset_top = 483.0
+offset_right = 2153.0
+offset_bottom = 523.0
+
+[node name="TextureRect" type="TextureRect" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection"]
+layout_mode = 0
+offset_left = -204.0
+offset_top = -385.0
+offset_right = 214.0
+offset_bottom = 615.0
+texture = ExtResource("35_smroy")
+expand_mode = 5
+flip_v = true
+
+[node name="ShipPreview" type="TextureRect" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 71.0
+offset_top = 101.0
+offset_right = 327.0
+offset_bottom = 357.0
+texture = SubResource("ViewportTexture_nwwe3")
+stretch_mode = 3
+
+[node name="ShipPreviewSubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview"]
+unique_name_in_owner = true
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_scale = 2.0
+texture_mipmap_bias = -0.109
+anisotropic_filtering_level = 0
+fsr_sharpness = 2.0
+canvas_item_default_texture_filter = 0
+size = Vector2i(256, 256)
+
+[node name="Ship3DRoot" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect/ShipPreview/ShipPreviewSubViewport" instance=ExtResource("36_q7i7m")]
+unique_name_in_owner = true
+
+[node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 71.0
+offset_top = 98.0
+offset_right = 322.0
+offset_bottom = 121.0
+theme = ExtResource("8_fq2vg")
+theme_override_font_sizes/font_size = 16
+text = "HMS Golden Horizon"
+
+[node name="EntityFaction" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 70.0
+offset_top = 61.0
+offset_right = 290.0
+offset_bottom = 84.0
+theme = ExtResource("8_fq2vg")
+theme_override_font_sizes/font_size = 16
+text = "Atlantic Empire"
+
+[node name="EntityClass" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 82.0
+offset_top = 290.0
+offset_right = 319.0
+offset_bottom = 313.0
+theme = ExtResource("8_fq2vg")
+theme_override_font_sizes/font_size = 16
+text = "Perseus Freighter"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection"]
+layout_mode = 0
+offset_left = -123.0
+offset_top = -44.0
+offset_right = 195.0
+offset_bottom = 243.0
+theme = ExtResource("8_fq2vg")
+theme_override_constants/separation = 10
+
+[node name="EntitySize" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Size: 352640 m³"
+fit_content = true
+
+[node name="EntitySpeed" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Speed: 20km/h"
+fit_content = true
+
+[node name="EntityPitch" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Pitch: 80hz"
+fit_content = true
+
+[node name="EntityProfile" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Profile: 0.1"
+fit_content = true
+
+[node name="EntityVolume" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Volume: 90db"
+fit_content = true
+
+[node name="EntityDetectable" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Detectable: N/A"
+fit_content = true
+
+[node name="EntityDepth" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Depth: S"
+fit_content = true
+
+[node name="EntitySonar" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Sonar: Active"
+fit_content = true
+
+[node name="EntityWeapons" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Weapons: None"
+fit_content = true
+
+[node name="EntityDestination" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Destination: N/A"
+fit_content = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection"]
+libraries = {
+&"": SubResource("AnimationLibrary_oh4je")
+}
+
+[node name="EntityInspectorToggle" type="TextureButton" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection"]
+modulate = Color(1, 1, 1, 0.4)
+layout_mode = 0
+offset_left = -232.0
+offset_top = -42.0
+offset_right = -132.0
+offset_bottom = 58.0
+texture_normal = ExtResource("33_abu4l")
+texture_hover = ExtResource("40_fq2vg")
+
+[node name="SignalInspection" type="Control" parent="UICanvas/PlayerUIRoot/InspectionRoot"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2113.0
+offset_top = 483.0
+offset_right = 2153.0
+offset_bottom = 523.0
+
+[node name="TextureRect" type="TextureRect" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
+layout_mode = 0
+offset_left = -204.0
+offset_top = -385.0
+offset_right = 214.0
+offset_bottom = 615.0
+texture = ExtResource("35_smroy")
+expand_mode = 5
+flip_v = true
+
+[node name="SignalPreview" type="TextureRect" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 71.0
+offset_top = 132.0
+offset_right = 327.0
+offset_bottom = 388.0
+texture = SubResource("ViewportTexture_fq2vg")
+stretch_mode = 3
+
+[node name="SubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalPreview"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_scale = 2.0
+texture_mipmap_bias = -0.109
+anisotropic_filtering_level = 0
+fsr_sharpness = 2.0
+canvas_item_default_texture_filter = 0
+size = Vector2i(256, 256)
+
+[node name="SpikyBoy" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalPreview/SubViewport" instance=ExtResource("39_nwwe3")]
+unique_name_in_owner = true
+
+[node name="SignalIDInput" type="LineEdit" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 71.0
+offset_top = 98.0
+offset_right = 322.0
+offset_bottom = 129.0
+theme = ExtResource("8_fq2vg")
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 16
+text = "Roma 97"
+
+[node name="LineEdit2" type="LineEdit" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 406.0
+offset_right = 322.0
+offset_bottom = 437.0
+theme = ExtResource("8_fq2vg")
+theme_override_fonts/font = ExtResource("29_ai432")
+theme_override_font_sizes/font_size = 16
+placeholder_text = "Enter ship type"
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 61.0
+offset_right = 290.0
+offset_bottom = 84.0
+theme = ExtResource("8_fq2vg")
+theme_override_font_sizes/font_size = 16
+text = "Unidentified Signal"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
+layout_mode = 0
+offset_left = -123.0
+offset_top = 80.0
+offset_right = 195.0
+offset_bottom = 367.0
+theme = ExtResource("8_fq2vg")
+theme_override_constants/separation = 10
+
+[node name="SignalColorChanger" type="ColorPickerButton" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "TETSTXXX"
+color = Color(1, 1, 1, 1)
+
+[node name="SignalSize" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Size: 300,000 m3"
+fit_content = true
+
+[node name="SignalCertainty" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Certainty: 20%"
+fit_content = true
+
+[node name="SignalPitch" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Pitch: 80hz"
+fit_content = true
+
+[node name="SignalVolume" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Volume: 90db"
+fit_content = true
+
+[node name="SignalDepth" type="RichTextLabel" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("29_ai432")
+text = "Depth: S"
+fit_content = true
+
+[node name="SignalInspectorToggle" type="TextureButton" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
+modulate = Color(1, 1, 1, 0.4)
+layout_mode = 0
+offset_left = -238.0
+offset_top = -42.0
+offset_right = -138.0
+offset_bottom = 58.0
+texture_normal = ExtResource("33_abu4l")
+texture_hover = ExtResource("40_fq2vg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
+libraries = {
+&"": SubResource("AnimationLibrary_q7i7m")
+}
+
+[node name="EditButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection"]
+layout_mode = 0
+offset_left = 113.0
+offset_top = -294.0
+offset_right = 154.0
+offset_bottom = -253.0
+texture_normal = ExtResource("41_q7i7m")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="AnimationGuides" type="Control" parent="UICanvas/PlayerUIRoot"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AnimTopLineBot" type="ColorRect" parent="UICanvas/PlayerUIRoot/AnimationGuides"]
+custom_minimum_size = Vector2(1, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.71019
+anchor_top = -0.123914
+anchor_right = -9.71019
+anchor_bottom = -0.123914
+offset_left = 537.408
+offset_top = 1127.96
+offset_right = 2175.41
+offset_bottom = 1177.96
+scale = Vector2(1.00746, 0.174442)
+
+[node name="AnimCenterline1" type="ColorRect" parent="UICanvas/PlayerUIRoot/AnimationGuides"]
+custom_minimum_size = Vector2(1, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.71019
+anchor_top = -0.123914
+anchor_right = -9.71019
+anchor_bottom = -0.123914
+offset_left = -1374.59
+offset_top = 933.957
+offset_right = 2317.41
+offset_bottom = 983.957
+scale = Vector2(1.00746, 0.174442)
+
+[node name="AnimRightLineLeft" type="ColorRect" parent="UICanvas/PlayerUIRoot/AnimationGuides"]
+custom_minimum_size = Vector2(1, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.71019
+anchor_top = -0.123914
+anchor_right = -9.71019
+anchor_bottom = -0.123914
+offset_left = 313.408
+offset_top = 143.957
+offset_right = 336.408
+offset_bottom = 5595.96
+scale = Vector2(1.00746, 0.174442)
+
+[node name="AnimationLeftLineRight" type="ColorRect" parent="UICanvas/PlayerUIRoot/AnimationGuides"]
+custom_minimum_size = Vector2(1, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.71019
+anchor_top = -0.123914
+anchor_right = -9.71019
+anchor_bottom = -0.123914
+offset_left = 2365.41
+offset_top = 143.957
+offset_right = 2388.41
+offset_bottom = 5595.96
+scale = Vector2(1.00746, 0.174442)
+
+[node name="ScreenspaceFilters" type="Control" parent="UICanvas/PlayerUIRoot"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FilterMaskGlitch" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
+material = SubResource("ShaderMaterial_q4mmy")
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1076.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="VHSScreenShader" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_7xmbg")
+layout_mode = 0
+offset_right = 1958.0
+offset_bottom = 1076.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ScreenDarkFilter" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+top_level = true
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1118.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PanicRoot" type="Control" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("42_250mi")
+
+[node name="PanicFilter" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot"]
+material = ExtResource("44_nd8hy")
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 1076.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="PanicBarBG" type="ColorRect" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot"]
+layout_mode = 0
+offset_left = -307.0
+offset_top = 435.0
+offset_right = 2140.0
+offset_bottom = 532.0
+mouse_filter = 2
+color = Color(1, 0, 0, 0.435294)
+
+[node name="WarningContainer" type="HBoxContainer" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -454.0
+offset_top = 460.0
+offset_right = 4510.0
+offset_bottom = 513.0
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot/WarningContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "REACTOR FAILURE: DOCK WITHIN 06:55:58"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot/WarningContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "REACTOR FAILURE: DOCK WITHIN 06:55:58"
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/ScreenspaceFilters/PanicRoot/WarningContainer"]
+layout_mode = 2
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "REACTOR FAILURE: DOCK WITHIN 06:55:58"
+
+[node name="FreeLookRect" type="ColorRect" parent="UICanvas/PlayerUIRoot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 739.0
+offset_right = 506.0
+offset_bottom = 771.0
+color = Color(0, 0, 0, 0.415686)
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/FreeLookRect"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 6.0
+offset_right = 462.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("29_ai432")
+text = "Free Look On - SPACE to return"
+
+[node name="CityUIRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CityBG" type="ColorRect" parent="UICanvas/PlayerUIRoot/CityUIRoot"]
+layout_mode = 0
+offset_right = 1917.0
+offset_bottom = 1077.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="CityUI" parent="UICanvas/PlayerUIRoot/CityUIRoot" instance=ExtResource("10_558vm")]
+layout_mode = 0
+offset_left = 1919.0
+offset_top = 68.0
+offset_right = 3199.0
+offset_bottom = 968.0
+
+[node name="UndockButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/CityUIRoot"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 116.451
+anchor_top = -11.0911
+anchor_right = 118.076
+anchor_bottom = -11.0911
+offset_left = -1421.04
+offset_top = 1381.64
+offset_right = -1319.04
+offset_bottom = 1421.64
+scale = Vector2(1.7, 1.7)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/CityUIRoot/UndockButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Undock"
+metadata/_edit_use_anchors_ = true
+
+[node name="UIAnimations" type="AnimationPlayer" parent="UICanvas/PlayerUIRoot"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_itjk8")
+}
+
+[node name="MunitionConfigRoot" type="Control" parent="UICanvas/PlayerUIRoot"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MunitionConfigUI" type="TextureRect" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot"]
+z_index = 2
+layout_mode = 0
+offset_left = 1941.0
+offset_top = 98.0
+offset_right = 3184.0
+offset_bottom = 972.0
+texture = ExtResource("43_itjk8")
+expand_mode = 1
+
+[node name="VesselPreview" type="TextureRect" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+texture_filter = 4
+layout_mode = 0
+offset_left = 272.0
+offset_top = 79.0
+offset_right = 1296.0
+offset_bottom = 591.0
+texture = SubResource("ViewportTexture_250mi")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="SubViewport" type="SubViewport" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VesselPreview"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_mode = 4
+scaling_3d_scale = 2.0
+texture_mipmap_bias = -0.109
+anisotropic_filtering_level = 0
+fsr_sharpness = 2.0
+canvas_item_default_texture_filter = 0
+sdf_scale = 0
+size = Vector2i(800, 400)
+
+[node name="MunitionWireframe" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VesselPreview/SubViewport" instance=ExtResource("47_dv6ba")]
+
+[node name="ConfigurationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VesselPreview"]
+layout_mode = 0
+offset_left = 396.0
+offset_top = 139.0
+offset_right = 779.0
+offset_bottom = 169.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("49_nd8hy")
+text = "Type: Sonar Torpedo"
+horizontal_alignment = 2
+
+[node name="ConfigurationLabel2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VesselPreview"]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 168.0
+offset_right = 776.0
+offset_bottom = 198.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("49_nd8hy")
+text = "4 Loaded"
+horizontal_alignment = 2
+
+[node name="ConfigurationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 123.0
+offset_right = 484.0
+offset_bottom = 153.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Manta Torpedo"
+
+[node name="ConfigurationLabel2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+modulate = Color(1, 1, 1, 0.380392)
+layout_mode = 0
+offset_left = 384.0
+offset_top = 123.0
+offset_right = 767.0
+offset_bottom = 153.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Hellcat RT-2 Wireguide"
+
+[node name="ConfigurationLabel3" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+modulate = Color(1, 1, 1, 0.380392)
+layout_mode = 0
+offset_left = 811.0
+offset_top = 123.0
+offset_right = 1020.0
+offset_bottom = 153.0
+theme = ExtResource("8_fq2vg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Phase Gate"
+
+[node name="EntityName" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 70.0
+offset_right = 461.0
+offset_bottom = 102.0
+theme = ExtResource("8_fq2vg")
+theme_override_font_sizes/font_size = 26
+text = "Configuration"
+
+[node name="VolumeBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label", "deviation_label", "typed_input", "unit_label")]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/left_percent = 0.0
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 97.0
+offset_top = 284.0
+offset_right = 393.0
+offset_bottom = 295.0
+min_value = 10.0
+max_value = 60.0
+value = 10.0
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("47_250mi")
+num_handles = 2
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+output_label = NodePath("Values")
+deviation_label = NodePath("DeviationLabel")
+typed_input = NodePath("LineEdit")
+mult_factor = 100.0
+output_symbol = "db"
+unit_label = NodePath("UnitLabel")
+minimum_deviation = 0.04
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -65.0
+offset_right = 208.0
+offset_bottom = -42.0
+theme = ExtResource("48_wftmj")
+text = "Target Volume"
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+layout_mode = 0
+offset_left = -9.99999
+offset_top = 25.0
+offset_right = 303.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "88db - 92db"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = -7.3335
+offset_right = 369.0
+offset_bottom = 92.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -69.0
+offset_right = 281.0
+offset_bottom = -41.0
+theme = ExtResource("48_wftmj")
+text = "90"
+alignment = 1
+
+[node name="DeviationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 197.0
+offset_bottom = -8.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Minimum deviation: 4.0db"
+
+[node name="UnitLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar"]
+layout_mode = 0
+offset_left = 285.0
+offset_top = -59.0
+offset_right = 302.0
+offset_bottom = -44.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "db"
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 674.0
+offset_right = 302.0
+offset_bottom = 697.0
+theme = ExtResource("48_wftmj")
+text = "Target Depths"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 30.0
+offset_right = 197.0
+offset_bottom = 53.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Minimum Deviation: 1"
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 113.0
+offset_right = 52.0
+offset_bottom = 128.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Crawl"
+
+[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 0
+offset_top = 87.0
+offset_right = 51.0
+offset_bottom = 102.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Swim"
+
+[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label"]
+layout_mode = 0
+offset_top = 61.0
+offset_right = 57.0
+offset_bottom = 76.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Surface"
+
+[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 523.0
+offset_right = 699.0
+offset_bottom = 546.0
+theme = ExtResource("48_wftmj")
+text = "Behaviour"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4"]
+layout_mode = 0
+offset_top = 68.0
+offset_right = 171.0
+offset_bottom = 221.0
+theme = ExtResource("48_wftmj")
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Wireguide"
+
+[node name="Label4" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Never switch targets"
+
+[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Detonate at max range"
+
+[node name="Label6" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Travel at: Swim"
+
+[node name="Label7" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Travel at: Crawl"
+
+[node name="Label8" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Travel at: Surface"
+
+[node name="Label9" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Detonate if jammed"
+
+[node name="Label10" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4/VBoxContainer"]
+modulate = Color(0.203922, 0.866667, 0.92549, 1)
+layout_mode = 2
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Accelerate on target"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 31.0
+offset_right = 123.0
+offset_bottom = 46.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Select Multiple"
+
+[node name="Label3" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+layout_mode = 0
+offset_left = 718.0
+offset_top = 520.0
+offset_right = 927.0
+offset_bottom = 543.0
+theme = ExtResource("48_wftmj")
+text = "Max Travel:"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 34.0
+offset_right = 197.0
+offset_bottom = 57.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Max range: 1000km"
+
+[node name="LineEdit2" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label3"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = -4.0
+offset_right = 317.0
+offset_bottom = 24.0
+theme = ExtResource("48_wftmj")
+text = "1000km"
+
+[node name="Label5" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+layout_mode = 0
+offset_left = 718.0
+offset_top = 614.0
+offset_right = 927.0
+offset_bottom = 637.0
+theme = ExtResource("48_wftmj")
+text = "Max Speed:"
+
+[node name="Label2" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label5"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 34.0
+offset_right = 194.0
+offset_bottom = 57.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Top speed: 100km/h"
+
+[node name="LineEdit2" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/Label5"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = -4.0
+offset_right = 317.0
+offset_bottom = 24.0
+theme = ExtResource("48_wftmj")
+text = "100km/h"
+
+[node name="UndockButton" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 117.284
+anchor_top = -10.2135
+anchor_right = 118.934
+anchor_bottom = -10.2135
+offset_left = -144749.0
+offset_top = 9693.62
+offset_right = -146654.0
+offset_bottom = 9733.62
+scale = Vector2(0.94, 0.94)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Apply"
+metadata/_edit_use_anchors_ = true
+
+[node name="UndockButton2" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 117.284
+anchor_top = -10.2776
+anchor_right = 118.934
+anchor_bottom = -10.2776
+offset_left = -144749.0
+offset_top = 9693.62
+offset_right = -146654.0
+offset_bottom = 9733.62
+scale = Vector2(0.94, 0.94)
+texture_normal = ExtResource("7_nwwe3")
+texture_pressed = ExtResource("42_oh4je")
+texture_hover = ExtResource("42_oh4je")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton2"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.75
+offset_left = 26.0
+offset_top = 11.0
+offset_right = -27.0
+offset_bottom = 1.0
+theme = ExtResource("8_fq2vg")
+text = "Cancel"
+metadata/_edit_use_anchors_ = true
+
+[node name="ProfileBar" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label", "deviation_label", "typed_input", "unit_label")]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/left_percent = 0.0
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 97.0
+offset_top = 433.0
+offset_right = 393.0
+offset_bottom = 444.0
+min_value = 10.0
+max_value = 60.0
+value = 10.0
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("47_250mi")
+num_handles = 2
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+output_label = NodePath("Values")
+deviation_label = NodePath("DeviationLabel")
+typed_input = NodePath("LineEdit")
+mult_factor = 1.0
+unit_label = NodePath("UnitLabel")
+minimum_deviation = 0.04
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -65.0
+offset_right = 208.0
+offset_bottom = -42.0
+theme = ExtResource("48_wftmj")
+text = "Target Profile"
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
+layout_mode = 0
+offset_left = -9.99999
+offset_top = 25.0
+offset_right = 303.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "88db - 92db"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = -7.3335
+offset_right = 369.0
+offset_bottom = 92.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -69.0
+offset_right = 281.0
+offset_bottom = -41.0
+theme = ExtResource("48_wftmj")
+text = "1.0"
+alignment = 1
+
+[node name="DeviationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 197.0
+offset_bottom = -8.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Minimum deviation: 0.04"
+
+[node name="UnitLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar"]
+layout_mode = 0
+offset_left = 285.0
+offset_top = -59.0
+offset_right = 302.0
+offset_bottom = -44.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+
+[node name="ProfileBar2" type="TextureProgressBar" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI" node_paths=PackedStringArray("handle_1", "handle_2", "output_label", "deviation_label", "typed_input", "unit_label")]
+material = ExtResource("26_g8nhr")
+instance_shader_parameters/left_percent = 0.0
+instance_shader_parameters/right_percent = 1.0
+instance_shader_parameters/tint_progress = Color(1, 1, 1, 0.698039)
+layout_mode = 0
+offset_left = 97.0
+offset_top = 589.0
+offset_right = 393.0
+offset_bottom = 600.0
+min_value = 10.0
+max_value = 60.0
+value = 10.0
+nine_patch_stretch = true
+texture_under = ExtResource("27_bnsnq")
+texture_progress_offset = Vector2(-20, 0)
+tint_under = Color(1, 1, 1, 0.996078)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0, 0, 1)
+script = ExtResource("47_250mi")
+num_handles = 2
+handle_1 = NodePath("RangeBarControlMax")
+handle_2 = NodePath("RangeBarControlMin")
+output_label = NodePath("Values")
+deviation_label = NodePath("DeviationLabel")
+typed_input = NodePath("LineEdit")
+mult_factor = 100.0
+output_symbol = "hz"
+unit_label = NodePath("UnitLabel")
+minimum_deviation = 0.04
+
+[node name="Label" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -65.0
+offset_right = 208.0
+offset_bottom = -42.0
+theme = ExtResource("48_wftmj")
+text = "Target Pitch"
+
+[node name="Values" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
+layout_mode = 0
+offset_left = -9.99999
+offset_top = 25.0
+offset_right = 303.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "88db - 92db"
+horizontal_alignment = 1
+
+[node name="RangeBarControlMax" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = -7.3335
+offset_right = 369.0
+offset_bottom = 92.6665
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="RangeBarControlMin" type="TextureButton" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
+layout_mode = 0
+offset_left = -4.76837e-05
+offset_top = -7.40735
+offset_right = 99.9999
+offset_bottom = 92.5927
+scale = Vector2(0.25, 0.25)
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("30_thmph")
+texture_pressed = ExtResource("31_sljp2")
+texture_hover = ExtResource("31_sljp2")
+
+[node name="LineEdit" type="LineEdit" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = -69.0
+offset_right = 281.0
+offset_bottom = -41.0
+theme = ExtResource("48_wftmj")
+text = "60"
+alignment = 1
+
+[node name="DeviationLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 197.0
+offset_bottom = -8.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "Minimum deviation: 4.0hz"
+
+[node name="UnitLabel" type="Label" parent="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2"]
+layout_mode = 0
+offset_left = 285.0
+offset_top = -59.0
+offset_right = 302.0
+offset_bottom = -44.0
+theme = ExtResource("48_wftmj")
+theme_override_fonts/font = ExtResource("49_nd8hy")
+theme_override_font_sizes/font_size = 12
+text = "hz"
+
+[node name="SelfMenuRoot" parent="UICanvas/PlayerUIRoot" instance=ExtResource("47_nd8hy")]
+
+[node name="SettingsIconFilledBlue" type="Sprite2D" parent="UICanvas"]
+position = Vector2(1876, 36)
+scale = Vector2(0.21625, 0.21625)
+texture = ExtResource("34_lu2fn")
+
+[node name="Console" type="Control" parent="UICanvas"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ConsoleInput" type="LineEdit" parent="UICanvas/Console"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 51.0
+offset_right = 456.0
+offset_bottom = 82.0
+placeholder_text = "Welcome to the cheatzone"
+script = ExtResource("39_7xmbg")
+
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/VerySlow" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [2]]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Slow" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [1]]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Normal" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [0]]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/TimeManager/Fast" to="UICanvas/PlayerUIRoot/TimeManager" method="handle_set_time_scale" binds= [3]]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/ActiveSonarTab" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI" method="_on_active_sonar_tab_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/PassiveSonarTab" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI" method="_on_passive_sonar_tab_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/Tabs/OrdnanceTab" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI" method="_on_ordnance_tab_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_one_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobOnePivot/ActiveSonarKnobOne" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_one_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_two_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/ActiveSonarKnobTwoPivot/ActiveSonarKnobTwo" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_active_sonar_knob_two_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar/VolumeBarMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2/VolumeBarMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/VolumeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar2" method="_on_range_bar_control_min_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3/RangeBarControlMax" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/PassiveSonarPanelGroup/PassiveSonarControl/RangeBar3" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/ConfigureButton" to="UICanvas/PlayerUIRoot" method="_on_configure_button_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Buttons/PingButton" to="UICanvas/PlayerUIRoot/SonarOrdnanceUI/Panel/ActiveSonarPanelGroup/ActiveSonarControl" method="_on_ping_button_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection/EntityInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_entity_inspector_toggle_button_up"]
+[connection signal="text_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/TextureRect/SignalIDInput" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_id_input_text_changed"]
+[connection signal="color_changed" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/VBoxContainer/SignalColorChanger" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_color_changer_color_changed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/InspectionRoot/SignalInspection/SignalInspectorToggle" to="UICanvas/PlayerUIRoot/InspectionRoot" method="_on_signal_inspector_toggle_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/CityUIRoot/UndockButton" to="UICanvas/PlayerUIRoot" method="handle_undocked_button"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_range_bar_control_min_pressed"]
+[connection signal="text_changed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/VolumeBar" method="_on_line_edit_text_submitted"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/UndockButton" to="UICanvas/PlayerUIRoot" method="_on_configure_button_button_up"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_range_bar_control_min_pressed"]
+[connection signal="text_changed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar" method="_on_line_edit_text_submitted"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_range_bar_control_max_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/RangeBarControlMax" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_range_bar_control_max_pressed"]
+[connection signal="button_up" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_range_bar_control_min_button_up"]
+[connection signal="pressed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/RangeBarControlMin" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_range_bar_control_min_pressed"]
+[connection signal="text_changed" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2/LineEdit" to="UICanvas/PlayerUIRoot/MunitionConfigRoot/MunitionConfigUI/ProfileBar2" method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="UICanvas/Console/ConsoleInput" to="UICanvas/Console/ConsoleInput" method="_on_text_submitted"]

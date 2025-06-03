@@ -33,7 +33,6 @@ var current_movement_vector:Vector3 #Updated when the entity does move_to().
 @onready var munitions:EntityMunitions = %EntityMunitions
 @export var npc:bool = false
 @onready var sonar_node:SonarNode = %SonarNode
-@onready var notifications:Notifications = %Notifications
 signal can_dock_sig
 signal docked
 signal died
@@ -80,7 +79,6 @@ func unpack(type_id, _faction:Faction, with_name):
         render.update_colors(faction.faction_color)
         
     render.update_mesh_visibilities(faction.faction_layer, true)   
-    #temp spotlight adjustments
     spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)
     azimuth = pos_dict["azimuth"]
@@ -101,7 +99,11 @@ func unpack(type_id, _faction:Faction, with_name):
     %EntityDetector.unpack(self)
     unpacked = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta:float):
+    freeze = false
+
 func _physics_process(delta: float) -> void:
+    
     if unpacked != true:
         return
     #Because clients sync their own information, only run this stuff if it belongs to you.
@@ -313,12 +315,8 @@ func handle_in_docking_area(city:City):
             can_dock = true
             can_dock_at = city
             can_dock_sig.emit(true)
-
-            city.interaction.connect("opened_city", played_by.UI.test_method)
-            city.interaction.opened_city.connect(played_by.UI.test_method)       
+            can_dock_at.interaction.opened_city.disconnect(played_by.UI.handle_opened_city)
             city.interaction.opened_city.connect(played_by.UI.handle_opened_city)
-            city.interaction.opened_city.emit(city)
-            print(city.interaction.get_signal_connection_list("opened_city"))
 
 func handle_leave_docking_area():
     if can_dock == true:

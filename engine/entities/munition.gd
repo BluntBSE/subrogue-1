@@ -103,10 +103,7 @@ func on_body_entered_check_for_impact(body):
         #Don't collide with other munitions unless you're supposed to (Not yet implemented)
         if impact_type == IMPACT_TYPES.ships:
             if !(body is Munition):
-                var event: EntityDied = EntityDied.new()
-                event.died = body
-                event.killed_by = self
-                notifications.notify(event)
+                #Do event here
                 damage_target(body)
 
 
@@ -120,6 +117,8 @@ func damage_target(target: Entity) -> void:
     #NOTE: Did you get a weird bug here? Consider what happens if you manage to hit two colliders at once.
     remove_child(particles)
     anchor.add_child(particles)
+    #NOTE: Did you get a weird bug here? Consider what happens if you manage to hit two colliders at once.
+
     particles.global_position = target.global_position
     particles.global_basis = global_basis
     particles.rotation.z += deg_to_rad(180)
@@ -128,6 +127,10 @@ func damage_target(target: Entity) -> void:
     if played_by:
         played_by.UI.handle_impact_1()
         #TODO: Probably need a like "detonated" signal of some flavor.
+    var death_event = Events.COMBAT.entity_killed_by_object.new()
+    death_event.killed = target
+    death_event.killed_by = fired_from #Idk yet if this should be fired_from or 'self'
+    Events.COMBAT.entity_killed_by.emit(death_event)
     target.queue_free()
     queue_free()
 

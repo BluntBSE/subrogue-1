@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="CityDef" load_steps=3 format=3 uid="uid://c1pxncll7ggbu"]
+[gd_resource type="Resource" script_class="CityDef" load_steps=5 format=3 uid="uid://c1pxncll7ggbu"]
 
 [ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_ns30a"]
 [ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="2_1spi4"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npcdef.gd" id="2_utvu1"]
+[ext_resource type="Resource" uid="uid://bxtkhju4oso7y" path="res://engine/cities/city_npc/chiara_summers.tres" id="3_ihkl2"]
 
 [resource]
 script = ExtResource("2_1spi4")
 city_name = "Miami"
+default_faction_id = "AtlanticEmpire"
 city_greeting = "Officially demilitarized by federal decree, Miami's boardwalks still shimmer with the promise of sex and violence. By day, sunburned tourists pose for photos with famous art deco skyline and shop for handmade art; by night, the city swarms mercenary crews with designer handbags who laugh in the face of the city's barely-disguised combat drones.
 
 While the American government has tried time and again to relocate the private naval industry far away from one of its most important tourist destinations, the industry has made it very clear: When they aren't sinking foreign ships, America's privateers are here to party."
 city_portrait = ExtResource("1_ns30a")
+default_npcs = Array[ExtResource("2_utvu1")]([ExtResource("3_ihkl2")])
 metadata/_custom_type_script = "uid://b8owuv8kc08ga"

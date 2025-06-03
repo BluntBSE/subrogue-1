@@ -61,6 +61,9 @@ enum layers {
     MINOR_FACTIONS,
 }
 
+
+var faction_ids = ["SaharanFreeLeague", "AtlanticEmpire", "EuropeanFront", "SaharanFreeLeague", "PanAmericanFederation"]
+
 #Acoustic modeling is complex, so we're cheating
 #For game reasons, we've decided that a 90db sound at 90hz is audible up to 500km away.
 #To a receiver with a sensitivity of 15db

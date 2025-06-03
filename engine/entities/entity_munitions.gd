@@ -19,7 +19,7 @@ func launch_munition(args:Dictionary) -> Munition:
     var start_position:Vector3 = args.start_position
     var target_position:Vector3 = args.target_position
     munition.fired_from = args.originating_entity
-    controller.add_child(munition)
+    controller.add_child(munition, true)
     #TODO: Really got set this up into a better unpack...
     munition.atts.display_name = munition.display_name
     

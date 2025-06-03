@@ -1,7 +1,7 @@
 extends Node3D
 class_name Faction
 var faction_layer:int
-var faction_name:String
+@export var display_name:String
 
 @export var faction_color:Color #We kind of always want players to be the same color to themselves.
 #Is this a simple matter of not synchronizing the property in multiplayer? 00aea8
@@ -11,8 +11,7 @@ func _ready() -> void:
     #Register self with global faction list
     set_faction_ids()
     #For now, let's set faction names by naming the nodes in the editor.
-    faction_name = name
-
+    #That shit gonna need formatting tho
     pass # Replace with function body.
 
 

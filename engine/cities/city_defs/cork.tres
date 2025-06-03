@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CityDef" load_steps=4 format=3 uid="uid://b2v4r6rmciqa4"]
+
+[ext_resource type="Texture2D" uid="uid://bre1f0fath2ya" path="res://assets/UI/placeholder/gibraltar-nightlife.png" id="1_51o1l"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npcdef.gd" id="2_kx4g1"]
+[ext_resource type="Script" uid="uid://b8owuv8kc08ga" path="res://engine/cities/city_defs/city_def.gd" id="4_s5008"]
+
+[resource]
+script = ExtResource("4_s5008")
+city_name = "Cork"
+default_faction_id = "EuropeanFront"
+city_greeting = "Cork’s cobbled streets wind between ancient cathedrals and gleaming biotech labs. The River Lee glows with the reflection of neon signs advertising everything from gene-editing clinics to underground poetry slams. Hackers and poets share pints in centuries-old pubs, while outside, delivery drones buzz past mossy stone bridges. The city’s rebellious spirit endures, now channeled into digital activism and biotech startups that promise to change the world—or at least, shake up Dublin."
+city_portrait = ExtResource("1_51o1l")
+default_npcs = Array[ExtResource("2_kx4g1")]([])
+metadata/_custom_type_script = "uid://b8owuv8kc08ga"

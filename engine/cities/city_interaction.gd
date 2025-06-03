@@ -6,8 +6,12 @@ var world_hovered:bool = false
 signal opened_city
 
 #Move this to render
-func _ready():
-    var faction_color:Color = city.faction.faction_color
+func unpack(faction:Faction):
+    print("UNPACK GOT", faction.name, "FOR CITY, ", city.name)
+
+    
+    
+    var faction_color:Color = faction.faction_color
     city.get_node("CityRender/CityNameLabel").modulate = Color("ffffff")
     city.get_node("CityRender/CityNameLabel").outline_modulate = faction_color
     city.get_node("CityRender/CityDot").modulate = faction_color
@@ -15,6 +19,7 @@ func _ready():
     
 
 func _on_docking_area_body_entered(body: Entity) -> void:
+    print("Hello from docking body area entered for ", get_parent().name)
     body.handle_in_docking_area(get_parent())    
     if body.played_by != null:
         var interaction_area_1:Area3D = get_node("InteractionBox1")
@@ -67,6 +72,8 @@ func _on_interaction_box_1_input_event(camera: Node, event: InputEvent, event_po
     if event is InputEventMouseButton:
         event as InputEventMouseButton
         if event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+            print("Hello from IBOX 1 event on ", city.name)
+
             opened_city.emit(get_parent())
             SoundManager.play_straight("ui_swoop_1", "ui")
     pass # Replace with function body.

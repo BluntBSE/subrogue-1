@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CityNPCDef" load_steps=3 format=3 uid="uid://bxtkhju4oso7y"]
+
+[ext_resource type="Texture2D" uid="uid://10iq42ux2jj" path="res://assets/UI/placeholder/chiara-summer-mO9EzDBd5nI-unsplash.png" id="1_dh086"]
+[ext_resource type="Script" uid="uid://bg1x7yo16xmbn" path="res://engine/cities/city_npc/city_npcdef.gd" id="2_dh086"]
+
+[resource]
+script = ExtResource("2_dh086")
+portrait = ExtResource("1_dh086")
+display_name = "Chiara Summers"
+job = "Rich bitch"
+vignettes = Array[String](["Chiara ashes her cigarette off the hotel balcony while you review the plans on her phone. In this breeze, it's a miracle her fur coat stays clean.
+
+\"The security cameras are off for exactly seven more minutes. If you have any more questions, I suggest you ask them quickly.\"
+"])
+faction = "AtlanticEmpire"
+metadata/_custom_type_script = "uid://bg1x7yo16xmbn"
