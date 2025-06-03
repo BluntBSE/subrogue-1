@@ -29,22 +29,22 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y867n")
 
-[node name="AssignedColorModulator" type="Control" parent="."]
+[node name="Modulator1" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HoverModulator" type="Control" parent="AssignedColorModulator"]
+[node name="Modulator2" type="Control" parent="Modulator1"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="FactionModulator" type="Control" parent="AssignedColorModulator/HoverModulator"]
+[node name="Modulator3" type="Control" parent="Modulator1/Modulator2"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="AssignedColorModulator/HoverModulator/FactionModulator"]
+[node name="TextureRect" type="TextureRect" parent="Modulator1/Modulator2/Modulator3"]
 layout_mode = 0
 offset_left = 117.0
 offset_top = 99.0
@@ -52,35 +52,35 @@ offset_right = 373.0
 offset_bottom = 355.0
 texture = ExtResource("1_pknvo")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Modulator1/Modulator2/Modulator3/TextureRect"]
 visible = false
 layout_mode = 0
 offset_left = 216.0
 offset_right = 529.0
 offset_bottom = 112.0
 
-[node name="Label" type="Label" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect/VBoxContainer"]
+[node name="Label" type="Label" parent="Modulator1/Modulator2/Modulator3/TextureRect/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_aqybd")
 theme_override_fonts/font = ExtResource("2_u576x")
 theme_override_font_sizes/font_size = 20
 text = "Depth: S"
 
-[node name="Label2" type="Label" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect/VBoxContainer"]
+[node name="Label2" type="Label" parent="Modulator1/Modulator2/Modulator3/TextureRect/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_aqybd")
 theme_override_fonts/font = ExtResource("2_u576x")
 theme_override_font_sizes/font_size = 20
 text = "Size: 1000-3000 M3"
 
-[node name="Label3" type="Label" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect/VBoxContainer"]
+[node name="Label3" type="Label" parent="Modulator1/Modulator2/Modulator3/TextureRect/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_aqybd")
 theme_override_fonts/font = ExtResource("2_u576x")
 theme_override_font_sizes/font_size = 20
 text = "Pitch: 60hz"
 
-[node name="Volume" type="Label" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect/VBoxContainer"]
+[node name="Volume" type="Label" parent="Modulator1/Modulator2/Modulator3/TextureRect/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_aqybd")
@@ -88,7 +88,7 @@ theme_override_fonts/font = ExtResource("2_u576x")
 theme_override_font_sizes/font_size = 20
 text = "Volume: 90db"
 
-[node name="Certainty" type="Label" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect/VBoxContainer"]
+[node name="Certainty" type="Label" parent="Modulator1/Modulator2/Modulator3/TextureRect/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_aqybd")
@@ -96,7 +96,7 @@ theme_override_fonts/font = ExtResource("2_u576x")
 theme_override_font_sizes/font_size = 20
 text = "Certainty: 20%"
 
-[node name="TextureRect2" type="TextureRect" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="Modulator1/Modulator2/Modulator3/TextureRect"]
 material = SubResource("ShaderMaterial_y867n")
 layout_mode = 0
 offset_left = -128.0
@@ -105,7 +105,7 @@ offset_right = 397.0
 offset_bottom = 415.0
 texture = ExtResource("3_aqybd")
 
-[node name="TextureRect" type="TextureRect" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
+[node name="TextureRect" type="TextureRect" parent="Modulator1/Modulator2/Modulator3/TextureRect"]
 modulate = Color(0.0562916, 0.0562916, 0.0562916, 1)
 show_behind_parent = true
 layout_mode = 0
@@ -115,7 +115,7 @@ offset_right = 350.0
 offset_bottom = 368.0
 texture = ExtResource("3_aqybd")
 
-[node name="Button" type="Button" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
+[node name="Button" type="Button" parent="Modulator1/Modulator2/Modulator3/TextureRect"]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -128,7 +128,7 @@ offset_bottom = -40.424
 theme_override_font_sizes/font_size = 50
 text = "Pin Signal"
 
-[node name="SignalID" type="RichTextLabel" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
+[node name="SignalID" type="RichTextLabel" parent="Modulator1/Modulator2/Modulator3/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 2
 offset_left = -486.0
@@ -144,7 +144,7 @@ text = "Golden Crest"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="SignalClass" type="RichTextLabel" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
+[node name="SignalClass" type="RichTextLabel" parent="Modulator1/Modulator2/Modulator3/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 2
 offset_left = -154.0
@@ -160,7 +160,7 @@ text = "Unknown Large"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Label6" type="Label" parent="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect"]
+[node name="Label6" type="Label" parent="Modulator1/Modulator2/Modulator3/TextureRect"]
 visible = false
 layout_mode = 2
 offset_left = 303.0
@@ -173,4 +173,4 @@ theme_override_font_sizes/font_size = 78
 text = "28%"
 horizontal_alignment = 1
 
-[connection signal="button_up" from="AssignedColorModulator/HoverModulator/FactionModulator/TextureRect/Button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="Modulator1/Modulator2/Modulator3/TextureRect/Button" to="." method="_on_button_button_up"]
