@@ -6,6 +6,7 @@ func stateUpdate(_dt: float) -> void:
     pass
 func stateHandleInput(_args:Dictionary) -> void :
     pass
+    
 func stateEnter(_args: Dictionary) -> void:
     _ref = _reference
     var sig:SignalPopup = _args.signal
@@ -15,6 +16,8 @@ func stateEnter(_args: Dictionary) -> void:
     sig.stream.emit({"volume":sig.sound.volume, "pitch":sig.sound.pitch, "certainty":sig.certainty, "entity": sig.detected_object})
     _ref.signal_id_input.text= sig.signal_id
     pass
+    
 func stateExit() -> void:
+    _ref.signal_player.play_backwards("slide_in")
+    await _ref.signal_player.animation_finished
     _ref.signal_inspector_panel.visible = false
-    pass
