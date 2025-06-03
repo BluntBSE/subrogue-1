@@ -5,9 +5,6 @@ class_name EntityDetector
 var entity:Entity
 @onready var detection_area = %DetectionArea
 var detection_parent:EntityDetector = null #Used for ordnance that updates detection for its parent.
-var sensitivity:float = 5.0 #Expressed as minimum DB to hear
-var c100:float = 200.0 #Expressed as km
-var cfalloff:float = 0.15 #Certainty lost per 10km.
 var min_certainty: float = 10.0 #Always at least 10% certain in detection position
 var max_range:float = 2000.0 #Expressed as km
 #Signals themselves carry a positively_identified signal. We might not neeed the array here.
@@ -18,7 +15,8 @@ var known_signals = []
 var sigmap = {} # {entity rigid object as key: signalpopup} Signals match to the array below, which we for updating those independently.
 var archive_map = {}
 var popup_pool:SignalPopupPool
-
+var min_sensitivity: float = 25.0   # Minimum dB to detect (certainty = 20%)
+var max_sensitivity: float = 70.0  # dB for certainty = 100%
 
 
 
@@ -134,8 +132,8 @@ func DETECTOR_poll_single_entity(dict: Dictionary) -> void:
             continue
         var dist = GlobeHelpers.arc_to_km(detector.entity.position, dict.entity.position, detector.entity.anchor)
         var final_db = GlobalConst.attenuate_sound(sound.volume, sound.pitch, dist)
-        if final_db >= sensitivity:
-            var certainty = calculate_certainty(dist, c100, cfalloff, min_certainty)
+        if final_db >= min_sensitivity:
+            var certainty = calculate_certainty(final_db, min_sensitivity, max_sensitivity)
             if certainty > max_certainty:
                 max_certainty = certainty
                 most_certain_detector = detector
@@ -191,36 +189,35 @@ func DETECTOR_update_signal_properties(dict: Dictionary, sound, max_certainty: f
     sigmap[dict.entity].sound = sound
 
 func DETECTOR_handle_identification(dict: Dictionary, most_certain_detector) -> void:
-    var dist = GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
-    if dist <= c100:
+    var final_db = GlobalConst.attenuate_sound(
+        dict.entity.emission.volume,
+        dict.entity.emission.pitch,
+        GlobeHelpers.arc_to_km(entity.position, dict.entity.position, entity.anchor)
+    )
+    if final_db >= max_sensitivity:
         if entity.is_player and entity.get_multiplayer_authority() == get_multiplayer_authority():
             dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, true)
         sigmap[dict.entity].positively_identify()
         sigmap[dict.entity].visible = false
-    elif dist > c100 + 50.0:
+    else:
         if sigmap[dict.entity].visible == false:
             sigmap[dict.entity].visible = true
         if entity.is_player and entity.get_multiplayer_authority() == get_multiplayer_authority():
             dict.entity.render.update_mesh_visibilities(entity.faction.faction_layer, false)
-
+            
 func DETECTOR_maybe_play_acquire_sound():
     if entity.is_player and (entity.get_multiplayer_authority() == get_multiplayer_authority()):
         SoundManager.play("signal_acquired_1")
   
-func calculate_certainty(dist: float, c100: float, cfalloff: float, min_certainty: float) -> float:
-    # Calculate certainty based on distance
-    var certainty: float
-    var from_c100 = (dist - c100)
-    if from_c100 > 0:
-        certainty = 100 - (cfalloff * from_c100)
+func calculate_certainty(final_db: float, min_sensitivity: float, max_sensitivity: float) -> float:
+    if final_db < min_sensitivity:
+        return 0.0
+    elif final_db >= max_sensitivity:
+        return 100.0
     else:
-        certainty = 100.0
-
-    # Ensure minimum certainty
-    if certainty < min_certainty:
-        certainty = min_certainty
-
-    return certainty        
+        # Linearly interpolate certainty between 20% and 100%
+        var t = (final_db - min_sensitivity) / (max_sensitivity - min_sensitivity)
+        return lerp(20.0, 100.0, t)
 
 func handle_tracked_object_died(_entity:Entity)->void:
    # print("Detector is handling target died")
