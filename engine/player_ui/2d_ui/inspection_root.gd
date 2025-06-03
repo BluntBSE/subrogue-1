@@ -43,6 +43,7 @@ func handle_opened_signal(sig:SignalPopup):
 #Identified open
 func handle_openened_identified_signal(sig:SignalPopup):
     inspecting_signal = sig
+    handle_color_stream(sig.color)
     %SignalInspection.visible = false
     %EntityInspection.visible = true
     load_inspected_entity(sig.detected_object)
@@ -129,6 +130,7 @@ func load_inspected_entity(entity:Entity):
     if inspecting_entity:
         closed_identified.disconnect(entity.render.handle_release_observed)
     %EntityName.text = entity.given_name
+    %EntityFaction.text = entity.faction.display_name
     %EntitySize.text = "Size: " + str(entity.atts.size)+"m³"
     %EntityClass.text = entity.atts.class_display_name
     %EntitySpeed.text = "Max speed: " + str(GlobeHelpers.game_s_to_kph(entity.max_speed))
