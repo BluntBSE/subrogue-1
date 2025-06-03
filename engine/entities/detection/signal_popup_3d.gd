@@ -8,7 +8,7 @@ var color: Color = Color("ffffff"):
     set(value):
         color = value
         stream_color.emit(value)
-        find_child("FactionModulator", true, false).modulate = color
+        find_child("Modulator1", true, false).modulate = color
 var faction
 var detecting_object: Entity
 var display_name: String
@@ -263,11 +263,14 @@ func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Ve
             identified_opened.emit(self)
 
 func _on_area_3d_mouse_entered() -> void:
-    %SignalControlScene.modulate = Color("00aea8")
+    %SignalControlScene.modulate = Color("ffffff")
+    %SignalControlScene.get_node("Modulator1").modulate = Color("00aea8")
     hover_scaling = true
 
 func _on_area_3d_mouse_exited() -> void:
     modulate_by_certainty()
+    %SignalControlScene.get_node("Modulator1").modulate = color 
+    
     hover_scaling = false
 
 func handle_update_name(str: String):
@@ -276,7 +279,7 @@ func handle_update_name(str: String):
     id_label.text = signal_id
 
 func handle_update_color(_color: Color):
-    %SignalControlScene.get_node("AssignedColorModulator").modulate = _color
+    %SignalControlScene.get_node("Modulator1").modulate = _color
     color = _color
 
 func positively_identify():

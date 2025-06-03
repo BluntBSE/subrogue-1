@@ -25,7 +25,6 @@ func _process(delta: float) -> void:
     scale_with_camera_distance()
     
     if scaling == true:
-
             scale_with_fov()
     if selected == true:
             scale_with_fov()

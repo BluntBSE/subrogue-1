@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EntityType" load_steps=4 format=3 uid="uid://dcpa4ui8otfyx"]
 
-[ext_resource type="Resource" uid="uid://ct2thqa6f8emo" path="res://engine/entities/behavior/behavior_types/basic_commercial.tres" id="1_ldwdn"]
+[ext_resource type="Resource" uid="uid://bsjwhg61011rn" path="res://engine/entities/behavior/behavior_types/lobotomized.tres" id="1_mkeof"]
 [ext_resource type="Script" uid="uid://c7ymqn6mo5dye" path="res://engine/entities/types/entity_type.gd" id="1_vdh0r"]
 [ext_resource type="PackedScene" uid="uid://bfgnhjrv8rjgx" path="res://engine/entities/3d_scenes/commercial_freighter_1.tscn" id="2_mkeof"]
 
@@ -26,5 +26,5 @@ size = 300000.0
 vol_speed_factor = 1.0
 depths = [null, null]
 current_depth = 0
-behavior_type = ExtResource("1_ldwdn")
+behavior_type = ExtResource("1_mkeof")
 base_cost = 0

@@ -74,6 +74,7 @@ func unpack(type_id, _faction:Faction, with_name):
         #When we create missions, we will want to generate entities with specific names.
         if with_name == null or with_name == "":
             given_name = NameGenerator.generate_name()
+            name = given_name
             
     if faction.faction_color:
         render.update_colors(faction.faction_color)
