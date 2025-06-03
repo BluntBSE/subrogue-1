@@ -33,6 +33,9 @@ var poll_frequency
 func unpack(_entity:Entity):
     print("Unpack called with ", _entity.name)
     entity = _entity
+    max_sensitivity = _entity.atts.type.base_max_sensitivity #When we get into modifying equipment, this will have to change
+    min_sensitivity = _entity.atts.type.base_min_sensitivity #Same 
+    min_certainty = _entity.atts.type.base_min_certainty
     if entity.is_player == true:
         poll_active = true
         poll_frequency = 0.25
@@ -215,9 +218,8 @@ func calculate_certainty(final_db: float, min_sensitivity: float, max_sensitivit
     elif final_db >= max_sensitivity:
         return 100.0
     else:
-        # Linearly interpolate certainty between 20% and 100%
         var t = (final_db - min_sensitivity) / (max_sensitivity - min_sensitivity)
-        return lerp(20.0, 100.0, t)
+        return lerp(min_certainty, 100.0, t)
 
 func handle_tracked_object_died(_entity:Entity)->void:
    # print("Detector is handling target died")
