@@ -8,12 +8,23 @@ class_name InspectionRoot
 var inspecting_signal:SignalPopup
 var inspecting_entity:Entity #Positively ID'd
 var active_inspection_color:Color
+var state_machine:StateMachine
+@onready var signal_inspector_panel = %SignalInspection
+@onready var entity_inspector_panel = %EntityInspection
+@onready var entity_player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
+@onready var signal_player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
 signal closed_unidentified
 signal closed_identified
 signal edited_signal_name
 signal edited_signal_type
 signal edited_color
 
+func _ready():
+    state_machine = StateMachine.new()
+    state_machine.Add("InspectorClosedState", InspectorClosedState.new(self,{}))
+    state_machine.Add("InspectingUnidentifiedState", InspectingUnidentifiedState.new(self, {}))
+    state_machine.Add("InspectingIdentifiedState", InspectingIdentifiedState.new(self,{}))
+    state_machine.Add("InspectingSelfState", InspectingSelfState.new(self,{}))
 
 #Unidentified open
 func handle_opened_signal(sig:SignalPopup):
@@ -23,6 +34,7 @@ func handle_opened_signal(sig:SignalPopup):
     SoundManager.play_straight("ui_swoop_1", "ui")
 
     inspecting_signal = sig
+    state_machine.Change("InspectingUnidentifiedState", {"signal":sig})
     #Close Entity inspection if it's open
     if %EntityInspection.visible == true:
         %EntityInspection.get_node("AnimationPlayer").play_backwards("slide_in")
@@ -43,33 +55,20 @@ func handle_opened_signal(sig:SignalPopup):
 #Identified open
 func handle_openened_identified_signal(sig:SignalPopup):
     inspecting_signal = sig
-    handle_color_stream(sig.color)
-    %SignalInspection.visible = false
-    %EntityInspection.visible = true
-    load_inspected_entity(sig.detected_object)
-    SoundManager.play_straight("ui_swoop_1", "ui")
-    var player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
-    player.play("slide_in")
+    state_machine.Change("InspectingIdentifiedState", {"signal":inspecting_signal})
+    entity_player.play("slide_in")
 
 func handle_identified_signal(sig:SignalPopup):
     #If this is the signal you were already looking at, and it's positive now,
     #Close signal inspector and open the more detailed entity inspector
-    if sig == inspecting_signal and %SignalInspection.visible == true:
-        var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
-        player.play_backwards("slide_in")
-        load_inspected_entity(sig.detected_object)
-        await player.animation_finished
-        %SignalInspection.visible = false
-        %EntityInspection.visible = true
-        player = %EntityInspection.get_node("AnimationPlayer")
-        player.play("slide_in")
+    if sig == inspecting_signal:
+        state_machine.Change("InspectingIdentifiedState", {"signal":sig})
     #No matter what, positively identified signals no longer respond to the panel    
     disconnect_unidentified(sig)
 
 func _on_signal_inspector_toggle_button_up() -> void:
-    var player:AnimationPlayer = %SignalInspection.get_node("AnimationPlayer")
-    player.play_backwards("slide_in")
-    await player.animation_finished
+    signal_player.play_backwards("slide_in")
+    await signal_player.animation_finished
     %SignalInspection.visible = false
 
 

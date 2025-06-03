@@ -270,7 +270,6 @@ func _on_area_3d_mouse_entered() -> void:
 func _on_area_3d_mouse_exited() -> void:
     modulate_by_certainty()
     %SignalControlScene.get_node("Modulator1").modulate = color 
-    
     hover_scaling = false
 
 func handle_update_name(str: String):
