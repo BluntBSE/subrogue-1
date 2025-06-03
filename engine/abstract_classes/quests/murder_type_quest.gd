@@ -30,7 +30,7 @@ func enable(player:Player):
     print(name, ": bound entity killed events")
     assigned_to = player
     Events.COMBAT.entity_killed_by.connect(try_complete)
-    Events.QUESTS.activated_quest.emit({"for":assigned_to, "quest":self})
+    Events.QUESTS.enabled_quest.emit({"for":assigned_to, "quest":self})
 
 # Example: add multiple conditions in quest setup
 func build_random_quest_specifics():
@@ -45,7 +45,7 @@ func build_random_quest_specifics():
     # Add more conditions as needed
 
 # When an entity is killed, check all conditions
-func try_complete(death_event:Events.Combat.entity_killed_by_object):
+func try_complete(death_event:Events._combat.entity_killed_by_object):
     if death_event.killed_by.faction != assigned_to:
         return
     var all_satisfied = true
@@ -65,7 +65,7 @@ func create_hunt_condition():
     print("TARGET FACTION NODE ", target_faction)
     hunt.target_faction = target_faction
     hunt.category = "commercial" #TODO: Make dynamic
-    hunt.required_count = 5
+    hunt.required_count = 2
     conditions.append(hunt)
 
 func exclude_citynpc_faction(npc:CityNPC):

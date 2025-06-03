@@ -86,38 +86,6 @@ text = "Chiara ashes her cigarette off the hotel balcony while you review the pl
 "
 fit_content = true
 
-[node name="ContractDescription" type="RichTextLabel" parent="."]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = -668.0
-offset_top = 198.0
-offset_right = -85.0
-offset_bottom = 665.0
-theme = ExtResource("2_hfq2i")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "Destroy [b]5 commercial vessels[/b] belonging to the [b][color=ffbb00]PAF[/color][/b].
-
-Destroy [b]5 commercial vessels[/b] belonging to the [b][color=6390ff]European Front[/color][/b].
-
-The vessels must be [b]large or larger[/b]. 
-
-It does not matter if you are detected during this mission.
-
-Complete the mission within [b]20 days [/b].
-
-[b]ADVANCE[/b]: 
-$6,000,000
-
-[b]ON COMPLETION[/b]:
-$20,000,000
-
-[b]ON FAILURE[/b]:
-[b][color=d4003d]Atlantic Empire:[/color][/b] -10 Standing
-[b]Chiara Summers:[/b] -5 Opinion
-"
-fit_content = true
-
 [node name="ContractNPCLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
@@ -266,3 +234,6 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[b]ON FAILURE[/b]: -30,000,000"
 fit_content = true
+
+[connection signal="button_up" from="ContractActions/TextureButton" to="." method="handle_back_button_up"]
+[connection signal="button_up" from="ContractActions/TextureButton5" to="." method="handle_accept_button_up"]

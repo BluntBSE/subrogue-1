@@ -44,8 +44,12 @@ func render_murder_type_quest(quest:MurderTypeQuest):
     #TODO: Rewards
 
 func handle_accept_button_up():
-    var ui_root:PlayerUIRoot = get_parent().get_parent()
+    var ui_root:PlayerUIRoot = get_parent().get_parent().get_parent() #Can we don't? But I don't know if I feel like passing this down as props everywhere...
     var player = ui_root.player
     active_quest.enable(player)
     closeup_accepted.emit()
     pass
+
+func handle_back_button_up():
+    var city_ui:CityUI = get_parent()
+    city_ui.state_machine.Change("ViewingContracts", {"npcs":city_ui.active_city.npcs})

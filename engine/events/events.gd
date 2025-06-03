@@ -1,9 +1,9 @@
 extends Node
-var QUESTS = Quests.new()
-var COMBAT = Combat.new()
+var QUESTS = _quests.new()
+var COMBAT = _combat.new()
 
 
-class Quests:
+class _quests:
     signal enabled_quest #{"for":player, "quest":quest"}
     signal completed_quest
     signal canceled_quest
@@ -11,7 +11,7 @@ class Quests:
     signal unlock #Nothing specific planned yet, but I imagine this is necessary
     signal trigger_event_id #Nothing specific planned yet, but I imagine this is necessary
 
-class Combat:
+class _combat:
     signal entity_killed_by
     class entity_killed_by_object:
         var killed:Entity

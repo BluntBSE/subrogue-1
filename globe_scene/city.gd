@@ -37,6 +37,9 @@ func _ready():
     
     interaction.unpack(faction)
     #TODO: NPCs
+    npc_node = Node.new()
+    npc_node.name = "NPCs"
+    add_child(npc_node)
     #This isn't the way to do it but...whatever. Prototyping what the city scene should even be in the end.
     if get_node("NPCs") == null:
         npc_node = Node.new()

@@ -79,7 +79,6 @@ func unpack(type_id, _faction:Faction, with_name):
         render.update_colors(faction.faction_color)
         
     render.update_mesh_visibilities(faction.faction_layer, true)   
-    #temp spotlight adjustments
     spot_color = Color("d1001a")
     var pos_dict := GlobeHelpers.rads_from_position(position)
     azimuth = pos_dict["azimuth"]
