@@ -2186,10 +2186,10 @@ script = ExtResource("34_558vm")
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = 2113.0
-offset_top = 483.0
-offset_right = 2153.0
-offset_bottom = 523.0
+offset_left = 2112.0
+offset_top = 486.0
+offset_right = 2152.0
+offset_bottom = 526.0
 
 [node name="TextureRect" type="TextureRect" parent="UICanvas/PlayerUIRoot/InspectionRoot/EntityInspection"]
 layout_mode = 0
