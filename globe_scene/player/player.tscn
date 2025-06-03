@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cgd8r3p0kth43" path="res://assets/UI/blue_buttons/VolumeSliderKnobT04White_horizontal.png" id="31_sljp2"]
 [ext_resource type="Texture2D" uid="uid://b4da1i6v747wi" path="res://assets/UI/white_buttons/PCMainButtonPressed02WhiteT01.png" id="32_4elw6"]
 [ext_resource type="Texture2D" uid="uid://rjyib6up3d33" path="res://assets/UI/blue_buttons/VolumeSliderKnobT03Blue.png" id="33_abu4l"]
-[ext_resource type="Script" uid="uid://dxfcu2yvec3m6" path="res://engine/player_ui/2d_ui/inspection_root.gd" id="34_558vm"]
+[ext_resource type="Script" uid="uid://dxfcu2yvec3m6" path="res://engine/player_ui/2d_ui/inspection/inspection_root.gd" id="34_558vm"]
 [ext_resource type="Texture2D" uid="uid://cneet4dqfpucs" path="res://assets/UI/blue_icons/SettingsIconFilledBlue.png" id="34_lu2fn"]
 [ext_resource type="Texture2D" uid="uid://iomaljq1mjwv" path="res://assets/UI/blue_panels/MediumMenuBGT01.4BlueDark.png" id="35_smroy"]
 [ext_resource type="PackedScene" uid="uid://bfgnhjrv8rjgx" path="res://engine/entities/3d_scenes/commercial_freighter_1.tscn" id="36_q7i7m"]
