@@ -62,7 +62,7 @@ func handle_identified_signal(sig:SignalPopup):
     disconnect_unidentified(sig)
 
 func _on_signal_inspector_toggle_button_up() -> void:
-    #signal_player.play_backwards("slide_in")
+    signal_player.play_backwards("slide_in")
     await signal_player.animation_finished
     %SignalInspection.visible = false
 
@@ -112,9 +112,9 @@ func update_ship_colors(color:Color):
     %EntityClass.add_theme_color_override("font_outline_color", color)
 
 func _on_entity_inspector_toggle_button_up() -> void:
-    var player:AnimationPlayer = %EntityInspection.get_node("AnimationPlayer")
-    #player.play_backwards("slide_in")
-    await player.animation_finished
+  
+    entity_player.play_backwards("slide_in")
+    await entity_player.animation_finished
     %EntityInspection.visible = false
     closed_identified.emit()
     pass # Replace with function body.
